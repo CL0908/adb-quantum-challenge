@@ -1,0 +1,563 @@
+{
+  "counts": [
+    {
+      "topology": "chain",
+      "n": 2,
+      "logical_qubits": 52,
+      "toffoli": 156,
+      "rotations": 80,
+      "cnot_A": 1010,
+      "cnot_Q": 3220,
+      "depth_A_cnot_layers": 260,
+      "depth_Q_cnot_layers": 664,
+      "modality": {
+        "trapped_ion_all_to_all": {
+          "cnot_Q": 3220,
+          "note": "native all-to-all; dense dependence graphs map directly"
+        },
+        "neutral_atom_reconfigurable": {
+          "cnot_Q": 3220,
+          "note": "atom shuttling gives effective all-to-all; parallel Rydberg gates suit source-parallel prep"
+        },
+        "superconducting_2d": {
+          "cnot_Q": 38049,
+          "note": "SWAP overhead; chain/ring graphs map to a line, complete graphs do not"
+        }
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "logical_qubits": 189,
+      "toffoli": 752,
+      "rotations": 576,
+      "cnot_A": 5056,
+      "cnot_Q": 14600,
+      "depth_A_cnot_layers": 356,
+      "depth_Q_cnot_layers": 904,
+      "modality": {
+        "trapped_ion_all_to_all": {
+          "cnot_Q": 14600,
+          "note": "native all-to-all; dense dependence graphs map directly"
+        },
+        "neutral_atom_reconfigurable": {
+          "cnot_Q": 14600,
+          "note": "atom shuttling gives effective all-to-all; parallel Rydberg gates suit source-parallel prep"
+        },
+        "superconducting_2d": {
+          "cnot_Q": 315675,
+          "note": "SWAP overhead; chain/ring graphs map to a line, complete graphs do not"
+        }
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 28,
+      "logical_qubits": 611,
+      "toffoli": 2706,
+      "rotations": 2016,
+      "cnot_A": 18140,
+      "cnot_Q": 50896,
+      "depth_A_cnot_layers": 638,
+      "depth_Q_cnot_layers": 1504,
+      "modality": {
+        "trapped_ion_all_to_all": {
+          "cnot_Q": 50896,
+          "note": "native all-to-all; dense dependence graphs map directly"
+        },
+        "neutral_atom_reconfigurable": {
+          "cnot_Q": 50896,
+          "note": "atom shuttling gives effective all-to-all; parallel Rydberg gates suit source-parallel prep"
+        },
+        "superconducting_2d": {
+          "cnot_Q": 1937998,
+          "note": "SWAP overhead; chain/ring graphs map to a line, complete graphs do not"
+        }
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "logical_qubits": 220,
+      "toffoli": 926,
+      "rotations": 1008,
+      "cnot_A": 6522,
+      "cnot_Q": 18276,
+      "depth_A_cnot_layers": 464,
+      "depth_Q_cnot_layers": 1120,
+      "modality": {
+        "trapped_ion_all_to_all": {
+          "cnot_Q": 18276,
+          "note": "native all-to-all; dense dependence graphs map directly"
+        },
+        "neutral_atom_reconfigurable": {
+          "cnot_Q": 18276,
+          "note": "atom shuttling gives effective all-to-all; parallel Rydberg gates suit source-parallel prep"
+        },
+        "superconducting_2d": {
+          "cnot_Q": 424891,
+          "note": "SWAP overhead; chain/ring graphs map to a line, complete graphs do not"
+        }
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 12,
+      "logical_qubits": 699,
+      "toffoli": 3664,
+      "rotations": 4320,
+      "cnot_A": 26148,
+      "cnot_Q": 69024,
+      "depth_A_cnot_layers": 800,
+      "depth_Q_cnot_layers": 1828,
+      "modality": {
+        "trapped_ion_all_to_all": {
+          "cnot_Q": 69024,
+          "note": "native all-to-all; dense dependence graphs map directly"
+        },
+        "neutral_atom_reconfigurable": {
+          "cnot_Q": 69024,
+          "note": "atom shuttling gives effective all-to-all; parallel Rydberg gates suit source-parallel prep"
+        },
+        "superconducting_2d": {
+          "cnot_Q": 2806371,
+          "note": "SWAP overhead; chain/ring graphs map to a line, complete graphs do not"
+        }
+      }
+    }
+  ],
+  "mlae": {
+    "exceedance_adb": [
+      {
+        "p2": 0.001,
+        "f_per_Q": 0.039890739524606776,
+        "k_schedule": [
+          0
+        ],
+        "mode": "noise_aware",
+        "queries": 100,
+        "rel_rmse": 39.82779639285782,
+        "rel_bias": 34.87221421304808,
+        "mc_rel_rmse_same_queries": 0.9055945058736755
+      },
+      {
+        "p2": 0.001,
+        "f_per_Q": 0.039890739524606776,
+        "k_schedule": [
+          0
+        ],
+        "mode": "naive",
+        "queries": 100,
+        "rel_rmse": 38.15060888559886,
+        "rel_bias": 38.035524024119304,
+        "mc_rel_rmse_same_queries": 0.9055945058736755
+      },
+      {
+        "p2": 0.0001,
+        "f_per_Q": 0.7246865220050998,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "mode": "noise_aware",
+        "queries": 1800,
+        "rel_rmse": 0.8598197095585851,
+        "rel_bias": -0.023349363078275065,
+        "mc_rel_rmse_same_queries": 0.21345067203618553
+      },
+      {
+        "p2": 0.0001,
+        "f_per_Q": 0.7246865220050998,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "mode": "naive",
+        "queries": 1800,
+        "rel_rmse": 39.4080038387142,
+        "rel_bias": 38.41050470141748,
+        "mc_rel_rmse_same_queries": 0.21345067203618553
+      },
+      {
+        "p2": 1e-05,
+        "f_per_Q": 0.9683127442323604,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "mode": "noise_aware",
+        "queries": 13300,
+        "rel_rmse": 0.06479776955813231,
+        "rel_bias": -0.01521932534668419,
+        "mc_rel_rmse_same_queries": 0.07852500243893332
+      },
+      {
+        "p2": 1e-05,
+        "f_per_Q": 0.9683127442323604,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "mode": "naive",
+        "queries": 13300,
+        "rel_rmse": 0.02582034501399166,
+        "rel_bias": 0.022361721206006102,
+        "mc_rel_rmse_same_queries": 0.07852500243893332
+      },
+      {
+        "p2": 1e-06,
+        "f_per_Q": 0.9967851770351843,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ],
+        "mode": "noise_aware",
+        "queries": 103200,
+        "rel_rmse": 0.06632720799829263,
+        "rel_bias": -0.008173413732922867,
+        "mc_rel_rmse_same_queries": 0.02818992564751096
+      },
+      {
+        "p2": 1e-06,
+        "f_per_Q": 0.9967851770351843,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ],
+        "mode": "naive",
+        "queries": 103200,
+        "rel_rmse": 0.03208622447717825,
+        "rel_bias": 0.03203107195750077,
+        "mc_rel_rmse_same_queries": 0.02818992564751096
+      }
+    ],
+    "both_exhausted_adb": [
+      {
+        "p2": 0.001,
+        "f_per_Q": 0.039890739524606776,
+        "k_schedule": [
+          0
+        ],
+        "mode": "noise_aware",
+        "queries": 100,
+        "rel_rmse": 15501.156753228588,
+        "rel_bias": 13660.110875510869,
+        "mc_rel_rmse_same_queries": 17.779626044509953
+      },
+      {
+        "p2": 0.001,
+        "f_per_Q": 0.039890739524606776,
+        "k_schedule": [
+          0
+        ],
+        "mode": "naive",
+        "queries": 100,
+        "rel_rmse": 14907.495737258087,
+        "rel_bias": 14864.784939006973,
+        "mc_rel_rmse_same_queries": 17.779626044509953
+      },
+      {
+        "p2": 0.0001,
+        "f_per_Q": 0.7246865220050998,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "mode": "noise_aware",
+        "queries": 1800,
+        "rel_rmse": 273.9445963301156,
+        "rel_bias": 186.6659406162612,
+        "mc_rel_rmse_same_queries": 4.190698047677981
+      },
+      {
+        "p2": 0.0001,
+        "f_per_Q": 0.7246865220050998,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "mode": "naive",
+        "queries": 1800,
+        "rel_rmse": 14230.982650721508,
+        "rel_bias": 12993.466551977066,
+        "mc_rel_rmse_same_queries": 4.190698047677981
+      },
+      {
+        "p2": 1e-05,
+        "f_per_Q": 0.9683127442323604,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "mode": "noise_aware",
+        "queries": 13300,
+        "rel_rmse": 2.585468452635546,
+        "rel_bias": 1.2345343630926633,
+        "mc_rel_rmse_same_queries": 1.5416890997605277
+      },
+      {
+        "p2": 1e-05,
+        "f_per_Q": 0.9683127442323604,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "mode": "naive",
+        "queries": 13300,
+        "rel_rmse": 22.73062697865344,
+        "rel_bias": 18.02612529873723,
+        "mc_rel_rmse_same_queries": 1.5416890997605277
+      },
+      {
+        "p2": 1e-06,
+        "f_per_Q": 0.9967851770351843,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ],
+        "mode": "noise_aware",
+        "queries": 103200,
+        "rel_rmse": 0.1785818837261006,
+        "rel_bias": 0.011398324623140312,
+        "mc_rel_rmse_same_queries": 0.553455584132265
+      },
+      {
+        "p2": 1e-06,
+        "f_per_Q": 0.9967851770351843,
+        "k_schedule": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ],
+        "mode": "naive",
+        "queries": 103200,
+        "rel_rmse": 0.7400838231704762,
+        "rel_bias": 0.585493941875326,
+        "mc_rel_rmse_same_queries": 0.553455584132265
+      }
+    ]
+  },
+  "qcbm_bias": [
+    {
+      "p2": 0.001,
+      "p_readout": 0.01,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.044033506229748665,
+      "rel_bias_ideal_weights": 0.09105733418708128,
+      "rel_bias_calibrated_mean": 0.030651664755103468,
+      "rel_bias_calibrated_rms": 0.0358241278758648
+    },
+    {
+      "p2": 0.001,
+      "p_readout": 0.01,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.044033506229748665,
+      "rel_bias_ideal_weights": 0.09105733418708128,
+      "rel_bias_calibrated_mean": 0.0028855426441229404,
+      "rel_bias_calibrated_rms": 0.004007406078210364
+    },
+    {
+      "p2": 0.001,
+      "p_readout": 0.01,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.044033506229748665,
+      "rel_bias_ideal_weights": 0.09105733418708128,
+      "rel_bias_calibrated_mean": 0.00012286851061809044,
+      "rel_bias_calibrated_rms": 0.0009668687094042673
+    },
+    {
+      "p2": 0.001,
+      "p_readout": 0.03,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.10863864503711143,
+      "rel_bias_ideal_weights": 0.11749372419371151,
+      "rel_bias_calibrated_mean": 0.014620786694950294,
+      "rel_bias_calibrated_rms": 0.017677425779346098
+    },
+    {
+      "p2": 0.001,
+      "p_readout": 0.03,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.10863864503711143,
+      "rel_bias_ideal_weights": 0.11749372419371151,
+      "rel_bias_calibrated_mean": 0.0034969968365441417,
+      "rel_bias_calibrated_rms": 0.004828548670799146
+    },
+    {
+      "p2": 0.001,
+      "p_readout": 0.03,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.10863864503711143,
+      "rel_bias_ideal_weights": 0.11749372419371151,
+      "rel_bias_calibrated_mean": -4.784233385858316e-05,
+      "rel_bias_calibrated_rms": 0.0014733206969128024
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.01,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.08105797045107895,
+      "rel_bias_ideal_weights": 0.34555718761485243,
+      "rel_bias_calibrated_mean": 0.022670218317750578,
+      "rel_bias_calibrated_rms": 0.026325039843226213
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.01,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.08105797045107895,
+      "rel_bias_ideal_weights": 0.34555718761485243,
+      "rel_bias_calibrated_mean": 0.0002525607397371843,
+      "rel_bias_calibrated_rms": 0.004267452889679722
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.01,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.08105797045107895,
+      "rel_bias_ideal_weights": 0.34555718761485243,
+      "rel_bias_calibrated_mean": 0.00023772332579993227,
+      "rel_bias_calibrated_rms": 0.0014400634309567866
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.03,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.14252948702003584,
+      "rel_bias_ideal_weights": 0.3329527041995495,
+      "rel_bias_calibrated_mean": 0.01568721793394621,
+      "rel_bias_calibrated_rms": 0.019271949212525983
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.03,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.14252948702003584,
+      "rel_bias_ideal_weights": 0.3329527041995495,
+      "rel_bias_calibrated_mean": 0.0015534869083483672,
+      "rel_bias_calibrated_rms": 0.004212133067839575
+    },
+    {
+      "p2": 0.005,
+      "p_readout": 0.03,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.14252948702003584,
+      "rel_bias_ideal_weights": 0.3329527041995495,
+      "rel_bias_calibrated_mean": 1.9720825044555747e-05,
+      "rel_bias_calibrated_rms": 0.0015153328804503896
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.01,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.12933885858427577,
+      "rel_bias_ideal_weights": 0.5971303177440441,
+      "rel_bias_calibrated_mean": 0.02435824126332814,
+      "rel_bias_calibrated_rms": 0.029353475720383118
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.01,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.12933885858427577,
+      "rel_bias_ideal_weights": 0.5971303177440441,
+      "rel_bias_calibrated_mean": 0.00026640265680043517,
+      "rel_bias_calibrated_rms": 0.004587612914786545
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.01,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.12933885858427577,
+      "rel_bias_ideal_weights": 0.5971303177440441,
+      "rel_bias_calibrated_mean": 0.00019744516523357848,
+      "rel_bias_calibrated_rms": 0.0015788173602654459
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.03,
+      "calib_shots": 10000,
+      "tv_noisy_vs_ideal": 0.1858055283451365,
+      "rel_bias_ideal_weights": 0.5431824453384975,
+      "rel_bias_calibrated_mean": 0.018901366453730816,
+      "rel_bias_calibrated_rms": 0.025731991376468966
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.03,
+      "calib_shots": 100000,
+      "tv_noisy_vs_ideal": 0.1858055283451365,
+      "rel_bias_ideal_weights": 0.5431824453384975,
+      "rel_bias_calibrated_mean": -4.520006672020793e-05,
+      "rel_bias_calibrated_rms": 0.006119427455369666
+    },
+    {
+      "p2": 0.01,
+      "p_readout": 0.03,
+      "calib_shots": 1000000,
+      "tv_noisy_vs_ideal": 0.1858055283451365,
+      "rel_bias_ideal_weights": 0.5431824453384975,
+      "rel_bias_calibrated_mean": 0.0002768577638205927,
+      "rel_bias_calibrated_rms": 0.0020100816281691824
+    }
+  ]
+}

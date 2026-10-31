@@ -1,0 +1,21 @@
+ring     n= 2 seed=101 mu=1.20e-02 twisted=0.0375 RDPO-warm=0.0057 train=4000+40000 2s
+ring     n= 2 seed=202 mu=1.20e-02 twisted=0.0375 RDPO-warm=0.0079 train=6000+40000 2s
+ring     n= 2 seed=303 mu=1.20e-02 twisted=0.0375 RDPO-warm=0.0072 train=4000+40000 2s
+ring     n= 8 seed=101 mu=3.89e-05 twisted=0.0724 RDPO-warm=0.0185 train=6000+40000 14s
+ring     n= 8 seed=202 mu=3.89e-05 twisted=0.0724 RDPO-warm=0.0212 train=6000+40000 21s
+ring     n= 8 seed=303 mu=3.89e-05 twisted=0.0724 RDPO-warm=0.0190 train=6000+40000 22s
+ring     n=16 seed=101 mu=1.46e-08 twisted=0.1323 RDPO-warm=0.0319 train=6000+40000 33s
+ring     n=16 seed=202 mu=1.46e-08 twisted=0.1323 RDPO-warm=0.0357 train=6000+40000 38s
+ring     n=16 seed=303 mu=1.46e-08 twisted=0.1323 RDPO-warm=0.0280 train=6000+40000 31s
+ring     n=20 seed=101 mu=2.90e-10 twisted=0.1236 RDPO-warm=0.0346 train=8000+40000 43s
+ring     n=20 seed=202 mu=2.90e-10 twisted=0.1236 RDPO-warm=0.0373 train=6000+40000 34s
+ring     n=20 seed=303 mu=2.90e-10 twisted=0.1236 RDPO-warm=0.0357 train=8000+40000 40s
+ring     n=28 seed=101 mu=1.32e-13 twisted=0.2595 RDPO-warm=0.0667 train=8000+40000 58s
+ring     n=28 seed=202 mu=1.32e-13 twisted=0.2595 RDPO-warm=0.0615 train=8000+40000 57s
+ring     n=28 seed=303 mu=1.32e-13 twisted=0.2595 RDPO-warm=0.0761 train=8000+40000 58s
+complete n= 6 seed=101 mu=6.25e-04 twisted=0.0548 RDPO-warm=0.0174 train=6000+40000 22s
+complete n= 6 seed=202 mu=6.25e-04 twisted=0.0548 RDPO-warm=0.0169 train=6000+40000 23s
+complete n= 6 seed=303 mu=6.25e-04 twisted=0.0548 RDPO-warm=0.0141 train=6000+40000 23s
+complete n= 7 seed=101 mu=2.90e-04 twisted=0.0709 RDPO-warm=0.0208 train=6000+40000 32s
+complete n= 7 seed=202 mu=2.90e-04 twisted=0.0709 RDPO-warm=0.0163 train=6000+40000 33s
+complete n= 7 seed=303 mu=2.90e-04 twisted=0.0709 RDPO-warm=0.0163 train=6000+40000 34s

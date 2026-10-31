@@ -112,9 +112,33 @@ def fig_policies():
     fig.tight_layout(); fig.savefig(F / "policy_comparison.png", dpi=150); plt.close(fig)
 
 
+def fig_scale_rdpo():
+    import numpy as np
+    cold = json.loads((R / "scale_rdpo.json").read_text())["rows"]
+    warm = json.loads((R / "scale_rdpo_warm.json").read_text())["rows"]
+    fig, ax = plt.subplots(figsize=(7.5, 4.3))
+    ring = sorted({x["n"] for x in cold if x["topology"] == "ring" and x["target"] == "exceedance"})
+    med = lambda rows, key, n: float(np.median([x[key] for x in rows if x["n"] == n]))
+    rc = [x for x in cold if x["topology"] == "ring" and x["target"] == "exceedance"]
+    rw = [x for x in warm if x["topology"] == "ring"]
+    nw = sorted({x["n"] for x in rw})
+    ax.plot(ring, [med(rc, "mc_theory_rel_rmse", n) for n in ring], marker="o", ms=5, color=SERIES[0],
+            label="Monte Carlo (theoretical √((1−μ)/μN); empirical runs return 0 for n ≥ 16)")
+    ax.plot(nw, [med(rw, "rel_rmse_twisted", n) for n in nw], marker="o", ms=5, color=SERIES[1], label="classical exponential twisting")
+    ax.plot(ring, [med(rc, "rel_rmse_rdpo", n) for n in ring], marker="o", ms=5, color=SERIES[2], label="RDPO (cold start)")
+    ax.plot(nw, [med(rw, "rel_rmse_rdpo_warm", n) for n in nw], marker="o", ms=5, color=SERIES[6], label="RDPO (twist warm start)")
+    ax.set_yscale("log"); ax.set_xlabel("Countries n (ring dependence graph)")
+    ax.set_ylabel("Relative RMSE of Pr(L > T_n) @ N=4096")
+    ax.set_title("Scalable RDPO: source-level Doob policy, μ from 1e-2 to 1e-13", color=INK, loc="left")
+    ax.legend(fontsize=8, loc="upper left")
+    fig.tight_layout(); fig.savefig(F / "scale_rdpo.png", dpi=150); plt.close(fig)
+
+
 if __name__ == "__main__":
-    for f in (fig_rmse, fig_bond, fig_latent, fig_structured, fig_policies):
+    for f in (fig_rmse, fig_bond, fig_latent, fig_structured, fig_policies, fig_scale_rdpo):
         try:
             f(); print("ok", f.__name__)
         except FileNotFoundError as e:
             print("skip", f.__name__, e)
+
+

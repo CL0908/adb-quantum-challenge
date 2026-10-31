@@ -19,8 +19,11 @@ error than the best reference baseline.
 payouts are capped, every Poisson source has a finite increment law. The term distribution
 therefore loads *exactly* into a structured quantum circuit with O(n + |E|) qubits and gates for any
 dependence graph (52 qubits / 156 Toffolis per call for ADB). Amplitude estimation on this circuit
-needs O(1/√μ) queries against O(1/μ) for Monte Carlo, i.e. 10⁵–10⁶× fewer queries on rare
-portfolio tails at n = 28. We also test a variational quantum critic for the RDPO policy and report
+needs O(1/√μ) queries against O(1/μ) for Monte Carlo. Exponentially twisting the source registers
+makes the importance weight bounded, so the amplitude decays only with the large-deviation gap: at
+n = 28 countries (μ ≈ 1e-13), QAE needs 3.4×10⁴ calls against 7.6×10¹⁴ Monte Carlo samples. At
+scale, a source-level RDPO policy keeps the relative error between 0.7% and 6.7% while μ falls from
+1e-2 to 1e-13, which is 3–5× better than classical exponential twisting. We also test a variational quantum critic for the RDPO policy and report
 it as unreliable on the rarest target. We report the classical limits ourselves: exact tilted tensor
 networks solve sparse dependence graphs classically at any scale, and fault-tolerant costs remain
 ≫ classical at benchmark scale. A quantum advantage is only plausible for dense dependence graphs
@@ -55,6 +58,10 @@ state-preparation operator *A* for amplitude estimation.
 | 11 | **Scalable quantum construction:** an *exact* Poisson-source loading circuit (no truncation, thanks to the cap) with O(n+|E|) qubits and gates for **any** dependence graph. For ADB it uses 52 qubits / 156 Toffolis per A vs 97 / 3,808 for generic loading, a 10× lower T-count. With it, QAE needs 10⁵–10⁶× fewer queries than MC on rare portfolio tails at n = 28. | §7.1–7.2, Fig. 4 |
 | 12 | **Information-theoretic RL:** CE minimises KL, but IS variance is set by χ² (Rényi-2). A Rényi-2 policy-gradient refinement removes every CE failure (exact per-path std 14.5 → 0.60) and makes the pairwise Doob policy the best estimator: median 0.0030 relative RMSE on "both exhausted", 0/15 failures. | §7.4, Fig. 5 |
 | 13 | **Hybrid quantum RL** (variational quantum critic on the dependence graph, O(n+|E|) params) works when training converges and beats the factorized model on Pr(L>T), but fails on 9–10/15 rarest-target runs. Bulk MI / entanglement across cuts (≤ 0.1 bit) does not predict the tail-accurate representation size (χ ≈ 60). | §7.3, §7.5 |
+
+| 14 | **Scalable RDPO** (source-level Doob policy, O(n) params, O(n+|E|) per path): Pr(L>T_n) to **0.7% → 6.7% relative RMSE while μ falls from 1e-2 to 1e-13** (ring, 2 → 28 countries), 3–5× better than classical exponential twisting at every n; a twist warm start fixes the cold-start failure at n = 28 (0.84 → 0.067). | §7.6, Fig. 6 |
+| 15 | **End-to-end Q-RDPO:** exponentially twisted source registers make the IS weight a bounded function of total loss, so a = μ·e^{I(T)} (large-deviation gap). QAE calls fall 80,000× at n = 28 (2.8e9 → 3.4e4). Honest gain over the classical estimator with the same twist: ≈ 3× at n = 28, growing with n. | §7.7 |
+| 16 | **Near-term feasibility:** QAE needs ≤ 1e-6 two-qubit error (early fault-tolerant); the near-term route is the QCBM sampler, whose noise bias (+9% to +60%) is removed to ≤ 0.6% by calibrating the sampled law with 10⁵ shots. Dense dependence graphs map best to trapped-ion / neutral-atom hardware. | §7.8 |
 
 **Positioning.** The value of this submission is an honest map. (i) The best per-query accuracy on
 the benchmark today is a *classical* learned Doob transform. (ii) For sparse dependence graphs,
@@ -565,7 +572,121 @@ this means (i) entropy-based arguments for low-entanglement quantum loaders are 
 tail targets, and (ii) the tilted gauge of §5.2 is the right frame for any compressed
 representation, classical or quantum.
 
-### 7.6 Other quantum routes considered (not implemented)
+### 7.6 Scalable RDPO: a source-level Doob policy (`src/scale/`)
+The year-by-year policy of §3 needs a normaliser over all 10ⁿ annual states. We instead sample the
+**Poisson sources** sequentially (K = 2n + 2|E| steps), each with its finite capped-increment law
+(≤ 25 values), and learn q_k(x | s) ∝ p_k(x)·Ṽ_θ(s ⊕ x) with
+log Ṽ_θ(s) = Σ_i θ_i·ψ(a_i, r_i) + θ_g·g(L), where ψ are per-country threshold features and g are
+global loss features (min(L,T)/T, 1{L>T}, (L−T)⁺). The normaliser is a sum over ≤ 25 values; a
+step touches 1–2 countries; a path costs O(n + |E|); there are 5n + 3 parameters. Gradients are
+checked against finite differences (tests). Training is CE policy search followed by Rényi-2
+refinement, as in §7.4. The exact references come from the tilted MPS (§5).
+
+**Target Pr(L > T_n), T_n = USD 40m·n, relative RMSE at N = 4,096 paths (median over 3 seeds; Fig. 6).**
+
+![Fig. 6](figures/scale_rdpo.png)
+
+| graph | n | μ (exact) | params | MC (theory / empirical) | classical exp. twisting | RDPO (cold) | **RDPO (twist warm start)** |
+|---|---|---|---|---|---|---|---|
+| ring | 2 | 1.2e-2 | 13 | 0.14 / 0.15 | 0.038 | 0.0074 | **0.0072** |
+| ring | 8 | 3.9e-5 | 43 | 2.5 / 1.9 (90% zeros) | 0.072 | 0.021 | **0.019** |
+| ring | 16 | 1.5e-8 | 83 | 129 / all zeros | 0.13 | 0.031 | **0.032** |
+| ring | 20 | 2.9e-10 | 103 | 920 / all zeros | 0.12 | 0.043 | **0.036** |
+| ring | 28 | 1.3e-13 | 143 | 4.3e4 / all zeros | 0.26 | 0.84 ✗ | **0.067** |
+| complete | 6 | 6.3e-4 | 33 | 0.62 / 0.54 | 0.055 | 0.017 | **0.017** |
+| complete | 7 | 2.9e-4 | 38 | 0.91 / 1.05 | 0.071 | 0.021 | **0.016** |
+
+Stop-loss E[(L − T_n)⁺] (cold start): ring n = 4 / 8 / 16 → 0.014 / 0.018 / 0.027 (MC 0.45 / 1.6 / all
+zeros); complete n = 6 → 0.017.
+
+Reading:
+* **The error grows only from 0.7% to 6.7% while μ falls by 11 orders of magnitude** (ring
+  2 → 28 countries), with O(n) parameters and O(n + |E|) cost per path.
+* **The cold start breaks at n = 28.** CE reaches the target level, but the fitted weights are
+  heavy-tailed (0.84). **Warm-starting from the optimal exponential twist** (θ_g ← η*·T) fixes it:
+  0.84 → 0.067, a 13× improvement. The twist is the natural prior: it *is* the large-deviation
+  Doob transform of the uncapped loss.
+* **RDPO beats the strongest simple classical method** (one-parameter exponential twisting,
+  Glasserman's classic) by 3–5× at every n. State dependence is what the extra parameters buy.
+* **Budget (honest accounting):** CE uses 4–20k paths; the Rényi-2 stage adds 40k. At scale the
+  CE-only policy is within ≈ 10% of CE + Rényi-2 (e.g. ring 16: 0.030 vs 0.031). **Rényi-2 should
+  therefore run as a conditional repair** (triggered by a high estimated χ²), which it clearly is
+  in the 2-country year-level setting of §7.4. Even charging all 40k paths, RDPO at ring n = 16
+  reaches 3% where MC would need ~10¹² paths.
+
+### 7.7 End-to-end Q-RDPO: twisted Poisson-source loading with bounded weights (`src/quantum/twisted.py`)
+§4.3 showed that IS inside QAE fails when weights are unbounded (a = μ/M with huge M). The
+twist solves this inside the structured circuit. Each source register is prepared in
+q_k(x) ∝ p_k(x)e^{ηℓ_k(x)} (ℓ_k = loss contribution). This only changes source amplitudes, so
+loading costs nothing extra. The likelihood ratio depends only on the uncapped total loss U,
+w = e^{−ηU + Λ(η)}, and U ≥ L, so on {L > T} the weight is bounded by e^{−ηT + Λ(η)}. The oracle
+rotates by g = 1{L>T}·e^{−η(U−T)} ∈ [0,1], using a lookup over U (≤ 2,700 values at n = 28), and
+
+  a = E_q[g] = μ · e^{ηT − Λ(η)}  (maximised over η: a = μ·e^{I(T)}, I the Cramér rate of U).
+
+Verified exactly by sparse-statevector simulation: n = 2 gives a = 0.0720, matching the analytic
+value, and recovers μ to 1e-16 (test).
+
+| graph | n | μ | a (twisted) | QAE calls: plain → **twisted** | classical twisted IS paths (bound) | MC paths | Toffoli / A |
+|---|---|---|---|---|---|---|---|
+| ring | 2 | 1.2e-2 | 0.072 | 9.3e3 → **3.8e3** | ≤ 1.3e3 | 8.2e3 | 428 |
+| ring | 8 | 3.9e-5 | 0.025 | 1.6e5 → **6.5e3** | ≤ 3.9e3 | 2.6e6 | 2,308 |
+| ring | 16 | 1.5e-8 | 0.0060 | 8.4e6 → **1.3e4** | ≤ 1.7e4 | 6.9e9 | 4,648 |
+| ring | 20 | 2.9e-10 | 0.0030 | 6.0e7 → **1.9e4** | ≤ 3.3e4 | 3.5e11 | 5,800 |
+| ring | 28 | 1.3e-13 | 8.8e-4 | 2.8e9 → **3.4e4** | ≤ 1.1e5 | 7.6e14 | 8,106 |
+| complete | 7 | 2.9e-4 | 0.025 | 6.0e4 → **6.4e3** | ≤ 3.9e3 | 3.5e5 | 4,348 |
+
+(10% relative error; IQAE calls ≈ 102/(ε√a) fitted on our emulator.)
+
+* Twisting cuts QAE calls by up to **80,000×** (n = 28) and makes the amplitude decay only like the
+  large-deviation gap e^{I(T)}·μ, not like μ.
+* **Honest comparison:** classically the same twist already removes almost all of the rarity. The
+  quantum gain over the *best classical estimator with the same proposal* is the residual
+  1/√a vs 1/a, i.e. ≈ 3× fewer queries at n = 28, growing with n. Classical twisting wins below
+  n ≈ 16. Combined with ~10³-qubit fault-tolerant cost, a wall-clock advantage would require far
+  larger and denser portfolios. We state this as the scaling argument, not as a present advantage.
+
+### 7.8 Near-term feasibility, error mitigation and hardware mapping (`src/quantum/nisq.py`)
+**Hardware counts** (Toffoli = 6 CNOT; Grover iterate Q = 2A + reflections):
+
+| instance | logical qubits | CNOT / A | CNOT / Q | CNOT depth / Q | CNOT / Q on 2D superconducting (SWAPs) |
+|---|---|---|---|---|---|
+| ADB (n = 2) | 52 | 1,010 | 3,220 | ~660 | ~3.8e4 |
+| ring n = 8 | 189 | 5,056 | 14,600 | ~900 | ~3.2e5 |
+| ring n = 28 | 611 | 18,140 | 50,896 | ~1,500 | ~1.9e6 |
+| complete n = 12 | 699 | 26,148 | 69,024 | ~1,830 | ~2.8e6 |
+
+**Hardware modality.** Dense dependence graphs need all-to-all interactions between country
+registers through the shared-source registers. They map natively to **trapped ions** and
+**reconfigurable neutral atoms** (where parallel Rydberg gates also suit the source-parallel
+preparation). On 2D superconducting lattices, SWAP overhead inflates CNOT counts 10–40×. Chain and
+ring portfolios map to a line.
+
+**Noisy low-depth amplitude estimation** (MLAE, Suzuki et al. 2020; depolarising decay per Grover
+iterate f = (1−p₂)^{CNOT/Q}; noise-aware likelihood that fits f jointly, as in Tanaka et al. 2021,
+used as error mitigation; 100 shots per depth, 40 repetitions):
+
+| p₂ (two-qubit error) | f per Q | exceedance (μ = 1.2%): MLAE vs MC at equal queries | both exhausted (3.2e-5) |
+|---|---|---|---|
+| 1e-3 (today) | 0.04 | 37 vs 0.91 (fails) | fails |
+| 1e-4 | 0.73 | 0.97 vs 0.21 (worse) | fails |
+| 1e-5 | 0.97 | 0.073 vs 0.079 (break-even) | 1.6 vs 1.5 |
+| 1e-6 | 0.997 | **0.013 vs 0.028** | **0.14 vs 0.55** |
+
+Without the noise-aware fit the estimates are biased by up to 30×. **QAE on this problem needs
+early-fault-tolerant error rates (≤ 1e-6 per logical two-qubit gate). It is not a NISQ algorithm.**
+
+**Near-term route: the QCBM as a proposal sampler (8 qubits, depth 9, 32 CZ).** On hardware the
+samples come from a noisy law q' ≠ q. If the ideal q is used in the IS weights, the estimate is
+**biased by +9% (p₂ = 1e-3) up to +60% (p₂ = 1e-2)** (exceedance target, exact computation).
+Mitigation: calibrate the law that is *actually sampled* (post-readout, post-selected) from
+calibration shots with add-½ smoothing, and use it in the weights. The RMS bias falls to
+**≤ 0.6% with 10⁵ shots and ≈ 0.1–0.2% with 10⁶ shots** for every noise setting tested
+(p₂ ≤ 1e-2, readout error ≤ 3%). A subtle point we initially got wrong: **inverting readout errors
+is the wrong mitigation here**. It targets the pre-readout law, while the IS samples carry readout
+noise, so it leaves a persistent bias of up to 7%.
+
+### 7.9 Other quantum routes considered (not implemented)
 * **Quantum annealing / QBM proposal:** the pairwise log-linear policy is an Ising model on the
   dependence graph, so it maps natively to annealer hardware graphs (minor embedding). Sampling
   quality at low temperature is the open question.
@@ -614,7 +735,7 @@ benchmark-scale instance (§4.4). (4) CE instability (§3.2).
 ---
 
 ## 9. Reproducibility
-See README.md. 32 tests (`pytest tests/`). Seeds are stored in every `results/*.json`. CPU only
+See README.md. 35 tests (`pytest tests/`). Seeds are stored in every `results/*.json`. CPU only
 (4 cores); no quantum SDK or hardware: the circuits are simulated by our own exact simulator.
 
 ## 10. References

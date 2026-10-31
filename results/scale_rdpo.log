@@ -1,0 +1,48 @@
+ring     n= 2 exceedance seed=101 mu=1.20e-02 CE=0.0077 RDPO=0.0059 MC=0.148 (zero 0.00) K=6 params=13 3s
+ring     n= 2 exceedance seed=202 mu=1.20e-02 CE=0.0076 RDPO=0.0074 MC=0.148 (zero 0.00) K=6 params=13 3s
+ring     n= 2 exceedance seed=303 mu=1.20e-02 CE=0.0068 RDPO=0.0075 MC=0.148 (zero 0.00) K=6 params=13 2s
+ring     n= 4 exceedance seed=101 mu=1.64e-03 CE=0.0153 RDPO=0.0154 MC=0.417 (zero 0.00) K=16 params=23 9s
+ring     n= 4 exceedance seed=202 mu=1.64e-03 CE=0.0167 RDPO=0.0175 MC=0.417 (zero 0.00) K=16 params=23 8s
+ring     n= 4 exceedance seed=303 mu=1.64e-03 CE=0.0120 RDPO=0.0160 MC=0.417 (zero 0.00) K=16 params=23 9s
+ring     n= 6 exceedance seed=101 mu=2.96e-04 CE=0.0175 RDPO=0.0187 MC=0.762 (zero 0.27) K=24 params=33 14s
+ring     n= 6 exceedance seed=202 mu=2.96e-04 CE=0.0163 RDPO=0.0149 MC=0.762 (zero 0.27) K=24 params=33 13s
+ring     n= 6 exceedance seed=303 mu=2.96e-04 CE=0.0149 RDPO=0.0205 MC=0.762 (zero 0.27) K=24 params=33 12s
+ring     n= 8 exceedance seed=101 mu=3.89e-05 CE=0.0217 RDPO=0.0213 MC=1.920 (zero 0.90) K=32 params=43 19s
+ring     n= 8 exceedance seed=202 mu=3.89e-05 CE=0.0196 RDPO=0.0202 MC=1.920 (zero 0.90) K=32 params=43 19s
+ring     n= 8 exceedance seed=303 mu=3.89e-05 CE=0.0201 RDPO=0.0228 MC=1.920 (zero 0.90) K=32 params=43 19s
+ring     n=12 exceedance seed=101 mu=8.50e-07 CE=0.0273 RDPO=0.0289 MC=52.286 (zero 0.97) K=48 params=63 30s
+ring     n=12 exceedance seed=202 mu=8.50e-07 CE=0.0247 RDPO=0.0267 MC=52.286 (zero 0.97) K=48 params=63 29s
+ring     n=12 exceedance seed=303 mu=8.50e-07 CE=0.0250 RDPO=0.0267 MC=52.286 (zero 0.97) K=48 params=63 34s
+ring     n=16 exceedance seed=101 mu=1.46e-08 CE=0.0273 RDPO=0.0324 MC=1.000 (zero 1.00) K=64 params=83 49s
+ring     n=16 exceedance seed=202 mu=1.46e-08 CE=0.0300 RDPO=0.0280 MC=1.000 (zero 1.00) K=64 params=83 55s
+ring     n=16 exceedance seed=303 mu=1.46e-08 CE=0.0312 RDPO=0.0309 MC=1.000 (zero 1.00) K=64 params=83 68s
+ring     n=20 exceedance seed=101 mu=2.90e-10 CE=0.0627 RDPO=0.0475 MC=1.000 (zero 1.00) K=80 params=103 72s
+ring     n=20 exceedance seed=202 mu=2.90e-10 CE=0.0382 RDPO=0.0354 MC=1.000 (zero 1.00) K=80 params=103 61s
+ring     n=20 exceedance seed=303 mu=2.90e-10 CE=0.0398 RDPO=0.0434 MC=1.000 (zero 1.00) K=80 params=103 62s
+ring     n=28 exceedance seed=101 mu=1.32e-13 CE=0.7312 RDPO=0.8360 MC=1.000 (zero 1.00) K=112 params=143 117s
+ring     n=28 exceedance seed=202 mu=1.32e-13 CE=0.4492 RDPO=0.2663 MC=1.000 (zero 1.00) K=112 params=143 111s
+ring     n=28 exceedance seed=303 mu=1.32e-13 CE=0.9997 RDPO=0.9928 MC=1.000 (zero 1.00) K=112 params=143 137s
+complete n= 4 exceedance seed=101 mu=2.07e-03 CE=0.0173 RDPO=0.0143 MC=0.321 (zero 0.00) K=20 params=23 12s
+complete n= 4 exceedance seed=202 mu=2.07e-03 CE=0.0204 RDPO=0.0138 MC=0.321 (zero 0.00) K=20 params=23 13s
+complete n= 4 exceedance seed=303 mu=2.07e-03 CE=0.0155 RDPO=0.0161 MC=0.321 (zero 0.00) K=20 params=23 11s
+complete n= 5 exceedance seed=101 mu=1.74e-03 CE=0.0166 RDPO=0.0163 MC=0.414 (zero 0.00) K=30 params=28 20s
+complete n= 5 exceedance seed=202 mu=1.74e-03 CE=0.0188 RDPO=0.0185 MC=0.414 (zero 0.00) K=30 params=28 20s
+complete n= 5 exceedance seed=303 mu=1.74e-03 CE=0.0200 RDPO=0.0155 MC=0.414 (zero 0.00) K=30 params=28 17s
+complete n= 6 exceedance seed=101 mu=6.25e-04 CE=0.0190 RDPO=0.0171 MC=0.542 (zero 0.10) K=42 params=33 26s
+complete n= 6 exceedance seed=202 mu=6.25e-04 CE=0.0182 RDPO=0.0175 MC=0.542 (zero 0.10) K=42 params=33 27s
+complete n= 6 exceedance seed=303 mu=6.25e-04 CE=0.0166 RDPO=0.0160 MC=0.542 (zero 0.10) K=42 params=33 28s
+complete n= 7 exceedance seed=101 mu=2.90e-04 CE=0.0215 RDPO=0.0235 MC=1.049 (zero 0.30) K=56 params=38 38s
+complete n= 7 exceedance seed=202 mu=2.90e-04 CE=0.0218 RDPO=0.0209 MC=1.049 (zero 0.30) K=56 params=38 37s
+complete n= 7 exceedance seed=303 mu=2.90e-04 CE=0.0186 RDPO=0.0163 MC=1.049 (zero 0.30) K=56 params=38 36s
+ring     n= 4 stop_loss  seed=101 mu=4.83e+04 CE=0.0149 RDPO=0.0134 MC=0.454 (zero 0.00) K=16 params=23 8s
+ring     n= 4 stop_loss  seed=202 mu=4.83e+04 CE=0.0137 RDPO=0.0148 MC=0.454 (zero 0.00) K=16 params=23 8s
+ring     n= 4 stop_loss  seed=303 mu=4.83e+04 CE=0.0112 RDPO=0.0144 MC=0.454 (zero 0.00) K=16 params=23 9s
+ring     n= 8 stop_loss  seed=101 mu=9.52e+02 CE=0.0180 RDPO=0.0178 MC=1.600 (zero 0.90) K=32 params=43 18s
+ring     n= 8 stop_loss  seed=202 mu=9.52e+02 CE=0.0231 RDPO=0.0182 MC=1.600 (zero 0.90) K=32 params=43 18s
+ring     n= 8 stop_loss  seed=303 mu=9.52e+02 CE=0.0173 RDPO=0.0201 MC=1.600 (zero 0.90) K=32 params=43 18s
+ring     n=16 stop_loss  seed=101 mu=3.47e-01 CE=0.0273 RDPO=0.0273 MC=1.000 (zero 1.00) K=64 params=83 44s
+ring     n=16 stop_loss  seed=202 mu=3.47e-01 CE=0.0284 RDPO=0.0252 MC=1.000 (zero 1.00) K=64 params=83 45s
+ring     n=16 stop_loss  seed=303 mu=3.47e-01 CE=0.0276 RDPO=0.0278 MC=1.000 (zero 1.00) K=64 params=83 44s
+complete n= 6 stop_loss  seed=101 mu=1.54e+04 CE=0.0148 RDPO=0.0167 MC=0.843 (zero 0.10) K=42 params=33 25s
+complete n= 6 stop_loss  seed=202 mu=1.54e+04 CE=0.0119 RDPO=0.0173 MC=0.843 (zero 0.10) K=42 params=33 27s
+complete n= 6 stop_loss  seed=303 mu=1.54e+04 CE=0.0165 RDPO=0.0147 MC=0.843 (zero 0.10) K=42 params=33 27s

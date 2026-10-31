@@ -150,3 +150,44 @@ def test_renyi2_refinement_rescues_failed_ce_fit():
     prop, _ = renyi2_refine(prop, PROB.f[EXH], seed=1)
     after = exact_rel_std(prop, PROB.f[EXH])
     assert after < before / 3
+
+
+def test_twisted_loading_exact_and_bounded():
+    """Twisted Poisson-source A: g <= 1 and a = μ·e^{ηT−Λ(η)} exactly (n = 2 and 3)."""
+    from src.tensor.synthetic import SyntheticModel, topology
+    from src.quantum.twisted import simulate_twisted_A, twisted_amplitude
+    m = SyntheticModel(2, topology("chain", 2))
+    r = simulate_twisted_A(m, 80e6)
+    mu = PROB.exact["term_portfolio_loss_exceedance_probability"]
+    assert r["g_max"] <= 1 + 1e-12
+    assert r["mu_recovered"] == pytest.approx(mu, rel=1e-10)
+    assert r["a"] == pytest.approx(twisted_amplitude(m, mu, 32)["a_twisted"], rel=1e-10)
+
+
+def test_source_rdpo_gradients_and_unbiasedness():
+    from scipy.optimize import check_grad
+    from src.tensor.synthetic import SyntheticModel, topology
+    from src.scale.source_rdpo import SourceProblem, SourcePolicy, mc_estimate, twisted_estimate, warm_start_theta
+    P = SourceProblem(SyntheticModel(2, topology("chain", 2)), 80e6)
+    pol = SourcePolicy(P); pol.set(np.random.default_rng(1).normal(0, .3, pol.n_params))
+    rng = np.random.default_rng(0)
+    _, _, _, acts = pol.sample(40, rng, record=True); c = np.ones(40) / 40
+    v = pol.get().copy()
+    f = lambda x: (pol.set(x), pol.replay_grad(acts, c, "ce")[0])[1]
+    g = lambda x: (pol.set(x), pol.replay_grad(acts, c, "ce")[1])[1]
+    assert check_grad(f, g, v) < 1e-5
+    mu = PROB.exact["term_portfolio_loss_exceedance_probability"]
+    x = np.array([twisted_estimate(P, warm_start_theta(P)[1], 4096, rng) for _ in range(40)])
+    assert abs(x.mean() - mu) < 4 * x.std(ddof=1) / np.sqrt(len(x))
+    y = np.array([mc_estimate(P, 4096, rng) for _ in range(40)])
+    assert abs(y.mean() - mu) < 4 * y.std(ddof=1) / np.sqrt(len(y))
+
+
+def test_nisq_calibrated_weights_remove_bias():
+    from src.quantum.qcbm import QCBM, optimal_iid_proposal
+    from src.quantum.nisq import is_bias_study
+    f = PROB.f["term_portfolio_loss_exceedance_probability"]
+    qc = QCBM(2, seed=1); qc.fit_kl(optimal_iid_proposal(PROB.p, f), restarts=1, seed=1)
+    r = is_bias_study(PROB, f, qc, 0.05, 1e-2, 0.02, 10 ** 6, np.random.default_rng(0))
+    assert abs(r["rel_bias_ideal_weights"]) > 0.03         # noise biases naive weights (6% for this L=2 QCBM)
+    assert abs(r["rel_bias_calibrated_weights"]) < 0.02    # calibrating the sampled law fixes it

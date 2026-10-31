@@ -97,6 +97,10 @@ This repository is a reproducible prototype of:
 | Structured quantum loading for ADB, per call of A | 52 qubits, 156 Toffolis (vs 97 / 3,808 generic) | REPORT §7.1 |
 | QAE vs MC queries, Pr(L > T), 28-country ring | 2.8×10⁹ vs 7.6×10¹⁴ | REPORT §7.2 |
 | Exact tilted MPS, 28 countries (chain / ring) | χ = 9 / 58, 7–68 s, tail error ≤ 1e-9 | REPORT §5 |
+| **Scalable RDPO**, Pr(L > T_n), ring 2 → 28 countries (μ: 1e-2 → 1e-13) | rel. RMSE **0.7% → 6.7%**; MC returns 0 for n ≥ 16; 3–5× better than exp. twisting | REPORT §7.6 |
+| **End-to-end Q-RDPO** (twisted loading, bounded weights), 28 countries | QAE calls 2.8×10⁹ → **3.4×10⁴** (MC: 7.6×10¹⁴ paths) | REPORT §7.7 |
+| Near-term QCBM sampler under noise (p₂ ≤ 1e-2) | bias +9…60% → **≤ 0.6%** with 10⁵ calibration shots | REPORT §7.8 |
+| QAE error-rate threshold to beat MC (noise-aware MLAE) | two-qubit error **≤ 1e-6** (early fault-tolerant) | REPORT §7.8 |
 
 <p align="center">
   <img src="figures/policy_comparison.png" width="48%" alt="Policy families: CE vs CE + Rényi-2">
@@ -144,7 +148,7 @@ Python ≥ 3.11, CPU only (the full pipeline was run on 4 cores).
    ```sh
    pip install numpy scipy matplotlib pytest
    ```
-3. Run the tests (32 tests, ~10 s)
+3. Run the tests (35 tests, ~40 s)
    ```sh
    python -m pytest -q tests/
    ```
@@ -165,6 +169,10 @@ PYTHONPATH=. python -m src.tensor.scaling            # Phase 4  tilted MPS scali
 PYTHONPATH=. python -m src.causal.latent_dimension   # Phase 5  quantum latent dimension  (~ 20 min)
 PYTHONPATH=. python -m src.quantum.run_structured    # Phase 6  Q-RDPO structured loading (~ 5 min)
 PYTHONPATH=. python -m src.hybrid.run_hybrid         # Phase 6  RDPO, VQC critic, entropy (~ 10 min)
+PYTHONPATH=. python -m src.scale.run_scale          # Phase 7  scalable RDPO (cold)     (~ 30 min)
+PYTHONPATH=. python -m src.scale.run_scale2         # Phase 7  RDPO warm start vs twist (~ 15 min)
+PYTHONPATH=. python -m src.quantum.run_twisted      # Phase 7  twisted Q-RDPO amplitudes  (< 1 min)
+PYTHONPATH=. python -m src.quantum.run_nisq         # Phase 7  NISQ counts, noisy MLAE, QCBM bias (~ 5 min)
 PYTHONPATH=. python -m src.figures                   # figures/
 ```
 
@@ -178,9 +186,10 @@ src/baselines/                     MC, scrambled Sobol, stratified, IS, zero-var
 src/learned/                       RDPO: log-linear Doob policy, CE policy search, Rényi-2 refinement
 src/quantum/                       QCBM, IQAE, resource model, structured Poisson-source loading
 src/hybrid/                        variational quantum critic, entropy diagnostics
+src/scale/                         scalable source-level RDPO, exponential twisting, scaling sweeps
 src/tensor/                        n-country synthetic model, tilted-gauge MPS, exact targets
 src/causal/                        classical (NMF) vs quantum (PSD) latent dimension
-tests/                             32 tests
+tests/                             35 tests
 results/  figures/                 all numbers and plots used in REPORT.md
 ```
 
@@ -194,10 +203,12 @@ results/  figures/                 all numbers and plots used in REPORT.md
 - [x] Phase 4: exact tilted-gauge tensor networks to 28 countries
 - [x] Phase 5: classical vs quantum latent dimension
 - [x] Phase 6: RDPO (Rényi-2 refinement), structured quantum loading, variational quantum critic
-- [ ] Scalable RDPO for n ≥ 4 countries (source-level policy, no 10ⁿ normaliser)
-- [ ] End-to-end Q-RDPO: load the RDPO proposal in the structured circuit + variance-based QAE
+- [x] Scalable RDPO for n ≥ 4 countries (source-level policy, no 10ⁿ normaliser), up to 28 countries
+- [x] End-to-end Q-RDPO: twisted source loading with bounded weights
+- [x] NISQ feasibility: hardware counts, noisy MLAE, QCBM sampler bias + calibration mitigation
+- [ ] Variance-based QAE (Montanaro) and state-dependent RDPO loading
 - [ ] Dense-dependence benchmark (degree-normalised complete / random graphs) where MPS χ blows up
-- [ ] Noise models, shot noise and hardware runs for the QCBM / VQC components
+- [ ] Hardware runs (QCBM sampler) on trapped-ion / neutral-atom devices in the QAI Ventures sandbox
 
 See [REPORT.md §8](REPORT.md) for the Phase 2 plan and risks.
 
@@ -230,5 +241,5 @@ Project link: [https://github.com/CL0908/adb-quantum-challenge](https://github.c
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-32%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-35%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20prototype-orange?style=for-the-badge
