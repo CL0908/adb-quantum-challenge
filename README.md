@@ -12,6 +12,9 @@ src/learned/     Phase 2  learned Doob h-transform: log-linear Ṽ_θ fitted by 
 src/quantum/     Phase 3  QCBM proposal (exact statevector sim), IQAE emulation, IS→QAE cascade, resource estimates
 src/tensor/      Phase 4  n-country synthetic model, MPS in a tilted gauge, exact targets, bond-dimension scaling
 src/causal/      Phase 5  classical (nonnegative rank) vs quantum (PSD rank) latent dimension across cuts
+src/quantum/structured_loading.py   Phase 6  exact Poisson-source quantum loading + scaling vs MC / MPS
+src/hybrid/      Phase 6  hybrid quantum RL (VQC soft-value critic), cut-entropy diagnostics
+src/learned/renyi.py   Phase 6  Rényi-2 (χ²) policy-gradient refinement, exact second moment
 src/figures.py   report figures
 tests/           32 tests (pytest)
 results/         JSON outputs of every phase (+ logs)
