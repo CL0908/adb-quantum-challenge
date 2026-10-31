@@ -12,7 +12,9 @@
   <p align="center">
     ADB Quantum Challenge: Joint-Loss Modelling for Natural Catastrophe Risk (Phase 1 prototype)
     <br />
-    <a href="REPORT.md"><strong>Read the technical report »</strong></a>
+    <a href="docs/RDPO_Proposal.pdf"><strong>Phase 1 proposal (PDF) »</strong></a>
+    &middot;
+    <a href="REPORT.md"><strong>Full technical report »</strong></a>
     <br />
     <br />
     <a href="#usage">Reproduce</a>
