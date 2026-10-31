@@ -1,7 +1,35 @@
-# ADB Quantum Challenge — Technical Report (Phase 1 prototype)
+# Information-Theoretic Reinforcement Learning for Joint Catastrophe Tails: Quantum Enhanced Rényi-Doob Policy Optimization
 
-**Joint-loss modelling for natural catastrophe risk: learned Doob h-transforms, quantum proposals,
-amplitude estimation and tensor networks.**
+*ADB Quantum Challenge — Technical Report (Phase 1 prototype)*
+
+## Abstract
+
+Joint-tail targets of multi-country catastrophe bond portfolios, such as "both bonds exhausted"
+(≈3×10⁻⁵ per term), defeat sampling methods at fixed budget, and exact enumeration grows as
+10ⁿ. We cast the zero-variance importance-sampling proposal as the optimal policy of a
+KL-regularised (soft) control problem: it is the Doob h-transform of the loss process, and its log
+value function is a soft value function. **Rényi-Doob Policy Optimization (RDPO)** learns a compact
+O(n)-parameter approximation of this policy by cross-entropy policy search. It then refines the
+policy with a Rényi-2 (χ²) policy gradient, because χ², not KL, is the divergence that controls
+importance-sampling variance. On the ADB benchmark, RDPO estimates the joint-exhaustion probability
+with a median relative RMSE of 0.30% at 4,096 paths, 0/15 failed fits, and roughly 100–400× lower
+error than the best reference baseline.
+
+**Quantum enhancement (Q-RDPO)** refers precisely to the estimation stage. Because quarter-step
+payouts are capped, every Poisson source has a finite increment law. The term distribution
+therefore loads *exactly* into a structured quantum circuit with O(n + |E|) qubits and gates for any
+dependence graph (52 qubits / 156 Toffolis per call for ADB). Amplitude estimation on this circuit
+needs O(1/√μ) queries against O(1/μ) for Monte Carlo, i.e. 10⁵–10⁶× fewer queries on rare
+portfolio tails at n = 28. We also test a variational quantum critic for the RDPO policy and report
+it as unreliable on the rarest target. We report the classical limits ourselves: exact tilted tensor
+networks solve sparse dependence graphs classically at any scale, and fault-tolerant costs remain
+≫ classical at benchmark scale. A quantum advantage is only plausible for dense dependence graphs
+combined with very rare targets.
+
+**Naming used in this report.** *RDPO* = learned Doob policy (§3) + Rényi-2 refinement (§7.4).
+*Q-RDPO* = RDPO + structured Poisson-source loading + IQAE (§7.1–7.2).
+
+---
 
 All numbers below come from the scripts in this repository (`results/*.json`, fixed seeds).
 "Query" means one sampled three-year path for classical methods and one application of the
@@ -395,7 +423,7 @@ Goal of this phase: not to beat the classical baselines on the 2-country benchma
 forward quantum constructions whose cost **provably scales polynomially in portfolio size for
 any dependence graph**, and to compare them honestly against the classical alternatives as n grows.
 
-### 7.1 Structured ("Poisson-source") quantum loading (`src/quantum/structured_loading.py`)
+### 7.1 Q-RDPO, part 1: structured ("Poisson-source") quantum loading (`src/quantum/structured_loading.py`)
 By §1.3 the term law is a product of independent sources (solo EQ, solo rain, shared EQ and
 shared rain on each edge). Because of the 4-step cap, each source's total effect over the term is
 a **capped increment with a finite law**: 5 outcomes for solo EQ, 25 for shared EQ, 2 for rain.
@@ -426,7 +454,7 @@ exact values: Pr(L>80m) = 0.0120467, both exhausted = 3.1633e-5 (tests).
 
 Still hopeless against 0.2 ms classical enumeration at n = 2. The point is the scaling.
 
-### 7.2 Scaling comparison: structured QAE vs MC vs exact tilted MPS (Fig. 4)
+### 7.2 Q-RDPO, part 2: structured QAE vs MC vs exact tilted MPS (Fig. 4)
 Target Pr(L > T_n) at 10% relative error. μ is taken from the exact MPS where available. The
 IQAE call count is fitted on our emulator as ≈ C/(ε·√a) with C = 102.
 
@@ -475,7 +503,7 @@ rain RY(2π) = identity and maps a to cos(πa/2), which is non-monotone. The fea
 **zero** linear information about a and r (R² = 0). Scaling the per-layer angle by 1/L restores
 R² ≥ 0.89 (test).
 
-### 7.4 Information-theoretic RL: Rényi-2 (χ²) policy refinement (`src/learned/renyi.py`)
+### 7.4 RDPO: information-theoretic RL with Rényi-2 (χ²) policy refinement (`src/learned/renyi.py`)
 CE minimises KL(p*‖q). The IS variance is governed by a different divergence:
 E_q[(wf)²]/μ² = 1 + χ²(p*‖q) = exp D₂(p*‖q). A policy can therefore have small KL and still a
 heavy-tailed weight distribution, which is exactly how the pairwise fits failed in §3.2. We
