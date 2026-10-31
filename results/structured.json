@@ -1,0 +1,1573 @@
+{
+  "iqae_C": 101.90936833400963,
+  "iqae_calibration": [
+    [
+      1e-06,
+      0.01,
+      8858060.0,
+      88.5806
+    ],
+    [
+      1e-06,
+      0.1,
+      1045896.6666666666,
+      104.58966666666667
+    ],
+    [
+      1e-05,
+      0.01,
+      3421796.6666666665,
+      108.20671156638628
+    ],
+    [
+      1e-05,
+      0.1,
+      406213.3333333333,
+      128.45593492625315
+    ],
+    [
+      0.0001,
+      0.01,
+      1275023.3333333333,
+      127.50233333333334
+    ],
+    [
+      0.0001,
+      0.1,
+      61543.333333333336,
+      61.543333333333344
+    ],
+    [
+      0.001,
+      0.01,
+      271206.6666666667,
+      85.76307832887323
+    ],
+    [
+      0.001,
+      0.1,
+      38103.333333333336,
+      120.49331977794915
+    ],
+    [
+      0.01,
+      0.01,
+      105893.33333333333,
+      105.89333333333335
+    ],
+    [
+      0.01,
+      0.1,
+      11393.333333333334,
+      113.93333333333335
+    ],
+    [
+      0.1,
+      0.01,
+      25673.333333333332,
+      81.1862084620562
+    ],
+    [
+      0.1,
+      0.1,
+      2540.0,
+      80.32185256827684
+    ],
+    [
+      0.3,
+      0.01,
+      18116.666666666668,
+      99.2290700013526
+    ],
+    [
+      0.3,
+      0.1,
+      903.3333333333334,
+      49.47760436130001
+    ]
+  ],
+  "verify": [
+    {
+      "topology": "chain",
+      "n": 2,
+      "exceedance": 0.012046720907534041,
+      "support": 3400,
+      "norm_err": 0.0,
+      "max_abs_err_vs_dense": 4.440892098500626e-16,
+      "stop_loss_scaled": 0.003529433732076763,
+      "at_least_two_pay": 0.0441377687308436,
+      "all_exhausted": 3.163304630917912e-05,
+      "expected_loss_scaled": 0.06289695843096321,
+      "adb_exact": {
+        "exceedance": 0.012046720907534033,
+        "at_least_two_pay": 0.044137768730843456,
+        "all_exhausted": 3.163304630917887e-05,
+        "stop_loss_scaled": 0.0035294337320767627,
+        "expected_loss_scaled": 0.06289695843096317
+      },
+      "resources": {
+        "n": 2,
+        "edges": 1,
+        "logical_qubits": 52,
+        "rotations": 80,
+        "cnot_prep": 74,
+        "toffoli": 156,
+        "toffoli_depth_est": 33
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "exceedance": 0.009108553513552048,
+      "support": 1156000,
+      "norm_err": 4.440892098500626e-16,
+      "max_abs_err_vs_dense": 2.220446049250313e-16,
+      "stop_loss_scaled": 0.0013256556194734428,
+      "at_least_two_pay": 0.08825385673904386,
+      "all_exhausted": 8.870601701479474e-08,
+      "expected_loss_scaled": 0.06409810089339361,
+      "resources": {
+        "n": 3,
+        "edges": 2,
+        "logical_qubits": 73,
+        "rotations": 152,
+        "cnot_prep": 142,
+        "toffoli": 240,
+        "toffoli_depth_est": 44
+      }
+    }
+  ],
+  "scaling": [
+    {
+      "topology": "chain",
+      "n": 2,
+      "edges": 1,
+      "A": {
+        "n": 2,
+        "edges": 1,
+        "logical_qubits": 52,
+        "rotations": 80,
+        "cnot_prep": 74,
+        "toffoli": 156,
+        "toffoli_depth_est": 33
+      },
+      "mu_exceedance": 0.012046720904162762,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.38949625399982324,
+      "exceedance": {
+        "qae_calls": 9284.952478216392,
+        "qae_T": 73392107.29697679,
+        "qae_runtime_s": 5045.707376667154,
+        "qae_phys_qubits": 89000,
+        "mc_samples": 8201.014093008896,
+        "mc_ops": 164020.28186017793
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 890067606.7060988,
+        "qae_runtime_s": 66087.51979792783,
+        "qae_phys_qubits": 99816,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 19997999.999999996
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 105256469173.05649,
+        "qae_runtime_s": 8973113.997003064,
+        "qae_phys_qubits": 123944,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 199999997999.99997
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "edges": 2,
+      "A": {
+        "n": 3,
+        "edges": 2,
+        "logical_qubits": 73,
+        "rotations": 152,
+        "cnot_prep": 142,
+        "toffoli": 240,
+        "toffoli_depth_est": 44
+      },
+      "mu_exceedance": 0.009108553515765318,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.5806141889997889,
+      "exceedance": {
+        "qae_calls": 10677.987363182452,
+        "qae_T": 162346039.25902882,
+        "qae_runtime_s": 11161.29019905823,
+        "qae_phys_qubits": 115250,
+        "mc_samples": 10878.691603108817,
+        "mc_ops": 348118.13129948213
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 1700652467.6485279,
+        "qae_runtime_s": 126273.44572290318,
+        "qae_phys_qubits": 130434,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 31996799.999999996
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 200939692919.50134,
+        "qae_runtime_s": 18235277.132444747,
+        "qae_phys_qubits": 182994,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 319999996799.99994
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "edges": 3,
+      "A": {
+        "n": 4,
+        "edges": 3,
+        "logical_qubits": 96,
+        "rotations": 224,
+        "cnot_prep": 210,
+        "toffoli": 342,
+        "toffoli_depth_est": 40
+      },
+      "mu_exceedance": 0.0014295575153544788,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.8460013619996971,
+      "exceedance": {
+        "qae_calls": 26953.38366128364,
+        "qae_T": 635726972.7948345,
+        "qae_runtime_s": 47202.727730016464,
+        "qae_phys_qubits": 163968,
+        "mc_samples": 69851.71507681772,
+        "mc_ops": 3073475.46337998
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 2535053074.9210978,
+        "qae_runtime_s": 202170.48272495755,
+        "qae_phys_qubits": 185472,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 43995599.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 299004491298.96027,
+        "qae_runtime_s": 27134657.585380644,
+        "qae_phys_qubits": 233088,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 439999995599.99994
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "edges": 4,
+      "A": {
+        "n": 5,
+        "edges": 4,
+        "logical_qubits": 117,
+        "rotations": 296,
+        "cnot_prep": 278,
+        "toffoli": 430,
+        "toffoli_depth_est": 44
+      },
+      "mu_exceedance": 0.0010238169238084758,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 1.4514741450002475,
+      "exceedance": {
+        "qae_calls": 31849.524845761465,
+        "qae_T": 1006801350.3778363,
+        "qae_runtime_s": 74755.00026555435,
+        "qae_phys_qubits": 194586,
+        "mc_samples": 97573.71262824218,
+        "mc_ops": 5464127.907181562
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 3373322622.401475,
+        "qae_runtime_s": 269022.4791365176,
+        "qae_phys_qubits": 220794,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 55994399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 397456183699.1999,
+        "qae_runtime_s": 36069148.67070239,
+        "qae_phys_qubits": 278826,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 559999994399.9999
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "edges": 5,
+      "A": {
+        "n": 6,
+        "edges": 5,
+        "logical_qubits": 138,
+        "rotations": 368,
+        "cnot_prep": 346,
+        "toffoli": 518,
+        "toffoli_depth_est": 48
+      },
+      "mu_exceedance": 0.00026030658654256167,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 1.8364552680004635,
+      "exceedance": {
+        "qae_calls": 63164.2772443462,
+        "qae_T": 2567092799.541297,
+        "qae_runtime_s": 204725.6507634184,
+        "qae_phys_qubits": 256116,
+        "mc_samples": 384062.3883906195,
+        "mc_ops": 26116242.410562124
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 4219394935.036975,
+        "qae_runtime_s": 336496.7460691987,
+        "qae_phys_qubits": 256116,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 67993199.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 496688152614.95184,
+        "qae_runtime_s": 45074449.849806875,
+        "qae_phys_qubits": 324564,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 679999993199.9999
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 7,
+      "edges": 6,
+      "A": {
+        "n": 7,
+        "edges": 6,
+        "logical_qubits": 159,
+        "rotations": 440,
+        "cnot_prep": 414,
+        "toffoli": 606,
+        "toffoli_depth_est": 52
+      },
+      "mu_exceedance": 9.246457023877859e-05,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.8445587709993561,
+      "exceedance": {
+        "qae_calls": 105980.61416943012,
+        "qae_T": 5282240414.140926,
+        "qae_runtime_s": 421258.6730277388,
+        "qae_phys_qubits": 291438,
+        "mc_samples": 1081395.3202265694,
+        "mc_ops": 86511625.61812556
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 5071720876.47433,
+        "qae_runtime_s": 404469.7398988278,
+        "qae_phys_qubits": 291438,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 79991999.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 596545484410.889,
+        "qae_runtime_s": 54136502.710288174,
+        "qae_phys_qubits": 370302,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 799999991999.9999
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 8,
+      "edges": 7,
+      "A": {
+        "n": 8,
+        "edges": 7,
+        "logical_qubits": 182,
+        "rotations": 512,
+        "cnot_prep": 482,
+        "toffoli": 728,
+        "toffoli_depth_est": 49
+      },
+      "mu_exceedance": 3.470492297843302e-05,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 2.3296152459997757,
+      "exceedance": {
+        "qae_calls": 172989.0315095596,
+        "qae_T": 10292559828.792257,
+        "qae_runtime_s": 877440.7254045398,
+        "qae_phys_qubits": 373804,
+        "mc_samples": 2881335.583710814,
+        "mc_ops": 265082873.7013949
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 5943941845.637835,
+        "qae_runtime_s": 474029.3621896173,
+        "qae_phys_qubits": 330124,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 91990799.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 698392318979.4415,
+        "qae_runtime_s": 67220260.70177124,
+        "qae_phys_qubits": 469900,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 919999990799.9999
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 10,
+      "edges": 9,
+      "A": {
+        "n": 10,
+        "edges": 9,
+        "logical_qubits": 224,
+        "rotations": 656,
+        "cnot_prep": 618,
+        "toffoli": 912,
+        "toffoli_depth_est": 55
+      },
+      "mu_exceedance": 5.713766968919826e-06,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 3.2903361340004267,
+      "exceedance": {
+        "qae_calls": 426336.8260333428,
+        "qae_T": 33841398706.67832,
+        "qae_runtime_s": 2884979.239744327,
+        "qae_phys_qubits": 454528,
+        "mc_samples": 17501488.801915165,
+        "mc_ops": 2030172701.022159
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 7675181627.973863,
+        "qae_runtime_s": 654309.2337847719,
+        "qae_phys_qubits": 454528,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 115988399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 900765772517.4484,
+        "qae_runtime_s": 86698705.6048044,
+        "qae_phys_qubits": 572800,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1159999988399.9998
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 12,
+      "edges": 11,
+      "A": {
+        "n": 12,
+        "edges": 11,
+        "logical_qubits": 266,
+        "rotations": 800,
+        "cnot_prep": 754,
+        "toffoli": 1096,
+        "toffoli_depth_est": 61
+      },
+      "mu_exceedance": 7.623881775237133e-07,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 4.070408266000413,
+      "exceedance": {
+        "qae_calls": 1167148.2768828725,
+        "qae_T": 117744337154.96132,
+        "qae_runtime_s": 10685298.59681274,
+        "qae_phys_qubits": 603348,
+        "mc_samples": 131166676.90990244,
+        "mc_ops": 18363334767.38634
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 9420477786.328043,
+        "qae_runtime_s": 803095.7312844656,
+        "qae_phys_qubits": 535252,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 139985999.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1104544863657.2705,
+        "qae_runtime_s": 106312443.12701228,
+        "qae_phys_qubits": 675700,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1399999985999.9998
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 16,
+      "edges": 15,
+      "A": {
+        "n": 16,
+        "edges": 15,
+        "logical_qubits": 352,
+        "rotations": 1088,
+        "cnot_prep": 1026,
+        "toffoli": 1530,
+        "toffoli_depth_est": 66
+      },
+      "mu_exceedance": 1.3012814691161439e-08,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 5.483495282999684,
+      "exceedance": {
+        "qae_calls": 8933640.810549537,
+        "qae_T": 1325307621795.4458,
+        "qae_runtime_s": 127560858.59781165,
+        "qae_phys_qubits": 886400,
+        "mc_samples": 7684732402.0252495,
+        "mc_ops": 1444729691580.7468
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 12971506316.377817,
+        "qae_runtime_s": 1105820.9134712087,
+        "qae_phys_qubits": 700544,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 187981199.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1518146667271.0557,
+        "qae_runtime_s": 146121616.7248391,
+        "qae_phys_qubits": 886400,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1879999981199.9998
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 20,
+      "edges": 19,
+      "A": {
+        "n": 20,
+        "edges": 19,
+        "logical_qubits": 436,
+        "rotations": 1376,
+        "cnot_prep": 1298,
+        "toffoli": 1914,
+        "toffoli_depth_est": 76
+      },
+      "mu_exceedance": 2.5935454755004756e-10,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 5.437125268000273,
+      "exceedance": {
+        "qae_calls": 63280102.80190729,
+        "qae_T": 12691237499807.23,
+        "qae_runtime_s": 1291333415.6053858,
+        "qae_phys_qubits": 1217768,
+        "mc_samples": 385572572058.9787,
+        "mc_ops": 90995127005918.97
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 16535367104.428213,
+        "qae_runtime_s": 1409640.045652505,
+        "qae_phys_qubits": 861992,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 235976399.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1933031696684.9023,
+        "qae_runtime_s": 186054300.80592182,
+        "qae_phys_qubits": 1092200,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 2359999976399.9995
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 28,
+      "edges": 27,
+      "A": {
+        "n": 28,
+        "edges": 27,
+        "logical_qubits": 604,
+        "rotations": 1952,
+        "cnot_prep": 1842,
+        "toffoli": 2682,
+        "toffoli_depth_est": 96
+      },
+      "mu_exceedance": 1.1867709064901314e-13,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 7.325857421999899,
+      "exceedance": {
+        "qae_calls": 2958221329.7621307,
+        "qae_T": 945908983411110.2,
+        "qae_runtime_s": 106651237879.60266,
+        "qae_phys_qubits": 2054648,
+        "mc_samples": 842622611096336.9,
+        "mc_ops": 2.7975070688398384e+17
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 23738755627.722225,
+        "qae_runtime_s": 2154292.0732157915,
+        "qae_phys_qubits": 1339512,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 331966799.99999994
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 2770368450231.9194,
+        "qae_runtime_s": 281884989.8110978,
+        "qae_phys_qubits": 1677752,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 3319999966799.9995
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 50,
+      "edges": 49,
+      "A": {
+        "n": 50,
+        "edges": 49,
+        "logical_qubits": 1068,
+        "rotations": 3536,
+        "cnot_prep": 3338,
+        "toffoli": 4996,
+        "toffoli_depth_est": 137
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 43974262704.97599,
+        "qae_runtime_s": 3990664.340476571,
+        "qae_phys_qubits": 2350104,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 595940399.9999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 5115663386305.737,
+        "qae_runtime_s": 520518749.55660874,
+        "qae_phys_qubits": 2948184,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 5959999940399.999
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "edges": 1,
+      "A": {
+        "n": 2,
+        "edges": 1,
+        "logical_qubits": 52,
+        "rotations": 80,
+        "cnot_prep": 74,
+        "toffoli": 156,
+        "toffoli_depth_est": 33
+      },
+      "mu_exceedance": 0.012046720904162762,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.4202533959996799,
+      "exceedance": {
+        "qae_calls": 9284.952478216392,
+        "qae_T": 73392107.29697679,
+        "qae_runtime_s": 5045.707376667154,
+        "qae_phys_qubits": 89000,
+        "mc_samples": 8201.014093008896,
+        "mc_ops": 164020.28186017793
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 890067606.7060988,
+        "qae_runtime_s": 66087.51979792783,
+        "qae_phys_qubits": 99816,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 19997999.999999996
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 105256469173.05649,
+        "qae_runtime_s": 8973113.997003064,
+        "qae_phys_qubits": 123944,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 199999997999.99997
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "edges": 3,
+      "A": {
+        "n": 3,
+        "edges": 3,
+        "logical_qubits": 80,
+        "rotations": 216,
+        "cnot_prep": 204,
+        "toffoli": 264,
+        "toffoli_depth_est": 44
+      },
+      "mu_exceedance": 0.010728696369151223,
+      "mps_chi": 10,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 1.2279848589996618,
+      "exceedance": {
+        "qae_calls": 9838.76601707311,
+        "qae_T": 211083216.72493064,
+        "qae_runtime_s": 15672.928841826099,
+        "qae_phys_qubits": 140640,
+        "mc_samples": 9220.796913177184,
+        "mc_ops": 331948.6888743786
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 2409109352.1609178,
+        "qae_runtime_s": 192126.4708348332,
+        "qae_phys_qubits": 158560,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 35996399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 284785148172.6975,
+        "qae_runtime_s": 25844252.196672294,
+        "qae_phys_qubits": 198240,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 359999996399.99994
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "edges": 4,
+      "A": {
+        "n": 4,
+        "edges": 4,
+        "logical_qubits": 103,
+        "rotations": 288,
+        "cnot_prep": 272,
+        "toffoli": 366,
+        "toffoli_depth_est": 40
+      },
+      "mu_exceedance": 0.0016416415814231899,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 1.4653339980004603,
+      "exceedance": {
+        "qae_calls": 25152.13977158065,
+        "qae_T": 758979521.0957899,
+        "qae_runtime_s": 56354.229441362404,
+        "qae_phys_qubits": 174174,
+        "mc_samples": 60814.63638080297,
+        "mc_ops": 2919102.546278543
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 3252901981.6822414,
+        "qae_runtime_s": 259418.93303915873,
+        "qae_phys_qubits": 197246,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 47995199.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 383789148777.0319,
+        "qae_runtime_s": 34828865.25151564,
+        "qae_phys_qubits": 248334,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 479999995199.9999
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "edges": 5,
+      "A": {
+        "n": 5,
+        "edges": 5,
+        "logical_qubits": 124,
+        "rotations": 360,
+        "cnot_prep": 340,
+        "toffoli": 454,
+        "toffoli_depth_est": 44
+      },
+      "mu_exceedance": 0.0011506108860198016,
+      "mps_chi": 56,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 2.4562590840005214,
+      "exceedance": {
+        "qae_calls": 30043.4546745808,
+        "qae_T": 1150994567.1792698,
+        "qae_runtime_s": 91791.81673254677,
+        "qae_phys_qubits": 232568,
+        "mc_samples": 86810.35450387615,
+        "mc_ops": 5208621.270232569
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 4098196555.8506365,
+        "qae_runtime_s": 326831.17532908823,
+        "qae_phys_qubits": 232568,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 59993999.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 482943343846.0733,
+        "qae_runtime_s": 43827108.454031155,
+        "qae_phys_qubits": 294072,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 599999993999.9999
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "edges": 6,
+      "A": {
+        "n": 6,
+        "edges": 6,
+        "logical_qubits": 145,
+        "rotations": 432,
+        "cnot_prep": 408,
+        "toffoli": 542,
+        "toffoli_depth_est": 48
+      },
+      "mu_exceedance": 0.00029644110177731215,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 3.882956832000673,
+      "exceedance": {
+        "qae_calls": 59189.5312143261,
+        "qae_T": 2814790660.901886,
+        "qae_runtime_s": 224479.5552069254,
+        "qae_phys_qubits": 267890,
+        "mc_samples": 337235.1380778514,
+        "mc_ops": 24280929.9416053
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 4949885608.209375,
+        "qae_runtime_s": 394753.37725469767,
+        "qae_phys_qubits": 267890,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 71992799.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 582736986734.149,
+        "qae_runtime_s": 52883381.54612402,
+        "qae_phys_qubits": 339810,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 719999992799.9999
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 7,
+      "edges": 7,
+      "A": {
+        "n": 7,
+        "edges": 7,
+        "logical_qubits": 166,
+        "rotations": 504,
+        "cnot_prep": 476,
+        "toffoli": 630,
+        "toffoli_depth_est": 52
+      },
+      "mu_exceedance": 0.00010505193171684796,
+      "mps_chi": 56,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 4.622422401999756,
+      "exceedance": {
+        "qae_calls": 99428.77490229541,
+        "qae_T": 5660201089.311206,
+        "qae_runtime_s": 451401.03687256866,
+        "qae_phys_qubits": 303212,
+        "mc_samples": 951810.1492539451,
+        "mc_ops": 79952052.53733139
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 5806892310.032762,
+        "qae_runtime_s": 463099.6617251127,
+        "qae_phys_qubits": 303212,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 83991599.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 683062394568.6896,
+        "qae_runtime_s": 65744755.47723637,
+        "qae_phys_qubits": 430700,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 839999991599.9999
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "edges": 8,
+      "A": {
+        "n": 8,
+        "edges": 8,
+        "logical_qubits": 189,
+        "rotations": 576,
+        "cnot_prep": 544,
+        "toffoli": 752,
+        "toffoli_depth_est": 49
+      },
+      "mu_exceedance": 3.888654419108764e-05,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 6.501119451000704,
+      "exceedance": {
+        "qae_calls": 163423.47271774436,
+        "qae_T": 10909571126.652353,
+        "qae_runtime_s": 930040.9385471131,
+        "qae_phys_qubits": 387258,
+        "mc_samples": 2571483.6179374065,
+        "mc_ops": 246862427.32199103
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 6683126264.265659,
+        "qae_runtime_s": 569736.5140286474,
+        "qae_phys_qubits": 387258,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 95990399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 785310527644.1815,
+        "qae_runtime_s": 75586138.28575246,
+        "qae_phys_qubits": 487050,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 959999990399.9998
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 10,
+      "edges": 10,
+      "A": {
+        "n": 10,
+        "edges": 10,
+        "logical_qubits": 231,
+        "rotations": 720,
+        "cnot_prep": 680,
+        "toffoli": 936,
+        "toffoli_depth_est": 55
+      },
+      "mu_exceedance": 6.403545507644497e-06,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 10.00264943899947,
+      "exceedance": {
+        "qae_calls": 402720.61329658533,
+        "qae_T": 35002237989.061584,
+        "qae_runtime_s": 2983940.7885674997,
+        "qae_phys_qubits": 467982,
+        "mc_samples": 15616248.768134909,
+        "mc_ops": 1873949852.176189
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 8421001359.509431,
+        "qae_runtime_s": 717890.365898179,
+        "qae_phys_qubits": 467982,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 119987999.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 988347512472.9624,
+        "qae_runtime_s": 95128448.07552262,
+        "qae_phys_qubits": 589950,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1199999987999.9998
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 12,
+      "edges": 12,
+      "A": {
+        "n": 12,
+        "edges": 12,
+        "logical_qubits": 273,
+        "rotations": 864,
+        "cnot_prep": 816,
+        "toffoli": 1120,
+        "toffoli_depth_est": 61
+      },
+      "mu_exceedance": 8.496892206447331e-07,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 14.508297247999508,
+      "exceedance": {
+        "qae_calls": 1105564.42467688,
+        "qae_T": 120203470268.6297,
+        "qae_runtime_s": 10908464.926878147,
+        "qae_phys_qubits": 618594,
+        "mc_samples": 117689988.99997729,
+        "mc_ops": 16947358415.99673
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 10171665411.133888,
+        "qae_runtime_s": 867134.4762991639,
+        "qae_phys_qubits": 548706,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 143985599.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1192663392939.812,
+        "qae_runtime_s": 114793851.5704569,
+        "qae_phys_qubits": 692850,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1439999985599.9998
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 16,
+      "edges": 16,
+      "A": {
+        "n": 16,
+        "edges": 16,
+        "logical_qubits": 359,
+        "rotations": 1152,
+        "cnot_prep": 1088,
+        "toffoli": 1554,
+        "toffoli_depth_est": 66
+      },
+      "mu_exceedance": 1.4564028479010561e-08,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 25.203713023999626,
+      "exceedance": {
+        "qae_calls": 8444488.526470762,
+        "qae_T": 1323775881314.0242,
+        "qae_runtime_s": 127413428.57647482,
+        "qae_phys_qubits": 903550,
+        "mc_samples": 6866232010.443779,
+        "mc_ops": 1318316546005.2056
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 13731088067.167074,
+        "qae_runtime_s": 1170575.257725993,
+        "qae_phys_qubits": 713998,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 191980799.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1607104609151.9382,
+        "qae_runtime_s": 154683818.63087407,
+        "qae_phys_qubits": 903550,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1919999980799.9995
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 20,
+      "edges": 20,
+      "A": {
+        "n": 20,
+        "edges": 20,
+        "logical_qubits": 443,
+        "rotations": 1440,
+        "cnot_prep": 1360,
+        "toffoli": 1938,
+        "toffoli_depth_est": 76
+      },
+      "mu_exceedance": 2.898829225098419e-10,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 38.59579362199929,
+      "exceedance": {
+        "qae_calls": 59855325.12415246,
+        "qae_T": 12540174900962.842,
+        "qae_runtime_s": 1275962796.1729689,
+        "qae_phys_qubits": 1236934,
+        "mc_samples": 344966854567.35236,
+        "mc_ops": 82792045096164.56
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 17301410151.46858,
+        "qae_runtime_s": 1474945.2154126961,
+        "qae_phys_qubits": 875446,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 239975999.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 2022635768190.8962,
+        "qae_runtime_s": 194678692.68837377,
+        "qae_phys_qubits": 1109350,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 2399999975999.9995
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 28,
+      "edges": 28,
+      "A": {
+        "n": 28,
+        "edges": 28,
+        "logical_qubits": 611,
+        "rotations": 2016,
+        "cnot_prep": 1904,
+        "toffoli": 2706,
+        "toffoli_depth_est": 96
+      },
+      "mu_exceedance": 1.3220243960861647e-13,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 67.97625565899943,
+      "exceedance": {
+        "qae_calls": 2802814624.9142885,
+        "qae_T": 924209821394625.9,
+        "qae_runtime_s": 104204657362.24406,
+        "qae_phys_qubits": 2078182,
+        "mc_samples": 756415693205325.1,
+        "mc_ops": 2.5415567291698925e+17
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 24514480743.45292,
+        "qae_runtime_s": 2224689.127468352,
+        "qae_phys_qubits": 1354758,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 335966399.99999994
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 2860940728606.946,
+        "qae_runtime_s": 291100719.13575673,
+        "qae_phys_qubits": 1696918,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 3359999966399.9995
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 50,
+      "edges": 50,
+      "A": {
+        "n": 50,
+        "edges": 50,
+        "logical_qubits": 1075,
+        "rotations": 3600,
+        "cnot_prep": 3400,
+        "toffoli": 5020,
+        "toffoli_depth_est": 137
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 44766555775.657715,
+        "qae_runtime_s": 4062564.9366409373,
+        "qae_phys_qubits": 2365350,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 599939999.9999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 5207892460175.867,
+        "qae_runtime_s": 529903057.82289445,
+        "qae_phys_qubits": 2967350,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 5999999939999.999
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "edges": 1,
+      "A": {
+        "n": 2,
+        "edges": 1,
+        "logical_qubits": 52,
+        "rotations": 80,
+        "cnot_prep": 74,
+        "toffoli": 156,
+        "toffoli_depth_est": 33
+      },
+      "mu_exceedance": 0.012046720904162762,
+      "mps_chi": 9,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 0.2500912450004762,
+      "exceedance": {
+        "qae_calls": 9284.952478216392,
+        "qae_T": 73392107.29697679,
+        "qae_runtime_s": 5045.707376667154,
+        "qae_phys_qubits": 89000,
+        "mc_samples": 8201.014093008896,
+        "mc_ops": 164020.28186017793
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 890067606.7060988,
+        "qae_runtime_s": 66087.51979792783,
+        "qae_phys_qubits": 99816,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 19997999.999999996
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 105256469173.05649,
+        "qae_runtime_s": 8973113.997003064,
+        "qae_phys_qubits": 123944,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 199999997999.99997
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "edges": 3,
+      "A": {
+        "n": 3,
+        "edges": 3,
+        "logical_qubits": 80,
+        "rotations": 216,
+        "cnot_prep": 204,
+        "toffoli": 264,
+        "toffoli_depth_est": 44
+      },
+      "mu_exceedance": 0.010728696369151223,
+      "mps_chi": 10,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 1.0214816800007611,
+      "exceedance": {
+        "qae_calls": 9838.76601707311,
+        "qae_T": 211083216.72493064,
+        "qae_runtime_s": 15672.928841826099,
+        "qae_phys_qubits": 140640,
+        "mc_samples": 9220.796913177184,
+        "mc_ops": 331948.6888743786
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 2409109352.1609178,
+        "qae_runtime_s": 192126.4708348332,
+        "qae_phys_qubits": 158560,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 35996399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 284785148172.6975,
+        "qae_runtime_s": 25844252.196672294,
+        "qae_phys_qubits": 198240,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 359999996399.99994
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "edges": 6,
+      "A": {
+        "n": 4,
+        "edges": 6,
+        "logical_qubits": 125,
+        "rotations": 416,
+        "cnot_prep": 396,
+        "toffoli": 494,
+        "toffoli_depth_est": 49
+      },
+      "mu_exceedance": 0.0020719958516633168,
+      "mps_chi": 58,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 3.4057593510005972,
+      "exceedance": {
+        "qae_calls": 22388.225311083203,
+        "qae_T": 980729918.9525443,
+        "qae_runtime_s": 72819.19648222641,
+        "qae_phys_qubits": 206250,
+        "mc_samples": 48162.64488885146,
+        "mc_ops": 2697108.1137756817
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 4742284445.848371,
+        "qae_runtime_s": 378197.1845564075,
+        "qae_phys_qubits": 234250,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 55994399.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 558726928797.5593,
+        "qae_runtime_s": 50704468.78837851,
+        "qae_phys_qubits": 296250,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 559999994399.9999
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "edges": 10,
+      "A": {
+        "n": 5,
+        "edges": 10,
+        "logical_qubits": 169,
+        "rotations": 680,
+        "cnot_prep": 650,
+        "toffoli": 694,
+        "toffoli_depth_est": 58
+      },
+      "mu_exceedance": 0.0017395580182666985,
+      "mps_chi": 69,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 12.743212573000164,
+      "exceedance": {
+        "qae_calls": 24434.004565124655,
+        "qae_T": 1776685093.5633593,
+        "qae_runtime_s": 141690.63621167792,
+        "qae_phys_qubits": 308258,
+        "mc_samples": 57385.866495927694,
+        "mc_ops": 4590869.319674215
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 7838531174.962086,
+        "qae_runtime_s": 668234.7826655178,
+        "qae_phys_qubits": 348818,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 79991999.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 921975639767.0044,
+        "qae_runtime_s": 88740155.32757416,
+        "qae_phys_qubits": 438050,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 799999991999.9999
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "edges": 15,
+      "A": {
+        "n": 6,
+        "edges": 15,
+        "logical_qubits": 220,
+        "rotations": 1008,
+        "cnot_prep": 966,
+        "toffoli": 926,
+        "toffoli_depth_est": 67
+      },
+      "mu_exceedance": 0.0006252641172808709,
+      "mps_chi": 135,
+      "mps_tol": 1e-09,
+      "mps_runtime_s": 67.26142888699997,
+      "exceedance": {
+        "qae_calls": 40755.13693441094,
+        "qae_T": 4532112309.494053,
+        "qae_runtime_s": 361435.95668215066,
+        "qae_phys_qubits": 394040,
+        "mc_samples": 159832.414536879,
+        "mc_ops": 17261900.76998293
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 11740152236.799694,
+        "qae_runtime_s": 1000847.9781871738,
+        "qae_phys_qubits": 446840,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 107989199.99999999
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1378761550810.7964,
+        "qae_runtime_s": 132705799.26553914,
+        "qae_phys_qubits": 563000,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1079999989199.9998
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 7,
+      "edges": 21,
+      "A": {
+        "n": 7,
+        "edges": 21,
+        "logical_qubits": 278,
+        "rotations": 1400,
+        "cnot_prep": 1344,
+        "toffoli": 1190,
+        "toffoli_depth_est": 76
+      },
+      "mu_exceedance": 0.0002898102003733718,
+      "mps_chi": 80,
+      "mps_tol": 1e-06,
+      "mps_runtime_s": 93.84214313699977,
+      "exceedance": {
+        "qae_calls": 59862.83440796662,
+        "qae_T": 9474774978.777588,
+        "qae_runtime_s": 807724.5669407892,
+        "qae_phys_qubits": 558316,
+        "mc_samples": 344953.4172750537,
+        "mc_ops": 48293478.41850752
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 16458207545.773556,
+        "qae_runtime_s": 1403062.1932771956,
+        "qae_phys_qubits": 558316,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 139985999.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 1930190653370.171,
+        "qae_runtime_s": 185780850.38687894,
+        "qae_phys_qubits": 705100,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1399999985999.9998
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 8,
+      "edges": 28,
+      "A": {
+        "n": 8,
+        "edges": 28,
+        "logical_qubits": 361,
+        "rotations": 1856,
+        "cnot_prep": 1784,
+        "toffoli": 1808,
+        "toffoli_depth_est": 87
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 22140537443.213135,
+        "qae_runtime_s": 1887480.8170339195,
+        "qae_phys_qubits": 717842,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 175982399.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 2591046981578.074,
+        "qae_runtime_s": 249388271.97688964,
+        "qae_phys_qubits": 908450,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 1759999982399.9998
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 10,
+      "edges": 45,
+      "A": {
+        "n": 10,
+        "edges": 45,
+        "logical_qubits": 516,
+        "rotations": 2960,
+        "cnot_prep": 2850,
+        "toffoli": 2656,
+        "toffoli_depth_est": 105
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 35802671383.24116,
+        "qae_runtime_s": 3249092.4280291344,
+        "qae_phys_qubits": 1147848,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 259973999.99999997
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 4181506352914.6387,
+        "qae_runtime_s": 425468271.4090644,
+        "qae_phys_qubits": 1436808,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 2599999973999.9995
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 12,
+      "edges": 66,
+      "A": {
+        "n": 12,
+        "edges": 66,
+        "logical_qubits": 699,
+        "rotations": 4320,
+        "cnot_prep": 4164,
+        "toffoli": 3664,
+        "toffoli_depth_est": 123
+      },
+      "mu=1e-4": {
+        "qae_calls": 101909.36833400963,
+        "qae_T": 52864330232.1009,
+        "qae_runtime_s": 4797437.968563156,
+        "qae_phys_qubits": 1546422,
+        "mc_samples": 999899.9999999999,
+        "mc_ops": 359963999.99999994
+      },
+      "mu=1e-8": {
+        "qae_calls": 10190936.833400961,
+        "qae_T": 6163917282342.204,
+        "qae_runtime_s": 627178583.4783192,
+        "qae_phys_qubits": 1937862,
+        "mc_samples": 9999999899.999998,
+        "mc_ops": 3599999963999.9995
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 16,
+      "infeasible": "shared rates exceed totals"
+    },
+    {
+      "topology": "complete",
+      "n": 20,
+      "infeasible": "shared rates exceed totals"
+    },
+    {
+      "topology": "complete",
+      "n": 28,
+      "infeasible": "shared rates exceed totals"
+    },
+    {
+      "topology": "complete",
+      "n": 50,
+      "infeasible": "shared rates exceed totals"
+    }
+  ],
+  "assumptions": "eps_rel = 10% (target half-width), IQAE alpha=0.05; T-count & surface code as resources.py"
+}

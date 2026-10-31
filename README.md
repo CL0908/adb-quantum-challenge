@@ -13,7 +13,7 @@ src/quantum/     Phase 3  QCBM proposal (exact statevector sim), IQAE emulation,
 src/tensor/      Phase 4  n-country synthetic model, MPS in a tilted gauge, exact targets, bond-dimension scaling
 src/causal/      Phase 5  classical (nonnegative rank) vs quantum (PSD rank) latent dimension across cuts
 src/figures.py   report figures
-tests/           28 tests (pytest)
+tests/           32 tests (pytest)
 results/         JSON outputs of every phase (+ logs)
 figures/         PNG figures used in REPORT.md
 ```
@@ -40,6 +40,8 @@ PYTHONPATH=. python -m src.learned.run_learned     # Phase 2  (~ 40 min)
 PYTHONPATH=. python -m src.quantum.run_quantum     # Phase 3  (~ 15 min)
 PYTHONPATH=. python -m src.tensor.scaling          # Phase 4  (~ 20 min)
 PYTHONPATH=. python -m src.causal.latent_dimension # Phase 5  (~ 20 min)
+PYTHONPATH=. python -m src.quantum.run_structured  # Phase 6a (~ 5 min)
+PYTHONPATH=. python -m src.hybrid.run_hybrid        # Phase 6b-d (~ 10 min)
 PYTHONPATH=. python -m src.figures
 ```
 

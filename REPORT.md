@@ -24,6 +24,10 @@ state-preparation operator *A* for amplitude estimation.
 | 9 | A plain (untilted) SVD truncation **silently destroys tail targets** (2% error on the rarest target at tol 1e-12). Compressing in the Doob gauge fixes this. | §5.2 |
 | 10 | **Quantum latent dimension (route C):** across country cuts, a k-dimensional quantum common cause (PSD factorization) fits the joint tail far better than a k-state classical one (e.g. 64× lower error at k=3 on the ADB cut). At **equal parameter count**, the classical model is as good or better. This is a *dimension* separation, not a parameter separation, and there is no feasibility separation. | §6 |
 
+| 11 | **Scalable quantum construction:** an *exact* Poisson-source loading circuit (no truncation, thanks to the cap) with O(n+|E|) qubits and gates for **any** dependence graph. For ADB it uses 52 qubits / 156 Toffolis per A vs 97 / 3,808 for generic loading, a 10× lower T-count. With it, QAE needs 10⁵–10⁶× fewer queries than MC on rare portfolio tails at n = 28. | §7.1–7.2, Fig. 4 |
+| 12 | **Information-theoretic RL:** CE minimises KL, but IS variance is set by χ² (Rényi-2). A Rényi-2 policy-gradient refinement removes every CE failure (exact per-path std 14.5 → 0.60) and makes the pairwise Doob policy the best estimator: median 0.0030 relative RMSE on "both exhausted", 0/15 failures. | §7.4, Fig. 5 |
+| 13 | **Hybrid quantum RL** (variational quantum critic on the dependence graph, O(n+|E|) params) works when training converges and beats the factorized model on Pr(L>T), but fails on 9–10/15 rarest-target runs. Bulk MI / entanglement across cuts (≤ 0.1 bit) does not predict the tail-accurate representation size (χ ≈ 60). | §7.3, §7.5 |
+
 **Positioning.** The value of this submission is an honest map. (i) The best per-query accuracy on
 the benchmark today is a *classical* learned Doob transform. (ii) For sparse dependence graphs,
 exact tensor networks scale to large portfolios, which leaves no room for quantum advantage there.
@@ -385,7 +389,170 @@ we would present it as a theory result, not a performance claim.
 
 ---
 
-## 7. Where a quantum method could matter, and the Phase 2 plan
+## 7. Scalable quantum concepts and information-theoretic RL (Phase 6)
+
+Goal of this phase: not to beat the classical baselines on the 2-country benchmark, but to put
+forward quantum constructions whose cost **provably scales polynomially in portfolio size for
+any dependence graph**, and to compare them honestly against the classical alternatives as n grows.
+
+### 7.1 Structured ("Poisson-source") quantum loading (`src/quantum/structured_loading.py`)
+By §1.3 the term law is a product of independent sources (solo EQ, solo rain, shared EQ and
+shared rain on each edge). Because of the 4-step cap, each source's total effect over the term is
+a **capped increment with a finite law**: 5 outcomes for solo EQ, 25 for shared EQ, 2 for rain.
+This holds exactly, because min(a+min(x,4),4) = min(a+x,4). So the circuit is **exact with no
+truncation of Poisson counts**:
+
+1. prepare each source register in Σ_x √p_src(x)|x⟩ (3, 6 or 1 qubits; all in parallel);
+2. add the increments into per-country *uncapped* sum registers. In-place adders are
+   permutations, so no garbage is created, and the widths are sized so sums never overflow;
+3. payoff oracle: cap, compute L = Σ 7a_i + 4r_i (USD 2.5m units), compare/evaluate f, and
+   rotate the objective qubit.
+
+This is the catastrophe-risk analogue of Egger et al. (2021)'s latent-factor loading, with the
+shared Poisson sources playing the latent factors. Qubits and gates are **O(n + |E|)**, and depth
+is O((maxdeg+1)·w + n·w_L) because sources on disjoint countries run in parallel (edge colouring).
+
+**Exactness.** An exact sparse-statevector simulation of A (product state with finite support,
+followed by permutations, so every nonzero amplitude is tracked) reproduces the dense joint law
+to 4e-16 (n = 2) and 2e-16 (n = 3, chain). For n = 2 the A-operator amplitudes equal the ADB
+exact values: Pr(L>80m) = 0.0120467, both exhausted = 3.1633e-5 (tests).
+
+**Cost vs the generic loading of §4.4 (ADB, both exhausted, 1% relative error):**
+
+| A-operator | logical qubits | Toffoli / A | rotations / A | T-count | physical qubits | runtime |
+|---|---|---|---|---|---|---|
+| generic (Möttönen on the 100-state annual law) | 97 | 3,808 | 765 | 1.7e11 | 2.4e5 | ~180 days |
+| **structured Poisson-source** | **52** | **156** | **80** | **1.8e10** | **1.1e5** | **~16 days** |
+
+Still hopeless against 0.2 ms classical enumeration at n = 2. The point is the scaling.
+
+### 7.2 Scaling comparison: structured QAE vs MC vs exact tilted MPS (Fig. 4)
+Target Pr(L > T_n) at 10% relative error. μ is taken from the exact MPS where available. The
+IQAE call count is fitted on our emulator as ≈ C/(ε·√a) with C = 102.
+
+![Fig. 4](figures/structured_scaling.png)
+
+| graph | n | edges | A: qubits / Toffoli | μ = Pr(L>T_n) | QAE calls | MC samples | exact MPS χ / runtime |
+|---|---|---|---|---|---|---|---|
+| chain | 10 | 9 | 224 / 912 | 5.7e-6 | 4.3e5 | 1.8e7 | 9 / 3 s |
+| chain | 28 | 27 | 604 / 2,682 | 1.2e-13 | 3.0e9 | 8.4e14 | 9 / 7 s |
+| ring | 28 | 28 | 611 / 2,706 | 1.3e-13 | 2.8e9 | 7.6e14 | 58 / 68 s |
+| complete | 6 | 15 | 220 / 926 | 6.3e-4 | 4.1e4 | 1.6e5 | 135 / 67 s |
+| complete | 7 | 21 | 278 / 1,190 | 2.9e-4 | 6.0e4 | 3.5e5 | 80 (tol 1e-6) / 94 s |
+| complete | 12 | 66 | 699 / 3,664 | (unknown) | — | — | not computed |
+| chain/ring | 50 | 49–50 | ~1,070 / ~5,000 | (unknown) | — | — | — |
+
+Reading:
+* **Quantum side:** per-call cost grows linearly (chain/ring) or quadratically (complete) in n,
+  with no exponential factor for *any* graph, and calls grow as 1/√μ.
+* **MC:** per-sample cost is also O(n+|E|), but samples grow as 1/μ. At n = 28 that is a
+  **10⁵–10⁶× gap in query count** in QAE's favour.
+* **Exact tilted MPS:** for sparse graphs it beats both by orders of magnitude (seconds, exact).
+  For dense graphs χ grows (58 → 135 for n = 4 → 6), and runtime goes 3 s → 94 s by n = 7.
+  The complete graph with this rate rule becomes infeasible at n ≈ 14 (shared rates exceed totals).
+  A degree-normalised dense model is the Phase-2 testbed where neither MPS nor MC is comfortable.
+* **The honest crossover statement:** in query complexity the structured QAE dominates MC for
+  rare joint-tail targets at every n. In wall-clock, a fault-tolerant machine with ~10³ logical
+  qubits would still need 10⁹–10¹⁵ T gates. **A quantum advantage is only conceivable for dense
+  dependence graphs *and* very rare targets**, where exact MPS blows up and MC needs ≫10¹² samples.
+
+### 7.3 Hybrid quantum RL: a variational quantum critic for the Doob policy (`src/hybrid/`)
+**Soft-RL view.** The zero-variance proposal is the optimal policy of a KL-regularised control
+problem (Todorov's linearly solvable MDPs; Kappen's path-integral control):
+π*(y|s) ∝ p(y)·V(s⊕y) with the soft Bellman equation log V_t(s) = log Σ_y p(y)V_{t+1}(s⊕y).
+So log Ṽ is a soft value function, and the IS proposal is its Boltzmann policy.
+
+**Quantum critic.** log Ṽ_{θ,t}(s) = w_t·⟨O⟩, measured on U(θ_c)E(s)|0⟩. Each country gets 2
+qubits (EQ level, rain) with angle encoding re-uploaded every layer. Trainable RY plus CZ
+gates on the **dependence graph** (intra-country and cross-country edges). Observables are local
+⟨Z⟩ and edge ⟨ZZ⟩. Parameters are O(n+|E|) and depth is O(L·maxdeg), so the architecture scales
+with the portfolio. Training is cross-entropy *policy search*: a convex readout step, then a
+gradient step on θ_c against the same objective (alternating). Total: 36 parameters at L = 3,
+vs 30 (factorized) and 45 (pairwise) classical.
+
+*A design pitfall we hit and fixed:* re-uploading the encoding L times with angle π·a/4 makes
+rain RY(2π) = identity and maps a to cos(πa/2), which is non-monotone. The features then carried
+**zero** linear information about a and r (R² = 0). Scaling the per-layer angle by 1/L restores
+R² ≥ 0.89 (test).
+
+### 7.4 Information-theoretic RL: Rényi-2 (χ²) policy refinement (`src/learned/renyi.py`)
+CE minimises KL(p*‖q). The IS variance is governed by a different divergence:
+E_q[(wf)²]/μ² = 1 + χ²(p*‖q) = exp D₂(p*‖q). A policy can therefore have small KL and still a
+heavy-tailed weight distribution, which is exactly how the pairwise fits failed in §3.2. We
+refine any policy by a REINFORCE-type gradient on log E_q[(wf)²] (reward = −(wf)²), using Adam
+and gradient clipping, and keep the iterate with the lowest *estimated* χ² (the exact answer is
+never used). The method itself is variance-minimising adaptive IS (cf. Arouna 2004); the RL
+framing and its use as a repair step after CE are ours.
+
+We also added an **exact** per-path second moment for state-dependent policies, via the backward
+recursion U_t(s) = Σ_y p(y)²/q_t(y|s)·U_{t+1}(s⊕y). It matches sampling (0.00844 vs 0.00830)
+and is immune to the heavy-tail under-sampling that fooled our first test. On the known CE failure
+(adb-base, pairwise) the exact per-path relative std goes **14.5 → 0.60 (24×)**.
+
+**Results: 5 scenarios × 3 seeds, "both exhausted", relative RMSE at N = 4096 (Fig. 5).**
+
+![Fig. 5](figures/policy_comparison.png)
+
+| policy | params | CE: median / worst | CE failures (>5%) | **CE + Rényi-2**: median / worst | failures |
+|---|---|---|---|---|---|
+| classical factorized | 30 | 0.0090 / 0.0099 | 0/15 | 0.0079 / 0.0093 | 0/15 |
+| classical pairwise | 45 | 0.0046 / 0.065 | 2/15 | **0.0030 / 0.0105** | **0/15** |
+| hybrid VQC critic (L=3) | 36 | 0.17 / 31 | 10/15 | 0.10 / 9.9 | 9/15 |
+
+Other targets (adb-base, 3 seeds, CE + Rényi-2 median): Pr(L>T): factorized 0.023, pairwise
+0.011, **VQC 0.018**; stop-loss: 0.012 / 0.0084 / 0.0092 (one VQC seed failed at 0.13).
+Refinement costs 80k extra paths (40 steps × 2,000); training costs 8–12k.
+
+Reading:
+* **Rényi-2 refinement is the most useful finding of this phase.** It removes every pairwise
+  failure and makes the pairwise policy the best overall: **≈ 3× better than factorized and
+  ≈ 100–400× better than the brief's best baseline** at N = 4096. The information-theoretic view
+  (optimise the divergence that actually controls variance) paid off directly.
+* **The hybrid VQC critic works when CE converges** (best runs 0.007–0.01 on exhaustion, and it
+  beats factorized on Pr(L>T)). But it is **unreliable on the rarest target** (fails 9–10/15),
+  and Rényi-2 cannot rescue it: its χ² estimate is too noisy when the starting policy has heavy
+  tails, and in some runs refinement made it worse. Its features are bounded (⟨Z⟩ ∈ [−1,1]), so
+  the log-value range needed for a 3e-5 event forces large readout weights. That is a plausible
+  cause, to test in Phase 2 with a learned output scale or classical skip features.
+* Scalability: the critic has O(n+|E|) parameters and constant-depth local observables. **The
+  same light-cone argument makes it classically simulable at constant depth**, so it is a scalable
+  hybrid *architecture*, not a claimed advantage.
+
+### 7.5 Information-theoretic diagnostics across cuts
+For the middle cut of the n-country term law: classical mutual information I(A:B), entanglement
+entropy of the Born state √P (what a quantum loader must create across the cut), and the
+tilted-MPS bond dimension needed for 1e-9 tail accuracy.
+
+| graph | n | I(A:B) [bits] | Born entanglement [bits] | tilted χ (tol 1e-9) | log₂χ |
+|---|---|---|---|---|---|
+| chain | 4–6 | 0.012 | 0.037 | 9 | 3.2 |
+| ring | 4–6 | 0.024 | 0.073 | 56–58 | 5.8 |
+| complete | 4 / 5 | 0.029 / 0.034 | 0.086 / 0.100 | 58 / 69 | 5.9 / 6.1 |
+
+**Bulk information measures do not predict the representation size needed for tail accuracy.**
+MI and entanglement are ≤ 0.1 bit, yet χ ≈ 60 states (≈ 6 bits) are needed, because the joint
+tail lives in exponentially small Schmidt coefficients. For catastrophe risk the relevant
+quantity is a **tail-weighted** (tilted / Rényi-α→0) rank, not Shannon entropy. Practically,
+this means (i) entropy-based arguments for low-entanglement quantum loaders are misleading for
+tail targets, and (ii) the tilted gauge of §5.2 is the right frame for any compressed
+representation, classical or quantum.
+
+### 7.6 Other quantum routes considered (not implemented)
+* **Quantum annealing / QBM proposal:** the pairwise log-linear policy is an Ising model on the
+  dependence graph, so it maps natively to annealer hardware graphs (minor embedding). Sampling
+  quality at low temperature is the open question.
+* **Quantum walks (Szegedy) on the Doob chain:** quadratic mixing-time speedups for MCMC-based
+  rare-event estimators (e.g. splitting), relevant if Phase 2 uses MCMC instead of IS.
+* **MPS → circuit compilation:** a bond-χ MPS of √P compiles into a sequential circuit with
+  ⌈log₂χ⌉ ancillas (≈ 6–8 qubits here). By §7.5 this needs the tilted gauge, and amplitude
+  loading of a tilted state requires reweighting inside QAE.
+* **Variance-based QAE (Montanaro 2015):** costs Õ(σ/ε) instead of O(M/ε), which removes the
+  max-weight problem of §4.3 for IS-in-QAE. Combined with the structured loading of §7.1 and a
+  per-source tilted proposal, this is the most promising end-to-end quantum pipeline for Phase 2.
+
+---
+
+## 8. Where a quantum method could matter, and the Phase 2 plan
 
 **Classical regime (no quantum case):** sparse dependence graphs (chain/tree/ring/star) at any n,
 via the exact tilted MPS; the 2-country benchmark via enumeration or the learned Doob IS.
@@ -403,10 +570,14 @@ structure is available; (iii) latent-dimension-limited representations (§6).
 3. **Born-machine / locally-purified tensor networks** (Glasser et al. 2019) as the quantum-inspired
    counterpart of §6. Test whether PSD-rank savings across cuts show up as lower χ for the same
    tail error in the high-cut-width regime.
-4. Variance-based QAE (Montanaro 2015) and QROM-based or structure-aware state preparation
-   (load the Poisson-source circuit of §1.3 directly). Redo the resource estimate in the regime
-   of item 2.
-5. Proposal selection by pilot ESS / variance (fixes the pairwise-family failures of §3.2).
+4. Variance-based QAE (Montanaro 2015) on top of the structured Poisson-source loading (§7.1,
+   done), with a per-source tilted proposal. Redo the end-to-end resource estimate in the
+   dense-graph regime of item 2.
+5. Make CE + Rényi-2 refinement (§7.4, done) the default training pipeline. Add pilot-ESS
+   selection, and use the exact second-moment recursion as a stopping criterion where states
+   can be enumerated.
+6. Hybrid VQC critic (§7.3): learned output scale or classical skip features, a deeper circuit
+   beyond the light-cone-simulable regime, and runs on hardware with shot noise.
 
 **Risks:** (1) dequantization, already shown for sparse graphs; we present it ourselves. (2) Memory
 savings (§6) do not imply accuracy gains. (3) Fault-tolerant cost ≫ classical for any
@@ -414,11 +585,11 @@ benchmark-scale instance (§4.4). (4) CE instability (§3.2).
 
 ---
 
-## 8. Reproducibility
-See README.md. 28 tests (`pytest tests/`). Seeds are stored in every `results/*.json`. CPU only
+## 9. Reproducibility
+See README.md. 32 tests (`pytest tests/`). Seeds are stored in every `results/*.json`. CPU only
 (4 cores); no quantum SDK or hardware: the circuits are simulated by our own exact simulator.
 
-## 9. References
+## 10. References
 Glasserman (2003); Owen (1997); Egger, García Gutiérrez, Cahué Mestre & Woerner (2021, IEEE TC
 70(12)), whose correlated-default latent-factor structure mirrors our shared-event sources;
 Grinko, Gacon, Zoufal & Woerner (2021, npj QI 7:52); Suzuki et al. (2020); Woerner & Egger (2019);
@@ -432,5 +603,9 @@ ancilla-free Clifford+T approximation of z-rotations"; Fiorini, Massar, Pokutta,
 (2012), "Linear vs. semidefinite extended formulations" (STOC); Fawzi, Gouveia, Parrilo, Robinson
 & Thomas (2015), "Positive semidefinite rank" (Math. Prog.); Glasser, Sweke, Pancotti, Eisert &
 Cirac (2019), "Expressive power of tensor-network factorizations for probabilistic modeling"
-(NeurIPS); Cichocki & Phan (2009), HALS NMF; Boutsidis & Gallopoulos (2008), NNDSVD. Citations in
+(NeurIPS); Cichocki & Phan (2009), HALS NMF; Boutsidis & Gallopoulos (2008), NNDSVD. Phase 6: Todorov (2009), "Efficient computation
+of optimal actions" (PNAS; linearly solvable MDPs); Kappen (2005), "Path integrals and symmetry
+breaking for optimal control theory" (J. Stat. Mech.); Arouna (2004), "Adaptive Monte Carlo method,
+a variance reduction technique" (MCMA); Pérez-Salinas et al. (2020), "Data re-uploading for a
+universal quantum classifier" (Quantum 4:226); Rényi (1961), "On measures of entropy and information". Citations in
 the "additional" list should be checked against the published versions before submission.

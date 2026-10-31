@@ -103,3 +103,50 @@ def test_tilted_mps_matches_dense(kind):
     m = targets_from_mps(mdl, psi, 160e6)
     for k in d:
         assert m[k] == pytest.approx(d[k], rel=1e-9), k
+
+
+def test_structured_loading_exact_adb():
+    """Poisson-source circuit A reproduces ADB targets exactly (cap makes increments finite)."""
+    from src.tensor.synthetic import SyntheticModel, topology, dense_term_distribution
+    from src.quantum.structured_loading import simulate_A, payoff_library
+    m = SyntheticModel(2, topology("chain", 2))
+    lib, _ = payoff_library(m, 80e6)
+    r = simulate_A(m, lib["all_exhausted"])
+    assert r["norm"] == pytest.approx(1.0, abs=1e-12)
+    assert np.abs(r["joint"] - dense_term_distribution(m)).max() < 1e-14
+    assert r["a"] == pytest.approx(PROB.exact[EXH], rel=1e-10)
+    assert simulate_A(m, lib["exceedance"])["a"] == pytest.approx(
+        PROB.exact["term_portfolio_loss_exceedance_probability"], rel=1e-10)
+
+
+def test_structured_loading_n3_matches_dense():
+    from src.tensor.synthetic import SyntheticModel, topology, dense_term_distribution
+    from src.quantum.structured_loading import simulate_A, payoff_library
+    m = SyntheticModel(3, topology("chain", 3))
+    lib, _ = payoff_library(m, 120e6)
+    r = simulate_A(m, lib["at_least_two_pay"])
+    assert np.abs(r["joint"] - dense_term_distribution(m)).max() < 1e-14
+
+
+def test_vqc_encoding_is_informative():
+    """Re-uploading with 1/L-scaled angles keeps a and r linearly recoverable at θ=0."""
+    from src.hybrid.vqc_policy import quantum_features
+    from src.model.annual import STATES
+    for L in (1, 2, 3):
+        F = quantum_features(np.zeros(4 * L), L)
+        X = np.c_[F, np.ones(100)]
+        for col in STATES.T:
+            c = np.linalg.lstsq(X, col, rcond=None)[0]
+            r2 = 1 - np.sum((X @ c - col) ** 2) / np.sum((col - col.mean()) ** 2)
+            assert r2 > 0.85
+
+
+def test_renyi2_refinement_rescues_failed_ce_fit():
+    from src.learned.cross_entropy import fit
+    from src.learned.renyi import renyi2_refine
+    prop, _ = fit(PROB, EXH, SCENARIOS["adb-base"], kind="pairwise", seed=20261142)  # known CE failure (learned.json: adb-base, pairwise)
+    from src.learned.renyi import exact_rel_std
+    before = exact_rel_std(prop, PROB.f[EXH])        # exact: heavy tails are not missed
+    prop, _ = renyi2_refine(prop, PROB.f[EXH], seed=1)
+    after = exact_rel_std(prop, PROB.f[EXH])
+    assert after < before / 3

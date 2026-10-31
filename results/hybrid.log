@@ -1,0 +1,71 @@
+entropy {'topology': 'chain', 'n': 4, 'cut': 2, 'mutual_info_bits': 0.011733223308766583, 'born_entanglement_bits': 0.03667330064123575, 'tilted_spectrum_entropy_bits': 0.08335402754105697, 'chi_tilted_tol1e-9': 9, 'log2_chi': 3.169925001442312}
+entropy {'topology': 'chain', 'n': 5, 'cut': 2, 'mutual_info_bits': 0.011745251953242608, 'born_entanglement_bits': 0.036701046017659784, 'tilted_spectrum_entropy_bits': 0.09234794233835532, 'chi_tilted_tol1e-9': 9, 'log2_chi': 3.169925001442312}
+entropy {'topology': 'chain', 'n': 6, 'cut': 3, 'mutual_info_bits': 0.01175729442420348, 'born_entanglement_bits': 0.03672881499432824, 'tilted_spectrum_entropy_bits': 0.09875200020200994, 'chi_tilted_tol1e-9': 9, 'log2_chi': 3.169925001442312}
+entropy {'topology': 'ring', 'n': 4, 'cut': 2, 'mutual_info_bits': 0.023531907927596407, 'born_entanglement_bits': 0.07339946935144791, 'tilted_spectrum_entropy_bits': 0.17760629270159733, 'chi_tilted_tol1e-9': 58, 'log2_chi': 5.857980995127572}
+entropy {'topology': 'ring', 'n': 5, 'cut': 2, 'mutual_info_bits': 0.02349957358621335, 'born_entanglement_bits': 0.07344401994898543, 'tilted_spectrum_entropy_bits': 0.1300911783042445, 'chi_tilted_tol1e-9': 56, 'log2_chi': 5.807354922057604}
+entropy {'topology': 'ring', 'n': 6, 'cut': 3, 'mutual_info_bits': 0.023515673557668926, 'born_entanglement_bits': 0.07346178694637889, 'tilted_spectrum_entropy_bits': 0.1600507237695815, 'chi_tilted_tol1e-9': 58, 'log2_chi': 5.857980995127572}
+entropy {'topology': 'complete', 'n': 4, 'cut': 2, 'mutual_info_bits': 0.029030334591642948, 'born_entanglement_bits': 0.0855812798082987, 'tilted_spectrum_entropy_bits': 0.07674273703204114, 'chi_tilted_tol1e-9': 58, 'log2_chi': 5.857980995127572}
+entropy {'topology': 'complete', 'n': 5, 'cut': 2, 'mutual_info_bits': 0.034297543982859224, 'born_entanglement_bits': 0.1004866144318744, 'tilted_spectrum_entropy_bits': 0.031324564858174975, 'chi_tilted_tol1e-9': 69, 'log2_chi': 6.108524456778169}
+adb-base          both_bonds_exhausted_prob  classical_factorized  seed=11 CE=0.0080 +R2=0.0078 4s
+adb-base          both_bonds_exhausted_prob  classical_factorized  seed=22 CE=0.0077 +R2=0.0080 3s
+adb-base          both_bonds_exhausted_prob  classical_factorized  seed=33 CE=0.0090 +R2=0.0081 4s
+adb-base          both_bonds_exhausted_prob  classical_pairwise    seed=11 CE=0.0065 +R2=0.0025 5s
+adb-base          both_bonds_exhausted_prob  classical_pairwise    seed=22 CE=0.0044 +R2=0.0026 5s
+adb-base          both_bonds_exhausted_prob  classical_pairwise    seed=33 CE=0.0067 +R2=0.0032 5s
+adb-base          both_bonds_exhausted_prob  hybrid_vqc_L3         seed=11 CE=0.4518 +R2=0.9468 9s
+adb-base          both_bonds_exhausted_prob  hybrid_vqc_L3         seed=22 CE=1.6118 +R2=0.2405 9s
+adb-base          both_bonds_exhausted_prob  hybrid_vqc_L3         seed=33 CE=0.0462 +R2=0.0285 10s
+adb-independent   both_bonds_exhausted_prob  classical_factorized  seed=11 CE=0.0094 +R2=0.0035 3s
+adb-independent   both_bonds_exhausted_prob  classical_factorized  seed=22 CE=0.0097 +R2=0.0034 3s
+adb-independent   both_bonds_exhausted_prob  classical_factorized  seed=33 CE=0.0049 +R2=0.0038 3s
+adb-independent   both_bonds_exhausted_prob  classical_pairwise    seed=11 CE=0.0594 +R2=0.0105 5s
+adb-independent   both_bonds_exhausted_prob  classical_pairwise    seed=22 CE=0.0651 +R2=0.0094 5s
+adb-independent   both_bonds_exhausted_prob  classical_pairwise    seed=33 CE=0.0069 +R2=0.0039 4s
+adb-independent   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=11 CE=0.1953 +R2=0.1374 10s
+adb-independent   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=22 CE=0.4712 +R2=0.6387 9s
+adb-independent   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=33 CE=31.2205 +R2=9.8514 10s
+adb-common-shock  both_bonds_exhausted_prob  classical_factorized  seed=11 CE=0.0095 +R2=0.0093 3s
+adb-common-shock  both_bonds_exhausted_prob  classical_factorized  seed=22 CE=0.0092 +R2=0.0079 3s
+adb-common-shock  both_bonds_exhausted_prob  classical_factorized  seed=33 CE=0.0099 +R2=0.0087 3s
+adb-common-shock  both_bonds_exhausted_prob  classical_pairwise    seed=11 CE=0.0235 +R2=0.0038 5s
+adb-common-shock  both_bonds_exhausted_prob  classical_pairwise    seed=22 CE=0.0037 +R2=0.0024 4s
+adb-common-shock  both_bonds_exhausted_prob  classical_pairwise    seed=33 CE=0.0062 +R2=0.0033 4s
+adb-common-shock  both_bonds_exhausted_prob  hybrid_vqc_L3         seed=11 CE=0.1710 +R2=0.1034 9s
+adb-common-shock  both_bonds_exhausted_prob  hybrid_vqc_L3         seed=22 CE=0.1443 +R2=0.0322 10s
+adb-common-shock  both_bonds_exhausted_prob  hybrid_vqc_L3         seed=33 CE=0.4727 +R2=0.3559 9s
+adb-rain-stress   both_bonds_exhausted_prob  classical_factorized  seed=11 CE=0.0079 +R2=0.0080 4s
+adb-rain-stress   both_bonds_exhausted_prob  classical_factorized  seed=22 CE=0.0090 +R2=0.0078 4s
+adb-rain-stress   both_bonds_exhausted_prob  classical_factorized  seed=33 CE=0.0078 +R2=0.0074 4s
+adb-rain-stress   both_bonds_exhausted_prob  classical_pairwise    seed=11 CE=0.0045 +R2=0.0027 5s
+adb-rain-stress   both_bonds_exhausted_prob  classical_pairwise    seed=22 CE=0.0036 +R2=0.0027 5s
+adb-rain-stress   both_bonds_exhausted_prob  classical_pairwise    seed=33 CE=0.0046 +R2=0.0030 5s
+adb-rain-stress   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=11 CE=0.0092 +R2=0.0073 9s
+adb-rain-stress   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=22 CE=0.1153 +R2=0.0965 10s
+adb-rain-stress   both_bonds_exhausted_prob  hybrid_vqc_L3         seed=33 CE=0.0108 +R2=0.0101 10s
+adb-rain-cover    both_bonds_exhausted_prob  classical_factorized  seed=11 CE=0.0080 +R2=0.0068 4s
+adb-rain-cover    both_bonds_exhausted_prob  classical_factorized  seed=22 CE=0.0092 +R2=0.0083 3s
+adb-rain-cover    both_bonds_exhausted_prob  classical_factorized  seed=33 CE=0.0076 +R2=0.0079 3s
+adb-rain-cover    both_bonds_exhausted_prob  classical_pairwise    seed=11 CE=0.0039 +R2=0.0026 5s
+adb-rain-cover    both_bonds_exhausted_prob  classical_pairwise    seed=22 CE=0.0036 +R2=0.0026 5s
+adb-rain-cover    both_bonds_exhausted_prob  classical_pairwise    seed=33 CE=0.0041 +R2=0.0032 5s
+adb-rain-cover    both_bonds_exhausted_prob  hybrid_vqc_L3         seed=11 CE=0.4518 +R2=0.9468 9s
+adb-rain-cover    both_bonds_exhausted_prob  hybrid_vqc_L3         seed=22 CE=0.0161 +R2=0.0106 11s
+adb-rain-cover    both_bonds_exhausted_prob  hybrid_vqc_L3         seed=33 CE=0.0236 +R2=0.0180 10s
+adb-base          portfolio_loss_exceedance  classical_factorized  seed=11 CE=0.0371 +R2=0.0225 3s
+adb-base          portfolio_loss_exceedance  classical_factorized  seed=22 CE=0.0234 +R2=0.0212 3s
+adb-base          portfolio_loss_exceedance  classical_factorized  seed=33 CE=0.0294 +R2=0.0294 3s
+adb-base          portfolio_loss_exceedance  classical_pairwise    seed=11 CE=0.0163 +R2=0.0112 4s
+adb-base          portfolio_loss_exceedance  classical_pairwise    seed=22 CE=0.0152 +R2=0.0148 4s
+adb-base          portfolio_loss_exceedance  classical_pairwise    seed=33 CE=0.0151 +R2=0.0097 5s
+adb-base          portfolio_loss_exceedance  hybrid_vqc_L3         seed=11 CE=0.0161 +R2=0.0175 9s
+adb-base          portfolio_loss_exceedance  hybrid_vqc_L3         seed=22 CE=0.0226 +R2=0.0222 8s
+adb-base          portfolio_loss_exceedance  hybrid_vqc_L3         seed=33 CE=0.0184 +R2=0.0180 10s
+adb-base          portfolio_stop_loss_usd    classical_factorized  seed=11 CE=0.0129 +R2=0.0130 3s
+adb-base          portfolio_stop_loss_usd    classical_factorized  seed=22 CE=0.0160 +R2=0.0116 3s
+adb-base          portfolio_stop_loss_usd    classical_factorized  seed=33 CE=0.0117 +R2=0.0103 3s
+adb-base          portfolio_stop_loss_usd    classical_pairwise    seed=11 CE=0.0090 +R2=0.0085 5s
+adb-base          portfolio_stop_loss_usd    classical_pairwise    seed=22 CE=0.0090 +R2=0.0084 5s
+adb-base          portfolio_stop_loss_usd    classical_pairwise    seed=33 CE=0.0118 +R2=0.0077 5s
+adb-base          portfolio_stop_loss_usd    hybrid_vqc_L3         seed=11 CE=0.0486 +R2=0.1313 10s
+adb-base          portfolio_stop_loss_usd    hybrid_vqc_L3         seed=22 CE=0.0122 +R2=0.0092 9s
+adb-base          portfolio_stop_loss_usd    hybrid_vqc_L3         seed=33 CE=0.0109 +R2=0.0081 11s
