@@ -155,3 +155,29 @@ B star     tol=1e-09 n= 4 chi=  10 t=   1.31s Pall=2.099e-10 mass=0.999999999998
 B star     tol=1e-09 n= 5 chi=  10 t=   2.20s Pall=5.431e-13 mass=0.999999999998
 B star     tol=1e-09 n= 6 chi=  10 t=   4.11s Pall=1.186e-15 mass=0.999999999998
 B star     tol=1e-09 n= 7 chi=  10 t=   6.98s Pall=2.906e-18 mass=0.999999999998
+B star     tol=1e-09 n= 8 chi=  10 t=   7.90s Pall=6.095e-21 mass=0.999999999998
+B star     tol=1e-09 n= 9 chi=  10 t=  11.46s Pall=1.445e-23 mass=0.999999999998
+B star     tol=1e-09 n=10 chi=  10 t=  15.28s Pall=2.954e-26 mass=0.999999999998
+B star     tol=1e-09 n=12 chi=  10 t=  23.14s Pall=1.376e-31 mass=0.999999999995
+B star     tol=1e-09 n=14 chi=  10 t=  34.25s Pall=6.229e-37 mass=0.999999999988
+B complete tol=1e-06 n= 2 chi=   7 t=   0.47s Pall=3.163e-05 mass=1.000000001891
+B complete tol=1e-06 n= 3 chi=   8 t=   1.17s Pall=1.514e-07 mass=1.000000001142
+B complete tol=1e-06 n= 4 chi=  35 t=   2.65s Pall=1.212e-09 mass=1.000000778676
+B complete tol=1e-06 n= 5 chi=  43 t=   5.22s Pall=1.000e-11 mass=1.000000065636
+B complete tol=1e-06 n= 6 chi=  68 t=  32.68s Pall=8.431e-14 mass=0.999136090688
+B complete tol=1e-06 n= 7 chi=  80 t=  93.84s Pall=8.504e-16 mass=0.948498656471
+B complete tol=1e-09 n= 2 chi=   9 t=   0.25s Pall=3.163e-05 mass=0.999999999997
+B complete tol=1e-09 n= 3 chi=  10 t=   1.02s Pall=1.514e-07 mass=0.999999999997
+B complete tol=1e-09 n= 4 chi=  58 t=   3.41s Pall=1.212e-09 mass=0.999999999967
+B complete tol=1e-09 n= 5 chi=  69 t=  12.74s Pall=1.000e-11 mass=0.999999999588
+B complete tol=1e-09 n= 6 chi= 135 t=  67.26s Pall=8.431e-14 mass=0.999999999393
+C ring     n=8 m=0.0 chi=4
+C ring     n=8 m=0.5 chi=52
+C ring     n=8 m=1.0 chi=58
+C ring     n=8 m=2.0 chi=70
+C ring     n=8 m=4.0 chi=83
+C ring     n=8 m=6.0 chi=88
+C complete n=6 m=0.0 chi=6
+C complete n=6 m=0.5 chi=108
+C complete n=6 m=1.0 chi=135
+C complete n=6 m=2.0 chi=169

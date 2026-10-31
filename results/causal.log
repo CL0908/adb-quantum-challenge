@@ -14,3 +14,21 @@ ring4_term_cut(01|23)        k= 3 NMF=5.49e-02 PSD=7.97e-03
 ring4_term_cut(01|23)        k= 4 NMF=3.42e-02 PSD=2.83e-03
 ring4_term_cut(01|23)        k= 6 NMF=7.96e-03 PSD=7.55e-04
 ring4_term_cut(01|23)        k= 8 NMF=4.05e-03 PSD=2.95e-04
+ring4_term_cut(01|23)        k=10 NMF=2.26e-03 PSD=1.70e-04
+ring4_term_cut(01|23)        k=12 NMF=1.33e-03 PSD=1.12e-04
+ring4_term_cut(01|23)        k=16 NMF=5.65e-04 PSD=None
+ring4_term_cut(01|23)        k=20 NMF=2.15e-04 PSD=None
+ring4_term_cut(01|23)        k=25 NMF=1.34e-04 PSD=None
+ring4_term_cut(01|23)        k=30 NMF=9.89e-05 PSD=None
+complete4_term_cut(01|23)    k= 1 NMF=8.96e-02 PSD=8.96e-02
+complete4_term_cut(01|23)    k= 2 NMF=4.89e-02 PSD=2.54e-02
+complete4_term_cut(01|23)    k= 3 NMF=2.54e-02 PSD=2.22e-03
+complete4_term_cut(01|23)    k= 4 NMF=6.42e-03 PSD=1.11e-03
+complete4_term_cut(01|23)    k= 6 NMF=1.70e-03 PSD=4.23e-04
+complete4_term_cut(01|23)    k= 8 NMF=5.21e-04 PSD=2.47e-04
+complete4_term_cut(01|23)    k=10 NMF=1.09e-04 PSD=1.26e-04
+complete4_term_cut(01|23)    k=12 NMF=6.50e-05 PSD=6.88e-05
+complete4_term_cut(01|23)    k=16 NMF=3.79e-06 PSD=None
+complete4_term_cut(01|23)    k=20 NMF=1.22e-06 PSD=None
+complete4_term_cut(01|23)    k=25 NMF=1.07e-06 PSD=None
+complete4_term_cut(01|23)    k=30 NMF=9.86e-07 PSD=None

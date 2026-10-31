@@ -1849,5 +1849,1682 @@
         "all_exhausted_prob": 1.0004090849937443e-11
       }
     }
+  ],
+  "B_scaling_n": [
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.3447049019996484,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.13721295,
+        "prob_at_least_two_pay": 0.044137769018685734,
+        "exceedance_prob": 0.01204671958936817,
+        "stop_loss": 282354.54103484645,
+        "all_exhausted_prob": 3.163304564850262e-05,
+        "total_mass": 1.000000001891215
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.6290632610007378,
+      "n_edges": 2,
+      "targets": {
+        "expected_loss": 15383544.010966692,
+        "prob_at_least_two_pay": 0.08825385673695103,
+        "exceedance_prob": 0.009108548275903319,
+        "stop_loss": 159078.56059395,
+        "all_exhausted_prob": 8.870603767797036e-08,
+        "total_mass": 1.0000000027819502
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.8454456850004135,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 20127026.448832974,
+        "prob_at_least_two_pay": 0.14492543588055956,
+        "exceedance_prob": 0.0014295572220650202,
+        "stop_loss": 41345.37283263913,
+        "all_exhausted_prob": 5.268465139141719e-10,
+        "total_mass": 1.000000003534167
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 1.2362799360007557,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 25447057.28299224,
+        "prob_at_least_two_pay": 0.20498715246429094,
+        "exceedance_prob": 0.0010238159780220349,
+        "stop_loss": 18773.00263839358,
+        "all_exhausted_prob": 2.934666368070821e-12,
+        "total_mass": 1.000000005289579
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.8403746969997883,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 30190539.74686578,
+        "prob_at_least_two_pay": 0.26670179522678716,
+        "exceedance_prob": 0.00026030643338957496,
+        "stop_loss": 6041.965738776987,
+        "all_exhausted_prob": 1.587946759773261e-14,
+        "total_mass": 1.0000000059969776
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 7,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 2.2349531629997728,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 35510570.61088461,
+        "prob_at_least_two_pay": 0.32757101287740253,
+        "exceedance_prob": 9.246449001943103e-05,
+        "stop_loss": 2219.1465956271995,
+        "all_exhausted_prob": 9.27129285385191e-17,
+        "total_mass": 1.0000000077711877
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 8,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 2.5989644470000712,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 40254053.09408726,
+        "prob_at_least_two_pay": 0.3871008161986381,
+        "exceedance_prob": 3.470488408974677e-05,
+        "stop_loss": 838.5018941233974,
+        "all_exhausted_prob": 4.890420612072349e-19,
+        "total_mass": 1.0000000084735845
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 9,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 2.9035882120006136,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 45574083.98907733,
+        "prob_at_least_two_pay": 0.44364957866839033,
+        "exceedance_prob": 1.3131996658706083e-05,
+        "stop_loss": 309.45627352748954,
+        "all_exhausted_prob": 2.8944413865984056e-21,
+        "total_mass": 1.0000000102517101
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 10,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 3.336442122000335,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 50317566.49115516,
+        "prob_at_least_two_pay": 0.4974079503481698,
+        "exceedance_prob": 5.713758281201166e-06,
+        "stop_loss": 114.56775829000513,
+        "all_exhausted_prob": 1.515445044433926e-23,
+        "total_mass": 1.0000000109536626
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 12,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 3.969188457999735,
+      "n_edges": 11,
+      "targets": {
+        "expected_loss": 60381079.93815325,
+        "prob_at_least_two_pay": 0.5938796718627501,
+        "exceedance_prob": 7.623868481552016e-07,
+        "stop_loss": 15.894144534870966,
+        "all_exhausted_prob": 4.7046691019010106e-28,
+        "total_mass": 1.0000000134344194
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 16,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 4.883631202999823,
+      "n_edges": 15,
+      "targets": {
+        "expected_loss": 80508106.98195049,
+        "prob_at_least_two_pay": 0.7434057550714147,
+        "exceedance_prob": 1.3012785593463819e-08,
+        "stop_loss": 0.3081323928819901,
+        "all_exhausted_prob": 4.539977814065974e-37,
+        "total_mass": 1.0000000183961741
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 20,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 4.849407051000526,
+      "n_edges": 19,
+      "targets": {
+        "expected_loss": 100635134.22547954,
+        "prob_at_least_two_pay": 0.8429792482082523,
+        "exceedance_prob": 2.5935381218647954e-10,
+        "stop_loss": 0.00626824936671218,
+        "all_exhausted_prob": 4.382268332480227e-46,
+        "total_mass": 1.0000000233579478
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 24,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 8.455160967000666,
+      "n_edges": 23,
+      "targets": {
+        "expected_loss": 120762161.66873786,
+        "prob_at_least_two_pay": 0.906093108286984,
+        "exceedance_prob": 5.644819235141088e-12,
+        "stop_loss": 0.00012968476865325498,
+        "all_exhausted_prob": 4.230143274459326e-55,
+        "total_mass": 1.0000000283197037
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 28,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 7.240025391000017,
+      "n_edges": 27,
+      "targets": {
+        "expected_loss": 140889189.31172812,
+        "prob_at_least_two_pay": 0.9448012803823015,
+        "exceedance_prob": 1.1867663006932219e-13,
+        "stop_loss": 2.6973270188554634e-06,
+        "all_exhausted_prob": 4.083308274047176e-64,
+        "total_mass": 1.0000000332814662
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.38949625399982324,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.348799951,
+        "prob_at_least_two_pay": 0.044137768727621395,
+        "exceedance_prob": 0.012046720904162762,
+        "stop_loss": 282354.6985743885,
+        "all_exhausted_prob": 3.163304630906703e-05,
+        "total_mass": 0.9999999999967548
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.5806141889997889,
+      "n_edges": 2,
+      "targets": {
+        "expected_loss": 15383544.214229831,
+        "prob_at_least_two_pay": 0.08825385673549106,
+        "exceedance_prob": 0.009108553515765318,
+        "stop_loss": 159078.67432859732,
+        "all_exhausted_prob": 8.870601701845552e-08,
+        "total_mass": 0.9999999999967301
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.8460013619996971,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 20127026.697631937,
+        "prob_at_least_two_pay": 0.14492543502070498,
+        "exceedance_prob": 0.0014295575153544788,
+        "stop_loss": 41345.39895185958,
+        "all_exhausted_prob": 5.26846543647937e-10,
+        "total_mass": 0.9999999999953427
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 1.4514741450002475,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 25447057.562975448,
+        "prob_at_least_two_pay": 0.20498715077296634,
+        "exceedance_prob": 0.0010238169238084758,
+        "stop_loss": 18773.019403791943,
+        "all_exhausted_prob": 2.934665782646999e-12,
+        "total_mass": 0.9999999999939357
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 1.8364552680004635,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 30190540.04635641,
+        "prob_at_least_two_pay": 0.26670179237973,
+        "exceedance_prob": 0.00026030658654256167,
+        "stop_loss": 6041.971969044256,
+        "all_exhausted_prob": 1.5879467207724042e-14,
+        "total_mass": 0.9999999999926461
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 7,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.8445587709993561,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 35510570.911669515,
+        "prob_at_least_two_pay": 0.3275710086786794,
+        "exceedance_prob": 9.246457023877859e-05,
+        "stop_loss": 2219.1489177568574,
+        "all_exhausted_prob": 9.271291328526674e-17,
+        "total_mass": 0.9999999999912058
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 8,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 2.3296152459997757,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 40254053.39502493,
+        "prob_at_least_two_pay": 0.3871008107484631,
+        "exceedance_prob": 3.470492297843302e-05,
+        "stop_loss": 838.503032766855,
+        "all_exhausted_prob": 4.890420166228892e-19,
+        "total_mass": 0.9999999999899158
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 9,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 3.000859621000018,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 45574084.260308444,
+        "prob_at_least_two_pay": 0.44364957158461443,
+        "exceedance_prob": 1.3132012949154058e-05,
+        "stop_loss": 309.45669622475424,
+        "all_exhausted_prob": 2.8944409334097905e-21,
+        "total_mass": 0.9999999999884661
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 10,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 3.2903361340004267,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 50317566.74363805,
+        "prob_at_least_two_pay": 0.4974079420216457,
+        "exceedance_prob": 5.713766968919826e-06,
+        "stop_loss": 114.56794414143798,
+        "all_exhausted_prob": 1.5154448364909992e-23,
+        "total_mass": 0.9999999999871798
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 12,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 4.070408266000413,
+      "n_edges": 11,
+      "targets": {
+        "expected_loss": 60381080.092196114,
+        "prob_at_least_two_pay": 0.5938796605749138,
+        "exceedance_prob": 7.623881775237133e-07,
+        "stop_loss": 15.894174365867553,
+        "all_exhausted_prob": 4.70466829675609e-28,
+        "total_mass": 0.9999999999844434
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 16,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 5.483495282999684,
+      "n_edges": 15,
+      "targets": {
+        "expected_loss": 80508106.78914784,
+        "prob_at_least_two_pay": 0.743405737941333,
+        "exceedance_prob": 1.3012814691161439e-08,
+        "stop_loss": 0.30813313048103763,
+        "all_exhausted_prob": 4.539976790032277e-37,
+        "total_mass": 0.9999999999789805
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 20,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 5.437125268000273,
+      "n_edges": 19,
+      "targets": {
+        "expected_loss": 100635133.48588064,
+        "prob_at_least_two_pay": 0.8429792255043753,
+        "exceedance_prob": 2.5935454755004756e-10,
+        "stop_loss": 0.006268267893016076,
+        "all_exhausted_prob": 4.382267124484373e-46,
+        "total_mass": 0.999999999973529
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 24,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 7.109798202999627,
+      "n_edges": 23,
+      "targets": {
+        "expected_loss": 120762160.18239163,
+        "prob_at_least_two_pay": 0.9060930802569463,
+        "exceedance_prob": 5.644838575784089e-12,
+        "stop_loss": 0.00012968522367512122,
+        "all_exhausted_prob": 4.230141898930221e-55,
+        "total_mass": 0.9999999999680579
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 28,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 7.325857421999899,
+      "n_edges": 27,
+      "targets": {
+        "expected_loss": 140889186.87868756,
+        "prob_at_least_two_pay": 0.944801247194117,
+        "exceedance_prob": 1.1867709064901314e-13,
+        "stop_loss": 2.6973379503248763e-06,
+        "all_exhausted_prob": 4.0833067443515535e-64,
+        "total_mass": 0.9999999999626235
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.2145897939999486,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.13721295,
+        "prob_at_least_two_pay": 0.044137769018685734,
+        "exceedance_prob": 0.01204671958936817,
+        "stop_loss": 282354.54103484645,
+        "all_exhausted_prob": 3.163304564850262e-05,
+        "total_mass": 1.000000001891215
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-06,
+      "max_bond": 8,
+      "final_max_bond": 8,
+      "runtime_s": 0.6082384870005626,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 15383543.987731809,
+        "prob_at_least_two_pay": 0.09664430107482952,
+        "exceedance_prob": 0.010728692362370748,
+        "stop_loss": 189114.50338176862,
+        "all_exhausted_prob": 1.5144113461171546e-07,
+        "total_mass": 1.0000000011420846
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 35,
+      "runtime_s": 1.216698076999819,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 20127026.299656674,
+        "prob_at_least_two_pay": 0.15072642045565743,
+        "exceedance_prob": 0.0016416409996795802,
+        "stop_loss": 48292.05997851543,
+        "all_exhausted_prob": 1.0607261893547304e-09,
+        "total_mass": 1.0000000050024074
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 1.6376674580005783,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 25447056.923443817,
+        "prob_at_least_two_pay": 0.2087554314818475,
+        "exceedance_prob": 0.0011506093740740317,
+        "stop_loss": 21773.67373524808,
+        "all_exhausted_prob": 5.4867565158291e-12,
+        "total_mass": 1.0000000088353855
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 1.307246591999501,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 30190525.294270284,
+        "prob_at_least_two_pay": 0.2689428187118055,
+        "exceedance_prob": 0.0002964408135333368,
+        "stop_loss": 6929.909980660446,
+        "all_exhausted_prob": 3.082497422878191e-14,
+        "total_mass": 0.9999989156049038
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 7,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 2.795167350000156,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 35510444.345848136,
+        "prob_at_least_two_pay": 0.3286434776986467,
+        "exceedance_prob": 0.00010505184622632037,
+        "stop_loss": 2563.1107307399707,
+        "all_exhausted_prob": 1.7705311863879797e-16,
+        "total_mass": 0.9999959892877404
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 2.425238562999766,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 40253853.24614209,
+        "prob_at_least_two_pay": 0.387317783603034,
+        "exceedance_prob": 3.888642114020254e-05,
+        "stop_loss": 951.8182191511497,
+        "all_exhausted_prob": 9.394222267268325e-19,
+        "total_mass": 0.9999908268824598
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 9,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 3.117856331999974,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 45573643.02975051,
+        "prob_at_least_two_pay": 0.4432376535686846,
+        "exceedance_prob": 1.4988167081282206e-05,
+        "stop_loss": 355.7863619127991,
+        "all_exhausted_prob": 5.5599552822075786e-21,
+        "total_mass": 0.9999862368026858
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 10,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 5.277867484000126,
+      "n_edges": 10,
+      "targets": {
+        "expected_loss": 50317053.57774914,
+        "prob_at_least_two_pay": 0.4965558366357745,
+        "exceedance_prob": 6.4035064363118824e-06,
+        "stop_loss": 129.52731103496575,
+        "all_exhausted_prob": 2.9020488821307865e-23,
+        "total_mass": 0.9999837043678028
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 12,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 4.488460487000339,
+      "n_edges": 12,
+      "targets": {
+        "expected_loss": 60380142.31008546,
+        "prob_at_least_two_pay": 0.5925363190756939,
+        "exceedance_prob": 8.496835247323651e-07,
+        "stop_loss": 17.92809425006195,
+        "all_exhausted_prob": 9.000970647570483e-28,
+        "total_mass": 0.9999767072854341
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 16,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 6.67570090999925,
+      "n_edges": 16,
+      "targets": {
+        "expected_loss": 80505907.91925396,
+        "prob_at_least_two_pay": 0.7419406714730392,
+        "exceedance_prob": 1.4563893087147563e-08,
+        "stop_loss": 0.34659644191497163,
+        "all_exhausted_prob": 8.682721602771352e-37,
+        "total_mass": 0.9999629829663934
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 20,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 13.19029913599934,
+      "n_edges": 20,
+      "targets": {
+        "expected_loss": 100631141.87774494,
+        "prob_at_least_two_pay": 0.8418034766540323,
+        "exceedance_prob": 2.898791534691365e-10,
+        "stop_loss": 0.0070326471416155105,
+        "all_exhausted_prob": 8.380817874112651e-46,
+        "total_mass": 0.9999495858510633
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 24,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 15.987247853000554,
+      "n_edges": 24,
+      "targets": {
+        "expected_loss": 120755861.04155785,
+        "prob_at_least_two_pay": 0.905246786581115,
+        "exceedance_prob": 6.2981566887837395e-12,
+        "stop_loss": 0.0001452518726011396,
+        "all_exhausted_prob": 8.089855076679489e-55,
+        "total_mass": 0.9999364714940399
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 28,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 34,
+      "runtime_s": 18.55374477999976,
+      "n_edges": 28,
+      "targets": {
+        "expected_loss": 140880078.94657195,
+        "prob_at_least_two_pay": 0.9442157884926302,
+        "exceedance_prob": 1.3219996400697811e-13,
+        "stop_loss": 3.0177837173429732e-06,
+        "all_exhausted_prob": 7.809032563959529e-64,
+        "total_mass": 0.9999236004517288
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.4202533959996799,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.348799951,
+        "prob_at_least_two_pay": 0.044137768727621395,
+        "exceedance_prob": 0.012046720904162762,
+        "stop_loss": 282354.6985743885,
+        "all_exhausted_prob": 3.163304630906703e-05,
+        "total_mass": 0.9999999999967548
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 1.2279848589996618,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 15383544.214281712,
+        "prob_at_least_two_pay": 0.09664430176739003,
+        "exceedance_prob": 0.010728696369151223,
+        "stop_loss": 189114.59529363728,
+        "all_exhausted_prob": 1.5144109537725552e-07,
+        "total_mass": 0.9999999999973523
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 1.4653339980004603,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 20127026.697469093,
+        "prob_at_least_two_pay": 0.15072642026863792,
+        "exceedance_prob": 0.0016416415814231899,
+        "stop_loss": 48292.09880970868,
+        "all_exhausted_prob": 1.0607271645104853e-09,
+        "total_mass": 0.9999999999919488
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-09,
+      "max_bond": 56,
+      "final_max_bond": 54,
+      "runtime_s": 2.4562590840005214,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 25447057.562848523,
+        "prob_at_least_two_pay": 0.20875543268225127,
+        "exceedance_prob": 0.0011506108860198016,
+        "stop_loss": 21773.699390791742,
+        "all_exhausted_prob": 5.486770428718092e-12,
+        "total_mass": 0.9999999999915071
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 3.882956832000673,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 30190540.045942646,
+        "prob_at_least_two_pay": 0.2689429386362804,
+        "exceedance_prob": 0.00029644110177731215,
+        "stop_loss": 6929.921242848193,
+        "all_exhausted_prob": 3.082503415354824e-14,
+        "total_mass": 0.999999999986648
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 7,
+      "tol": 1e-09,
+      "max_bond": 56,
+      "final_max_bond": 55,
+      "runtime_s": 4.622422401999756,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 35510570.905749016,
+        "prob_at_least_two_pay": 0.3286434473098183,
+        "exceedance_prob": 0.00010505193171684796,
+        "stop_loss": 2563.113852740099,
+        "all_exhausted_prob": 1.7705385374991607e-16,
+        "total_mass": 0.9999999999433734
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 6.501119451000704,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 40254053.394327596,
+        "prob_at_least_two_pay": 0.3873171864767382,
+        "exceedance_prob": 3.888654419108764e-05,
+        "stop_loss": 951.8215005790428,
+        "all_exhausted_prob": 9.394240201240574e-19,
+        "total_mass": 0.9999999999815413
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 9,
+      "tol": 1e-09,
+      "max_bond": 56,
+      "final_max_bond": 55,
+      "runtime_s": 8.49769833099981,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 45574084.23601483,
+        "prob_at_least_two_pay": 0.44323731775935105,
+        "exceedance_prob": 1.4988230505453278e-05,
+        "stop_loss": 355.7877447934844,
+        "all_exhausted_prob": 5.559981526438454e-21,
+        "total_mass": 0.999999999881711
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 10,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 10.00264943899947,
+      "n_edges": 10,
+      "targets": {
+        "expected_loss": 50317566.742661655,
+        "prob_at_least_two_pay": 0.49655508403031445,
+        "exceedance_prob": 6.403545507644497e-06,
+        "stop_loss": 129.5279517778996,
+        "all_exhausted_prob": 2.902054535614442e-23,
+        "total_mass": 1.000000000131995
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 12,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 14.508297247999508,
+      "n_edges": 12,
+      "targets": {
+        "expected_loss": 60381080.09448066,
+        "prob_at_least_two_pay": 0.5925374794835628,
+        "exceedance_prob": 8.496892206447331e-07,
+        "stop_loss": 17.928206179871417,
+        "all_exhausted_prob": 9.000993030204222e-28,
+        "total_mass": 1.0000000002723735
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 16,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 25.203713023999626,
+      "n_edges": 16,
+      "targets": {
+        "expected_loss": 80508106.80638102,
+        "prob_at_least_two_pay": 0.741952076079351,
+        "exceedance_prob": 1.4564028479010561e-08,
+        "stop_loss": 0.34659956975028494,
+        "all_exhausted_prob": 8.682752695054582e-37,
+        "total_mass": 1.000000000536059
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 20,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 38.59579362199929,
+      "n_edges": 20,
+      "targets": {
+        "expected_loss": 100635133.52795453,
+        "prob_at_least_two_pay": 0.8418307143587439,
+        "exceedance_prob": 2.898829225098419e-10,
+        "stop_loss": 0.007032733221444261,
+        "all_exhausted_prob": 8.380857023546467e-46,
+        "total_mass": 1.0000000007784389
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 24,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 47.866596902999845,
+      "n_edges": 24,
+      "targets": {
+        "expected_loss": 120762160.25821298,
+        "prob_at_least_two_pay": 0.9052918920261891,
+        "exceedance_prob": 6.298260823839275e-12,
+        "stop_loss": 0.0001452541015464349,
+        "all_exhausted_prob": 8.089901590273475e-55,
+        "total_mass": 1.00000000100452
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 28,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 56,
+      "runtime_s": 67.97625565899943,
+      "n_edges": 28,
+      "targets": {
+        "expected_loss": 140889186.9963649,
+        "prob_at_least_two_pay": 0.9442786694488915,
+        "exceedance_prob": 1.3220243960861647e-13,
+        "stop_loss": 3.0178392439323485e-06,
+        "all_exhausted_prob": 7.809085775543384e-64,
+        "total_mass": 1.0000000012171604
+      }
+    },
+    {
+      "topology": "star",
+      "n": 2,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.2946244419999857,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.13721295,
+        "prob_at_least_two_pay": 0.044137769018685734,
+        "exceedance_prob": 0.01204671958936817,
+        "stop_loss": 282354.54103484645,
+        "all_exhausted_prob": 3.163304564850262e-05,
+        "total_mass": 1.000000001891215
+      }
+    },
+    {
+      "topology": "star",
+      "n": 3,
+      "tol": 1e-06,
+      "max_bond": 8,
+      "final_max_bond": 8,
+      "runtime_s": 0.5841150389996983,
+      "n_edges": 2,
+      "targets": {
+        "expected_loss": 15383543.9996136,
+        "prob_at_least_two_pay": 0.08821463905043347,
+        "exceedance_prob": 0.009458738375078865,
+        "stop_loss": 162552.55993384589,
+        "all_exhausted_prob": 8.943225531718112e-08,
+        "total_mass": 1.0000000007329801
+      }
+    },
+    {
+      "topology": "star",
+      "n": 4,
+      "tol": 1e-06,
+      "max_bond": 8,
+      "final_max_bond": 8,
+      "runtime_s": 0.5110774519998813,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 20127026.931675546,
+        "prob_at_least_two_pay": 0.1422626484091711,
+        "exceedance_prob": 0.0014573097533752976,
+        "stop_loss": 41610.79578970224,
+        "all_exhausted_prob": 2.0994664007519463e-10,
+        "total_mass": 0.9999998736099627
+      }
+    },
+    {
+      "topology": "star",
+      "n": 5,
+      "tol": 1e-06,
+      "max_bond": 8,
+      "final_max_bond": 8,
+      "runtime_s": 0.9185823770003481,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 25447058.212379448,
+        "prob_at_least_two_pay": 0.20153360636449189,
+        "exceedance_prob": 0.001050852108894424,
+        "stop_loss": 18437.283987181403,
+        "all_exhausted_prob": 5.431305683552505e-13,
+        "total_mass": 0.9999992972547569
+      }
+    },
+    {
+      "topology": "star",
+      "n": 6,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 2.194721638000374,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 30190539.79505869,
+        "prob_at_least_two_pay": 0.263685668224343,
+        "exceedance_prob": 0.0002444807721634939,
+        "stop_loss": 5602.582409493458,
+        "all_exhausted_prob": 1.186415284452752e-15,
+        "total_mass": 0.9999983356170236
+      }
+    },
+    {
+      "topology": "star",
+      "n": 7,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 3.3185193190001883,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 35510553.67606212,
+        "prob_at_least_two_pay": 0.3256721577438425,
+        "exceedance_prob": 8.538074261578123e-05,
+        "stop_loss": 1948.112011356852,
+        "all_exhausted_prob": 2.9064383604026306e-18,
+        "total_mass": 0.9999953757608913
+      }
+    },
+    {
+      "topology": "star",
+      "n": 8,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 4.867563910000172,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 40253971.58884593,
+        "prob_at_least_two_pay": 0.38670524814433693,
+        "exceedance_prob": 3.038002346453052e-05,
+        "stop_loss": 696.076265107201,
+        "all_exhausted_prob": 6.09529845832774e-21,
+        "total_mass": 0.9999890685720528
+      }
+    },
+    {
+      "topology": "star",
+      "n": 9,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 5.562243161000879,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 45573853.89025016,
+        "prob_at_least_two_pay": 0.44486382112364176,
+        "exceedance_prob": 1.0235439330515362e-05,
+        "stop_loss": 235.0969573501357,
+        "all_exhausted_prob": 1.4453456163025072e-23,
+        "total_mass": 0.9999796348394128
+      }
+    },
+    {
+      "topology": "star",
+      "n": 10,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 3.4360197699998025,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 50316958.64565723,
+        "prob_at_least_two_pay": 0.500209817122008,
+        "exceedance_prob": 4.3275113684785705e-06,
+        "stop_loss": 82.27323253619664,
+        "all_exhausted_prob": 2.9538741457476835e-26,
+        "total_mass": 0.9999605698139273
+      }
+    },
+    {
+      "topology": "star",
+      "n": 12,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 9.505747623000389,
+      "n_edges": 11,
+      "targets": {
+        "expected_loss": 60378064.40073248,
+        "prob_at_least_two_pay": 0.5993668241414735,
+        "exceedance_prob": 5.11407933513805e-07,
+        "stop_loss": 9.634406973615057,
+        "all_exhausted_prob": 1.3759941340429883e-31,
+        "total_mass": 0.9998775480937855
+      }
+    },
+    {
+      "topology": "star",
+      "n": 14,
+      "tol": 1e-06,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 11.604809866999858,
+      "n_edges": 13,
+      "targets": {
+        "expected_loss": 70432893.25058828,
+        "prob_at_least_two_pay": 0.6829038332792495,
+        "exceedance_prob": 5.1967654886914026e-08,
+        "stop_loss": 1.0958160476572107,
+        "all_exhausted_prob": 6.2286884185661275e-37,
+        "total_mass": 0.9996486550703464
+      }
+    },
+    {
+      "topology": "star",
+      "n": 2,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.3787027339994893,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.348799951,
+        "prob_at_least_two_pay": 0.044137768727621395,
+        "exceedance_prob": 0.012046720904162762,
+        "stop_loss": 282354.6985743885,
+        "all_exhausted_prob": 3.163304630906703e-05,
+        "total_mass": 0.9999999999967548
+      }
+    },
+    {
+      "topology": "star",
+      "n": 3,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 0.7716332010004407,
+      "n_edges": 2,
+      "targets": {
+        "expected_loss": 15383544.214290304,
+        "prob_at_least_two_pay": 0.08821463988546675,
+        "exceedance_prob": 0.009458742206788977,
+        "stop_loss": 162552.64767342168,
+        "all_exhausted_prob": 8.943224079697542e-08,
+        "total_mass": 0.9999999999974681
+      }
+    },
+    {
+      "topology": "star",
+      "n": 4,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 1.311899209999865,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 20127026.697797026,
+        "prob_at_least_two_pay": 0.1422626531952296,
+        "exceedance_prob": 0.0014573098777525347,
+        "stop_loss": 41610.80820098567,
+        "all_exhausted_prob": 2.099466558383716e-10,
+        "total_mass": 0.9999999999978586
+      }
+    },
+    {
+      "topology": "star",
+      "n": 5,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 2.203857278000214,
+      "n_edges": 4,
+      "targets": {
+        "expected_loss": 25447057.563273586,
+        "prob_at_least_two_pay": 0.20153370563914716,
+        "exceedance_prob": 0.001050852545521112,
+        "stop_loss": 18437.291473531535,
+        "all_exhausted_prob": 5.431309484663174e-13,
+        "total_mass": 0.9999999999982462
+      }
+    },
+    {
+      "topology": "star",
+      "n": 6,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 4.1144169009994584,
+      "n_edges": 5,
+      "targets": {
+        "expected_loss": 30190540.046769947,
+        "prob_at_least_two_pay": 0.26368602332784,
+        "exceedance_prob": 0.0002444807969596956,
+        "stop_loss": 5602.583932114586,
+        "all_exhausted_prob": 1.1864158762658672e-15,
+        "total_mass": 0.9999999999981132
+      }
+    },
+    {
+      "topology": "star",
+      "n": 7,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 6.976375410999935,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 35510570.912235595,
+        "prob_at_least_two_pay": 0.32567371034397724,
+        "exceedance_prob": 8.538076419980562e-05,
+        "stop_loss": 1948.1125225639928,
+        "all_exhausted_prob": 2.906440983146106e-18,
+        "total_mass": 0.9999999999982959
+      }
+    },
+    {
+      "topology": "star",
+      "n": 8,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 7.9043778429995655,
+      "n_edges": 7,
+      "targets": {
+        "expected_loss": 40254053.39574173,
+        "prob_at_least_two_pay": 0.3867098938056075,
+        "exceedance_prob": 3.03800337439896e-05,
+        "stop_loss": 696.0765621961447,
+        "all_exhausted_prob": 6.095306618208051e-21,
+        "total_mass": 0.9999999999982365
+      }
+    },
+    {
+      "topology": "star",
+      "n": 9,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 11.456457252999826,
+      "n_edges": 8,
+      "targets": {
+        "expected_loss": 45574084.26120518,
+        "prob_at_least_two_pay": 0.44487255985676954,
+        "exceedance_prob": 1.0235445549290231e-05,
+        "stop_loss": 235.09709921586642,
+        "all_exhausted_prob": 1.4453472452471972e-23,
+        "total_mass": 0.9999999999983588
+      }
+    },
+    {
+      "topology": "star",
+      "n": 10,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 15.281584776000273,
+      "n_edges": 9,
+      "targets": {
+        "expected_loss": 50317566.74470346,
+        "prob_at_least_two_pay": 0.5002283328238171,
+        "exceedance_prob": 4.327514303981608e-06,
+        "stop_loss": 82.27328540433571,
+        "all_exhausted_prob": 2.953876935949826e-26,
+        "total_mass": 0.9999999999981128
+      }
+    },
+    {
+      "topology": "star",
+      "n": 12,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 23.143065676000333,
+      "n_edges": 11,
+      "targets": {
+        "expected_loss": 60381080.09376107,
+        "prob_at_least_two_pay": 0.5994311059106124,
+        "exceedance_prob": 5.114082903920102e-07,
+        "stop_loss": 9.63441314579563,
+        "all_exhausted_prob": 1.3759957126371568e-31,
+        "total_mass": 0.999999999994888
+      }
+    },
+    {
+      "topology": "star",
+      "n": 14,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 34.25300785200034,
+      "n_edges": 13,
+      "targets": {
+        "expected_loss": 70444593.44284493,
+        "prob_at_least_two_pay": 0.6830902766076007,
+        "exceedance_prob": 5.196768489770756e-08,
+        "stop_loss": 1.0958166455231058,
+        "all_exhausted_prob": 6.228694728456373e-37,
+        "total_mass": 0.9999999999878852
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-06,
+      "max_bond": 7,
+      "final_max_bond": 7,
+      "runtime_s": 0.4729957720001039,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.13721295,
+        "prob_at_least_two_pay": 0.044137769018685734,
+        "exceedance_prob": 0.01204671958936817,
+        "stop_loss": 282354.54103484645,
+        "all_exhausted_prob": 3.163304564850262e-05,
+        "total_mass": 1.000000001891215
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-06,
+      "max_bond": 8,
+      "final_max_bond": 8,
+      "runtime_s": 1.168093946999761,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 15383543.987731809,
+        "prob_at_least_two_pay": 0.09664430107482952,
+        "exceedance_prob": 0.010728692362370748,
+        "stop_loss": 189114.50338176862,
+        "all_exhausted_prob": 1.5144113461171546e-07,
+        "total_mass": 1.0000000011420846
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-06,
+      "max_bond": 35,
+      "final_max_bond": 14,
+      "runtime_s": 2.6451448850002635,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 20127069.51182948,
+        "prob_at_least_two_pay": 0.15719838011990495,
+        "exceedance_prob": 0.0020719945261512976,
+        "stop_loss": 61684.20679846621,
+        "all_exhausted_prob": 1.212412764016685e-09,
+        "total_mass": 1.0000007786756278
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-06,
+      "max_bond": 43,
+      "final_max_bond": 16,
+      "runtime_s": 5.219540981999671,
+      "n_edges": 10,
+      "targets": {
+        "expected_loss": 25447055.246359196,
+        "prob_at_least_two_pay": 0.21991230442068863,
+        "exceedance_prob": 0.0017395569224937578,
+        "stop_loss": 35328.421252025175,
+        "all_exhausted_prob": 1.0004091438734484e-11,
+        "total_mass": 1.0000000656361343
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "tol": 1e-06,
+      "max_bond": 68,
+      "final_max_bond": 21,
+      "runtime_s": 32.676984552999784,
+      "n_edges": 15,
+      "targets": {
+        "expected_loss": 30199760.907573353,
+        "prob_at_least_two_pay": 0.28229911821145004,
+        "exceedance_prob": 0.0006252675105713299,
+        "stop_loss": 15394.216628885624,
+        "all_exhausted_prob": 8.430648851344547e-14,
+        "total_mass": 0.9991360906876869
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 7,
+      "tol": 1e-06,
+      "max_bond": 80,
+      "final_max_bond": 21,
+      "runtime_s": 93.84214313699977,
+      "n_edges": 21,
+      "targets": {
+        "expected_loss": 35847154.42594731,
+        "prob_at_least_two_pay": 0.34042433988849546,
+        "exceedance_prob": 0.0002898102003733718,
+        "stop_loss": 7887.431516034856,
+        "all_exhausted_prob": 8.504096500239706e-16,
+        "total_mass": 0.9484986564712888
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-09,
+      "max_bond": 9,
+      "final_max_bond": 9,
+      "runtime_s": 0.2500912450004762,
+      "n_edges": 1,
+      "targets": {
+        "expected_loss": 10063513.348799951,
+        "prob_at_least_two_pay": 0.044137768727621395,
+        "exceedance_prob": 0.012046720904162762,
+        "stop_loss": 282354.6985743885,
+        "all_exhausted_prob": 3.163304630906703e-05,
+        "total_mass": 0.9999999999967548
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-09,
+      "max_bond": 10,
+      "final_max_bond": 10,
+      "runtime_s": 1.0214816800007611,
+      "n_edges": 3,
+      "targets": {
+        "expected_loss": 15383544.214281712,
+        "prob_at_least_two_pay": 0.09664430176739003,
+        "exceedance_prob": 0.010728696369151223,
+        "stop_loss": 189114.59529363728,
+        "all_exhausted_prob": 1.5144109537725552e-07,
+        "total_mass": 0.9999999999973523
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "final_max_bond": 24,
+      "runtime_s": 3.4057593510005972,
+      "n_edges": 6,
+      "targets": {
+        "expected_loss": 20127026.693279058,
+        "prob_at_least_two_pay": 0.1571984710929181,
+        "exceedance_prob": 0.0020719958516633168,
+        "stop_loss": 61684.25863078101,
+        "all_exhausted_prob": 1.2124139462575652e-09,
+        "total_mass": 0.9999999999673214
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-09,
+      "max_bond": 69,
+      "final_max_bond": 25,
+      "runtime_s": 12.743212573000164,
+      "n_edges": 10,
+      "targets": {
+        "expected_loss": 25447057.530715585,
+        "prob_at_least_two_pay": 0.21991231254160734,
+        "exceedance_prob": 0.0017395580182666985,
+        "stop_loss": 35328.4426920453,
+        "all_exhausted_prob": 1.0004090857970191e-11,
+        "total_mass": 0.9999999995880706
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "tol": 1e-09,
+      "max_bond": 135,
+      "final_max_bond": 36,
+      "runtime_s": 67.26142888699997,
+      "n_edges": 15,
+      "targets": {
+        "expected_loss": 30190539.989275727,
+        "prob_at_least_two_pay": 0.28232261289796673,
+        "exceedance_prob": 0.0006252641172808709,
+        "stop_loss": 15394.139750959497,
+        "all_exhausted_prob": 8.430709545580119e-14,
+        "total_mass": 0.9999999993934087
+      }
+    }
+  ],
+  "C_scaling_m": [
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 0.0,
+      "tol": 1e-09,
+      "max_bond": 4,
+      "targets": {
+        "expected_loss": 40254053.39581628,
+        "prob_at_least_two_pay": 0.3875488194201087,
+        "exceedance_prob": 1.1479274913986791e-05,
+        "stop_loss": 254.85355342414488,
+        "all_exhausted_prob": 4.860873700713396e-20,
+        "total_mass": 0.9999999999999963
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 0.5,
+      "tol": 1e-09,
+      "max_bond": 52,
+      "targets": {
+        "expected_loss": 40254053.38435608,
+        "prob_at_least_two_pay": 0.38714546119460763,
+        "exceedance_prob": 2.3555774463253613e-05,
+        "stop_loss": 553.9845201505416,
+        "all_exhausted_prob": 3.026775231902191e-19,
+        "total_mass": 1.0000000001105205
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 1.0,
+      "tol": 1e-09,
+      "max_bond": 58,
+      "targets": {
+        "expected_loss": 40254053.394327596,
+        "prob_at_least_two_pay": 0.3873171864767382,
+        "exceedance_prob": 3.888654419108764e-05,
+        "stop_loss": 951.8215005790428,
+        "all_exhausted_prob": 9.394240201240574e-19,
+        "total_mass": 0.9999999999815413
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 2.0,
+      "tol": 1e-09,
+      "max_bond": 70,
+      "targets": {
+        "expected_loss": 40254053.389437385,
+        "prob_at_least_two_pay": 0.38953484906786284,
+        "exceedance_prob": 7.909409243990878e-05,
+        "stop_loss": 2052.562263938003,
+        "all_exhausted_prob": 4.2352782947228885e-18,
+        "total_mass": 0.99999999992202
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 4.0,
+      "tol": 1e-09,
+      "max_bond": 83,
+      "targets": {
+        "expected_loss": 40254053.39923155,
+        "prob_at_least_two_pay": 0.40261293720238933,
+        "exceedance_prob": 0.0001965620047021845,
+        "stop_loss": 5539.873152834419,
+        "all_exhausted_prob": 2.6875530107028385e-17,
+        "total_mass": 1.0000000001105376
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "m": 6.0,
+      "tol": 1e-09,
+      "max_bond": 88,
+      "targets": {
+        "expected_loss": 40254053.4058449,
+        "prob_at_least_two_pay": 0.4296965379862254,
+        "exceedance_prob": 0.0003622172056294647,
+        "stop_loss": 10872.542811140936,
+        "all_exhausted_prob": 9.095796699110222e-17,
+        "total_mass": 0.9999999999836218
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "m": 0.0,
+      "tol": 1e-09,
+      "max_bond": 6,
+      "targets": {
+        "expected_loss": 30190540.046862304,
+        "prob_at_least_two_pay": 0.26261249399669406,
+        "exceedance_prob": 0.00011067089061978821,
+        "stop_loss": 2398.560110464832,
+        "all_exhausted_prob": 2.428658656272967e-15,
+        "total_mass": 0.9999999999999989
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "m": 0.5,
+      "tol": 1e-09,
+      "max_bond": 108,
+      "targets": {
+        "expected_loss": 30190539.878843073,
+        "prob_at_least_two_pay": 0.27083833334257656,
+        "exceedance_prob": 0.0003420584231655627,
+        "stop_loss": 8050.343483230052,
+        "all_exhausted_prob": 2.724801295034773e-14,
+        "total_mass": 0.9999999953469677
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "m": 1.0,
+      "tol": 1e-09,
+      "max_bond": 135,
+      "targets": {
+        "expected_loss": 30190539.989275727,
+        "prob_at_least_two_pay": 0.28232261289796673,
+        "exceedance_prob": 0.0006252641172808709,
+        "stop_loss": 15394.139750959497,
+        "all_exhausted_prob": 8.430709545580119e-14,
+        "total_mass": 0.9999999993934087
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "m": 2.0,
+      "tol": 1e-09,
+      "max_bond": 169,
+      "targets": {
+        "expected_loss": 30190540.363797214,
+        "prob_at_least_two_pay": 0.31648548891904127,
+        "exceedance_prob": 0.0013332538019256966,
+        "stop_loss": 34733.007841975385,
+        "all_exhausted_prob": 3.3000408835339346e-13,
+        "total_mass": 0.9999999384428112
+      }
+    },
+    {
+      "topology": "complete",
+      "m": 4.0,
+      "infeasible": true
+    },
+    {
+      "topology": "complete",
+      "m": 6.0,
+      "infeasible": true
+    }
   ]
 }

@@ -1,0 +1,429 @@
+{
+  "note": "heuristic upper bounds on rank_+ (NMF) and rank_psd (real PSD factorization); relative Frobenius error on the tilted cut matrix",
+  "cases": {
+    "adb2_term_cut(KG|TJ)": {
+      "shape": [
+        10,
+        10
+      ],
+      "rank_tol1e-6": 7,
+      "rank_tol1e-12": 10,
+      "singular_values_rel": [
+        1.0,
+        0.17296116753197827,
+        0.06206234573352543,
+        0.010734375777843846,
+        0.001257873543029394,
+        0.00021756327660994417,
+        3.6552216843826514e-06,
+        6.322114101061964e-07,
+        2.1586458693879713e-09,
+        3.7336191840073703e-10
+      ],
+      "curve": [
+        {
+          "k": 1,
+          "nmf_rel_err": 0.18103493912983543,
+          "psd_rel_err": 0.18103493914527974,
+          "nmf_rel_err_envelope": 0.18103493912983543,
+          "psd_rel_err_envelope": 0.18103493914527974,
+          "params_per_outcome_nmf": 1,
+          "params_per_outcome_psd": 1
+        },
+        {
+          "k": 2,
+          "nmf_rel_err": 0.06195583878664715,
+          "psd_rel_err": 0.010631401815500395,
+          "nmf_rel_err_envelope": 0.06195583878664715,
+          "psd_rel_err_envelope": 0.010631401815500395,
+          "params_per_outcome_nmf": 2,
+          "params_per_outcome_psd": 3
+        },
+        {
+          "k": 3,
+          "nmf_rel_err": 0.01063139715761182,
+          "psd_rel_err": 0.00016665607150592368,
+          "nmf_rel_err_envelope": 0.01063139715761182,
+          "psd_rel_err_envelope": 0.00016665607150592368,
+          "params_per_outcome_nmf": 3,
+          "params_per_outcome_psd": 6
+        },
+        {
+          "k": 4,
+          "nmf_rel_err": 0.0012554623323092614,
+          "psd_rel_err": 0.0001037091290215123,
+          "nmf_rel_err_envelope": 0.0012554623323092614,
+          "psd_rel_err_envelope": 0.0001037091290215123,
+          "params_per_outcome_nmf": 4,
+          "params_per_outcome_psd": 10
+        },
+        {
+          "k": 5,
+          "nmf_rel_err": 0.00021399950470947832,
+          "psd_rel_err": 4.938020977555542e-06,
+          "nmf_rel_err_envelope": 0.00021399950470947832,
+          "psd_rel_err_envelope": 4.938020977555542e-06,
+          "params_per_outcome_nmf": 5,
+          "params_per_outcome_psd": 15
+        },
+        {
+          "k": 6,
+          "nmf_rel_err": 3.648200243796353e-06,
+          "psd_rel_err": 3.490364686037433e-06,
+          "nmf_rel_err_envelope": 3.648200243796353e-06,
+          "psd_rel_err_envelope": 3.490364686037433e-06,
+          "params_per_outcome_nmf": 6,
+          "params_per_outcome_psd": 21
+        },
+        {
+          "k": 7,
+          "nmf_rel_err": 1.6342377580574376e-06,
+          "psd_rel_err": 2.912371993883948e-06,
+          "nmf_rel_err_envelope": 1.6342377580574376e-06,
+          "psd_rel_err_envelope": 2.912371993883948e-06,
+          "params_per_outcome_nmf": 7,
+          "params_per_outcome_psd": 28
+        },
+        {
+          "k": 8,
+          "nmf_rel_err": 1.437719873344485e-06,
+          "psd_rel_err": 2.274998060283102e-06,
+          "nmf_rel_err_envelope": 1.437719873344485e-06,
+          "psd_rel_err_envelope": 2.274998060283102e-06,
+          "params_per_outcome_nmf": 8,
+          "params_per_outcome_psd": 36
+        },
+        {
+          "k": 9,
+          "nmf_rel_err": 2.925868848100391e-07,
+          "psd_rel_err": 2.3533153805332914e-06,
+          "nmf_rel_err_envelope": 2.925868848100391e-07,
+          "psd_rel_err_envelope": 2.274998060283102e-06,
+          "params_per_outcome_nmf": 9,
+          "params_per_outcome_psd": 45
+        },
+        {
+          "k": 10,
+          "nmf_rel_err": 0.0,
+          "psd_rel_err": 1.6896587811180933e-06,
+          "nmf_rel_err_envelope": 0.0,
+          "psd_rel_err_envelope": 1.6896587811180933e-06,
+          "params_per_outcome_nmf": 10,
+          "params_per_outcome_psd": 55
+        }
+      ]
+    },
+    "ring4_term_cut(01|23)": {
+      "shape": [
+        100,
+        100
+      ],
+      "rank_tol1e-6": 35,
+      "rank_tol1e-12": 80,
+      "singular_values_rel": [
+        1.0,
+        0.12043050810139982,
+        0.06262004464386393,
+        0.043415058888103195,
+        0.02831891606764782,
+        0.018112305022393353,
+        0.005228497601146459,
+        0.004549172896111168,
+        0.0027186529257890012,
+        0.002181274096734368,
+        0.0012294674087241783,
+        0.001134193349105553,
+        0.000737991188400004,
+        0.0006796650619271399,
+        0.0005478592033197853,
+        0.000512920845720792,
+        0.0002848694098471366,
+        0.000128827645422194,
+        8.887665379336619e-05,
+        8.18524087466531e-05,
+        6.234442284226837e-05,
+        6.231780102888089e-05,
+        4.6213041164386013e-05,
+        4.256065652074985e-05,
+        2.0899110522963012e-05,
+        1.9247377842828555e-05,
+        7.508170520183339e-06,
+        7.504964441669732e-06,
+        3.904010541679038e-06,
+        3.902343482536697e-06,
+        2.244626845694752e-06,
+        2.2445750714858e-06,
+        1.7655264777566707e-06,
+        1.7647725768568724e-06,
+        1.1090923815567062e-06,
+        2.703215515252948e-07,
+        2.7031531633108427e-07,
+        1.6818148697287812e-07,
+        1.6817940539441067e-07,
+        1.4055863328619938e-07
+      ],
+      "curve": [
+        {
+          "k": 1,
+          "nmf_rel_err": 0.1450918117647365,
+          "psd_rel_err": 0.1450918118293908,
+          "nmf_rel_err_envelope": 0.1450918117647365,
+          "psd_rel_err_envelope": 0.1450918118293908,
+          "params_per_outcome_nmf": 1,
+          "params_per_outcome_psd": 1
+        },
+        {
+          "k": 2,
+          "nmf_rel_err": 0.08278556084436858,
+          "psd_rel_err": 0.05490654206390813,
+          "nmf_rel_err_envelope": 0.08278556084436858,
+          "psd_rel_err_envelope": 0.05490654206390813,
+          "params_per_outcome_nmf": 2,
+          "params_per_outcome_psd": 3
+        },
+        {
+          "k": 3,
+          "nmf_rel_err": 0.054906540896001256,
+          "psd_rel_err": 0.007971778246341075,
+          "nmf_rel_err_envelope": 0.054906540896001256,
+          "psd_rel_err_envelope": 0.007971778246341075,
+          "params_per_outcome_nmf": 3,
+          "params_per_outcome_psd": 6
+        },
+        {
+          "k": 4,
+          "nmf_rel_err": 0.034200320436492265,
+          "psd_rel_err": 0.0028276356895886924,
+          "nmf_rel_err_envelope": 0.034200320436492265,
+          "psd_rel_err_envelope": 0.0028276356895886924,
+          "params_per_outcome_nmf": 4,
+          "params_per_outcome_psd": 10
+        },
+        {
+          "k": 6,
+          "nmf_rel_err": 0.007957363663876922,
+          "psd_rel_err": 0.0007552100144175534,
+          "nmf_rel_err_envelope": 0.007957363663876922,
+          "psd_rel_err_envelope": 0.0007552100144175534,
+          "params_per_outcome_nmf": 6,
+          "params_per_outcome_psd": 21
+        },
+        {
+          "k": 8,
+          "nmf_rel_err": 0.004048637525505583,
+          "psd_rel_err": 0.0002949236363791358,
+          "nmf_rel_err_envelope": 0.004048637525505583,
+          "psd_rel_err_envelope": 0.0002949236363791358,
+          "params_per_outcome_nmf": 8,
+          "params_per_outcome_psd": 36
+        },
+        {
+          "k": 10,
+          "nmf_rel_err": 0.0022581521478333825,
+          "psd_rel_err": 0.00016997714448392908,
+          "nmf_rel_err_envelope": 0.0022581521478333825,
+          "psd_rel_err_envelope": 0.00016997714448392908,
+          "params_per_outcome_nmf": 10,
+          "params_per_outcome_psd": 55
+        },
+        {
+          "k": 12,
+          "nmf_rel_err": 0.0013250129742644599,
+          "psd_rel_err": 0.00011201648666923617,
+          "nmf_rel_err_envelope": 0.0013250129742644599,
+          "psd_rel_err_envelope": 0.00011201648666923617,
+          "params_per_outcome_nmf": 12,
+          "params_per_outcome_psd": 78
+        },
+        {
+          "k": 16,
+          "nmf_rel_err": 0.0005647368371049104,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 0.0005647368371049104,
+          "params_per_outcome_nmf": 16,
+          "params_per_outcome_psd": 136
+        },
+        {
+          "k": 20,
+          "nmf_rel_err": 0.00021546970950098458,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 0.00021546970950098458,
+          "params_per_outcome_nmf": 20,
+          "params_per_outcome_psd": 210
+        },
+        {
+          "k": 25,
+          "nmf_rel_err": 0.00013352631349827405,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 0.00013352631349827405,
+          "params_per_outcome_nmf": 25,
+          "params_per_outcome_psd": 325
+        },
+        {
+          "k": 30,
+          "nmf_rel_err": 9.894046661879712e-05,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 9.894046661879712e-05,
+          "params_per_outcome_nmf": 30,
+          "params_per_outcome_psd": 465
+        }
+      ]
+    },
+    "complete4_term_cut(01|23)": {
+      "shape": [
+        100,
+        100
+      ],
+      "rank_tol1e-6": 14,
+      "rank_tol1e-12": 33,
+      "singular_values_rel": [
+        1.0,
+        0.07541907651691826,
+        0.041881758123550744,
+        0.024708298324564195,
+        0.005932291115995471,
+        0.001863477041943151,
+        0.0012507768226014146,
+        0.0010348269740739306,
+        0.00044740791759789603,
+        0.0002484547816386137,
+        9.433243288936441e-05,
+        5.238473235073323e-05,
+        1.712003014189902e-05,
+        1.291176863241604e-06,
+        7.1701696147025e-07,
+        7.157710908799732e-07,
+        8.828159471946722e-08,
+        5.398279467241779e-08,
+        2.9977751700061556e-08,
+        1.5733365313981577e-08,
+        6.658116346062647e-09,
+        3.6973883968558357e-09,
+        1.3817904611114408e-09,
+        1.1865958817155973e-09,
+        6.589410009426891e-10,
+        3.139585665231689e-10,
+        1.042133601530279e-10,
+        5.898689276427425e-11,
+        5.787181400290898e-11,
+        2.367846481385776e-11,
+        1.314913789934803e-11,
+        4.448735976847204e-12,
+        2.4704750742886325e-12,
+        5.838989822706853e-13,
+        2.1133992056089825e-13,
+        1.12418451968362e-13,
+        4.4037618609722945e-14,
+        2.4454247781973318e-14,
+        1.5939300044398827e-14,
+        8.851080054756583e-15
+      ],
+      "curve": [
+        {
+          "k": 1,
+          "nmf_rel_err": 0.08960581809468984,
+          "psd_rel_err": 0.08960581811536696,
+          "nmf_rel_err_envelope": 0.08960581809468984,
+          "psd_rel_err_envelope": 0.08960581811536696,
+          "params_per_outcome_nmf": 1,
+          "params_per_outcome_psd": 1
+        },
+        {
+          "k": 2,
+          "nmf_rel_err": 0.04885525495025723,
+          "psd_rel_err": 0.025433035368906558,
+          "nmf_rel_err_envelope": 0.04885525495025723,
+          "psd_rel_err_envelope": 0.025433035368906558,
+          "params_per_outcome_nmf": 2,
+          "params_per_outcome_psd": 3
+        },
+        {
+          "k": 3,
+          "nmf_rel_err": 0.025433012992019794,
+          "psd_rel_err": 0.00221537454181109,
+          "nmf_rel_err_envelope": 0.025433012992019794,
+          "psd_rel_err_envelope": 0.00221537454181109,
+          "params_per_outcome_nmf": 3,
+          "params_per_outcome_psd": 6
+        },
+        {
+          "k": 4,
+          "nmf_rel_err": 0.0064218355643119816,
+          "psd_rel_err": 0.0011127350777277562,
+          "nmf_rel_err_envelope": 0.0064218355643119816,
+          "psd_rel_err_envelope": 0.0011127350777277562,
+          "params_per_outcome_nmf": 4,
+          "params_per_outcome_psd": 10
+        },
+        {
+          "k": 6,
+          "nmf_rel_err": 0.0016987623588915566,
+          "psd_rel_err": 0.00042250932836757613,
+          "nmf_rel_err_envelope": 0.0016987623588915566,
+          "psd_rel_err_envelope": 0.00042250932836757613,
+          "params_per_outcome_nmf": 6,
+          "params_per_outcome_psd": 21
+        },
+        {
+          "k": 8,
+          "nmf_rel_err": 0.0005211942610983357,
+          "psd_rel_err": 0.0002467057567938823,
+          "nmf_rel_err_envelope": 0.0005211942610983357,
+          "psd_rel_err_envelope": 0.0002467057567938823,
+          "params_per_outcome_nmf": 8,
+          "params_per_outcome_psd": 36
+        },
+        {
+          "k": 10,
+          "nmf_rel_err": 0.00010882462232557578,
+          "psd_rel_err": 0.00012573777088701569,
+          "nmf_rel_err_envelope": 0.00010882462232557578,
+          "psd_rel_err_envelope": 0.00012573777088701569,
+          "params_per_outcome_nmf": 10,
+          "params_per_outcome_psd": 55
+        },
+        {
+          "k": 12,
+          "nmf_rel_err": 6.498280341628582e-05,
+          "psd_rel_err": 6.881728330021451e-05,
+          "nmf_rel_err_envelope": 6.498280341628582e-05,
+          "psd_rel_err_envelope": 6.881728330021451e-05,
+          "params_per_outcome_nmf": 12,
+          "params_per_outcome_psd": 78
+        },
+        {
+          "k": 16,
+          "nmf_rel_err": 3.794130503479306e-06,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 3.794130503479306e-06,
+          "params_per_outcome_nmf": 16,
+          "params_per_outcome_psd": 136
+        },
+        {
+          "k": 20,
+          "nmf_rel_err": 1.217736203175364e-06,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 1.217736203175364e-06,
+          "params_per_outcome_nmf": 20,
+          "params_per_outcome_psd": 210
+        },
+        {
+          "k": 25,
+          "nmf_rel_err": 1.0722980610093901e-06,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 1.0722980610093901e-06,
+          "params_per_outcome_nmf": 25,
+          "params_per_outcome_psd": 325
+        },
+        {
+          "k": 30,
+          "nmf_rel_err": 9.856462916695205e-07,
+          "psd_rel_err": null,
+          "nmf_rel_err_envelope": 9.856462916695205e-07,
+          "params_per_outcome_nmf": 30,
+          "params_per_outcome_psd": 465
+        }
+      ]
+    }
+  }
+}
