@@ -1,0 +1,16 @@
+adb2_term_cut(KG|TJ)         k= 1 NMF=1.81e-01 PSD=1.81e-01
+adb2_term_cut(KG|TJ)         k= 2 NMF=6.20e-02 PSD=1.06e-02
+adb2_term_cut(KG|TJ)         k= 3 NMF=1.06e-02 PSD=1.67e-04
+adb2_term_cut(KG|TJ)         k= 4 NMF=1.26e-03 PSD=1.04e-04
+adb2_term_cut(KG|TJ)         k= 5 NMF=2.14e-04 PSD=4.94e-06
+adb2_term_cut(KG|TJ)         k= 6 NMF=3.65e-06 PSD=3.49e-06
+adb2_term_cut(KG|TJ)         k= 7 NMF=1.63e-06 PSD=2.91e-06
+adb2_term_cut(KG|TJ)         k= 8 NMF=1.44e-06 PSD=2.27e-06
+adb2_term_cut(KG|TJ)         k= 9 NMF=2.93e-07 PSD=2.35e-06
+adb2_term_cut(KG|TJ)         k=10 NMF=0.00e+00 PSD=1.69e-06
+ring4_term_cut(01|23)        k= 1 NMF=1.45e-01 PSD=1.45e-01
+ring4_term_cut(01|23)        k= 2 NMF=8.28e-02 PSD=5.49e-02
+ring4_term_cut(01|23)        k= 3 NMF=5.49e-02 PSD=7.97e-03
+ring4_term_cut(01|23)        k= 4 NMF=3.42e-02 PSD=2.83e-03
+ring4_term_cut(01|23)        k= 6 NMF=7.96e-03 PSD=7.55e-04
+ring4_term_cut(01|23)        k= 8 NMF=4.05e-03 PSD=2.95e-04

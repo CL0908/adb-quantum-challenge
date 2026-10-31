@@ -1,0 +1,1853 @@
+{
+  "threshold_rule": "T_n = 40m * n",
+  "A_correctness": [
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 1.5436739831744273e-11,
+      "rel_err": {
+        "expected_loss": 1.4362902752580368e-13,
+        "prob_at_least_two_pay": 1.9981377413179296e-13,
+        "exceedance_prob": 5.87086532994577e-13,
+        "stop_loss": 2.613786618284217e-12,
+        "all_exhausted_prob": 1.5436739831744273e-11
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 3.592611112715919e-07,
+      "rel_err": {
+        "expected_loss": 2.084928958368028e-10,
+        "prob_at_least_two_pay": 8.122896831839894e-10,
+        "exceedance_prob": 5.724291120203806e-09,
+        "stop_loss": 3.3326016456600467e-09,
+        "all_exhausted_prob": 3.592611112715919e-07
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.0031170430557124454,
+      "rel_err": {
+        "expected_loss": 4.413760424488166e-07,
+        "prob_at_least_two_pay": 8.39447524002659e-08,
+        "exceedance_prob": 1.4878968091156877e-06,
+        "stop_loss": 1.8711251654030633e-05,
+        "all_exhausted_prob": 0.0031170430557124454
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 3.3316011539490548e-15,
+      "rel_err": {
+        "expected_loss": 3.3316011539490548e-15,
+        "prob_at_least_two_pay": 7.860494655066599e-16,
+        "exceedance_prob": 1.0079974812268922e-15,
+        "stop_loss": 1.2369050958045037e-15,
+        "all_exhausted_prob": 2.1421470167001018e-16
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 2.798500527137417e-10,
+      "rel_err": {
+        "expected_loss": 1.5318517016904756e-11,
+        "prob_at_least_two_pay": 7.300230038032072e-11,
+        "exceedance_prob": 2.798500527137417e-10,
+        "stop_loss": 2.9209719988272655e-11,
+        "all_exhausted_prob": 3.540754803903598e-12
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 5.579198623725026e-07,
+      "rel_err": {
+        "expected_loss": 2.1040480734368816e-08,
+        "prob_at_least_two_pay": 6.521448385883487e-09,
+        "exceedance_prob": 1.0942113445166312e-07,
+        "stop_loss": 5.579198623725026e-07,
+        "all_exhausted_prob": 2.0885639938684705e-08
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 3.1260300612857615e-10,
+      "rel_err": {
+        "expected_loss": 2.421607300982888e-16,
+        "prob_at_least_two_pay": 1.8869821653935558e-15,
+        "exceedance_prob": 3.3260177633457012e-12,
+        "stop_loss": 1.8551376673308544e-13,
+        "all_exhausted_prob": 3.1260300612857615e-10
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 2.570951377314191e-07,
+      "rel_err": {
+        "expected_loss": 1.5175256420375873e-10,
+        "prob_at_least_two_pay": 4.085652899896543e-10,
+        "exceedance_prob": 7.215837817465321e-09,
+        "stop_loss": 1.8579672096546154e-09,
+        "all_exhausted_prob": 2.570951377314191e-07
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.002395918654210406,
+      "rel_err": {
+        "expected_loss": 3.027315953560074e-07,
+        "prob_at_least_two_pay": 7.124409147997785e-08,
+        "exceedance_prob": 1.4087087953287642e-05,
+        "stop_loss": 2.6962180325260228e-05,
+        "all_exhausted_prob": 0.002395918654210406
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 2.237991893826296e-15,
+      "rel_err": {
+        "expected_loss": 1.0897232854422996e-15,
+        "prob_at_least_two_pay": 3.1449702756559263e-16,
+        "exceedance_prob": 5.713498219215016e-16,
+        "stop_loss": 5.488572980268799e-16,
+        "all_exhausted_prob": 2.237991893826296e-15
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 2.4298974666487666e-10,
+      "rel_err": {
+        "expected_loss": 1.2002091185496439e-11,
+        "prob_at_least_two_pay": 4.0255619528395857e-11,
+        "exceedance_prob": 2.4298974666487666e-10,
+        "stop_loss": 5.164491041027194e-11,
+        "all_exhausted_prob": 4.127603049513632e-11
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 7.150101255845439e-07,
+      "rel_err": {
+        "expected_loss": 1.3225026119922888e-08,
+        "prob_at_least_two_pay": 2.371276138141812e-11,
+        "exceedance_prob": 5.750252997090274e-07,
+        "stop_loss": 7.150101255845439e-07,
+        "all_exhausted_prob": 2.3293996245846716e-07
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.08825385673904378,
+        "exceedance_prob": 0.009108553513552033,
+        "stop_loss": 159078.67433681292,
+        "all_exhausted_prob": 8.870601701479409e-08
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 5.522077172602368e-10,
+      "rel_err": {
+        "expected_loss": 1.2956226709801881e-15,
+        "prob_at_least_two_pay": 9.575812420604751e-16,
+        "exceedance_prob": 8.224284950016642e-13,
+        "stop_loss": 6.701313156714929e-13,
+        "all_exhausted_prob": 5.522077172602368e-10
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 4.0278941256922176e-07,
+      "rel_err": {
+        "expected_loss": 1.8941947923044452e-10,
+        "prob_at_least_two_pay": 3.773833420447785e-10,
+        "exceedance_prob": 6.629324281191993e-10,
+        "stop_loss": 3.044377354438449e-09,
+        "all_exhausted_prob": 4.0278941256922176e-07
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.0039158978881847,
+      "rel_err": {
+        "expected_loss": 3.648606886913542e-07,
+        "prob_at_least_two_pay": 7.992289373624228e-08,
+        "exceedance_prob": 2.216774480342643e-05,
+        "stop_loss": 3.081155845680124e-05,
+        "all_exhausted_prob": 0.0039158978881847
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 9.994803461847165e-15,
+      "rel_err": {
+        "expected_loss": 9.994803461847165e-15,
+        "prob_at_least_two_pay": 7.852166184895897e-15,
+        "exceedance_prob": 8.342598160289843e-15,
+        "stop_loss": 8.798993115434519e-15,
+        "all_exhausted_prob": 9.812874148542247e-16
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 6.359208304386835e-11,
+      "rel_err": {
+        "expected_loss": 1.3726752021129099e-11,
+        "prob_at_least_two_pay": 3.504306858569991e-11,
+        "exceedance_prob": 2.3833741158727682e-11,
+        "stop_loss": 6.359208304386835e-11,
+        "all_exhausted_prob": 8.655347513980204e-12
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 6.316686226904436e-07,
+      "rel_err": {
+        "expected_loss": 1.2375163263075345e-08,
+        "prob_at_least_two_pay": 5.898039528519257e-09,
+        "exceedance_prob": 2.051371727579915e-07,
+        "stop_loss": 6.316686226904436e-07,
+        "all_exhausted_prob": 5.644589591421781e-08
+      },
+      "dense": {
+        "expected_loss": 20127026.697908215,
+        "prob_at_least_two_pay": 0.14492543502578362,
+        "exceedance_prob": 0.0014295575153204071,
+        "stop_loss": 41345.39894923034,
+        "all_exhausted_prob": 5.26846543652497e-10
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 5.822178016697205e-10,
+      "rel_err": {
+        "expected_loss": 1.756725054369127e-15,
+        "prob_at_least_two_pay": 2.708030772669e-16,
+        "exceedance_prob": 7.749619402862276e-13,
+        "stop_loss": 1.2979894988847137e-12,
+        "all_exhausted_prob": 5.822178016697205e-10
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 4.561590079809182e-07,
+      "rel_err": {
+        "expected_loss": 2.1375581592180836e-10,
+        "prob_at_least_two_pay": 3.548812042874953e-10,
+        "exceedance_prob": 2.2598146452030834e-09,
+        "stop_loss": 6.747235445734296e-10,
+        "all_exhausted_prob": 4.561590079809182e-07
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.00437653416161495,
+      "rel_err": {
+        "expected_loss": 3.868264695512585e-07,
+        "prob_at_least_two_pay": 7.200714755219257e-08,
+        "exceedance_prob": 2.674517341230116e-05,
+        "stop_loss": 4.688314233008745e-05,
+        "all_exhausted_prob": 0.00437653416161495
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 1.786003805275279e-14,
+      "rel_err": {
+        "expected_loss": 1.786003805275279e-14,
+        "prob_at_least_two_pay": 1.4623366172412602e-14,
+        "exceedance_prob": 1.6520096021406328e-14,
+        "stop_loss": 1.6084372709380595e-14,
+        "all_exhausted_prob": 5.9180714181056966e-15
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 6.60418371949087e-11,
+      "rel_err": {
+        "expected_loss": 1.5448932915631164e-11,
+        "prob_at_least_two_pay": 3.178713601266599e-11,
+        "exceedance_prob": 6.60418371949087e-11,
+        "stop_loss": 5.824984644845634e-11,
+        "all_exhausted_prob": 3.628562267835611e-11
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 9.238507721553683e-07,
+      "rel_err": {
+        "expected_loss": 1.1018025827560907e-08,
+        "prob_at_least_two_pay": 8.219093964156849e-09,
+        "exceedance_prob": 9.238507721553683e-07,
+        "stop_loss": 8.931164202470691e-07,
+        "all_exhausted_prob": 1.995219734720385e-07
+      },
+      "dense": {
+        "expected_loss": 25447057.563368578,
+        "prob_at_least_two_pay": 0.2049871507794823,
+        "exceedance_prob": 0.0010238169238760905,
+        "stop_loss": 18773.01940488547,
+        "all_exhausted_prob": 2.9346657825405127e-12
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 7.333411576001421e-10,
+      "rel_err": {
+        "expected_loss": 2.0976748006345904e-15,
+        "prob_at_least_two_pay": 6.244182020784327e-16,
+        "exceedance_prob": 1.2899305288013566e-12,
+        "stop_loss": 7.017682838721248e-13,
+        "all_exhausted_prob": 7.333411576001421e-10
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 5.328766914859442e-07,
+      "rel_err": {
+        "expected_loss": 2.411011889163499e-10,
+        "prob_at_least_two_pay": 3.426345023536901e-10,
+        "exceedance_prob": 2.209624963980718e-09,
+        "stop_loss": 4.0490249216058625e-09,
+        "all_exhausted_prob": 5.328766914859442e-07
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.0053913410134290045,
+      "rel_err": {
+        "expected_loss": 4.181293500731162e-07,
+        "prob_at_least_two_pay": 7.519304245784987e-08,
+        "exceedance_prob": 3.567426493687714e-05,
+        "stop_loss": 5.071893321620238e-05,
+        "all_exhausted_prob": 0.0053913410134290045
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 5.365228987211067e-15,
+      "rel_err": {
+        "expected_loss": 2.714637977291823e-15,
+        "prob_at_least_two_pay": 3.954648613163407e-15,
+        "exceedance_prob": 3.540332416794166e-15,
+        "stop_loss": 3.612706738080437e-15,
+        "all_exhausted_prob": 5.365228987211067e-15
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 5.997063079324041e-11,
+      "rel_err": {
+        "expected_loss": 1.675733684118709e-11,
+        "prob_at_least_two_pay": 2.958576697207891e-11,
+        "exceedance_prob": 3.145522875867202e-11,
+        "stop_loss": 5.997063079324041e-11,
+        "all_exhausted_prob": 5.626138085737293e-12
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "chain",
+      "n": 6,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 1.0311045733001742e-06,
+      "rel_err": {
+        "expected_loss": 9.936773015984505e-09,
+        "prob_at_least_two_pay": 1.0645472394827622e-08,
+        "exceedance_prob": 5.883247164340307e-07,
+        "stop_loss": 1.0311045733001742e-06,
+        "all_exhausted_prob": 2.4566183708268187e-08
+      },
+      "dense": {
+        "expected_loss": 30190540.046862323,
+        "prob_at_least_two_pay": 0.2667017923876206,
+        "exceedance_prob": 0.00026030658653437367,
+        "stop_loss": 6041.971968681915,
+        "all_exhausted_prob": 1.5879467207634702e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 1.5436739831744273e-11,
+      "rel_err": {
+        "expected_loss": 1.4362902752580368e-13,
+        "prob_at_least_two_pay": 1.9981377413179296e-13,
+        "exceedance_prob": 5.87086532994577e-13,
+        "stop_loss": 2.613786618284217e-12,
+        "all_exhausted_prob": 1.5436739831744273e-11
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 3.592611112715919e-07,
+      "rel_err": {
+        "expected_loss": 2.084928958368028e-10,
+        "prob_at_least_two_pay": 8.122896831839894e-10,
+        "exceedance_prob": 5.724291120203806e-09,
+        "stop_loss": 3.3326016456600467e-09,
+        "all_exhausted_prob": 3.592611112715919e-07
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.0031170430557124454,
+      "rel_err": {
+        "expected_loss": 4.413760424488166e-07,
+        "prob_at_least_two_pay": 8.39447524002659e-08,
+        "exceedance_prob": 1.4878968091156877e-06,
+        "stop_loss": 1.8711251654030633e-05,
+        "all_exhausted_prob": 0.0031170430557124454
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 3.3316011539490548e-15,
+      "rel_err": {
+        "expected_loss": 3.3316011539490548e-15,
+        "prob_at_least_two_pay": 7.860494655066599e-16,
+        "exceedance_prob": 1.0079974812268922e-15,
+        "stop_loss": 1.2369050958045037e-15,
+        "all_exhausted_prob": 2.1421470167001018e-16
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 2.798500527137417e-10,
+      "rel_err": {
+        "expected_loss": 1.5318517016904756e-11,
+        "prob_at_least_two_pay": 7.300230038032072e-11,
+        "exceedance_prob": 2.798500527137417e-10,
+        "stop_loss": 2.9209719988272655e-11,
+        "all_exhausted_prob": 3.540754803903598e-12
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 5.579198623725026e-07,
+      "rel_err": {
+        "expected_loss": 2.1040480734368816e-08,
+        "prob_at_least_two_pay": 6.521448385883487e-09,
+        "exceedance_prob": 1.0942113445166312e-07,
+        "stop_loss": 5.579198623725026e-07,
+        "all_exhausted_prob": 2.0885639938684705e-08
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 1.384082843744321e-08,
+      "rel_err": {
+        "expected_loss": 7.498507007493513e-13,
+        "prob_at_least_two_pay": 2.6536641477144847e-13,
+        "exceedance_prob": 5.7375715032639766e-11,
+        "stop_loss": 4.111526002449596e-11,
+        "all_exhausted_prob": 1.384082843744321e-08
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 4.764432030623864e-05,
+      "rel_err": {
+        "expected_loss": 1.0298281827785999e-08,
+        "prob_at_least_two_pay": 7.668874279270767e-09,
+        "exceedance_prob": 1.0985511088404421e-07,
+        "stop_loss": 3.4123640851762045e-07,
+        "all_exhausted_prob": 4.764432030623864e-05
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.03876315083816955,
+      "rel_err": {
+        "expected_loss": 2.7738818605073555e-06,
+        "prob_at_least_two_pay": 2.2533003581046512e-07,
+        "exceedance_prob": 5.5342184726286e-05,
+        "stop_loss": 0.00022379674246682683,
+        "all_exhausted_prob": 0.03876315083816955
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 1.3982878048534615e-15,
+      "rel_err": {
+        "expected_loss": 0.0,
+        "prob_at_least_two_pay": 5.743861791589794e-16,
+        "exceedance_prob": 3.2338010445337335e-16,
+        "stop_loss": 6.155808420969285e-16,
+        "all_exhausted_prob": 1.3982878048534615e-15
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 1.5882522788133424e-10,
+      "rel_err": {
+        "expected_loss": 8.629639777782621e-12,
+        "prob_at_least_two_pay": 2.88099183777113e-11,
+        "exceedance_prob": 1.5882522788133424e-10,
+        "stop_loss": 2.7983689500884276e-11,
+        "all_exhausted_prob": 2.876505236351859e-11
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 8,
+      "max_rel_err": 4.860394864644911e-07,
+      "rel_err": {
+        "expected_loss": 1.4735398697234466e-08,
+        "prob_at_least_two_pay": 7.1948869271220665e-09,
+        "exceedance_prob": 3.7330504567382633e-07,
+        "stop_loss": 4.860394864644911e-07,
+        "all_exhausted_prob": 2.5910282846906474e-07
+      },
+      "dense": {
+        "expected_loss": 15383544.214414466,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.514410953728993e-07
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 46,
+      "max_rel_err": 2.5333291666438726e-06,
+      "rel_err": {
+        "expected_loss": 4.546154863516484e-12,
+        "prob_at_least_two_pay": 5.219969402377786e-12,
+        "exceedance_prob": 7.043899473308098e-11,
+        "stop_loss": 2.878087947825807e-10,
+        "all_exhausted_prob": 2.5333291666438726e-06
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 28,
+      "max_rel_err": 0.04352067792648668,
+      "rel_err": {
+        "expected_loss": 2.969655597388334e-08,
+        "prob_at_least_two_pay": 1.6830575886313012e-08,
+        "exceedance_prob": 1.658983557955836e-06,
+        "stop_loss": 4.558313584105558e-06,
+        "all_exhausted_prob": 0.04352067792648668
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 13,
+      "max_rel_err": 0.20844044494018013,
+      "rel_err": {
+        "expected_loss": 1.9459817425263573e-05,
+        "prob_at_least_two_pay": 1.3315553936085681e-05,
+        "exceedance_prob": 0.0008806314154838123,
+        "stop_loss": 0.0014318056838269104,
+        "all_exhausted_prob": 0.20844044494018013
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 82,
+      "max_rel_err": 8.597560765384973e-14,
+      "rel_err": {
+        "expected_loss": 2.406156388963207e-15,
+        "prob_at_least_two_pay": 1.104872346783318e-15,
+        "exceedance_prob": 4.609855920837328e-14,
+        "stop_loss": 1.7627874161725482e-14,
+        "all_exhausted_prob": 8.597560765384973e-14
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 58,
+      "max_rel_err": 1.122552901040167e-10,
+      "rel_err": {
+        "expected_loss": 2.1817360334541385e-11,
+        "prob_at_least_two_pay": 5.5933794265123206e-11,
+        "exceedance_prob": 8.935987758065527e-12,
+        "stop_loss": 4.2645142240218714e-11,
+        "all_exhausted_prob": 1.122552901040167e-10
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 35,
+      "max_rel_err": 9.194398518876571e-07,
+      "rel_err": {
+        "expected_loss": 1.9786903610307285e-08,
+        "prob_at_least_two_pay": 1.1848540559669622e-09,
+        "exceedance_prob": 3.543580685111951e-07,
+        "stop_loss": 8.041326350765386e-07,
+        "all_exhausted_prob": 9.194398518876571e-07
+      },
+      "dense": {
+        "expected_loss": 20127026.69790821,
+        "prob_at_least_two_pay": 0.15072642027706862,
+        "exceedance_prob": 0.0016416415814085202,
+        "stop_loss": 48292.098811768104,
+        "all_exhausted_prob": 1.0607271646295575e-09
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 45,
+      "max_rel_err": 1.6418624925739711e-06,
+      "rel_err": {
+        "expected_loss": 8.432426654726344e-12,
+        "prob_at_least_two_pay": 7.002732303784711e-12,
+        "exceedance_prob": 3.0556553585863516e-10,
+        "stop_loss": 6.65919376875946e-10,
+        "all_exhausted_prob": 1.6418624925739711e-06
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 28,
+      "max_rel_err": 0.04205133018663065,
+      "rel_err": {
+        "expected_loss": 4.9842574298466003e-08,
+        "prob_at_least_two_pay": 2.6312964937404924e-08,
+        "exceedance_prob": 3.7416690533278297e-06,
+        "stop_loss": 1.2948410446874463e-05,
+        "all_exhausted_prob": 0.04205133018663065
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 13,
+      "max_rel_err": 0.25496954991837706,
+      "rel_err": {
+        "expected_loss": 2.4852041304720154e-05,
+        "prob_at_least_two_pay": 1.576637902668483e-05,
+        "exceedance_prob": 0.001084399278512421,
+        "stop_loss": 0.0023490080841360064,
+        "all_exhausted_prob": 0.25496954991837706
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 79,
+      "max_rel_err": 3.176351833857046e-13,
+      "rel_err": {
+        "expected_loss": 2.1227094406960294e-14,
+        "prob_at_least_two_pay": 3.176351833857046e-13,
+        "exceedance_prob": 2.0372179028436662e-13,
+        "stop_loss": 1.1010660110428752e-13,
+        "all_exhausted_prob": 1.0821088273224733e-13
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 56,
+      "max_rel_err": 4.4593866722218997e-10,
+      "rel_err": {
+        "expected_loss": 2.0436275344985123e-11,
+        "prob_at_least_two_pay": 4.446639948375824e-11,
+        "exceedance_prob": 3.0174664746055705e-10,
+        "stop_loss": 2.0307767444521616e-10,
+        "all_exhausted_prob": 4.4593866722218997e-10
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 35,
+      "max_rel_err": 2.5361614687933463e-06,
+      "rel_err": {
+        "expected_loss": 2.5147298391512233e-08,
+        "prob_at_least_two_pay": 5.7947540011193426e-09,
+        "exceedance_prob": 1.314339174839922e-06,
+        "stop_loss": 1.178484415868734e-06,
+        "all_exhausted_prob": 2.5361614687933463e-06
+      },
+      "dense": {
+        "expected_loss": 25447057.563368566,
+        "prob_at_least_two_pay": 0.20875543269153388,
+        "exceedance_prob": 0.0011506108863669946,
+        "stop_loss": 21773.699395213494,
+        "all_exhausted_prob": 5.4867704311648554e-12
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 46,
+      "max_rel_err": 3.6546431643578943e-06,
+      "rel_err": {
+        "expected_loss": 1.0960474225951067e-11,
+        "prob_at_least_two_pay": 9.134037828839243e-12,
+        "exceedance_prob": 1.1154867904902859e-09,
+        "stop_loss": 1.5408079710087305e-09,
+        "all_exhausted_prob": 3.6546431643578943e-06
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 28,
+      "max_rel_err": 0.06014201389476907,
+      "rel_err": {
+        "expected_loss": 7.207640537694522e-08,
+        "prob_at_least_two_pay": 3.361157762907873e-08,
+        "exceedance_prob": 1.8830042748881767e-05,
+        "stop_loss": 3.050700530845479e-05,
+        "all_exhausted_prob": 0.06014201389476907
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 13,
+      "max_rel_err": 0.30956303379968714,
+      "rel_err": {
+        "expected_loss": 3.345578806508629e-05,
+        "prob_at_least_two_pay": 1.9750310486883378e-05,
+        "exceedance_prob": 0.0029673733742547645,
+        "stop_loss": 0.0037682259823989925,
+        "all_exhausted_prob": 0.30956303379968714
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 82,
+      "max_rel_err": 2.666240879002955e-13,
+      "rel_err": {
+        "expected_loss": 1.0858551909167292e-14,
+        "prob_at_least_two_pay": 1.6305990293952956e-14,
+        "exceedance_prob": 2.666240879002955e-13,
+        "stop_loss": 7.310163146294675e-14,
+        "all_exhausted_prob": 1.9940948460504182e-13
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 58,
+      "max_rel_err": 2.479062686134157e-10,
+      "rel_err": {
+        "expected_loss": 3.0462310062180194e-11,
+        "prob_at_least_two_pay": 5.449812844637808e-11,
+        "exceedance_prob": 4.2273816032800696e-11,
+        "stop_loss": 2.479062686134157e-10,
+        "all_exhausted_prob": 1.5848345177901732e-12
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "ring",
+      "n": 6,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 35,
+      "max_rel_err": 1.9440276101558332e-06,
+      "rel_err": {
+        "expected_loss": 4.886494912558265e-07,
+        "prob_at_least_two_pay": 4.459649782761113e-07,
+        "exceedance_prob": 9.723059384602643e-07,
+        "stop_loss": 1.625401692223973e-06,
+        "all_exhausted_prob": 1.9440276101558332e-06
+      },
+      "dense": {
+        "expected_loss": 30190540.04686232,
+        "prob_at_least_two_pay": 0.26894293865093727,
+        "exceedance_prob": 0.00029644110176478046,
+        "stop_loss": 6929.921244566164,
+        "all_exhausted_prob": 3.0825034153499386e-14
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 1.5436739831744273e-11,
+      "rel_err": {
+        "expected_loss": 1.4362902752580368e-13,
+        "prob_at_least_two_pay": 1.9981377413179296e-13,
+        "exceedance_prob": 5.87086532994577e-13,
+        "stop_loss": 2.613786618284217e-12,
+        "all_exhausted_prob": 1.5436739831744273e-11
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 3.592611112715919e-07,
+      "rel_err": {
+        "expected_loss": 2.084928958368028e-10,
+        "prob_at_least_two_pay": 8.122896831839894e-10,
+        "exceedance_prob": 5.724291120203806e-09,
+        "stop_loss": 3.3326016456600467e-09,
+        "all_exhausted_prob": 3.592611112715919e-07
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.0031170430557124454,
+      "rel_err": {
+        "expected_loss": 4.413760424488166e-07,
+        "prob_at_least_two_pay": 8.39447524002659e-08,
+        "exceedance_prob": 1.4878968091156877e-06,
+        "stop_loss": 1.8711251654030633e-05,
+        "all_exhausted_prob": 0.0031170430557124454
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 3.3316011539490548e-15,
+      "rel_err": {
+        "expected_loss": 3.3316011539490548e-15,
+        "prob_at_least_two_pay": 7.860494655066599e-16,
+        "exceedance_prob": 1.0079974812268922e-15,
+        "stop_loss": 1.2369050958045037e-15,
+        "all_exhausted_prob": 2.1421470167001018e-16
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 9,
+      "max_rel_err": 2.798500527137417e-10,
+      "rel_err": {
+        "expected_loss": 1.5318517016904756e-11,
+        "prob_at_least_two_pay": 7.300230038032072e-11,
+        "exceedance_prob": 2.798500527137417e-10,
+        "stop_loss": 2.9209719988272655e-11,
+        "all_exhausted_prob": 3.540754803903598e-12
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 2,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 7,
+      "max_rel_err": 5.579198623725026e-07,
+      "rel_err": {
+        "expected_loss": 2.1040480734368816e-08,
+        "prob_at_least_two_pay": 6.521448385883487e-09,
+        "exceedance_prob": 1.0942113445166312e-07,
+        "stop_loss": 5.579198623725026e-07,
+        "all_exhausted_prob": 2.0885639938684705e-08
+      },
+      "dense": {
+        "expected_loss": 10063513.34895411,
+        "prob_at_least_two_pay": 0.04413776873084355,
+        "exceedance_prob": 0.012046720907534038,
+        "stop_loss": 282354.698566141,
+        "all_exhausted_prob": 3.163304630917903e-05
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 9,
+      "max_rel_err": 1.3840828262657238e-08,
+      "rel_err": {
+        "expected_loss": 7.500928614794498e-13,
+        "prob_at_least_two_pay": 2.6536641477144847e-13,
+        "exceedance_prob": 5.7375715032639766e-11,
+        "stop_loss": 4.111526002449596e-11,
+        "all_exhausted_prob": 1.3840828262657238e-08
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 7,
+      "max_rel_err": 4.764432030606386e-05,
+      "rel_err": {
+        "expected_loss": 1.0298282069946731e-08,
+        "prob_at_least_two_pay": 7.668874279270767e-09,
+        "exceedance_prob": 1.0985511088404421e-07,
+        "stop_loss": 3.4123640851762045e-07,
+        "all_exhausted_prob": 4.764432030606386e-05
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 5,
+      "max_rel_err": 0.038763150838169384,
+      "rel_err": {
+        "expected_loss": 2.773881860265195e-06,
+        "prob_at_least_two_pay": 2.2533003581046512e-07,
+        "exceedance_prob": 5.5342184726286e-05,
+        "stop_loss": 0.00022379674246682683,
+        "all_exhausted_prob": 0.038763150838169384
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 1.2235018292467792e-15,
+      "rel_err": {
+        "expected_loss": 2.4216073009828886e-16,
+        "prob_at_least_two_pay": 5.743861791589794e-16,
+        "exceedance_prob": 3.2338010445337335e-16,
+        "stop_loss": 6.155808420969285e-16,
+        "all_exhausted_prob": 1.2235018292467792e-15
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 10,
+      "max_rel_err": 1.5882522788133424e-10,
+      "rel_err": {
+        "expected_loss": 8.629397617052524e-12,
+        "prob_at_least_two_pay": 2.88099183777113e-11,
+        "exceedance_prob": 1.5882522788133424e-10,
+        "stop_loss": 2.7983689500884276e-11,
+        "all_exhausted_prob": 2.8765227149494202e-11
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 3,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 8,
+      "max_rel_err": 4.860394864644911e-07,
+      "rel_err": {
+        "expected_loss": 1.473539845507374e-08,
+        "prob_at_least_two_pay": 7.1948869271220665e-09,
+        "exceedance_prob": 3.7330504567382633e-07,
+        "stop_loss": 4.860394864644911e-07,
+        "all_exhausted_prob": 2.5910282864385073e-07
+      },
+      "dense": {
+        "expected_loss": 15383544.214414462,
+        "prob_at_least_two_pay": 0.09664430177017434,
+        "exceedance_prob": 0.010728696367447235,
+        "stop_loss": 189114.5952989294,
+        "all_exhausted_prob": 1.5144109537289928e-07
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 45,
+      "max_rel_err": 2.100871030251373e-05,
+      "rel_err": {
+        "expected_loss": 3.596278356735009e-13,
+        "prob_at_least_two_pay": 1.617325351155389e-13,
+        "exceedance_prob": 7.08793356809138e-12,
+        "stop_loss": 2.4666730513849503e-10,
+        "all_exhausted_prob": 2.100871030251373e-05
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 27,
+      "max_rel_err": 0.0004916238626162546,
+      "rel_err": {
+        "expected_loss": 3.887208761703034e-08,
+        "prob_at_least_two_pay": 2.3566177642717755e-08,
+        "exceedance_prob": 1.5321349294095983e-06,
+        "stop_loss": 2.382457468441823e-06,
+        "all_exhausted_prob": 0.0004916238626162546
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 13,
+      "max_rel_err": 0.3595485285730647,
+      "rel_err": {
+        "expected_loss": 6.460214463649187e-05,
+        "prob_at_least_two_pay": 3.99150525110968e-05,
+        "exceedance_prob": 0.0025209081636639943,
+        "stop_loss": 0.0043055764574405145,
+        "all_exhausted_prob": 0.3595485285730647
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 82,
+      "max_rel_err": 6.849882718804167e-13,
+      "rel_err": {
+        "expected_loss": 3.090985515052736e-14,
+        "prob_at_least_two_pay": 7.945375633405296e-15,
+        "exceedance_prob": 6.279175733603278e-15,
+        "stop_loss": 1.179548523257664e-16,
+        "all_exhausted_prob": 6.849882718804167e-13
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 58,
+      "max_rel_err": 1.3878009074032754e-09,
+      "rel_err": {
+        "expected_loss": 2.2999671548496713e-10,
+        "prob_at_least_two_pay": 6.99009076152777e-10,
+        "exceedance_prob": 1.5871139931326752e-10,
+        "stop_loss": 4.720656990347218e-10,
+        "all_exhausted_prob": 1.3878009074032754e-09
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 35,
+      "max_rel_err": 2.1271855955357925e-06,
+      "rel_err": {
+        "expected_loss": 2.1271855955357925e-06,
+        "prob_at_least_two_pay": 5.79413372227022e-07,
+        "exceedance_prob": 6.395684474666095e-07,
+        "stop_loss": 8.39812246278756e-07,
+        "all_exhausted_prob": 9.76501030299317e-07
+      },
+      "dense": {
+        "expected_loss": 20127026.697908208,
+        "prob_at_least_two_pay": 0.15719847120280125,
+        "exceedance_prob": 0.0020719958513344674,
+        "stop_loss": 61684.25860166199,
+        "all_exhausted_prob": 1.2124139479401544e-09
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": false,
+      "max_bond": 50,
+      "max_rel_err": 0.0006686094660323745,
+      "rel_err": {
+        "expected_loss": 2.9911171925725024e-11,
+        "prob_at_least_two_pay": 1.1027269769424177e-11,
+        "exceedance_prob": 2.417059341086372e-09,
+        "stop_loss": 7.350035671042103e-09,
+        "all_exhausted_prob": 0.0006686094660323745
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": false,
+      "max_bond": 31,
+      "max_rel_err": 0.02634683002015846,
+      "rel_err": {
+        "expected_loss": 1.3817675360551409e-07,
+        "prob_at_least_two_pay": 7.630470954375825e-08,
+        "exceedance_prob": 4.981350027087079e-06,
+        "stop_loss": 7.4924122558205265e-06,
+        "all_exhausted_prob": 0.02634683002015846
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": false,
+      "max_bond": 13,
+      "max_rel_err": 0.6171389942846667,
+      "rel_err": {
+        "expected_loss": 0.0002421013040963077,
+        "prob_at_least_two_pay": 0.00013202710700756522,
+        "exceedance_prob": 0.008792177174611162,
+        "stop_loss": 0.018880080774413863,
+        "all_exhausted_prob": 0.6171389942846667
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-12,
+      "tilted_gauge": true,
+      "max_bond": 92,
+      "max_rel_err": 7.724193409795733e-13,
+      "rel_err": {
+        "expected_loss": 1.5078556716668352e-14,
+        "prob_at_least_two_pay": 2.6125886647409376e-14,
+        "exceedance_prob": 4.4064695076071425e-13,
+        "stop_loss": 2.940992210112254e-13,
+        "all_exhausted_prob": 7.724193409795733e-13
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-09,
+      "tilted_gauge": true,
+      "max_bond": 69,
+      "max_rel_err": 1.283172879513096e-09,
+      "rel_err": {
+        "expected_loss": 1.283172879513096e-09,
+        "prob_at_least_two_pay": 4.531427758782285e-10,
+        "exceedance_prob": 6.174831219209896e-10,
+        "stop_loss": 2.1331028857054304e-10,
+        "all_exhausted_prob": 8.029462964521573e-10
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    },
+    {
+      "topology": "complete",
+      "n": 5,
+      "tol": 1e-06,
+      "tilted_gauge": true,
+      "max_bond": 43,
+      "max_rel_err": 6.292970870566861e-07,
+      "rel_err": {
+        "expected_loss": 9.105215239732949e-08,
+        "prob_at_least_two_pay": 3.738112837947859e-08,
+        "exceedance_prob": 6.292970870566861e-07,
+        "stop_loss": 6.06663712668928e-07,
+        "all_exhausted_prob": 5.8855627140754904e-08
+      },
+      "dense": {
+        "expected_loss": 25447057.56336856,
+        "prob_at_least_two_pay": 0.21991231264125902,
+        "exceedance_prob": 0.0017395580171925508,
+        "stop_loss": 35328.44268450938,
+        "all_exhausted_prob": 1.0004090849937443e-11
+      }
+    }
+  ]
+}

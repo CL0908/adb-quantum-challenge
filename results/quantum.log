@@ -1,0 +1,14 @@
+adb-base          both_bonds_exhausted_probability     mc=178 pdf_is=34.7 teacher_iid=4.53 factorized_iid=9.4 loglinear_iid=4.53 qcbm_iid=5.96 leak=0.021 37s
+   IQAE: {'none (load p)': ('a=3.16e-05', 'calls=1.59e+06'), 'pdf_is': ('a=0.000189', 'calls=1.03e+06'), 'loglinear_iid': ('a=0.00015', 'calls=1.14e+06'), 'qcbm_iid': ('a=2.82e-06', 'calls=7.36e+06'), 'learned_doob_state_dependent': ('a=0.0513', 'calls=2.92e+04')}
+adb-independent   both_bonds_exhausted_probability     mc=505 pdf_is=68.3 teacher_iid=5.54 factorized_iid=5.54 loglinear_iid=5.53 qcbm_iid=6.38 leak=0.011 26s
+adb-common-shock  both_bonds_exhausted_probability     mc=151 pdf_is=31.6 teacher_iid=4.39 factorized_iid=10.6 loglinear_iid=4.39 qcbm_iid=5.97 leak=0.025 34s
+adb-rain-stress   both_bonds_exhausted_probability     mc=120 pdf_is=24.5 teacher_iid=4.42 factorized_iid=8.38 loglinear_iid=4.42 qcbm_iid=6.48 leak=0.018 33s
+adb-rain-cover    both_bonds_exhausted_probability     mc=178 pdf_is=32.8 teacher_iid=4.53 factorized_iid=9.4 loglinear_iid=4.53 qcbm_iid=5.58 leak=0.020 50s
+adb-base          expected_principal_loss_usd          mc=2.14 pdf_is=1.05 teacher_iid=0.829 factorized_iid=1.06 loglinear_iid=0.837 qcbm_iid=0.844 leak=0.009 57s
+   IQAE: {'none (load p)': ('a=0.0629', 'calls=2.88e+04'), 'pdf_is': ('a=0.376', 'calls=7.73e+03'), 'loglinear_iid': ('a=0.187', 'calls=1.54e+04'), 'qcbm_iid': ('a=0.263', 'calls=1.67e+04'), 'learned_doob_state_dependent': ('a=0.0377', 'calls=3.38e+04')}
+adb-base          joint_attachment_probability         mc=4.65 pdf_is=3.26 teacher_iid=1.57 factorized_iid=3.07 loglinear_iid=1.7 qcbm_iid=1.87 leak=0.012 66s
+   IQAE: {'none (load p)': ('a=0.0441', 'calls=3.47e+04'), 'pdf_is': ('a=0.0378', 'calls=3.77e+04'), 'loglinear_iid': ('a=0.062', 'calls=2.7e+04'), 'qcbm_iid': ('a=0.00979', 'calls=8.82e+04'), 'learned_doob_state_dependent': ('a=0.00835', 'calls=1.15e+05')}
+adb-base          portfolio_loss_exceedance_probabili  mc=9.06 pdf_is=3.35 teacher_iid=1.95 factorized_iid=3.35 loglinear_iid=2.04 qcbm_iid=2.26 leak=0.035 71s
+   IQAE: {'none (load p)': ('a=0.012', 'calls=7.53e+04'), 'pdf_is': ('a=0.0401', 'calls=3.16e+04'), 'loglinear_iid': ('a=0.031', 'calls=4.62e+04'), 'qcbm_iid': ('a=0.0306', 'calls=4.89e+04'), 'learned_doob_state_dependent': ('a=0.0581', 'calls=3.16e+04')}
+adb-base          portfolio_stop_loss_usd              mc=12 pdf_is=3.77 teacher_iid=1.68 factorized_iid=2.44 loglinear_iid=1.69 qcbm_iid=1.94 leak=0.028 74s
+   IQAE: {'none (load p)': ('a=0.00353', 'calls=2.13e+05'), 'pdf_is': ('a=0.0211', 'calls=6.99e+04'), 'loglinear_iid': ('a=0.101', 'calls=2.74e+04'), 'qcbm_iid': ('a=0.0128', 'calls=7.74e+04'), 'learned_doob_state_dependent': ('a=0.0298', 'calls=4.57e+04')}

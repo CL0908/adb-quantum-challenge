@@ -1,0 +1,715 @@
+{
+  "seed": 20261102,
+  "alpha_mix": 0.05,
+  "qcbm_layers": 4,
+  "eps_rel": 0.01,
+  "proposals": {
+    "adb-base|term_both_bonds_exhausted_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 177.79626044510027
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 34.74962821637917
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 4.5323513036542336
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.4800669928016903,
+        "rel_std_per_path": 9.400257300609061
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 4.242793671444314e-07,
+        "rel_std_per_path": 4.532672354385261
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.08646700822897806,
+        "rel_std_per_path": 5.9569624472820895,
+        "leak": 0.021457847885492876
+      }
+    },
+    "adb-independent|term_both_bonds_exhausted_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 504.8230660482517
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 68.28980640867022
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 5.535167864527126
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 2.6322650838349924e-16,
+        "rel_std_per_path": 5.535167864527143
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 3.1248407463486996e-08,
+        "rel_std_per_path": 5.534406600125113
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.0044767769844389444,
+        "rel_std_per_path": 6.376910422650936,
+        "leak": 0.01119815642893196
+      }
+    },
+    "adb-common-shock|term_both_bonds_exhausted_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 150.74971368677072
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 31.600099828865968
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 4.394315778218015
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.5767155458373948,
+        "rel_std_per_path": 10.644327778837555
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 8.081158579227177e-07,
+        "rel_std_per_path": 4.393575004199083
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.16521932621981436,
+        "rel_std_per_path": 5.968499338520913,
+        "leak": 0.02534272265715032
+      }
+    },
+    "adb-rain-stress|term_both_bonds_exhausted_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 120.16796147259949
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 24.458251929914216
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 4.41905371080822
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.37237211464808895,
+        "rel_std_per_path": 8.377715081799646
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 4.2260595388274013e-07,
+        "rel_std_per_path": 4.418782762271173
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.11074397204453983,
+        "rel_std_per_path": 6.479282817713457,
+        "leak": 0.018355332814361747
+      }
+    },
+    "adb-rain-cover|term_both_bonds_exhausted_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 177.79626044510027
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 32.79246357879766
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 4.5323513036542336
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.4800669928016903,
+        "rel_std_per_path": 9.400257300609061
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 4.242793671444314e-07,
+        "rel_std_per_path": 4.532672354385261
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.07875056537124712,
+        "rel_std_per_path": 5.5797052573824075,
+        "leak": 0.020454459285002558
+      }
+    },
+    "adb-base|term_expected_principal_loss_usd": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 2.1448564148156883
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 1.053174818284912
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 0.8292822762183418
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.028202006974363394,
+        "rel_std_per_path": 1.0618688584043248
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 0.003492593343056845,
+        "rel_std_per_path": 0.8367461021817397
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.004518481180815859,
+        "rel_std_per_path": 0.8437576566823677,
+        "leak": 0.009081552561279183
+      }
+    },
+    "adb-base|term_joint_attachment_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 4.6536365685003505
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 3.257646251345208
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 1.5746799216115022
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.2560389598142602,
+        "rel_std_per_path": 3.070146209161956
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 0.03229040707362718,
+        "rel_std_per_path": 1.7037974919248722
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.06911248836667304,
+        "rel_std_per_path": 1.874527341633625,
+        "leak": 0.012254988725150184
+      }
+    },
+    "adb-base|term_portfolio_loss_exceedance_probability": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 9.055945058736755
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 3.354218640210043
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 1.9470441989427705
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.1828776352643547,
+        "rel_std_per_path": 3.347546361487175
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 0.027311066758791126,
+        "rel_std_per_path": 2.037167166485339
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.07346020734671226,
+        "rel_std_per_path": 2.26321068024631,
+        "leak": 0.03484220746264188
+      }
+    },
+    "adb-base|term_portfolio_stop_loss_usd": {
+      "mc": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 11.96377506068428
+      },
+      "pdf_is": {
+        "n_params": 0,
+        "kl_to_teacher": null,
+        "rel_std_per_path": 3.7667963833441473
+      },
+      "teacher_iid": {
+        "n_params": 100,
+        "kl_to_teacher": 0.0,
+        "rel_std_per_path": 1.6800561049044822
+      },
+      "factorized_iid": {
+        "n_params": 10,
+        "kl_to_teacher": 0.12418204631312296,
+        "rel_std_per_path": 2.4363315424156418
+      },
+      "loglinear_iid": {
+        "n_params": 15,
+        "kl_to_teacher": 0.005048784612078947,
+        "rel_std_per_path": 1.689825843173899
+      },
+      "qcbm_iid": {
+        "n_params": 40,
+        "kl_to_teacher": 0.062317108452869,
+        "rel_std_per_path": 1.9390314450924409,
+        "leak": 0.027519927624959584
+      }
+    }
+  },
+  "iqae": {
+    "term_both_bonds_exhausted_probability": {
+      "ce_training_paths": 10000,
+      "proposals": {
+        "none (load p)": {
+          "mu": 3.1633046309178836e-05,
+          "M": 1.0,
+          "a": 3.1633046309178836e-05,
+          "rel_std_per_path": 177.79626044510036,
+          "iqae_A_calls_mean": 1586448.0,
+          "iqae_kmax": 8732,
+          "iqae_rel_rmse": 0.001221971379254419,
+          "classical_paths_for_same_rel_rmse": 21170113013.54551
+        },
+        "pdf_is": {
+          "mu": 3.1633046309178836e-05,
+          "M": 0.16720208633915695,
+          "a": 0.00018919049996190575,
+          "rel_std_per_path": 34.74962821637922,
+          "iqae_A_calls_mean": 1031970.0,
+          "iqae_kmax": 5335,
+          "iqae_rel_rmse": 0.001022257680059562,
+          "classical_paths_for_same_rel_rmse": 1155525571.856475
+        },
+        "loglinear_iid": {
+          "mu": 3.1633046309178836e-05,
+          "M": 0.2115836574001654,
+          "a": 0.000149506094647715,
+          "rel_std_per_path": 4.5326723543852685,
+          "iqae_A_calls_mean": 1144858.0,
+          "iqae_kmax": 5947,
+          "iqae_rel_rmse": 0.0010337158932635633,
+          "classical_paths_for_same_rel_rmse": 19226767.165229812
+        },
+        "qcbm_iid": {
+          "mu": 3.1633046309178836e-05,
+          "M": 11.207236485394597,
+          "a": 2.8225554399965945e-06,
+          "rel_std_per_path": 5.956962447282097,
+          "iqae_A_calls_mean": 7357220.0,
+          "iqae_kmax": 40862,
+          "iqae_rel_rmse": 0.0009571531495034442,
+          "classical_paths_for_same_rel_rmse": 38733510.445061944
+        },
+        "learned_doob_state_dependent": {
+          "mu": 3.163304630917882e-05,
+          "M": 0.0006171922614743244,
+          "a": 0.05125314797955349,
+          "rel_std_per_path": 0.8018945461412769,
+          "iqae_A_calls_mean": 29156.0,
+          "iqae_kmax": 204,
+          "iqae_rel_rmse": 0.001973148257370538,
+          "classical_paths_for_same_rel_rmse": 165163.88239056309
+        }
+      }
+    },
+    "term_expected_principal_loss_usd": {
+      "ce_training_paths": 6000,
+      "proposals": {
+        "none (load p)": {
+          "mu": 10063513.348954108,
+          "M": 160000000.0,
+          "a": 0.06289695843096317,
+          "rel_std_per_path": 2.1448564148156883,
+          "iqae_A_calls_mean": 28798.0,
+          "iqae_kmax": 206,
+          "iqae_rel_rmse": 0.014608602175053482,
+          "classical_paths_for_same_rel_rmse": 21556.54342640518
+        },
+        "pdf_is": {
+          "mu": 10063513.348954108,
+          "M": 26752333.814265113,
+          "a": 0.3761732871166535,
+          "rel_std_per_path": 1.0531748182849126,
+          "iqae_A_calls_mean": 7726.0,
+          "iqae_kmax": 37,
+          "iqae_rel_rmse": 0.0043921983702643,
+          "classical_paths_for_same_rel_rmse": 57495.92164282029
+        },
+        "loglinear_iid": {
+          "mu": 10063513.348954108,
+          "M": 53738990.704139136,
+          "a": 0.18726651202585734,
+          "rel_std_per_path": 0.8367461021817403,
+          "iqae_A_calls_mean": 15446.0,
+          "iqae_kmax": 142,
+          "iqae_rel_rmse": 0.023658464657730974,
+          "classical_paths_for_same_rel_rmse": 1250.8760621035594
+        },
+        "qcbm_iid": {
+          "mu": 10063513.348954108,
+          "M": 38311921.535174,
+          "a": 0.2626731561797244,
+          "rel_std_per_path": 0.843757656682368,
+          "iqae_A_calls_mean": 16660.0,
+          "iqae_kmax": 98,
+          "iqae_rel_rmse": 0.0018854537386023623,
+          "classical_paths_for_same_rel_rmse": 200264.37133635086
+        },
+        "learned_doob_state_dependent": {
+          "mu": 10063513.348954108,
+          "M": 266583150.42665425,
+          "a": 0.037749997825623674,
+          "rel_std_per_path": 0.5686370080308989,
+          "iqae_A_calls_mean": 33848.0,
+          "iqae_kmax": 303,
+          "iqae_rel_rmse": 0.0049418793714414615,
+          "classical_paths_for_same_rel_rmse": 13239.938306250648
+        }
+      }
+    },
+    "term_joint_attachment_probability": {
+      "ce_training_paths": 6000,
+      "proposals": {
+        "none (load p)": {
+          "mu": 0.04413776873084346,
+          "M": 1.0,
+          "a": 0.04413776873084346,
+          "rel_std_per_path": 4.653636568500349,
+          "iqae_A_calls_mean": 34660.0,
+          "iqae_kmax": 279,
+          "iqae_rel_rmse": 0.001418541475241251,
+          "classical_paths_for_same_rel_rmse": 10762194.848163338
+        },
+        "pdf_is": {
+          "mu": 0.044137768730843456,
+          "M": 1.1668974618227095,
+          "a": 0.037824890510859174,
+          "rel_std_per_path": 3.2576462513452067,
+          "iqae_A_calls_mean": 37680.0,
+          "iqae_kmax": 354,
+          "iqae_rel_rmse": 0.00256618741447844,
+          "classical_paths_for_same_rel_rmse": 1611502.9443845004
+        },
+        "loglinear_iid": {
+          "mu": 0.04413776873084346,
+          "M": 0.7119770836855208,
+          "a": 0.061993243521780324,
+          "rel_std_per_path": 1.7037974919248717,
+          "iqae_A_calls_mean": 27012.0,
+          "iqae_kmax": 201,
+          "iqae_rel_rmse": 0.0022360741522394435,
+          "classical_paths_for_same_rel_rmse": 580581.972223396
+        },
+        "qcbm_iid": {
+          "mu": 0.044137768730843456,
+          "M": 4.5070037510795515,
+          "a": 0.009793151097393971,
+          "rel_std_per_path": 1.8745273416336248,
+          "iqae_A_calls_mean": 88210.0,
+          "iqae_kmax": 726,
+          "iqae_rel_rmse": 0.00214622087408428,
+          "classical_paths_for_same_rel_rmse": 762842.2347801724
+        },
+        "learned_doob_state_dependent": {
+          "mu": 0.044137768730843456,
+          "M": 5.285279942091153,
+          "a": 0.008351074912671529,
+          "rel_std_per_path": 2.0128638041286653,
+          "iqae_A_calls_mean": 114566.0,
+          "iqae_kmax": 796,
+          "iqae_rel_rmse": 0.007257429733088448,
+          "classical_paths_for_same_rel_rmse": 76924.22001527068
+        }
+      }
+    },
+    "term_portfolio_loss_exceedance_probability": {
+      "ce_training_paths": 10000,
+      "proposals": {
+        "none (load p)": {
+          "mu": 0.012046720907534034,
+          "M": 1.0,
+          "a": 0.012046720907534034,
+          "rel_std_per_path": 9.055945058736754,
+          "iqae_A_calls_mean": 75290.0,
+          "iqae_kmax": 575,
+          "iqae_rel_rmse": 0.00201217907294266,
+          "classical_paths_for_same_rel_rmse": 20255095.828490745
+        },
+        "pdf_is": {
+          "mu": 0.012046720907534034,
+          "M": 0.30053646012214147,
+          "a": 0.04008405802955857,
+          "rel_std_per_path": 3.3542186402100427,
+          "iqae_A_calls_mean": 31620.0,
+          "iqae_kmax": 224,
+          "iqae_rel_rmse": 0.001930829062391333,
+          "classical_paths_for_same_rel_rmse": 3017832.15748668
+        },
+        "loglinear_iid": {
+          "mu": 0.012046720907534034,
+          "M": 0.38829875182459717,
+          "a": 0.03102436165691255,
+          "rel_std_per_path": 2.0371671664853395,
+          "iqae_A_calls_mean": 46250.0,
+          "iqae_kmax": 402,
+          "iqae_rel_rmse": 0.00285681503143512,
+          "classical_paths_for_same_rel_rmse": 508497.81523014314
+        },
+        "qcbm_iid": {
+          "mu": 0.012046720907534034,
+          "M": 0.39306143132515364,
+          "a": 0.030648443086670037,
+          "rel_std_per_path": 2.263210680246309,
+          "iqae_A_calls_mean": 48920.0,
+          "iqae_kmax": 386,
+          "iqae_rel_rmse": 0.0012637709418668063,
+          "classical_paths_for_same_rel_rmse": 3207105.43060087
+        },
+        "learned_doob_state_dependent": {
+          "mu": 0.012046720907534034,
+          "M": 0.20746823657246574,
+          "a": 0.05806537476075902,
+          "rel_std_per_path": 0.9410545020847255,
+          "iqae_A_calls_mean": 31628.0,
+          "iqae_kmax": 202,
+          "iqae_rel_rmse": 0.0032420829737460147,
+          "classical_paths_for_same_rel_rmse": 84252.21020258663
+        }
+      }
+    },
+    "term_portfolio_stop_loss_usd": {
+      "ce_training_paths": 8000,
+      "proposals": {
+        "none (load p)": {
+          "mu": 282354.69856614096,
+          "M": 80000000.0,
+          "a": 0.003529433732076762,
+          "rel_std_per_path": 11.963775060684283,
+          "iqae_A_calls_mean": 212648.0,
+          "iqae_kmax": 1234,
+          "iqae_rel_rmse": 0.0013124854249609921,
+          "classical_paths_for_same_rel_rmse": 83089759.0019812
+        },
+        "pdf_is": {
+          "mu": 282354.69856614096,
+          "M": 13376166.907132557,
+          "a": 0.021108790023813273,
+          "rel_std_per_path": 3.7667963833441482,
+          "iqae_A_calls_mean": 69862.0,
+          "iqae_kmax": 513,
+          "iqae_rel_rmse": 0.006904891585457794,
+          "classical_paths_for_same_rel_rmse": 297598.3790735357
+        },
+        "loglinear_iid": {
+          "mu": 282354.69856614096,
+          "M": 2796436.270510678,
+          "a": 0.1009694737347181,
+          "rel_std_per_path": 1.6898258431739,
+          "iqae_A_calls_mean": 27416.0,
+          "iqae_kmax": 226,
+          "iqae_rel_rmse": 0.008779406301274995,
+          "classical_paths_for_same_rel_rmse": 37047.04722914899
+        },
+        "qcbm_iid": {
+          "mu": 282354.69856614096,
+          "M": 22047067.729544777,
+          "a": 0.012806904846931812,
+          "rel_std_per_path": 1.9390314450924413,
+          "iqae_A_calls_mean": 77360.0,
+          "iqae_kmax": 613,
+          "iqae_rel_rmse": 0.0020142481733746577,
+          "classical_paths_for_same_rel_rmse": 926709.7816856925
+        },
+        "learned_doob_state_dependent": {
+          "mu": 282354.69856614096,
+          "M": 9477115.11933661,
+          "a": 0.029793317376723555,
+          "rel_std_per_path": 0.6461113298191143,
+          "iqae_A_calls_mean": 45686.0,
+          "iqae_kmax": 400,
+          "iqae_rel_rmse": 0.0018829458453651015,
+          "classical_paths_for_same_rel_rmse": 117744.07277394657
+        }
+      }
+    }
+  },
+  "resources": {
+    "none (load p)": {
+      "per_A": {
+        "toffoli": 3808,
+        "rotations": 781,
+        "cnot_loading": 762,
+        "logical_qubits": 97
+      },
+      "a_calls": 1586448.0,
+      "logical_qubits": 97,
+      "toffoli_total": 6195079440.0,
+      "rotations_total": 1239015888.0,
+      "T_count_total": 174102789931.41327,
+      "rotation_synthesis_precision": 8.07092152477709e-13,
+      "surface_code": {
+        "code_distance": 33,
+        "physical_qubits": 235266,
+        "runtime_s": 15799828.186275752,
+        "assumptions": {
+          "p_phys": 0.001,
+          "factories": 4,
+          "cycle_time_s": 1e-06
+        }
+      },
+      "amplitude": 3.1633046309178836e-05
+    },
+    "pdf_is": {
+      "per_A": {
+        "toffoli": 3808,
+        "rotations": 781,
+        "cnot_loading": 762,
+        "logical_qubits": 97
+      },
+      "a_calls": 1031970.0,
+      "logical_qubits": 97,
+      "toffoli_total": 4029842850.0,
+      "rotations_total": 805968570.0,
+      "T_count_total": 111752215131.82458,
+      "rotation_synthesis_precision": 1.2407431719080559e-12,
+      "surface_code": {
+        "code_distance": 31,
+        "physical_qubits": 210434,
+        "runtime_s": 9526876.339988045,
+        "assumptions": {
+          "p_phys": 0.001,
+          "factories": 4,
+          "cycle_time_s": 1e-06
+        }
+      },
+      "amplitude": 0.00018919049996190575
+    },
+    "loglinear_iid": {
+      "per_A": {
+        "toffoli": 3808,
+        "rotations": 781,
+        "cnot_loading": 762,
+        "logical_qubits": 97
+      },
+      "a_calls": 1144858.0,
+      "logical_qubits": 97,
+      "toffoli_total": 4470670490.0,
+      "rotations_total": 894134098.0,
+      "T_count_total": 124378613813.04391,
+      "rotation_synthesis_precision": 1.118400475092943e-12,
+      "surface_code": {
+        "code_distance": 33,
+        "physical_qubits": 235266,
+        "runtime_s": 11287359.203533733,
+        "assumptions": {
+          "p_phys": 0.001,
+          "factories": 4,
+          "cycle_time_s": 1e-06
+        }
+      },
+      "amplitude": 0.000149506094647715
+    },
+    "qcbm_iid": {
+      "per_A": {
+        "toffoli": 3808,
+        "rotations": 136,
+        "cnot_loading": 96,
+        "logical_qubits": 97
+      },
+      "a_calls": 7357220.0,
+      "logical_qubits": 97,
+      "toffoli_total": 28729944100.0,
+      "rotations_total": 1000581920.0,
+      "T_count_total": 234581298618.20032,
+      "rotation_synthesis_precision": 9.99418418433945e-13,
+      "surface_code": {
+        "code_distance": 33,
+        "physical_qubits": 235266,
+        "runtime_s": 21288252.84960168,
+        "assumptions": {
+          "p_phys": 0.001,
+          "factories": 4,
+          "cycle_time_s": 1e-06
+        }
+      },
+      "amplitude": 2.8225554399965945e-06
+    },
+    "learned_doob_state_dependent": {
+      "per_A": {
+        "toffoli": 395488,
+        "rotations": 130831,
+        "cnot_loading": 131326,
+        "logical_qubits": 105
+      },
+      "a_calls": 29156.0,
+      "logical_qubits": 105,
+      "toffoli_total": 11533909508.0,
+      "rotations_total": 3814508636.0,
+      "T_count_total": 524413619233.5306,
+      "rotation_synthesis_precision": 2.621569631701314e-13,
+      "surface_code": {
+        "code_distance": 33,
+        "physical_qubits": 252690,
+        "runtime_s": 47590535.94544289,
+        "assumptions": {
+          "p_phys": 0.001,
+          "factories": 4,
+          "cycle_time_s": 1e-06
+        }
+      },
+      "amplitude": 0.05125314797955349
+    },
+    "nisq_qcbm_sampler_4096_paths": {
+      "shots": 12558,
+      "two_qubit_gates_per_shot": 32,
+      "circuit_depth_per_shot": 9,
+      "qubits": 8
+    }
+  }
+}
