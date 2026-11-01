@@ -460,21 +460,97 @@ RDPO.](../../figures/paper/e3_ablation.png){.wide}
 ![**Figure [fig:tn].** Bond dimension of the exact tilted matrix-product state versus portfolio size.
 Sparse dependence stays constant; dense dependence grows.](../../figures/paper/tn_bond.png){.wide}
 
-## 6.5 Limitations
+## 6.5 RDPO v2: first Deep Development results
+
+We implemented the first items of the work plan (WP1 engineering, WP3 RL improvements) and re-ran the
+studies against v1 at the same total budgets.
+
+**What changed (WP1, engineering).**
+
+* **Table-driven engine.** Each country state is coded as one of 10 values, so every logit is a table
+  lookup. The policy is *identical* to v1: actions, weights and gradients match to machine precision
+  (tested). Rollouts are {{V2_SPEEDUP}} faster on one core for 4–28 countries (Table [tab:v2tp]).
+* **Exact compressed training.** Paths share few distinct local states at each source step. The
+  cross-entropy and Rényi-2 objectives are therefore evaluated on unique states with aggregated weights;
+  the result is the same objective with 50–500× cheaper evaluations.
+
+{{V2_TP_TABLE}}
+
+**What changed (WP3, RL improvements).**
+
+* **Stage-dependent soft values.** The exact value function $V_k$ depends on how many sources remain, but
+  v1 shares one progress parameter vector across all steps. v2 gives each of 4 contiguous stages of source
+  steps its own progress parameters (+9 parameters) for portfolio-wide threshold targets.
+* **Flexible soft values for smooth targets.** For expected loss, the progress features are replaced by a
+  piecewise-linear (hat-function) basis, a fixed-knot ReLU network in the loss, which keeps the
+  cross-entropy fit concave.
+* **Exact reduction for pair targets.** A target that depends on two countries only needs the joint law
+  of their 100 states, which is the product of the kernels of the sources touching them (Proposition 2).
+  It is computed exactly in at most {{V2_EXACT_MS}} for any portfolio size, agreeing with the tensor-network
+  references to {{V2_EXACT_ERR}}. The product routes such targets to this exact path (the
+  `validate_exact` tool), and RDPO's job is the portfolio-wide targets.
+* **Interval and selection safeguards.** Student-t intervals with Welch–Satterthwaite degrees of freedom,
+  and selection of the initial (twist or transferred) policy when its estimated χ² beats every trained
+  iterate.
+
+**Results.**
+
+![**Figure [fig:v2].** RDPO v2 against v1 on the scaling cases. (a) Relative RMSE at the same total
+budget (24 replications, same seeds). (b) Wall-clock time per estimate on one core, v1 study versus
+v2.](../../figures/paper/v2_results.png){.wide}
+
+{{V2_SCALE_TABLE}}
+
+* **Accuracy at scale.** On the portfolio-wide targets, at the same budget and the same seeds, v2
+  {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings,
+  including the 28-country stop-loss that v1 lost.
+* **Speed.** One estimate takes {{V2_TIME}} less wall-clock time than in the v1 study.
+* **Error bars.** With 24 replications instead of 6–10, coverage of the v1 intervals is {{V2_COV}} in the
+  scaling cases. Most of the low-coverage cells reported in §6.2 were sampling noise from too few
+  replications.
+
+{{V2_BENCH_TABLE}}
+
+* **Benchmark.** v2 keeps the 20/25 wins over the best reference method. On the non-pair cells it is on
+  par with v1 at 4,096 paths, and its advantage grows with the budget (median error ratio in Table
+  [tab:v2bench]). Pair targets are unchanged by construction. On expected loss the spline soft values
+  close part of the gap to scrambled Sobol, but Sobol remains better.
+
+**Transfer: the sleep phase in practice.** In the planned wake–sleep cycle (§10.2), today's estimate starts
+from the policy trained overnight on yesterday's model. We emulate this by training on one model and
+reusing the parameters as the initial policy after a change of scenario or a 20% rate increase.
+
+{{V2_TRANSFER_TABLE}}
+
+* **Small budgets become usable.** Transfer improves accuracy by {{V2_TRANSFER_GAIN}}. At 2,048 paths,
+  cold-start RDPO spends most of its budget on reaching the tail, while the transferred policy is already
+  there. The estimator remains unbiased, because the initial policy is fixed before sampling.
+
+**Negative results (kept for the record).**
+
+* A *value-of-training* stopping rule, which stops training when one more batch is not expected to pay
+  for itself, slightly *increased* the error at two countries and was dropped.
+* Spline soft values *hurt* the threshold targets (in development probes, up to ×19 on the stop-loss), so they are used for
+  expected loss only.
+* t-intervals and model selection did not change any result in these studies: the effective degrees of
+  freedom were large, and the trained policy always beat the initial one. They are kept as safeguards.
+
+## 6.6 Limitations
 
 * **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
 * **Level functions.** The cross-entropy stage is indispensable for the rarest targets, so new targets
   need a sensible score function.
-* **Error bars under heavy tails.** Coverage falls below nominal in some rare-target settings; robust
-  variance estimators are part of WP3.
-* **Budget competition.** At small budgets and large portfolios, extra parameters compete with estimation
-  for paths; the one-parameter twist is better for the stop-loss at 28 countries. Model selection is in WP3.
+* **Error bars under heavy tails.** In the v2 benchmark, coverage is {{V2_BENCH_COV}} per cell (40 replications); the lowest cells are
+  rare targets with heavy-tailed weights. Heavy-tail diagnostics remain part of WP3.
+* **Dense dependence.** Complete graphs are limited to 7 countries by the exact references. Larger dense
+  portfolios need reference-free validation (WP2).
 * **Synthetic scaling.** Scaling results use a calibrated synthetic extension; realistic multi-peril
   portfolios follow in Phase 2.
 
 ::: {.takeaway}
-RDPO is the most accurate method on every rare target we tested, up to 28 countries. Scrambled Sobol
-wins on expected loss, and exact tensor networks suffice for sparse dependence.
+RDPO is the most accurate method on every rare target we tested, up to 28 countries. v2 is several times
+faster and up to {{V2_GAIN_MAX}} more accurate at 16–28 countries, and overnight transfer makes small budgets usable.
+Pair targets are solved exactly. Scrambled Sobol remains better on expected loss.
 :::
 
 # 7 Quantum Extension: an Evidence-First Design {.newpage}

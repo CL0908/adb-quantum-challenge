@@ -121,3 +121,32 @@ class PortfolioProblem:
         Ls = self.site_loss(a, r)
         i, j = self.pair
         return float(P @ self.payoff_from(Ls.sum(1), Ls[:, i], Ls[:, j]))
+
+    # --- exact reduction for targets that depend on a country pair only -----------------------
+    def exact_pair(self):
+        """Exact E[f] for pair targets (joint attachment / exhaustion) in *any* portfolio size.
+
+        f depends only on the terminal codes (s_i, s_j) ∈ {0..9}², and sources commute (Proposition 2), so
+        the joint law of (s_i, s_j) is the product of the kernels of the sources touching i or j, acting on
+        a 100-state space; all other sources integrate out. Cost O(K · 100 · 25)."""
+        assert self.target in ("joint_attachment", "joint_exhaustion")
+        i, j = self.pair
+        dist = np.zeros((10, 10)); dist[0, 0] = 1.0
+        a_of, r_of = np.arange(10) // 2, np.arange(10) % 2
+        for src in self.src:
+            if i not in src["sites"] and j not in src["sites"]:
+                continue
+            new = np.zeros((10, 10))
+            for v, pv in enumerate(src["p"]):
+                if pv == 0:
+                    continue
+                codes = []
+                for site in (i, j):
+                    da = sum(inc[v] for s, inc in src["da"] if s == site)
+                    dr = sum(inc[v] for s, inc in src["dr"] if s == site)
+                    codes.append(2 * np.minimum(a_of + da, 4) + np.minimum(r_of + dr, 1))
+                np.add.at(new, (codes[0][:, None].repeat(10, 1), codes[1][None, :].repeat(10, 0)), pv * dist)
+            dist = new
+        Li = self.site_loss(a_of, r_of)
+        f = self.payoff_from(np.zeros((10, 10)), Li[:, None].repeat(10, 1), Li[None, :].repeat(10, 0))
+        return float((dist * f).sum())

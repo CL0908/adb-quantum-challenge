@@ -74,6 +74,9 @@ All numbers come from `results/rdpo_e*.json` (fixed seeds), with **training incl
 | Ablation | indispensable: cross-entropy (×81), twist warm start (×37 at scale), target-relevance freezing (×2.6) |
 | Quantum stage (projected) | exact twisted loader + bitwise weight oracle; amplitude-estimation calls at 28 countries cut from 2.8×10⁹ to 3.4×10⁴ |
 | Falsifiable wall-clock criterion | quantum needs **8.2×10⁴ – 4.4×10⁶×** faster hardware to beat RDPO (s* shrinks with portfolio size) |
+| **RDPO v2** (roadmap WP1 + WP3) | 6.5–9.9× faster rollouts (identical policy), 2.4–4.3× less wall-clock per estimate; more accurate than v1 in 6/8 large-portfolio settings (up to ×1.7); beats exponential twisting in 8/8 |
+| Exact pair reduction | pair targets (joint attachment / exhaustion) exact in ≤ 3 ms for any portfolio size |
+| Overnight transfer (sleep phase) | warm-starting from yesterday's policy cuts small-budget error by ×1.8–×84 |
 | Error-mitigation trust boundary | mitigation worse than none in 21–38% of instances under miscalibration; pilot-disagreement guard caps p99 error at ≤ 0.17 |
 
 <p align="center">
@@ -113,6 +116,7 @@ Final experiments (≈ 7 CPU-hours in total; set `OMP_NUM_THREADS=1` when runnin
 PYTHONPATH=. python -m src.rdpo.experiments e1   # benchmark: 5 scenarios x 5 targets x 3 budgets
 PYTHONPATH=. python -m src.rdpo.experiments e2   # scaling to 28 countries vs exact tensor networks
 PYTHONPATH=. python -m src.rdpo.experiments e3   # ablation
+PYTHONPATH=. python -m src.rdpo.experiments_v2 throughput|scale|bench|transfer   # RDPO v2 (resumable)
 ```
 
 Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
@@ -141,7 +145,7 @@ src/learned/ src/scale/ src/hybrid/ src/causal/   earlier prototypes (documented
 src/viz/             figure style, concept art, data figures, paper build
 docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
 docs/RDPO_Proposal.pdf   the technical proposal
-results/  figures/   all numbers and plots; tests/  44 tests
+results/  figures/   all numbers and plots; tests/  49 tests
 ```
 
 ## Roadmap
@@ -150,7 +154,8 @@ results/  figures/   all numbers and plots; tests/  44 tests
 - [x] Final RDPO: source-level soft-RL policy, KL → χ² training, fixed-budget unbiased estimation
 - [x] Benchmark, scaling (to 28 countries) and ablation at fixed total budget
 - [x] Quantum-ready stage: exact structured / twisted loading, resource estimates, NISQ analysis
-- [ ] WP1 GPU-batched library · WP2 realistic multi-peril portfolios · WP3 neural soft values, robust error bars, model selection
+- [x] RDPO v2: table-driven engine, exact compressed training, stage-dependent and spline soft values, exact pair reduction, transfer warm start
+- [ ] WP1 GPU batching · WP2 realistic multi-peril portfolios · WP3 heavy-tail diagnostics, larger dense references
 - [x] Quantum evidence standard: wall-clock break-even map, noise/miscalibration study with trust guard
 - [ ] WP4 compiled quantum stage + AI-for-Quantum · WP5 web app with AI analyst agent and MCP tools · WP6 validation and delivery
 
@@ -174,5 +179,5 @@ plan; all numbers come from the scripts in this repository.
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-44%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-49%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

@@ -48,3 +48,63 @@ def test_rdpo_estimate_accuracy_and_interval():
     assert np.sqrt(np.mean((e - mu) ** 2)) / mu < 0.05          # MC at this budget: ~1.4
     assert all(r["paths_used"] == 16384 for r in res)           # training is inside the budget
     assert np.mean([r["ci"][0] <= mu <= r["ci"][1] for r in res]) >= 0.5
+
+
+# ---------------- RDPO v2 (roadmap WP1 / WP3) ----------------
+def test_fast_engine_identical_to_v1():
+    from src.rdpo.policy import RDPOPolicy
+    from src.rdpo.fast import FastPolicy
+    from src.tensor.synthetic import SyntheticModel, topology
+    cases = [(adb_model("adb-base"), t, 80e6) for t in TARGETS] + [(SyntheticModel(6, topology("complete", 6)), "exceedance", None),
+                                                                  (SyntheticModel(8, topology("ring", 8)), "joint_exhaustion", None)]
+    for model, t, thr in cases:
+        P = PortfolioProblem(model, t, threshold=thr)
+        a, b = RDPOPolicy(P), FastPolicy(P)
+        th = np.random.default_rng(1).normal(size=a.d) * 0.5
+        a.theta, b.theta = th.copy(), th.copy()
+        U = np.random.default_rng(2).random((2000, P.K))
+        ra, rb = a.rollout(2000, None, record=True, U=U), b.rollout(2000, None, record=True, U=U)
+        assert (ra["acts"] == rb["acts"]).all() and np.allclose(ra["w"], rb["w"], rtol=1e-12)
+        c = np.random.default_rng(3).random(2000)
+        assert np.allclose(a.replay(ra["acts"], c, "mix"), b.replay(rb["acts"], c, "mix"))
+        assert np.allclose(a.replay(ra["acts"], c, "ce")[1], b.replay(rb["acts"], c, "ce")[1])
+
+
+def test_spline_policy_is_valid_importance_sampler():
+    from src.rdpo.fast import FastPolicy
+    P = PortfolioProblem(adb_model("adb-base"), "expected_loss", threshold=80e6)
+    pol = FastPolicy(P, value="spline")
+    pol.theta = np.random.default_rng(0).normal(size=pol.d)
+    out = pol.rollout(200000, np.random.default_rng(1))
+    g = out["w"] * out["f"]
+    assert abs(g.mean() / P.exact_dense() - 1) < 4 * g.std() / np.sqrt(len(g)) / P.exact_dense() + 1e-3
+
+
+def test_v2_unbiased_and_t_interval():
+    from src.rdpo.train import v2_config
+    P = PortfolioProblem(adb_model("adb-base"), "joint_exhaustion", threshold=80e6)
+    mu = P.exact_dense()
+    xs = [rdpo_estimate(P, 4096, np.random.default_rng(100 + r), v2_config()) for r in range(30)]
+    est = np.array([x["estimate"] for x in xs])
+    assert abs(est.mean() / mu - 1) < 4 * est.std() / np.sqrt(len(est)) / mu
+    assert all(np.isfinite(x["dof"]) or x["dof"] == float("inf") for x in xs)
+    assert all(x["ci"][1] - x["ci"][0] >= 2 * 1.96 * x["se"] - 1e-15 for x in xs)
+
+
+def test_exact_pair_reduction_matches_dense_and_mps():
+    for sc in ADB_SCENARIOS:
+        for t in ("joint_attachment", "joint_exhaustion"):
+            P = PortfolioProblem(adb_model(sc), t, threshold=80e6)
+            assert abs(P.exact_pair() / P.exact_dense() - 1) < 1e-12
+    P = PortfolioProblem(SyntheticModel(6, topology("complete", 6)), "joint_exhaustion")
+    assert abs(P.exact_pair() / P.exact_dense() - 1) < 1e-12
+
+
+def test_stage_dependent_policy_is_unbiased_sampler():
+    from src.rdpo.fast import FastPolicy
+    P = PortfolioProblem(adb_model("adb-base"), "exceedance", threshold=80e6)
+    pol = FastPolicy(P, stages=4)
+    pol.theta = np.random.default_rng(0).normal(size=pol.d) * 0.5
+    out = pol.rollout(200000, np.random.default_rng(1))
+    g = out["w"] * out["f"]; mu = P.exact_dense()
+    assert abs(g.mean() - mu) < 4 * g.std() / np.sqrt(len(g))

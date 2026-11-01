@@ -49,6 +49,22 @@ class RDPOConfig:
     pg_max_steps: int = 12
     pg_patience: int = 3
     clip: float = 5.0
+    # ---- v2 options (roadmap WP1 / WP3) ----
+    engine: str = "v1"               # "fast": table-driven engine (identical policy, ~10x faster rollouts)
+    value: str = "linear"            # "spline": piecewise-linear progress basis (fixed-knot ReLU network)
+    ci: str = "z"                    # "t": Student-t with Welch–Satterthwaite effective degrees of freedom
+    value_of_training: bool = False  # stop training when one more batch is not expected to pay for itself
+    theta0: object = None            # transfer warm start (e.g. yesterday's / a neighbouring scenario's policy)
+    stages: int = 1                  # stage-dependent progress parameters (fast engine only)
+    select: bool = False             # model selection: keep the initial (twist / transferred) policy if its
+                                     # estimated χ² beats every trained iterate
+
+
+def v2_config(**kw):
+    """RDPO v2 defaults: fast engine, t-intervals, value-of-training stopping."""
+    base = dict(engine="fast", ci="t", select=True)
+    base.update(kw)
+    return RDPOConfig(**base)
 
 
 def _warm_start(pol: RDPOPolicy):
@@ -56,19 +72,26 @@ def _warm_start(pol: RDPOPolicy):
     if P.target in ("exceedance", "stop_loss"):
         from src.quantum.twisted import best_twist
         eta, _ = best_twist(P.model, P.T)
-        pol.theta[pol.off_h] = eta * P.T
+        for b in range(getattr(pol, "stages", 1)):
+            pol.theta[pol.off_h + b * pol.G] = eta * P.T
         return eta
     return None
 
 
 def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RDPOConfig()):
-    pol = RDPOPolicy(prob, cfg.alpha, cfg.edge_features, cfg.relevance)
+    if cfg.engine == "fast":
+        from .fast import FastPolicy
+        pol = FastPolicy(prob, cfg.alpha, cfg.edge_features, cfg.relevance, value=cfg.value, stages=cfg.stages)
+    else:
+        pol = RDPOPolicy(prob, cfg.alpha, cfg.edge_features, cfg.relevance)
     b = int(max(cfg.batch_min, budget * cfg.batch_frac))
     train_cap = int(cfg.train_frac * budget)
     used, batches, log = 0, [], {"ce": [], "pg": []}
     level = prob.level()
     eligible = False                     # is the *current* policy already level-reaching?
     eta = _warm_start(pol) if cfg.warm_start else None
+    if cfg.theta0 is not None and len(cfg.theta0) == pol.d:
+        pol.theta = np.array(cfg.theta0, dtype=float)
 
     def draw(n, record):
         nonlocal used
@@ -80,6 +103,7 @@ def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RD
 
     # ---- stage 1: cross-entropy policy search ---------------------------------------------
     after = 0
+    init_theta, init_chi2 = pol.theta.copy(), np.inf
     if cfg.ce:
         while used + b <= train_cap:
             out, _ = draw(b, True)
@@ -91,17 +115,27 @@ def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RD
                     gam = min(level, hi.min())
             if gam >= level:
                 W = w * out["f"]; after += 1
+                if len(log["ce"]) == 0:          # the initial policy already reaches the target: score it
+                    g0 = w * out["f"]
+                    init_chi2 = (g0 ** 2).mean() / g0.mean() ** 2 - 1 if g0.mean() > 0 else np.inf
             else:
                 W = w * (sc >= max(gam, 1e-12))
             log["ce"].append({"gamma": float(gam), "elite": int((W > 0).sum())})
             keep = W > 0
             if keep.any():
                 c = W[keep] / W[keep].sum(); acts = out["acts"][keep]
+                if hasattr(pol, "compile"):          # v2: compress to unique local states once per fit
+                    comp = pol.compile(acts); Cs = pol.aggregate(comp, c)
 
-                def obj(th):
-                    pol.theta = th
-                    v, gr = pol.replay(acts, c, "ce")
-                    return v + 0.5 * cfg.kappa * th @ th, gr + cfg.kappa * th
+                    def obj(th):
+                        pol.theta = th
+                        v, gr = pol.ce_from(comp, Cs)
+                        return v + 0.5 * cfg.kappa * th @ th, gr + cfg.kappa * th
+                else:
+                    def obj(th):
+                        pol.theta = th
+                        v, gr = pol.replay(acts, c, "ce")
+                        return v + 0.5 * cfg.kappa * th @ th, gr + cfg.kappa * th
 
                 th0 = pol.theta.copy()
                 r = minimize(obj, th0, jac=True, method="L-BFGS-B", options={"maxiter": 100})
@@ -117,13 +151,22 @@ def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RD
     if cfg.pg and eligible:
         m = np.zeros(pol.d); s2 = np.zeros(pol.d)
         best_chi2, best_th, since = np.inf, pol.theta.copy(), 0
+        hist = []
         for k in range(1, cfg.pg_max_steps + 1):
             if used + b > train_cap:
                 break
+            if cfg.value_of_training and len(hist) >= 3:
+                # predicted per-step improvement factor of χ² (geometric mean of the last two steps); one more
+                # batch pays off only if  χ·r/(R − b) < χ/R  with R the remaining budget
+                r_hat = float(np.clip(np.sqrt(hist[-1] / hist[-3]), 0.0, 1.0))
+                R_left = budget - used
+                if r_hat > (R_left - b) / R_left:
+                    break
             out, g = draw(b, True)
             mu, M2 = g.mean(), (g ** 2).mean()
             chi2 = M2 / mu ** 2 - 1 if mu > 0 else np.inf
             log["pg"].append({"chi2_hat": float(chi2)})
+            hist.append(max(min(chi2, best_chi2), 1e-12) if np.isfinite(chi2) else (best_chi2 if np.isfinite(best_chi2) else 1e12))
             if chi2 < best_chi2 * 0.97:
                 best_chi2, best_th, since = chi2, pol.theta.copy(), 0
             else:
@@ -132,13 +175,19 @@ def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RD
                     break
             if M2 == 0:
                 continue
-            grad = -pol.replay(out["acts"], (g ** 2 / M2 - 1) / b, "mix")     # ∇ log M₂ (baseline 1)
+            coef = (g ** 2 / M2 - 1) / b
+            if hasattr(pol, "compile"):
+                comp = pol.compile(out["acts"]); grad = -pol.mix_from(comp, pol.aggregate(comp, coef))
+            else:
+                grad = -pol.replay(out["acts"], coef, "mix")     # ∇ log M₂ (baseline 1)
             nrm = np.linalg.norm(grad)
             if nrm > cfg.clip:
                 grad *= cfg.clip / nrm
             m = 0.9 * m + 0.1 * grad; s2 = 0.999 * s2 + 0.001 * grad ** 2
             pol.theta = pol.theta - cfg.pg_lr * (m / (1 - 0.9 ** k)) / (np.sqrt(s2 / (1 - 0.999 ** k)) + 1e-8)
         pol.theta = best_th
+        if cfg.select and init_chi2 < best_chi2:
+            pol.theta = init_theta; log["selected"] = "initial"
 
     # ---- stage 3: estimation ------------------------------------------------------------------
     final_policy_is_eligible = eligible
@@ -175,7 +224,16 @@ def rdpo_estimate(prob: PortfolioProblem, budget: int, rng, cfg: RDPOConfig = RD
     est = sum(total(bt) for bt in use) / n_tot
     var = sum(var_of_sum(bt) for bt in use) / n_tot ** 2
     se = float(np.sqrt(var))
-    return {"estimate": float(est), "se": se, "ci": (float(est - 1.96 * se), float(est + 1.96 * se)),
+    zq, dof = 1.96, float("inf")
+    if cfg.ci == "t" and var > 0:
+        from scipy.stats import t as _t
+        def dof_of(bt):
+            return (len(bt["rqmc_means"]) - 1) if bt.get("g") is None else max(len(bt["g"]) - 1, 1)
+        contrib = [var_of_sum(bt) / n_tot ** 2 for bt in use]
+        den = sum(c ** 2 / dof_of(bt) for c, bt in zip(contrib, use))
+        dof = var ** 2 / den if den > 0 else float("inf")
+        zq = float(_t.ppf(0.975, dof))
+    return {"estimate": float(est), "se": se, "ci": (float(est - zq * se), float(est + zq * se)), "dof": dof,
             "paths_used": int(used), "paths_in_estimate": int(n_tot), "n_params": pol.n_params,
             "ce_iters": len(log["ce"]), "pg_steps": len(log["pg"]), "eta_warm": eta,
             "reached_level": bool(final_policy_is_eligible), "log": log, "theta": pol.theta.tolist()}

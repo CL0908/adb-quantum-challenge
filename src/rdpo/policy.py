@@ -31,10 +31,10 @@ def chi(ai, ri, aj, rj):
 
 
 class RDPOPolicy:
-    def __init__(self, prob: PortfolioProblem, alpha=0.05, edge_features=True, relevance=True):
+    def __init__(self, prob: PortfolioProblem, alpha=0.05, edge_features=True, relevance=True, n_h=None):
         self.P, self.alpha, self.edge_features = prob, alpha, edge_features
         n, E = prob.n, len(prob.edges)
-        self.G = prob.NH[prob.target]
+        self.G = n_h if n_h is not None else prob.NH[prob.target]
         self.off_edge = n * NPSI
         self.off_h = self.off_edge + (E * NCHI if edge_features else 0)
         self.d = self.off_h + self.G
