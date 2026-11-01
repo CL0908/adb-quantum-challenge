@@ -669,7 +669,30 @@ advisory agent and the delivery layer are planned.](../art/data_flow.svg){.wide}
   logged, every estimate carries its uncertainty, and a validation pack supports model review by
   regulators and rating agencies.
 
-## 10.2 Market opportunity
+## 10.2 Operating cycle: wake by day, sleep by night
+
+![**Exhibit 2.** Wake–sleep operating cycle, adapted from the sleep framework for continual learning
+[@behrouz2026sleep]. By day the system serves frozen, validated policies and writes a short-term memory.
+Overnight it consolidates that memory into the risk model, retrains policies on self-generated stress
+scenarios, and promotes them only after passing exact regression checks.](../art/wake_sleep.svg){.wide}
+
+* **Why a sleep phase.** Hazard information arrives continuously, but a risk number used for pricing must be
+  reproducible. Separating *serving* (day) from *learning* (night) gives both.
+* **Wake phase.** Agents ingest news and feeds and answer questions with the current policy library. Events,
+  queries and sampled paths are logged as short-term memory. Nothing in the risk model changes during the day.
+* **Consolidation.** Credible events update source rates through credibility-weighted (Bayesian) updates that
+  an analyst approves. Newly observed shared events add dependence edges, and buffered paths warm-start the
+  next policies.
+* **Dreaming.** The system generates stress scenarios where the day's estimated χ² was highest (an RL
+  curriculum) and retrains RDPO (KL → χ²) from yesterday's parameters. Capacity grows (more features) only
+  when χ² stalls.
+* **Gate against forgetting.** Before promotion, every new policy must reproduce the 25 exact ADB reference
+  values and the tensor-network references within its intervals, and it must pass coverage checks.
+  Otherwise the system rolls back.
+* **Safety property.** RDPO is unbiased for *any* learned policy (Proposition 5), so a bad night can only
+  widen intervals, never bias an estimate, and the gate catches it.
+
+## 10.3 Market opportunity
 
 ::: {.tiles .market}
 ::: {.tile}
@@ -686,7 +709,7 @@ uninsured natural-catastrophe losses in 2024, the protection gap (Swiss Re Insti
 :::
 :::
 
-![**Exhibit 2.** Total, serviceable and obtainable market. The TAM is a third-party estimate of the
+![**Exhibit 3.** Total, serviceable and obtainable market. The TAM is a third-party estimate of the
 catastrophe-modelling and exposure-management software market. The SAM and SOM are bottom-up:
 institutions per segment × annual contract value, with all assumptions in
 `src/business/market.py`.](../art/market_sizing.svg){.wide}
@@ -699,7 +722,7 @@ institutions per segment × annual contract value, with all assumptions in
 * **Upside not counted.** Correlated credit and supply-chain risk, compound climate extremes, and
   advisory fees on bond structuring.
 
-## 10.3 Customers and business model
+## 10.4 Customers and business model
 
 | Segment | Buyer | Pain point today | What we offer | Model |
 |---|---|---|---|---|
@@ -723,9 +746,9 @@ institutions per segment × annual contract value, with all assumptions in
 | Enterprise | reinsurers, development banks, pools | on-premise or private cloud, MCP server, validation pack, SLA, custom perils | ≈ US$150–300k / year |
 | Advisory | bond issuers, sponsors | structuring and trigger-design studies with independent validation | per project |
 
-## 10.4 Fit with the analyst's daily workflow
+## 10.5 Fit with the analyst's daily workflow
 
-![**Exhibit 3.** A day with the product. Agents prepare (news scan, hazard refresh, re-estimation);
+![**Exhibit 4.** A day with the product. Agents prepare (news scan, hazard refresh, re-estimation);
 the analyst decides (morning brief, questions, recommendation, sign-off).](../art/workflow_day.svg){.wide}
 
 * **No new habit required.** The product produces a morning brief, answers questions in plain language,
@@ -735,9 +758,9 @@ the analyst decides (morning brief, questions, recommendation, sign-off).](../ar
 * **Decision rights stay with people.** The agent never executes a trade, a trigger or a price. Every
   recommendation is approved and logged with its data and model versions.
 
-## 10.5 Go-to-market
+## 10.6 Go-to-market
 
-![**Exhibit 4.** Go-to-market in three phases, from public pilots to private-capital
+![**Exhibit 5.** Go-to-market in three phases, from public pilots to private-capital
 scale.](../art/gtm.svg){.wide}
 
 | Competitor type | Examples | Their strength | Our position |
@@ -750,7 +773,7 @@ scale.](../art/gtm.svg){.wide}
   coverage tests); the source-level data model; and the agent protocol, which is hard to replicate
   without the engine underneath.
 
-## 10.6 Commercial risks and impact
+## 10.7 Commercial risks and impact
 
 | Risk | Mitigation |
 |---|---|

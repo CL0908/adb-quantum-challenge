@@ -182,7 +182,7 @@ def data_flow():
 def market_sizing():
     m = json.loads(Path("results/market_model.json").read_text())
     W, H = 1340, 640
-    b = [header(W, "EXHIBIT 2", "Market sizing: a focused, bottom-up serviceable market inside a US$2bn software category",
+    b = [header(W, "EXHIBIT 3", "Market sizing: a focused, bottom-up serviceable market inside a US$2bn software category",
                 "TAM is a third-party top-down estimate; SAM and SOM are bottom-up (institutions × annual contract value).")]
     cx, cy = 300, 370
     circles = [(230, ICE, STEEL2, "TAM", f"US${m['tam_bn']:.1f}bn", "cat-modelling & exposure software, 2025"),
@@ -241,7 +241,7 @@ def market_sizing():
 # ------------------------------------------------------------------------------------------------
 def workflow_day():
     W, H = 1340, 560
-    b = [header(W, "EXHIBIT 3", "A day with the product: agents prepare, the analyst decides",
+    b = [header(W, "EXHIBIT 4", "A day with the product: agents prepare, the analyst decides",
                 "How the tool fits the daily routine of a disaster-risk-financing or reinsurance analyst.")]
     x0, x1 = 170, W - 40
     times = ["07:00", "08:30", "09:30", "11:00", "14:00", "17:00"]
@@ -286,7 +286,7 @@ def workflow_day():
 # ------------------------------------------------------------------------------------------------
 def gtm():
     W, H = 1340, 400
-    b = [header(W, "EXHIBIT 4", "Go-to-market: prove it with public institutions, scale it with private risk capital")]
+    b = [header(W, "EXHIBIT 5", "Go-to-market: prove it with public institutions, scale it with private risk capital")]
     phases = [("PHASE A · 2027", "Prove", "Pilot with ADB / DRF teams", ["ADB bond portfolio analytics", "open-source library + paper", "validation pack"],
                "Revenue: grants, technical-assistance contracts"),
               ("PHASE B · 2028", "Productise", "SaaS + agent for analysts", ["web app, MCP tools, API", "first reinsurer & ILS clients", "Oasis LMF plug-in"],
@@ -307,9 +307,67 @@ def gtm():
     return svg(W, H, "".join(b), bg=PAPER)
 
 
+# ------------------------------------------------------------------------------------------------
+def wake_sleep():
+    W, H = 1340, 760
+    b = [header(W, "EXHIBIT 2", "Wake–sleep operating cycle: serve by day, consolidate and self-improve by night",
+                "Adapted from the wake–sleep framework for continual learning (Behrouz et al., 2026); what is consolidated here is the risk model, not the language model.")]
+    # wake panel
+    wx, wy, ww, wh = 30, 170, 520, 450
+    b.append(f'<rect x="{wx}" y="{wy}" width="{ww}" height="{wh}" rx="4" fill="{ICE}" stroke="{STEEL}" stroke-width="1.3"/>')
+    b.append(text(wx + 18, wy + 30, "WAKE PHASE", 13, GOLD, 700)); b.append(text(wx + 18, wy + 54, "Serving the day: frozen, validated policies", 16, NAVY, 700))
+    ins = [("Daily news & reports", "news-scout agent"), ("Hazard & forecast feeds", "data agent"), ("Analyst questions", "advisory agent")]
+    for k, (t, sub) in enumerate(ins):
+        b.append(item(wx + 18, wy + 80 + 62 * k, 200, 50, t, sub))
+        b.append(path_arrow([(wx + 218, wy + 105 + 62 * k), (wx + 268, wy + 105 + 62 * k)], NAVY2, 1.6))
+    b.append(item(wx + 268, wy + 80, 232, 174, "", None, dark=True))
+    b.append(text(wx + 282, wy + 106, "RDPO serving", 15, "#FFFFFF", 700))
+    for k, t in enumerate(["today's policy library θ_t", "estimates ± CI on demand", "same-day event impact", "exact checks where possible",
+                           "unbiased for any θ"]):
+        b.append(text(wx + 284, wy + 130 + 21 * k, "· " + t, 12, STEEL2))
+    b.append(text(wx + 18, wy + 300, "SHORT-TERM MEMORY (written all day)", 11, GOLD, 700))
+    mem = [("Event log", "new events, credibility"), ("Query log", "targets & scenarios asked"), ("Path buffer", "sampled paths + weights")]
+    for k, (t, sub) in enumerate(mem):
+        b.append(item(wx + 18 + 166 * k, wy + 312, 152, 56, t, sub))
+    b.append(path_arrow([(wx + 384, wy + 254), (wx + 384, wy + 312)], NAVY2, 1.6))
+    b.append(text(wx + 18, wy + 410, "Nothing in the risk model changes during the day: every number", 12, INK))
+    b.append(text(wx + 18, wy + 428, "served is reproducible from a versioned policy and source model.", 12, INK))
+    # sleep panel
+    sx, sy, sw, sh = 600, 170, 710, 450
+    b.append(f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="4" fill="{NAVY}"/>')
+    b.append(text(sx + 18, sy + 30, "SLEEP PHASE", 13, GOLD, 700)); b.append(text(sx + 18, sy + 54, "Overnight: consolidate, dream, then gate", 16, "#FFFFFF", 700))
+    stages = [("1  Consolidation", ["event log → credibility-weighted", "rate updates (analyst-approved)", "new shared events → graph edges",
+                                    "path buffer → warm start θ"]),
+              ("2  Dreaming", ["synthetic stress scenarios where", "today's χ² was highest (RL curriculum)", "retrain KL → χ² from θ_t",
+                               "grow features only if χ² stalls"]),
+              ("3  Gate (no forgetting)", ["regression: 25 exact ADB values,", "tensor-network references,", "coverage on fresh replications",
+                                           "promote θ_t+1 or roll back"])]
+    cwid = (sw - 36 - 2 * 16) / 3
+    for k, (t, lines) in enumerate(stages):
+        x = sx + 18 + k * (cwid + 16)
+        b.append(f'<rect x="{x}" y="{sy + 80}" width="{cwid}" height="180" rx="3" fill="{NAVY2}" stroke="{STEEL}" stroke-width="1"/>')
+        b.append(text(x + 12, sy + 106, t, 14, "#FFFFFF", 700))
+        for j, l in enumerate(lines):
+            b.append(text(x + 12, sy + 134 + 22 * j, l, 11.2, STEEL2))
+        if k < 2:
+            b.append(path_arrow([(x + cwid, sy + 170), (x + cwid + 16, sy + 170)], GOLD, 1.8))
+    b.append(f'<rect x="{sx + 18}" y="{sy + 280}" width="{sw - 36}" height="56" rx="3" fill="{GOLD2}"/>')
+    b.append(text(sx + 34, sy + 304, "Long-term memory (versioned)", 13, NAVY, 700))
+    b.append(text(sx + 34, sy + 324, "source laws p_k · dependence graph · policy library θ per target and scenario · validation record", 12, NAVY2))
+    b.append(text(sx + 18, sy + 380, "Why this is safe: the estimator stays unbiased whatever θ is learned, so a weaker", 12, STEEL2))
+    b.append(text(sx + 18, sy + 400, "overnight policy can only widen intervals; the gate rejects it before morning.", 12, STEEL2))
+    # cycle arrows
+    b.append(path_arrow([(wx + ww - 60, wy - 6), (wx + ww - 60, wy - 22), (sx + 60, wy - 22), (sx + 60, wy - 6)], GOLD, 2))
+    b.append(text((wx + ww + sx) / 2, wy - 28, "night: short-term memory handed over", 12, GOLD, 600, "middle"))
+    b.append(path_arrow([(sx + 60, sy + sh + 6), (sx + 60, sy + sh + 24), (wx + ww - 60, sy + sh + 24), (wx + ww - 60, sy + sh + 6)], GOLD, 2))
+    b.append(text((wx + ww + sx) / 2, sy + sh + 42, "morning: promoted policies θ_t+1 + updated model + morning brief", 12, GOLD, 600, "middle"))
+    b.append(footer(W, H, "Planned for WP3 (overnight retraining, capacity growth) and WP5 (agents). Phase 1 already provides the gate's exact references and the warm-start mechanism."))
+    return svg(W, H, "".join(b), bg=PAPER)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    files = {"data_flow": data_flow(), "market_sizing": market_sizing(), "workflow_day": workflow_day(), "gtm": gtm()}
+    files = {"data_flow": data_flow(), "wake_sleep": wake_sleep(), "market_sizing": market_sizing(), "workflow_day": workflow_day(), "gtm": gtm()}
     for k, v in files.items():
         (OUT / f"{k}.svg").write_text(v)
     print("wrote", ", ".join(files))
