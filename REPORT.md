@@ -2,6 +2,12 @@
 
 *ADB Quantum Challenge — Technical Report (Phase 1 prototype)*
 
+
+> **Research log.** This file records the full development history (Phases 0–7), including methods that
+> were later superseded and negative results. The formal proposal is **`docs/RDPO_Proposal.pdf`** (built from
+> `docs/paper/proposal.md` by `src/viz/build_paper.py`). The final estimator is implemented in **`src/rdpo/`**;
+> numbers in this log refer to the earlier implementations they describe.
+
 ## Abstract
 
 Joint-tail targets of multi-country catastrophe bond portfolios, such as "both bonds exhausted"

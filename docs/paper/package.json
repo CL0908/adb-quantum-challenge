@@ -1,0 +1,6 @@
+{
+  "name": "rdpo-paper-build",
+  "private": true,
+  "description": "Typesetting dependency for the report (MathJax TeX->SVG)",
+  "dependencies": { "mathjax-full": "3.2.2" }
+}

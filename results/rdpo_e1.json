@@ -1,0 +1,1730 @@
+{
+  "reps": 40,
+  "rows": [
+    {
+      "scenario": "adb-base",
+      "target": "expected_loss",
+      "budget": 4096,
+      "mu": 10063513.34895411,
+      "rdpo": {
+        "rel_rmse": 0.007387865673961015,
+        "rel_bias": 0.0018423520402274787,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.03498434196539597,
+        "sobol": 0.007022826359048934,
+        "stratified": 0.01094181848884073,
+        "importance": 0.016290839106965743
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.9505893405454454,
+      "n_params": 14,
+      "mean_rel_se": 0.010005323718083235,
+      "seconds_per_fit": 0.38044856719999987
+    },
+    {
+      "scenario": "adb-base",
+      "target": "expected_loss",
+      "budget": 16384,
+      "mu": 10063513.34895411,
+      "rdpo": {
+        "rel_rmse": 0.003767575516292805,
+        "rel_bias": 0.0005979067815333425,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.01647336187666486,
+        "sobol": 0.0020890029232253004,
+        "stratified": 0.006129665298760011,
+        "importance": 0.007359734860865914
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.5544687596018844,
+      "n_params": 14,
+      "mean_rel_se": 0.003896205711659871,
+      "seconds_per_fit": 0.5340199348249997
+    },
+    {
+      "scenario": "adb-base",
+      "target": "expected_loss",
+      "budget": 65536,
+      "mu": 10063513.34895411,
+      "rdpo": {
+        "rel_rmse": 0.0016128427280452352,
+        "rel_bias": 2.955156150813347e-07,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.007724189053643833,
+        "sobol": 0.0006157951234091084,
+        "stratified": 0.003238424217106375,
+        "importance": 0.004289427579295401
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.3818072975754132,
+      "n_params": 14,
+      "mean_rel_se": 0.001818810433991045,
+      "seconds_per_fit": 2.042383226299998
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_attachment",
+      "budget": 4096,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.021503013389428206,
+        "rel_bias": 0.003978348711385944,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.07719667222593572,
+        "sobol": 0.044009291378869685,
+        "stratified": 0.03640313213067013,
+        "importance": 0.050966015142268666
+      },
+      "best_baseline": "stratified",
+      "improvement_vs_best": 1.6929316589909884,
+      "n_params": 15,
+      "mean_rel_se": 0.019714096617745196,
+      "seconds_per_fit": 0.6113174603499999
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_attachment",
+      "budget": 16384,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.004579230748372102,
+        "rel_bias": -0.0014054022447478642,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.03537844871978374,
+        "sobol": 0.018479334283077263,
+        "stratified": 0.017909412860930108,
+        "importance": 0.024083817967526105
+      },
+      "best_baseline": "stratified",
+      "improvement_vs_best": 3.9110090417035286,
+      "n_params": 15,
+      "mean_rel_se": 0.004639935172823427,
+      "seconds_per_fit": 0.6912434065750006
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_attachment",
+      "budget": 65536,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.002110438056057278,
+        "rel_bias": -0.0006379816049619882,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 0.01676106665470789,
+        "sobol": 0.005825919777058084,
+        "stratified": 0.009168828983501676,
+        "importance": 0.01292279514893837
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 2.7605263089038834,
+      "n_params": 15,
+      "mean_rel_se": 0.0017748168670410037,
+      "seconds_per_fit": 1.6335341177499998
+    },
+    {
+      "scenario": "adb-base",
+      "target": "exceedance",
+      "budget": 4096,
+      "mu": 0.012046720907534038,
+      "rdpo": {
+        "rel_rmse": 0.008695975471061258,
+        "rel_bias": 0.0013907611337226455,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.15716530480311747,
+        "sobol": 0.10988294806793103,
+        "stratified": 0.07389211116817915,
+        "importance": 0.05228092143761514
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.012082441078317,
+      "n_params": 16,
+      "mean_rel_se": 0.008821652184531223,
+      "seconds_per_fit": 1.3865007255249993
+    },
+    {
+      "scenario": "adb-base",
+      "target": "exceedance",
+      "budget": 16384,
+      "mu": 0.012046720907534038,
+      "rdpo": {
+        "rel_rmse": 0.003288842186444928,
+        "rel_bias": -0.00045065825054419265,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.0712714226442161,
+        "sobol": 0.039609466581968386,
+        "stratified": 0.03862686893245637,
+        "importance": 0.0261658051808224
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 7.955932117590085,
+      "n_params": 16,
+      "mean_rel_se": 0.0034299826167889756,
+      "seconds_per_fit": 1.5460330130750009
+    },
+    {
+      "scenario": "adb-base",
+      "target": "exceedance",
+      "budget": 65536,
+      "mu": 0.012046720907534038,
+      "rdpo": {
+        "rel_rmse": 0.0016231902578370497,
+        "rel_bias": 0.00036250542460762423,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.03447083401869176,
+        "sobol": 0.01483772494024121,
+        "stratified": 0.018546212684011174,
+        "importance": 0.01306550719810862
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 8.049276500413947,
+      "n_params": 16,
+      "mean_rel_se": 0.001598426594217843,
+      "seconds_per_fit": 2.316562696800003
+    },
+    {
+      "scenario": "adb-base",
+      "target": "stop_loss",
+      "budget": 4096,
+      "mu": 282354.698566141,
+      "rdpo": {
+        "rel_rmse": 0.012043034117317438,
+        "rel_bias": 0.003760786275526353,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.20275069069726046,
+        "sobol": 0.1619769112880536,
+        "stratified": 0.10138138258865564,
+        "importance": 0.05638531907982819
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 4.681986161506275,
+      "n_params": 16,
+      "mean_rel_se": 0.010336158011005176,
+      "seconds_per_fit": 0.16918716892500357
+    },
+    {
+      "scenario": "adb-base",
+      "target": "stop_loss",
+      "budget": 16384,
+      "mu": 282354.698566141,
+      "rdpo": {
+        "rel_rmse": 0.0030609529938057873,
+        "rel_bias": 0.00027031534302453584,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.09732346098398208,
+        "sobol": 0.04903820105030459,
+        "stratified": 0.04965950975876707,
+        "importance": 0.02987549733072842
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 9.760194746925269,
+      "n_params": 16,
+      "mean_rel_se": 0.0036158811002054846,
+      "seconds_per_fit": 0.32631987897499926
+    },
+    {
+      "scenario": "adb-base",
+      "target": "stop_loss",
+      "budget": 65536,
+      "mu": 282354.698566141,
+      "rdpo": {
+        "rel_rmse": 0.0014923503997812104,
+        "rel_bias": -0.00017522559236229188,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.04352486006766935,
+        "sobol": 0.01479796816893498,
+        "stratified": 0.02474008787850729,
+        "importance": 0.01512570187532145
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 9.915880460181786,
+      "n_params": 16,
+      "mean_rel_se": 0.001582204214730353,
+      "seconds_per_fit": 0.9393523095249975
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_exhaustion",
+      "budget": 4096,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.17284524123627648,
+        "rel_bias": 0.017464111934214672,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 2.7762543458594853,
+        "sobol": 3.0052442165404307,
+        "stratified": 1.3785340880416184,
+        "importance": 0.6104774164682477
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 3.531930715024636,
+      "n_params": 16,
+      "mean_rel_se": 0.0918701128888476,
+      "seconds_per_fit": 0.29566450997500054
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_exhaustion",
+      "budget": 16384,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.013881784648291269,
+        "rel_bias": -0.0011796890116811051,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 1.4163866615194138,
+        "sobol": 1.4438458804509176,
+        "stratified": 0.7924405347539482,
+        "importance": 0.26814898898860007
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 19.316607754868677,
+      "n_params": 16,
+      "mean_rel_se": 0.014711172235762595,
+      "seconds_per_fit": 0.40379269682500196
+    },
+    {
+      "scenario": "adb-base",
+      "target": "joint_exhaustion",
+      "budget": 65536,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.0018366584764320393,
+        "rel_bias": -9.893086404118061e-05,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.7399570298222672,
+        "sobol": 0.7120880735002751,
+        "stratified": 0.37314922628858527,
+        "importance": 0.13169680732703012
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 71.7045705649475,
+      "n_params": 16,
+      "mean_rel_se": 0.002468139034616784,
+      "seconds_per_fit": 1.1473613268500003
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "expected_loss",
+      "budget": 4096,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.007250584959407017,
+        "rel_bias": -4.745586349505109e-05,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.03224323128725832,
+        "sobol": 0.005825957600069575,
+        "stratified": 0.01179764905151993,
+        "importance": 0.016476215975347826
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.8035155277383366,
+      "n_params": 14,
+      "mean_rel_se": 0.00864964638665511,
+      "seconds_per_fit": 0.1191749272499976
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "expected_loss",
+      "budget": 16384,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.003755572320364449,
+        "rel_bias": -0.00020187147841727195,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.015284523235219054,
+        "sobol": 0.0019494705835577818,
+        "stratified": 0.006056446142142407,
+        "importance": 0.008218902775169104
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.5190874831478683,
+      "n_params": 14,
+      "mean_rel_se": 0.0034074596508552836,
+      "seconds_per_fit": 0.22350917347499716
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "expected_loss",
+      "budget": 65536,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.0015886778352295077,
+        "rel_bias": -0.00038128962042515053,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.008235729753960835,
+        "sobol": 0.0005170349461185472,
+        "stratified": 0.00319478597834402,
+        "importance": 0.004060365197846459
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.325449839264519,
+      "n_params": 14,
+      "mean_rel_se": 0.0015725257272521834,
+      "seconds_per_fit": 0.7479766847250005
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_attachment",
+      "budget": 4096,
+      "mu": 0.027156372630856768,
+      "rdpo": {
+        "rel_rmse": 0.024876423924414325,
+        "rel_bias": 0.0015157663035877524,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 0.09453077218753554,
+        "sobol": 0.0694634423554276,
+        "stratified": 0.04890408387469823,
+        "importance": 0.051966291635141305
+      },
+      "best_baseline": "stratified",
+      "improvement_vs_best": 1.9658807883034417,
+      "n_params": 15,
+      "mean_rel_se": 0.022511081849518354,
+      "seconds_per_fit": 0.10689017812499628
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_attachment",
+      "budget": 16384,
+      "mu": 0.027156372630856768,
+      "rdpo": {
+        "rel_rmse": 0.0046268463133882646,
+        "rel_bias": -7.44103194839377e-05,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.04287546863787176,
+        "sobol": 0.028972363333314752,
+        "stratified": 0.028100710759224178,
+        "importance": 0.024338126594659802
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.260197755917434,
+      "n_params": 15,
+      "mean_rel_se": 0.004817240989460054,
+      "seconds_per_fit": 0.21175330609999604
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_attachment",
+      "budget": 65536,
+      "mu": 0.027156372630856768,
+      "rdpo": {
+        "rel_rmse": 0.001855505299240332,
+        "rel_bias": -0.000348142581547026,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.02411022974000996,
+        "sobol": 0.009900667044828431,
+        "stratified": 0.011947256871141312,
+        "importance": 0.01170195537812215
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 5.33583334355439,
+      "n_params": 15,
+      "mean_rel_se": 0.0016817788009944525,
+      "seconds_per_fit": 0.7832400593499983
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "exceedance",
+      "budget": 4096,
+      "mu": 0.007185934925690393,
+      "rdpo": {
+        "rel_rmse": 0.008312516667011358,
+        "rel_bias": 0.0006689400012101943,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.18817541048557962,
+        "sobol": 0.1586639627280112,
+        "stratified": 0.1051082259865637,
+        "importance": 0.05425793113658048
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.527256823665186,
+      "n_params": 16,
+      "mean_rel_se": 0.007913024416865042,
+      "seconds_per_fit": 0.15798033574999976
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "exceedance",
+      "budget": 16384,
+      "mu": 0.007185934925690393,
+      "rdpo": {
+        "rel_rmse": 0.002738454801124377,
+        "rel_bias": 0.00046675484253835527,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.08835891638653828,
+        "sobol": 0.06738767436391427,
+        "stratified": 0.051163195083581144,
+        "importance": 0.0297059980013268
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 10.847722587617612,
+      "n_params": 16,
+      "mean_rel_se": 0.0031983078733316215,
+      "seconds_per_fit": 0.27059733662500207
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "exceedance",
+      "budget": 65536,
+      "mu": 0.007185934925690393,
+      "rdpo": {
+        "rel_rmse": 0.0013492974339677185,
+        "rel_bias": 9.858331434847303e-05,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.04532203964396288,
+        "sobol": 0.021310764478104177,
+        "stratified": 0.023445004222717638,
+        "importance": 0.013437153002195551
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 9.958629331030826,
+      "n_params": 16,
+      "mean_rel_se": 0.0014467264033397268,
+      "seconds_per_fit": 1.0035530377750035
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "stop_loss",
+      "budget": 4096,
+      "mu": 171266.4454338066,
+      "rdpo": {
+        "rel_rmse": 0.00815420245086749,
+        "rel_bias": 0.0009094304488392911,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.24666923960173387,
+        "sobol": 0.2106298842624706,
+        "stratified": 0.13451790995524057,
+        "importance": 0.059281290990911666
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 7.270029331268932,
+      "n_params": 16,
+      "mean_rel_se": 0.007620579007686025,
+      "seconds_per_fit": 0.15496323277499754
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "stop_loss",
+      "budget": 16384,
+      "mu": 171266.4454338066,
+      "rdpo": {
+        "rel_rmse": 0.0031362646640297,
+        "rel_bias": 0.0002775667207187967,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.11988834077662436,
+        "sobol": 0.07963747420849158,
+        "stratified": 0.065770939580207,
+        "importance": 0.03272967954282567
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 10.435879317905592,
+      "n_params": 16,
+      "mean_rel_se": 0.002797020195759371,
+      "seconds_per_fit": 0.2822049571249977
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "stop_loss",
+      "budget": 65536,
+      "mu": 171266.4454338066,
+      "rdpo": {
+        "rel_rmse": 0.0013223308985851783,
+        "rel_bias": -0.0002585674619770059,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.0610441730047747,
+        "sobol": 0.02097712098337126,
+        "stratified": 0.03043483898580494,
+        "importance": 0.015106329851976293
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 11.424016385111502,
+      "n_params": 16,
+      "mean_rel_se": 0.0012367303069324245,
+      "seconds_per_fit": 0.8457566845500025
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_exhaustion",
+      "budget": 4096,
+      "mu": 3.9239179307530354e-06,
+      "rdpo": {
+        "rel_rmse": 0.5968974442775469,
+        "rel_bias": -0.056010570782853125,
+        "reps": 40,
+        "ci_coverage": 0.825
+      },
+      "baselines": {
+        "mc": 10.649012063965714,
+        "sobol": 11.495000402852037,
+        "stratified": 4.086701949024939,
+        "importance": 1.209905458516235
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 2.0269905159011707,
+      "n_params": 16,
+      "mean_rel_se": 0.2730591266787786,
+      "seconds_per_fit": 0.2746058152250043
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_exhaustion",
+      "budget": 16384,
+      "mu": 3.9239179307530354e-06,
+      "rdpo": {
+        "rel_rmse": 0.0035371095319127388,
+        "rel_bias": -9.816061989152764e-07,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 4.385464667068848,
+        "sobol": 4.874438220146715,
+        "stratified": 1.651742208139109,
+        "importance": 0.6032499494126217
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 170.54884616095174,
+      "n_params": 16,
+      "mean_rel_se": 0.00318665181456333,
+      "seconds_per_fit": 0.387617422400001
+    },
+    {
+      "scenario": "adb-independent",
+      "target": "joint_exhaustion",
+      "budget": 65536,
+      "mu": 3.9239179307530354e-06,
+      "rdpo": {
+        "rel_rmse": 0.0017404798966087498,
+        "rel_bias": -0.0005743967380192297,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 1.7831367522786545,
+        "sobol": 1.8953036566378958,
+        "stratified": 1.0371749097818865,
+        "importance": 0.26284313078005617
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 151.01761950379014,
+      "n_params": 16,
+      "mean_rel_se": 0.0015872107396128134,
+      "seconds_per_fit": 0.9722301989750008
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "expected_loss",
+      "budget": 4096,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.010496005960459506,
+        "rel_bias": 0.0029601729150080026,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.03699551106143289,
+        "sobol": 0.007514101153232611,
+        "stratified": 0.01250102254202825,
+        "importance": 0.01675419970809599
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.7159009990599938,
+      "n_params": 14,
+      "mean_rel_se": 0.010049162268054064,
+      "seconds_per_fit": 0.0943407239999999
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "expected_loss",
+      "budget": 16384,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.004160478475829074,
+        "rel_bias": -0.0012990921315649334,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.01800684813449931,
+        "sobol": 0.0022063266637356027,
+        "stratified": 0.006085607729821573,
+        "importance": 0.008325093341343607
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.530305991619375,
+      "n_params": 14,
+      "mean_rel_se": 0.003958867518550476,
+      "seconds_per_fit": 0.2022743365249994
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "expected_loss",
+      "budget": 65536,
+      "mu": 10063513.348954108,
+      "rdpo": {
+        "rel_rmse": 0.0019322695333908032,
+        "rel_bias": 0.000376969471864608,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.008471430467397503,
+        "sobol": 0.0005449065468677418,
+        "stratified": 0.00330670454638286,
+        "importance": 0.004113822915072674
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.28200338381960816,
+      "n_params": 14,
+      "mean_rel_se": 0.0018564450064600022,
+      "seconds_per_fit": 0.7119214491249977
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_attachment",
+      "budget": 4096,
+      "mu": 0.05052567031293324,
+      "rdpo": {
+        "rel_rmse": 0.016288607316350467,
+        "rel_bias": -0.0010298336478188805,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.06923522758814007,
+        "sobol": 0.03993028773250851,
+        "stratified": 0.030698234310857046,
+        "importance": 0.04979560498622983
+      },
+      "best_baseline": "stratified",
+      "improvement_vs_best": 1.8846445073325715,
+      "n_params": 15,
+      "mean_rel_se": 0.017113264234471567,
+      "seconds_per_fit": 0.0993169068750035
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_attachment",
+      "budget": 16384,
+      "mu": 0.05052567031293324,
+      "rdpo": {
+        "rel_rmse": 0.004775075120285064,
+        "rel_bias": -0.0005848770123409575,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.0323293183349412,
+        "sobol": 0.015154903726506035,
+        "stratified": 0.016263642300667264,
+        "importance": 0.0223024897305402
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 3.1737518980855977,
+      "n_params": 15,
+      "mean_rel_se": 0.004499007413432486,
+      "seconds_per_fit": 0.22328298179999706
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_attachment",
+      "budget": 65536,
+      "mu": 0.05052567031293324,
+      "rdpo": {
+        "rel_rmse": 0.0018902726342202676,
+        "rel_bias": 0.0001723058901835026,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.016059198327674922,
+        "sobol": 0.005632407601047942,
+        "stratified": 0.007795896598510289,
+        "importance": 0.01261404796788803
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 2.9796800202692957,
+      "n_params": 15,
+      "mean_rel_se": 0.0017653834783689702,
+      "seconds_per_fit": 0.7419237068499968
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "exceedance",
+      "budget": 4096,
+      "mu": 0.016066409986690622,
+      "rdpo": {
+        "rel_rmse": 0.007755043020662508,
+        "rel_bias": -0.0013623343553536731,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.12272190420563112,
+        "sobol": 0.08500348363566962,
+        "stratified": 0.06602804200360392,
+        "importance": 0.04536229834784171
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.84939351425628,
+      "n_params": 16,
+      "mean_rel_se": 0.00908482171434258,
+      "seconds_per_fit": 0.15190834180000365
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "exceedance",
+      "budget": 16384,
+      "mu": 0.016066409986690622,
+      "rdpo": {
+        "rel_rmse": 0.004161404923940617,
+        "rel_bias": 0.000899742377116908,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 0.05282818367510602,
+        "sobol": 0.035816452714193786,
+        "stratified": 0.03239468833538644,
+        "importance": 0.024333258305034848
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.847366153926837,
+      "n_params": 16,
+      "mean_rel_se": 0.0035124004810686183,
+      "seconds_per_fit": 0.2640256944499981
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "exceedance",
+      "budget": 65536,
+      "mu": 0.016066409986690622,
+      "rdpo": {
+        "rel_rmse": 0.0016456199418861453,
+        "rel_bias": -0.00012423108140704092,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.029341707639133092,
+        "sobol": 0.011388735549641555,
+        "stratified": 0.01727772493389733,
+        "importance": 0.011211664871440877
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.813034155742246,
+      "n_params": 16,
+      "mean_rel_se": 0.0016424030525162717,
+      "seconds_per_fit": 0.8318510746499953
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "stop_loss",
+      "budget": 4096,
+      "mu": 385043.3702234681,
+      "rdpo": {
+        "rel_rmse": 0.009132717747008696,
+        "rel_bias": -0.0017094045175043817,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.1491878642808036,
+        "sobol": 0.1212486759981104,
+        "stratified": 0.09153910790349495,
+        "importance": 0.052209590173093144
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.71676379577084,
+      "n_params": 16,
+      "mean_rel_se": 0.010169190591257602,
+      "seconds_per_fit": 0.15057061687499526
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "stop_loss",
+      "budget": 16384,
+      "mu": 385043.3702234681,
+      "rdpo": {
+        "rel_rmse": 0.005049502652058478,
+        "rel_bias": 0.00039997133523714116,
+        "reps": 40,
+        "ci_coverage": 0.875
+      },
+      "baselines": {
+        "mc": 0.07060822695138541,
+        "sobol": 0.03912265725562716,
+        "stratified": 0.04439846036665223,
+        "importance": 0.027259435675729644
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.398439718536849,
+      "n_params": 16,
+      "mean_rel_se": 0.0038577982623583767,
+      "seconds_per_fit": 0.2762522808500023
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "stop_loss",
+      "budget": 65536,
+      "mu": 385043.3702234681,
+      "rdpo": {
+        "rel_rmse": 0.0014533693536577248,
+        "rel_bias": 0.00046342574920453793,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.0390454498530981,
+        "sobol": 0.010943539754866427,
+        "stratified": 0.024102740817450192,
+        "importance": 0.012564798541926074
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 7.529771924338843,
+      "n_params": 16,
+      "mean_rel_se": 0.0016838696164283322,
+      "seconds_per_fit": 0.8187327874250002
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_exhaustion",
+      "budget": 4096,
+      "mu": 4.400154217606936e-05,
+      "rdpo": {
+        "rel_rmse": 0.20404140086562603,
+        "rel_bias": -0.04898482370018838,
+        "reps": 40,
+        "ci_coverage": 0.775
+      },
+      "baselines": {
+        "mc": 2.2497081042417215,
+        "sobol": 2.2055162718859114,
+        "stratified": 1.3061619585634991,
+        "importance": 0.47725156301095195
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 2.338993758062129,
+      "n_params": 16,
+      "mean_rel_se": 0.11256730612523135,
+      "seconds_per_fit": 0.30731562437500204
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_exhaustion",
+      "budget": 16384,
+      "mu": 4.400154217606936e-05,
+      "rdpo": {
+        "rel_rmse": 0.017651834667564127,
+        "rel_bias": -0.002121548142973861,
+        "reps": 40,
+        "ci_coverage": 0.85
+      },
+      "baselines": {
+        "mc": 1.2132080293681808,
+        "sobol": 1.1460675809579361,
+        "stratified": 0.6728047158898741,
+        "importance": 0.2687713509259982
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 15.22625585315928,
+      "n_params": 16,
+      "mean_rel_se": 0.016366766912815828,
+      "seconds_per_fit": 0.4109545944749982
+    },
+    {
+      "scenario": "adb-common-shock",
+      "target": "joint_exhaustion",
+      "budget": 65536,
+      "mu": 4.400154217606936e-05,
+      "rdpo": {
+        "rel_rmse": 0.0025629911660963517,
+        "rel_bias": -0.0005073499341810186,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.5777012220142251,
+        "sobol": 0.5728161370057809,
+        "stratified": 0.32176280982174416,
+        "importance": 0.12167646636542383
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 47.47439943413741,
+      "n_params": 16,
+      "mean_rel_se": 0.0024025167330332014,
+      "seconds_per_fit": 1.038926471474997
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "expected_loss",
+      "budget": 4096,
+      "mu": 11170505.731674107,
+      "rdpo": {
+        "rel_rmse": 0.00969165539090082,
+        "rel_bias": -0.0021722770556314207,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.030622985850890582,
+        "sobol": 0.006763084990238584,
+        "stratified": 0.012765265160849191,
+        "importance": 0.015620021283956126
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.6978255744202609,
+      "n_params": 14,
+      "mean_rel_se": 0.009258263077463965,
+      "seconds_per_fit": 0.10779090247499994
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "expected_loss",
+      "budget": 16384,
+      "mu": 11170505.731674107,
+      "rdpo": {
+        "rel_rmse": 0.0040944536150943605,
+        "rel_bias": 0.00040938193457340754,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.01640047695549288,
+        "sobol": 0.002043925501940449,
+        "stratified": 0.0065298094038125426,
+        "importance": 0.008192466982440494
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.4991937127839083,
+      "n_params": 14,
+      "mean_rel_se": 0.003920071307714479,
+      "seconds_per_fit": 0.2209731389500007
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "expected_loss",
+      "budget": 65536,
+      "mu": 11170505.731674107,
+      "rdpo": {
+        "rel_rmse": 0.0017234030671786464,
+        "rel_bias": -0.00014696762872833463,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.0075317225191696025,
+        "sobol": 0.000574083579446705,
+        "stratified": 0.0031997296768745027,
+        "importance": 0.0035418955360325467
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.3331104547623484,
+      "n_params": 14,
+      "mean_rel_se": 0.001823063209220737,
+      "seconds_per_fit": 0.7492142195749978
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_attachment",
+      "budget": 4096,
+      "mu": 0.07046389659987537,
+      "rdpo": {
+        "rel_rmse": 0.014047684576720081,
+        "rel_bias": -0.0004403655021980664,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.054925761783662784,
+        "sobol": 0.02870281871980333,
+        "stratified": 0.030482771651707645,
+        "importance": 0.041409751050165054
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 2.0432419708063376,
+      "n_params": 15,
+      "mean_rel_se": 0.013524941836563076,
+      "seconds_per_fit": 0.09882060785000135
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_attachment",
+      "budget": 16384,
+      "mu": 0.07046389659987537,
+      "rdpo": {
+        "rel_rmse": 0.00457054440301429,
+        "rel_bias": 0.00033184726644978316,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.027481930418423263,
+        "sobol": 0.01357379560785158,
+        "stratified": 0.015951247171845945,
+        "importance": 0.021881072761976032
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 2.969842191862224,
+      "n_params": 15,
+      "mean_rel_se": 0.004128649209479007,
+      "seconds_per_fit": 0.21802030855000112
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_attachment",
+      "budget": 65536,
+      "mu": 0.07046389659987537,
+      "rdpo": {
+        "rel_rmse": 0.0014133469298299724,
+        "rel_bias": 0.00012713773960406328,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 0.014802161321439699,
+        "sobol": 0.0038310626638164754,
+        "stratified": 0.008191922404096743,
+        "importance": 0.011288585463138314
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 2.7106314684373762,
+      "n_params": 15,
+      "mean_rel_se": 0.0017576627651086107,
+      "seconds_per_fit": 0.6445736296749999
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "exceedance",
+      "budget": 4096,
+      "mu": 0.013215038883593148,
+      "rdpo": {
+        "rel_rmse": 0.008991416314608215,
+        "rel_bias": -0.0015156434953704652,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.14078055247507895,
+        "sobol": 0.0950381887416954,
+        "stratified": 0.08648088557634155,
+        "importance": 0.04974927238722245
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.532973966114279,
+      "n_params": 16,
+      "mean_rel_se": 0.010011287192174924,
+      "seconds_per_fit": 0.149775354625001
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "exceedance",
+      "budget": 16384,
+      "mu": 0.013215038883593148,
+      "rdpo": {
+        "rel_rmse": 0.004170730399159031,
+        "rel_bias": 0.00041870219408838633,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.06806487266605317,
+        "sobol": 0.03857450293713488,
+        "stratified": 0.037735813745756804,
+        "importance": 0.024694863372620075
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 5.920992490332017,
+      "n_params": 16,
+      "mean_rel_se": 0.004099489292693831,
+      "seconds_per_fit": 0.25741806407500006
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "exceedance",
+      "budget": 65536,
+      "mu": 0.013215038883593148,
+      "rdpo": {
+        "rel_rmse": 0.0019130690533767875,
+        "rel_bias": 3.1921827415441814e-05,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.031142461795843023,
+        "sobol": 0.014471159233162372,
+        "stratified": 0.020703204189471375,
+        "importance": 0.01267633496110464
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.626177418284743,
+      "n_params": 16,
+      "mean_rel_se": 0.0018341373407543915,
+      "seconds_per_fit": 0.7778121887499992
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "stop_loss",
+      "budget": 4096,
+      "mu": 306285.7963275195,
+      "rdpo": {
+        "rel_rmse": 0.01151515090471965,
+        "rel_bias": -0.0029686558626732923,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.18078158279956527,
+        "sobol": 0.14692847591110703,
+        "stratified": 0.10631156415334714,
+        "importance": 0.05506933890646575
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 4.782337579605214,
+      "n_params": 16,
+      "mean_rel_se": 0.010450215278177532,
+      "seconds_per_fit": 0.13722460187499905
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "stop_loss",
+      "budget": 16384,
+      "mu": 306285.7963275195,
+      "rdpo": {
+        "rel_rmse": 0.0036751549878799574,
+        "rel_bias": 0.0003886214020170882,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.08863936083459564,
+        "sobol": 0.04594078153637731,
+        "stratified": 0.050351812171552185,
+        "importance": 0.02930938331922338
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 7.975006065289979,
+      "n_params": 16,
+      "mean_rel_se": 0.00391998395057069,
+      "seconds_per_fit": 0.2593919296500019
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "stop_loss",
+      "budget": 65536,
+      "mu": 306285.7963275195,
+      "rdpo": {
+        "rel_rmse": 0.0015353543578833927,
+        "rel_bias": -0.00043865247411554504,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.043553059536600935,
+        "sobol": 0.014477272886971003,
+        "stratified": 0.026773726330040323,
+        "importance": 0.013547418467304137
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 8.823642827301656,
+      "n_params": 16,
+      "mean_rel_se": 0.0016966735393406712,
+      "seconds_per_fit": 0.7801872791499989
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_exhaustion",
+      "budget": 4096,
+      "mu": 6.924565668457676e-05,
+      "rdpo": {
+        "rel_rmse": 0.10807332302589297,
+        "rel_bias": 0.0017217609862482284,
+        "reps": 40,
+        "ci_coverage": 1.0
+      },
+      "baselines": {
+        "mc": 1.9319772931816508,
+        "sobol": 1.5904273182907833,
+        "stratified": 1.2055821765499322,
+        "importance": 0.3947602576394211
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 3.652707685733339,
+      "n_params": 16,
+      "mean_rel_se": 0.09556148905800653,
+      "seconds_per_fit": 0.3485910614750026
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_exhaustion",
+      "budget": 16384,
+      "mu": 6.924565668457676e-05,
+      "rdpo": {
+        "rel_rmse": 0.03211174442281847,
+        "rel_bias": 0.004791585791065792,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.9875360656565938,
+        "sobol": 0.9949166341387655,
+        "stratified": 0.5961017058805427,
+        "importance": 0.2008767879266134
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.255555141497426,
+      "n_params": 16,
+      "mean_rel_se": 0.010425352805029006,
+      "seconds_per_fit": 0.4751346169749979
+    },
+    {
+      "scenario": "adb-rain-stress",
+      "target": "joint_exhaustion",
+      "budget": 65536,
+      "mu": 6.924565668457676e-05,
+      "rdpo": {
+        "rel_rmse": 0.00228274612217266,
+        "rel_bias": 0.00018086641374319683,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 0.46775089612437787,
+        "sobol": 0.48850769971458363,
+        "stratified": 0.2688223755600843,
+        "importance": 0.09579538865871523
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 41.96497706347634,
+      "n_params": 16,
+      "mean_rel_se": 0.0019851222321583648,
+      "seconds_per_fit": 1.169466610400002
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "expected_loss",
+      "budget": 4096,
+      "mu": 9970051.441960666,
+      "rdpo": {
+        "rel_rmse": 0.01126650350572084,
+        "rel_bias": -0.0016815625354793824,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.029900229663909147,
+        "sobol": 0.007086092949179956,
+        "stratified": 0.010368693184360634,
+        "importance": 0.017882629273788492
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.6289522694935319,
+      "n_params": 14,
+      "mean_rel_se": 0.01047479955369087,
+      "seconds_per_fit": 0.09793937412500213
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "expected_loss",
+      "budget": 16384,
+      "mu": 9970051.441960666,
+      "rdpo": {
+        "rel_rmse": 0.004492110864844056,
+        "rel_bias": 0.0008326005763069638,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.014912783907294808,
+        "sobol": 0.002470261947555642,
+        "stratified": 0.004524945742318048,
+        "importance": 0.008194772193738702
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.5499111713578327,
+      "n_params": 14,
+      "mean_rel_se": 0.004315873389211307,
+      "seconds_per_fit": 0.21287154069999586
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "expected_loss",
+      "budget": 65536,
+      "mu": 9970051.441960666,
+      "rdpo": {
+        "rel_rmse": 0.002028816849945809,
+        "rel_bias": -0.0002524346259560225,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.008267109509294683,
+        "sobol": 0.0006970816799720017,
+        "stratified": 0.00242036695471906,
+        "importance": 0.004358550317399914
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 0.3435902457092769,
+      "n_params": 14,
+      "mean_rel_se": 0.002017859869119938,
+      "seconds_per_fit": 0.6812829820000047
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_attachment",
+      "budget": 4096,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.02012906248672454,
+        "rel_bias": -0.0030533969576871036,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.07446816481113513,
+        "sobol": 0.04189064526921249,
+        "stratified": 0.037988792627802394,
+        "importance": 0.040053996740719265
+      },
+      "best_baseline": "stratified",
+      "improvement_vs_best": 1.8872609021337508,
+      "n_params": 15,
+      "mean_rel_se": 0.018796605833281067,
+      "seconds_per_fit": 0.10639328692499816
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_attachment",
+      "budget": 16384,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.005286449414058367,
+        "rel_bias": 0.0008561426180988446,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.0350038783064348,
+        "sobol": 0.018151655557249326,
+        "stratified": 0.018606825218294938,
+        "importance": 0.020967826005023615
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 3.4336194552393224,
+      "n_params": 15,
+      "mean_rel_se": 0.004872573396199753,
+      "seconds_per_fit": 0.20030504865000012
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_attachment",
+      "budget": 65536,
+      "mu": 0.04413776873084355,
+      "rdpo": {
+        "rel_rmse": 0.0016767024918270621,
+        "rel_bias": -0.00011481446892500339,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.018662755777225207,
+        "sobol": 0.005749536094579403,
+        "stratified": 0.009286099574502181,
+        "importance": 0.010371607950140652
+      },
+      "best_baseline": "sobol",
+      "improvement_vs_best": 3.429073507437967,
+      "n_params": 15,
+      "mean_rel_se": 0.0017894336218285062,
+      "seconds_per_fit": 0.6262331115500046
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "exceedance",
+      "budget": 4096,
+      "mu": 0.006997089316821918,
+      "rdpo": {
+        "rel_rmse": 0.009924223267054591,
+        "rel_bias": 0.0004863293461793234,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.18600779778746146,
+        "sobol": 0.1561765889591816,
+        "stratified": 0.10122688052679799,
+        "importance": 0.06413565832331165
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.462536825045298,
+      "n_params": 16,
+      "mean_rel_se": 0.01026113327689724,
+      "seconds_per_fit": 0.18710245217499732
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "exceedance",
+      "budget": 16384,
+      "mu": 0.006997089316821918,
+      "rdpo": {
+        "rel_rmse": 0.004232776313093293,
+        "rel_bias": 0.0015002143976156057,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.08787674893371689,
+        "sobol": 0.0740157918365237,
+        "stratified": 0.04840004506414681,
+        "importance": 0.03340614413370638
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 7.892253609143197,
+      "n_params": 16,
+      "mean_rel_se": 0.004161892432710205,
+      "seconds_per_fit": 0.3692726363749898
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "exceedance",
+      "budget": 65536,
+      "mu": 0.006997089316821918,
+      "rdpo": {
+        "rel_rmse": 0.0016328989158652185,
+        "rel_bias": 2.2147008617893356e-05,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.04748957807548754,
+        "sobol": 0.02411766252995007,
+        "stratified": 0.02543522903626604,
+        "importance": 0.0164590291559377
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 10.079637506046485,
+      "n_params": 16,
+      "mean_rel_se": 0.0018845710865523634,
+      "seconds_per_fit": 1.0983544259500035
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "stop_loss",
+      "budget": 4096,
+      "mu": 170927.46112726923,
+      "rdpo": {
+        "rel_rmse": 0.01086744173093329,
+        "rel_bias": -0.001272788928880968,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 0.21063310181740375,
+        "sobol": 0.17808678060438082,
+        "stratified": 0.11776576399276649,
+        "importance": 0.06772396462068007
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.231822198586933,
+      "n_params": 16,
+      "mean_rel_se": 0.010114732819740633,
+      "seconds_per_fit": 0.22184367257499388
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "stop_loss",
+      "budget": 16384,
+      "mu": 170927.46112726923,
+      "rdpo": {
+        "rel_rmse": 0.0035098646595295327,
+        "rel_bias": -0.0006894673217603271,
+        "reps": 40,
+        "ci_coverage": 0.95
+      },
+      "baselines": {
+        "mc": 0.10195075057183396,
+        "sobol": 0.06993318559312448,
+        "stratified": 0.053071854772709426,
+        "importance": 0.0366778554403891
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 10.449934398697144,
+      "n_params": 16,
+      "mean_rel_se": 0.003938558444368542,
+      "seconds_per_fit": 0.37873482415000126
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "stop_loss",
+      "budget": 65536,
+      "mu": 170927.46112726923,
+      "rdpo": {
+        "rel_rmse": 0.0018551179609340596,
+        "rel_bias": -0.00012945741141271816,
+        "reps": 40,
+        "ci_coverage": 0.925
+      },
+      "baselines": {
+        "mc": 0.050561979249328246,
+        "sobol": 0.02395472501048683,
+        "stratified": 0.028827992990135186,
+        "importance": 0.01742747540636722
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 9.3942680591548,
+      "n_params": 16,
+      "mean_rel_se": 0.0018243143422727065,
+      "seconds_per_fit": 1.1145988387500096
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_exhaustion",
+      "budget": 4096,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.07741516121239292,
+        "rel_bias": -0.011688150163726348,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 3.041733645320386,
+        "sobol": 2.707873605761614,
+        "stratified": 1.6182733589332732,
+        "importance": 0.4895531842791852
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 6.323737839104514,
+      "n_params": 16,
+      "mean_rel_se": 0.03209774324152794,
+      "seconds_per_fit": 0.36691193685001056
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_exhaustion",
+      "budget": 16384,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.0037195934237552594,
+        "rel_bias": 0.0002292739953259407,
+        "reps": 40,
+        "ci_coverage": 0.975
+      },
+      "baselines": {
+        "mc": 1.266269769403885,
+        "sobol": 1.403425396014565,
+        "stratified": 0.7474865718202035,
+        "importance": 0.2700935346525032
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 72.61372517962455,
+      "n_params": 16,
+      "mean_rel_se": 0.003907806551630953,
+      "seconds_per_fit": 0.5853889470750004
+    },
+    {
+      "scenario": "adb-rain-cover",
+      "target": "joint_exhaustion",
+      "budget": 65536,
+      "mu": 3.163304630917903e-05,
+      "rdpo": {
+        "rel_rmse": 0.001448019336925014,
+        "rel_bias": -9.58684865286462e-05,
+        "reps": 40,
+        "ci_coverage": 0.9
+      },
+      "baselines": {
+        "mc": 0.6356178590656562,
+        "sobol": 0.693108610943694,
+        "stratified": 0.3632232186606583,
+        "importance": 0.1383715365845109
+      },
+      "best_baseline": "importance",
+      "improvement_vs_best": 95.55917732311092,
+      "n_params": 16,
+      "mean_rel_se": 0.0013229937586340067,
+      "seconds_per_fit": 1.5393052583999975
+    }
+  ]
+}

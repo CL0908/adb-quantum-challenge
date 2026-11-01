@@ -1,247 +1,175 @@
 <a id="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
 ![Python][python-shield] ![NumPy][numpy-shield] ![SciPy][scipy-shield] ![Tests][tests-shield] ![Status][status-shield]
 
-<!-- PROJECT TITLE -->
 <br />
 <div align="center">
   <h2 align="center">Information-Theoretic Reinforcement Learning for Joint Catastrophe Tails</h2>
-  <h3 align="center">Quantum Enhanced Rényi-Doob Policy Optimization</h3>
-
+  <h3 align="center">Quantum Enhanced Rényi-Doob Policy Optimization (RDPO)</h3>
   <p align="center">
-    ADB Quantum Challenge: Joint-Loss Modelling for Natural Catastrophe Risk (Phase 1 prototype)
-    <br />
-    <a href="docs/RDPO_Proposal.pdf"><strong>Phase 1 proposal (PDF) »</strong></a>
+    ADB Quantum Challenge: Joint-Loss Modelling for Natural Catastrophe Risk · Phase 1
+    <br /><br />
+    <a href="docs/RDPO_Proposal.pdf"><strong>Technical proposal (PDF) »</strong></a>
     &middot;
-    <a href="REPORT.md"><strong>Full technical report »</strong></a>
-    <br />
-    <br />
-    <a href="#usage">Reproduce</a>
+    <a href="#reproduce">Reproduce</a>
     &middot;
     <a href="#key-results">Key results</a>
     &middot;
-    <a href="#roadmap">Phase 2 roadmap</a>
+    <a href="REPORT.md">Research log</a>
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#method-in-one-picture">Method in one picture</a></li>
-        <li><a href="#key-results">Key results</a></li>
-        <li><a href="#what-we-do-not-claim">What we do not claim</a></li>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#project-layout">Project Layout</a></li>
+    <li><a href="#about-the-project">About the project</a></li>
+    <li><a href="#key-results">Key results</a></li>
+    <li><a href="#what-we-do-not-claim">What we do not claim</a></li>
+    <li><a href="#reproduce">Reproduce</a></li>
+    <li><a href="#project-layout">Project layout</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#license">License</a> · <a href="#contact">Contact</a> · <a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+## About the project
 
-![Learned Doob policy vs. reference baselines](figures/rmse_both_exhausted.png)
+![Benchmark results at a fixed total budget](figures/paper/e1_heatmap.png)
 
-Catastrophe bonds pooled across countries are priced and stress-tested on **joint tails**: how
-often several countries' bonds pay out, or are exhausted, together. For the ADB benchmark
-(Kyrgyz Republic + Tajikistan, earthquake + precipitation, 3-year term) the probability that
-**both bonds are exhausted is ≈ 3×10⁻⁵**. Monte Carlo returns exactly zero for it in 95–100% of
-runs at 1,024 paths, and exact enumeration grows as 10ⁿ with portfolio size.
+Pooled catastrophe bonds are priced and stress-tested on **joint tails**: how often several countries
+attach, exceed a pooled threshold or exhaust their cover together. For the ADB benchmark (Kyrgyz
+Republic + Tajikistan, earthquake + precipitation, 3-year term) the joint-exhaustion probability is
+≈ 3×10⁻⁵, and plain Monte Carlo returns zero in most runs at practical budgets.
 
-This repository is a reproducible prototype of:
+**RDPO** treats the zero-variance importance-sampling measure as what it is mathematically: the Doob
+h-transform of the loss process, i.e. the optimal policy of a KL-regularised (soft) control problem.
 
-* **RDPO (Rényi-Doob Policy Optimization).** The zero-variance importance-sampling proposal is the
-  optimal policy of a KL-regularised (soft) control problem, i.e. the Doob h-transform of the loss
-  process. RDPO learns a compact O(n)-parameter approximation of it by cross-entropy policy
-  search. It then refines the policy with a **Rényi-2 (χ²) policy gradient**, because χ², not KL,
-  controls IS variance.
-* **Q-RDPO (quantum estimation stage).** Payouts are capped, so every Poisson source has a finite
-  increment law, and the term distribution loads **exactly** into a structured quantum circuit
-  with **O(n + |E|) qubits and gates for any dependence graph**. Amplitude estimation on it needs
-  O(1/√μ) queries vs O(1/μ) for Monte Carlo.
-* **Honest classical baselines,** including our own strongest ones: zero-variance backward
-  induction and an exact tensor network compressed in a tilted (Doob) gauge.
+1. **Source-level formulation.** The term law is an exact product of independent Poisson sources with
+   finite, capped increment laws, so a scenario is a sequence of K = 2n + 2|E| small draws.
+2. **Learned soft-value policy.** O(n + |E|) features: per country, per dependence edge, and target
+   progress. Sources that cannot affect the payoff are frozen at their true law, as the exact Doob
+   policy prescribes.
+3. **Information-theoretic training.** An exponential-twist warm start, then multilevel cross-entropy
+   (KL), then a Rényi-2 (χ²) policy gradient, which targets the divergence that actually controls variance.
+4. **Fixed total budget.** Training is charged to the path budget; eligible training batches are recycled
+   into an exactly unbiased estimator; the final stage uses randomised quasi-Monte Carlo.
+5. **Quantum-ready estimation stage (future feature).** The same change of measure loads *exactly* into
+   a structured amplitude-estimation circuit with O(n + |E|) qubits and gates and bounded weights.
 
-### Method in one picture
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```
-                 soft Bellman / Doob h-transform
- ADB model ──►  π*(y|s) ∝ p(y)·V(s⊕y)   (zero-variance IS policy)
-                        │
-          ┌─────────────┴──────────────┐
-          ▼                            ▼
-  RDPO (classical, today)        Q-RDPO (quantum, scalable concept)
-  log Ṽ_θ: O(n) features         exact Poisson-source loading circuit
-  CE policy search (KL)          O(n+|E|) qubits & gates
-  + Rényi-2 policy gradient (χ²) + IQAE: O(1/√μ) queries
-          │                            │
-          └──────► unbiased estimates of the 5 portfolio targets ◄──────┘
-```
+## Key results
 
-### Key results
+All numbers come from `results/rdpo_e*.json` (fixed seeds), with **training included in every budget**.
 
-| Result | Number | Where |
-|---|---|---|
-| Exact reproduction of the brief (3 checkpoints + 25 reference values) | all match; stop-loss to the dollar | REPORT §1 |
-| RDPO on "both bonds exhausted" (5 scenarios × 3 seeds, N = 4,096) | median rel. RMSE **0.30%**, 0/15 failures | REPORT §7.4 |
-| vs. best reference baseline (MC / Sobol / stratified / IS) at equal paths | **≈ 100–400× lower error** | REPORT §3, §7.4 |
-| Rényi-2 repair of a failed CE fit (exact per-path std) | 14.5 → 0.60 | REPORT §7.4 |
-| Structured quantum loading for ADB, per call of A | 52 qubits, 156 Toffolis (vs 97 / 3,808 generic) | REPORT §7.1 |
-| QAE vs MC queries, Pr(L > T), 28-country ring | 2.8×10⁹ vs 7.6×10¹⁴ | REPORT §7.2 |
-| Exact tilted MPS, 28 countries (chain / ring) | χ = 9 / 58, 7–68 s, tail error ≤ 1e-9 | REPORT §5 |
-| **Scalable RDPO**, Pr(L > T_n), ring 2 → 28 countries (μ: 1e-2 → 1e-13) | rel. RMSE **0.7% → 6.7%**; MC returns 0 for n ≥ 16; 3–5× better than exp. twisting | REPORT §7.6 |
-| **End-to-end Q-RDPO** (twisted loading, bounded weights), 28 countries | QAE calls 2.8×10⁹ → **3.4×10⁴** (MC: 7.6×10¹⁴ paths) | REPORT §7.7 |
-| Near-term QCBM sampler under noise (p₂ ≤ 1e-2) | bias +9…60% → **≤ 0.6%** with 10⁵ calibration shots | REPORT §7.8 |
-| QAE error-rate threshold to beat MC (noise-aware MLAE) | two-qubit error **≤ 1e-6** (early fault-tolerant) | REPORT §7.8 |
+| Result | Number |
+|---|---|
+| Benchmark, 5 scenarios × 5 targets, 16,384 paths | RDPO more accurate than the best reference method in **20/25** cells |
+| Joint exhaustion (≈ 3×10⁻⁵) | **×6.3 to ×171** lower error than the best reference method (median ×19) |
+| Expected loss (smooth target) | scrambled Sobol remains better (×0.5); we recommend it there |
+| Interval coverage (75 settings) | **95%** mean empirical coverage of nominal 95% intervals |
+| Scaling, ring of 2 → 28 countries, Pr(L > Tₙ) down to **1.3×10⁻¹³** | relative error **0.1% → 4.2%** (Monte Carlo would need ~10¹⁵ paths) |
+| Joint exhaustion of one pair inside an 8–28-country portfolio | **0.4%–1.0%** relative error |
+| vs classical exponential twisting | RDPO more accurate in **15/16** settings (median ×3.5) |
+| Ablation | indispensable: cross-entropy (×81), twist warm start (×37 at scale), target-relevance freezing (×2.6) |
+| Quantum stage (projected) | exact loader: 52 qubits / 156 Toffolis per call (ADB); twisted loading cuts amplitude-estimation calls at 28 countries from 2.8×10⁹ to 3.4×10⁴ |
 
 <p align="center">
-  <img src="figures/policy_comparison.png" width="48%" alt="Policy families: CE vs CE + Rényi-2">
-  <img src="figures/structured_scaling.png" width="48%" alt="Structured quantum loading: scaling">
+  <img src="figures/paper/e2_scaling.png" width="96%" alt="Scaling with portfolio size">
 </p>
 
-### What we do not claim
+## What we do not claim
 
-* **No quantum advantage on the 2-country benchmark.** Exact enumeration takes 0.2 ms, while a
-  fault-tolerant QAE run needs ~10¹⁰ T gates.
-* For **sparse dependence graphs** (chain, ring, star) an exact tilted tensor network solves the
-  problem classically at any portfolio size. A quantum advantage is only plausible for **dense
-  dependence graphs and very rare targets**.
-* The **variational quantum critic** for the RDPO policy is a scalable architecture, but it was
-  unreliable on the rarest target (9–10/15 failed runs), and at constant depth it is classically
-  simulable.
-* Quantum circuits are simulated **exactly and noise-free** in NumPy; resource counts come from
-  component formulas, not compiled circuits.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-* [![Python][python-shield]](https://www.python.org/) 3.13
-* [![NumPy][numpy-shield]](https://numpy.org/) / [![SciPy][scipy-shield]](https://scipy.org/), plus matplotlib and pytest
-* Our own exact real-amplitude statevector simulator (QCBM, VQC), sparse statevector simulator
-  (structured loading), and IQAE emulator. **No quantum SDK or hardware.**
+* **No quantum advantage in Phase 1.** No quantum processor is available; quantum results are exact
+  simulations and resource projections, presented as a future feature.
+* **Sobol wins on smooth targets.** For expected loss, scrambled Sobol is more accurate than RDPO.
+* **Error bars under heavy tails.** Coverage drops below nominal in a few rare-target settings (as low
+  as 78% in one benchmark cell).
+* **Budget competition at scale.** At 28 countries the one-parameter twist beats RDPO on the stop-loss
+  (3.5% vs 5.9%).
+* **Synthetic scaling.** All scaling results use a synthetic but calibrated extension of the benchmark.
+* **Classical exact methods suffice for sparse dependence.** Exact tilted tensor networks solve chain,
+  star and ring portfolios exactly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-## Getting Started
+## Reproduce
 
-### Prerequisites
-
-Python ≥ 3.11, CPU only (the full pipeline was run on 4 cores).
-
-### Installation
-
-1. Clone the repository
-   ```sh
-   git clone https://github.com/CL0908/adb-quantum-challenge.git
-   ```
-2. Install the dependencies
-   ```sh
-   pip install numpy scipy matplotlib pytest
-   ```
-3. Run the tests (35 tests, ~40 s)
-   ```sh
-   python -m pytest -q tests/
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE -->
-## Usage
-
-Each phase writes `results/<phase>.json`. Fixed seeds are recorded in every file.
+Python ≥ 3.11, CPU only.
 
 ```sh
-PYTHONPATH=. python -m src.model.exact              # Phase 0  exact reproduction       (< 1 s)
-PYTHONPATH=. python -m src.baselines.run_baselines   # Phase 1  reference baselines       (~ 3 min)
-PYTHONPATH=. python -m src.learned.run_learned       # Phase 2  learned Doob policy (CE)  (~ 40 min)
-PYTHONPATH=. python -m src.quantum.run_quantum       # Phase 3  QCBM, IQAE, resources     (~ 15 min)
-PYTHONPATH=. python -m src.tensor.scaling            # Phase 4  tilted MPS scaling        (~ 20 min)
-PYTHONPATH=. python -m src.causal.latent_dimension   # Phase 5  quantum latent dimension  (~ 20 min)
-PYTHONPATH=. python -m src.quantum.run_structured    # Phase 6  Q-RDPO structured loading (~ 5 min)
-PYTHONPATH=. python -m src.hybrid.run_hybrid         # Phase 6  RDPO, VQC critic, entropy (~ 10 min)
-PYTHONPATH=. python -m src.scale.run_scale          # Phase 7  scalable RDPO (cold)     (~ 30 min)
-PYTHONPATH=. python -m src.scale.run_scale2         # Phase 7  RDPO warm start vs twist (~ 15 min)
-PYTHONPATH=. python -m src.quantum.run_twisted      # Phase 7  twisted Q-RDPO amplitudes  (< 1 min)
-PYTHONPATH=. python -m src.quantum.run_nisq         # Phase 7  NISQ counts, noisy MLAE, QCBM bias (~ 5 min)
-PYTHONPATH=. python -m src.figures                   # figures/
+pip install -r requirements.txt
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Project Layout
-
-```
-src/model/                         exact ADB model (compound Poisson fit, CTMC, rain, term, targets)
-src/baselines/                     MC, scrambled Sobol, stratified, IS, zero-variance Doob
-src/learned/                       RDPO: log-linear Doob policy, CE policy search, Rényi-2 refinement
-src/quantum/                       QCBM, IQAE, resource model, structured Poisson-source loading
-src/hybrid/                        variational quantum critic, entropy diagnostics
-src/scale/                         scalable source-level RDPO, exponential twisting, scaling sweeps
-src/tensor/                        n-country synthetic model, tilted-gauge MPS, exact targets
-src/causal/                        classical (NMF) vs quantum (PSD) latent dimension
-tests/                             35 tests
-results/  figures/                 all numbers and plots used in REPORT.md
+```sh
+python -m pytest -q tests/
 ```
 
-<!-- ROADMAP -->
+Final experiments (≈ 7 CPU-hours in total; set `OMP_NUM_THREADS=1` when running them in parallel):
+
+```sh
+PYTHONPATH=. python -m src.rdpo.experiments e1   # benchmark: 5 scenarios x 5 targets x 3 budgets
+PYTHONPATH=. python -m src.rdpo.experiments e2   # scaling to 28 countries vs exact tensor networks
+PYTHONPATH=. python -m src.rdpo.experiments e3   # ablation
+```
+
+Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
+equations; every number is filled in from `results/`.
+
+```sh
+cd docs/paper && npm install && cd ../..
+```
+
+```sh
+PYTHONPATH=. python -m src.viz.build_paper
+```
+
+Earlier phases (baselines, tensor networks, quantum simulations) have their own drivers. See
+[REPORT.md](REPORT.md) and the `run_*` modules in `src/`.
+
+## Project layout
+
+```
+src/rdpo/            final estimator: problem (source form), policy, budgeted training, experiments
+src/model/           exact ADB model (compound Poisson fit, CTMC, rain, term, targets)
+src/baselines/       MC, scrambled Sobol, stratified, brief IS, zero-variance backward induction
+src/tensor/          n-country model, tilted-gauge MPS (exact references), bond-dimension scaling
+src/quantum/         structured & twisted loading, IQAE/MLAE emulation, QCBM, NISQ analysis, resources
+src/learned/ src/scale/ src/hybrid/ src/causal/   earlier prototypes (documented in REPORT.md)
+src/viz/             figure style, concept art, data figures, paper build
+docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
+docs/RDPO_Proposal.pdf   the technical proposal
+results/  figures/   all numbers and plots; tests/  44 tests
+```
+
 ## Roadmap
 
-- [x] Phase 0: exact reproduction of the brief
-- [x] Phase 1: reference baselines + zero-variance backward induction
-- [x] Phase 2: learned Doob policy (CE policy search)
-- [x] Phase 3: QCBM proposal, IQAE emulation, resource estimates
-- [x] Phase 4: exact tilted-gauge tensor networks to 28 countries
-- [x] Phase 5: classical vs quantum latent dimension
-- [x] Phase 6: RDPO (Rényi-2 refinement), structured quantum loading, variational quantum critic
-- [x] Scalable RDPO for n ≥ 4 countries (source-level policy, no 10ⁿ normaliser), up to 28 countries
-- [x] End-to-end Q-RDPO: twisted source loading with bounded weights
-- [x] NISQ feasibility: hardware counts, noisy MLAE, QCBM sampler bias + calibration mitigation
-- [ ] Variance-based QAE (Montanaro) and state-dependent RDPO loading
-- [ ] Dense-dependence benchmark (degree-normalised complete / random graphs) where MPS χ blows up
-- [ ] Hardware runs (QCBM sampler) on trapped-ion / neutral-atom devices in the QAI Ventures sandbox
+- [x] Exact reproduction of the brief (all checkpoints and 25 reference values)
+- [x] Final RDPO: source-level soft-RL policy, KL → χ² training, fixed-budget unbiased estimation
+- [x] Benchmark, scaling (to 28 countries) and ablation at fixed total budget
+- [x] Quantum-ready stage: exact structured / twisted loading, resource estimates, NISQ analysis
+- [ ] WP1 GPU-batched library · WP2 realistic multi-peril portfolios · WP3 neural soft values, robust error bars, model selection
+- [ ] WP4 compiled quantum resource tables and calibrated sampler on sandbox hardware · WP5 validation and delivery
 
-See [REPORT.md §8](REPORT.md) for the Phase 2 plan and risks.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
 ## License
 
 No license has been chosen yet; all rights reserved until one is added.
 
-<!-- CONTACT -->
 ## Contact
 
-Project link: [https://github.com/CL0908/adb-quantum-challenge](https://github.com/CL0908/adb-quantum-challenge)
+Tan Chun Loong · [https://github.com/CL0908/adb-quantum-challenge](https://github.com/CL0908/adb-quantum-challenge)
 
-<!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* ADB Quantum Challenge brief and reference values
-* Glasserman (2003); Owen (1997); Egger et al. (2021); Grinko et al. (2021); Montanaro (2015);
-  Chakrabarti et al. (2021); Todorov (2009); Kappen (2005); Arouna (2004); Fawzi et al. (2015);
-  Glasser et al. (2019). Full list in [REPORT.md §10](REPORT.md).
-* README layout: [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
-* **AI use:** code and report were written with Claude Code (Anthropic) following the team's plan;
-  every number comes from the scripts in this repository.
+ADB Quantum Challenge brief and reference values. README layout:
+[Best-README-Template](https://github.com/othneildrew/Best-README-Template). **AI use:** developed with
+Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the author's research
+plan; all numbers come from the scripts in this repository.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- MARKDOWN LINKS & IMAGES -->
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-35%20passing-2ea44f?style=for-the-badge
-[status-shield]: https://img.shields.io/badge/status-Phase%201%20prototype-orange?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-44%20passing-2ea44f?style=for-the-badge
+[status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

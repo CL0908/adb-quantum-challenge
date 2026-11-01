@@ -1,0 +1,30 @@
+E2 ring     n= 2 exceedance       mu=1.205e-02 RDPO=0.0014 cov=0.95 twist=0.0110 2.9s
+E2 ring     n= 2 stop_loss        mu=2.824e+05 RDPO=0.0014 cov=0.95 twist=0.0090 2.7s
+E2 ring     n= 2 joint_exhaustion mu=3.163e-05 RDPO=0.0034 cov=0.90 twist=nan 3.8s
+E2 ring     n= 8 exceedance       mu=3.889e-05 RDPO=0.0030 cov=1.00 twist=0.0218 17.7s
+E2 ring     n= 8 stop_loss        mu=9.518e+02 RDPO=0.0043 cov=1.00 twist=0.0125 17.5s
+E2 ring     n= 8 joint_exhaustion mu=1.899e-05 RDPO=0.0445 cov=0.90 twist=nan 12.7s
+E2 ring     n=16 exceedance       mu=1.456e-08 RDPO=0.0057 cov=1.00 twist=0.0291 28.9s
+E2 ring     n=16 stop_loss        mu=3.466e-01 RDPO=0.0063 cov=0.90 twist=0.0292 29.4s
+E2 ring     n=16 joint_exhaustion mu=1.899e-05 RDPO=0.0965 cov=0.50 twist=nan 24.6s
+E2 ring     n=20 exceedance       mu=2.899e-10 RDPO=0.0089 cov=1.00 twist=0.0296 40.4s
+E2 ring     n=20 stop_loss        mu=7.033e-03 RDPO=0.0057 cov=1.00 twist=0.0271 42.2s
+E2 ring     n=20 joint_exhaustion mu=1.899e-05 RDPO=0.0559 cov=0.83 twist=nan 30.5s
+E2 ring     n=28 exceedance       mu=1.322e-13 RDPO=0.0423 cov=1.00 twist=0.0555 65.4s
+E2 ring     n=28 stop_loss        mu=3.018e-06 RDPO=0.0589 cov=0.83 twist=0.0348 66.7s
+E2 ring     n=28 joint_exhaustion mu=1.899e-05 RDPO=0.8085 cov=0.50 twist=nan 41.4s
+E2 complete n= 4 exceedance       mu=2.072e-03 RDPO=0.0029 cov=1.00 twist=0.0105 15.4s
+E2 complete n= 4 stop_loss        mu=6.168e+04 RDPO=0.0028 cov=0.95 twist=0.0089 15.6s
+E2 complete n= 4 joint_exhaustion mu=1.480e-05 RDPO=0.0283 cov=0.90 twist=nan 12.0s
+=== restart with target-relevance freezing ===
+E2 ring     n= 8 joint_exhaustion mu=1.899e-05 RDPO=0.0100 cov=0.90 twist=nan 3.8s
+E2 ring     n=16 joint_exhaustion mu=1.899e-05 RDPO=0.0088 cov=1.00 twist=nan 6.4s
+E2 ring     n=20 joint_exhaustion mu=1.899e-05 RDPO=0.0056 cov=1.00 twist=nan 6.4s
+E2 ring     n=28 joint_exhaustion mu=1.899e-05 RDPO=0.0041 cov=0.83 twist=nan 9.4s
+E2 complete n= 4 joint_exhaustion mu=1.480e-05 RDPO=0.0042 cov=0.95 twist=nan 4.2s
+E2 complete n= 6 exceedance       mu=6.253e-04 RDPO=0.0068 cov=0.60 twist=0.0144 60.0s
+E2 complete n= 6 stop_loss        mu=1.539e+04 RDPO=0.0048 cov=0.90 twist=0.0103 54.1s
+E2 complete n= 6 joint_exhaustion mu=1.145e-05 RDPO=0.0114 cov=1.00 twist=nan 7.6s
+E2 complete n= 7 exceedance       mu=2.898e-04 RDPO=0.0047 cov=1.00 twist=0.0171 92.2s
+E2 complete n= 7 stop_loss        mu=7.887e+03 RDPO=0.0059 cov=0.90 twist=0.0155 91.5s
+E2 complete n= 7 joint_exhaustion mu=1.061e-05 RDPO=0.0335 cov=0.80 twist=nan 9.2s

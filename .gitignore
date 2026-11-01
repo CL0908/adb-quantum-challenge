@@ -4,3 +4,13 @@ __pycache__/
 adb-quantum.bundle
 adb-quantum.zip
 submission/
+docs/paper/node_modules/
+docs/paper/package-lock.json
+docs/paper/body.pdf
+docs/paper/cover.pdf
+docs/paper/cover.html
+docs/paper/proposal.html
+docs/paper/proposal.filled.md
+docs/paper/pdf.js
+docs/paper/fonts.html
+docs/paper/mathjax-config.html

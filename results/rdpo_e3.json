@@ -1,0 +1,364 @@
+{
+  "rows": [
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "full RDPO",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.018454605465399825,
+      "rel_bias": -0.003175944701480525,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no edge features",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.02341673861702202,
+      "rel_bias": -0.008475559686814295,
+      "reps": 40,
+      "ci_coverage": 0.825
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no twist warm start",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.018454605465399825,
+      "rel_bias": -0.003175944701480525,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no cross-entropy stage",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 1.4858503093304225,
+      "rel_bias": 0.35063215086567645,
+      "reps": 40,
+      "ci_coverage": 0.525
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no R\u00e9nyi-2 (\u03c7\u00b2) stage",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.017935574154645237,
+      "rel_bias": -0.003338465233719675,
+      "reps": 40,
+      "ci_coverage": 0.925
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no sample recycling",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.015801582944239136,
+      "rel_bias": -0.00638850640961713,
+      "reps": 40,
+      "ci_coverage": 0.85
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no RQMC final stage",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.0215210999509559,
+      "rel_bias": -0.0014821238293365958,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "CE only (v1-style)",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.02452969694822798,
+      "rel_bias": -0.000213035682418611,
+      "reps": 40,
+      "ci_coverage": 0.925
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "full RDPO",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.003288842186444928,
+      "rel_bias": -0.00045065825054419265,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no edge features",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.003422051408954649,
+      "rel_bias": -0.0003723558969460435,
+      "reps": 40,
+      "ci_coverage": 0.925
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no twist warm start",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.0029336094688667386,
+      "rel_bias": -0.0001140646392039321,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no cross-entropy stage",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.012503288931875483,
+      "rel_bias": -3.6011941530265426e-05,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no R\u00e9nyi-2 (\u03c7\u00b2) stage",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.0035209140300652532,
+      "rel_bias": -0.0003398264148020385,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no sample recycling",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.002413823209109907,
+      "rel_bias": -0.0003267589820804288,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no RQMC final stage",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.004246516439166795,
+      "rel_bias": -0.0003645684616023539,
+      "reps": 40,
+      "ci_coverage": 0.975
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "CE only (v1-style)",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.004300114235255591,
+      "rel_bias": 6.47977018208817e-05,
+      "reps": 40,
+      "ci_coverage": 0.975
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "full RDPO",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.04149865163313878,
+      "rel_bias": 0.004882189392520175,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no edge features",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.022025601998511654,
+      "rel_bias": 0.0026692992937970197,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no twist warm start",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 1.5463681243176188,
+      "rel_bias": -0.5612300542802728,
+      "reps": 40,
+      "ci_coverage": 0.1
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no cross-entropy stage",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.0236368422443742,
+      "rel_bias": -0.0007547783839160271,
+      "reps": 40,
+      "ci_coverage": 0.975
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no R\u00e9nyi-2 (\u03c7\u00b2) stage",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.05073190492483435,
+      "rel_bias": -0.001321880287430521,
+      "reps": 40,
+      "ci_coverage": 0.925
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no sample recycling",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.0416529077918731,
+      "rel_bias": 0.0035279091922189357,
+      "reps": 40,
+      "ci_coverage": 0.875
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no RQMC final stage",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.09027247428474483,
+      "rel_bias": 0.01395315694123445,
+      "reps": 40,
+      "ci_coverage": 0.975
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "CE only (v1-style)",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.022820169758993467,
+      "rel_bias": -0.005180904891101182,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ADB base, joint exhaustion",
+      "ablation": "no target-relevance freezing",
+      "mu": 3.163304630917903e-05,
+      "budget": 16384,
+      "rel_rmse": 0.018454605465399825,
+      "rel_bias": -0.003175944701480525,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ADB base, Pr(L>80m)",
+      "ablation": "no target-relevance freezing",
+      "mu": 0.012046720907534038,
+      "budget": 16384,
+      "rel_rmse": 0.003288842186444928,
+      "rel_bias": -0.00045065825054419265,
+      "reps": 40,
+      "ci_coverage": 0.95
+    },
+    {
+      "case": "ring n=16, Pr(L>T)",
+      "ablation": "no target-relevance freezing",
+      "mu": 1.4564028479010561e-08,
+      "budget": 16384,
+      "rel_rmse": 0.04149865163313878,
+      "rel_bias": 0.004882189392520175,
+      "reps": 40,
+      "ci_coverage": 0.9
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "full RDPO",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.10246861667662323,
+      "rel_bias": 0.018436267259166483,
+      "reps": 40,
+      "ci_coverage": 0.825
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no edge features",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.0937324067385374,
+      "rel_bias": 0.004587816960816297,
+      "reps": 40,
+      "ci_coverage": 0.75
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no target-relevance freezing",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.2678618214673552,
+      "rel_bias": -0.04397629720534623,
+      "reps": 40,
+      "ci_coverage": 0.7
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no twist warm start",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.10246861667662323,
+      "rel_bias": 0.018436267259166483,
+      "reps": 40,
+      "ci_coverage": 0.825
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no cross-entropy stage",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 1.43984180677062,
+      "rel_bias": -0.11611600625058892,
+      "reps": 40,
+      "ci_coverage": 0.275
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no R\u00e9nyi-2 (\u03c7\u00b2) stage",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.05994989362770035,
+      "rel_bias": 0.0009481309828416521,
+      "reps": 40,
+      "ci_coverage": 0.85
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no sample recycling",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.09060232926673535,
+      "rel_bias": 0.011494290557061011,
+      "reps": 40,
+      "ci_coverage": 0.7
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "no RQMC final stage",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.08206443325069007,
+      "rel_bias": 0.012796521122167748,
+      "reps": 40,
+      "ci_coverage": 0.925
+    },
+    {
+      "case": "ring n=8, joint exhaustion (0,1)",
+      "ablation": "CE only (v1-style)",
+      "mu": 1.8989672951933362e-05,
+      "budget": 16384,
+      "rel_rmse": 0.30457480161488293,
+      "rel_bias": -0.035887120639279485,
+      "reps": 40,
+      "ci_coverage": 0.675
+    }
+  ]
+}

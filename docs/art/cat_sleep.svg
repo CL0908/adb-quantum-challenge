@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 90" width="150" height="90" font-family="Inter, 'Helvetica Neue', Arial, sans-serif"><g transform="translate(80,80) scale(1.0)">
+  <ellipse cx="0" cy="-16" rx="40" ry="18" fill="#1F3557"/>
+  <path d="M 36 -8 C 52 -2 34 10 -10 6 C -30 4 -40 -2 -38 -6" fill="none" stroke="#1F3557" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="-30" cy="-22" r="15" fill="#1F3557"/>
+  <path d="M -42 -30 L -48 -46 L -34 -36 Z" fill="#1F3557"/><path d="M -24 -34 L -20 -50 L -16 -34 Z" fill="#1F3557"/>
+  <path d="M -40 -33 L -43 -41 L -37 -36 Z" fill="#C8553A"/>
+  <path d="M -36 -22 q 3 3 6 0 M -27 -22 q 3 3 6 0" fill="none" stroke="#F6F1E7" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="10" y="-42" font-size="13" fill="#8A8E98" font-family="Inter, 'Helvetica Neue', Arial, sans-serif">z</text>
+  <text x="20" y="-54" font-size="16" fill="#8A8E98" font-family="Inter, 'Helvetica Neue', Arial, sans-serif">z</text>
+</g></svg>

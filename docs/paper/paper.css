@@ -1,0 +1,91 @@
+/* Report design: off-white annual-report style. Palette validated for CVD/contrast (src/viz/style.py). */
+:root {
+  --page: #F6F1E7; --card: #FBF8F1; --cardalt: #F1EADB; --ink: #1E2430; --ink2: #4F5563; --muted: #8A8E98;
+  --rule: #DDD4C4; --navy: #1F3557; --terra: #C8553A; --teal: #00897B; --ochre: #AD7A00; --blue: #2F6AB0;
+}
+@page { size: A4; margin: 19mm 18mm 21mm 18mm; background: #F6F1E7; }
+html, body { background: var(--page); }
+body {
+  font-family: "Source Serif 4", Charter, "Bitstream Charter", Georgia, serif; font-size: 10.2pt; line-height: 1.52;
+  color: var(--ink); margin: 0; max-width: none; padding: 0; hyphens: auto; text-align: justify;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-numeric: oldstyle-nums proportional-nums;
+}
+header#title-block-header { display: none; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+a { color: var(--terra); text-decoration: none; }
+strong { font-weight: 650; }
+
+/* ---------- headings ---------- */
+h1, h2, h3 { font-family: Inter, "Helvetica Neue", Arial, sans-serif; color: var(--navy); text-align: left; hyphens: none; }
+h1 {
+  font-size: 22pt; font-weight: 700; letter-spacing: -0.01em; margin: 22pt 0 14pt; padding-top: 4pt;
+  page-break-after: avoid; break-after: avoid; line-height: 1.15;
+}
+h1.newpage { page-break-before: always; break-before: page; margin-top: 0; }
+h1 { padding-top: 18pt; background: linear-gradient(var(--terra), var(--terra)) left top / 46pt 4pt no-repeat;
+     page-break-inside: avoid; break-inside: avoid; }
+h2 { font-size: 12.5pt; font-weight: 650; margin: 16pt 0 6pt; page-break-after: avoid; break-after: avoid; }
+h3 { font-size: 10.5pt; margin: 12pt 0 4pt; }
+
+/* ---------- front matter ---------- */
+.frontmatter h2 { margin-top: 0; font-size: 11pt; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terra); }
+.abstract { background: var(--card); border: 1px solid var(--rule); border-radius: 10pt; padding: 14pt 18pt 8pt; margin-bottom: 14pt; }
+.abstract p { font-size: 10pt; }
+.glance { margin-bottom: 10pt; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 9pt; }
+.tile { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--terra); border-radius: 8pt;
+        padding: 9pt 12pt 6pt; font-family: Inter, sans-serif; font-size: 8.6pt; color: var(--ink2); line-height: 1.35; text-align: left; }
+.tile p { margin: 0; }
+.tile .big { display: block; font-family: "Source Serif 4", serif; font-size: 22pt; font-weight: 700; color: var(--terra);
+             line-height: 1.1; margin-bottom: 3pt; font-variant-numeric: lining-nums; }
+.toc { page-break-before: always; break-before: page; margin-bottom: 18pt; background: var(--cardalt); border-radius: 10pt; padding: 10pt 16pt; font-family: Inter, sans-serif; font-size: 9pt; columns: 2; column-gap: 20pt; }
+.toc p { margin: 2pt 0; text-align: left; }
+.toc strong { color: var(--navy); }
+
+/* ---------- section openers with mascots ---------- */
+.opener { display: flex; align-items: center; gap: 14pt; background: var(--cardalt); border-radius: 12pt;
+          padding: 10pt 16pt; margin: 0 0 14pt; font-style: italic; color: var(--ink2); page-break-inside: avoid; }
+.opener p { margin: 0; text-align: left; }
+.opener p:first-child { flex: 0 0 auto; }
+.opener p + p { flex: 1 1 auto; }
+img.mascot { height: 64pt; width: auto; display: block; }
+.closing { text-align: center; margin-top: 18pt; }
+img.mascot-end { height: 54pt; }
+
+/* ---------- propositions, algorithm, callouts ---------- */
+.proposition { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--navy);
+               border-radius: 6pt; padding: 9pt 14pt 3pt; margin: 9pt 0 12pt; page-break-inside: avoid; }
+.algorithm { background: var(--card); border: 1.5px solid var(--navy); border-radius: 6pt; padding: 9pt 14pt 4pt;
+             margin: 10pt 0 12pt; font-size: 9.6pt; page-break-inside: avoid; }
+.algorithm ol { margin: 4pt 0 6pt; padding-left: 18pt; }
+.algorithm li { margin: 3pt 0; text-align: left; }
+
+/* ---------- tables (booktabs style) ---------- */
+table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt; font-family: Inter, sans-serif; font-size: 8.1pt;
+        line-height: 1.35; page-break-inside: avoid; font-variant-numeric: tabular-nums lining-nums; }
+thead tr { border-top: 1.4pt solid var(--navy); border-bottom: 0.8pt solid var(--navy); }
+tbody tr:last-child { border-bottom: 1.4pt solid var(--navy); }
+th { text-align: left; font-weight: 650; color: var(--navy); padding: 4pt 6pt; }
+td { padding: 3.2pt 6pt; vertical-align: top; text-align: left; hyphens: none; }
+th { hyphens: none; }
+tbody tr:nth-child(even) td { background: rgba(221, 212, 196, 0.25); }
+td strong { color: var(--terra); }
+td math { font-size: 1em; }
+
+/* ---------- figures ---------- */
+figure { margin: 10pt 0 14pt; page-break-inside: avoid; break-inside: avoid; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figure img.wide { width: 100%; }
+figcaption { font-family: Inter, sans-serif; font-size: 8.2pt; color: var(--ink2); text-align: left; margin-top: 5pt; line-height: 1.4; }
+figcaption strong { color: var(--navy); }
+
+/* ---------- maths (MathJax SVG) ---------- */
+mjx-container[display="true"] { margin: 7pt 0 9pt !important; }
+mjx-container svg { overflow: visible; }
+mjx-container { color: var(--ink); }
+code { font-family: "JetBrains Mono", monospace; font-size: 8.4pt; }
+
+/* ---------- references ---------- */
+#refs { font-size: 8.6pt; line-height: 1.38; text-align: left; }
+#refs .csl-entry { margin-bottom: 4pt; padding-left: 14pt; text-indent: -14pt; }
+ul, ol { padding-left: 16pt; } li { margin: 2pt 0; }
