@@ -628,6 +628,28 @@ def ap_values():
     return v
 
 
+def headline_values():
+    v = {}
+    rain = json.loads((R / "realdata_rain.json").read_text())
+    im = rain["implied"]
+    v["HL_EXC_BRIEF"] = pct(im["brief"]["exceedance"], 1)
+    v["HL_EXC_DATA"] = pct(im["both from data"]["exceedance"], 1)
+    v["HL_RAIN_SHARE"] = f"about {pct(rain['pooled']['0.2']['share'], 0)}"
+    eq = json.loads((R / "realdata_losses.json").read_text())["tests"]["eq_noaa_1900"]
+    v["HL_EQ_SHARE"] = f"about {pct(eq['share_of_A'], 0)}"
+    ap = json.loads((R / "wp2_asia_pacific.json").read_text())
+    c = ap["cases"]["asia_pacific"]
+    r = next(x for x in ap["rows"] if x["case"] == "asia_pacific" and x["method"] == "rdpo"
+             and x["target"] == "exceedance" and x["threshold_musd"] == c["T_rare"])
+    v["HL_AP_MU"] = f"1-in-{1 / r['mu']:.1e}".replace("e+0", "×10^").replace("e+", "×10^") + "-term"
+    v["HL_AP_MU"] = f"{sci(r['mu'])}-probability"
+    v["HL_AP_ERR"] = pct(r["rel_rmse"], 1)
+    v["HL_AP_SEC"] = f"{r['seconds']:.0f} s"
+    t = json.loads((R / "sweep_timing.json").read_text())
+    v["HL_SWEEP"] = f"{t['seconds_total']:.0f} seconds"
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -658,7 +680,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values):
         try:
             vals.update(fn())
         except Exception as ex:

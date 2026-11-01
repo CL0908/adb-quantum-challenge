@@ -9,6 +9,26 @@ lang: en
 
 ::: {.frontmatter}
 
+::: {.headline}
+## Headline findings
+
+1. **The joint tail of the bond is likely underestimated.** We replaced the two dependence assumptions with
+   public data: 120 years of earthquake loss records and daily rainfall at {{RAIN_NST}} weather stations. The
+   chance that the pool pays more than US$80m in a term then rises from {{HL_EXC_BRIEF}} to **{{HL_EXC_DATA}}:
+   {{RAIN_EXC_FACTOR}} the challenge's base case.** Earthquakes hit both countries far more often than
+   assumed ({{HL_EQ_SHARE}} of events, not 7.5%); extreme rain far less often ({{HL_RAIN_SHARE}}, not 25%).
+2. **Joint tails that simulation cannot see, at about 1% error.** In a 28-country Asia–Pacific pool
+   calibrated from public data, RDPO estimates a {{HL_AP_MU}} pool loss to **{{HL_AP_ERR}} relative error**
+   with 65,536 simulated terms ({{HL_AP_SEC}} on one core). Plain Monte Carlo sees no such event.
+3. **Stress tests in seconds.** All 25 scenario × question cells of the bond are re-estimated in
+   **{{HL_SWEEP}}** on one core. A policy carried over from the previous run cuts the error at small budgets by
+   {{V2_TRANSFER_GAIN}}.
+
+*Indicative findings. Public data serve as proxies: earthquake epicentres and reported losses for payout
+triggers, and station rainfall for the rain index. They are not a re-pricing of the actual bond, whose trigger
+definitions and modelling agent are not public. Methods and caveats are in §6.6–6.7.*
+:::
+
 ::: {.abstract}
 ## Abstract
 
@@ -28,30 +48,30 @@ estimator's variance. Training is charged to a fixed path budget, and the estima
 With training included, RDPO attains {{E1_EXH_MED}} median relative error on the ADB joint-exhaustion
 probability at 16,384 paths, a {{E1_EXH_RANGE}} improvement over the best reference method. It keeps
 errors of {{E2_RANGE}} as the target probability falls to 10⁻¹³ in a 28-country portfolio. The same
-learned change of measure loads *exactly* into an amplitude-estimation circuit. We assess this quantum
+learned change of measure loads *exactly* into an amplitude-estimation circuit. On pools calibrated from
+public hazard and loss data, RDPO meets the work plan's accuracy target at 28 countries, and the data
+suggest that the bond's joint tail is underestimated (Headline findings). We assess this quantum
 stage with a falsifiable wall-clock criterion and a calibration trust guard, and we claim no quantum
 advantage in Phase 1.
 :::
 
 ::: {.glance}
-## At a glance
-
-::: {.tiles}
+::: {.tiles .four}
+::: {.tile}
+[{{RAIN_EXC_FACTOR}}]{.big}
+pool exceedance with dependence calibrated to public data, relative to the challenge's base case
+:::
+::: {.tile}
+[{{HL_AP_ERR}}]{.big}
+relative error at μ ≈ 10⁻⁸ in a 28-country data-calibrated pool (65,536 paths)
+:::
 ::: {.tile}
 [{{E1_EXH_RANGE_SHORT}}]{.big}
-lower error than the best reference method on joint exhaustion (training included)
-:::
-::: {.tile}
-[10⁻¹³]{.big}
-smallest target probability estimated, at {{E2_RING28_EXC}} relative RMSE (28 countries)
-:::
-::: {.tile}
-[{{E1_COVERAGE}}]{.big}
-empirical coverage of nominal 95% intervals over 75 benchmark settings; the estimator is provably unbiased
+lower error than the best reference method on the bond's joint exhaustion
 :::
 ::: {.tile}
 [{{Q_SSTAR_28}}]{.big}
-hardware speed-up a fault-tolerant machine would need for quantum to beat RDPO in wall-clock (28 countries): a falsifiable target
+hardware speed-up quantum would need to beat RDPO: a falsifiable target
 :::
 :::
 :::

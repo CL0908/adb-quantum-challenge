@@ -107,3 +107,15 @@ li p { margin: 0; }
 .profile { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--terra); border-radius: 8pt;
            padding: 6pt 14pt; margin: 4pt 0 10pt; }
 .profile p { margin: 3pt 0; }
+
+/* ---------- headline findings (front page) ---------- */
+.headline { background: var(--card); border: 1.5px solid var(--navy); border-top: 6pt solid var(--terra); border-radius: 8pt;
+            padding: 6pt 16pt 8pt; margin: 0 0 12pt; page-break-inside: avoid; }
+.headline h2 { font-size: 13pt; margin: 6pt 0 4pt; color: var(--navy); }
+.headline ol { margin: 4pt 0 6pt; padding-left: 16pt; }
+.headline li { margin: 4pt 0; text-align: left; }
+.headline > p:last-child { font-size: 8.4pt; color: var(--ink2); margin: 6pt 0 2pt; text-align: left; }
+.tiles.four { grid-template-columns: repeat(4, 1fr); gap: 7pt; }
+.tiles.four .tile { padding: 6pt 9pt; font-size: 7.6pt; }
+.tiles.four .big { font-size: 17pt; }
+.glance { page-break-inside: avoid; }
