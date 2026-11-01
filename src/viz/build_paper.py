@@ -490,6 +490,9 @@ def pool_values():
     v["POOL_GAIN"] = f"×{min(rare):.1f}–×{max(rare):.0f}"
     el = [g for t, g in gains if t == "expected_loss"]
     v["POOL_EL"] = f"×{el[0]:.1f}" if el else "—"
+    pr = get.get(("joint_exhaustion", None, "rdpo"))
+    v["POOL_PAIR"] = pct(pr["rel_rmse"], 1) if pr else "—"
+    v["POOL_PAIR_COV"] = pct(pr["ci_coverage"], 0) if pr else "—"
     return v
 
 
