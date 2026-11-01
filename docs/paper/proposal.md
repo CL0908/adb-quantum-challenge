@@ -782,10 +782,10 @@ Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang T
 (2024–2028; CGPA 4.8/5.0, First Class Honours).
 :::
 
-* **Incoming research fellow in quantum information, ICFO (Barcelona).** Pre-selected for ICFO's
-  Phortify Student Research Fellowship, one of three students selected worldwide (up to six months of
-  funded research). Proposed host: the Quantum Information Theory group of ICREA Professor Antonio Acín, a
-  leading group in quantum information and device-independent quantum cryptography.
+* **Incoming Phortify Student Research Fellow, ICFO – The Institute of Photonic Sciences (Barcelona).** One of
+  three students selected worldwide for this funded research fellowship. Hosted by the Quantum Information Theory
+  group of ICREA Professor Antonio Acín, a leading group in quantum information and device-independent quantum
+  cryptography.
 * *URECA Research Fellow, "The Thermodynamics of Mitigating Ignorance" (Prof. Mile Gu, NTU, 2026–2027).*
   This project studies the cost of acting on beliefs that differ from reality, measured by the relative
   entropy between belief and truth. It also covers optimal belief revision by dynamic programming for
