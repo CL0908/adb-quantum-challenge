@@ -616,7 +616,7 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 | WP2 Realistic portfolios (W3–6): public hazard data, heterogeneous perils, dense dependence, 10–50 countries | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
 | WP3 RL improvements (W5–8): small neural soft values, adaptive levels, robust error bars, model selection | M3 RDPO v2 | ≥ 2× over v1 on dense graphs; coverage ≥ 93% |
 | WP4 Quantum stage and AI-for-Quantum (W8–10): compiled loader; guarded estimation on emulators or hardware; RL depth schedules | M4 compiled resource tables + updated s* map | compiled counts within 2× of estimates; guard caps tail error |
-| WP5 Web application and agent (W9–11): dashboard, AI analyst agent, MCP tool server | M5 public demo | three end-to-end analyst workflows |
+| WP5 Web application and agents (W9–11): dashboard, news-scout and data agents, advisory agent, MCP tool server | M5 public demo | three end-to-end analyst workflows |
 | WP6 Validation and delivery (W11–12): independent checks, documentation, business case | M6 final deliverables | all deliverables of the call |
 
 | Risk | Mitigation and fallback |
@@ -626,53 +626,185 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 | Quantum hardware unavailable or too noisy | The trust guard falls back to RDPO; the quantum stage remains a tested design. |
 | Single-person team capacity | Modular packages; WP4 is descoped first, then WP5. |
 
-# 10 Commercialisation and Product
+# 10 Commercialisation and Product {.newpage}
 
-![**Figure [fig:product].** Product roadmap: a web application in which an AI analyst agent calls the RDPO
-engine through a tool protocol (MCP).](../art/product_agent.svg){.wide}
+::: {.advisory}
 
-* **Integration.** RDPO is an estimation engine between a catastrophe model's event- or source-level
-  output and the metrics used for pricing, structuring and monitoring (Figure [fig:integration]). It needs
-  only the source laws and the contract payoff.
-* **Product.** A web application with a portfolio and scenario editor and a joint-tail dashboard. An AI
-  analyst agent answers questions such as *"what is the probability that both bonds are exhausted if the
-  common-shock rate doubles?"* by calling the engine through a Model Context Protocol (MCP) tool server
-  (`estimate_joint_tail`, `stress_test`, `validate_exact`). It returns the estimate with its interval,
-  policy diagnostics and an exact cross-check where one exists.
-* **Users.** Disaster-risk-financing teams at multilateral development banks; regional sovereign risk
-  pools; reinsurers and insurance-linked-securities investors; catastrophe-model vendors and Oasis
-  users; rating agencies and supervisors.
-* **Deployment.** Open Python library, Oasis plug-in, hosted API, and the agent front end. The estimator
-  is unbiased with reported uncertainty, reproducible and interpretable, which eases model validation.
-  A quantum back end is an optional upgrade, gated by the trust guard.
+::: {.exec}
+## Executive summary
+
+* **What we sell.** A joint-tail analytics service: open hazard data and daily news flow into an RDPO
+  estimation engine. An advisory agent turns the results into evidence-backed recommendations,
+  delivered as a web application and as Model Context Protocol (MCP) tools.
+* **Who buys.** Business-to-business and business-to-government. The buyers are development banks and
+  sovereign risk pools, reinsurers, ILS investors, brokers, model vendors and parametric insurers. We do
+  not sell to consumers; they benefit indirectly through cheaper pooled and parametric cover.
+* **How big.** Within a US$2.1bn catastrophe-modelling software category, we size a bottom-up serviceable
+  market of about US${{MK_SAM}}m a year and target US${{MK_SOM}}m of annual recurring revenue (ARR) from
+  {{MK_CUST}} institutions by year 5.
+* **Why we win.** We are the only offering that pairs an *unbiased, validated* rare-event engine with an
+  agent interface. Every number the agent reports comes from a tool call to the engine, never from the
+  language model.
+:::
+
+## 10.1 From data to decision: end-to-end data flow
+
+![**Exhibit 1.** End-to-end data flow of the planned product. Phase 1 has built the source model, the
+RDPO engine, the exact checks and the diagnostics. Data agents, calibration from open data, the
+advisory agent and the delivery layer are planned.](../art/data_flow.svg){.wide}
+
+| Stage | What happens | Status |
+|---|---|---|
+| 1 Data | Rainfall (ERA5, GPM IMERG, CHIRPS); ensemble forecasts (Google WeatherNext 2); earthquake catalogues and hazard models (USGS, GEM); terrain (Copernicus DEM); exposure (WorldPop, OpenStreetMap); contract terms | contract terms used; open data planned |
+| 2 Ingest | *News-scout agent*: scrapes daily news and disaster reports, extracts event type, place and severity, geocodes and scores credibility. *Data agent*: pulls feeds, runs quality checks, keeps versioned snapshots | planned (WP2, WP5) |
+| 3 Calibrate | Fit event rates and severities per peril and country; build the source laws $p_k$ and the dependence graph; generate stress and forecast-conditioned scenarios | source laws and graph built; fitting planned |
+| 4 Estimate | RDPO learned change of measure; unbiased estimate with 95% interval; exact checks and diagnostics; GPU batching; guarded quantum back end in the future | **built** (GPU planned, quantum future) |
+| 5 Advise | Advisory agent plans stress tests and drafts recommendations, calling the MCP tools `estimate_joint_tail`, `stress_test`, `validate_exact`, `event_impact` | planned (WP5) |
+| 6 Deliver | Joint-tail dashboard, morning risk brief, recommendation memos, API and MCP access for Excel, Oasis and other agents | planned (WP5) |
+
+* **Same-day event response.** When the news-scout agent flags a breaking event (for example a
+  magnitude-6 earthquake near a covered region), the advisory agent re-estimates the affected joint tails
+  and trigger probabilities the same day.
+* **Governance by design.** A human approves every recommendation. Data, model and policy versions are
+  logged, every estimate carries its uncertainty, and a validation pack supports model review by
+  regulators and rating agencies.
+
+## 10.2 Market opportunity
+
+::: {.tiles .market}
+::: {.tile}
+[US$61.3bn]{.big}
+catastrophe bonds outstanding, end-2025: a record, up 24% in one year (Artemis)
+:::
+::: {.tile}
+[US$19bn]{.big}
+parametric insurance premiums, 2025, growing ≈ 12% a year (Global Market Insights)
+:::
+::: {.tile}
+[US$181bn]{.big}
+uninsured natural-catastrophe losses in 2024, the protection gap (Swiss Re Institute)
+:::
+:::
+
+![**Exhibit 2.** Total, serviceable and obtainable market. The TAM is a third-party estimate of the
+catastrophe-modelling and exposure-management software market. The SAM and SOM are bottom-up:
+institutions per segment × annual contract value, with all assumptions in
+`src/business/market.py`.](../art/market_sizing.svg){.wide}
+
+* **TAM, US$2.1bn (2025).** Catastrophe-modelling and exposure-management software. Third-party estimates
+  range from US$2.1bn to US$2.8bn, growing 9–12% a year.
+* **SAM, ≈ US${{MK_SAM}}m a year.** {{MK_INST}} institutions that price, structure or hold
+  *multi-region joint* catastrophe risk, at annual contract values of US$50–300k.
+* **SOM, ≈ US${{MK_SOM}}m ARR by year 5.** {{MK_CUST}} customers, about {{MK_SHARE}} of the SAM.
+* **Upside not counted.** Correlated credit and supply-chain risk, compound climate extremes, and
+  advisory fees on bond structuring.
+
+## 10.3 Customers and business model
+
+| Segment | Buyer | Pain point today | What we offer | Model |
+|---|---|---|---|---|
+| Development banks and sovereign pools (ADB, World Bank, CCRIF, ARC, SEADRIF) | disaster-risk-financing teams | joint tails of pooled bonds cannot be estimated from data; slow scenario studies | portfolio analytics, stress tests, trigger monitoring | **B2G**: technical-assistance contracts, enterprise licence |
+| Reinsurers | catastrophe analytics, pricing | Monte Carlo on event loss tables is noisy in the joint tail | engine plug-in, faster and tighter tail metrics | **B2B**: enterprise subscription |
+| ILS funds and cat-bond investors | portfolio managers, risk | correlation between bonds; pricing new issues | joint-tail dashboard, agent, morning brief | **B2B**: professional subscription |
+| Brokers and model vendors | structuring, product teams | aggregation step is the accuracy bottleneck | licensed estimation layer, Oasis plug-in | **B2B**: licence and royalty |
+| Parametric insurers and MGAs | product, actuarial | pricing multi-site and multi-peril triggers | API and MCP tools | **B2B**: usage-based API |
+
+* **Why B2B and B2G, not B2C.** Joint-tail analytics are bought by institutions that hold risk capital.
+  Consumers do not buy them, but they benefit *indirectly* (B2B2C): parametric and micro-insurance
+  products priced with tighter tails can carry lower uncertainty loadings.
+* **Land and expand.** We start with public institutions, where the challenge's use case lives and
+  where validation and openness matter most. We then expand to private risk capital, where the budget
+  sits.
+
+| Tier | For whom | Includes | Indicative price |
+|---|---|---|---|
+| Open core | researchers, model validators | Python library, exact references, documentation | free (open source) |
+| Professional | ILS funds, MGAs | web app, dashboard, advisory agent, 5 seats, daily brief | ≈ US$50–100k / year |
+| Enterprise | reinsurers, development banks, pools | on-premise or private cloud, MCP server, validation pack, SLA, custom perils | ≈ US$150–300k / year |
+| Advisory | bond issuers, sponsors | structuring and trigger-design studies with independent validation | per project |
+
+## 10.4 Fit with the analyst's daily workflow
+
+![**Exhibit 3.** A day with the product. Agents prepare (news scan, hazard refresh, re-estimation);
+the analyst decides (morning brief, questions, recommendation, sign-off).](../art/workflow_day.svg){.wide}
+
+* **No new habit required.** The product produces a morning brief, answers questions in plain language,
+  and drafts the memo the analyst already writes.
+* **Fits existing systems.** The MCP and API layer exposes the same tools to Excel, Oasis pipelines and
+  in-house agents.
+* **Decision rights stay with people.** The agent never executes a trade, a trigger or a price. Every
+  recommendation is approved and logged with its data and model versions.
+
+## 10.5 Go-to-market
+
+![**Exhibit 4.** Go-to-market in three phases, from public pilots to private-capital
+scale.](../art/gtm.svg){.wide}
+
+| Competitor type | Examples | Their strength | Our position |
+|---|---|---|---|
+| Catastrophe-model vendors | commercial vendor platforms, Oasis LMF | hazard science, exposure data, market acceptance | **complement**: we replace the plain-Monte-Carlo aggregation step and plug in via event or source output |
+| Risk analytics and ILS platforms | in-house broker and fund tools | distribution, client relationships | licence partner; joint-tail accuracy as a differentiator |
+| General AI assistants | chat-based copilots | language interface | our agent only reports engine outputs with intervals; no hallucinated numbers |
+
+* **Defensibility.** The method and its validation suite (unbiasedness proof, exact references,
+  coverage tests); the source-level data model; and the agent protocol, which is hard to replicate
+  without the engine underneath.
+
+## 10.6 Commercial risks and impact
+
+| Risk | Mitigation |
+|---|---|
+| Long institutional sales cycles | start with grant-funded pilots; open core builds trust and adoption |
+| Data licensing for commercial use | open datasets first; licensed feeds per client contract |
+| Model-risk scrutiny of AI agents | numbers only from validated tools; human sign-off; audit trail |
+| Incumbent vendors build the same capability | partner and licence early; Oasis plug-in keeps us inside the workflow |
+
+* **Impact.** Tighter joint-tail estimates reduce uncertainty loadings in pricing, so pooled cover becomes
+  cheaper for vulnerable countries, and trigger decisions become easier to defend (UN SDG 13: climate
+  action).
 * **Broader applicability.** Correlated credit portfolios, parametric pandemic and supply-chain cover,
   compound climate extremes, infrastructure reliability.
-* **Impact.** Tighter joint-tail estimates reduce uncertainty loadings in pricing, making pooled cover
-  cheaper for vulnerable countries, and make trigger decisions more defensible (UN SDG 13).
 
-![**Figure [fig:integration].** Integration of the RDPO engine into a catastrophe-risk workflow.](../art/integration.svg){.wide}
+::: {.takeaway}
+Open data and daily news in; validated joint-tail numbers and human-approved recommendations out. We sell
+business-to-business and business-to-government, starting with public pilots.
+:::
+
+:::
 
 # 11 Team {.newpage}
 
-**Tan Chun Loong** (sole member: research, implementation, quantum resource estimation, product and
-business case). Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang
-Technological University (2024–2028; CGPA 4.8/5.0, First Class Honours).
+::: {.profile}
+**Tan Chun Loong**, sole member: research, implementation, quantum resource estimation, product and
+business case.
 
+Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang Technological University
+(2024–2028; CGPA 4.8/5.0, First Class Honours).
+:::
+
+* **Incoming research fellow in quantum information, ICFO (Barcelona).** Pre-selected for ICFO's
+  Phortify Student Research Fellowship, one of three students selected worldwide (up to six months of
+  funded research). Proposed host: the Quantum Information Theory group of ICREA Professor Antonio Acín, a
+  leading group in quantum information and device-independent quantum cryptography.
 * *URECA Research Fellow, "The Thermodynamics of Mitigating Ignorance" (Prof. Mile Gu, NTU, 2026–2027).*
-  The cost of acting on beliefs that differ from reality, measured by the relative entropy between belief
-  and truth, and optimal belief revision by dynamic programming for model-based reinforcement learning.
-  RDPO rests on the same mathematics: backward induction for value functions and divergences between a
-  policy and the optimal measure.
+  This project studies the cost of acting on beliefs that differ from reality, measured by the relative
+  entropy between belief and truth. It also covers optimal belief revision by dynamic programming for
+  model-based reinforcement learning. RDPO rests on the same mathematics: backward induction for value
+  functions, and divergences between a policy and the optimal measure.
 * *Quantum Security Research Intern, QUASAR-CREATE Thrust 2, Fraunhofer Singapore (2026–).* Security
   evaluation of quantum key distribution under device imperfections.
 * *URECA Research Fellow, atmosphere–ocean interaction models (Prof. François Gay-Balmaz, NTU, 2025–2026).*
   Fokker–Planck equations and stochastic thermodynamics for reduced climate models.
-* *Selected projects:* Clifford+T compilation and T-count optimisation (MIT iQuHACK 2026, sole Singapore
-  representative); quantum optimisation for wildfire response (SEA Quantathon 2025 finalist); quantum
-  reservoir computing for sustainable-finance systemic risk (QAI Ventures GenQ Hackathon 2025); AI risk
-  scoring for maritime fuel verification (winner, SuperAI NEXT Hackathon 2026).
+* *Selected projects:*
+  * Clifford+T compilation and T-count optimisation (MIT iQuHACK 2026, sole Singapore representative).
+  * Quantum optimisation for wildfire response (SEA Quantathon 2025 finalist).
+  * Quantum reservoir computing for sustainable-finance systemic risk (QAI Ventures GenQ Hackathon 2025).
+  * AI risk scoring for maritime fuel verification (winner, SuperAI NEXT Hackathon 2026).
 * *Community:* founder of Quantum Wings (quantum outreach to more than 500 students); Country Lead
   (Singapore), Qiskit Fall Fest 2026.
+* **Why this profile fits.** Quantum information theory (ICFO, QKD security) underpins the quantum stage.
+  Relative entropy and dynamic programming (NTU) underpin RDPO. Stochastic climate models connect to the
+  hazard side, and hackathon product delivery connects to the agent product.
 
 A short CV is attached as an annex.
 

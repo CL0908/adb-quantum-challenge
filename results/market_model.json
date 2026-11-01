@@ -1,0 +1,60 @@
+{
+  "tam_bn": 2.1,
+  "sam_m": 30.35,
+  "som_m": 3.45,
+  "som_share_of_sam": 0.11367380560131796,
+  "customers_y5": 28,
+  "segments": [
+    {
+      "segment": "Development banks & sovereign risk pools",
+      "institutions": 15,
+      "acv_k": 150,
+      "sam_m": 2.25,
+      "won_y5": 4,
+      "som_m": 0.6
+    },
+    {
+      "segment": "Reinsurers",
+      "institutions": 50,
+      "acv_k": 250,
+      "sam_m": 12.5,
+      "won_y5": 5,
+      "som_m": 1.25
+    },
+    {
+      "segment": "ILS fund managers & cat-bond investors",
+      "institutions": 70,
+      "acv_k": 100,
+      "sam_m": 7.0,
+      "won_y5": 8,
+      "som_m": 0.8
+    },
+    {
+      "segment": "Brokers & catastrophe-model vendors (licence)",
+      "institutions": 12,
+      "acv_k": 300,
+      "sam_m": 3.6,
+      "won_y5": 1,
+      "som_m": 0.3
+    },
+    {
+      "segment": "Parametric insurers & MGAs",
+      "institutions": 100,
+      "acv_k": 50,
+      "sam_m": 5.0,
+      "won_y5": 10,
+      "som_m": 0.5
+    }
+  ],
+  "context_bn": {
+    "Catastrophe bonds outstanding (2025)": 61.3,
+    "Parametric insurance premiums (2025)": 19.4,
+    "Uninsured nat-cat losses, protection gap (2024)": 181.0
+  },
+  "sources": {
+    "cat_bonds": "Artemis.bm, outstanding catastrophe bond market at end-2025 (US$61.3bn)",
+    "parametric": "Global Market Insights, parametric insurance market 2025 (US$19.4bn)",
+    "gap": "Swiss Re Institute sigma 1/2025: 2024 economic nat-cat losses US$318bn, protection gap US$181bn",
+    "software": "TrendX Insights / Market Intelo: catastrophe modelling & exposure software 2025 (US$2.1bn)"
+  }
+}

@@ -12,7 +12,8 @@ from pathlib import Path
 
 import numpy as np
 
-from . import art, art2, paper_figs
+from . import art, art2, art3, paper_figs
+from ..business import market
 
 ROOT = Path(".")
 PAPER = ROOT / "docs/paper"
@@ -282,6 +283,12 @@ def q_values():
     return v
 
 
+def mk_values():
+    m = json.loads((R / "market_model.json").read_text())
+    return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
+            "MK_INST": str(sum(r["institutions"] for r in m["segments"])), "MK_SHARE": pct(m["som_share_of_sam"], 0)}
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -306,7 +313,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values):
         try:
             vals.update(fn())
         except Exception as ex:
@@ -348,6 +355,8 @@ const { chromium } = require('playwright');
 def build(cv=None):
     art.main()
     art2.main()
+    (R / "market_model.json").write_text(json.dumps(market.model(), indent=2))
+    art3.main()
     paper_figs.main()
     left = fill()
     html = PAPER / "proposal.html"
