@@ -1285,3 +1285,361 @@
 {"id": "complete-4-stop_loss-v1-10", "key": ["complete", 4, "stop_loss", "v1"], "est": 61437.58355826873, "ci": [60986.759091457796, 61888.40802507966], "sec": 2.6004096229989955, "selected": null}
 {"id": "complete-4-stop_loss-v2-10", "key": ["complete", 4, "stop_loss", "v2"], "est": 61437.58355826873, "ci": [60961.67562279181, 61913.49149374565], "sec": 2.726519054000164, "selected": null}
 {"id": "complete-4-stop_loss-twist-10", "key": ["complete", 4, "stop_loss", "twist"], "est": 61280.68174103554, "ci": null, "sec": 0.10274123099952703, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-10", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4847870897398694e-05, "ci": [1.474287083486806e-05, 1.4952870959929327e-05], "sec": 1.156590390999554, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-10", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61557.5042836347, "ci": [61181.135925223025, 61933.87264204637], "sec": 2.9694549630003166, "selected": null}
+{"id": "complete-6-exceedance-twist-10", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006206174612148011, "ci": null, "sec": 0.2582869790003315, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-10", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4847870897398694e-05, "ci": [1.4740879060088989e-05, 1.4954862734708399e-05], "sec": 0.9495312490016659, "selected": null}
+{"id": "complete-6-stop_loss-twist-10", "key": ["complete", 6, "stop_loss", "twist"], "est": 15513.822236086418, "ci": null, "sec": 0.22940302500137477, "selected": null}
+{"id": "complete-7-exceedance-twist-10", "key": ["complete", 7, "exceedance", "twist"], "est": 0.0002882721748365492, "ci": null, "sec": 0.2808514859989373, "selected": null}
+{"id": "complete-7-stop_loss-twist-10", "key": ["complete", 7, "stop_loss", "twist"], "est": 7898.260118275704, "ci": null, "sec": 0.3068286409998109, "selected": null}
+{"id": "ring-2-exceedance-v1-11", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012048963972979948, "ci": [0.01201150047119507, 0.012086427474764825], "sec": 0.32969434699953126, "selected": null}
+{"id": "ring-2-exceedance-v2-11", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012048963972979948, "ci": [0.012011487439257663, 0.012086440506702233], "sec": 0.3047856730008789, "selected": null}
+{"id": "ring-2-exceedance-twist-11", "key": ["ring", 2, "exceedance", "twist"], "est": 0.012070352517714267, "ci": null, "sec": 0.04579666899917356, "selected": null}
+{"id": "ring-2-exceedance-v2-final-11", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012024101058957657, "ci": [0.011991754561475582, 0.012056447556439732], "sec": 0.3150777480004763, "selected": null}
+{"id": "ring-2-stop_loss-v1-11", "key": ["ring", 2, "stop_loss", "v1"], "est": 282083.51964888524, "ci": [281201.38058595237, 282965.6587118181], "sec": 0.3066440210004657, "selected": null}
+{"id": "ring-2-stop_loss-v2-11", "key": ["ring", 2, "stop_loss", "v2"], "est": 282083.51964888524, "ci": [281200.31114822143, 282966.72814954905], "sec": 0.22597942299944407, "selected": null}
+{"id": "ring-2-stop_loss-twist-11", "key": ["ring", 2, "stop_loss", "twist"], "est": 285403.55591345875, "ci": null, "sec": 0.020375031999719795, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-11", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282232.8000771401, "ci": [281512.4839476742, 282953.116206606], "sec": 0.25062274999982037, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-11", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.1626159224913946e-05, "ci": [3.151763979840193e-05, 3.173467865142596e-05], "sec": 0.23240675300075964, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-11", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.1626159224913946e-05, "ci": [3.1517388935305325e-05, 3.173492951452257e-05], "sec": 0.2310489259998576, "selected": null}
+{"id": "ring-20-stop_loss-v2-10", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.006997920177540204, "ci": [0.006921078371562547, 0.0070747619835178615], "sec": 21.760251308998704, "selected": null}
+{"id": "ring-8-exceedance-v2-11", "key": ["ring", 8, "exceedance", "v2"], "est": 3.922017234720144e-05, "ci": [3.885725165505501e-05, 3.958309303934787e-05], "sec": 5.502705161999984, "selected": null}
+{"id": "ring-8-exceedance-v1-11", "key": ["ring", 8, "exceedance", "v1"], "est": 3.922017234720144e-05, "ci": [3.88659725950383e-05, 3.9574372099364576e-05], "sec": 5.600884962001146, "selected": null}
+{"id": "ring-8-exceedance-twist-11", "key": ["ring", 8, "exceedance", "twist"], "est": 3.9399591275163386e-05, "ci": null, "sec": 0.15206590199886705, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-10", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007065930288292844, "ci": [0.006995898376136056, 0.007135962200449633], "sec": 23.14395634200082, "selected": null}
+{"id": "ring-8-exceedance-v2-final-11", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.882040795345049e-05, "ci": [3.846399835933213e-05, 3.9176817547568854e-05], "sec": 4.584314980000272, "selected": null}
+{"id": "ring-8-stop_loss-twist-11", "key": ["ring", 8, "stop_loss", "twist"], "est": 933.9046222061977, "ci": null, "sec": 0.14096581100056937, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-11", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.9003316929660796e-05, "ci": [1.874720780040401e-05, 1.9259426058917584e-05], "sec": 0.6909428520011716, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-11", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.9003316929660796e-05, "ci": [1.8734567340277023e-05, 1.927206651904457e-05], "sec": 0.9064138640005694, "selected": null}
+{"id": "ring-16-exceedance-twist-11", "key": ["ring", 16, "exceedance", "twist"], "est": 1.4276982731837797e-08, "ci": null, "sec": 0.33227199700013443, "selected": null}
+{"id": "ring-16-stop_loss-twist-11", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.36186214344629986, "ci": null, "sec": 0.32902249399921857, "selected": null}
+{"id": "ring-8-stop_loss-v2-11", "key": ["ring", 8, "stop_loss", "v2"], "est": 950.9551274432926, "ci": [943.6126528714927, 958.2976020150924], "sec": 5.464476856999681, "selected": null}
+{"id": "ring-8-stop_loss-v1-11", "key": ["ring", 8, "stop_loss", "v1"], "est": 950.9551274432926, "ci": [943.7027504900645, 958.2075043965206], "sec": 5.577729879998515, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-11", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 947.9957769049579, "ci": [940.701006610638, 955.2905471992777], "sec": 6.639220307000869, "selected": null}
+{"id": "ring-20-exceedance-twist-11", "key": ["ring", 20, "exceedance", "twist"], "est": 3.082684837170005e-10, "ci": null, "sec": 0.42972294600076566, "selected": null}
+{"id": "ring-20-exceedance-v2-final-11", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.9370492372888623e-10, "ci": [2.890118794377708e-10, 2.983979680200017e-10], "sec": 13.242763488000492, "selected": null}
+{"id": "ring-20-exceedance-v1-11", "key": ["ring", 20, "exceedance", "v1"], "est": 2.853496561929118e-10, "ci": [2.808582480109575e-10, 2.8984106437486615e-10], "sec": 15.836743114001365, "selected": null}
+{"id": "ring-20-exceedance-v2-11", "key": ["ring", 20, "exceedance", "v2"], "est": 2.853496561929118e-10, "ci": [2.807420002256413e-10, 2.8995731216018234e-10], "sec": 15.313111531000686, "selected": null}
+{"id": "ring-20-stop_loss-twist-11", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.006957983374797744, "ci": null, "sec": 0.4340637189998233, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-11", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.897194993783489e-05, "ci": [1.8816566629880522e-05, 1.912733324578926e-05], "sec": 1.677808604999882, "selected": null}
+{"id": "ring-20-stop_loss-v1-11", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.007027667586359135, "ci": [0.006927311425959542, 0.0071280237467587285], "sec": 17.24893260099998, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-11", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.897194993783489e-05, "ci": [1.8813723782546925e-05, 1.9130176093122856e-05], "sec": 1.7780518769995979, "selected": null}
+{"id": "ring-28-exceedance-twist-11", "key": ["ring", 28, "exceedance", "twist"], "est": 1.3403971618529472e-13, "ci": null, "sec": 0.766088555999886, "selected": null}
+{"id": "ring-28-stop_loss-twist-11", "key": ["ring", 28, "stop_loss", "twist"], "est": 2.848310592372842e-06, "ci": null, "sec": 0.762767578000421, "selected": null}
+{"id": "complete-4-exceedance-v1-11", "key": ["complete", 4, "exceedance", "v1"], "est": 0.0020715497186394507, "ci": [0.002059770083396632, 0.0020833293538822695], "sec": 2.34181033799905, "selected": null}
+{"id": "complete-4-exceedance-v2-11", "key": ["complete", 4, "exceedance", "v2"], "est": 0.0020715497186394507, "ci": [0.002059685514827549, 0.0020834139224513524], "sec": 2.4107874979999906, "selected": null}
+{"id": "complete-4-exceedance-twist-11", "key": ["complete", 4, "exceedance", "twist"], "est": 0.0021225704315390266, "ci": null, "sec": 0.09593141600089439, "selected": null}
+{"id": "complete-4-exceedance-v2-final-11", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.002069164651111335, "ci": [0.002057700009864416, 0.002080629292358254], "sec": 2.7533685130001686, "selected": null}
+{"id": "complete-4-stop_loss-v1-11", "key": ["complete", 4, "stop_loss", "v1"], "est": 61954.52169870249, "ci": [61367.478909076635, 62541.564488328346], "sec": 2.7417225389999658, "selected": null}
+{"id": "complete-4-stop_loss-v2-11", "key": ["complete", 4, "stop_loss", "v2"], "est": 61954.52169870249, "ci": [61309.10058051329, 62599.94281689169], "sec": 2.8982597650010575, "selected": null}
+{"id": "complete-4-stop_loss-twist-11", "key": ["complete", 4, "stop_loss", "twist"], "est": 62105.16580336901, "ci": null, "sec": 0.1585318149991508, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-11", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61681.69390982931, "ci": [61292.04993123485, 62071.33788842377], "sec": 3.018201131000751, "selected": null}
+{"id": "ring-20-stop_loss-v2-11", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.007027667586359135, "ci": [0.0069250893724670005, 0.00713024580025127], "sec": 15.134896134999508, "selected": null}
+{"id": "complete-6-exceedance-twist-11", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006286875128460736, "ci": null, "sec": 0.29614010700061044, "selected": null}
+{"id": "complete-6-stop_loss-twist-11", "key": ["complete", 6, "stop_loss", "twist"], "est": 15264.29414253788, "ci": null, "sec": 0.23365800800092984, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-11", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007026269437010022, "ci": [0.006925260209276177, 0.007127278664743867], "sec": 15.04140944000028, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-11", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4857487568800714e-05, "ci": [1.4717276132167106e-05, 1.4997699005434322e-05], "sec": 1.0907452980009111, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-11", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4857487568800714e-05, "ci": [1.4710075513332186e-05, 1.5004899624269242e-05], "sec": 0.9800360690005618, "selected": null}
+{"id": "complete-7-exceedance-twist-11", "key": ["complete", 7, "exceedance", "twist"], "est": 0.00029481620584790436, "ci": null, "sec": 0.381349166000291, "selected": null}
+{"id": "ring-2-exceedance-v1-12", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012056154217871252, "ci": [0.012019053492376622, 0.012093254943365881], "sec": 0.33880145600051037, "selected": null}
+{"id": "ring-2-exceedance-twist-12", "key": ["ring", 2, "exceedance", "twist"], "est": 0.0121316405328145, "ci": null, "sec": 0.02514510800028802, "selected": null}
+{"id": "complete-7-stop_loss-twist-11", "key": ["complete", 7, "stop_loss", "twist"], "est": 7997.6781515628645, "ci": null, "sec": 0.4002345829994738, "selected": null}
+{"id": "ring-2-exceedance-v2-final-12", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012033237437365982, "ci": [0.01200277156578506, 0.012063703308946905], "sec": 0.3154408169993985, "selected": null}
+{"id": "ring-2-exceedance-v2-12", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012056154217871252, "ci": [0.012018972985336548, 0.012093335450405956], "sec": 0.4130044590001489, "selected": null}
+{"id": "ring-2-stop_loss-twist-12", "key": ["ring", 2, "stop_loss", "twist"], "est": 282426.8404273809, "ci": null, "sec": 0.03241651600001205, "selected": null}
+{"id": "ring-2-stop_loss-v2-12", "key": ["ring", 2, "stop_loss", "v2"], "est": 281780.72959701554, "ci": [280926.5124192195, 282634.9467748116], "sec": 0.2797994110005675, "selected": null}
+{"id": "ring-2-stop_loss-v1-12", "key": ["ring", 2, "stop_loss", "v1"], "est": 281780.72959701554, "ci": [280927.8507352591, 282633.60845877195], "sec": 0.3768322989999433, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-12", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 281692.30365667504, "ci": [281001.4131181925, 282383.19419515756], "sec": 0.3135882659989875, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-12", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.165937766654075e-05, "ci": [3.155750379159123e-05, 3.176125154149027e-05], "sec": 0.31908651599951554, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-12", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.165937766654075e-05, "ci": [3.1557286917860574e-05, 3.176146841522093e-05], "sec": 0.2628534719988238, "selected": null}
+{"id": "ring-8-exceedance-twist-12", "key": ["ring", 8, "exceedance", "twist"], "est": 3.829914885405664e-05, "ci": null, "sec": 0.17700904400044237, "selected": null}
+{"id": "ring-8-exceedance-v2-12", "key": ["ring", 8, "exceedance", "v2"], "est": 3.89356440767713e-05, "ci": [3.849799276198548e-05, 3.937329539155712e-05], "sec": 4.590402181000172, "selected": null}
+{"id": "ring-8-exceedance-v1-12", "key": ["ring", 8, "exceedance", "v1"], "est": 3.89356440767713e-05, "ci": [3.8523719104137196e-05, 3.93475690494054e-05], "sec": 5.136975645998973, "selected": null}
+{"id": "ring-8-exceedance-v2-final-12", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.915662476308271e-05, "ci": [3.8884621475475326e-05, 3.942862805069009e-05], "sec": 5.111870075999832, "selected": null}
+{"id": "ring-8-stop_loss-twist-12", "key": ["ring", 8, "stop_loss", "twist"], "est": 965.0208748737759, "ci": null, "sec": 0.15421272999992652, "selected": null}
+{"id": "ring-8-stop_loss-v1-12", "key": ["ring", 8, "stop_loss", "v1"], "est": 949.1260190293833, "ci": [941.5566549388728, 956.6953831198938], "sec": 5.598804037999798, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-12", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.9005796815165988e-05, "ci": [1.889394807206748e-05, 1.9117645558264495e-05], "sec": 0.8728161030012416, "selected": null}
+{"id": "ring-16-exceedance-twist-12", "key": ["ring", 16, "exceedance", "twist"], "est": 1.4011257466413119e-08, "ci": null, "sec": 0.27610856699902797, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-12", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.9005796815165988e-05, "ci": [1.8892326656266684e-05, 1.9119266974065293e-05], "sec": 0.8247592539992183, "selected": null}
+{"id": "ring-16-stop_loss-twist-12", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.34869780426609176, "ci": null, "sec": 0.29335468800127273, "selected": null}
+{"id": "ring-8-stop_loss-v2-12", "key": ["ring", 8, "stop_loss", "v2"], "est": 949.1260190293833, "ci": [941.3982833634988, 956.8537546952679], "sec": 5.366393697999229, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-12", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 952.460697161367, "ci": [946.9905290823999, 957.930865240334], "sec": 7.2208850939987315, "selected": null}
+{"id": "ring-20-exceedance-twist-12", "key": ["ring", 20, "exceedance", "twist"], "est": 2.930751122463656e-10, "ci": null, "sec": 0.43264471200018306, "selected": null}
+{"id": "ring-20-exceedance-v2-12", "key": ["ring", 20, "exceedance", "v2"], "est": 2.902795616746017e-10, "ci": [2.850923178019096e-10, 2.9546680554729387e-10], "sec": 10.835454757998377, "selected": null}
+{"id": "ring-20-exceedance-v1-12", "key": ["ring", 20, "exceedance", "v1"], "est": 2.902795616746017e-10, "ci": [2.8523660412018817e-10, 2.9532251922901527e-10], "sec": 12.534547052999187, "selected": null}
+{"id": "ring-20-stop_loss-v1-12", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.007043552406801815, "ci": [0.0069348953625282435, 0.007152209451075387], "sec": 12.638530053000068, "selected": null}
+{"id": "ring-20-exceedance-v2-final-12", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.90794733485496e-10, "ci": [2.8628377725639887e-10, 2.953056897145931e-10], "sec": 15.473975962999248, "selected": null}
+{"id": "ring-20-stop_loss-twist-12", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.006775842251300715, "ci": null, "sec": 0.4243311549998907, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-12", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.8992962575674533e-05, "ci": [1.8884183692434907e-05, 1.910174145891416e-05], "sec": 1.511496545999762, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-12", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.8992962575674533e-05, "ci": [1.8880091990161117e-05, 1.910583316118795e-05], "sec": 1.722751032000815, "selected": null}
+{"id": "ring-28-exceedance-twist-12", "key": ["ring", 28, "exceedance", "twist"], "est": 1.2544858134410638e-13, "ci": null, "sec": 0.7390847719998419, "selected": null}
+{"id": "ring-28-stop_loss-twist-12", "key": ["ring", 28, "stop_loss", "twist"], "est": 3.0382236663964936e-06, "ci": null, "sec": 0.6509630009986722, "selected": null}
+{"id": "ring-20-stop_loss-v2-12", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.007043552406801815, "ci": [0.006931484065673865, 0.0071556207479297656], "sec": 11.579877066000336, "selected": null}
+{"id": "complete-4-exceedance-v1-12", "key": ["complete", 4, "exceedance", "v1"], "est": 0.002069825130149473, "ci": [0.002052494852700124, 0.0020871554075988226], "sec": 2.130586064999079, "selected": null}
+{"id": "complete-4-exceedance-twist-12", "key": ["complete", 4, "exceedance", "twist"], "est": 0.002103480158370267, "ci": null, "sec": 0.09754733299996587, "selected": null}
+{"id": "complete-4-exceedance-v2-12", "key": ["complete", 4, "exceedance", "v2"], "est": 0.002069825130149473, "ci": [0.0020513157397127483, 0.002088334520586198], "sec": 2.1620222500005184, "selected": null}
+{"id": "complete-4-exceedance-v2-final-12", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.002077540741675974, "ci": [0.002064443097156668, 0.0020906383861952794], "sec": 2.2498163130003377, "selected": null}
+{"id": "complete-4-stop_loss-v1-12", "key": ["complete", 4, "stop_loss", "v1"], "est": 61314.085396218215, "ci": [60904.92784397297, 61723.24294846346], "sec": 2.521888974000831, "selected": null}
+{"id": "complete-4-stop_loss-twist-12", "key": ["complete", 4, "stop_loss", "twist"], "est": 61725.90290699608, "ci": null, "sec": 0.09418526400077099, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-12", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.0070639876412419925, "ci": [0.00695379241956798, 0.0071741828629160054], "sec": 13.57635142700019, "selected": null}
+{"id": "complete-4-stop_loss-v2-12", "key": ["complete", 4, "stop_loss", "v2"], "est": 61314.085396218215, "ci": [60891.79704640772, 61736.37374602871], "sec": 2.552222428999812, "selected": null}
+{"id": "complete-6-exceedance-twist-12", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006132468807830218, "ci": null, "sec": 0.24946643999828666, "selected": null}
+{"id": "complete-6-stop_loss-twist-12", "key": ["complete", 6, "stop_loss", "twist"], "est": 15236.286473190843, "ci": null, "sec": 0.19287558700125373, "selected": null}
+{"id": "complete-7-exceedance-twist-12", "key": ["complete", 7, "exceedance", "twist"], "est": 0.00029168853019706487, "ci": null, "sec": 0.3298202219993982, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-12", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4817436547083818e-05, "ci": [1.4702209580243857e-05, 1.493266351392378e-05], "sec": 1.1919039860003977, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-12", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4817436547083818e-05, "ci": [1.4698872471096362e-05, 1.4936000623071275e-05], "sec": 0.9903254649998416, "selected": null}
+{"id": "complete-7-stop_loss-twist-12", "key": ["complete", 7, "stop_loss", "twist"], "est": 7840.807241448245, "ci": null, "sec": 0.3101131189996522, "selected": null}
+{"id": "ring-2-exceedance-v1-13", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012058092584485359, "ci": [0.012020684642743822, 0.012095500526226896], "sec": 0.29301939200013294, "selected": null}
+{"id": "ring-2-exceedance-twist-13", "key": ["ring", 2, "exceedance", "twist"], "est": 0.01195363657435206, "ci": null, "sec": 0.02405888399880496, "selected": null}
+{"id": "ring-2-exceedance-v2-13", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012058092584485359, "ci": [0.012020637014002524, 0.012095548154968194], "sec": 0.2795603949998622, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-12", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61574.451141005404, "ci": [61244.89804328048, 61904.004238730326], "sec": 2.7787245719991915, "selected": null}
+{"id": "ring-2-exceedance-v2-final-13", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012061087409534491, "ci": [0.012029910258504545, 0.012092264560564437], "sec": 0.2853391529988585, "selected": null}
+{"id": "ring-2-stop_loss-twist-13", "key": ["ring", 2, "stop_loss", "twist"], "est": 280615.90081710735, "ci": null, "sec": 0.029900896000981447, "selected": null}
+{"id": "ring-2-stop_loss-v1-13", "key": ["ring", 2, "stop_loss", "v1"], "est": 282914.0287510611, "ci": [282088.10620634264, 283739.9512957796], "sec": 0.29753076400083955, "selected": null}
+{"id": "ring-2-stop_loss-v2-13", "key": ["ring", 2, "stop_loss", "v2"], "est": 282914.0287510611, "ci": [282087.8007735204, 283740.2567286019], "sec": 0.30296688999987964, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-13", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.174527797532642e-05, "ci": [3.161702291676002e-05, 3.187353303389282e-05], "sec": 0.32254932499927236, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-13", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282216.62546288985, "ci": [281549.96240771824, 282883.28851806145], "sec": 0.4085338659988338, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-13", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.174527797532642e-05, "ci": [3.1616244775672086e-05, 3.1874311174980755e-05], "sec": 0.3239821289989777, "selected": null}
+{"id": "ring-8-exceedance-twist-13", "key": ["ring", 8, "exceedance", "twist"], "est": 3.9195662591395054e-05, "ci": null, "sec": 0.15000321099978464, "selected": null}
+{"id": "ring-8-exceedance-v1-13", "key": ["ring", 8, "exceedance", "v1"], "est": 3.8630949075516054e-05, "ci": [3.819716647863722e-05, 3.906473167239489e-05], "sec": 4.2537277869996615, "selected": null}
+{"id": "ring-8-exceedance-v2-final-13", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.890008965401657e-05, "ci": [3.8535644422746945e-05, 3.926453488528619e-05], "sec": 4.762245107000126, "selected": null}
+{"id": "ring-8-exceedance-v2-13", "key": ["ring", 8, "exceedance", "v2"], "est": 3.8630949075516054e-05, "ci": [3.8166081924523284e-05, 3.9095816226508824e-05], "sec": 4.838506037000116, "selected": null}
+{"id": "ring-8-stop_loss-twist-13", "key": ["ring", 8, "stop_loss", "twist"], "est": 963.5472426625748, "ci": null, "sec": 0.12655984999946668, "selected": null}
+{"id": "ring-8-stop_loss-v1-13", "key": ["ring", 8, "stop_loss", "v1"], "est": 947.8824759316456, "ci": [940.2228886324436, 955.5420632308475], "sec": 5.303556536000542, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-13", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.901425016008979e-05, "ci": [1.8900902269498453e-05, 1.912759805068113e-05], "sec": 0.9833042730006127, "selected": null}
+{"id": "ring-16-exceedance-twist-13", "key": ["ring", 16, "exceedance", "twist"], "est": 1.5102552405341412e-08, "ci": null, "sec": 0.32803850099844567, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-13", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.901425016008979e-05, "ci": [1.8899290342109936e-05, 1.9129209978069647e-05], "sec": 1.0341352750001533, "selected": null}
+{"id": "ring-16-stop_loss-twist-13", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.3449049282825185, "ci": null, "sec": 0.36146076299883134, "selected": null}
+{"id": "ring-8-stop_loss-v2-13", "key": ["ring", 8, "stop_loss", "v2"], "est": 947.8824759316456, "ci": [940.0574563834839, 955.7074954798072], "sec": 5.213779423000233, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-13", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 947.6687643250954, "ci": [939.9261369785447, 955.411391671646], "sec": 5.40654702699976, "selected": null}
+{"id": "ring-20-exceedance-twist-13", "key": ["ring", 20, "exceedance", "twist"], "est": 2.8113199926801594e-10, "ci": null, "sec": 0.4406722549992992, "selected": null}
+{"id": "ring-20-exceedance-v1-13", "key": ["ring", 20, "exceedance", "v1"], "est": 2.935405613774567e-10, "ci": [2.8913191231166313e-10, 2.9794921044325025e-10], "sec": 16.466990506998627, "selected": null}
+{"id": "ring-20-exceedance-v2-13", "key": ["ring", 20, "exceedance", "v2"], "est": 2.935405613774567e-10, "ci": [2.8906673158271004e-10, 2.9801439117220333e-10], "sec": 16.79822287100069, "selected": null}
+{"id": "ring-20-stop_loss-v1-13", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.006994143088775169, "ci": [0.006879819976515386, 0.0071084662010349525], "sec": 14.234841145000246, "selected": null}
+{"id": "ring-20-exceedance-v2-final-13", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.8627456250041436e-10, "ci": [2.825650329428003e-10, 2.899840920580284e-10], "sec": 15.745253690000027, "selected": null}
+{"id": "ring-20-stop_loss-twist-13", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.0075031830884252125, "ci": null, "sec": 0.5500544149999769, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-13", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.8666962986516053e-05, "ci": [1.731250200991636e-05, 2.0021423963115747e-05], "sec": 1.8708308049990592, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-13", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.8666962986516053e-05, "ci": [1.7069101927274545e-05, 2.0264824045757562e-05], "sec": 1.5288364749994798, "selected": null}
+{"id": "ring-28-exceedance-twist-13", "key": ["ring", 28, "exceedance", "twist"], "est": 1.4473348572167927e-13, "ci": null, "sec": 0.7388646399995196, "selected": null}
+{"id": "ring-28-stop_loss-twist-13", "key": ["ring", 28, "stop_loss", "twist"], "est": 3.1726017199293606e-06, "ci": null, "sec": 0.70517932400071, "selected": null}
+{"id": "complete-4-exceedance-v1-13", "key": ["complete", 4, "exceedance", "v1"], "est": 0.0020676824288857532, "ci": [0.0020547912293520636, 0.002080573628419443], "sec": 2.584090799000478, "selected": null}
+{"id": "complete-4-exceedance-v2-13", "key": ["complete", 4, "exceedance", "v2"], "est": 0.0020676824288857532, "ci": [0.002054552060529645, 0.0020808127972418615], "sec": 2.5056530890014983, "selected": null}
+{"id": "complete-4-exceedance-twist-13", "key": ["complete", 4, "exceedance", "twist"], "est": 0.0020392897592722424, "ci": null, "sec": 0.09607736199905048, "selected": null}
+{"id": "complete-4-exceedance-v2-final-13", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.0020685927957982734, "ci": [0.0020570739103956365, 0.0020801116812009103], "sec": 2.501184288999866, "selected": null}
+{"id": "complete-4-stop_loss-v1-13", "key": ["complete", 4, "stop_loss", "v1"], "est": 61385.48869445674, "ci": [61023.759302881306, 61747.218086032175], "sec": 2.509439573999771, "selected": null}
+{"id": "complete-4-stop_loss-v2-13", "key": ["complete", 4, "stop_loss", "v2"], "est": 61385.48869445674, "ci": [61019.76672901501, 61751.21065989847], "sec": 2.382819518999895, "selected": null}
+{"id": "complete-4-stop_loss-twist-13", "key": ["complete", 4, "stop_loss", "twist"], "est": 61200.59397945158, "ci": null, "sec": 0.10023718800039205, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-13", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61516.732243942795, "ci": [61085.35349695572, 61948.11099092987], "sec": 2.4141355310002837, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-13", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4758731161008932e-05, "ci": [1.463771265476379e-05, 1.4879749667254073e-05], "sec": 1.006690410000374, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-13", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4758731161008932e-05, "ci": [1.4634756570869529e-05, 1.4882705751148334e-05], "sec": 1.007642634000149, "selected": null}
+{"id": "complete-6-exceedance-twist-13", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006249253215478204, "ci": null, "sec": 0.21128746800059162, "selected": null}
+{"id": "complete-6-stop_loss-twist-13", "key": ["complete", 6, "stop_loss", "twist"], "est": 15348.893338816759, "ci": null, "sec": 0.20642941100049939, "selected": null}
+{"id": "complete-7-exceedance-twist-13", "key": ["complete", 7, "exceedance", "twist"], "est": 0.0002927449395901161, "ci": null, "sec": 0.2959242159995483, "selected": null}
+{"id": "complete-7-stop_loss-twist-13", "key": ["complete", 7, "stop_loss", "twist"], "est": 7856.867888894193, "ci": null, "sec": 0.32984351300001435, "selected": null}
+{"id": "ring-2-exceedance-v1-14", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012064766354547035, "ci": [0.012026103897957469, 0.012103428811136602], "sec": 0.3906018550005683, "selected": null}
+{"id": "ring-2-exceedance-v2-14", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012064766354547035, "ci": [0.01202605724596915, 0.012103475463124921], "sec": 0.3183487389997026, "selected": null}
+{"id": "ring-2-exceedance-twist-14", "key": ["ring", 2, "exceedance", "twist"], "est": 0.012117280945472014, "ci": null, "sec": 0.026996668000720092, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-13", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007072339902694834, "ci": [0.0069776490968766055, 0.007167030708513063], "sec": 13.952686560000075, "selected": null}
+{"id": "ring-2-stop_loss-v1-14", "key": ["ring", 2, "stop_loss", "v1"], "est": 282858.5736135964, "ci": [281918.30094492383, 283798.84628226893], "sec": 0.3014652140009275, "selected": null}
+{"id": "ring-2-exceedance-v2-final-14", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012057814456871792, "ci": [0.012026396222208389, 0.012089232691535196], "sec": 0.3944530520002445, "selected": null}
+{"id": "ring-2-stop_loss-twist-14", "key": ["ring", 2, "stop_loss", "twist"], "est": 281029.2498050386, "ci": null, "sec": 0.030636067000159528, "selected": null}
+{"id": "ring-2-stop_loss-v2-14", "key": ["ring", 2, "stop_loss", "v2"], "est": 282858.5736135964, "ci": [281915.2783745875, 283801.8688526053], "sec": 0.27757107700017514, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-14", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282725.5793824925, "ci": [281962.0944254505, 283489.06433953455], "sec": 0.26828219699928013, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-14", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.15793632771151e-05, "ci": [3.14485423232996e-05, 3.17101842309306e-05], "sec": 0.3001741919997585, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-14", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.15793632771151e-05, "ci": [3.1448500858718406e-05, 3.171022569551179e-05], "sec": 0.23998950199893443, "selected": null}
+{"id": "ring-20-stop_loss-v2-13", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.006994143088775169, "ci": [0.006874180235928788, 0.00711410594162155], "sec": 16.34894700699988, "selected": null}
+{"id": "ring-8-exceedance-twist-14", "key": ["ring", 8, "exceedance", "twist"], "est": 3.857396334836115e-05, "ci": null, "sec": 0.2627254359995277, "selected": null}
+{"id": "ring-8-exceedance-v1-14", "key": ["ring", 8, "exceedance", "v1"], "est": 3.888975674636856e-05, "ci": [3.8505353357299474e-05, 3.927416013543764e-05], "sec": 4.9519739219995245, "selected": null}
+{"id": "ring-8-exceedance-v2-14", "key": ["ring", 8, "exceedance", "v2"], "est": 3.888975674636856e-05, "ci": [3.848616880610622e-05, 3.929334468663089e-05], "sec": 5.0604795969993575, "selected": null}
+{"id": "ring-8-exceedance-v2-final-14", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.906973029357485e-05, "ci": [3.872337036307077e-05, 3.9416090224078924e-05], "sec": 5.746914495000965, "selected": null}
+{"id": "ring-8-stop_loss-twist-14", "key": ["ring", 8, "stop_loss", "twist"], "est": 955.5937801233129, "ci": null, "sec": 0.15504251399943314, "selected": null}
+{"id": "ring-8-stop_loss-v1-14", "key": ["ring", 8, "stop_loss", "v1"], "est": 954.8638061718999, "ci": [944.0135359512832, 965.7140763925166], "sec": 4.911554885000442, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-14", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.890972077252933e-05, "ci": [1.8812457815927972e-05, 1.9006983729130687e-05], "sec": 0.8498616650012991, "selected": null}
+{"id": "ring-16-exceedance-twist-14", "key": ["ring", 16, "exceedance", "twist"], "est": 1.4242987224702508e-08, "ci": null, "sec": 0.3468529879992275, "selected": null}
+{"id": "ring-16-stop_loss-twist-14", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.3384254162168616, "ci": null, "sec": 0.3236970560010377, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-14", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.890972077252933e-05, "ci": [1.881211622457791e-05, 1.900732532048075e-05], "sec": 0.8790117469998222, "selected": null}
+{"id": "ring-8-stop_loss-v2-14", "key": ["ring", 8, "stop_loss", "v2"], "est": 954.8638061718999, "ci": [943.1002060901185, 966.6274062536813], "sec": 4.563502438000796, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-14", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 951.0306406529486, "ci": [941.645350883825, 960.4159304220722], "sec": 5.757642350001333, "selected": null}
+{"id": "ring-20-exceedance-twist-14", "key": ["ring", 20, "exceedance", "twist"], "est": 2.8702428022265804e-10, "ci": null, "sec": 0.4032625990002998, "selected": null}
+{"id": "ring-20-exceedance-v2-14", "key": ["ring", 20, "exceedance", "v2"], "est": 2.933132177004657e-10, "ci": [2.86383595895363e-10, 3.002428395055684e-10], "sec": 14.044694722000713, "selected": null}
+{"id": "ring-20-exceedance-v1-14", "key": ["ring", 20, "exceedance", "v1"], "est": 2.933132177004657e-10, "ci": [2.8674734261088777e-10, 2.998790927900436e-10], "sec": 14.345333657000083, "selected": null}
+{"id": "ring-20-exceedance-v2-final-14", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.887725214467533e-10, "ci": [2.836983323345843e-10, 2.938467105589223e-10], "sec": 13.996796258999893, "selected": null}
+{"id": "ring-20-stop_loss-twist-14", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.006733867552423604, "ci": null, "sec": 0.459013021998544, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-14", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.8985884476224193e-05, "ci": [1.882870397430684e-05, 1.9143064978141546e-05], "sec": 1.514363329999469, "selected": null}
+{"id": "ring-20-stop_loss-v1-14", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.007164180937422854, "ci": [0.0070416985808200196, 0.007286663294025688], "sec": 15.50413988100081, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-14", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.8985884476224193e-05, "ci": [1.8823297267598208e-05, 1.914847168485018e-05], "sec": 1.5633926230002544, "selected": null}
+{"id": "ring-28-exceedance-twist-14", "key": ["ring", 28, "exceedance", "twist"], "est": 1.4342500659216817e-13, "ci": null, "sec": 0.6010582870003418, "selected": null}
+{"id": "ring-28-stop_loss-twist-14", "key": ["ring", 28, "stop_loss", "twist"], "est": 2.7860262356491233e-06, "ci": null, "sec": 0.7034156570007326, "selected": null}
+{"id": "complete-4-exceedance-v1-14", "key": ["complete", 4, "exceedance", "v1"], "est": 0.0020740293692705675, "ci": [0.0020570430264173927, 0.0020910157121237422], "sec": 2.479666922999968, "selected": null}
+{"id": "complete-4-exceedance-v2-14", "key": ["complete", 4, "exceedance", "v2"], "est": 0.0020740293692705675, "ci": [0.0020559234871503802, 0.0020921352513907547], "sec": 2.5033190100002685, "selected": null}
+{"id": "complete-4-exceedance-twist-14", "key": ["complete", 4, "exceedance", "twist"], "est": 0.0021074197944204996, "ci": null, "sec": 0.09273696899981587, "selected": null}
+{"id": "complete-4-exceedance-v2-final-14", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.0020718196028651306, "ci": [0.002058539976839775, 0.002085099228890486], "sec": 2.718728802001351, "selected": null}
+{"id": "complete-4-stop_loss-v1-14", "key": ["complete", 4, "stop_loss", "v1"], "est": 61878.7954792641, "ci": [61509.98336531303, 62247.60759321517], "sec": 2.5570285600006173, "selected": null}
+{"id": "complete-4-stop_loss-v2-14", "key": ["complete", 4, "stop_loss", "v2"], "est": 61878.7954792641, "ci": [61504.39455805892, 62253.196400469285], "sec": 2.4691172349994304, "selected": null}
+{"id": "complete-4-stop_loss-twist-14", "key": ["complete", 4, "stop_loss", "twist"], "est": 61736.19693404644, "ci": null, "sec": 0.09613666300174373, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-14", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61953.65059415984, "ci": [61574.689624002865, 62332.61156431681], "sec": 2.7562263829986478, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-14", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4766383195104193e-05, "ci": [1.4633285734791573e-05, 1.4899480655416814e-05], "sec": 0.9202487260008638, "selected": null}
+{"id": "complete-6-exceedance-twist-14", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006240455095128197, "ci": null, "sec": 0.2130200439987675, "selected": null}
+{"id": "complete-6-stop_loss-twist-14", "key": ["complete", 6, "stop_loss", "twist"], "est": 15310.62141031418, "ci": null, "sec": 0.22259083499920962, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-14", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4766383195104193e-05, "ci": [1.4628877935873942e-05, 1.4903888454334445e-05], "sec": 0.9827249159989151, "selected": null}
+{"id": "complete-7-exceedance-twist-14", "key": ["complete", 7, "exceedance", "twist"], "est": 0.00028905069436829236, "ci": null, "sec": 0.3642520400007925, "selected": null}
+{"id": "complete-7-stop_loss-twist-14", "key": ["complete", 7, "stop_loss", "twist"], "est": 7763.0171239797255, "ci": null, "sec": 0.3224936719998368, "selected": null}
+{"id": "ring-2-exceedance-v1-15", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012042648193803027, "ci": [0.012007020805473063, 0.01207827558213299], "sec": 0.298546123000051, "selected": null}
+{"id": "ring-2-exceedance-v2-15", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012042648193803027, "ci": [0.012007015377669922, 0.012078281009936132], "sec": 0.30964961300014693, "selected": null}
+{"id": "ring-2-exceedance-twist-15", "key": ["ring", 2, "exceedance", "twist"], "est": 0.012206307369443763, "ci": null, "sec": 0.025720729001477594, "selected": null}
+{"id": "ring-2-exceedance-v2-final-15", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012043517791034785, "ci": [0.012013343892330745, 0.012073691689738824], "sec": 0.3125011970005289, "selected": null}
+{"id": "ring-2-stop_loss-v1-15", "key": ["ring", 2, "stop_loss", "v1"], "est": 282891.61805219477, "ci": [282023.5978534605, 283759.638250929], "sec": 0.3640515700008109, "selected": null}
+{"id": "ring-2-stop_loss-v2-15", "key": ["ring", 2, "stop_loss", "v2"], "est": 282891.61805219477, "ci": [282022.569566422, 283760.6665379675], "sec": 0.36167398399993544, "selected": null}
+{"id": "ring-2-stop_loss-twist-15", "key": ["ring", 2, "stop_loss", "twist"], "est": 282784.06068946375, "ci": null, "sec": 0.026567740000245976, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-15", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282560.475620089, "ci": [281832.51924474747, 283288.4319954305], "sec": 0.30813589100034733, "selected": null}
+{"id": "ring-20-stop_loss-v2-14", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.007164180937422854, "ci": [0.007037607963202339, 0.007290753911643369], "sec": 16.32427441300024, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-14", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007063509997790656, "ci": [0.006962876374297423, 0.0071641436212838885], "sec": 16.293877153999347, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-15", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.165497060218401e-05, "ci": [3.15393069782373e-05, 3.177063422613072e-05], "sec": 0.3062638430001243, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-15", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.165497060218401e-05, "ci": [3.15387622999737e-05, 3.177117890439432e-05], "sec": 0.28436660599982133, "selected": null}
+{"id": "ring-8-exceedance-twist-15", "key": ["ring", 8, "exceedance", "twist"], "est": 3.8233081256521895e-05, "ci": null, "sec": 0.1569648149998102, "selected": null}
+{"id": "ring-8-exceedance-v2-final-15", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.896437403327006e-05, "ci": [3.8586597432762115e-05, 3.934215063377801e-05], "sec": 5.070893256001, "selected": null}
+{"id": "ring-8-exceedance-v1-15", "key": ["ring", 8, "exceedance", "v1"], "est": 3.9030578456496926e-05, "ci": [3.867857578954732e-05, 3.9382581123446534e-05], "sec": 5.473847317000036, "selected": null}
+{"id": "ring-8-stop_loss-v1-15", "key": ["ring", 8, "stop_loss", "v1"], "est": 948.6601721444873, "ci": [939.3591963041341, 957.9611479848405], "sec": 5.254148387000896, "selected": null}
+{"id": "ring-8-stop_loss-twist-15", "key": ["ring", 8, "stop_loss", "twist"], "est": 961.4389768598235, "ci": null, "sec": 0.1568637589989521, "selected": null}
+{"id": "ring-8-exceedance-v2-15", "key": ["ring", 8, "exceedance", "v2"], "est": 3.9030578456496926e-05, "ci": [3.866816749628057e-05, 3.9392989416713285e-05], "sec": 6.392106039000282, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-15", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.8960174963705848e-05, "ci": [1.8843223738543703e-05, 1.9077126188867993e-05], "sec": 1.0557341000003362, "selected": null}
+{"id": "ring-16-exceedance-twist-15", "key": ["ring", 16, "exceedance", "twist"], "est": 1.4310548445399546e-08, "ci": null, "sec": 0.4410744090000662, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-15", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.8960174963705848e-05, "ci": [1.8842875341874956e-05, 1.907747458553674e-05], "sec": 0.8802055880005355, "selected": null}
+{"id": "ring-16-stop_loss-twist-15", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.3422537282267578, "ci": null, "sec": 0.41818662699915876, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-15", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 947.9639982263881, "ci": [940.8379943047521, 955.090002148024], "sec": 4.792838043000302, "selected": null}
+{"id": "ring-8-stop_loss-v2-15", "key": ["ring", 8, "stop_loss", "v2"], "est": 948.6601721444873, "ci": [938.8305855921856, 958.4897586967891], "sec": 5.296842302999721, "selected": null}
+{"id": "ring-20-exceedance-twist-15", "key": ["ring", 20, "exceedance", "twist"], "est": 2.8951408205408824e-10, "ci": null, "sec": 0.4509377869999298, "selected": null}
+{"id": "ring-20-exceedance-v2-15", "key": ["ring", 20, "exceedance", "v2"], "est": 2.8913078684079475e-10, "ci": [2.825044691096883e-10, 2.957571045719012e-10], "sec": 13.596714710000015, "selected": null}
+{"id": "ring-20-exceedance-v1-15", "key": ["ring", 20, "exceedance", "v1"], "est": 2.8913078684079475e-10, "ci": [2.8298716871265776e-10, 2.9527440496893175e-10], "sec": 17.638581123999757, "selected": null}
+{"id": "ring-20-exceedance-v2-final-15", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.8651094773842893e-10, "ci": [2.816662083621305e-10, 2.9135568711472733e-10], "sec": 16.086530111000684, "selected": null}
+{"id": "ring-20-stop_loss-twist-15", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.00680036628424663, "ci": null, "sec": 0.4250977829997282, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-15", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.903055615962564e-05, "ci": [1.891213964910787e-05, 1.9148972670143407e-05], "sec": 1.6734739290004654, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-15", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.903055615962564e-05, "ci": [1.890868727115953e-05, 1.9152425048091747e-05], "sec": 1.74306896500093, "selected": null}
+{"id": "ring-28-exceedance-twist-15", "key": ["ring", 28, "exceedance", "twist"], "est": 1.296823763505737e-13, "ci": null, "sec": 0.6185451999990619, "selected": null}
+{"id": "ring-20-stop_loss-v1-15", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.006967687379578851, "ci": [0.00683452507019877, 0.007100849688958933], "sec": 20.141434744000435, "selected": null}
+{"id": "ring-28-stop_loss-twist-15", "key": ["ring", 28, "stop_loss", "twist"], "est": 2.831203911321745e-06, "ci": null, "sec": 0.5443519709988323, "selected": null}
+{"id": "complete-4-exceedance-v1-15", "key": ["complete", 4, "exceedance", "v1"], "est": 0.0020604416021702096, "ci": [0.0020467288819241247, 0.0020741543224162945], "sec": 2.295338902000367, "selected": null}
+{"id": "complete-4-exceedance-v2-15", "key": ["complete", 4, "exceedance", "v2"], "est": 0.0020604416021702096, "ci": [0.0020462829438231455, 0.0020746002605172738], "sec": 2.170910938000816, "selected": null}
+{"id": "complete-4-exceedance-twist-15", "key": ["complete", 4, "exceedance", "twist"], "est": 0.002079633101096605, "ci": null, "sec": 0.09566901899961522, "selected": null}
+{"id": "complete-4-exceedance-v2-final-15", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.002061878150527255, "ci": [0.0020509098969433664, 0.002072846404111143], "sec": 2.4102071830002387, "selected": null}
+{"id": "complete-4-stop_loss-v1-15", "key": ["complete", 4, "stop_loss", "v1"], "est": 61263.75852786382, "ci": [60851.00649364337, 61676.51056208427], "sec": 2.2672509479998553, "selected": null}
+{"id": "complete-4-stop_loss-v2-15", "key": ["complete", 4, "stop_loss", "v2"], "est": 61263.75852786382, "ci": [60833.904743895175, 61693.61231183247], "sec": 2.086389116999271, "selected": null}
+{"id": "complete-4-stop_loss-twist-15", "key": ["complete", 4, "stop_loss", "twist"], "est": 61369.042973386284, "ci": null, "sec": 0.08914013300091028, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-15", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61561.862745375525, "ci": [61134.570593842254, 61989.154896908796], "sec": 2.924132725000163, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-15", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4347540160479212e-05, "ci": [1.39829675708502e-05, 1.4712112750108223e-05], "sec": 0.8501908620000904, "selected": null}
+{"id": "complete-6-exceedance-twist-15", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006267810192803314, "ci": null, "sec": 0.20873063299950445, "selected": null}
+{"id": "complete-6-stop_loss-twist-15", "key": ["complete", 6, "stop_loss", "twist"], "est": 15374.299014451834, "ci": null, "sec": 0.23421105399938824, "selected": null}
+{"id": "complete-7-exceedance-twist-15", "key": ["complete", 7, "exceedance", "twist"], "est": 0.0002889859189540723, "ci": null, "sec": 0.3033028400004696, "selected": null}
+{"id": "ring-20-stop_loss-v2-15", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.006967687379578851, "ci": [0.006820257298951702, 0.007115117460206001], "sec": 18.389844507000817, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-15", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4347540160479212e-05, "ci": [1.397536730652047e-05, 1.4719713014437954e-05], "sec": 0.887266304998775, "selected": null}
+{"id": "complete-7-stop_loss-twist-15", "key": ["complete", 7, "stop_loss", "twist"], "est": 7749.932748463161, "ci": null, "sec": 0.2508448410007986, "selected": null}
+{"id": "ring-2-exceedance-v1-16", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012051379269577823, "ci": [0.012014460862488684, 0.012088297676666962], "sec": 0.2569453820015042, "selected": null}
+{"id": "ring-2-exceedance-twist-16", "key": ["ring", 2, "exceedance", "twist"], "est": 0.01208463284823519, "ci": null, "sec": 0.02079939400027797, "selected": null}
+{"id": "ring-2-exceedance-v2-16", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012051379269577823, "ci": [0.012014458331855217, 0.012088300207300428], "sec": 0.3067823799992766, "selected": null}
+{"id": "ring-2-exceedance-v2-final-16", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012045620535981617, "ci": [0.01201219116920136, 0.012079049902761874], "sec": 0.28191467999931774, "selected": null}
+{"id": "ring-2-stop_loss-v1-16", "key": ["ring", 2, "stop_loss", "v1"], "est": 282916.525340976, "ci": [282107.7607738306, 283725.28990812146], "sec": 0.23547549700015225, "selected": null}
+{"id": "ring-2-stop_loss-twist-16", "key": ["ring", 2, "stop_loss", "twist"], "est": 283005.90859132586, "ci": null, "sec": 0.024504660999809857, "selected": null}
+{"id": "ring-2-stop_loss-v2-16", "key": ["ring", 2, "stop_loss", "v2"], "est": 282916.525340976, "ci": [282106.43112313503, 283726.619558817], "sec": 0.2697159540002758, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-16", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282463.8709108017, "ci": [281757.2819590083, 283170.4598625951], "sec": 0.30052309799975774, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-16", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.152154498880405e-05, "ci": [3.1416770150319656e-05, 3.1626319827288444e-05], "sec": 0.28020085699972697, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-16", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.152154498880405e-05, "ci": [3.1416762600168464e-05, 3.1626327377439636e-05], "sec": 0.27758060000087426, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-15", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.006968254610123241, "ci": [0.0068603024441954525, 0.00707620677605103], "sec": 19.310161523000716, "selected": null}
+{"id": "ring-8-exceedance-twist-16", "key": ["ring", 8, "exceedance", "twist"], "est": 3.843475506913847e-05, "ci": null, "sec": 0.15543557099954342, "selected": null}
+{"id": "ring-8-exceedance-v2-final-16", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.8930578661975286e-05, "ci": [3.865664225661667e-05, 3.92045150673339e-05], "sec": 5.021778379999887, "selected": null}
+{"id": "ring-8-exceedance-v1-16", "key": ["ring", 8, "exceedance", "v1"], "est": 3.86165254521477e-05, "ci": [3.828932558929127e-05, 3.8943725315004126e-05], "sec": 5.4363061439999, "selected": null}
+{"id": "ring-8-exceedance-v2-16", "key": ["ring", 8, "exceedance", "v2"], "est": 3.86165254521477e-05, "ci": [3.82830791843485e-05, 3.89499717199469e-05], "sec": 5.432807859000604, "selected": null}
+{"id": "ring-8-stop_loss-twist-16", "key": ["ring", 8, "stop_loss", "twist"], "est": 964.666262384806, "ci": null, "sec": 0.15647725200142304, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-16", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.888102886468072e-05, "ci": [1.8782697179300548e-05, 1.8979360550060893e-05], "sec": 0.9782417040005384, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-16", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.888102886468072e-05, "ci": [1.8781786733523284e-05, 1.8980270995838157e-05], "sec": 0.9294596529998671, "selected": null}
+{"id": "ring-16-exceedance-twist-16", "key": ["ring", 16, "exceedance", "twist"], "est": 1.446006984281859e-08, "ci": null, "sec": 0.3062510800009477, "selected": null}
+{"id": "ring-16-stop_loss-twist-16", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.3371209721300659, "ci": null, "sec": 0.3207002659983118, "selected": null}
+{"id": "ring-8-stop_loss-v1-16", "key": ["ring", 8, "stop_loss", "v1"], "est": 957.3461680440978, "ci": [945.8759095005479, 968.8164265876477], "sec": 5.5036255569993955, "selected": null}
+{"id": "ring-8-stop_loss-v2-16", "key": ["ring", 8, "stop_loss", "v2"], "est": 957.3461680440978, "ci": [944.8528926205568, 969.8394434676388], "sec": 5.229294394001045, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-16", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 950.7049343306387, "ci": [940.1236009781479, 961.2862676831295], "sec": 5.376638952999201, "selected": null}
+{"id": "ring-20-exceedance-twist-16", "key": ["ring", 20, "exceedance", "twist"], "est": 2.9351747377136667e-10, "ci": null, "sec": 0.4433865299997706, "selected": null}
+{"id": "ring-20-exceedance-v1-16", "key": ["ring", 20, "exceedance", "v1"], "est": 2.9089265990559085e-10, "ci": [2.861998743462039e-10, 2.955854454649778e-10], "sec": 17.316120362998845, "selected": null}
+{"id": "ring-20-stop_loss-v1-16", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.006994131312346606, "ci": [0.006847977297776344, 0.007140285326916867], "sec": 17.3856059990012, "selected": null}
+{"id": "ring-20-exceedance-v2-16", "key": ["ring", 20, "exceedance", "v2"], "est": 2.9089265990559085e-10, "ci": [2.8597142402546914e-10, 2.9581389578571257e-10], "sec": 20.383678599000632, "selected": null}
+{"id": "ring-20-stop_loss-twist-16", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.007046880823397666, "ci": null, "sec": 0.48841994400027033, "selected": null}
+{"id": "ring-20-exceedance-v2-final-16", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.9242069130578295e-10, "ci": [2.878644172604292e-10, 2.969769653511367e-10], "sec": 20.08465331499974, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-16", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.9129680126460318e-05, "ci": [1.8849068172621406e-05, 1.941029208029923e-05], "sec": 1.8333387359998596, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-16", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.9129680126460318e-05, "ci": [1.8850631012582746e-05, 1.940872924033789e-05], "sec": 1.8872078559998045, "selected": null}
+{"id": "ring-28-stop_loss-twist-16", "key": ["ring", 28, "stop_loss", "twist"], "est": 3.1375273816952134e-06, "ci": null, "sec": 0.718911173999004, "selected": null}
+{"id": "ring-28-exceedance-twist-16", "key": ["ring", 28, "exceedance", "twist"], "est": 1.2808889022091877e-13, "ci": null, "sec": 0.7899033829999098, "selected": null}
+{"id": "complete-4-exceedance-v2-16", "key": ["complete", 4, "exceedance", "v2"], "est": 0.0020757334029792187, "ci": [0.0020543244344444693, 0.0020971423715139682], "sec": 2.4295053300011205, "selected": null}
+{"id": "complete-4-exceedance-v1-16", "key": ["complete", 4, "exceedance", "v1"], "est": 0.0020757334029792187, "ci": [0.00205614079787725, 0.0020953260080811874], "sec": 2.628033779999896, "selected": null}
+{"id": "complete-4-exceedance-twist-16", "key": ["complete", 4, "exceedance", "twist"], "est": 0.0020528322822378747, "ci": null, "sec": 0.11224119299913582, "selected": null}
+{"id": "complete-4-exceedance-v2-final-16", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.0020646304672211485, "ci": [0.0020488275335580628, 0.0020804334008842343], "sec": 2.662646972999937, "selected": null}
+{"id": "complete-4-stop_loss-v1-16", "key": ["complete", 4, "stop_loss", "v1"], "est": 61845.407230788674, "ci": [61433.515056121556, 62257.29940545579], "sec": 2.4675308209989453, "selected": null}
+{"id": "ring-20-stop_loss-v2-16", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.006994131312346606, "ci": [0.006839246533834454, 0.007149016090858757], "sec": 15.030936653998651, "selected": null}
+{"id": "complete-4-stop_loss-v2-16", "key": ["complete", 4, "stop_loss", "v2"], "est": 61845.407230788674, "ci": [61419.39571152584, 62271.41875005151], "sec": 2.5343126539992227, "selected": null}
+{"id": "complete-4-stop_loss-twist-16", "key": ["complete", 4, "stop_loss", "twist"], "est": 62027.253110094534, "ci": null, "sec": 0.20545665400095459, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-16", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61950.03391624205, "ci": [61541.16202588057, 62358.90580660353], "sec": 3.2301725200013607, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-16", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.4898525211091488e-05, "ci": [1.4556333048576594e-05, 1.5240717373606381e-05], "sec": 0.9515718549992016, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-16", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.4898525211091488e-05, "ci": [1.4501641402914026e-05, 1.529540901926895e-05], "sec": 0.9977352730002167, "selected": null}
+{"id": "complete-6-exceedance-twist-16", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006286965714767692, "ci": null, "sec": 0.2008973160009191, "selected": null}
+{"id": "complete-6-stop_loss-twist-16", "key": ["complete", 6, "stop_loss", "twist"], "est": 15665.39170114585, "ci": null, "sec": 0.23486773100012215, "selected": null}
+{"id": "complete-7-stop_loss-twist-16", "key": ["complete", 7, "stop_loss", "twist"], "est": 7871.898182750174, "ci": null, "sec": 0.2998576439986209, "selected": null}
+{"id": "complete-7-exceedance-twist-16", "key": ["complete", 7, "exceedance", "twist"], "est": 0.0002898332755950247, "ci": null, "sec": 0.32884330799970485, "selected": null}
+{"id": "ring-2-exceedance-v1-17", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012040376345566046, "ci": [0.012003304997984129, 0.012077447693147964], "sec": 0.33604020699931425, "selected": null}
+{"id": "ring-2-exceedance-twist-17", "key": ["ring", 2, "exceedance", "twist"], "est": 0.011905141828361962, "ci": null, "sec": 0.027194772999791894, "selected": null}
+{"id": "ring-2-exceedance-v2-17", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012040376345566046, "ci": [0.012003270694347055, 0.012077481996785037], "sec": 0.2893416650003928, "selected": null}
+{"id": "ring-2-exceedance-v2-final-17", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.012037438366054849, "ci": [0.01200538070959202, 0.012069496022517678], "sec": 0.2920470260014554, "selected": null}
+{"id": "ring-2-stop_loss-v1-17", "key": ["ring", 2, "stop_loss", "v1"], "est": 282001.9983040701, "ci": [281091.04100135376, 282912.9556067864], "sec": 0.3055700889999571, "selected": null}
+{"id": "ring-2-stop_loss-v2-17", "key": ["ring", 2, "stop_loss", "v2"], "est": 282001.9983040701, "ci": [281090.5765539077, 282913.42005423247], "sec": 0.2960142900010396, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-17", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282245.14127362095, "ci": [281430.6904629694, 283059.5920842725], "sec": 0.27486028900057136, "selected": null}
+{"id": "ring-2-stop_loss-twist-17", "key": ["ring", 2, "stop_loss", "twist"], "est": 286236.12696891656, "ci": null, "sec": 0.12024390099941229, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-17", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.165772781224285e-05, "ci": [3.155756657689706e-05, 3.175788904758864e-05], "sec": 0.27944182899955194, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-17", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.165772781224285e-05, "ci": [3.1557043368502585e-05, 3.175841225598312e-05], "sec": 0.407775607000076, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-16", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007081613689204684, "ci": [0.007003452952081078, 0.00715977442632829], "sec": 16.903807097000026, "selected": null}
+{"id": "ring-8-exceedance-twist-17", "key": ["ring", 8, "exceedance", "twist"], "est": 3.823212564902063e-05, "ci": null, "sec": 0.16790054900047835, "selected": null}
+{"id": "ring-8-exceedance-v2-final-17", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.906787521603013e-05, "ci": [3.8722790474276225e-05, 3.941295995778404e-05], "sec": 5.194446131999939, "selected": null}
+{"id": "ring-8-exceedance-v1-17", "key": ["ring", 8, "exceedance", "v1"], "est": 3.8847135991162276e-05, "ci": [3.856382197989772e-05, 3.9130450002426835e-05], "sec": 5.589770693000901, "selected": null}
+{"id": "ring-8-exceedance-v2-17", "key": ["ring", 8, "exceedance", "v2"], "est": 3.8847135991162276e-05, "ci": [3.856277269611495e-05, 3.91314992862096e-05], "sec": 6.017073134000384, "selected": null}
+{"id": "ring-8-stop_loss-twist-17", "key": ["ring", 8, "stop_loss", "twist"], "est": 938.4014399918171, "ci": null, "sec": 0.14739600699977018, "selected": null}
+{"id": "ring-8-joint_exhaustion-v1-17", "key": ["ring", 8, "joint_exhaustion", "v1"], "est": 1.8993886103074334e-05, "ci": [1.8780051317781675e-05, 1.9207720888366993e-05], "sec": 0.9972979850008414, "selected": null}
+{"id": "ring-8-stop_loss-v1-17", "key": ["ring", 8, "stop_loss", "v1"], "est": 951.1512159501237, "ci": [942.2491189256793, 960.0533129745681], "sec": 5.516095402999781, "selected": null}
+{"id": "ring-8-joint_exhaustion-v2-17", "key": ["ring", 8, "joint_exhaustion", "v2"], "est": 1.8993886103074334e-05, "ci": [1.877849272349588e-05, 1.920927948265279e-05], "sec": 1.20231036199948, "selected": null}
+{"id": "ring-16-stop_loss-twist-17", "key": ["ring", 16, "stop_loss", "twist"], "est": 0.34728943625816355, "ci": null, "sec": 0.415441623001243, "selected": null}
+{"id": "ring-16-exceedance-twist-17", "key": ["ring", 16, "exceedance", "twist"], "est": 1.4207295742724358e-08, "ci": null, "sec": 0.5349613519993, "selected": null}
+{"id": "ring-8-stop_loss-v2-17", "key": ["ring", 8, "stop_loss", "v2"], "est": 951.1512159501237, "ci": [941.8386505982181, 960.4637813020294], "sec": 5.676955953000288, "selected": null}
+{"id": "ring-8-stop_loss-v2-final-17", "key": ["ring", 8, "stop_loss", "v2-final"], "est": 953.5290455565366, "ci": [945.6395462955293, 961.418544817544], "sec": 6.148028884999803, "selected": null}
+{"id": "ring-20-exceedance-twist-17", "key": ["ring", 20, "exceedance", "twist"], "est": 2.862079523453165e-10, "ci": null, "sec": 0.6363483670011192, "selected": null}
+{"id": "ring-20-exceedance-v2-final-17", "key": ["ring", 20, "exceedance", "v2-final"], "est": 2.906480218709103e-10, "ci": [2.8484001955220325e-10, 2.964560241896173e-10], "sec": 19.12720437399912, "selected": null}
+{"id": "ring-20-exceedance-v2-17", "key": ["ring", 20, "exceedance", "v2"], "est": 2.902085577599462e-10, "ci": [2.832101302937068e-10, 2.972069852261856e-10], "sec": 22.877341911000258, "selected": null}
+{"id": "ring-20-stop_loss-v1-17", "key": ["ring", 20, "stop_loss", "v1"], "est": 0.006981883544345392, "ci": [0.0068842535755733745, 0.00707951351311741], "sec": 20.003731333999895, "selected": null}
+{"id": "ring-20-stop_loss-twist-17", "key": ["ring", 20, "stop_loss", "twist"], "est": 0.006907062920695001, "ci": null, "sec": 1.1658794300001318, "selected": null}
+{"id": "ring-20-exceedance-v1-17", "key": ["ring", 20, "exceedance", "v1"], "est": 2.902085577599462e-10, "ci": [2.837178078152212e-10, 2.9669930770467125e-10], "sec": 26.858565423999607, "selected": null}
+{"id": "ring-20-joint_exhaustion-v1-17", "key": ["ring", 20, "joint_exhaustion", "v1"], "est": 1.9002833249958875e-05, "ci": [1.88698155659215e-05, 1.913585093399625e-05], "sec": 4.080592419999448, "selected": null}
+{"id": "ring-28-exceedance-twist-17", "key": ["ring", 28, "exceedance", "twist"], "est": 1.196052027031971e-13, "ci": null, "sec": 1.6154177549997257, "selected": null}
+{"id": "ring-20-joint_exhaustion-v2-17", "key": ["ring", 20, "joint_exhaustion", "v2"], "est": 1.9002833249958875e-05, "ci": [1.886817467384089e-05, 1.913749182607686e-05], "sec": 3.803943282000546, "selected": null}
+{"id": "ring-28-stop_loss-twist-17", "key": ["ring", 28, "stop_loss", "twist"], "est": 2.9781991116687604e-06, "ci": null, "sec": 1.786051363000297, "selected": null}
+{"id": "complete-4-exceedance-v1-17", "key": ["complete", 4, "exceedance", "v1"], "est": 0.002082974239615911, "ci": [0.0020691877074898355, 0.0020967607717419863], "sec": 6.465063678999286, "selected": null}
+{"id": "complete-4-exceedance-v2-17", "key": ["complete", 4, "exceedance", "v2"], "est": 0.002082974239615911, "ci": [0.002068761251094853, 0.002097187228136969], "sec": 6.84649852900111, "selected": null}
+{"id": "complete-4-exceedance-twist-17", "key": ["complete", 4, "exceedance", "twist"], "est": 0.0020718805963822673, "ci": null, "sec": 0.23050602699913725, "selected": null}
+{"id": "complete-4-exceedance-v2-final-17", "key": ["complete", 4, "exceedance", "v2-final"], "est": 0.0020735023305579457, "ci": [0.002061658876507919, 0.0020853457846079725], "sec": 7.138153986999896, "selected": null}
+{"id": "complete-4-stop_loss-v1-17", "key": ["complete", 4, "stop_loss", "v1"], "est": 61604.920734541294, "ci": [61212.20942482001, 61997.63204426258], "sec": 5.865220347999639, "selected": null}
+{"id": "ring-20-stop_loss-v2-17", "key": ["ring", 20, "stop_loss", "v2"], "est": 0.006981883544345392, "ci": [0.006882602262540641, 0.007081164826150143], "sec": 24.192715286999373, "selected": null}
+{"id": "complete-4-stop_loss-twist-17", "key": ["complete", 4, "stop_loss", "twist"], "est": 62158.31631887027, "ci": null, "sec": 0.23432378600045922, "selected": null}
+{"id": "complete-4-joint_exhaustion-v1-17", "key": ["complete", 4, "joint_exhaustion", "v1"], "est": 1.480160343135491e-05, "ci": [1.4700351487577777e-05, 1.4902855375132044e-05], "sec": 2.167309041999033, "selected": null}
+{"id": "complete-4-joint_exhaustion-v2-17", "key": ["complete", 4, "joint_exhaustion", "v2"], "est": 1.480160343135491e-05, "ci": [1.4698963633307373e-05, 1.4904243229402448e-05], "sec": 2.177659125998616, "selected": null}
+{"id": "complete-4-stop_loss-v2-17", "key": ["complete", 4, "stop_loss", "v2"], "est": 61604.920734541294, "ci": [61201.42579503312, 62008.415674049465], "sec": 5.9626784789998055, "selected": null}
+{"id": "complete-6-exceedance-twist-17", "key": ["complete", 6, "exceedance", "twist"], "est": 0.0006264625343472736, "ci": null, "sec": 0.4558299669988628, "selected": null}
+{"id": "complete-6-stop_loss-twist-17", "key": ["complete", 6, "stop_loss", "twist"], "est": 15481.39575635831, "ci": null, "sec": 0.5737615810012358, "selected": null}
+{"id": "complete-7-exceedance-twist-17", "key": ["complete", 7, "exceedance", "twist"], "est": 0.000294677247322812, "ci": null, "sec": 0.7369117609996465, "selected": null}
+{"id": "complete-4-stop_loss-v2-final-17", "key": ["complete", 4, "stop_loss", "v2-final"], "est": 61820.770291281435, "ci": [61484.02890443229, 62157.51167813058], "sec": 6.336455324000781, "selected": null}
+{"id": "complete-7-stop_loss-twist-17", "key": ["complete", 7, "stop_loss", "twist"], "est": 7847.84434851271, "ci": null, "sec": 0.6921600829991803, "selected": null}
+{"id": "ring-2-exceedance-v2-18", "key": ["ring", 2, "exceedance", "v2"], "est": 0.012033819897291662, "ci": [0.011996044300138854, 0.01207159549444447], "sec": 0.6705064670004504, "selected": null}
+{"id": "ring-2-exceedance-twist-18", "key": ["ring", 2, "exceedance", "twist"], "est": 0.012101652458524818, "ci": null, "sec": 0.05693503900147334, "selected": null}
+{"id": "ring-2-exceedance-v1-18", "key": ["ring", 2, "exceedance", "v1"], "est": 0.012033819897291662, "ci": [0.011996050267161995, 0.01207158952742133], "sec": 0.8589686089999304, "selected": null}
+{"id": "ring-2-exceedance-v2-final-18", "key": ["ring", 2, "exceedance", "v2-final"], "est": 0.01203657970184289, "ci": [0.012004553081647877, 0.012068606322037902], "sec": 0.698648816000059, "selected": null}
+{"id": "ring-2-stop_loss-v1-18", "key": ["ring", 2, "stop_loss", "v1"], "est": 282503.3628922418, "ci": [281695.69655898423, 283311.02922549937], "sec": 0.6160468649995892, "selected": null}
+{"id": "ring-2-stop_loss-twist-18", "key": ["ring", 2, "stop_loss", "twist"], "est": 280446.7015163002, "ci": null, "sec": 0.042872596999586676, "selected": null}
+{"id": "ring-2-stop_loss-v2-final-18", "key": ["ring", 2, "stop_loss", "v2-final"], "est": 282307.300457504, "ci": [281650.8460276539, 282963.7548873541], "sec": 0.7038105209994683, "selected": null}
+{"id": "ring-2-stop_loss-v2-18", "key": ["ring", 2, "stop_loss", "v2"], "est": 282503.3628922418, "ci": [281695.45007168746, 283311.27571279614], "sec": 0.7807396640000661, "selected": null}
+{"id": "ring-2-joint_exhaustion-v1-18", "key": ["ring", 2, "joint_exhaustion", "v1"], "est": 3.162338387931288e-05, "ci": [3.142512742914401e-05, 3.1821640329481745e-05], "sec": 0.6869872030001716, "selected": null}
+{"id": "ring-2-joint_exhaustion-v2-18", "key": ["ring", 2, "joint_exhaustion", "v2"], "est": 3.162338387931288e-05, "ci": [3.14243402535847e-05, 3.182242750504105e-05], "sec": 0.7675972460001503, "selected": null}
+{"id": "ring-20-stop_loss-v2-final-17", "key": ["ring", 20, "stop_loss", "v2-final"], "est": 0.007009732090450874, "ci": [0.0068565170777922756, 0.007162947103109472], "sec": 35.99579340800119, "selected": null}
+{"id": "ring-8-exceedance-twist-18", "key": ["ring", 8, "exceedance", "twist"], "est": 3.8995624672858215e-05, "ci": null, "sec": 0.25470257900087745, "selected": null}
+{"id": "ring-8-exceedance-v2-18", "key": ["ring", 8, "exceedance", "v2"], "est": 3.8826976570446096e-05, "ci": [3.851422782928546e-05, 3.9139725311606734e-05], "sec": 10.25854080299905, "selected": null}
+{"id": "ring-8-exceedance-v2-final-18", "key": ["ring", 8, "exceedance", "v2-final"], "est": 3.885836990567927e-05, "ci": [3.827386312910836e-05, 3.944287668225018e-05], "sec": 10.223033882000891, "selected": null}

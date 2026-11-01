@@ -1,0 +1,189 @@
+{
+  "data": {
+    "source": "https://github.com/owid/owid-datasets",
+    "files": {
+      "noaa_events": "datasets/Significant earthquake events (NGDC-NASA)/Significant earthquake events (NGDC-NASA).csv",
+      "noaa_deaths": "datasets/Earthquake deaths (NGDC-NOAA)/Earthquake deaths (NGDC-NOAA).csv",
+      "emdat": "datasets/Natural disasters (EMDAT)/Natural disasters (EMDAT).csv"
+    }
+  },
+  "tests": {
+    "eq_noaa_1975": {
+      "label": "NOAA significant earthquakes, 1975\u20132020",
+      "years": [
+        1975,
+        2020
+      ],
+      "table_both_KGonly_TJonly_none": [
+        [
+          5,
+          3
+        ],
+        [
+          11,
+          27
+        ]
+      ],
+      "p_KG": 0.17391304347826086,
+      "p_TJ": 0.34782608695652173,
+      "p_both": 0.10869565217391304,
+      "p_both_if_independent": 0.06049149338374291,
+      "lambda_A": 0.19105523676270922,
+      "lambda_B": 0.4274440148269396,
+      "lambda_S": 0.08569465311719163,
+      "share_of_A": 0.4485333904959876,
+      "share_of_B": 0.20048158389090334,
+      "share_of_min": 0.4485333904959876,
+      "share_of_min_ci95": [
+        0.0,
+        0.8245911561235276
+      ],
+      "share_of_A_ci95": [
+        0.0,
+        0.8245911561235276
+      ],
+      "lr_test_independence_p": 0.07697447013642293
+    },
+    "eq_noaa_1900": {
+      "label": "NOAA significant earthquakes, 1900\u20132020",
+      "years": [
+        1900,
+        2020
+      ],
+      "table_both_KGonly_TJonly_none": [
+        [
+          5,
+          4
+        ],
+        [
+          15,
+          97
+        ]
+      ],
+      "p_KG": 0.0743801652892562,
+      "p_TJ": 0.1652892561983471,
+      "p_both": 0.04132231404958678,
+      "p_both_if_independent": 0.012294242196571272,
+      "lambda_A": 0.07729167430164652,
+      "lambda_B": 0.18067002875548163,
+      "lambda_S": 0.036882240610495914,
+      "share_of_A": 0.4771825807079227,
+      "share_of_B": 0.2041414442924136,
+      "share_of_min": 0.4771825807079227,
+      "share_of_min_ci95": [
+        0.12431445976186112,
+        0.7915550895206928
+      ],
+      "share_of_A_ci95": [
+        0.12431445976186112,
+        0.7915550895206928
+      ],
+      "lr_test_independence_p": 0.004878176315221005
+    },
+    "eq_emdat_1990": {
+      "label": "EM-DAT earthquake losses, 1990\u20132020",
+      "years": [
+        1990,
+        2020
+      ],
+      "table_both_KGonly_TJonly_none": [
+        [
+          2,
+          4
+        ],
+        [
+          7,
+          18
+        ]
+      ],
+      "p_KG": 0.1935483870967742,
+      "p_TJ": 0.2903225806451613,
+      "p_both": 0.06451612903225806,
+      "p_both_if_independent": 0.05619146722164412,
+      "lambda_A": 0.21511137961694557,
+      "lambda_B": 0.3429447511268303,
+      "lambda_S": 0.014440738013947763,
+      "share_of_A": 0.06713144622875257,
+      "share_of_B": 0.04210805958248121,
+      "share_of_min": 0.06713144622875257,
+      "share_of_min_ci95": [
+        0.0,
+        0.5655883150745722
+      ],
+      "share_of_A_ci95": [
+        0.0,
+        0.5655883150745722
+      ],
+      "lr_test_independence_p": 0.7980648171497458
+    },
+    "hydro_emdat_1990": {
+      "label": "EM-DAT flood/landslide/storm losses, 1990\u20132020",
+      "years": [
+        1990,
+        2020
+      ],
+      "table_both_KGonly_TJonly_none": [
+        [
+          3,
+          2
+        ],
+        [
+          15,
+          11
+        ]
+      ],
+      "p_KG": 0.16129032258064516,
+      "p_TJ": 0.5806451612903226,
+      "p_both": 0.0967741935483871,
+      "p_both_if_independent": 0.09365244536940687,
+      "lambda_A": 0.17589066646366416,
+      "lambda_B": 0.8690378470236094,
+      "lambda_S": 0.00883681909766235,
+      "share_of_A": 0.05024040942779574,
+      "share_of_B": 0.010168508918141831,
+      "share_of_min": 0.05024040942779574,
+      "share_of_min_ci95": [
+        0.0,
+        0.7998225584195477
+      ],
+      "share_of_A_ci95": [
+        0.0,
+        0.7998225584195477
+      ],
+      "lr_test_independence_p": 0.9235640716125407
+    }
+  },
+  "implied": {
+    "brief": {
+      "eq_share": 0.0745,
+      "rain_share": 0.25,
+      "joint_attachment": 0.04413776873084355,
+      "exceedance": 0.012046720907534038,
+      "joint_exhaustion": 3.163304630917903e-05
+    },
+    "loss data, lower 95% bound": {
+      "eq_share": 0.12431445976186112,
+      "rain_share": 0.25,
+      "m": 1.6686504666021627,
+      "joint_attachment": 0.0484027409431597,
+      "exceedance": 0.014735501257751603,
+      "joint_exhaustion": 3.9902736314707114e-05
+    },
+    "loss data, point estimate": {
+      "eq_share": 0.4771825807079227,
+      "rain_share": 0.25,
+      "m": 6.405135311515741,
+      "joint_attachment": 0.07935203502964845,
+      "exceedance": 0.033658755317186456,
+      "joint_exhaustion": 9.854729347558187e-05
+    },
+    "loss data, upper 95% bound": {
+      "eq_share": 0.7915550895206928,
+      "rain_share": 0.25,
+      "m": 10.624900530479097,
+      "joint_attachment": 0.10804564580153697,
+      "exceedance": 0.05031585481527545,
+      "joint_exhaustion": 0.000150909682934703
+    }
+  }
+}

@@ -536,7 +536,7 @@ reusing the parameters as the initial policy after a change of scenario or a 20%
 * t-intervals and model selection changed no result in these studies: the effective degrees of freedom
   were large, and the trained policy always beat the initial one. They are kept as safeguards.
 
-## 6.6 Real-world check of the model's assumptions
+## 6.6 Real-world checks
 
 The benchmark model is calibrated to the brief's parameters, not to observations. We tested its earthquake
 assumptions, the peril behind US$70m of each country's US$80m cover, against public data.
@@ -577,6 +577,42 @@ that also reach the other country, with 95% intervals, against the brief's 7.5% 
   could not be checked: the reanalysis services (ERA5 via Open-Meteo) are blocked in this environment, and
   checking them is a first task of WP2.
 
+**Loss-data backtest.** Epicentre distance is a proxy, so we repeated the test on *reported losses*. Public
+records give yearly losses per country: NOAA's significant-earthquake database (1900–2020) and EM-DAT (1990–2020),
+both via the Our World in Data mirror. In the bond model, each country's events are a Poisson process with a
+country-only part and a shared part. For yearly occurrence this is a bivariate Poisson model, so the 2×2 table
+of loss years identifies the shared rate by maximum likelihood (`src/realdata/loss_backtest.py`).
+
+{{LOSS_TABLE}}
+
+* **The longest record rejects the brief's 7.5%.** Over 1900–2020 the shared share is {{LOSS_SHARE}}, and
+  independence is rejected (p = {{LOSS_P}}). This matches the epicentre analysis above, from independent data.
+* **Short records are not informative.** The 31-year EM-DAT windows cannot separate 7.5% from 50%, and the
+  flood and landslide record does not constrain the rain assumption. This is the brief's own point about
+  short data.
+* **Implied bond risk.** With the loss-data share for earthquakes (rain at the brief's value), the
+  joint-exhaustion probability is {{LOSS_EXH}}: {{LOSS_EXH_FACTOR}} the brief's base case.
+
+**A real five-country pool.** Finally, we calibrated a Central Asian pool from data alone and tested RDPO on
+it (`src/realdata/central_asia_pool.py`):
+
+* **Rates.** Rates come from each country's catalogue main shocks within 50 km, with one Gutenberg–Richter slope
+  b = {{POOL_B}}.
+* **Payout design.** Each country holds the bond's design. The 25% tier triggers at {{POOL_M1}}, the magnitude at
+  which the Kyrgyz and Tajik data reproduce the brief's trigger frequency, and higher tiers follow the brief's
+  tier ratios.
+* **Dependence graph.** The graph is not assumed: an edge exists wherever main shocks reached two countries.
+  The catalogue finds {{POOL_EDGES}}. A shock reaching three countries is assigned to its two nearest
+  countries, so no event is counted twice.
+
+{{POOL_CAL_TABLE}}
+
+{{POOL_TABLE}}
+
+* **Result.** On the data-calibrated pool, RDPO beats the better of plain Monte Carlo and exponential
+  twisting by {{POOL_GAIN}} on the rare questions, against exact answers, with honest intervals. On expected pool
+  payout, a smooth target, the factor is {{POOL_EL}}.
+
 ## 6.7 Limitations
 
 * **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
@@ -586,9 +622,10 @@ that also reach the other country, with 95% intervals, against the brief's 7.5% 
   rare targets with heavy-tailed weights. Heavy-tail diagnostics remain part of WP3.
 * **Dense dependence.** Complete graphs are limited to 7 countries by the exact references. Larger dense
   portfolios need reference-free validation (WP2).
-* **Synthetic scaling and partial real-data check.** Scaling results use a calibrated synthetic extension,
-  and only the earthquake assumptions were checked against data (§6.6). Realistic multi-peril portfolios
-  follow in WP2.
+* **Real-data scope.** Earthquake assumptions were checked against a catalogue and two loss records, and
+  RDPO was tested on a data-calibrated five-country pool (§6.6). Loss data are yearly and smaller than bond
+  triggers, the rain cover could not be calibrated from data, and no actual bond payout history exists to
+  backtest against. A full calibration with hazard, exposure and vulnerability models is WP2.
 
 ::: {.takeaway}
 RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 28 countries. The

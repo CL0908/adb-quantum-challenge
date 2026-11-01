@@ -426,6 +426,73 @@ def rd_values():
     return v
 
 
+def loss_values():
+    d = json.loads((R / "realdata_losses.json").read_text())
+    v = {}
+    lines = ["**Table [tab:loss].** Loss-data backtest of the shared-event assumption. Yearly occurrence of reported losses "
+             "in the Kyrgyz Republic (KG) and Tajikistan (TJ), and the bivariate-Poisson estimate of the shared share (the "
+             "fraction of KG events that also hit TJ; the brief assumes 7.5%). Profile-likelihood 95% intervals.", "",
+             "| Loss record | years | KG / TJ / both | both, if independent | shared share (95% CI) | test of independence |",
+             "|---|---|---|---|---|---|"]
+    for k, t in d["tests"].items():
+        tab = t["table_both_KGonly_TJonly_none"]; n = t["years"][1] - t["years"][0] + 1
+        lines.append(f"| {t['label'].rsplit(',', 1)[0]} | {t['years'][0]}–{t['years'][1]} | "
+                     f"{tab[0][0] + tab[0][1]} / {tab[0][0] + tab[1][0]} / **{tab[0][0]}** | {t['p_both_if_independent'] * n:.1f} | "
+                     f"**{pct(t['share_of_A'], 0)}** ({pct(t['share_of_A_ci95'][0], 0)}–{pct(t['share_of_A_ci95'][1], 0)}) | "
+                     f"p = {t['lr_test_independence_p']:.3f} |")
+    v["LOSS_TABLE"] = "\n".join(lines)
+    t = d["tests"]["eq_noaa_1900"]
+    v["LOSS_SHARE"] = f"{pct(t['share_of_A'], 0)} ({pct(t['share_of_A_ci95'][0], 0)}–{pct(t['share_of_A_ci95'][1], 0)})"
+    v["LOSS_P"] = f"{t['lr_test_independence_p']:.3f}"
+    im = d["implied"]; b = im["brief"]["joint_exhaustion"]
+    lo, mid, hi = im["loss data, lower 95% bound"], im["loss data, point estimate"], im["loss data, upper 95% bound"]
+    v["LOSS_EXH"] = f"{sci(mid['joint_exhaustion'])} (95% range {sci(lo['joint_exhaustion'])}–{sci(hi['joint_exhaustion'])})"
+    v["LOSS_EXH_FACTOR"] = f"{mid['joint_exhaustion'] / b:.1f}×"
+    return v
+
+
+def pool_values():
+    d = json.loads((R / "realdata_pool.json").read_text())
+    cal = d["calibration"]; v = {}
+    names = {"KG": "Kyrgyz Rep.", "TJ": "Tajikistan", "UZ": "Uzbekistan", "KZ": "Kazakhstan", "TM": "Turkmenistan"}
+    lines = ["**Table [tab:poolcal].** Data-calibrated five-country pool. Annual probabilities of a 25% and a 100% earthquake "
+             "payout per country (each country holds US$70m earthquake + US$10m rain cover), and shared-event rates on the "
+             "edges found in the catalogue.", "",
+             "| Country | main shocks M ≥ 5.5 within 50 km, per year | annual P(≥ 25% payout) | annual P(100% payout) | brief (KG, TJ) |",
+             "|---|---|---|---|---|"]
+    for c in ("KG", "TJ", "UZ", "KZ", "TM"):
+        bt = cal["brief_tails"].get(c)
+        lines.append(f"| {names[c]} | {cal['rate55'][c]:.2f} | {pct(cal['tails'][c][0])} | {pct(cal['tails'][c][3])} | "
+                     + (f"{pct(bt[0])} / {pct(bt[3])}" if bt else "—") + " |")
+    v["POOL_CAL_TABLE"] = "\n".join(lines)
+    v["POOL_EDGES"] = ", ".join(f"{names[a]}–{names[b]} ({cal['n_both'][f'{a}-{b}']} events)" for a, b in cal["edges"])
+    v["POOL_B"] = f"{cal['b']:.2f}"; v["POOL_M1"] = f"M{cal['m1']:.1f}"
+    tl = {"exceedance": "Pr(pool payout > {})", "stop_loss": "stop-loss above {}", "joint_exhaustion": "KG and TJ both exhausted",
+          "joint_attachment": "KG and TJ both paid", "expected_loss": "expected pool payout"}
+    get = {(r["target"], r["threshold_musd"], r["method"]): r for r in d["rows"]}
+    keys = list(dict.fromkeys((r["target"], r["threshold_musd"]) for r in d["rows"]))
+    lines = [f"**Table [tab:pool].** RDPO (Phase 2 engine) on the data-calibrated pool against exact answers (dense "
+             f"enumeration), at 16,384 simulated terms, {d['reps']} replications. Relative RMSE; interval coverage in parentheses.", "",
+             "| Question | exact value | RDPO | plain Monte Carlo | exp. twisting | RDPO gain over best alternative |", "|---|---|---|---|---|---|"]
+    gains = []
+    for t, thr in keys:
+        r = get.get((t, thr, "rdpo")); mc = get.get((t, thr, "mc")); tw = get.get((t, thr, "twist"))
+        if not r:
+            continue
+        lab = tl[t].format(f"US${thr:.0f}m" if thr else "")
+        val = f"US${r['mu'] / 1e6:.2f}m" if t in ("expected_loss", "stop_loss") else sci(r["mu"])
+        alts = [x["rel_rmse"] for x in (mc, tw) if x]
+        g = min(alts) / r["rel_rmse"] if alts else float("nan"); gains.append((t, g))
+        lines.append(f"| {lab} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
+                     f"{pct(mc['rel_rmse']) if mc else '—'} | {pct(tw['rel_rmse']) if tw else '—'} | ×{g:.1f} |")
+    v["POOL_TABLE"] = "\n".join(lines)
+    rare = [g for t, g in gains if t not in ("expected_loss",)]
+    v["POOL_GAIN"] = f"×{min(rare):.1f}–×{max(rare):.0f}"
+    el = [g for t, g in gains if t == "expected_loss"]
+    v["POOL_EL"] = f"×{el[0]:.1f}" if el else "—"
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -456,7 +523,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values):
         try:
             vals.update(fn())
         except Exception as ex:
