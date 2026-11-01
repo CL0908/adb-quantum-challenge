@@ -496,6 +496,51 @@ def pool_values():
     return v
 
 
+def wp2_values():
+    d = json.loads((R / "wp2_carec.json").read_text())
+    cal = d["calibration"]; v = {}
+    names = {"AF": "Afghanistan", "AZ": "Azerbaijan", "GE": "Georgia", "KZ": "Kazakhstan", "KG": "Kyrgyz Rep.",
+             "MN": "Mongolia", "PK": "Pakistan", "TJ": "Tajikistan", "TM": "Turkmenistan", "UZ": "Uzbekistan"}
+    lines = ["**Table [tab:carec].** Calibrated CAREC pool (west to east). Each country holds US$70m earthquake + US$10m rain "
+             "cover. Rain-trigger probabilities scale the brief's 2% by each country's frequency of major flood, landslide "
+             "and storm losses (EM-DAT 1990–2020).", "",
+             "| Country | main shocks M ≥ 5.5 within 50 km, per year | annual P(≥ 25% EQ payout) | annual P(100% EQ payout) | annual P(rain trigger) |",
+             "|---|---|---|---|---|"]
+    for c in cal["order"]:
+        lines.append(f"| {names[c]} | {cal['rate55'][c]:.2f} | {pct(cal['tails'][c][0])} | {pct(cal['tails'][c][3])} | {pct(cal['rain_p'][c])} |")
+    v["CAREC_TABLE"] = "\n".join(lines)
+    v["CAREC_EDGES"] = ", ".join(f"{names[a]}–{names[b]}" for a, b in cal["edges"])
+    v["CAREC_NEDGES"] = str(len(cal["edges"]))
+    v["CAREC_EVENTS"] = str(cal["events"])
+    v["CAREC_BOND"] = str(d["mps"]["max_bond"])
+    v["CAREC_MPS_S"] = f"{d['mps']['mps_seconds'] / 60:.0f} min"
+    v["CAREC_TR"] = f"US${d['T_rare']}m"; v["CAREC_TM"] = f"US${d['T_moderate']}m"
+    v["CAREC_MU_RARE"] = sci(d["references"][f"exceedance|{d['T_rare']}"])
+    v["CAREC_CHECK"] = sci(max(d["references"][f"check|{d['T_rare']}"], d["references"][f"check|{d['T_moderate']}"]))
+    tl = {"exceedance": "Pr(pool payout > {})", "stop_loss": "stop-loss above {}", "joint_exhaustion": "KG and TJ both exhausted",
+          "expected_loss": "expected pool payout"}
+    get = {(r["target"], r["threshold_musd"], r["method"], r["budget"]): r for r in d["rows"]}
+    keys = list(dict.fromkeys((r["target"], r["threshold_musd"], r["budget"]) for r in d["rows"]))
+    lines = [f"**Table [tab:carecres].** RDPO (Phase 2 engine) on the CAREC pool against exact tensor-network references, "
+             f"{d['reps']} replications. Relative RMSE; interval coverage in parentheses.", "",
+             "| Question | budget | exact value | RDPO | plain Monte Carlo | exp. twisting |", "|---|---|---|---|---|---|"]
+    for t, thr, B in keys:
+        r = get.get((t, thr, "rdpo", B)); mc = get.get((t, thr, "mc", B)); tw = get.get((t, thr, "twist", B))
+        if not r:
+            continue
+        lab = tl[t].format(f"US${thr}m" if thr else "")
+        val = f"US${r['mu'] / 1e6:.2f}m" if t in ("expected_loss", "stop_loss") else sci(r["mu"])
+        lines.append(f"| {lab} | {B:,} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
+                     f"{pct(mc['rel_rmse']) if mc else '—'} | {pct(tw['rel_rmse']) if tw else '—'} |")
+    v["CAREC_RES_TABLE"] = "\n".join(lines)
+    crit = get.get(("exceedance", d["T_rare"], "rdpo", 65536))
+    v["CAREC_CRIT"] = pct(crit["rel_rmse"], 1) if crit else "—"
+    v["CAREC_CRIT_OK"] = "met" if crit and crit["rel_rmse"] <= 0.10 else "not met"
+    crit16 = get.get(("exceedance", d["T_rare"], "rdpo", 16384))
+    v["CAREC_CRIT16"] = pct(crit16["rel_rmse"], 1) if crit16 else "—"
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -526,7 +571,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values):
         try:
             vals.update(fn())
         except Exception as ex:

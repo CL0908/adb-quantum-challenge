@@ -593,6 +593,28 @@ of loss years identifies the shared rate by maximum likelihood (`src/realdata/lo
 * **Implied bond risk.** With the loss-data share for earthquakes (rain at the brief's value), the
   joint-exhaustion probability is {{LOSS_EXH}}: {{LOSS_EXH_FACTOR}} the brief's base case.
 
+**Market record of comparable bonds.** The challenge bond has no payout history, and catastrophe bonds are
+private placements without public price series, so exchange data such as Yahoo Finance cannot be used. The
+closest public record is the World Bank's parametric sovereign bonds. In that record, triggers do occur at
+roughly the rates the models price, but a single near-miss decides the outcome, and no two countries have ever
+paid out together:
+
+| Bond (IBRD) | Peril | Modelled annual attachment probability | Outcome |
+|---|---|---|---|
+| FONDEN 2017, Mexico, Class A (US$150m) | earthquake | not published in the sources found | 100% paid after the M8.1 Chiapas earthquake, Sept 2017 [^mx17] |
+| Pacific Alliance 2018, Peru (US$200m) | earthquake | 7.14% | 30% paid after the M8.0 Loreto earthquake, May 2019 [^pe18] |
+| FONDEN 2020, Mexico, Class D | Pacific hurricane | not published in the sources found | about 50% loss after Hurricane Otis, 2023 [^mx20] |
+| CAR Jamaica 2024 (US$150m) | hurricane | 2.46% (2.34% at launch) | not triggered by Beryl (2024); 100% paid after Melissa, 2025 [^jm24] |
+
+* **What this shows.** Parametric sovereign bonds do pay, at roughly the modelled frequencies, and basis risk is
+  real (Beryl). The record is far too small to validate a *joint* tail, which is why the joint risk has to come
+  from a model of the kind tested here.
+
+[^mx17]: Artemis, "Mexico confirms $150m cat bond payout for quake", https://www.artemis.bm/news/mexico-confirms-150m-cat-bond-payout-for-quake/
+[^pe18]: Artemis, "Peru's World Bank cat bond could be triggered by M8.0 earthquake", https://www.artemis.bm/news/perus-world-bank-cat-bond-could-be-triggered-by-m8-0-earthquake/; attachment probability from Artemis, "$1 billion Pacific Alliance earthquake cat bond launched by World Bank", https://www.artemis.bm/news/1-billion-pacific-alliance-earthquake-cat-bond-launched-by-world-bank/
+[^mx20]: Artemis, "Mexico expected to renew Pacific coast hurricane cat bond after Otis resolution", https://www.artemis.bm/news/mexico-expected-to-renew-pacific-coast-hurricane-cat-bond-after-otis-resolution/
+[^jm24]: World Bank press release, 7 Nov 2025, https://www.worldbank.org/en/news/press-release/2025/11/07/hurricane-melissa-triggers-100-payout-of-150-million-world-bank-catastrophe-bond-for-jamaica; attachment probability from the World Bank case study, https://thedocs.worldbank.org/en/doc/401877c87631461af8ad227793affc5f-0340012025/original/Case-Study-Jamaica-2024-Cat-Bond.pdf; Beryl: Artemis, https://www.artemis.bm/news/jamaicas-disaster-insurance-funds-sufficient-for-beryl-despite-no-cat-bond-payout-cdps-meenan/
+
 **A real five-country pool.** Finally, we calibrated a Central Asian pool from data alone and tested RDPO on
 it (`src/realdata/central_asia_pool.py`):
 
@@ -617,7 +639,34 @@ it (`src/realdata/central_asia_pool.py`):
   Carlo, but the intervals are optimistic. The Phase 2 engine therefore answers pair questions exactly (pair
   reduction, §6.5) and uses RDPO for pool-wide questions.
 
-## 6.7 Limitations
+## 6.7 WP2 first results: a calibrated ten-country CAREC pool
+
+The work plan's WP2 asks for realistic portfolios (public hazard data, heterogeneous perils, dense dependence,
+10–50 countries). Its success criterion is a relative RMSE of at most 10% at μ ≤ 10⁻⁸ within 10⁵ paths. As a
+first step we built the pool of ADB's Central Asia Regional Economic Cooperation programme (CAREC) from public
+data alone (`src/realdata/carec_pool.py`):
+
+* **Countries.** Afghanistan, Azerbaijan, Georgia, Kazakhstan, Kyrgyz Republic, Mongolia, Pakistan, Tajikistan,
+  Turkmenistan and Uzbekistan. China is excluded because only some of its provinces take part in CAREC.
+* **Perils.** Earthquakes come from {{CAREC_EVENTS}} catalogue main shocks, calibrated as in §6.6. Rain is
+  heterogeneous: each country's trigger probability scales the brief's 2% by its observed frequency of major
+  hydro-meteorological losses.
+* **Dependence.** The catalogue finds {{CAREC_NEDGES}} shared-event edges: {{CAREC_EDGES}}.
+* **Exact references.** A tilted matrix-product state with countries ordered west to east has maximum bond
+  dimension {{CAREC_BOND}} and builds in {{CAREC_MPS_S}}. Results at truncation tolerances 10⁻¹⁰ and 10⁻¹² agree
+  to {{CAREC_CHECK}}.
+
+{{CAREC_TABLE}}
+
+{{CAREC_RES_TABLE}}
+
+* **WP2 criterion {{CAREC_CRIT_OK}}.** At μ = {{CAREC_MU_RARE}} (pool payout above {{CAREC_TR}}), RDPO's relative
+  RMSE is {{CAREC_CRIT}} with 65,536 paths, against the 10% target within 10⁵ paths. At 16,384 paths it is
+  {{CAREC_CRIT16}}.
+* **Remaining WP2 scope.** Pools of 20–50 countries, references beyond tensor networks for dense dependence,
+  and ground-motion and exposure models in place of epicentre proxies.
+
+## 6.8 Limitations
 
 * **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
 * **Level functions.** The cross-entropy stage is indispensable for the rarest targets, so new targets
@@ -773,7 +822,7 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 | Work package | Milestone | Success criterion |
 |---|---|---|
 | WP1 Engineering (W1–2): GPU-batched RDPO, library API, sandbox onboarding. *CPU part done (§6.5): 6.5–9.9× rollout throughput, identical policy* | M1 library v0.1 | prototype results reproduced; ≥ 10× throughput |
-| WP2 Realistic portfolios (W3–6): public hazard data, heterogeneous perils, dense dependence, 10–50 countries | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
+| WP2 Realistic portfolios (W3–6): public hazard data, heterogeneous perils, dense dependence, 10–50 countries. *First results in §6.6–6.7: calibrated 5- and 10-country pools* | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
 | WP3 RL improvements (W5–8): small neural soft values, adaptive levels, robust error bars, model selection. *First results in §6.5 (Phase 2 engine)* | M3 Phase 2 engine | ≥ 2× over Phase 1 on dense graphs; coverage ≥ 93% |
 | WP4 Quantum stage and AI-for-Quantum (W8–10): compiled loader; guarded estimation on emulators or hardware; RL depth schedules | M4 compiled resource tables + updated s* map | compiled counts within 2× of estimates; guard caps tail error |
 | WP5 Web application and agents (W9–11): dashboard, news-scout and data agents, advisory agent, MCP tool server | M5 public demo | three end-to-end analyst workflows |

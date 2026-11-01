@@ -46,6 +46,7 @@ class DataModel(SyntheticModel):
     """SyntheticModel with country-specific tails and data-based shared rates (same source structure)."""
     tails: list = field(default_factory=list)
     shared_eq: dict = field(default_factory=dict)
+    rain_p: list = field(default_factory=list)       # annual rain-trigger probability per country (default 2%)
 
     def __post_init__(self):
         self.lam, self.Lam = [], []
@@ -53,8 +54,8 @@ class DataModel(SyntheticModel):
             l, L = compound_poisson_rates(np.asarray(t))
             self.lam.append(l); self.Lam.append(L)
         self.w = [l / L for l, L in zip(self.lam, self.Lam)]
-        mu = -np.log(1 - 0.02) * self.rain_mult
-        self.mu = [mu] * self.n
+        rp = self.rain_p if self.rain_p else [0.02] * self.n
+        self.mu = [-np.log(1 - p) * self.rain_mult for p in rp]
         deg = np.zeros(self.n, int)
         for i, j in self.edges:
             deg[i] += 1; deg[j] += 1
