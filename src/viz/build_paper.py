@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import art, paper_figs
+from . import art, art2, paper_figs
 
 ROOT = Path(".")
 PAPER = ROOT / "docs/paper"
@@ -45,7 +45,7 @@ def e1_values(B=16384):
     v["E1_SEC_16K"] = f"{np.mean([r['seconds_per_fit'] for r in d if r['budget'] == B]):.1f}"
     # table: targets x scenarios at B
     hdr = "| Target | " + " | ".join(paper_figs.SCN_LABEL[s] for s in SCN) + " |"
-    lines = [f"**Table 1.** RDPO relative RMSE at B = {B:,} paths (training included) and, in parentheses, the improvement factor over the best of the four reference methods in the same cell. Bold: RDPO more accurate.", "", hdr, "|---" * 6 + "|"]
+    lines = [f"**Table [tab:e1].** RDPO relative RMSE at B = {B:,} paths (training included) and, in parentheses, the improvement factor over the best of the four reference methods in the same cell. Bold: RDPO more accurate.", "", hdr, "|---" * 6 + "|"]
     wins = 0
     for t in TGT:
         cells = []
@@ -79,7 +79,7 @@ def e1_values(B=16384):
         f"(median factor {fold(med_imp['expected_loss'])}), and we recommend it for that quantity. "
         f"Because the training cost is charged to the budget, the advantage on joint exhaustion depends on the budget: "
         f"the median factor is {fold(float(np.median(small)))} at 4,096 paths, where the cross-entropy stage consumes most "
-        f"of the budget, and {fold(float(np.median(big)))} at 65,536 paths (Figure 6). Across all 75 budget–scenario–target settings the "
+        f"of the budget, and {fold(float(np.median(big)))} at 65,536 paths (Figure [fig:e1budget]). Across all 75 budget–scenario–target settings the "
         f"nominal 95% intervals cover the exact value in {pct(float(np.mean(covs)), 0)} of replications "
         f"(range {pct(min(covs), 0)}–{pct(max(covs), 0)}).")
     return v
@@ -106,7 +106,7 @@ def e2_values():
     v["E2_RING28_EXC"] = pct(r28["rdpo"]["rel_rmse"], 1) if r28 else "—"
     v["E2_SEC_28"] = f"{r28['seconds_per_fit']:.0f}" if r28 else "—"
     hdr = ("| Graph | n | μ exceedance | RDPO | Exp. twisting | MC (theory) | RDPO stop-loss | Exp. twisting stop-loss | μ pair exhaustion | RDPO | MC (theory) |")
-    lines = ["**Table 2.** Scaling results at a total budget of 65,536 paths (relative RMSE; training included). MC entries are theoretical relative errors at the same budget.", "", hdr, "|---" * 11 + "|"]
+    lines = ["**Table [tab:e2].** Scaling results at a total budget of 65,536 paths (relative RMSE; training included). MC entries are theoretical relative errors at the same budget.", "", hdr, "|---" * 11 + "|"]
     keys = sorted({(r["topology"], r["n"]) for r in d}, key=lambda k: (k[0] != "ring", k[1]))
     for kind, n in keys:
         e, s, j = get.get((kind, n, "exceedance")), get.get((kind, n, "stop_loss")), get.get((kind, n, "joint_exhaustion"))
@@ -149,7 +149,7 @@ def e3_values():
     abl = list(dict.fromkeys(r["ablation"] for r in d))
     get = {(r["case"], r["ablation"]): r for r in d}
     hdr = "| Configuration | " + " | ".join(cases) + " |"
-    lines = ["**Table 3.** Ablation: relative RMSE at B = 16,384 paths (40 replications). Ratios to full RDPO in parentheses.", "", hdr, "|---" * (len(cases) + 1) + "|"]
+    lines = ["**Table [tab:e3].** Ablation: relative RMSE at B = 16,384 paths (40 replications). Ratios to full RDPO in parentheses.", "", hdr, "|---" * (len(cases) + 1) + "|"]
     for a in abl:
         cells = []
         for c in cases:
@@ -205,6 +205,98 @@ def e3_values():
     return {"E3_TEXT": txt}
 
 
+def q_values():
+    d = json.loads((R / "quantum_advantage.json").read_text())
+    adv = sorted(d["advantage"], key=lambda r: (r["topology"] != "ring", r["n"]))
+    v = {}
+    r28 = next(r for r in adv if r["topology"] == "ring" and r["n"] == 28)
+    v["Q_SSTAR_28"] = sci(r28["required_speedup"]).replace("1.0×", "")
+    v["Q_PL_28"] = sci(r28["pL_required"])
+    def dur(s):
+        return f"{s * 1e3:.1f} ms" if s < 1 else (f"{s:.1f} s" if s < 600 else (f"{s / 3600:.1f} h" if s < 2 * 86400 else f"{s / 86400:.0f} d"))
+    lines = ["**Table [tab:qadv].** Falsifiable wall-clock comparison at 10% relative error on Pr(L > Tₙ). Classical: measured "
+             "single-core RDPO time (training included). Quantum: projected IQAE runtime on the stated surface-code baseline. "
+             "s*: hardware speed-up required for break-even. p_L: logical two-qubit error rate required by the deepest circuit.", "",
+             "| Graph | n | μ | twisted amplitude a | RDPO paths needed | RDPO time | AE calls | max Grover depth | quantum time | s* | p_L required |",
+             "|---" * 11 + "|"]
+    for r in adv:
+        lines.append(f"| {r['topology']} | {r['n']} | {sci(r['mu'])} | {r['a_twisted']:.3f} | {r['classical_paths']:,.0f} | "
+                     f"{dur(r['classical_seconds'])} | {r['quantum_calls']:,.0f} | {r['quantum_kmax']:.0f} | {dur(r['quantum_seconds'])} | "
+                     f"**{sci(r['required_speedup'])}** | {sci(r['pL_required'])} |")
+    v["Q_ADV_TABLE"] = "\n".join(lines)
+    ss = [r["required_speedup"] for r in adv]
+    ring = [r for r in adv if r["topology"] == "ring"]
+    v["Q_ADV_TEXT"] = "\n".join([
+        f"* **Result.** In every setting the quantum stage is slower: break-even needs a hardware speed-up between "
+        f"{sci(min(ss))} and {sci(max(ss))}. The reason is that RDPO needs only "
+        f"{min(r['classical_paths'] for r in adv):,.0f}–{max(r['classical_paths'] for r in adv):,.0f} paths for 10% error, so the "
+        f"quadratic query advantage has almost nothing to act on.",
+        f"* **Trend.** The gap closes with portfolio size: on the ring, s* falls from {sci(ring[0]['required_speedup'])} (n = 2) to "
+        f"{sci(ring[-1]['required_speedup'])} (n = 28), because RDPO's per-path variance grows "
+        f"(ρ² from {ring[0]['classical_rho2']:.2f} to {ring[-1]['classical_rho2']:.0f}) while the twisted amplitude decays only slowly.",
+        f"* **Hardware requirement.** The deepest circuit at n = 28 has Grover depth {ring[-1]['quantum_kmax']:.0f}, "
+        f"{ring[-1]['logical_qubits']} logical qubits and about {ring[-1]['physical_qubits'] / 1e6:.1f} million physical qubits, and needs a "
+        f"logical error rate of {sci(ring[-1]['pL_required'])}.",
+        "* **Falsification statements.** The quantum stage is *not* useful for a portfolio class if (i) s* stays above the "
+        "projected speed-up of available fault-tolerant hardware, or (ii) RDPO's per-path relative variance ρ² stays below "
+        "about 10³ as portfolios grow. Conversely, a target class on which RDPO's ρ² grows quickly (dense dependence, "
+        "many-country compound triggers) is where the stage should be re-tested first (WP4).",
+        "* **What the comparison already includes.** The classical side is our *best* method, timed with training; the quantum "
+        "side includes state preparation, the weight oracle and all IQAE rounds. Comparing against plain Monte Carlo instead would "
+        "show a misleading quantum advantage of several orders of magnitude."])
+    ms = d["mitigation_summary"]
+    lines = ["**Table [tab:mit].** Error mitigation under control-offset miscalibration (250 random instances per level; relative error "
+             "of the estimated amplitude). Guard 2 combines the goodness-of-fit and pilot-disagreement guards with fallback to RDPO.", "",
+             "| offset δ_max | mitigation worse than none | p99 error: none | mitigated | guard 2 | max error: none | mitigated | guard 2 | fallback rate |",
+             "|---" * 9 + "|"]
+    for k in sorted(ms, key=float):
+        m = ms[k]
+        lines.append(f"| {float(k):g} | {pct(m['mitigation_worse_than_raw'], 0)} | {m['raw']['p99']:.2f} | {m['mit']['p99']:.2f} | "
+                     f"**{m['guard2']['p99']:.2f}** | {m['raw']['max']:.2f} | {m['mit']['max']:.2f} | **{m['guard2']['max']:.2f}** | "
+                     f"{pct(m['fallback2_rate'], 0)} |")
+    v["MIT_TABLE"] = "\n".join(lines)
+    ks = sorted(ms, key=float)
+    worse = [ms[k]["mitigation_worse_than_raw"] for k in ks]
+    v["MIT_TEXT"] = "\n".join([
+        f"* **Mitigation is not monotone.** Noise-aware fitting removes the worst raw errors, but it is worse than no mitigation "
+        f"in {pct(worse[0], 0)} of instances without miscalibration, rising to {pct(worse[-1], 0)} at δ_max = {float(ks[-1]):g}. "
+        "This reproduces the qualitative finding of [@errmit2026] on our own workload.",
+        f"* **Goodness of fit alone is not enough.** The likelihood-ratio guard triggers in only "
+        f"{pct(min(ms[k]['fallback_rate'] for k in ks), 0)}–{pct(max(ms[k]['fallback_rate'] for k in ks), 0)} of instances: a coherent "
+        "offset is largely absorbed by a shifted amplitude, so the fit still looks good.",
+        f"* **An independent classical check bounds the tail.** Adding the pilot-disagreement test caps the 99th-percentile error "
+        f"at {min(ms[k]['guard2']['p99'] for k in ks):.2f}–{max(ms[k]['guard2']['p99'] for k in ks):.2f} and the maximum at "
+        f"{max(ms[k]['guard2']['max'] for k in ks):.2f} across all offset levels, at a fallback rate of "
+        f"{pct(min(ms[k]['fallback2_rate'] for k in ks), 0)}–{pct(max(ms[k]['fallback2_rate'] for k in ks), 0)}. The median error "
+        "is unchanged or better.",
+        "* **Design rule.** The quantum estimate is accepted only when it is consistent with an unbiased classical pilot. This is "
+        "where RDPO and the quantum stage meet: the classical RL estimator is the calibration anchor, not a competitor to be hidden."])
+    lines = ["**Table [tab:qres].** Projected logical and physical resources per amplitude-estimation run (10% relative error, "
+             "twisted loading with the bitwise weight oracle). A: one state preparation; Q: one Grover iterate.", "",
+             "| Graph | n | logical qubits | Toffoli (A) | rotations (A) | CNOT (Q) | lookup Toffolis avoided | code distance | physical qubits | runtime |",
+             "|---" * 10 + "|"]
+    for r in adv:
+        lines.append(f"| {r['topology']} | {r['n']} | {r['logical_qubits']} | {r['toffoli_A']:,} | {r['rotations_A']:,} | "
+                     f"{r['cnot_Q']:,} | {r['lookup_toffoli_avoided']:,} | {r['code_distance']} | {r['physical_qubits']:,} | {dur(r['quantum_seconds'])} |")
+    v["Q_RES_TABLE"] = "\n".join(lines)
+    return v
+
+
+def number_labels(md):
+    """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
+    for kind in ("fig", "tab"):
+        order = []
+        for k in re.findall(r"\[" + kind + r":(\w+)\]", md):
+            if k not in order:
+                order.append(k)
+        for i, k in enumerate(order, 1):
+            md = md.replace(f"[{kind}:{k}]", str(i))
+    left = re.findall(r"\[(?:fig|tab):\w+\]", md)
+    if left:
+        print("UNRESOLVED LABELS:", left, file=sys.stderr)
+    return md
+
+
 def toc(md):
     heads = [(n, re.sub(r"\s*\{[^}]*\}\s*$", "", t)) for n, t in re.findall(r"^# (\d+) (.+)$", md, flags=re.M)]
     items = "\n\n".join(f"**{n}**  {t}" for n, t in heads)
@@ -214,7 +306,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values):
+    for fn in (e1_values, e2_values, e3_values, q_values):
         try:
             vals.update(fn())
         except Exception as ex:
@@ -222,6 +314,7 @@ def fill():
     md = md.replace("# 1 Introduction {.newpage}", toc(md) + "\n\n# 1 Introduction", 1)
     for k, val in vals.items():
         md = md.replace("{{" + k + "}}", val)
+    md = number_labels(md)
     left = sorted(set(re.findall(r"\{\{(\w+)\}\}", md)))
     if left:
         print("UNFILLED:", left, file=sys.stderr)
@@ -254,6 +347,7 @@ const { chromium } = require('playwright');
 
 def build(cv=None):
     art.main()
+    art2.main()
     paper_figs.main()
     left = fill()
     html = PAPER / "proposal.html"

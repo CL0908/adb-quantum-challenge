@@ -72,7 +72,9 @@ All numbers come from `results/rdpo_e*.json` (fixed seeds), with **training incl
 | Joint exhaustion of one pair inside an 8–28-country portfolio | **0.4%–1.0%** relative error |
 | vs classical exponential twisting | RDPO more accurate in **15/16** settings (median ×3.5) |
 | Ablation | indispensable: cross-entropy (×81), twist warm start (×37 at scale), target-relevance freezing (×2.6) |
-| Quantum stage (projected) | exact loader: 52 qubits / 156 Toffolis per call (ADB); twisted loading cuts amplitude-estimation calls at 28 countries from 2.8×10⁹ to 3.4×10⁴ |
+| Quantum stage (projected) | exact twisted loader + bitwise weight oracle; amplitude-estimation calls at 28 countries cut from 2.8×10⁹ to 3.4×10⁴ |
+| Falsifiable wall-clock criterion | quantum needs **8.2×10⁴ – 4.4×10⁶×** faster hardware to beat RDPO (s* shrinks with portfolio size) |
+| Error-mitigation trust boundary | mitigation worse than none in 21–38% of instances under miscalibration; pilot-disagreement guard caps p99 error at ≤ 0.17 |
 
 <p align="center">
   <img src="figures/paper/e2_scaling.png" width="96%" alt="Scaling with portfolio size">
@@ -149,7 +151,8 @@ results/  figures/   all numbers and plots; tests/  44 tests
 - [x] Benchmark, scaling (to 28 countries) and ablation at fixed total budget
 - [x] Quantum-ready stage: exact structured / twisted loading, resource estimates, NISQ analysis
 - [ ] WP1 GPU-batched library · WP2 realistic multi-peril portfolios · WP3 neural soft values, robust error bars, model selection
-- [ ] WP4 compiled quantum resource tables and calibrated sampler on sandbox hardware · WP5 validation and delivery
+- [x] Quantum evidence standard: wall-clock break-even map, noise/miscalibration study with trust guard
+- [ ] WP4 compiled quantum stage + AI-for-Quantum · WP5 web app with AI analyst agent and MCP tools · WP6 validation and delivery
 
 ## License
 

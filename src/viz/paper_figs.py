@@ -152,7 +152,7 @@ def tn_bond():
         ax.text(xe + 0.6, ye, kind, color=cols[kind], fontsize=8.5, va="center", fontweight="semibold")
     ax.set_yscale("log"); ax.set_xlabel("countries n"); ax.set_ylabel("max bond dimension χ")
     ax.set_xlim(1, 31)
-    ax.set_title("Exact tilted-gauge tensor network: representation size vs portfolio size (graphs as in Figure 2)", fontsize=9.5)
+    ax.set_title("Exact tilted-gauge tensor network: representation size vs portfolio size", fontsize=9.5)
     S.save(fig, OUT / "tn_bond.png")
 
 
@@ -178,9 +178,10 @@ def gantt():
     wps = [("WP1  Engineering: GPU-batched RDPO, library API", 1, 2, S.BLUE, "M1"),
            ("WP2  Realistic portfolios: perils, dense graphs, 10–50 countries", 3, 6, S.TEAL, "M2"),
            ("WP3  RL improvements: neural soft values, adaptive levels", 5, 8, S.TERRA, "M3"),
-           ("WP4  Quantum stage: compiled loading, calibrated sampler", 8, 10, S.PLUM, "M4"),
-           ("WP5  Validation, documentation, demo, business case", 11, 12, S.OCHRE, "M5")]
-    fig, ax = plt.subplots(figsize=(9.6, 2.9))
+           ("WP4  Quantum stage + AI-for-Quantum: compiled loader, guarded AE", 8, 10, S.PLUM, "M4"),
+           ("WP5  Web application, AI analyst agent, MCP tool server", 9, 11, S.GREEN, "M5"),
+           ("WP6  Validation, documentation, business case", 11, 12, S.OCHRE, "M6")]
+    fig, ax = plt.subplots(figsize=(9.6, 3.3))
     for k, (lab, s, e, c, m) in enumerate(wps):
         y = len(wps) - 1 - k
         ax.barh(y, e - s + 1, left=s - 0.5, color=c, height=0.5, alpha=0.9)
@@ -196,11 +197,60 @@ def gantt():
     S.save(fig, OUT / "gantt.png")
 
 
+def quantum_advantage_fig():
+    d = _load("quantum_advantage.json")["advantage"]
+    fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.7), gridspec_kw={"wspace": 0.32})
+    for kind, m, c in (("ring", "o", S.TERRA), ("complete", "s", S.PLUM)):
+        rr = sorted([r for r in d if r["topology"] == kind], key=lambda r: r["n"])
+        n = [r["n"] for r in rr]
+        axes[0].plot(n, [r["required_speedup"] for r in rr], marker=m, color=c, label=f"{kind} dependence")
+        axes[1].plot(n, [r["pL_required"] for r in rr], marker=m, color=c, label=f"{kind} dependence")
+    ax = axes[0]
+    ax.set_yscale("log"); ax.axhline(1, color=S.INK, lw=1)
+    ax.text(2, 1.4, "break-even: quantum = classical wall-clock", fontsize=7.5, color=S.INK)
+    ax.set_xlabel("countries n"); ax.set_ylabel("required hardware speed-up  s* = T_Q / T_RDPO")
+    ax.set_title("(a) Wall-clock criterion (10% relative error)", fontsize=9.5)
+    ax.legend(fontsize=7.5, loc="upper right")
+    ax = axes[1]
+    ax.set_yscale("log")
+    for y, lab in ((1e-3, "today's physical two-qubit error"), (1e-6, "early fault tolerance"), (1e-9, "mature fault tolerance")):
+        ax.axhline(y, color=S.MUTED, lw=0.9, ls=":")
+        ax.text(27.5, y * 1.35, lab, fontsize=7, color=S.INK2, ha="right")
+    ax.set_xlabel("countries n"); ax.set_ylabel("logical error rate needed per two-qubit gate")
+    ax.set_title("(b) Noise criterion for the deepest IQAE circuit", fontsize=9.5)
+    ax.set_ylim(1e-10, 3e-3)
+    S.save(fig, OUT / "quantum_advantage.png")
+
+
+def mitigation_fig():
+    q = _load("quantum_advantage.json")
+    rows = q["mitigation_instances"]
+    dms = sorted({r["delta_max"] for r in rows})
+    fig, axes = plt.subplots(1, len(dms), figsize=(9.8, 3.2), sharey=True, gridspec_kw={"wspace": 0.12})
+    lab = {"raw": ("no mitigation", S.BLUE, "--"), "mit": ("noise-aware mitigation", S.OCHRE, "-"),
+           "guard": ("+ goodness-of-fit guard", S.PLUM, ":"), "guard2": ("+ fit & pilot-disagreement guard", S.TERRA, "-")}
+    for ax, dm in zip(axes, dms):
+        sub = [r for r in rows if r["delta_max"] == dm]
+        for k, (l, c, ls) in lab.items():
+            e = np.sort(np.maximum([r["err_" + k] for r in sub], 1e-5))
+            ccdf = 1 - np.arange(len(e)) / len(e)
+            ax.step(e, ccdf, where="post", color=c, ls=ls, lw=2.2 if k == "guard2" else 1.5, label=l)
+        s = q["mitigation_summary"][str(dm)]
+        ax.set_xscale("log"); ax.set_yscale("log")
+        ax.set_title(f"control offset |δ| ≤ {dm:g} rad / iterate", fontsize=9)
+        ax.text(0.03, 0.05, f"mitigation worse than none: {100 * s['mitigation_worse_than_raw']:.0f}%\nguard falls back: {100 * s['fallback2_rate']:.0f}%",
+                transform=ax.transAxes, fontsize=7.2, color=S.INK2)
+        ax.set_xlabel("relative error of the estimate")
+    axes[0].set_ylabel("fraction of instances with error ≥ x")
+    axes[0].legend(fontsize=7.2, loc="lower left", bbox_to_anchor=(0.0, 0.18))
+    S.save(fig, OUT / "mitigation.png")
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     S.apply()
     done = []
-    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, quantum_queries, gantt):
+    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, quantum_queries, gantt, quantum_advantage_fig, mitigation_fig):
         try:
             f(); done.append(f.__name__)
         except Exception as ex:   # partial results while experiments are running
@@ -210,3 +260,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

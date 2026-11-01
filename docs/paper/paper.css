@@ -89,3 +89,12 @@ code { font-family: "JetBrains Mono", monospace; font-size: 8.4pt; }
 #refs { font-size: 8.6pt; line-height: 1.38; text-align: left; }
 #refs .csl-entry { margin-bottom: 4pt; padding-left: 14pt; text-indent: -14pt; }
 ul, ol { padding-left: 16pt; } li { margin: 2pt 0; }
+
+/* ---------- key-takeaway bar (concept-card style) ---------- */
+.takeaway { background: var(--navy); color: #F6F1E7; border-radius: 8pt; padding: 8pt 14pt 8pt 40pt; margin: 12pt 0 14pt;
+            position: relative; font-family: Inter, sans-serif; font-size: 9.2pt; font-weight: 600; page-break-inside: avoid; }
+.takeaway::before { content: "KEY"; position: absolute; left: 10pt; top: 50%; transform: translateY(-50%);
+                    font-size: 6.5pt; letter-spacing: 0.08em; color: #E8B04B; font-weight: 700; }
+.takeaway p { margin: 0; text-align: left; }
+li { margin: 2.5pt 0; }
+li p { margin: 0; }

@@ -12,31 +12,25 @@ lang: en
 ::: {.abstract}
 ## Abstract
 
-Pooled catastrophe-risk instruments are priced, structured and stress-tested on their *joint tails*: the
-probability that several countries attach, exceed a pooled threshold or exhaust their cover together.
-These quantities are rare (10⁻³ to 10⁻¹³ per term), are driven by a dependence structure that historical
-data cannot pin down, and must be re-estimated under many dependence scenarios. Plain Monte Carlo
-returns no hit at all at practical budgets, and exact enumeration grows as 10ⁿ with the number of
-countries.
+Pooled catastrophe-risk instruments are priced and stress-tested on their *joint tails*, such as the
+probability that two countries exhaust their cover in the same term. These probabilities are rare
+(10⁻³ to 10⁻¹³), poorly constrained by historical data, and must be recomputed under many dependence
+scenarios. Plain Monte Carlo returns no hit at practical budgets, and exact enumeration grows as 10ⁿ
+with the number of countries.
 
-We formulate joint-loss estimation as a sequential decision problem over independent Poisson *sources*
-of loss. We show that the zero-variance importance-sampling measure is the Doob h-transform of the loss
-process, equivalently the optimal policy of a KL-regularised (soft) control problem. On this basis we
-propose **Rényi-Doob Policy Optimization (RDPO)**: a compact soft-value policy is learned by
-cross-entropy policy search and then refined by a Rényi-2 (χ²) policy gradient, because χ² rather than
-KL governs estimator variance. Training and estimation share one fixed path budget. Training samples are
-recycled into an estimator that is exactly unbiased, and the final stage uses randomised quasi-Monte
-Carlo.
+We cast joint-loss estimation as a reinforcement-learning problem. A scenario is a sequence of draws
+from independent Poisson *sources* of loss. The zero-variance sampler is the Doob h-transform of this
+process, equivalently the optimal policy of a KL-regularised control problem. **Rényi-Doob Policy
+Optimization (RDPO)** learns this policy with a compact soft-value function. It is trained first by
+cross-entropy (KL) and then by a Rényi-2 (χ²) policy gradient, since χ² is the divergence that sets the
+estimator's variance. Training is charged to a fixed path budget, and the estimator is exactly unbiased.
 
-On the ADB benchmark (five scenarios × five targets), with all training charged to the budget, RDPO
-attains {{E1_EXH_MED}} median relative RMSE on the joint-exhaustion probability at 16,384 paths, a
-{{E1_EXH_RANGE}} improvement over the best of the four reference methods. On an n-country extension it
-keeps relative errors of {{E2_RANGE}} while the target probability falls to 10⁻¹³ (28 countries),
-where Monte Carlo would require on the order of 10¹⁵ paths. As a forward-looking extension we show that
-the same change of measure carries over to quantum amplitude estimation through an *exact*, structured
-loading circuit whose size scales linearly with the dependence graph. Since no quantum processor is
-available in Phase 1, the quantum stage is presented as a resource-estimated future feature, not as a
-claimed advantage.
+With training included, RDPO attains {{E1_EXH_MED}} median relative error on the ADB joint-exhaustion
+probability at 16,384 paths, a {{E1_EXH_RANGE}} improvement over the best reference method. It keeps
+errors of {{E2_RANGE}} as the target probability falls to 10⁻¹³ in a 28-country portfolio. The same
+learned change of measure loads *exactly* into an amplitude-estimation circuit. We assess this quantum
+stage with a falsifiable wall-clock criterion and a calibration trust guard, and we claim no quantum
+advantage in Phase 1.
 :::
 
 ::: {.glance}
@@ -53,11 +47,11 @@ smallest target probability estimated, at {{E2_RING28_EXC}} relative RMSE (28 co
 :::
 ::: {.tile}
 [{{E1_COVERAGE}}]{.big}
-empirical coverage of nominal 95% intervals across all 75 benchmark settings; the estimator is provably unbiased (Proposition 5)
+empirical coverage of nominal 95% intervals over 75 benchmark settings; the estimator is provably unbiased
 :::
 ::: {.tile}
-[O(n + |E|)]{.big}
-cost per sampled path, for both the classical policy and the future quantum loader
+[{{Q_SSTAR_28}}]{.big}
+hardware speed-up a fault-tolerant machine would need for quantum to beat RDPO in wall-clock (28 countries): a falsifiable target
 :::
 :::
 :::
@@ -66,320 +60,310 @@ cost per sampled path, for both the classical policy and the future quantum load
 
 # 1 Introduction {.newpage}
 
-Disaster risk financing instruments transfer the cost of natural catastrophes from governments to
-capital markets before an event occurs. In a catastrophe bond, investors receive a coupon in exchange
-for exposing part of their principal to a pre-agreed parametric trigger. For a multilateral development
-bank structuring a pooled facility, such as the Asian Development Bank's Disaster Relief Bond for the
-Kyrgyz Republic and Tajikistan, the decision-relevant quantities are *joint*: whether pooling reduces
-cost depends on how often the covered countries suffer losses together, and whether investors are
-adequately compensated depends on the probability that the cover of several countries is exhausted in
-the same term. Two features make these quantities hard to compute. First, they lie far in the tail of
-the joint loss distribution, where sampling error dominates. Second, the dependence that drives them is
-poorly constrained by the short historical record, so they must be recomputed across many dependence
-scenarios and, for regional pools, across many countries.
+## 1.1 Why now
 
-This proposal makes four contributions.
+* **Pooled cover is growing, and its price depends on joint tails.** The Asian Development Bank's
+  US$160 million Disaster Relief Bond for the Kyrgyz Republic and Tajikistan pools earthquake and
+  precipitation risk across a shared fault and glacier system. Whether pooling lowers cost, and whether
+  investors are paid fairly, depends on how often both countries lose *together*.
+* **The losses are large and recurrent.** Earthquakes in Central Asia are reported to cause on the order
+  of half a billion US dollars of damage per year, with the Kyrgyz Republic among the most affected
+  (CABAR.asia, cited in the challenge brief).
+* **The data cannot pin down the joint tail.** Only a couple of decades of high-quality disaster data
+  exist, so the dependence between countries must be stress-tested across scenarios rather than
+  estimated. Every scenario multiplies the number of rare-event computations.
+* **Current tools fail exactly where it matters.** At the 3×10⁻⁵ joint-exhaustion probability of the
+  benchmark, plain Monte Carlo with 16,384 paths returns *zero* in about 60% of runs. Exact enumeration
+  is instant for two countries but grows as 10ⁿ, and regional pools cover 5–30 countries.
 
-1. **A source-level formulation.** We show that the capped multi-year payout process of the benchmark
-   is exactly a product of commuting single- and two-country Poisson kernels, and that each source has
-   a finite term-increment law (Propositions 1–2). This yields an exact representation in which a
-   portfolio scenario is a sequence of K = 2n + 2|E| independent draws.
-2. **RDPO, an information-theoretic reinforcement-learning estimator.** We identify the zero-variance
-   importance-sampling measure with the optimal policy of a soft control problem (Proposition 3). We
-   learn it with a compact policy class and a two-stage objective (KL, then Rényi-2) whose second stage
-   targets estimator variance directly (Proposition 4). With sample recycling the estimator is exactly
-   unbiased under a fixed total budget (Proposition 5).
-3. **A rigorous evaluation at fixed total budget.** RDPO is compared with the challenge's reference
-   methods on all 25 benchmark cells, scaled to 28 countries against exact tensor-network references,
-   and dissected by an ablation study. All training costs are charged to the budget, and interval
+::: {.takeaway}
+The bottleneck is accuracy per query in the joint tail, and how it degrades as portfolios grow.
+:::
+
+## 1.2 The idea in three cards
+
+![**Figure [fig:cards].** The three ideas behind RDPO. (01) The optimal sampler moves probability
+towards the losses and corrects by importance weights. (02) A catastrophe portfolio decomposes into
+independent Poisson shocks, so a scenario is a short sequence of small draws. (03) Estimation error is
+dominated by a few rare paths, so the sampler must be trained against χ², not only against
+KL.](../art/concept_cards.svg){.wide}
+
+## 1.3 System overview
+
+![**Figure [fig:arch].** System architecture. Calibrated hazard parameters, contract terms, a
+dependence graph and stress scenarios define an exact source model. The RDPO engine learns a
+soft-value sampling policy inside a fixed path budget (top loop) and turns it into an unbiased estimate
+with a confidence interval (bottom row). A validation layer checks the method against exact references.
+The same learned measure can feed a future quantum estimation stage (dashed).](../art/architecture.svg){.wide}
+
+## 1.4 Contributions
+
+1. **Exact source-level formulation.** The capped multi-year payout process is an exact product of
+   commuting Poisson kernels with finite increment laws (Propositions 1–2), so a scenario is a sequence
+   of K = 2n + 2|E| independent draws.
+2. **RDPO.** The zero-variance sampler is the optimal policy of a soft control problem (Proposition 3).
+   We learn it with KL then χ² objectives (Proposition 4) inside a fixed budget, with an exactly unbiased
+   estimator (Proposition 5).
+3. **Rigorous evaluation.** All 25 benchmark cells, scaling to 28 countries against exact
+   tensor-network references, and an ablation. Training is always charged to the budget, and interval
    coverage is reported.
-4. **A quantum-ready estimation stage.** The same change of measure can be loaded *exactly* into a
-   quantum circuit whose qubit and gate counts scale with the dependence graph, with bounded importance
-   weights for amplitude estimation. We provide end-to-end resource estimates and a near-term
-   feasibility analysis, and we state clearly that no quantum advantage is claimed in Phase 1.
+4. **A quantum stage held to an explicit evidence standard.** Exact structured loading of the learned
+   measure, a falsifiable wall-clock criterion against our own best classical method, and a calibration
+   trust guard for error mitigation.
 
-# 2 Problem Formulation {.newpage}
+# 2 Data and Problem Formulation {.newpage}
 
 ::: {.opener}
 ![](../art/cat_peek.svg){.mascot}
 
-This section builds the estimation problem step by step, from the contract terms of the benchmark to
-an exact source-level representation that holds for any number of countries.
+This section states what data the prototype uses, then builds the estimation problem step by step,
+from the contract terms to an exact source-level representation for any number of countries.
 :::
 
-![**Figure 1.** The benchmark portfolio. Each country's bond pays in earthquake quarter steps and a
-single precipitation trigger; shared events hit both countries at once. All five targets are
+## 2.1 Data and model inputs
+
+The prototype uses **no historical loss records and no proprietary data**. All inputs are the
+calibrated parameters published in the challenge brief:
+
+| Input | Values | Source | Used for |
+|---|---|---|---|
+| Annual EQ exceedance probabilities (≥25/50/75/100% of sub-limit) | KG: 3.883/2.331/1.790/1.184%; TJ: 3.925/1.743/1.332/1.043% | Brief, Table 1 | compound-Poisson rates (§2.4) |
+| Conditional trigger probabilities | Pr(TJ \| KG) = 7.5%, Pr(KG \| TJ) = 7.4% | Brief | shared-event rate (§2.5) |
+| Precipitation trigger probability; shared share | 2% per year; 25% of the smaller rate | Brief | rain sources (§2.5) |
+| Contract terms | US$80m principal = 70m EQ + 10m rain; 3-year term; T = 80m | Brief | payoffs (§2.3) |
+| Stress scenarios | base, independent, common shock (m = 2), rain stress (×2), rain cover (60/20m) | Brief, Table 4 | E1 benchmark |
+| Reference values | five targets × five scenarios | Brief, Table 5 | validation (reproduced exactly) |
+| n-country extension | KG/TJ parameters alternated on chain, ring, star and complete graphs | constructed (§2.8) | scaling study |
+
+In Phase 2 the same pipeline will take source laws estimated from public hazard data (for example
+earthquake catalogues, regional seismic hazard models and precipitation reanalyses) in place of the
+brief's parameters. The method only needs one finite increment law per source.
+
+![**Figure [fig:setup].** The benchmark portfolio. Each country's bond pays in earthquake quarter steps
+and a single precipitation trigger; shared events hit both countries at once. All five targets are
 expectations of functions of the two term losses.](../art/problem_setup.svg){.wide}
 
-## 2.1 Contract terms and payout functions
+## 2.2 Notation in brief
 
-Consider countries $i = 1, \dots, n$ (the benchmark has $n = 2$) over a term of $\tau = 3$ years. Country
-$i$ holds a bond with principal $B_i$ split into an earthquake sub-limit $E_i$ and a precipitation
-sub-limit $P_i$ (benchmark: $E_i = 70$m, $P_i = 10$m, $B_i = 80$m). Earthquake payouts accrue in quarter
-steps of $E_i$ and accumulate over the term up to the sub-limit; precipitation pays $P_i$ at most once.
-We therefore describe the terminal state of country $i$ by
+* Countries $i = 1, \dots, n$; term $\tau = 3$ years; dependence graph $\mathcal G = (V, \mathcal E)$.
+* Terminal state of country $i$: EQ quarter steps $a_i \in \{0, \dots, 4\}$ and rain trigger $r_i \in \{0,1\}$.
+* Sources $k = 1, \dots, K$ with finite increment laws $p_k$; target functional $f$; target value $\mu = \mathbb E_p[f]$.
+* Sampling policy $q_\theta$; importance weight $w = \mathrm dP/\mathrm dQ_\theta$; total path budget $B$.
 
-$$a_i \in \{0,1,2,3,4\} \ \text{(cumulative EQ quarter steps, capped)}, \qquad r_i \in \{0,1\} \ \text{(rain trigger)},$$
+## 2.3 Contract terms and payout functions
 
-and its term loss by
+Country $i$ holds a bond with principal $B_i$ split into an earthquake sub-limit $E_i$ and a
+precipitation sub-limit $P_i$ (benchmark: $E_i = 70$m, $P_i = 10$m, $B_i = 80$m). Earthquake payouts accrue in
+quarter steps and accumulate up to the sub-limit; precipitation pays $P_i$ at most once. The term loss is
 
 $$L_i = E_i \frac{a_i}{4} + P_i\, r_i, \qquad L = \sum_{i=1}^n L_i .$$
 
-## 2.2 Annual earthquake model
+## 2.4 Annual earthquake model
 
-For each country the brief specifies the annual exceedance probabilities $t_1 > t_2 > t_3 > t_4$ that the
-year's aggregate EQ payout reaches at least 25%, 50%, 75% and 100% of the sub-limit. The point
-probabilities of paying 0, 1, 2 or 3 quarter steps are $p_0 = 1 - t_1$, $p_k = t_k - t_{k+1}$
-($k = 1, 2$) and $p_3 = t_3 - t_4$. The annual payout is modelled as compound Poisson: events arrive at
-total rate $\Lambda$ and an event pays $k$ quarter steps with rate $\lambda_k$
-($\Lambda = \sum_k \lambda_k$). Matching the first four point probabilities gives
+From the exceedance probabilities $t_1 > t_2 > t_3 > t_4$, the point probabilities of paying 0–3 quarter
+steps are $p_0 = 1 - t_1$, $p_k = t_k - t_{k+1}$ ($k = 1, 2$) and $p_3 = t_3 - t_4$. A compound Poisson model with
+total rate $\Lambda$ and size rates $\lambda_k$ matches them when
 
 $$\Lambda = -\ln p_0,\quad \lambda_1 = \frac{p_1}{p_0},\quad \lambda_2 = \frac{p_2}{p_0} - \frac{\lambda_1^2}{2},\quad \lambda_3 = \frac{p_3}{p_0} - \lambda_1\lambda_2 - \frac{\lambda_1^3}{6},\quad \lambda_4 = \Lambda - \lambda_1-\lambda_2-\lambda_3,$$
 
-and per-event size probabilities $w_{i,k} = \lambda_{i,k}/\Lambda_i$.
+with per-event size probabilities $w_{i,k} = \lambda_{i,k}/\Lambda_i$.
 
-## 2.3 Dependence through shared events
+## 2.5 Dependence through shared events
 
-Dependence enters through events that hit both countries. With conditional trigger probabilities
-$\rho_{2|1} = 0.075$ and $\rho_{1|2} = 0.074$ and a scenario multiplier $m$, the shared-event rate is
+* **Shared earthquakes.** With conditional trigger probabilities $\rho_{2|1} = 0.075$, $\rho_{1|2} = 0.074$ and
+  scenario multiplier $m$,
+  $$c = m \cdot \tfrac12\left(\rho_{2|1}\Lambda_1 + \rho_{1|2}\Lambda_2\right).$$
+  Solo events arrive at $\Lambda_i - c$, so each country keeps its total rate; shared events draw their
+  sizes independently in each country.
+* **Generator.** The capped levels $(a_1, a_2)$ form a 25-state Markov chain with generator $G$:
+  $$G_{(a,b),(a \oplus k,\, b)} \mathrel{+}= (\Lambda_1 - c)\, w_{1,k}, \qquad G_{(a,b),(a,\, b \oplus j)} \mathrel{+}= (\Lambda_2 - c)\, w_{2,j}, \qquad G_{(a,b),(a\oplus k,\, b \oplus j)} \mathrel{+}= c\, w_{1,k} w_{2,j},$$
+  where $x \oplus k = \min(x + k, 4)$ is capped addition.
+* **Rain.** Each country triggers with annual probability $q = 2\%$ (rate $\mu = -\ln(1-q)$), of which a
+  shared component $c_r = s_r \min(\mu_1, \mu_2)$ with $s_r = 0.25$ triggers both.
 
-$$c = m \cdot \tfrac12\left(\rho_{2|1}\Lambda_1 + \rho_{1|2}\Lambda_2\right).$$
-
-Each country keeps its total rate: solo events arrive at $\Lambda_i - c$ and shared events at $c$, with
-event sizes drawn independently in each country from $w_{i,\cdot}$. The pair of capped annual levels
-$(a_1, a_2)$ is a continuous-time Markov chain on 25 states with generator $G$, whose off-diagonal
-entries are
-
-$$G_{(a,b),(a \oplus k,\, b)} \mathrel{+}= (\Lambda_1 - c)\, w_{1,k}, \qquad G_{(a,b),(a,\, b \oplus j)} \mathrel{+}= (\Lambda_2 - c)\, w_{2,j}, \qquad G_{(a,b),(a\oplus k,\, b \oplus j)} \mathrel{+}= c\, w_{1,k} w_{2,j},$$
-
-where $x \oplus k = \min(x + k, 4)$ denotes capped addition. Precipitation is modelled analogously: each
-country triggers with annual probability $q = 2\%$, i.e. at Poisson rate $\mu = -\ln(1-q)$, of which a
-shared component $c_r = s_r \min(\mu_1, \mu_2)$ ($s_r = 0.25$) triggers both countries.
-
-## 2.4 Aggregation over the term
-
-The brief aggregates the term by convolving three annual draws and capping the running total. The
-following observation removes the year structure altogether and is used throughout.
+## 2.6 Aggregation over the term
 
 ::: {.proposition}
-**Proposition 1 (term law).** Let $P_{\text{EQ}}^{(\tau)}$ denote the law of the capped term EQ levels.
-Then $P_{\text{EQ}}^{(\tau)} = e^{\tau G}_{(0,0),\,\cdot}$, and the term rain law is that of the annual
-model with rates multiplied by $\tau$.
+**Proposition 1 (term law).** The law of the capped term EQ levels is $e^{\tau G}_{(0,0),\,\cdot}$, and
+the term rain law is the annual one with rates multiplied by $\tau$.
 
-*Proof.* For non-negative integers $x, y$, $\min(\min(x,4) + y, 4) = \min(x + y, 4)$. Hence capping each
-year and then capping the running total equals capping the total uncapped event count over the term.
-The superposition of independent Poisson streams over three unit intervals is a Poisson stream on
-$[0,\tau]$, whose capped levels form the chain with generator $G$; the claim follows. The rain trigger
-is the indicator of at least one event, to which the same argument applies. $\square$
+*Proof.* For non-negative integers, $\min(\min(x,4) + y, 4) = \min(x + y, 4)$, so capping each year and
+then the running total equals capping the total event count over the term. Independent Poisson streams
+over three unit intervals superpose to a Poisson stream on $[0,\tau]$, whose capped levels follow $G$.
+The rain trigger is the indicator of at least one event. $\square$
 :::
 
-Numerically, $e^{3G}$ reproduces the three-fold capped convolution of the brief to within $3\times10^{-16}$ in all
-five scenarios.
+Numerically, $e^{3G}$ reproduces the brief's three-fold capped convolution to within $3\times10^{-16}$ in
+all five scenarios.
 
-## 2.5 Estimation targets
+## 2.7 Estimation targets
 
-All five focus quantities are expectations $\mu = \mathbb{E}[f(\text{terminal state})]$ with $T = 80$m:
-
-| Target | Definition | Rare? |
+| Target | Definition | Typical value |
 |---|---|---|
-| expected principal loss | $\mathbb{E}[L]$ | no |
-| joint attachment | $\Pr(L_1 > 0,\ L_2 > 0)$ | moderately (≈ 4%) |
-| portfolio exceedance | $\Pr(L > T)$ | moderately (≈ 1%) |
+| expected principal loss | $\mathbb{E}[L]$ | US$10m (not rare) |
+| joint attachment | $\Pr(L_1 > 0,\ L_2 > 0)$ | ≈ 4% |
+| portfolio exceedance | $\Pr(L > T)$ | ≈ 1% |
 | portfolio stop-loss | $\mathbb{E}[(L - T)^+]$ | tail-driven |
-| joint exhaustion | $\Pr(L_1 = B_1,\ L_2 = B_2)$ | **rare (≈ 3×10⁻⁵)** |
+| joint exhaustion | $\Pr(L_1 = B_1,\ L_2 = B_2)$ | **≈ 3×10⁻⁵ (rare)** |
 
-## 2.6 Extension to n countries on a dependence graph
+## 2.8 Extension to n countries
 
-To study portfolio scale we place countries on an undirected *dependence graph*
-$\mathcal{G} = (V, \mathcal{E})$: an edge $\{i,j\}$ means that $i$ and $j$ can be hit by common events
-(a shared fault system, river basin or weather regime). Each edge carries a shared EQ source at rate
-$c_{ij}$ (the rule of §2.3) and a shared rain source at rate $c^r_{ij} = s_r\min(\mu_i,\mu_j)/d_{\max}$, and every
-country's solo rates are reduced so that its total rates are preserved. For $n = 2$ and a single edge
-this reproduces the benchmark exactly. All 25 reference values are recovered to $4\times10^{-14}$
-relative error. Figure 2 shows the four graph families used in our scaling study.
+* An edge $\{i,j\}$ of the dependence graph means that $i$ and $j$ can be hit by common events (a shared
+  fault system, river basin or weather regime).
+* Each edge carries a shared EQ source (rate $c_{ij}$, the rule of §2.5) and a shared rain source
+  ($c^r_{ij} = s_r\min(\mu_i,\mu_j)/d_{\max}$); solo rates are reduced so that total rates are preserved.
+* For $n = 2$ with one edge this *is* the benchmark: all 25 reference values are recovered to
+  $4\times10^{-14}$.
 
-![**Figure 2.** Dependence graphs used in the scaling study. Nodes are countries; edges are shared-event
-sources. The number of edges crossing a cut of the country ordering (the cut-width) determines the
-difficulty for exact classical tensor-network methods (§6.4).](../art/topologies.svg){.wide}
+![**Figure [fig:topo].** Dependence graphs used in the scaling study. Nodes are countries; edges are
+shared-event sources. The number of edges crossing a cut (the cut-width) governs the cost of exact
+classical tensor-network methods (§6.4).](../art/topologies.svg){.wide}
 
-## 2.7 Source decomposition
+## 2.9 Source decomposition
 
 ::: {.proposition}
-**Proposition 2 (source decomposition).** Let $\mathcal{S}$ be the set of $K = 2n + 2|\mathcal{E}|$ independent
-Poisson sources (solo EQ and solo rain per country; shared EQ and shared rain per edge), and let $G_k$ be
-the generator of source $k$ acting on the levels of the countries it touches. Then the $G_k$ commute and
+**Proposition 2 (source decomposition).** Let $\mathcal{S}$ be the $K = 2n + 2|\mathcal{E}|$ independent Poisson
+sources (solo EQ and solo rain per country; shared EQ and shared rain per edge), with generators $G_k$.
+Then the $G_k$ commute and $P^{(\tau)} = \delta_{\mathbf 0} \prod_{k} e^{\tau G_k}$. The terminal state is
+$\mathbf{0} \oplus X_1 \oplus \cdots \oplus X_K$ with independent increments $X_k \sim p_k = (e^{\tau G_k})_{\mathbf 0, \cdot}$,
+each supported on at most 25 values.
 
-$$P^{(\tau)} = \delta_{\mathbf 0} \prod_{k \in \mathcal{S}} e^{\tau G_k}.$$
-
-Moreover, the terminal state equals $\mathbf{0} \oplus X_1 \oplus \cdots \oplus X_K$, where the
-increments $X_k$ are independent with *finite* laws $p_k = (e^{\tau G_k})_{\mathbf 0, \cdot}$ supported on at most 25
-values.
-
-*Proof.* Capped addition is a commutative monoid action, so the transition kernels of different
-sources commute. Independence of Poisson sources gives the product. Finiteness follows from the identity
-in the proof of Proposition 1: a source can raise each level by at most 4 quarter steps (one rain trigger)
-before the cap binds, so its term effect is a capped increment in $\{0..4\}$ or $\{0..4\}^2$ (resp.
-$\{0,1\}$). $\square$
+*Proof.* Capped addition is a commutative monoid action, so the kernels of different sources commute,
+and independence gives the product. By the identity in Proposition 1, a source's term effect is a capped
+increment in $\{0..4\}$, $\{0..4\}^2$ or $\{0,1\}$. $\square$
 :::
 
-![**Figure 3.** Source decomposition of a three-country chain. Each portfolio scenario is a sequence of
-independent draws, one per source, and each draw changes only the one or two countries it
+![**Figure [fig:sources].** Source decomposition of a three-country chain. A scenario is a sequence of
+independent draws, one per source; each draw changes only the one or two countries it
 touches.](../art/sources.svg){.wide}
 
-Proposition 2 is the structural basis of everything that follows. A scenario becomes a short sequence
-of small, independent decisions, and each decision has local consequences. This is the form required by
-the sequential policy of §4 and by the quantum loader of §7.
+## 2.10 Why the problem is hard
 
-## 2.8 Why the problem is hard
+* Monte Carlo relative error: $\mathrm{RE}_{\text{MC}} = \sqrt{(1-\mu)/(\mu N)}$, and the probability of no hit
+  at all is $(1-\mu)^N$.
+* For joint exhaustion ($\mu \approx 3.2\times10^{-5}$) at $N = 16{,}384$: $\mathrm{RE}_{\text{MC}} \approx 1.4$, and about
+  60% of runs return exactly zero.
+* Exact enumeration takes 0.2 ms for two countries but scales as $10^n$.
 
-For an unbiased Monte Carlo estimate of a probability $\mu$ from $N$ paths, the relative error is
-
-$$\mathrm{RE}_{\text{MC}} = \sqrt{\frac{1-\mu}{\mu N}},$$
-
-and the probability of observing no hit at all is $(1-\mu)^N$. For joint exhaustion
-($\mu \approx 3.2\times10^{-5}$) and $N = 16{,}384$ paths, $\mathrm{RE}_{\text{MC}} \approx 1.4$ and about 60% of runs return
-exactly zero. Exact enumeration is cheap for two countries (0.2 ms) but scales as $10^n$. The challenge
-is therefore **accuracy per query in the joint tail, and how it degrades with portfolio size**.
+::: {.takeaway}
+A portfolio scenario is a short sequence of independent, local draws. That is the structure a learned
+sampler, and a quantum loader, can exploit.
+:::
 
 # 3 Related Work
 
-**Catastrophe modelling practice.** Vendor platforms and the open-source Oasis Loss Modelling
-Framework chain hazard, vulnerability and financial modules and estimate portfolio metrics by
-aggregating simulated event or year loss tables, usually by plain Monte Carlo. Cross-region dependence
-is expressed through shared events or copulas [@joe2014; @embrechts1997].
+* **Catastrophe modelling practice.** Vendor platforms and the open-source Oasis Loss Modelling
+  Framework chain hazard, vulnerability and financial modules. They estimate portfolio metrics by
+  aggregating simulated event or year loss tables, usually by plain Monte Carlo, and they express
+  dependence through shared events or copulas [@joe2014; @embrechts1997].
+* **Rare-event simulation.** Stratification, randomised quasi-Monte Carlo and importance sampling are
+  classical [@glasserman2003; @owen1997]. The cross-entropy method fits proposals by multilevel KL
+  minimisation [@rubinstein2004]. Variance-minimising adaptive importance sampling [@arouna2004] and χ-
+  and Rényi-divergence variational inference [@dieng2017; @li2016] motivate our second training stage.
+* **Control and RL.** The link between zero-variance measures, Doob transforms and KL control goes back
+  to linearly solvable MDPs and path-integral control [@todorov2009; @kappen2005].
+* **Quantum methods for risk.** Amplitude estimation offers a quadratic query speed-up over Monte
+  Carlo [@brassard2002; @montanaro2015], with risk applications [@woerner2019] and a correlated
+  credit-default model [@egger2021] analogous to shared-event catastrophe risk. Practical variants avoid
+  phase estimation [@suzuki2020; @grinko2021], and end-to-end studies show that state preparation
+  dominates cost [@chakrabarti2021; @herman2023]. Generative models load distributions on near-term
+  devices [@benedetti2019; @zoufal2019; @amin2018; @zhu2022].
+* **Evidence standards.** A recent position paper argues that quantum machine learning on classical
+  data has not earned priority, because its advantage claims rest on strong input assumptions and
+  trainability and noise barriers, and lack wall-clock wins; it calls for falsifiable criteria and for
+  AI-for-Quantum work [@guo2026stopqml]. Error mitigation can itself increase error under
+  miscalibration [@errmit2026]. Section 7 is written to these standards.
 
-**Variance reduction for rare events.** Stratification, randomised quasi-Monte Carlo and importance
-sampling are classical [@glasserman2003; @owen1997]. The cross-entropy method fits proposals by
-multilevel KL minimisation [@rubinstein2004]. Variance-minimising adaptive importance sampling
-[@arouna2004] and χ- and Rényi-divergence variational inference [@dieng2017; @li2016] motivate our
-second training stage. The zero-variance measure as a Doob transform, and its link to KL control, go
-back to [@todorov2009; @kappen2005].
-
-**Quantum methods for risk.** Amplitude estimation offers a quadratic query-complexity speedup over
-Monte Carlo [@brassard2002; @montanaro2015], with risk applications [@woerner2019] and a correlated
-credit-default model [@egger2021] closely analogous to shared-event catastrophe risk. Phase-estimation-free
-variants [@suzuki2020; @grinko2021] and end-to-end resource studies [@chakrabarti2021; @herman2023]
-show that state preparation dominates cost and that advantage requires fault tolerance. Quantum
-generative models load distributions on near-term devices [@benedetti2019; @zoufal2019; @amin2018; @zhu2022].
-Tensor networks [@han2018; @orus2014] are the principal quantum-inspired classical alternative.
-
-**Positioning.** Existing work either estimates the tail with a hand-designed proposal or loads the
-*original* distribution into a quantum device. We treat the change of measure itself as the learnable
-object, train it against the divergence that governs variance, and carry it unchanged into a quantum
-loader whose cost follows the dependence graph.
+**Positioning.** We treat the *change of measure* as the learnable object, train it against the
+divergence that governs variance, and carry it unchanged into a quantum loader whose cost follows the
+dependence graph.
 
 # 4 Method: Rényi-Doob Policy Optimization {.newpage}
 
 ::: {.opener}
 ![](../art/cat_sitting.svg){.mascot}
 
-The method has one idea: the best possible sampling distribution is a reinforcement-learning policy,
-and we should train it against the quantity that actually determines estimation error.
+One idea: the best possible sampling distribution is a reinforcement-learning policy, and it should be
+trained against the quantity that actually determines estimation error.
 :::
 
 ## 4.1 Importance sampling and the zero-variance measure
 
-For any sampling law $Q$ with $Q \gg P$ on $\{f > 0\}$, the estimator
-$\hat\mu = \frac1N\sum_{j} w(X_j) f(X_j)$ with $w = \mathrm dP/\mathrm dQ$ is unbiased, and
+For any sampling law $Q$ with $Q \gg P$ on $\{f > 0\}$, the estimator $\hat\mu = \frac1N\sum_{j} w(X_j) f(X_j)$
+with $w = \mathrm dP/\mathrm dQ$ is unbiased, and
 
 $$\operatorname{Var}_Q(\hat\mu) = \frac{1}{N}\left(\mathbb{E}_Q[w^2 f^2] - \mu^2\right).$$
 
-For $f \ge 0$ the variance vanishes under $\mathrm dQ^*/\mathrm dP = f/\mu$. In the sequential source
-representation of Proposition 2, write $s_k$ for the state after sources $1..k-1$ and define the value
-function
+For $f \ge 0$ the variance vanishes under $\mathrm dQ^*/\mathrm dP = f/\mu$. In the source representation, with
+$s_k$ the state after sources $1..k-1$, define the value function
 
-$$V_k(s) = \mathbb{E}\left[f(S_K) \mid S_k = s\right], \qquad V_k(s) = \sum_x p_k(x)\, V_{k+1}(s \oplus_k x), \qquad V_{K+1} = f.$$
+$$V_k(s) = \mathbb{E}\left[f(S_K) \mid S_k = s\right] = \sum_x p_k(x)\, V_{k+1}(s \oplus_k x), \qquad V_{K+1} = f.$$
 
 ::: {.proposition}
-**Proposition 3 (Doob transform).** $Q^*$ is the Markov law with transition probabilities
+**Proposition 3 (Doob transform).** $Q^*$ is the Markov law with transitions
+$q^*_k(x \mid s) = p_k(x)\, V_{k+1}(s \oplus_k x) / V_k(s)$, and every path sampled from $Q^*$ has $w \cdot f = \mu$.
 
-$$q^*_k(x \mid s) = \frac{p_k(x)\, V_{k+1}(s \oplus_k x)}{V_k(s)},$$
-
-and every path sampled from $Q^*$ has $w \cdot f = \mu$.
-
-*Proof.* The product of the ratios telescopes: $\prod_k q^*_k / p_k = V_{K+1}(S_{K+1}) / V_1(\mathbf 0) = f/\mu$. $\square$
+*Proof.* The ratios telescope: $\prod_k q^*_k / p_k = V_{K+1}(S_{K+1}) / V_1(\mathbf 0) = f/\mu$. $\square$
 :::
 
-For two countries $V$ can be tabulated exactly (100 states). This *zero-variance backward induction* is
-our strongest classical baseline, and it is exact. At scale the table has $10^n$ entries, which is why
-$V$ must be learned.
+For two countries $V$ has only 100 states and can be tabulated exactly. This zero-variance backward
+induction is our strongest classical baseline, and it is exact. At scale $V$ has $10^n$ entries and must be
+*learned*.
 
-## 4.2 A soft reinforcement-learning view
+## 4.2 The reinforcement-learning loop
 
-Taking logarithms of the recursion gives
+Taking logarithms of the recursion gives the **soft Bellman equation**
 
-$$\log V_k(s) = \log \sum_x p_k(x)\, \exp\!\big(\log V_{k+1}(s \oplus_k x)\big),$$
+$$\log V_k(s) = \log \sum_x p_k(x)\, \exp\!\big(\log V_{k+1}(s \oplus_k x)\big)$$
 
-which is the *soft Bellman equation* of a KL-regularised control problem with reference dynamics $p$ and
-terminal reward $\log f$ [@todorov2009; @kappen2005]. Its optimal policy is the Boltzmann policy of
-Proposition 3. Learning the zero-variance sampler is therefore a reinforcement-learning problem: we
-approximate a soft value function and act with its Boltzmann policy.
+of a KL-regularised control problem with reference dynamics $p$ and terminal reward $\log f$
+[@todorov2009; @kappen2005]. The zero-variance sampler is its Boltzmann policy. Figure [fig:rl] states the
+resulting MDP.
+
+![**Figure [fig:rl].** RDPO as one reinforcement-learning loop. The agent chooses the increment of
+each Poisson source in turn; the environment applies it with capping. After K steps the payoff and
+importance weight are observed. The two learners update the same soft value
+function.](../art/rl_loop.svg){.wide}
 
 ## 4.3 Policy class
 
-We parametrise the soft value function linearly in features of the state,
-$\log \tilde V_\theta(s) = \theta^\top \Phi(s)$, and act with
-
-$$\tilde q_{\theta,k}(x \mid s) \propto p_k(x)\, \exp\!\left(\theta^\top\left[\Phi(s \oplus_k x) - \Phi(s)\right]\right), \qquad q_{\theta,k} = (1-\alpha)\,\tilde q_{\theta,k} + \alpha\, p_k .$$
-
-The defensive mixture ($\alpha = 0.05$) bounds every per-step likelihood ratio by $1/\alpha$. The feature
-map has three blocks:
-
-| Block | Features | Count |
-|---|---|---|
-| country $i$ | $\psi(a_i, r_i) = [\mathbb 1\{a_i \ge 1\}, \dots, \mathbb 1\{a_i \ge 4\},\ r_i]$ | $5n$ |
-| edge $\{i,j\}$ | $\chi = [\mathbb 1\{L_i>0\}\mathbb 1\{L_j>0\},\ \mathbb 1\{a_i = a_j = 4\},\ r_i r_j]$ | $3\lvert\mathcal{E}\rvert$ |
-| target progress | e.g. $[\min(L,T)/T,\ \mathbb 1\{L>T\},\ (L-T)^+/(L_{\max}-T)]$ | 1–3 |
-
-**Locality.** A source touches at most two countries, so $\Phi(s\oplus_k x) - \Phi(s)$ is supported on
-a fixed coordinate set $\mathcal I_k$: the touched countries, their incident edges and the target block.
-The normaliser is a sum over at most 25 values. The cost of one path is therefore
-$O\big(\sum_k |\mathcal I_k|\, |\mathrm{supp}\, p_k|\big)$, which is $O(n + |\mathcal{E}|)$ for bounded-degree graphs and
-never involves the $10^n$ joint state space.
-
-**Target relevance.** If the payoff depends only on a subset $\mathcal R$ of countries (for example the pair
-in a joint-exhaustion target), then for every source $k$ that touches no country in $\mathcal R$ the value
-$V_{k+1}(s \oplus_k x)$ does not depend on $x$, so by Proposition 3 the exact Doob policy for that source is
-$q^*_k = p_k$. RDPO therefore freezes such sources at $p_k$, with likelihood ratio exactly one, and restricts the
-features to $\mathcal R$. For a pair target inside a large portfolio this removes the weight noise of
-every irrelevant source. In development runs it reduced the error for pair exhaustion inside a
-28-country portfolio by more than two orders of magnitude (§6.3).
+* **Soft value.** $\log \tilde V_\theta(s) = \theta^\top \Phi(s)$; policy
+  $$\tilde q_{\theta,k}(x \mid s) \propto p_k(x)\, \exp\!\left(\theta^\top\left[\Phi(s \oplus_k x) - \Phi(s)\right]\right), \qquad q_{\theta,k} = (1-\alpha)\,\tilde q_{\theta,k} + \alpha\, p_k .$$
+  The defensive mixture ($\alpha = 0.05$) bounds every per-step likelihood ratio by $1/\alpha$.
+* **Features.** Country thresholds $\psi(a_i, r_i) = [\mathbb 1\{a_i \ge 1\}, \dots, \mathbb 1\{a_i \ge 4\}, r_i]$ ($5n$);
+  dependence edges $\chi = [\mathbb 1\{L_i>0\}\mathbb 1\{L_j>0\}, \mathbb 1\{a_i = a_j = 4\}, r_i r_j]$ ($3|\mathcal E|$);
+  target progress, e.g. $[\min(L,T)/T, \mathbb 1\{L>T\}, (L-T)^+/(L_{\max}-T)]$ (1–3).
+* **Locality.** A source touches at most two countries, so $\Phi(s\oplus_k x) - \Phi(s)$ lives on a fixed small
+  coordinate set and the normaliser sums over at most 25 values. One path costs $O(n + |\mathcal E|)$ on
+  bounded-degree graphs and never touches the $10^n$ joint state space.
+* **Target relevance.** If $f$ depends only on a subset $\mathcal R$ of countries, then for every source
+  touching no country in $\mathcal R$ the exact Doob policy is $q^*_k = p_k$ (Proposition 3). RDPO freezes such
+  sources at $p_k$, with likelihood ratio exactly one. For a pair target inside a 28-country portfolio this
+  reduced the error by more than two orders of magnitude in development runs (§6.3).
 
 ## 4.4 Training objectives: from KL to Rényi-2
 
-**Stage 1: cross-entropy policy search (KL).** Minimising $D_{\mathrm{KL}}(Q^*\,\|\,Q_\theta)$ is equivalent to
-maximising $\mathbb{E}_{Q^*}[\log q_\theta]$, estimated by importance-weighted samples from the current policy.
-For a rare target, $Q^*$ has almost no mass under the initial policy, so we use the multilevel scheme
-of [@rubinstein2004]: at each iteration the elite level
-$\gamma = \min(\gamma^*, \text{quantile}_{1-\rho}(\text{score}))$ is raised until the target level $\gamma^*$
-is reached. Each update maximises a weighted log-likelihood, which is concave in $\theta$ because the
-policy is a log-linear (softmax) model.
-
-**Stage 2: Rényi-2 policy gradient (χ²).** The quantity that determines estimation error is not KL but
+* **Stage 1: cross-entropy policy search (KL).** Minimising $D_{\mathrm{KL}}(Q^*\,\|\,Q_\theta)$ is a weighted
+  maximum-likelihood problem, concave in $\theta$ for this log-linear policy. For rare targets, the elite
+  level $\gamma = \min(\gamma^*, \text{quantile}_{1-\rho}(\text{score}))$ is raised until the target level is reached
+  [@rubinstein2004].
+* **Stage 2: Rényi-2 policy gradient (χ²).** Estimation error is governed by a different divergence:
 
 ::: {.proposition}
 **Proposition 4 (variance is a Rényi-2 divergence).** For $f \ge 0$ and $g = w f$,
-
 $$\frac{N\operatorname{Var}_Q(\hat\mu)}{\mu^2} = \chi^2(Q^*\,\|\,Q) = e^{D_2(Q^*\|Q)} - 1, \qquad D_{\mathrm{KL}}(Q^*\|Q) \le D_2(Q^*\|Q).$$
-
 The bound runs one way only: a policy with small KL can still have very large variance.
 :::
 
-We therefore refine the policy by stochastic gradient descent on $\log M_2(\theta)$, $M_2 = \mathbb{E}_{Q_\theta}[g^2]$,
-using the score-function (REINFORCE) estimator with a constant baseline:
-
-$$\nabla_\theta \log M_2 = -\,\mathbb{E}_{Q_\theta}\!\left[\left(\frac{g^2}{M_2} - 1\right) \nabla_\theta \log q_\theta(\text{path})\right].$$
-
-We use Adam steps, keep the iterate with the lowest *estimated* χ², and stop early when it no longer
-improves. No exact reference value is used anywhere in training. In a preliminary study with year-level
-policies on the benchmark (15 fits per policy family), cross-entropy fits with a richer feature set
-produced heavy-tailed weights in 2 of 15 runs. The Rényi-2 stage removed every such failure and reduced
-the exact per-path relative standard deviation of a failed fit from 14.5 to 0.60. This is the stage's
-primary role: a repair mechanism for fits whose KL is small but whose χ² is not.
-
-**Warm start.** For loss-threshold targets the policy is initialised at the optimal exponential twist of
-the total loss, $\theta_h \leftarrow \eta^\star T$ with $\eta^\star = \arg\max_\eta\, \eta T - \Lambda(\eta)$
-(the large-deviation Doob transform), so that the first iteration already reaches the tail.
+  RDPO therefore takes REINFORCE steps on $\log M_2$, $M_2 = \mathbb E_{Q_\theta}[g^2]$, with a constant baseline:
+  $$\nabla_\theta \log M_2 = -\,\mathbb{E}_{Q_\theta}\!\left[\left(\frac{g^2}{M_2} - 1\right) \nabla_\theta \log q_\theta(\text{path})\right],$$
+  keeping the iterate with the lowest *estimated* χ² and stopping early. No reference value is used in
+  training. In a preliminary benchmark study this stage removed every heavy-tailed cross-entropy failure
+  (2 of 15 fits) and reduced the exact per-path relative standard deviation of a failed fit from 14.5 to
+  0.60. Its role is to repair fits whose KL is small but whose χ² is not.
+* **Warm start.** For threshold targets the policy starts at the optimal exponential twist of the total
+  loss, $\theta_h \leftarrow \eta^\star T$ with $\eta^\star = \arg\max_\eta\, \eta T - \Lambda(\eta)$ (the large-deviation Doob
+  transform).
 
 ## 4.5 Algorithm
 
@@ -387,70 +371,69 @@ the total loss, $\theta_h \leftarrow \eta^\star T$ with $\eta^\star = \arg\max_\
 **Algorithm 1: RDPO with a fixed total budget B**
 
 1. Initialise $\theta$ (warm start where applicable); batch size $b = \max(500, B/16)$; training cap $B/2$.
-2. **Stage 1:** repeat: draw $b$ paths; set the elite level $\gamma$; fit $\theta$ by concave weighted log-likelihood; until the target level is reached (plus one iteration).
-3. **Stage 2:** repeat: draw $b$ paths; estimate $\hat\chi^2$; take one Adam step on $\log M_2$; until no improvement for 3 steps or the cap is reached. Keep the best $\theta$.
-4. **Stage 3:** spend the remaining budget with the selected policy, using 8 independent scrambles of a Sobol sequence as inverse-CDF inputs.
-5. **Estimate:** pool every batch drawn by a policy that had already reached the target level before the batch was drawn (weights proportional to batch size); report the 95% interval from batch-wise variances.
+2. **Stage 1:** draw $b$ paths; set the elite level $\gamma$; refit $\theta$ by concave weighted log-likelihood. Repeat until the target level is reached, plus one iteration.
+3. **Stage 2:** draw $b$ paths; estimate $\hat\chi^2$; take one Adam step on $\log M_2$. Repeat until 3 steps pass without improvement or the cap is reached; keep the best $\theta$.
+4. **Stage 3:** spend the rest of the budget with the selected policy, driven by 8 scrambled Sobol sequences.
+5. **Estimate:** pool every batch whose policy had reached the target level before it was drawn (weights ∝ batch size); report the 95% interval.
 :::
 
-![**Figure 4.** RDPO stages and an illustrative allocation of the fixed path budget.](../art/pipeline.svg){.wide}
+![**Figure [fig:pipeline].** RDPO stages and an illustrative split of the fixed path budget.](../art/pipeline.svg){.wide}
 
-## 4.6 Unbiasedness and uncertainty quantification
+## 4.6 Unbiasedness and uncertainty
 
 ::: {.proposition}
-**Proposition 5 (recycled estimator is unbiased).** Let batches $b = 1, 2, \dots$ be drawn with policies
-$\theta_b$ and sizes $n_b$ that are measurable with respect to the history $\mathcal F_{b-1}$, and let
-$b_0$ be the first batch whose policy had reached the target level before it was drawn. Then
-$\hat\mu = \sum_{b \ge b_0} \frac{n_b}{N_e}\,\hat\mu_b$ with $N_e = B - \sum_{b<b_0} n_b$ satisfies
-$\mathbb{E}[\hat\mu] = \mu$.
+**Proposition 5 (recycled estimator is unbiased).** Let batches be drawn with policies $\theta_b$ and sizes
+$n_b$ measurable with respect to the history $\mathcal F_{b-1}$, and let $b_0$ be the first batch whose policy had
+reached the target level before it was drawn. Then $\hat\mu = \sum_{b \ge b_0} \frac{n_b}{N_e}\,\hat\mu_b$ with
+$N_e = B - \sum_{b<b_0} n_b$ satisfies $\mathbb{E}[\hat\mu] = \mu$.
 
-*Proof.* All batches after $b_0$ are pooled, so $N_e$ is $\mathcal F_{b_0-1}$-measurable and each weight
-$n_b/N_e$ is $\mathcal F_{b-1}$-measurable. Each batch mean is unbiased given its policy, so
-$\mathbb{E}[\hat\mu_b \mid \mathcal F_{b-1}] = \mu$, and the tower property gives
-$\mathbb{E}[\hat\mu] = \mu\, \mathbb{E}[\sum_b n_b/N_e] = \mu$. Scrambled Sobol points are marginally uniform, so
-RQMC blocks are unbiased as well. $\square$
+*Proof.* All batches after $b_0$ are pooled, so $N_e$ and every weight $n_b/N_e$ are known before batch $b$ is
+drawn. Since $\mathbb{E}[\hat\mu_b \mid \mathcal F_{b-1}] = \mu$, the tower property gives $\mathbb{E}[\hat\mu] = \mu$.
+Scrambled Sobol points are marginally uniform, so RQMC blocks are unbiased too. $\square$
 :::
 
-The standard error combines within-batch sample variances (i.i.d. batches) with between-scramble
-variances (RQMC blocks). We report the empirical coverage of the resulting 95% intervals.
+The standard error combines within-batch variances (i.i.d. batches) with between-scramble variances
+(RQMC blocks). We report the empirical coverage of the resulting 95% intervals.
+
+::: {.takeaway}
+RDPO learns the zero-variance sampler as a soft-RL policy: KL to reach the tail, χ² to control the
+error, inside one budget, without bias.
+:::
 
 # 5 Experimental Protocol
 
-* **Budget.** Every method receives the same total number of sampled term scenarios $B$. For RDPO, all
-  training paths count against $B$.
+* **Budget.** Every method receives the same total number of sampled term scenarios $B$; RDPO's training
+  paths count against $B$.
 * **Metrics.** Relative RMSE against the exact value over independent replications (40 for the
-  benchmark, 10–20 at scale), relative bias, and the empirical coverage of the nominal 95% interval.
-* **Reference values.** Benchmark: exact enumeration, which reproduces the brief's Table 5. Scaling:
-  exact tensor networks in a tail-preserving tilted gauge (§6.4), validated against dense enumeration
-  for $n \le 6$.
-* **Baselines.** The challenge's four reference methods: plain Monte Carlo, scrambled Sobol (8
-  scrambles), stratification by first payout year, and the brief's importance sampling (½ true + ½
-  loss-tilted). At scale we add classical exponential twisting [@glasserman2003], the strongest simple
-  rare-event method for threshold targets.
-* **Compute.** Single CPU core per run (Intel Xeon 2.1 GHz); NumPy/SciPy; fixed seeds recorded in
-  every result file.
+  benchmark, 6–20 at scale), relative bias, and the empirical coverage of nominal 95% intervals.
+* **References.** Benchmark: exact enumeration, which reproduces the brief's Table 5. Scaling: exact
+  tensor networks in a tail-preserving tilted gauge (§6.4), validated against dense enumeration for $n \le 6$.
+* **Baselines.** The challenge's four reference methods: plain Monte Carlo, scrambled Sobol (8 scrambles),
+  stratification by first payout year, and the brief's importance sampling. At scale we add classical
+  exponential twisting [@glasserman2003].
+* **Compute.** One CPU core per run (Intel Xeon 2.1 GHz); NumPy/SciPy; fixed seeds in every result file.
 
 # 6 Results {.newpage}
 
 ## 6.1 Benchmark: five scenarios × five targets
 
-![**Figure 5.** Benchmark results at a total budget of 16,384 paths, training included. Left: RDPO's
-relative RMSE in each scenario-target cell. Right: improvement factor over the best of the four
-reference methods in the same cell (>1 means RDPO is more accurate).](../../figures/paper/e1_heatmap.png){.wide}
+![**Figure [fig:e1].** Benchmark at a total budget of 16,384 paths, training included. Left: RDPO's
+relative RMSE per cell. Right: improvement over the best of the four reference methods in the same cell
+(>1: RDPO is more accurate).](../../figures/paper/e1_heatmap.png){.wide}
 
 {{TABLE_E1}}
 
 {{E1_TEXT}}
 
-![**Figure 6.** Relative RMSE versus total budget in the base scenario. RDPO's training cost is
-included. Grey dashes show the $N^{-1/2}$ reference slope.](../../figures/paper/e1_budget.png){.wide}
+![**Figure [fig:e1budget].** Relative RMSE versus total budget in the base scenario, with RDPO's
+training included. Grey dashes show the $N^{-1/2}$ slope.](../../figures/paper/e1_budget.png){.wide}
 
 ## 6.2 Scaling to large portfolios
 
-![**Figure 7.** Scaling with portfolio size at a total budget of 65,536 paths. (a) Pool exceedance
-$\Pr(L > T_n)$ on a ring: the target probability falls from $10^{-2}$ to $10^{-13}$ as countries are
-added. (b) Joint exhaustion of one country pair *inside* the portfolio. Monte Carlo is shown by its
-theoretical relative error, since empirical runs return zero.](../../figures/paper/e2_scaling.png){.wide}
+![**Figure [fig:e2].** Scaling at a total budget of 65,536 paths. (a) Pool exceedance $\Pr(L > T_n)$ on a
+ring: the target falls from $10^{-2}$ to $10^{-13}$. (b) Joint exhaustion of one country pair *inside* the
+portfolio. Monte Carlo is shown by its theoretical error, since empirical runs return
+zero.](../../figures/paper/e2_scaling.png){.wide}
 
 {{TABLE_E2}}
 
@@ -458,102 +441,147 @@ theoretical relative error, since empirical runs return zero.](../../figures/pap
 
 ## 6.3 Ablation study
 
-![**Figure 8.** Ablation at a total budget of 16,384 paths. Each bar removes one component of
+![**Figure [fig:e3].** Ablation at a total budget of 16,384 paths. Each bar removes one component of
 RDPO.](../../figures/paper/e3_ablation.png){.wide}
 
 {{E3_TEXT}}
 
 ## 6.4 Where classical exact methods suffice
 
-The source decomposition also yields an exact classical method. Applying the commuting kernels of
-Proposition 2 to a matrix-product state gives the full joint law with a bond dimension set by the
-number of shared sources crossing each cut. To keep relative accuracy in the tail we compress in a
-*tilted gauge*, $\tilde p(x) = p(x)\prod_i g_i(x_i)$ with $g_i$ the inverse independent marginal (a Doob-type
-reweighting). Plain singular-value truncation discards precisely the small tail entries and incurs up
-to 2% error on the rarest target even at tolerance $10^{-12}$.
+* Applying the commuting kernels of Proposition 2 to a matrix-product state gives the full joint law,
+  with a bond dimension set by the shared sources crossing each cut.
+* Tail accuracy requires compressing in a *tilted gauge*, $\tilde p(x) = p(x)\prod_i g_i(x_i)$ with $g_i$ the inverse
+  independent marginal. Plain truncation incurs up to 2% error on the rarest target even at tolerance
+  $10^{-12}$.
+* For chain, star and ring dependence the bond dimension is constant (9, 10, 58): all targets for 28
+  countries are exact in about a minute. For complete dependence it grows (58 → 135 from four to six
+  countries).
 
-![**Figure 9.** Bond dimension of the exact tilted matrix-product state versus portfolio size. Sparse
-dependence (chain, star, ring) stays constant; dense dependence (complete graph)
-grows.](../../figures/paper/tn_bond.png){.wide}
-
-For chain, star and ring dependence the bond dimension is constant (9, 10 and 58), and all targets for
-28 countries are computed exactly in about a minute. For complete dependence it grows (58 → 135 from
-four to six countries). We therefore position RDPO as the method of choice when dependence is dense
-or the model is only available as a simulator, and the tilted tensor network as an exact cross-check
-for sparse portfolios.
+![**Figure [fig:tn].** Bond dimension of the exact tilted matrix-product state versus portfolio size.
+Sparse dependence stays constant; dense dependence grows.](../../figures/paper/tn_bond.png){.wide}
 
 ## 6.5 Limitations
 
-* **Smooth targets.** RDPO offers no gain on smooth, non-rare targets: on expected loss, scrambled
-  Sobol remains more accurate and should be preferred.
-* **Level functions.** The cross-entropy stage is indispensable for the rarest targets (§6.3), so new
-  targets need a sensible score function for the level schedule.
-* **Error bars under heavy tails.** Interval coverage is below nominal in some rare-target settings,
-  most clearly for the exhaustion of one pair inside a large portfolio. Batch-variance error bars are
-  optimistic when the weights are heavy-tailed. Robust variance estimators (e.g. effective-sample-size
-  corrections) are part of WP3.
-* **Budget competition.** At small budgets and large portfolios, additional parameters and stages compete
-  with estimation for paths. Simpler configurations, or the one-parameter twist (which is better for the
-  stop-loss at 28 countries), can then be more accurate. Automatic model selection is planned (WP3).
-* **Synthetic scaling.** All scaling results use a synthetic but calibrated extension of the benchmark.
-  Realistic multi-peril, multi-country portfolios remain to be tested in Phase 2.
+* **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
+* **Level functions.** The cross-entropy stage is indispensable for the rarest targets, so new targets
+  need a sensible score function.
+* **Error bars under heavy tails.** Coverage falls below nominal in some rare-target settings; robust
+  variance estimators are part of WP3.
+* **Budget competition.** At small budgets and large portfolios, extra parameters compete with estimation
+  for paths; the one-parameter twist is better for the stop-loss at 28 countries. Model selection is in WP3.
+* **Synthetic scaling.** Scaling results use a calibrated synthetic extension; realistic multi-peril
+  portfolios follow in Phase 2.
 
-# 7 Quantum Extension (Future Feature) {.newpage}
+::: {.takeaway}
+RDPO is the most accurate method on every rare target we tested, up to 28 countries. Scrambled Sobol
+wins on expected loss, and exact tensor networks suffice for sparse dependence.
+:::
+
+# 7 Quantum Extension: an Evidence-First Design {.newpage}
 
 ::: {.opener}
 ![](../art/cat_box.svg){.mascot}
 
-Phase 1 provides no access to quantum hardware, so no quantum advantage can be demonstrated, and we
-claim none. This section shows that RDPO's change of measure is *quantum-ready*, and it quantifies
-what a future quantum estimation stage would require.
+Phase 1 provides no quantum processor, so no quantum advantage can be demonstrated, and we claim none.
+Instead we specify the quantum stage precisely enough that its advantage can be *tested and falsified*.
 :::
 
-## 7.1 Exact structured loading
+## 7.1 Why Q-RDPO is not "QML on classical data"
 
-By Proposition 2 the term law is generated by independent sources with finite increment laws. A
-quantum state-preparation operator $\mathcal A$ can therefore be built with one small register per source
-(3, 6 or 1 qubits). Each register is prepared in $\sum_x \sqrt{q_k(x)}\,|x\rangle$, the increments are added
-into per-country sum registers with in-place adders, and a payoff oracle rotates an objective qubit.
-The construction is *exact*, with no truncation of Poisson counts, and uses $O(n + |\mathcal{E}|)$ qubits and gates
-for any dependence graph. An exact sparse-statevector simulation reproduces the joint law to $10^{-16}$.
-For the benchmark the operator uses 52 logical qubits and 156 Toffoli gates per call, compared with 97
-and 3,808 for generic amplitude loading.
+The position paper of Guo and Pan [@guo2026stopqml] identifies four reasons why quantum machine
+learning on classical data has not earned priority. Q-RDPO is designed to avoid three of them by
+construction and to measure the fourth:
 
-![**Figure 10.** Structured loading circuit with twisted source registers (future work).](../art/quantum_circuit.svg){.wide}
+| Barrier for QML on classical data | Q-RDPO |
+|---|---|
+| Advantage relies on strong **input-loading assumptions** | Loading is *exact* and cheap: one small register per Poisson source, O(n + \|E\|) gates (Proposition 2, §7.2) |
+| **Trainability** (barren plateaus, noisy gradients) | Nothing is trained on the quantum device; the classical RL agent learns the measure (AI-for-Quantum) |
+| **Noise** makes deep circuits unreliable | Noise is modelled explicitly, and a calibration trust guard falls back to the classical estimate (§7.4) |
+| No convincing **wall-clock** wins | A falsifiable wall-clock criterion against our own best classical method (§7.3) |
 
-## 7.2 Bounded importance weights for amplitude estimation
+## 7.2 Construction: exact structured loading with bounded weights
 
-Loading an importance-sampling proposal into amplitude estimation helps only if the weighted payoff is
-bounded, since the estimated amplitude is $a = \mu / \max(w f)$. Preparing each source register in
-the exponentially twisted law $q_k(x) \propto p_k(x) e^{\eta \ell_k(x)}$ costs no additional gates and makes the
-weight a function of the uncapped total loss $U$ alone, $w = e^{-\eta U + \Lambda(\eta)}$. Because $U \ge L$,
-the weighted payoff is bounded on $\{L > T\}$, and
+![**Figure [fig:qcirc].** State-preparation operator A and the guarded estimation loop. ① Each source
+register is prepared in the twisted law $\sqrt{q_k}$. ② In-place adders form per-country sums. ③ The loss
+and threshold flag are computed. ④ The importance weight $e^{-\eta D}$ is written bit by bit onto ancillas.
+⑤ Good states are marked. Amplitude estimation then runs with a trust guard.](../art/quantum_circuit_v2.svg){.wide}
 
-$$a = \mu\, e^{\eta T - \Lambda(\eta)}, \qquad \max_\eta\ a = \mu\, e^{I(T)},$$
+* **Exact loading.** One register per source (3, 6 or 1 qubits), prepared in $\sum_x \sqrt{q_k(x)}\,|x\rangle$; no
+  truncation of Poisson counts. A sparse-statevector simulation reproduces the joint law to $10^{-16}$.
+* **Bounded weights.** With twisted registers $q_k \propto p_k e^{\eta \ell_k}$, the weight depends only on the uncapped
+  loss $U \ge L$: $w = e^{-\eta U + \Lambda(\eta)}$. On $\{L > T\}$ it is bounded, and the amplitude becomes
+  $$a = \mu\, e^{\eta T - \Lambda(\eta)}, \qquad \max_\eta a = \mu\, e^{I(T)},$$
+  which decays with the large-deviation gap, not with $\mu$.
+* **Bitwise oracle.** Since $e^{-\eta D} = \prod_b (e^{-\eta 2^b})^{d_b}$ for $D = U - T$, the weight needs one controlled
+  rotation per bit of $D$ (about 12 at 28 countries) instead of a lookup table with thousands of entries.
+* **Query effect.** At 28 countries ($\mu \approx 1.3\times10^{-13}$) the projected number of amplitude-estimation
+  calls falls from $2.8\times10^9$ (untwisted) to about $3.4\times10^4$, against $7.6\times10^{14}$ Monte Carlo paths
+  (Figure [fig:queries]).
 
-where $I$ is the Cramér rate function of $U$. The amplitude thus decays with the large-deviation gap
-rather than with $\mu$. For 28 countries ($\mu \approx 1.3\times10^{-13}$) the projected number of
-amplitude-estimation calls falls from $2.8\times10^{9}$ to $3.4\times10^{4}$, against $7.6\times10^{14}$
-Monte Carlo paths. Relative to the best *classical* estimator using the same twist, the projected
-query saving is about threefold at this size and grows with $n$.
+![**Figure [fig:queries].** Projected query counts for 10% relative error on $\Pr(L > T_n)$ (ring dependence).
+Quantum curves are projections from an exact emulation of iterative amplitude estimation, not hardware
+runs.](../../figures/paper/quantum_queries.png){.wide}
 
-![**Figure 11.** Projected query counts for 10% relative error on $\Pr(L > T_n)$ (ring dependence).
-Quantum curves are resource projections from an exact emulation of iterative amplitude estimation, not
-hardware runs.](../../figures/paper/quantum_queries.png){.wide}
+## 7.3 A falsifiable wall-clock criterion
 
-## 7.3 Near-term feasibility
+Query counts are not wall-clock time. For a target relative error $\varepsilon$ we compare measured
+classical time with projected fault-tolerant time:
 
-Noisy maximum-likelihood amplitude estimation, with a noise-aware likelihood as error mitigation,
-outperforms Monte Carlo on the benchmark only when two-qubit error rates reach about $10^{-6}$; the
-estimation stage is therefore an early-fault-tolerant workload. The near-term quantum component is an
-8-qubit circuit Born machine used as a proposal sampler (depth 9, 32 entangling gates). On hardware its
-samples follow a noisy law; using the ideal law in the importance weights biases estimates by 9–60%. We
-show that calibrating the *sampled* law with $10^5$ shots reduces the bias to at most 0.6%, and that
-readout-error inversion is the wrong mitigation in this setting.
+$$T_{\text{RDPO}}(n) = \frac{\rho^2(n)}{\varepsilon^2}\, t_{\text{path}}(n), \qquad T_{Q}(n) = \text{runtime of IQAE on the surface-code model}, \qquad s^*(n) = \frac{T_Q(n)}{T_{\text{RDPO}}(n)} .$$
+
+Here $\rho^2$ is RDPO's measured per-path relative variance and $t_{\text{path}}$ its measured time per path, both
+with training included. **Q-RDPO beats RDPO in wall-clock if and only if the quantum machine is $s^*$ times
+faster than the stated baseline** (physical error $10^{-3}$, 1 µs code cycles, 4 magic-state factories).
+
+![**Figure [fig:qadv].** (a) Hardware speed-up $s^*$ required for the quantum stage to match classical RDPO
+in wall-clock time at 10% relative error. (b) Logical two-qubit error rate required for the deepest
+amplitude-estimation circuit to succeed with probability one half.](../../figures/paper/quantum_advantage.png){.wide}
+
+{{Q_ADV_TABLE}}
+
+{{Q_ADV_TEXT}}
+
+## 7.4 Noise, mitigation and a calibration trust boundary
+
+Error mitigation is not monotone: under miscalibration it can increase error [@errmit2026]. We test this
+directly on low-depth maximum-likelihood amplitude estimation.
+
+* **Model.** Grover powers $k = 0, 1, 2, 4, \dots$ (depth capped by circuit fidelity), 100 shots each, with
+  depolarising decay $f$ and a coherent control offset $\delta$ per Grover iterate:
+  $P_k = \tfrac12 - \tfrac12 f^{2k+1}\cos\big((4k+2)\theta + 2k\delta\big)$.
+* **Estimators.** (i) no mitigation ($f = 1$, $\delta = 0$); (ii) noise-aware mitigation (fit $f$, assume $\delta = 0$);
+  (iii) + goodness-of-fit guard (likelihood-ratio test across depths); (iv) + pilot-disagreement guard,
+  which also rejects the quantum estimate when it disagrees by more than 3σ with a cheap RDPO pilot
+  (5% error). Rejected estimates fall back to the full classical RDPO estimate.
+* **Instances.** 250 per offset level; amplitude $a \in [10^{-3}, 10^{-1}]$, two-qubit error $p_2 \in [10^{-7}, 10^{-5}]$.
+
+![**Figure [fig:mit].** Tail of the relative error over random instances at three levels of control-offset
+miscalibration. Mitigation removes the worst raw errors but is worse than no mitigation in a growing
+fraction of instances; the combined guard bounds the tail.](../../figures/paper/mitigation.png){.wide}
+
+{{MIT_TABLE}}
+
+{{MIT_TEXT}}
+
+## 7.5 Near-term component and AI-for-Quantum roadmap
+
+* **Near-term sampler.** An 8-qubit circuit Born machine (depth 9, 32 entangling gates) can serve as a
+  proposal sampler. Hardware noise biases the importance weights by 9–60%. Calibrating the *sampled* law
+  with $10^5$ shots reduces the bias to at most 0.6%; inverting readout errors is the wrong mitigation in
+  this setting.
+* **AI-for-Quantum work in Phase 2** (in the spirit of [@guo2026stopqml]): an RL agent that chooses Grover
+  depth schedules under a noise budget; learned trust guards trained on calibration drift; and RL-driven
+  compilation of the source registers. All three use the same machinery as RDPO.
+
+::: {.takeaway}
+The quantum stage is exact, its data loading is cheap, and nothing is trained on the device. It still needs
+a machine about {{Q_SSTAR_28}} faster than today's fault-tolerant assumptions, and a logical error
+rate near {{Q_PL_28}} (28 countries). We state both as testable targets.
+:::
 
 # 8 Resource Estimation
 
-## 8.1 Classical (the deliverable of Phase 1 and the core of Phase 2)
+## 8.1 Classical (the Phase 1 deliverable and the core of Phase 2)
 
 | Task | Hardware | Wall time | Memory |
 |---|---|---|---|
@@ -565,91 +593,84 @@ readout-error inversion is the wrong mitigation in this setting.
 
 ## 8.2 Quantum (projected; future feature)
 
-All quantum figures are logical-level estimates from explicit component formulas, not compiled circuits.
-Assumptions: Toffoli = 4 T = 6 CNOT; Ross–Selinger rotation synthesis; surface code at physical error
-$10^{-3}$, 1 µs cycles and 4 magic-state factories.
+Logical-level estimates from explicit component formulas, not compiled circuits. Assumptions: Toffoli = 4 T
+= 6 CNOT; Ross–Selinger rotation synthesis; surface code at physical error $10^{-3}$, 1 µs cycles, 4
+magic-state factories; twisted loading with the bitwise oracle; 10% target relative error.
 
-| Instance | Logical qubits | CNOT / Grover iterate | Depth / iterate | Calls (shots) | T-count | Physical qubits | Runtime |
-|---|---|---|---|---|---|---|---|
-| Benchmark, $\Pr(L>80\text{m})$, 1%, twisted | 61 | 6,484 | ≈ 660 | 3.8×10⁴ (≈ 500) | 3.6×10⁸ | 1.1×10⁵ | ≈ 8 h |
-| Benchmark, joint exhaustion, 1%, untwisted | 52 | 3,220 | ≈ 660 | 1.8×10⁶ (≈ 700) | 1.8×10¹⁰ | 1.1×10⁵ | ≈ 16 days |
-| 16 countries, ring, 10%, twisted | 371 | 6.7×10⁴ | ≈ 1,100 | 1.3×10⁴ (≈ 450) | 1.8×10⁹ | 6.5×10⁵ | ≈ 1.6 days |
-| 28 countries, ring, 10%, twisted | 624 | 1.2×10⁵ | ≈ 1,500 | 3.4×10⁴ (≈ 490) | 8.7×10⁹ | 1.2×10⁶ | ≈ 8.6 days |
-| Near-term proposal sampler (QCBM) | 8 | 32 CZ | 9 | 3 per path + 10⁵ calibration | — | — | seconds |
+{{Q_RES_TABLE}}
 
-**Error mitigation.** Calibrated sampled-law weights (sampler); noise-aware maximum likelihood (low-depth
-amplitude estimation); post-selection of invalid register codes. **Hardware modality.** Dense
-dependence graphs require all-to-all coupling between country registers, which favours trapped-ion and
-reconfigurable neutral-atom platforms. On 2D superconducting lattices, SWAP routing inflates CNOT counts
-by 10–40×.
+* **Error mitigation:** noise-aware likelihood plus the two-part trust guard (§7.4); calibrated
+  sampled-law weights for the near-term sampler; post-selection of invalid register codes.
+* **Hardware modality:** dense dependence graphs need all-to-all coupling between country registers,
+  which favours trapped-ion and reconfigurable neutral-atom platforms. SWAP routing on 2D superconducting
+  lattices inflates CNOT counts by 10–40×.
 
 # 9 Work Plan for the Deep Development Phase {.newpage}
 
-![**Figure 12.** Work plan in weeks from the start of the Deep Development phase. The indicative calendar
-maps W1 to November 2026; the plan shifts one-to-one if the phase starts later.](../../figures/paper/gantt.png){.wide}
+![**Figure [fig:gantt].** Work plan in weeks from the start of the Deep Development phase. The indicative
+calendar maps W1 to November 2026; the plan shifts one-to-one if the phase starts later.](../../figures/paper/gantt.png){.wide}
 
 | Work package | Milestone | Success criterion |
 |---|---|---|
 | WP1 Engineering (W1–2): GPU-batched RDPO, library API, sandbox onboarding | M1 library v0.1 | prototype results reproduced; ≥ 10× throughput |
-| WP2 Realistic portfolios (W3–6): heterogeneous perils, degree-normalised dense dependence, 10–50 countries, scenario sweeps | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
-| WP3 RL improvements (W5–8): nonlinear (small neural) soft value functions, adaptive level functions, pilot-based model selection | M3 RDPO v2 | ≥ 2× over v1 on dense graphs, coverage ≥ 93% |
-| WP4 Quantum stage (W8–10): compile structured loading with a production SDK; run the calibrated sampler on sandbox hardware or noisy emulators | M4 compiled resource tables | compiled counts within 2× of estimates; mitigated bias ≤ 1% |
-| WP5 Validation and delivery (W11–12): independent reference checks, documentation, demo, business case | M5 final deliverables | all deliverables of the call |
+| WP2 Realistic portfolios (W3–6): public hazard data, heterogeneous perils, dense dependence, 10–50 countries | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
+| WP3 RL improvements (W5–8): small neural soft values, adaptive levels, robust error bars, model selection | M3 RDPO v2 | ≥ 2× over v1 on dense graphs; coverage ≥ 93% |
+| WP4 Quantum stage and AI-for-Quantum (W8–10): compiled loader; guarded estimation on emulators or hardware; RL depth schedules | M4 compiled resource tables + updated s* map | compiled counts within 2× of estimates; guard caps tail error |
+| WP5 Web application and agent (W9–11): dashboard, AI analyst agent, MCP tool server | M5 public demo | three end-to-end analyst workflows |
+| WP6 Validation and delivery (W11–12): independent checks, documentation, business case | M6 final deliverables | all deliverables of the call |
 
 | Risk | Mitigation and fallback |
 |---|---|
-| Dense-dependence instances also turn out to be classically easy | Publish the crossover map either way; RDPO remains the product. |
-| Training instability on new targets | Warm starts, Rényi-2 repair, pilot-based model selection; estimates stay unbiased regardless. |
-| Quantum hardware unavailable or too noisy | The quantum stage remains a resource-estimated feature; the sampler runs on noisy emulators. |
-| Single-person team capacity | Modular packages; WP4 is descoped first. |
+| Dense-dependence cases also turn out to be classically easy | Publish the crossover map either way; RDPO remains the product. |
+| Training instability on new targets | Warm starts, Rényi-2 repair, model selection; estimates stay unbiased regardless. |
+| Quantum hardware unavailable or too noisy | The trust guard falls back to RDPO; the quantum stage remains a tested design. |
+| Single-person team capacity | Modular packages; WP4 is descoped first, then WP5. |
 
-# 10 Commercialisation and Impact
+# 10 Commercialisation and Product
 
-![**Figure 13.** Integration of the RDPO engine into a catastrophe-risk workflow.](../art/integration.svg){.wide}
+![**Figure [fig:product].** Product roadmap: a web application in which an AI analyst agent calls the RDPO
+engine through a tool protocol (MCP).](../art/product_agent.svg){.wide}
 
-**Integration.** RDPO is an estimation engine positioned between a catastrophe model's event- or
-source-level output and the portfolio metrics used for pricing, structuring and monitoring. It requires
-only the source laws and the contract payoff. It can be delivered as an open Python library, as a plug-in
-to the Oasis Loss Modelling Framework's simulation stage, or as a hosted service; a quantum back end for
-the estimation stage is an optional future upgrade, not a dependency.
+* **Integration.** RDPO is an estimation engine between a catastrophe model's event- or source-level
+  output and the metrics used for pricing, structuring and monitoring (Figure [fig:integration]). It needs
+  only the source laws and the contract payoff.
+* **Product.** A web application with a portfolio and scenario editor and a joint-tail dashboard. An AI
+  analyst agent answers questions such as *"what is the probability that both bonds are exhausted if the
+  common-shock rate doubles?"* by calling the engine through a Model Context Protocol (MCP) tool server
+  (`estimate_joint_tail`, `stress_test`, `validate_exact`). It returns the estimate with its interval,
+  policy diagnostics and an exact cross-check where one exists.
+* **Users.** Disaster-risk-financing teams at multilateral development banks; regional sovereign risk
+  pools; reinsurers and insurance-linked-securities investors; catastrophe-model vendors and Oasis
+  users; rating agencies and supervisors.
+* **Deployment.** Open Python library, Oasis plug-in, hosted API, and the agent front end. The estimator
+  is unbiased with reported uncertainty, reproducible and interpretable, which eases model validation.
+  A quantum back end is an optional upgrade, gated by the trust guard.
+* **Broader applicability.** Correlated credit portfolios, parametric pandemic and supply-chain cover,
+  compound climate extremes, infrastructure reliability.
+* **Impact.** Tighter joint-tail estimates reduce uncertainty loadings in pricing, making pooled cover
+  cheaper for vulnerable countries, and make trigger decisions more defensible (UN SDG 13).
 
-**Users.** Disaster-risk-financing teams at multilateral development banks; regional sovereign risk
-pools; reinsurers and insurance-linked-securities investors pricing pooled tails; catastrophe-model
-vendors; rating agencies and supervisors validating tail metrics.
-
-**Deployment considerations.** The estimator is unbiased with reported uncertainty, reproducible
-(fixed seeds), light on compute and interpretable (a small set of feature weights), which eases model
-validation. The main barriers are integration with proprietary vendor models, addressed by operating at
-event or source level, and validation requirements, addressed by exact tensor-network cross-checks on
-sparse portfolios.
-
-**Broader applicability.** The required structure (independent shocks with capped effects and rare
-joint outcomes) also arises in correlated credit portfolios, parametric pandemic and supply-chain
-cover, compound climate extremes and infrastructure reliability.
-
-**Impact.** Tighter joint-tail estimates reduce uncertainty loadings in pricing, making pooled cover
-cheaper for vulnerable countries. They also make trigger and pooling decisions more defensible, which
-supports faster post-disaster liquidity (UN SDG 13).
+![**Figure [fig:integration].** Integration of the RDPO engine into a catastrophe-risk workflow.](../art/integration.svg){.wide}
 
 # 11 Team {.newpage}
 
-**Tan Chun Loong** (sole member; research, implementation, quantum resource estimation, business case).
-Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang Technological University (2024–2028;
-CGPA 4.8/5.0, First Class Honours).
+**Tan Chun Loong** (sole member: research, implementation, quantum resource estimation, product and
+business case). Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang
+Technological University (2024–2028; CGPA 4.8/5.0, First Class Honours).
 
 * *URECA Research Fellow, "The Thermodynamics of Mitigating Ignorance" (Prof. Mile Gu, NTU, 2026–2027).*
-  Studies the cost of acting on beliefs that differ from reality, measured by the relative entropy
-  between belief and truth, together with optimal belief revision by dynamic programming and its
-  implications for model-based reinforcement learning. RDPO rests on the same mathematics: backward
-  induction for value functions, and divergences between a policy and the optimal measure.
+  The cost of acting on beliefs that differ from reality, measured by the relative entropy between belief
+  and truth, and optimal belief revision by dynamic programming for model-based reinforcement learning.
+  RDPO rests on the same mathematics: backward induction for value functions and divergences between a
+  policy and the optimal measure.
 * *Quantum Security Research Intern, QUASAR-CREATE Thrust 2, Fraunhofer Singapore (2026–).* Security
   evaluation of quantum key distribution under device imperfections.
-* *URECA Research Fellow, models of atmosphere–ocean interaction (Prof. François Gay-Balmaz, NTU,
-  2025–2026).* Fokker–Planck equations and stochastic thermodynamics for reduced climate models.
+* *URECA Research Fellow, atmosphere–ocean interaction models (Prof. François Gay-Balmaz, NTU, 2025–2026).*
+  Fokker–Planck equations and stochastic thermodynamics for reduced climate models.
 * *Selected projects:* Clifford+T compilation and T-count optimisation (MIT iQuHACK 2026, sole Singapore
   representative); quantum optimisation for wildfire response (SEA Quantathon 2025 finalist); quantum
-  reservoir computing for sustainable-finance systemic risk (QAI Ventures GenQ Hackathon 2025);
-  AI risk scoring for maritime fuel verification (winner, SuperAI NEXT Hackathon 2026).
+  reservoir computing for sustainable-finance systemic risk (QAI Ventures GenQ Hackathon 2025); AI risk
+  scoring for maritime fuel verification (winner, SuperAI NEXT Hackathon 2026).
 * *Community:* founder of Quantum Wings (quantum outreach to more than 500 students); Country Lead
   (Singapore), Qiskit Fall Fest 2026.
 
@@ -657,22 +678,18 @@ A short CV is attached as an annex.
 
 # 12 Platform Requirement, Prototype Package and AI Use
 
-**Platform.** No platform access is required at this stage. All results were produced on the author's
-own compute (4-core CPU; no GPU; no quantum hardware). In the Deep Development phase the QAI Ventures
-sandbox would be used for GPU-batched RDPO sweeps, compilation of the loading circuits with production
-toolchains, and noisy-emulator or hardware runs of the proposal sampler.
-
-**Prototype package.** Source code, results and this document are available at
-<https://github.com/CL0908/adb-quantum-challenge>. Environment: Python 3.13, NumPy 2.5, SciPy 1.18,
-Matplotlib 3.11, pytest 9.2 (`requirements.txt`); Linux x86-64. All quantum circuits are simulated by
-exact simulators written for this project (real statevector, sparse statevector, and an
-amplitude-estimation emulator); no quantum SDK or hardware was used. Every experiment uses fixed seeds
-recorded in its output file, and a test suite checks every exactness claim in this document.
-
-**AI use.** The code, experiments and this document were developed with Claude Code (Anthropic) as an AI
-pair-programmer and writing assistant, following the author's research plan. The author directed the
-research questions and design decisions and reviewed all results. All numbers are produced by the
-scripts in the repository.
+* **Platform.** No platform access is required at this stage; all results were produced on the author's
+  own compute (4-core CPU, no GPU, no quantum hardware). In Deep Development the QAI Ventures sandbox
+  would serve GPU-batched RDPO sweeps, compilation of the loading circuits, and emulator or hardware runs.
+* **Prototype package.** Source code, results and this document: <https://github.com/CL0908/adb-quantum-challenge>.
+  Python 3.13, NumPy 2.5, SciPy 1.18, Matplotlib 3.11, pytest 9.2 (`requirements.txt`); Linux x86-64. All
+  quantum circuits are simulated by exact simulators written for this project; no quantum SDK or hardware
+  was used. Every experiment uses fixed seeds recorded in its output, and a test suite checks every
+  exactness claim.
+* **AI use.** The code, experiments and this document were developed with Claude Code (Anthropic) as an AI
+  pair-programmer and writing assistant, following the author's research plan. The author directed the
+  research questions and design decisions and reviewed all results. All numbers are produced by the
+  scripts in the repository.
 
 # References {.newpage}
 

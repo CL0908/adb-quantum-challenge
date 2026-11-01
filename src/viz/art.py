@@ -4,6 +4,7 @@ Run: python -m src.viz.art   -> docs/art/*.svg
 All illustrations (including the cat mascots) are original, drawn from primitives here.
 """
 import math
+import re
 from pathlib import Path
 
 from .style import PAGE, CARD, INK, INK2, MUTED, RULE, NAVY, BLUE, TERRA, TEAL, OCHRE, PLUM, GREEN
@@ -20,6 +21,7 @@ def svg(w, h, body, bg=None):
 
 
 def text(x, y, s, size=12, color=INK, weight=400, anchor="start", family=None, italic=False):
+    s = re.sub(r"&(?!amp;|lt;|gt;)", "&amp;", s)
     fam = f' font-family="{family}"' if family else ""
     st = ' font-style="italic"' if italic else ""
     return f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" font-weight="{weight}" text-anchor="{anchor}"{fam}{st}>{s}</text>'
