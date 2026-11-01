@@ -491,6 +491,16 @@ re-ran every study at the same total budgets, with more replications and identic
   It is computed exactly in at most {{V2_EXACT_MS}} for any portfolio size, and agrees with the
   tensor-network references to {{V2_EXACT_ERR}}. The Phase 2 engine answers such targets exactly and
   reserves RDPO for portfolio-wide targets.
+* **Projected Doob sampler: a simplified RDPO for pair targets.** For a target that depends only on a few
+  countries R, the exact value function depends only on their 10^|R| joint states. RDPO's learned log-linear
+  soft value is then replaced by an exact table per step, computed by backward induction over the sources that
+  touch R, while all other sources keep their true law. The policy is the zero-variance Doob sampler: every path
+  returns the exact value (relative spread {{PROJ_SD}}; 20,000 paths in {{PROJ_MS}} for the 10-country CAREC
+  pool). Its paths are also exact draws from the portfolio *conditional* on the event, which turns the
+  estimator into a stress-scenario generator. Given that the Kyrgyz and Tajik bonds are both exhausted, the
+  CAREC pool's total payout averages {{PROJ_COND_MEAN}} (95th percentile {{PROJ_COND_P95}}), and exceeds US$400m
+  with probability {{PROJ_COND_400}}. Three-country questions also work: all of KG, TJ and UZ exhausted has
+  probability {{PROJ_TRIPLE}}.
 * **Safeguards.** Student-t intervals with Welch–Satterthwaite degrees of freedom. The initial (twist or
   transferred) policy is selected whenever its estimated χ² beats every trained iterate.
 
@@ -593,6 +603,33 @@ of loss years identifies the shared rate by maximum likelihood (`src/realdata/lo
 * **Implied bond risk.** With the loss-data share for earthquakes (rain at the brief's value), the
   joint-exhaustion probability is {{LOSS_EXH}}: {{LOSS_EXH_FACTOR}} the brief's base case.
 
+**Meteorological calibration of the rain cover.** The rain cover is parametric: it pays when an
+extreme-precipitation index passes its 1-in-50-year level. Its frequency is a design choice, but the brief's 25%
+shared share is an assumption about the weather. We measured it in daily station data (NOAA GHCN-Daily via its
+open-data mirror; {{RAIN_NST}} stations; `src/realdata/rain_check.py`):
+
+* **Index.** Each station's daily precipitation is divided by its median annual maximum; the country index is
+  the daily maximum over its stations.
+* **Events.** Days above the country's (1−q) annual-maximum quantile are merged into events less than 3 days
+  apart. An event is shared when the neighbour has one within ±1 day.
+* **Data cleaning.** Code values of 99.1–99.8 mm, which occur hundreds of times in former-Soviet records, are
+  removed.
+
+{{RAIN_TABLE}}
+
+* **Extreme rain is local.** Pooled over neighbouring pairs, the shared share is {{RAIN_SHARE}} at the
+  1-in-5-year level and falls towards zero for rarer events. The brief's 25% is well outside the data.
+* **Both corrections together.** Earthquakes are more dependent than assumed (loss data) and rain much less
+  (station data):
+
+{{RAIN_IMP_TABLE}}
+
+* **Reading.** With both dependence assumptions taken from data, pool exceedance is {{RAIN_EXC_FACTOR}} the
+  brief's value, while joint exhaustion is {{RAIN_EXH_FACTOR}} because exhaustion needs rain in both countries.
+  Checking one assumption alone would have been misleading in either direction.
+* **Caveats.** Six stations per country sample the rainfall field sparsely, and Kyrgyz and Tajik records thin out
+  after the 1990s. Gridded data (ERA5, GPCP, both reachable via open-data mirrors) are the next step.
+
 **Market record of comparable bonds.** The challenge bond has no payout history, and catastrophe bonds are
 private placements without public price series, so exchange data such as Yahoo Finance cannot be used. The
 closest public record is the World Bank's parametric sovereign bonds. In that record, triggers do occur and
@@ -638,7 +675,7 @@ it (`src/realdata/central_asia_pool.py`):
   Carlo, but the intervals are optimistic. The Phase 2 engine therefore answers pair questions exactly (pair
   reduction, §6.5) and uses RDPO for pool-wide questions.
 
-## 6.7 WP2 first results: a calibrated ten-country CAREC pool
+## 6.7 WP2: calibrated regional pools
 
 The work plan's WP2 asks for realistic portfolios (public hazard data, heterogeneous perils, dense dependence,
 10–50 countries). Its success criterion is a relative RMSE of at most 10% at μ ≤ 10⁻⁸ within 10⁵ paths. As a
@@ -662,8 +699,27 @@ data alone (`src/realdata/carec_pool.py`):
 * **WP2 criterion {{CAREC_CRIT_OK}}.** At μ = {{CAREC_MU_RARE}} (pool payout above {{CAREC_TR}}), RDPO's relative
   RMSE is {{CAREC_CRIT}} with 65,536 paths, against the 10% target within 10⁵ paths. At 16,384 paths it is
   {{CAREC_CRIT16}}.
-* **Remaining WP2 scope.** Pools of 20–50 countries, references beyond tensor networks for dense dependence,
-  and ground-motion and exposure models in place of epicentre proxies.
+* **Remaining WP2 scope.** Ground-motion and exposure models in place of epicentre proxies, and gridded
+  rainfall.
+
+**Scaling to 28 real countries and 50 synthetic ones.** The second WP2 pool covers the ADB developing member
+countries of Asia and the Pacific (`src/realdata/asia_pacific_pool.py`):
+
+* **Design.** Every country buys the same *return-period* cover, as parametric sovereign covers are designed in
+  practice. Its 25% earthquake tier attaches at its own 1-in-25.6-year event, so trigger magnitudes range from
+  about M5.5 to M8.8. Rain uses the 2% design with the station-calibrated shared share.
+* **Data.** {{AP_EVENTS}} catalogue main shocks in the region. {{AP_N}} countries had at least one main shock
+  within 50 km and form the pool, with {{AP_E}} data-derived shared-event edges.
+* **Exact references.** Ordering the countries by reverse Cuthill–McKee gives bandwidth {{AP_BW}}. The exact
+  tensor network has maximum bond dimension {{AP_BOND}} and builds in {{AP_MPS_S}}, and a 100× tighter truncation
+  agrees to {{AP_CHECK}}. A 50-country ring (bond dimension {{R50_BOND}}) completes the 10–50-country range of WP2.
+
+{{AP_TABLE}}
+
+* **WP2 criterion at scale {{AP_CRIT_OK}}.** {{AP_CRIT}}, all with 65,536 paths (target: ≤ 10% within 10⁵
+  paths).
+
+
 
 ## 6.8 Limitations
 

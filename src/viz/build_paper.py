@@ -546,6 +546,88 @@ def wp2_values():
     return v
 
 
+def proj_values():
+    d = json.loads((R / "projected_doob.json").read_text())
+    v = {}
+    a = d["ADB benchmark (2 countries)"]; c = d.get("CAREC pool (10 countries)", a)
+    v["PROJ_SD"] = sci(max(a["rel_sd_per_path"], c["rel_sd_per_path"]))
+    v["PROJ_MS"] = f"{1e3 * c['seconds']:.0f} ms"
+    v["PROJ_COND_MEAN"] = f"US${c['conditional_pool_loss_mean_musd']:.0f}m"
+    v["PROJ_COND_P95"] = f"US${c['conditional_pool_loss_p95_musd']:.0f}m"
+    v["PROJ_COND_400"] = pct(c.get("P(pool > 400m | pair exhausted)", 0), 2)
+    v["PROJ_TRIPLE"] = sci(c.get("triple_exhaustion_KG_TJ_UZ", float("nan")))
+    return v
+
+
+def rain_values():
+    d = json.loads((R / "realdata_rain.json").read_text())
+    v = {}
+    names = {"KG": "Kyrgyz Rep.", "TJ": "Tajikistan", "UZ": "Uzbekistan", "KZ": "Kazakhstan", "TM": "Turkmenistan",
+             "AZ": "Azerbaijan", "GE": "Georgia", "PK": "Pakistan", "MN": "Mongolia"}
+    lines = ["**Table [tab:rain].** Shared share of extreme-rain events between neighbouring countries (GHCN-Daily stations). "
+             "Events at annual exceedance probability q; an event is shared when the other country has one within ±1 day. "
+             "Shared / events of the rarer country; the brief assumes 25%.", "",
+             "| Pair | common years | q = 50% | q = 20% | q = 10% | q = 5% |", "|---|---|---|---|---|---|"]
+    for pr, r in d["pairs"].items():
+        a, b = pr.split("-")
+        if r["0.5"]["years"] < 20:
+            continue
+        cells = [f"{x['shared']}/{min(x['events_A'], x['events_B'])}" for x in (r[q] for q in ("0.5", "0.2", "0.1", "0.05"))]
+        lines.append(f"| {names[a]}–{names[b]} | {r['0.5']['years']} | " + " | ".join(cells) + " |")
+    pl = d["pooled"]
+    lines.append("| **pooled** | | " + " | ".join(
+        f"**{pct(pl[q]['share'], 1)}** ({pct(pl[q]['share_ci95'][0], 1)}–{pct(pl[q]['share_ci95'][1], 1)})" for q in ("0.5", "0.2", "0.1", "0.05")) + " |")
+    v["RAIN_TABLE"] = "\n".join(lines)
+    v["RAIN_NST"] = str(sum(len(x) for x in d["stations"].values()))
+    v["RAIN_SHARE"] = f"{pct(pl['0.2']['share'], 1)} ({pct(pl['0.2']['share_ci95'][0], 1)}–{pct(pl['0.2']['share_ci95'][1], 1)})"
+    im = d["implied"]
+    lines = ["**Table [tab:rainimp].** Exact two-country targets with the dependence assumptions replaced by data.", "",
+             "| Dependence | earthquake intensity m | rain shared share | joint attachment | Pr(L > 80m) | joint exhaustion |",
+             "|---|---|---|---|---|---|"]
+    for k, r in im.items():
+        lines.append(f"| {k} | {r['m']:.1f} | {pct(r['rain_shared'], 1)} | {pct(r['joint_attachment'])} | {pct(r['exceedance'])} | {sci(r['joint_exhaustion'])} |")
+    v["RAIN_IMP_TABLE"] = "\n".join(lines)
+    b, both = im["brief"], im["both from data"]
+    v["RAIN_EXC_FACTOR"] = f"{both['exceedance'] / b['exceedance']:.1f}×"
+    v["RAIN_EXH_FACTOR"] = f"{both['joint_exhaustion'] / b['joint_exhaustion']:.2f}×"
+    return v
+
+
+def ap_values():
+    d = json.loads((R / "wp2_asia_pacific.json").read_text())
+    v = {}
+    cal = d.get("calibration", {})
+    v["AP_N"] = str(d["cases"]["asia_pacific"]["n"]); v["AP_E"] = str(d["cases"]["asia_pacific"]["edges"])
+    v["AP_BOND"] = str(d["cases"]["asia_pacific"]["max_bond"]); v["AP_MPS_S"] = f"{d['cases']['asia_pacific']['mps_seconds']:.0f} s"
+    v["AP_EVENTS"] = str(cal.get("events", "—")); v["AP_BW"] = str(cal.get("bandwidth", "—"))
+    v["AP_CHECK"] = sci(max(x["tol_check"] for x in d["cases"].values() if x.get("tol_check") is not None))
+    v["R50_BOND"] = str(d["cases"]["ring50"]["max_bond"])
+    get = {(r["case"], r["target"], r["threshold_musd"], r["method"]): r for r in d["rows"]}
+    lab = {"asia_pacific": f"Asia–Pacific ({v['AP_N']} countries)", "ring50": "ring (50 countries)"}
+    lines = [f"**Table [tab:ap].** WP2 at scale, 65,536 paths, {d['reps']} replications, exact tensor-network references. "
+             "Relative RMSE; interval coverage in parentheses.", "",
+             "| Pool | question | exact value | RDPO | plain Monte Carlo | exp. twisting |", "|---|---|---|---|---|---|"]
+    crit = []
+    for case in ("asia_pacific", "ring50"):
+        c = d["cases"][case]
+        for t, thr in (("exceedance", c["T_moderate"]), ("exceedance", c["T_rare"]), ("stop_loss", c["T_rare"]), ("joint_exhaustion", None)):
+            r = get.get((case, t, thr, "rdpo"))
+            if not r:
+                continue
+            mc = get.get((case, t, thr, "mc")); tw = get.get((case, t, thr, "twist"))
+            q = {"exceedance": f"Pr(pool payout > US${thr}m)", "stop_loss": f"stop-loss above US${thr}m",
+                 "joint_exhaustion": "KG and TJ both exhausted (sampled; exact by pair reduction)"}[t]
+            val = money(r["mu"]) if t == "stop_loss" else sci(r["mu"])
+            lines.append(f"| {lab[case]} | {q} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
+                         f"{pct(mc['rel_rmse']) if mc else '—'} | {pct(tw['rel_rmse']) if tw else '—'} |")
+            if t == "exceedance" and thr == c["T_rare"]:
+                crit.append((lab[case], r["mu"], r["rel_rmse"]))
+    v["AP_TABLE"] = "\n".join(lines)
+    v["AP_CRIT"] = "; ".join(f"{n}: {pct(e, 1)} at μ = {sci(mu)}" for n, mu, e in crit)
+    v["AP_CRIT_OK"] = "met" if crit and all(e <= 0.10 for _, _, e in crit) else "not met in every case"
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -576,7 +658,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values):
         try:
             vals.update(fn())
         except Exception as ex:

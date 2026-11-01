@@ -1,0 +1,24 @@
+{
+  "ADB benchmark (2 countries)": {
+    "mu": 3.1633046309179134e-05,
+    "exact": 3.163304630917914e-05,
+    "paths": 20000,
+    "seconds": 0.058743331999721704,
+    "rel_sd_per_path": 5.498937706110968e-16,
+    "all_paths_hit": true,
+    "conditional_pool_loss_mean_musd": 160.0,
+    "conditional_pool_loss_p95_musd": 160.0
+  },
+  "CAREC pool (10 countries)": {
+    "mu": 1.5921925475879308e-05,
+    "exact": 1.592192547587931e-05,
+    "paths": 20000,
+    "seconds": 0.12986153199744876,
+    "rel_sd_per_path": 8.904133417337228e-16,
+    "all_paths_hit": true,
+    "conditional_pool_loss_mean_musd": 193.666625,
+    "conditional_pool_loss_p95_musd": 275.0,
+    "P(pool > 400m | pair exhausted)": 0.0004,
+    "triple_exhaustion_KG_TJ_UZ": 2.0918204435785982e-08
+  }
+}

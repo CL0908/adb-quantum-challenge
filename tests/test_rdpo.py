@@ -122,3 +122,14 @@ def test_realdata_check_runs_on_cached_catalogue():
     rows = out["implied_scenarios"]["rows"]
     assert rows["brief"]["m"] == 1.0
     assert abs(rows["brief"]["joint_exhaustion"] / 3.163304630917903e-05 - 1) < 1e-10
+
+
+def test_projected_doob_is_zero_variance_and_exact():
+    from src.rdpo.projected import ProjectedDoob
+    for model, thr in [(adb_model("adb-common-shock"), 80e6), (SyntheticModel(8, topology("ring", 8)), None)]:
+        P = PortfolioProblem(model, "joint_exhaustion", threshold=thr)
+        d = ProjectedDoob(P)
+        assert abs(d.mu / P.exact_pair() - 1) < 1e-12
+        o = d.rollout(500, np.random.default_rng(0))
+        g = o["w"] * o["f"]
+        assert np.all(o["f"] == 1) and np.max(np.abs(g / d.mu - 1)) < 1e-10
