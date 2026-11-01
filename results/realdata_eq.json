@@ -1,0 +1,447 @@
+{
+  "data": {
+    "catalogue": "https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv",
+    "boundaries": "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson",
+    "years": [
+      1965,
+      2016
+    ],
+    "events_in_window": 335,
+    "events_declustered": 168
+  },
+  "radii_km": {
+    "25": {
+      "5.5": {
+        "KG": {
+          "events": 32,
+          "rate_per_year": 0.6153846153846154,
+          "dispersion_index": 0.7745098039215684,
+          "poisson_p_value": 0.8790490735189478,
+          "also_hit_other": 12,
+          "shared_share": 0.375,
+          "shared_share_ci95": [
+            0.2293366846595921,
+            0.5474589941047487
+          ]
+        },
+        "TJ": {
+          "events": 42,
+          "rate_per_year": 0.8076923076923077,
+          "dispersion_index": 1.0214752567693746,
+          "poisson_p_value": 0.43107727330912526,
+          "also_hit_other": 12,
+          "shared_share": 0.2857142857142857,
+          "shared_share_ci95": [
+            0.1716685874457567,
+            0.43567496077245566
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              21,
+              5
+            ],
+            [
+              9,
+              17
+            ]
+          ],
+          "fisher_p": 0.0017053369170264509,
+          "odds_ratio": 7.933333333333334,
+          "p_both_observed": 0.40384615384615385,
+          "p_both_if_independent": 0.28846153846153844
+        }
+      },
+      "6.0": {
+        "KG": {
+          "events": 15,
+          "rate_per_year": 0.28846153846153844,
+          "dispersion_index": 0.9973856209150329,
+          "poisson_p_value": 0.4789170145988982,
+          "also_hit_other": 5,
+          "shared_share": 0.3333333333333333,
+          "shared_share_ci95": [
+            0.15176100694691236,
+            0.5828687484878701
+          ]
+        },
+        "TJ": {
+          "events": 14,
+          "rate_per_year": 0.2692307692307692,
+          "dispersion_index": 0.8907563025210083,
+          "poisson_p_value": 0.6937252388823613,
+          "also_hit_other": 5,
+          "shared_share": 0.35714285714285715,
+          "shared_share_ci95": [
+            0.16344490737202735,
+            0.6123599531785959
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              8,
+              5
+            ],
+            [
+              5,
+              34
+            ]
+          ],
+          "fisher_p": 0.0012637222809942662,
+          "odds_ratio": 10.88,
+          "p_both_observed": 0.15384615384615385,
+          "p_both_if_independent": 0.0625
+        }
+      },
+      "6.5": {
+        "KG": {
+          "events": 5,
+          "rate_per_year": 0.09615384615384616,
+          "dispersion_index": 1.3294117647058825,
+          "poisson_p_value": 0.05775805653045958,
+          "also_hit_other": 3,
+          "shared_share": 0.6,
+          "shared_share_ci95": [
+            0.23071993220883708,
+            0.8823817688407467
+          ]
+        },
+        "TJ": {
+          "events": 4,
+          "rate_per_year": 0.07692307692307693,
+          "dispersion_index": 0.9411764705882353,
+          "poisson_p_value": 0.5935466657264794,
+          "also_hit_other": 3,
+          "shared_share": 0.75,
+          "shared_share_ci95": [
+            0.3006360524426366,
+            0.9544139373553637
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              47
+            ]
+          ],
+          "fisher_p": 0.0007129005448333179,
+          "odds_ratio": 141.0,
+          "p_both_observed": 0.057692307692307696,
+          "p_both_if_independent": 0.00591715976331361
+        }
+      }
+    },
+    "50": {
+      "5.5": {
+        "KG": {
+          "events": 41,
+          "rate_per_year": 0.7884615384615384,
+          "dispersion_index": 0.6633189861310378,
+          "poisson_p_value": 0.9694070407898415,
+          "also_hit_other": 18,
+          "shared_share": 0.43902439024390244,
+          "shared_share_ci95": [
+            0.2988990477210983,
+            0.5895973484824271
+          ]
+        },
+        "TJ": {
+          "events": 53,
+          "rate_per_year": 1.0192307692307692,
+          "dispersion_index": 0.8653348131705512,
+          "poisson_p_value": 0.7409762712141357,
+          "also_hit_other": 18,
+          "shared_share": 0.33962264150943394,
+          "shared_share_ci95": [
+            0.22686862857429074,
+            0.4740546388917903
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              27,
+              5
+            ],
+            [
+              8,
+              12
+            ]
+          ],
+          "fisher_p": 0.0018656314671170353,
+          "odds_ratio": 8.1,
+          "p_both_observed": 0.5192307692307693,
+          "p_both_if_independent": 0.4142011834319527
+        }
+      },
+      "6.0": {
+        "KG": {
+          "events": 20,
+          "rate_per_year": 0.38461538461538464,
+          "dispersion_index": 0.8313725490196079,
+          "poisson_p_value": 0.7988964147873591,
+          "also_hit_other": 8,
+          "shared_share": 0.4,
+          "shared_share_ci95": [
+            0.21880396741419272,
+            0.613422057684794
+          ]
+        },
+        "TJ": {
+          "events": 18,
+          "rate_per_year": 0.34615384615384615,
+          "dispersion_index": 0.8932461873638344,
+          "poisson_p_value": 0.6889507794769554,
+          "also_hit_other": 8,
+          "shared_share": 0.4444444444444444,
+          "shared_share_ci95": [
+            0.24559231101389126,
+            0.6628393057174837
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              11,
+              7
+            ],
+            [
+              5,
+              29
+            ]
+          ],
+          "fisher_p": 0.0011553503028970881,
+          "odds_ratio": 9.114285714285714,
+          "p_both_observed": 0.21153846153846154,
+          "p_both_if_independent": 0.10650887573964497
+        }
+      },
+      "6.5": {
+        "KG": {
+          "events": 6,
+          "rate_per_year": 0.11538461538461539,
+          "dispersion_index": 1.241830065359477,
+          "poisson_p_value": 0.11516874293204184,
+          "also_hit_other": 4,
+          "shared_share": 0.6666666666666666,
+          "shared_share_ci95": [
+            0.29998832134152864,
+            0.9032306674407831
+          ]
+        },
+        "TJ": {
+          "events": 6,
+          "rate_per_year": 0.11538461538461539,
+          "dispersion_index": 0.9019607843137254,
+          "poisson_p_value": 0.6720645356618086,
+          "also_hit_other": 4,
+          "shared_share": 0.6666666666666666,
+          "shared_share_ci95": [
+            0.29998832134152864,
+            0.9032306674407831
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              45
+            ]
+          ],
+          "fisher_p": 0.00026779942746329305,
+          "odds_ratio": 90.0,
+          "p_both_observed": 0.07692307692307693,
+          "p_both_if_independent": 0.011094674556213019
+        }
+      }
+    },
+    "100": {
+      "5.5": {
+        "KG": {
+          "events": 57,
+          "rate_per_year": 1.0961538461538463,
+          "dispersion_index": 0.832129342965256,
+          "poisson_p_value": 0.7976806486110453,
+          "also_hit_other": 28,
+          "shared_share": 0.49122807017543857,
+          "shared_share_ci95": [
+            0.3661606806374018,
+            0.6174031967096765
+          ]
+        },
+        "TJ": {
+          "events": 75,
+          "rate_per_year": 1.4423076923076923,
+          "dispersion_index": 0.9356862745098038,
+          "poisson_p_value": 0.6047162723980344,
+          "also_hit_other": 28,
+          "shared_share": 0.37333333333333335,
+          "shared_share_ci95": [
+            0.2725580313531414,
+            0.4864524402760493
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              30,
+              5
+            ],
+            [
+              10,
+              7
+            ]
+          ],
+          "fisher_p": 0.041631510257281124,
+          "odds_ratio": 4.2,
+          "p_both_observed": 0.5769230769230769,
+          "p_both_if_independent": 0.5177514792899409
+        }
+      },
+      "6.0": {
+        "KG": {
+          "events": 24,
+          "rate_per_year": 0.46153846153846156,
+          "dispersion_index": 0.8888888888888888,
+          "poisson_p_value": 0.6972905260534172,
+          "also_hit_other": 10,
+          "shared_share": 0.4166666666666667,
+          "shared_share_ci95": [
+            0.24467347246538232,
+            0.6116566235061137
+          ]
+        },
+        "TJ": {
+          "events": 32,
+          "rate_per_year": 0.6153846153846154,
+          "dispersion_index": 1.0294117647058822,
+          "poisson_p_value": 0.415662750954907,
+          "also_hit_other": 10,
+          "shared_share": 0.3125,
+          "shared_share_ci95": [
+            0.17952352116618736,
+            0.4856699969803239
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              13,
+              7
+            ],
+            [
+              11,
+              21
+            ]
+          ],
+          "fisher_p": 0.04604261253348277,
+          "odds_ratio": 3.5454545454545454,
+          "p_both_observed": 0.25,
+          "p_both_if_independent": 0.1775147928994083
+        }
+      },
+      "6.5": {
+        "KG": {
+          "events": 6,
+          "rate_per_year": 0.11538461538461539,
+          "dispersion_index": 1.241830065359477,
+          "poisson_p_value": 0.11516874293204184,
+          "also_hit_other": 4,
+          "shared_share": 0.6666666666666666,
+          "shared_share_ci95": [
+            0.29998832134152864,
+            0.9032306674407831
+          ]
+        },
+        "TJ": {
+          "events": 13,
+          "rate_per_year": 0.25,
+          "dispersion_index": 0.9215686274509803,
+          "poisson_p_value": 0.6332236179460633,
+          "also_hit_other": 4,
+          "shared_share": 0.3076923076923077,
+          "shared_share_ci95": [
+            0.12680497161618087,
+            0.5763111218666236
+          ]
+        },
+        "years": {
+          "table_both_KGonly_TJonly_none": [
+            [
+              4,
+              1
+            ],
+            [
+              8,
+              39
+            ]
+          ],
+          "fisher_p": 0.007923169267707083,
+          "odds_ratio": 19.5,
+          "p_both_observed": 0.07692307692307693,
+          "p_both_if_independent": 0.022189349112426038
+        }
+      }
+    }
+  },
+  "gutenberg_richter": {
+    "b": 0.921965939235953,
+    "b_se": 0.10575674627673895,
+    "n": 76,
+    "KG": {
+      "rate_M55": 0.7884615384615384,
+      "trigger_rate_brief": 0.039603986593163366,
+      "implied_trigger_magnitude": 6.9089908889044995
+    },
+    "TJ": {
+      "rate_M55": 1.0192307692307692,
+      "trigger_rate_brief": 0.040041049537183744,
+      "implied_trigger_magnitude": 7.024749465963481
+    }
+  },
+  "implied_scenarios": {
+    "radius_km": 50.0,
+    "min_magnitude": 6.0,
+    "rows": {
+      "observed": {
+        "shared_share": 0.42105263157894735,
+        "m": 5.65171317555634,
+        "joint_attachment": 0.07434132417482078,
+        "joint_exhaustion": 8.921047055502264e-05,
+        "exceedance": 0.030663861840725896
+      },
+      "ci_low": {
+        "shared_share": 0.2785227481181953,
+        "m": 3.73856037742544,
+        "joint_attachment": 0.06176766734886194,
+        "joint_exhaustion": 6.551641054208838e-05,
+        "exceedance": 0.023032583529861123
+      },
+      "ci_high": {
+        "shared_share": 0.5780792938687267,
+        "m": 7.759453608976197,
+        "joint_attachment": 0.08844398361883539,
+        "joint_exhaustion": 0.00011533965086324435,
+        "exceedance": 0.03902683624428757
+      },
+      "brief": {
+        "shared_share": 0.0745,
+        "m": 1.0,
+        "joint_attachment": 0.04413776873084355,
+        "joint_exhaustion": 3.163304630917903e-05,
+        "exceedance": 0.012046720907534038
+      }
+    }
+  }
+}

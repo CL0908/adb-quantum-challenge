@@ -82,11 +82,15 @@ def throughput(N=65536):
 
 
 # ------------------------------------------------------------------------------------------------
+SCALE_CASES = [("ring", 2), ("ring", 8), ("ring", 16), ("ring", 20), ("ring", 28),
+               ("complete", 4), ("complete", 6), ("complete", 7)]
+
+
 def _scale_refs():
     tens = {(r["topology"], r["n"]): r for r in json.loads((R / "tensor.json").read_text())["B_scaling_n"]
             if "targets" in r and r["tol"] == (1e-6 if (r["topology"] == "complete" and r["n"] == 7) else 1e-9)}
     out = {}
-    for kind, n in [("ring", 16), ("ring", 28), ("complete", 6), ("complete", 7)]:
+    for kind, n in SCALE_CASES:
         ref = tens[(kind, n)]["targets"]
         out[(kind, n)] = {"exceedance": ref["exceedance_prob"], "stop_loss": ref["stop_loss"],
                           "joint_exhaustion": pair_exhaustion_exact(SyntheticModel(n, topology(kind, n)))}
@@ -96,8 +100,13 @@ def _scale_refs():
 def _job(args):
     jid, kind, n, target, variant, rep, B, seed = args
     P = PortfolioProblem(SyntheticModel(n, topology(kind, n)), target)
-    cfg = VARIANTS[variant] if variant in VARIANTS else final_config(target)
     t0 = time.perf_counter()
+    if variant == "twist":                          # classical exponential twisting baseline, same budget
+        from .experiments import twisted_est
+        est = float(twisted_est(P, B, np.random.default_rng(seed)))
+        return {"id": jid, "key": [kind, n, target, variant], "est": est, "ci": None,
+                "sec": time.perf_counter() - t0, "selected": None}
+    cfg = VARIANTS[variant] if variant in VARIANTS else final_config(target)
     x = rdpo_estimate(P, B, np.random.default_rng(seed), cfg)
     return {"id": jid, "key": [kind, n, target, variant], "est": x["estimate"], "ci": list(x["ci"]),
             "sec": time.perf_counter() - t0, "selected": x.get("log", {}).get("selected")}
@@ -107,7 +116,8 @@ def scale(B=65536, reps=24, seed=7000, procs=4):
     refs = _scale_refs()
     jobs = [(f"{kind}-{n}-{t}-{v}-{r}", kind, n, t, v, r, B, seed + 1000 * n + 100 * TARGETS.index(t) + r)
             for r in range(reps) for (kind, n) in refs for t in ("exceedance", "stop_loss", "joint_exhaustion")
-            for v in list(VARIANTS) + ["v2-final"] if not (v == "v2-final" and t == "joint_exhaustion")]
+            for v in list(VARIANTS) + ["v2-final", "twist"]
+            if not (v in ("v2-final", "twist") and t == "joint_exhaustion")]
     res = {}
     for rec in run_jobs("scale", jobs, _job, procs):
         res.setdefault(tuple(rec["key"]), []).append((rec["est"], rec["ci"], rec["sec"], rec["selected"]))
@@ -121,7 +131,8 @@ def scale(B=65536, reps=24, seed=7000, procs=4):
                                    "rel_err_vs_mps": val / refs[(kind, n)]["joint_exhaustion"] - 1}
     for (kind, n, t, v), xs in sorted(res.items()):
         mu = refs[(kind, n)][t]
-        s = summarise([e for e, *_ in xs], mu, [c for _, c, *_ in xs])
+        cis = [c for _, c, *_ in xs]
+        s = summarise([e for e, *_ in xs], mu, None if v == "twist" else cis)
         rows.append({"topology": kind, "n": n, "target": t, "variant": v, "mu": mu, "budget": B, **s,
                      "seconds_per_fit": float(np.mean([x[2] for x in xs])),
                      "selected_initial": float(np.mean([x[3] == "initial" for x in xs])),

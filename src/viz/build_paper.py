@@ -292,43 +292,57 @@ def v2_values():
     v = {}
     sp = [r["speedup"] for r in tp if r["n"] >= 4]
     v["V2_SPEEDUP"] = f"{min(sp):.1f}–{max(sp):.1f}×"
-    lines = ["**Table [tab:v2tp].** Rollout throughput (paths per second, one core) of the v1 engine and the table-driven v2 "
-             "engine. Both sample from the identical policy (tested).", "",
-             "| Graph | n | sources K | v1 | v2 | speed-up |", "|---|---|---|---|---|---|"]
+    lines = ["**Table [tab:v2tp].** Rollout throughput (paths per second, one core) of the Phase 1 engine and the table-driven "
+             "Phase 2 engine. Both sample from the identical policy (tested).", "",
+             "| Graph | n | sources K | Phase 1 | Phase 2 | speed-up |", "|---|---|---|---|---|---|"]
     for r in tp:
         lines.append(f"| {r['topology']} | {r['n']} | {r['K']} | {r['v1']:,.0f} | {r['fast']:,.0f} | **{r['speedup']:.1f}×** |")
     v["V2_TP_TABLE"] = "\n".join(lines)
     get = {(r["topology"], r["n"], r["target"], r["variant"]): r for r in rows}
     keys = sorted({(r["topology"], r["n"], r["target"]) for r in rows}, key=lambda k: (k[0] != "ring", k[1], k[2]))
     tl = {"exceedance": "Pr(L > T)", "stop_loss": "stop-loss", "joint_exhaustion": "pair exhaustion"}
-    lines = [f"**Table [tab:v2scale].** Scaling cases at B = 65,536 with {reps} replications. *v1 study*: the original results "
-             "(6–10 replications). *v1 rerun* and *v2*: same seeds, {reps} replications. Relative RMSE, with empirical 95%-interval "
-             "coverage in parentheses; time per estimate on one core.".replace("{reps}", str(reps)), "",
-             "| Graph | n | target | v1 study | v1 rerun | v2 | exp. twisting | time v1 → v2 |", "|---|---|---|---|---|---|---|---|"]
-    gains, covs_v2, covs_v1 = [], [], []
+    ep = sc["exact_pair"]
+    lines = [f"**Table [tab:v2scale].** Scaling study at B = 65,536 with {reps} replications per cell and identical seeds for "
+             "every method. Relative RMSE, with empirical 95%-interval coverage in parentheses. *Phase 1 study*: the original "
+             "results (6–20 replications). Pair exhaustion is answered exactly by the Phase 2 engine (pair reduction); its "
+             "sampled estimate is shown for comparison.", "",
+             "| Graph | n | target | Phase 1 study | Phase 1 engine | Phase 2 engine | exp. twisting | time per estimate |",
+             "|---|---|---|---|---|---|---|---|"]
+    gains, covs_v2, covs_v1, tw_rows, tw_wins, times = [], [], [], 0, 0, []
     for k in keys:
         a = get.get(k + ("v1",)); b = get.get(k + ("v2-final",)) or get.get(k + ("v2",))
+        if not a or not b:
+            continue
         old = a["v1_study"]
-        lines.append(f"| {k[0]} | {k[1]} | {tl[k[2]]} | {pct(old['rel_rmse'])} ({pct(old['ci_coverage'], 0)}) | "
-                     f"{pct(a['rel_rmse'])} ({pct(a['ci_coverage'], 0)}) | **{pct(b['rel_rmse'])}** ({pct(b['ci_coverage'], 0)}) | "
-                     f"{pct(a['twisted']) if a['twisted'] else '—'} | {a['v1_study_seconds']:.0f} s → {b['seconds_per_fit']:.0f} s |")
-        covs_v1.append(a["ci_coverage"]); covs_v2.append(b["ci_coverage"])
-        if k[2] != "joint_exhaustion":
-            gains.append(a["rel_rmse"] / b["rel_rmse"])
+        tw = get.get(k + ("twist",))
+        twv = tw["rel_rmse"] if tw else None
+        if k[2] == "joint_exhaustion":
+            e = ep.get(f"{k[0]}-{k[1]}")
+            v2cell = f"**exact** ({e['ms']:.0f} ms); sampled {pct(b['rel_rmse'])}" if e else pct(b["rel_rmse"])
+        else:
+            v2cell = f"**{pct(b['rel_rmse'])}** ({pct(b['ci_coverage'], 0)})"
+            gains.append(a["rel_rmse"] / b["rel_rmse"]); covs_v2.append(b["ci_coverage"])
+            if twv:
+                tw_rows += 1; tw_wins += twv > b["rel_rmse"]
+        covs_v1.append(a["ci_coverage"])
+        t_old = a["v1_study_seconds"]
+        times.append(t_old / b["seconds_per_fit"]) if t_old else None
+        lines.append(f"| {k[0]} | {k[1]} | {tl[k[2]]} | "
+                     + (f"{pct(old['rel_rmse'])} ({pct(old['ci_coverage'], 0)})" if old else "—")
+                     + f" | {pct(a['rel_rmse'])} ({pct(a['ci_coverage'], 0)}) | {v2cell} | {pct(twv) if twv else '—'} | "
+                     + (f"{t_old:.0f} s → {b['seconds_per_fit']:.1f} s" if t_old else f"{b['seconds_per_fit']:.1f} s") + " |")
     v["V2_SCALE_TABLE"] = "\n".join(lines)
-    tw_rows = [k for k in keys if get[k + ("v1",)]["twisted"]]
-    tw_wins = sum(get[k + ("v1",)]["twisted"] > (get.get(k + ("v2-final",)) or get[k + ("v2",)])["rel_rmse"] for k in tw_rows)
-    times = [(get[k + ("v1",)]["v1_study_seconds"] / (get.get(k + ("v2-final",)) or get[k + ("v2",)])["seconds_per_fit"]) for k in keys]
     better = [g for g in gains if g > 1]; worse = [g for g in gains if g <= 1]
-    v["V2_GAIN"] = (f"is more accurate than v1 in {len(better)} of {len(gains)} settings (error lower by up to ×{max(gains):.1f})"
-                    + (f" and slightly less accurate in {len(worse)} (×{min(worse):.2f}–×{max(worse):.2f})" if worse else ""))
+    v["V2_GAIN"] = (f"is more accurate than the Phase 1 engine in {len(better)} of {len(gains)} settings (error lower by up to "
+                    f"×{max(gains):.1f}, median ×{float(np.median(gains)):.2f})"
+                    + (f" and less accurate in {len(worse)} (×{min(worse):.2f}–×{max(worse):.2f})" if worse else ""))
     v["V2_GAIN_MAX"] = f"{max(gains):.1f}×"
     v["V2_TIME"] = f"{min(times):.1f}–{max(times):.1f}×"
+    v["V2_TW_WINS"] = f"{tw_wins} of {tw_rows}"
+    v["V2_COV"] = f"{pct(min(covs_v2), 0)}–{pct(max(covs_v2), 0)} (mean {pct(float(np.mean(covs_v2)), 0)})"
     ep = sc["exact_pair"]
     v["V2_EXACT_MS"] = f"{max(e['ms'] for e in ep.values()):.0f} ms"
     v["V2_EXACT_ERR"] = sci(max(abs(e["rel_err_vs_mps"]) for e in ep.values()))
-    v["V2_TW_WINS"] = f"{tw_wins} of {len(tw_rows)}"
-    v["V2_COV"] = f"{pct(min(covs_v1), 0)}–{pct(max(covs_v1), 0)}"
     # benchmark
     def summ(B):
         bb = [r for r in bench if r["budget"] == B]
@@ -340,8 +354,8 @@ def v2_values():
         return wins, w1, better, float(np.median([r["improvement_vs_best"] for r in el])), \
             float(np.median([r["v1_improvement_vs_best"] for r in el])), float(np.mean([r["v2"]["ci_coverage"] for r in bb])), \
             float(np.median([r["v1"]["rel_rmse"] / r["v2"]["rel_rmse"] for r in npair]))
-    lines = ["**Table [tab:v2bench].** Benchmark (25 scenario–target cells, 40 replications) with the final v2 configuration.", "",
-             "| Budget | cells better than best reference: v1 → v2 | cells where v2 beats v1 | median v1/v2 error ratio (non-pair cells) | expected loss, median factor vs Sobol: v1 → v2 | mean coverage v2 |",
+    lines = ["**Table [tab:v2bench].** Benchmark (25 scenario–target cells, 40 replications): Phase 1 → Phase 2 engine.", "",
+             "| Budget | cells better than best reference | cells where Phase 2 beats Phase 1 | median error ratio Phase 1 / Phase 2 (non-pair cells) | expected loss, median factor vs Sobol | mean coverage, Phase 2 |",
              "|---|---|---|---|---|---|"]
     for B in (4096, 16384, 65536):
         w, w1, bt, m2, m1, cv, ratio = summ(B)
@@ -363,6 +377,52 @@ def v2_values():
             lines.append(f"| {c} | {tl.get(t, t)} | {B:,} | {pct(d[False]['rel_rmse'])} | **{pct(d[True]['rel_rmse'])}** | ×{g:.1f} |")
     v["V2_TRANSFER_TABLE"] = "\n".join(lines)
     v["V2_TRANSFER_GAIN"] = f"×{min(tgains):.1f}–×{max(tgains):.1f}" if tgains else "—"
+    return v
+
+
+def rd_values():
+    d = json.loads((R / "realdata_eq.json").read_text())
+    v = {}
+    gr = d["gutenberg_richter"]
+    v["RD_B"] = f"{gr['b']:.2f} ± {gr['b_se']:.2f}"
+    v["RD_MSTAR"] = f"M{gr['KG']['implied_trigger_magnitude']:.1f} (Kyrgyz Republic) and M{gr['TJ']['implied_trigger_magnitude']:.1f} (Tajikistan)"
+    v["RD_N"] = f"{d['data']['events_declustered']}"
+    lines = ["**Table [tab:rd].** Earthquake main shocks (aftershocks removed) within a given distance of each country, "
+             "1965–2016. *Shared share*: fraction of a country's events that are also within that distance of the other "
+             "country (95% Wilson interval); the brief assumes 7.5% (KG) and 7.4% (TJ). *Dispersion*: variance/mean of yearly "
+             "counts (Poisson = 1) with the χ² p-value. *Years*: Fisher test of independence between the two countries' event "
+             "years.", "",
+             "| Distance | M ≥ | events KG / TJ | shared share KG | shared share TJ | dispersion KG / TJ (p) | years: both observed vs independent (p) |",
+             "|---|---|---|---|---|---|---|"]
+    disp, shares = [], []
+    for Rk, dm in d["radii_km"].items():
+        for M, r in dm.items():
+            k, t = r["KG"], r["TJ"]
+            def sh(x):
+                return f"{pct(x['shared_share'], 0)} ({pct(x['shared_share_ci95'][0], 0)}–{pct(x['shared_share_ci95'][1], 0)})"
+            lines.append(f"| {Rk} km | {M} | {k['events']} / {t['events']} | {sh(k)} | {sh(t)} | "
+                         f"{k['dispersion_index']:.2f} ({k['poisson_p_value']:.2f}) / {t['dispersion_index']:.2f} ({t['poisson_p_value']:.2f}) | "
+                         f"{pct(r['years']['p_both_observed'], 0)} vs {pct(r['years']['p_both_if_independent'], 0)} (p = {r['years']['fisher_p']:.3f}) |")
+            if Rk == "50":
+                disp += [(k["dispersion_index"], k["poisson_p_value"]), (t["dispersion_index"], t["poisson_p_value"])]
+            shares += [k["shared_share"], t["shared_share"]]
+    v["RD_TABLE"] = "\n".join(lines)
+    v["RD_DISP"] = f"{min(x for x, _ in disp):.2f}–{max(x for x, _ in disp):.2f}"
+    v["RD_DISP_P"] = f"{min(p for _, p in disp):.2f}"
+    v["RD_SHARE"] = f"{pct(min(shares), 0)}–{pct(max(shares), 0)}"
+    im = d["implied_scenarios"]; rows = im["rows"]
+    lines = [f"**Table [tab:rdimp].** Exact two-country targets when the shared-event intensity is set from the data "
+             f"(events within {im['radius_km']:.0f} km of both countries, M ≥ {im['min_magnitude']:.1f}), compared with the brief.", "",
+             "| Shared-event setting | shared share | intensity m | joint attachment | Pr(L > 80m) | joint exhaustion |", "|---|---|---|---|---|---|"]
+    lab = {"brief": "brief (base case)", "ci_low": "data, lower 95% bound", "observed": "data, point estimate", "ci_high": "data, upper 95% bound"}
+    for key in ("brief", "ci_low", "observed", "ci_high"):
+        r = rows[key]
+        lines.append(f"| {lab[key]} | {pct(r['shared_share'], 1)} | {r['m']:.1f} | {pct(r['joint_attachment'])} | "
+                     f"{pct(r['exceedance'])} | {sci(r['joint_exhaustion'])} |")
+    v["RD_IMP_TABLE"] = "\n".join(lines)
+    b = rows["brief"]["joint_exhaustion"]
+    v["RD_EXH_FACTOR"] = f"{rows['ci_low']['joint_exhaustion'] / b:.1f}–{rows['ci_high']['joint_exhaustion'] / b:.1f}×"
+    v["RD_ATT"] = f"{pct(rows['ci_low']['joint_attachment'], 1)}–{pct(rows['ci_high']['joint_attachment'], 1)}"
     return v
 
 
@@ -396,7 +456,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values):
         try:
             vals.update(fn())
         except Exception as ex:

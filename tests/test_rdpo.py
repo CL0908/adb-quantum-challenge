@@ -108,3 +108,17 @@ def test_stage_dependent_policy_is_unbiased_sampler():
     out = pol.rollout(200000, np.random.default_rng(1))
     g = out["w"] * out["f"]; mu = P.exact_dense()
     assert abs(g.mean() - mu) < 4 * g.std() / np.sqrt(len(g))
+
+
+def test_realdata_check_runs_on_cached_catalogue():
+    from pathlib import Path
+    if not Path("data/real/usgs_m55_central_asia_1965_2016.csv").exists():
+        pytest.skip("real-data cache not present")
+    from src.realdata.eq_check import analyse
+    out, ev, dist, polys = analyse()
+    r = out["radii_km"]["50"]["5.5"]
+    assert r["KG"]["events"] > 10 and r["TJ"]["events"] > 10
+    assert 0.3 < r["KG"]["dispersion_index"] < 2.0
+    rows = out["implied_scenarios"]["rows"]
+    assert rows["brief"]["m"] == 1.0
+    assert abs(rows["brief"]["joint_exhaustion"] / 3.163304630917903e-05 - 1) < 1e-10

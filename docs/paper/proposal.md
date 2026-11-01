@@ -122,8 +122,8 @@ from the contract terms to an exact source-level representation for any number o
 
 ## 2.1 Data and model inputs
 
-The prototype uses **no historical loss records and no proprietary data**. All inputs are the
-calibrated parameters published in the challenge brief:
+The model uses **no historical loss records and no proprietary data**. Its inputs are the calibrated
+parameters published in the challenge brief; a public earthquake catalogue is used to *check* them (§6.6):
 
 | Input | Values | Source | Used for |
 |---|---|---|---|
@@ -134,6 +134,7 @@ calibrated parameters published in the challenge brief:
 | Stress scenarios | base, independent, common shock (m = 2), rain stress (×2), rain cover (60/20m) | Brief, Table 4 | E1 benchmark |
 | Reference values | five targets × five scenarios | Brief, Table 5 | validation (reproduced exactly) |
 | n-country extension | KG/TJ parameters alternated on chain, ring, star and complete graphs | constructed (§2.8) | scaling study |
+| Earthquake catalogue (real data) | USGS significant earthquakes, M ≥ 5.5, 1965–2016; country boundaries | public mirrors (§6.6) | check of Poisson arrivals, trigger size, shared events |
 
 In Phase 2 the same pipeline will take source laws estimated from public hazard data (for example
 earthquake catalogues, regional seismic hazard models and precipitation reanalyses) in place of the
@@ -460,97 +461,139 @@ RDPO.](../../figures/paper/e3_ablation.png){.wide}
 ![**Figure [fig:tn].** Bond dimension of the exact tilted matrix-product state versus portfolio size.
 Sparse dependence stays constant; dense dependence grows.](../../figures/paper/tn_bond.png){.wide}
 
-## 6.5 RDPO v2: first Deep Development results
+## 6.5 Phase 2 engine: complete results
 
-We implemented the first items of the work plan (WP1 engineering, WP3 RL improvements) and re-ran the
-studies against v1 at the same total budgets.
+Sections 6.1–6.4 report the **Phase 1 engine** (RDPO v1). We then implemented the first work packages of
+the Deep Development plan (WP1 engineering, WP3 RL improvements) as the **Phase 2 engine** (RDPO v2), and
+re-ran every study at the same total budgets, with more replications and identical seeds for every method.
 
-**What changed (WP1, engineering).**
+**Engineering (WP1).**
 
-* **Table-driven engine.** Each country state is coded as one of 10 values, so every logit is a table
-  lookup. The policy is *identical* to v1: actions, weights and gradients match to machine precision
-  (tested). Rollouts are {{V2_SPEEDUP}} faster on one core for 4–28 countries (Table [tab:v2tp]).
-* **Exact compressed training.** Paths share few distinct local states at each source step. The
-  cross-entropy and Rényi-2 objectives are therefore evaluated on unique states with aggregated weights;
-  the result is the same objective with 50–500× cheaper evaluations.
+* **Table-driven engine.** Each country state is one of 10 codes, so every logit is a table lookup. The
+  policy is *identical* to Phase 1: actions, weights and gradients match to machine precision (tested).
+  Rollouts are {{V2_SPEEDUP}} faster on one core for 4–28 countries (Table [tab:v2tp]).
+* **Exact compressed training.** Paths share few distinct local states at each source step, so the
+  cross-entropy and Rényi-2 objectives are evaluated on unique states with aggregated weights. The
+  objective is unchanged, and each evaluation is 50–500× cheaper.
 
 {{V2_TP_TABLE}}
 
-**What changed (WP3, RL improvements).**
+**Reinforcement-learning improvements (WP3).**
 
 * **Stage-dependent soft values.** The exact value function $V_k$ depends on how many sources remain, but
-  v1 shares one progress parameter vector across all steps. v2 gives each of 4 contiguous stages of source
-  steps its own progress parameters (+9 parameters) for portfolio-wide threshold targets.
-* **Flexible soft values for smooth targets.** For expected loss, the progress features are replaced by a
-  piecewise-linear (hat-function) basis, a fixed-knot ReLU network in the loss, which keeps the
-  cross-entropy fit concave.
+  Phase 1 shares one progress parameter vector across all steps. Phase 2 gives each of 4 contiguous
+  stages of source steps its own progress parameters (+9 parameters) for portfolio-wide targets.
+* **Flexible soft values for smooth targets.** For expected loss, a piecewise-linear (hat-function)
+  basis, a fixed-knot ReLU network in the loss, replaces the hand-made progress features. The
+  cross-entropy fit stays concave.
 * **Exact reduction for pair targets.** A target that depends on two countries only needs the joint law
-  of their 100 states, which is the product of the kernels of the sources touching them (Proposition 2).
-  It is computed exactly in at most {{V2_EXACT_MS}} for any portfolio size, agreeing with the tensor-network
-  references to {{V2_EXACT_ERR}}. The product routes such targets to this exact path (the
-  `validate_exact` tool), and RDPO's job is the portfolio-wide targets.
-* **Interval and selection safeguards.** Student-t intervals with Welch–Satterthwaite degrees of freedom,
-  and selection of the initial (twist or transferred) policy when its estimated χ² beats every trained
-  iterate.
+  of their 100 states. That law is the product of the kernels of the sources touching them (Proposition 2).
+  It is computed exactly in at most {{V2_EXACT_MS}} for any portfolio size, and agrees with the
+  tensor-network references to {{V2_EXACT_ERR}}. The Phase 2 engine answers such targets exactly and
+  reserves RDPO for portfolio-wide targets.
+* **Safeguards.** Student-t intervals with Welch–Satterthwaite degrees of freedom. The initial (twist or
+  transferred) policy is selected whenever its estimated χ² beats every trained iterate.
 
-**Results.**
+**Scaling study.**
 
-![**Figure [fig:v2].** RDPO v2 against v1 on the scaling cases. (a) Relative RMSE at the same total
-budget (24 replications, same seeds). (b) Wall-clock time per estimate on one core, v1 study versus
-v2.](../../figures/paper/v2_results.png){.wide}
+![**Figure [fig:v2].** Phase 1 versus Phase 2 engine on the scaling study (B = 65,536; 24 replications;
+identical seeds). (a, b) Relative RMSE for the portfolio-wide targets, with exponential twisting as the
+classical reference. (c) Wall-clock time per estimate on one core.](../../figures/paper/v2_results.png){.wide}
 
 {{V2_SCALE_TABLE}}
 
-* **Accuracy at scale.** On the portfolio-wide targets, at the same budget and the same seeds, v2
-  {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings,
-  including the 28-country stop-loss that v1 lost.
-* **Speed.** One estimate takes {{V2_TIME}} less wall-clock time than in the v1 study.
-* **Error bars.** With 24 replications instead of 6–10, coverage of the v1 intervals is {{V2_COV}} in the
-  scaling cases. Most of the low-coverage cells reported in §6.2 were sampling noise from too few
-  replications.
+* **Accuracy.** On the portfolio-wide targets, at the same budget and seeds, the Phase 2 engine
+  {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings.
+* **Speed.** One estimate takes {{V2_TIME}} less wall-clock time than in the Phase 1 study.
+* **Error bars.** With 24 replications, coverage of the Phase 2 intervals on portfolio-wide targets is
+  {{V2_COV}}. Most low-coverage cells of the Phase 1 study (6–10 replications) were sampling noise.
+
+**Benchmark.**
 
 {{V2_BENCH_TABLE}}
 
-* **Benchmark.** v2 keeps the 20/25 wins over the best reference method. On the non-pair cells it is on
-  par with v1 at 4,096 paths, and its advantage grows with the budget (median error ratio in Table
-  [tab:v2bench]). Pair targets are unchanged by construction. On expected loss the spline soft values
-  close part of the gap to scrambled Sobol, but Sobol remains better.
+* The Phase 2 engine keeps the 20/25 wins over the best reference method. On the non-pair cells it is on
+  par with Phase 1 at 4,096 paths, and its advantage grows with the budget. Pair targets are answered
+  exactly in the product. On expected loss the spline soft values close part of the gap to scrambled
+  Sobol, but Sobol remains better.
 
 **Transfer: the sleep phase in practice.** In the planned wake–sleep cycle (§10.2), today's estimate starts
-from the policy trained overnight on yesterday's model. We emulate this by training on one model and
+from the policy trained overnight on yesterday's model. We emulate this by training on one model, then
 reusing the parameters as the initial policy after a change of scenario or a 20% rate increase.
 
 {{V2_TRANSFER_TABLE}}
 
-* **Small budgets become usable.** Transfer improves accuracy by {{V2_TRANSFER_GAIN}}. At 2,048 paths,
-  cold-start RDPO spends most of its budget on reaching the tail, while the transferred policy is already
-  there. The estimator remains unbiased, because the initial policy is fixed before sampling.
+* **Small budgets become usable.** Transfer improves accuracy by {{V2_TRANSFER_GAIN}}. At 2,048 paths, a
+  cold start spends most of its budget reaching the tail, while the transferred policy is already there.
+  The estimator remains unbiased, because the initial policy is fixed before sampling.
 
 **Negative results (kept for the record).**
 
 * A *value-of-training* stopping rule, which stops training when one more batch is not expected to pay
   for itself, slightly *increased* the error at two countries and was dropped.
-* Spline soft values *hurt* the threshold targets (in development probes, up to ×19 on the stop-loss), so they are used for
-  expected loss only.
-* t-intervals and model selection did not change any result in these studies: the effective degrees of
-  freedom were large, and the trained policy always beat the initial one. They are kept as safeguards.
+* Spline soft values *hurt* the threshold targets (in development probes, up to ×19 on the stop-loss),
+  so they are used for expected loss only.
+* t-intervals and model selection changed no result in these studies: the effective degrees of freedom
+  were large, and the trained policy always beat the initial one. They are kept as safeguards.
 
-## 6.6 Limitations
+## 6.6 Real-world check of the model's assumptions
+
+The benchmark model is calibrated to the brief's parameters, not to observations. We tested its earthquake
+assumptions, the peril behind US$70m of each country's US$80m cover, against public data.
+
+* **Data.** The USGS catalogue of significant earthquakes (M ≥ 5.5, 1965–2016) in the public mirror
+  `plotly/datasets`, and country boundaries from `datasets/geo-countries`. Aftershocks are removed with
+  Gardner–Knopoff windows, which leaves {{RD_N}} main shocks in the Central Asian window. Both files are cached
+  in `data/real/`, and the analysis is `src/realdata/eq_check.py`.
+* **Proxy.** An event "reaches" a country if its epicentre lies inside the country or within a given
+  distance of its border (25, 50 or 100 km). This is a proxy for damage, not a payout calculation.
+
+![**Figure [fig:rd].** (a) Main shocks of M ≥ 5.5 around the Kyrgyz Republic (blue outline) and Tajikistan
+(teal outline), 1965–2016; red events lie within 50 km of both countries. (b) Share of each country's events
+that also reach the other country, with 95% intervals, against the brief's 7.5% / 7.4%.](../../figures/paper/realdata_eq.png){.wide}
+
+{{RD_TABLE}}
+
+* **Poisson arrivals: supported.** Yearly main-shock counts have dispersion {{RD_DISP}} at 50 km, with
+  every p-value ≥ {{RD_DISP_P}}. This is consistent with the compound-Poisson model.
+* **Trigger size: plausible.** The Gutenberg–Richter slope is b = {{RD_B}}. The brief's annual 25%-payout
+  probabilities then correspond to events of about {{RD_MSTAR}}: rare, damaging earthquakes, consistent with
+  the bond's design.
+* **Shared events: the brief's assumption looks too low.** {{RD_SHARE}} of one country's main shocks lie
+  within damaging distance of the other country, against the brief's 7.5%. Seismicity concentrates along
+  the shared Alay–Pamir border zone. Examples in the catalogue are 1974 M7.3 (Markansu), 1978 M6.8 (Alay),
+  2008 M6.7 (Nura) and 2016 M6.6 (Murghob). Event years are also significantly dependent at 25–50 km.
+* **Consequence for the bond.** Setting the shared-event intensity from these data changes the exact joint
+  targets as follows:
+
+{{RD_IMP_TABLE}}
+
+* **Reading.** With the data-based shared intensity, the joint-exhaustion probability is {{RD_EXH_FACTOR}} the
+  brief's base value, and joint attachment rises to {{RD_ATT}}. The brief's "common shock ×2" scenario sits at
+  the mild end of this range. The finding supports the brief's position that dependence must be stress-tested,
+  and it suggests testing intensities well above ×2.
+* **Caveats.** Epicentre distance is not payout: parametric triggers depend on ground motion at the exposure.
+  The catalogue covers 52 years and ends in 2016, and the M ≥ 6.5 rows rest on very few events. Rainfall
+  could not be checked: the reanalysis services (ERA5 via Open-Meteo) are blocked in this environment, and
+  checking them is a first task of WP2.
+
+## 6.7 Limitations
 
 * **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
 * **Level functions.** The cross-entropy stage is indispensable for the rarest targets, so new targets
   need a sensible score function.
-* **Error bars under heavy tails.** In the v2 benchmark, coverage is {{V2_BENCH_COV}} per cell (40 replications); the lowest cells are
+* **Error bars under heavy tails.** In the Phase 2 benchmark, coverage is {{V2_BENCH_COV}} per cell (40 replications); the lowest cells are
   rare targets with heavy-tailed weights. Heavy-tail diagnostics remain part of WP3.
 * **Dense dependence.** Complete graphs are limited to 7 countries by the exact references. Larger dense
   portfolios need reference-free validation (WP2).
-* **Synthetic scaling.** Scaling results use a calibrated synthetic extension; realistic multi-peril
-  portfolios follow in Phase 2.
+* **Synthetic scaling and partial real-data check.** Scaling results use a calibrated synthetic extension,
+  and only the earthquake assumptions were checked against data (§6.6). Realistic multi-peril portfolios
+  follow in WP2.
 
 ::: {.takeaway}
-RDPO is the most accurate method on every rare target we tested, up to 28 countries. v2 is several times
-faster and up to {{V2_GAIN_MAX}} more accurate at 16–28 countries, and overnight transfer makes small budgets usable.
-Pair targets are solved exactly. Scrambled Sobol remains better on expected loss.
+RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 28 countries. The
+Phase 2 engine is several times faster and up to {{V2_GAIN_MAX}} more accurate at scale, overnight transfer makes small
+budgets usable, and pair targets are solved exactly. Scrambled Sobol remains better on expected loss.
 :::
 
 # 7 Quantum Extension: an Evidence-First Design {.newpage}
@@ -688,9 +731,9 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 
 | Work package | Milestone | Success criterion |
 |---|---|---|
-| WP1 Engineering (W1–2): GPU-batched RDPO, library API, sandbox onboarding | M1 library v0.1 | prototype results reproduced; ≥ 10× throughput |
+| WP1 Engineering (W1–2): GPU-batched RDPO, library API, sandbox onboarding. *CPU part done (§6.5): 6.5–9.9× rollout throughput, identical policy* | M1 library v0.1 | prototype results reproduced; ≥ 10× throughput |
 | WP2 Realistic portfolios (W3–6): public hazard data, heterogeneous perils, dense dependence, 10–50 countries | M2 scaling report | ≤ 10% relative RMSE at μ ≤ 10⁻⁸ within 10⁵ paths |
-| WP3 RL improvements (W5–8): small neural soft values, adaptive levels, robust error bars, model selection | M3 RDPO v2 | ≥ 2× over v1 on dense graphs; coverage ≥ 93% |
+| WP3 RL improvements (W5–8): small neural soft values, adaptive levels, robust error bars, model selection. *First results in §6.5 (Phase 2 engine)* | M3 Phase 2 engine | ≥ 2× over Phase 1 on dense graphs; coverage ≥ 93% |
 | WP4 Quantum stage and AI-for-Quantum (W8–10): compiled loader; guarded estimation on emulators or hardware; RL depth schedules | M4 compiled resource tables + updated s* map | compiled counts within 2× of estimates; guard caps tail error |
 | WP5 Web application and agents (W9–11): dashboard, news-scout and data agents, advisory agent, MCP tool server | M5 public demo | three end-to-end analyst workflows |
 | WP6 Validation and delivery (W11–12): independent checks, documentation, business case | M6 final deliverables | all deliverables of the call |

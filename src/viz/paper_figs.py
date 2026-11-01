@@ -249,36 +249,29 @@ def mitigation_fig():
 def v2_fig():
     d = _load("rdpo_v2_scale.json")["rows"]
     get = {(r["topology"], r["n"], r["target"], r["variant"]): r for r in d}
-    cases = [(k, n, t) for (k, n) in (("ring", 16), ("ring", 28), ("complete", 6), ("complete", 7))
-             for t in ("exceedance", "stop_loss")]
-    lab = [f"{'ring' if k == 'ring' else 'compl.'} {n}\n{'Pr(L>T)' if t == 'exceedance' else 'stop-loss'}" for k, n, t in cases]
-    x = np.arange(len(cases))
-    fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.4), gridspec_kw={"wspace": 0.28, "width_ratios": [1.5, 1]})
-    ax = axes[0]
-    v1 = [get[c + ("v1",)]["rel_rmse"] for c in cases]
-    v2 = [get[c + ("v2-final",)]["rel_rmse"] for c in cases]
-    tw = [get[c + ("v1",)]["twisted"] or np.nan for c in cases]
-    ax.bar(x - 0.27, v1, 0.27, color=S.BLUE, label="RDPO v1")
-    ax.bar(x, v2, 0.27, color=S.TERRA, label="RDPO v2")
-    ax.bar(x + 0.27, tw, 0.27, color=S.MUTED, label="exponential twisting")
-    ax.set_xticks(x); ax.set_xticklabels(lab, fontsize=7)
-    ax.set_ylabel("relative RMSE (B = 65,536)")
-    ax.set_title("(a) Accuracy at the same total budget (24 replications)", fontsize=9.5)
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{100 * v:.1f}%"))
-    ax.legend(fontsize=7.5, loc="upper left")
-    ax = axes[1]
-    t_old = [get[c + ("v1",)]["v1_study_seconds"] for c in cases]
-    t_new = [get[c + ("v2-final",)]["seconds_per_fit"] for c in cases]
-    ax.scatter(t_old, t_new, color=S.TERRA, zorder=3)
-    lim = [1, max(t_old) * 1.3]
-    ax.plot(lim, lim, color=S.INK, lw=1); ax.plot(lim, [l / 3 for l in lim], color=S.MUTED, lw=1, ls=":")
-    ax.text(lim[1] * 0.95, lim[1] * 0.95 / 3 * 0.8, "3× faster", fontsize=7.5, color=S.INK2, ha="right", va="top")
-    ax.text(lim[1] * 0.95, lim[1] * 0.95 * 0.8, "same time", fontsize=7.5, color=S.INK2, ha="right", va="top")
-    ax.set_xscale("log"); ax.set_yscale("log")
-    ax.set_xlabel("v1 seconds per estimate"); ax.set_ylabel("v2 seconds per estimate")
-    ax.set_title("(b) Wall-clock per estimate (one core)", fontsize=9.5)
+    fig, axes = plt.subplots(1, 3, figsize=(10.4, 3.4), gridspec_kw={"wspace": 0.34})
+    for ax, t, title in ((axes[0], "exceedance", "(a) Pool exceedance Pr(L > Tₙ)"), (axes[1], "stop_loss", "(b) Pool stop-loss")):
+        for kind, mk in (("ring", "o"), ("complete", "s")):
+            ns = sorted({r["n"] for r in d if r["topology"] == kind})
+            for var, c, ls, lab in (("v1", S.BLUE, "--", "Phase 1 engine"), ("v2-final", S.TERRA, "-", "Phase 2 engine"),
+                                    ("twist", S.MUTED, ":", "exponential twisting")):
+                y = [get[(kind, n, t, var)]["rel_rmse"] if (kind, n, t, var) in get else np.nan for n in ns]
+                ax.plot(ns, y, ls=ls, marker=mk, color=c, ms=4.5, lw=1.6,
+                        label=f"{lab}" if kind == "ring" else None)
+        ax.set_yscale("log"); ax.set_xlabel("countries n (circles: ring, squares: every pair)")
+        ax.set_ylabel("relative RMSE (B = 65,536)"); ax.set_title(title, fontsize=9.5)
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{100 * v:g}%"))
+    axes[0].legend(fontsize=7.5, loc="upper left")
+    ax = axes[2]
+    for kind, mk in (("ring", "o"), ("complete", "s")):
+        ns = sorted({r["n"] for r in d if r["topology"] == kind})
+        old = [get[(kind, n, "exceedance", "v1")]["v1_study_seconds"] for n in ns]
+        new = [get[(kind, n, "exceedance", "v2-final")]["seconds_per_fit"] for n in ns]
+        ax.plot(ns, old, ls="--", marker=mk, color=S.BLUE, ms=4.5, label="Phase 1 engine" if kind == "ring" else None)
+        ax.plot(ns, new, ls="-", marker=mk, color=S.TERRA, ms=4.5, label="Phase 2 engine" if kind == "ring" else None)
+    ax.set_yscale("log"); ax.set_xlabel("countries n"); ax.set_ylabel("seconds per estimate (one core)")
+    ax.set_title("(c) Wall-clock, Pr(L > Tₙ)", fontsize=9.5); ax.legend(fontsize=7.5)
     S.save(fig, OUT / "v2_results.png")
-
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
