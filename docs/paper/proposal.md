@@ -595,9 +595,8 @@ of loss years identifies the shared rate by maximum likelihood (`src/realdata/lo
 
 **Market record of comparable bonds.** The challenge bond has no payout history, and catastrophe bonds are
 private placements without public price series, so exchange data such as Yahoo Finance cannot be used. The
-closest public record is the World Bank's parametric sovereign bonds. In that record, triggers do occur at
-roughly the rates the models price, but a single near-miss decides the outcome, and no two countries have ever
-paid out together:
+closest public record is the World Bank's parametric sovereign bonds. In that record, triggers do occur and
+near-misses decide outcomes, but no two countries have ever paid out together:
 
 | Bond (IBRD) | Peril | Modelled annual attachment probability | Outcome |
 |---|---|---|---|
@@ -606,8 +605,8 @@ paid out together:
 | FONDEN 2020, Mexico, Class D | Pacific hurricane | not published in the sources found | about 50% loss after Hurricane Otis, 2023 [^mx20] |
 | CAR Jamaica 2024 (US$150m) | hurricane | 2.46% (2.34% at launch) | not triggered by Beryl (2024); 100% paid after Melissa, 2025 [^jm24] |
 
-* **What this shows.** Parametric sovereign bonds do pay, at roughly the modelled frequencies, and basis risk is
-  real (Beryl). The record is far too small to validate a *joint* tail, which is why the joint risk has to come
+* **What this shows.** Parametric sovereign bonds do pay, and basis risk is real (Beryl). There are too few
+  bonds with published attachment probabilities to test the modelled frequencies statistically. The record is far too small to validate a *joint* tail, which is why the joint risk has to come
   from a model of the kind tested here.
 
 [^mx17]: Artemis, "Mexico confirms $150m cat bond payout for quake", https://www.artemis.bm/news/mexico-confirms-150m-cat-bond-payout-for-quake/

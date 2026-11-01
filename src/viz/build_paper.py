@@ -86,6 +86,11 @@ def e1_values(B=16384):
     return v
 
 
+def money(x):
+    """US$ amounts: millions when material, otherwise the exact small value."""
+    return f"US${x / 1e6:.2f}m" if x >= 1e5 else f"US${x:,.0f}" if x >= 1 else f"US${sci(x)}"
+
+
 def mcfmt(x):
     return pct(x, 0) if x < 10 else f"{x:,.0f}×"
 
@@ -480,7 +485,7 @@ def pool_values():
         if not r:
             continue
         lab = tl[t].format(f"US${thr:.0f}m" if thr else "")
-        val = f"US${r['mu'] / 1e6:.2f}m" if t in ("expected_loss", "stop_loss") else sci(r["mu"])
+        val = money(r["mu"]) if t in ("expected_loss", "stop_loss") else sci(r["mu"])
         alts = [x["rel_rmse"] for x in (mc, tw) if x]
         g = min(alts) / r["rel_rmse"] if alts else float("nan"); gains.append((t, g))
         lines.append(f"| {lab} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
@@ -529,7 +534,7 @@ def wp2_values():
         if not r:
             continue
         lab = tl[t].format(f"US${thr}m" if thr else "")
-        val = f"US${r['mu'] / 1e6:.2f}m" if t in ("expected_loss", "stop_loss") else sci(r["mu"])
+        val = money(r["mu"]) if t in ("expected_loss", "stop_loss") else sci(r["mu"])
         lines.append(f"| {lab} | {B:,} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
                      f"{pct(mc['rel_rmse']) if mc else '—'} | {pct(tw['rel_rmse']) if tw else '—'} |")
     v["CAREC_RES_TABLE"] = "\n".join(lines)

@@ -89,6 +89,7 @@ All numbers come from `results/*.json` (fixed seeds), with **training included i
 | USGS catalogue, M ≥ 5.5, 1965–2016 | Poisson arrivals supported; 25%-payout trigger ≈ M7; 29–75% of large quakes reach both countries (brief: 7.5%) |
 | Loss records (NOAA 1900–2020, EM-DAT 1990–2020) | 120-year record rejects independence (p = 0.005); shared share **48% (12–79%)**; short records uninformative |
 | Implied bond risk | joint exhaustion **≈ 3× the brief's base case** (4.0×10⁻⁵–1.5×10⁻⁴) |
+| **WP2: data-calibrated 10-country CAREC pool** (exact tensor-network references) | Pr(pool payout > US$500m) = 4.3×10⁻⁹: RDPO **1.25%** error with 65,536 paths (WP2 target ≤ 10%; twisting 7.0%; plain Monte Carlo sees nothing) |
 | Data-calibrated five-country Central Asian pool | RDPO ×1.7–×15 more accurate than the best of Monte Carlo / twisting on rare questions, against exact answers; weak spot: pair exhaustion (9.5%, answered exactly instead) |
 
 ### Quantum stage (projected, future feature)
@@ -140,6 +141,7 @@ PYTHONPATH=. python -m src.rdpo.experiments_v2 throughput|scale|bench|transfer  
 PYTHONPATH=. python -m src.realdata.eq_check            # real catalogue check
 PYTHONPATH=. python -m src.realdata.loss_backtest       # loss-data backtest
 PYTHONPATH=. python -m src.realdata.central_asia_pool   # data-calibrated 5-country pool
+PYTHONPATH=. python -m src.realdata.carec_pool          # WP2: 10-country CAREC pool
 ```
 
 Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
@@ -181,7 +183,8 @@ results/  figures/   all numbers and plots; tests/  50 tests
 - [x] Benchmark, scaling (to 28 countries) and ablation at fixed total budget
 - [x] Quantum-ready stage: exact structured / twisted loading, resource estimates, NISQ analysis
 - [x] RDPO v2: table-driven engine, exact compressed training, stage-dependent and spline soft values, exact pair reduction, transfer warm start
-- [ ] WP1 GPU batching · WP2 realistic multi-peril portfolios · WP3 heavy-tail diagnostics, larger dense references
+- [x] Real-world checks: catalogue, loss-data backtest, calibrated 5-country pool; WP2 first results (10-country CAREC pool, criterion met)
+- [ ] WP1 GPU batching · WP2 20–50-country pools with ground-motion and exposure models · WP3 heavy-tail diagnostics
 - [x] Quantum evidence standard: wall-clock break-even map, noise/miscalibration study with trust guard
 - [ ] WP4 compiled quantum stage + AI-for-Quantum · WP5 web app with AI analyst agent and MCP tools · WP6 validation and delivery
 
