@@ -1,0 +1,508 @@
+{
+  "reps": 24,
+  "cases": {
+    "ring50": {
+      "refs": {
+        "exceedance|650": 0.0014507279191974206,
+        "stop_loss|650": 70051.95537280904,
+        "exceedance|1150": 4.113979305058385e-09,
+        "stop_loss|1150": 0.1395672807077454,
+        "joint_exhaustion|None": 1.898967295193546e-05
+      },
+      "T_moderate": 650,
+      "T_rare": 1150,
+      "max_bond": 64,
+      "mps_seconds": 7.133313084999827,
+      "n": 50,
+      "edges": 50,
+      "tol_check": 1.4685563876071228e-10
+    },
+    "asia_pacific": {
+      "refs": {
+        "exceedance|450": 0.001795839594804731,
+        "stop_loss|450": 75247.89619490893,
+        "exceedance|850": 9.507045703536346e-09,
+        "stop_loss|850": 0.2665607503258491,
+        "joint_exhaustion|None": 1.4125325365389949e-05
+      },
+      "T_moderate": 450,
+      "T_rare": 850,
+      "max_bond": 367,
+      "mps_seconds": 41.79924708500039,
+      "n": 28,
+      "edges": 22,
+      "tol_check": 5.659213098141436e-10
+    }
+  },
+  "calibration": {
+    "order": [
+      "SB",
+      "PG",
+      "ID",
+      "TL",
+      "AZ",
+      "GE",
+      "AM",
+      "KZ",
+      "KG",
+      "VN",
+      "UZ",
+      "TJ",
+      "TM",
+      "LA",
+      "TH",
+      "AF",
+      "MM",
+      "PK",
+      "NP",
+      "BD",
+      "IN",
+      "BT",
+      "TO",
+      "VU",
+      "PH",
+      "MY",
+      "MN",
+      "FJ"
+    ],
+    "b": 0.8079120071226421,
+    "m1": {
+      "SB": 7.826698742755891,
+      "PG": 8.355654413944219,
+      "ID": 8.831570707071513,
+      "TL": 6.770300318097414,
+      "AZ": 6.071868526684633,
+      "GE": 6.289826989367748,
+      "AM": 5.481307610999127,
+      "KZ": 6.839017365697133,
+      "KG": 7.1049421770053085,
+      "VN": 5.481307610999127,
+      "UZ": 6.5991149700062985,
+      "TJ": 7.242942369969552,
+      "TM": 6.397697865095024,
+      "LA": 6.071868526684633,
+      "TH": 6.154732488403734,
+      "AF": 7.376908745207515,
+      "MM": 7.4709488207387595,
+      "PK": 7.368944870492587,
+      "NP": 6.662429442370138,
+      "BD": 6.3464637148493255,
+      "IN": 7.640321176517148,
+      "BT": 6.154732488403734,
+      "TO": 7.36086123378292,
+      "VU": 7.88196416210816,
+      "PH": 8.251468325777385,
+      "MY": 5.973861261846935,
+      "MN": 6.527334941406125,
+      "FJ": 7.527585546220337
+    },
+    "rate55": {
+      "SB": 3.019230769230769,
+      "PG": 8.076923076923077,
+      "ID": 19.576923076923077,
+      "TL": 0.4230769230769231,
+      "AZ": 0.11538461538461539,
+      "GE": 0.17307692307692307,
+      "AM": 0.038461538461538464,
+      "KZ": 0.4807692307692308,
+      "KG": 0.7884615384615384,
+      "VN": 0.038461538461538464,
+      "UZ": 0.3076923076923077,
+      "TJ": 1.0192307692307692,
+      "TM": 0.21153846153846154,
+      "LA": 0.11538461538461539,
+      "TH": 0.1346153846153846,
+      "AF": 1.3076923076923077,
+      "MM": 1.5576923076923077,
+      "PK": 1.2884615384615385,
+      "NP": 0.34615384615384615,
+      "BD": 0.19230769230769232,
+      "IN": 2.1346153846153846,
+      "BT": 0.1346153846153846,
+      "TO": 1.2692307692307692,
+      "VU": 3.3461538461538463,
+      "PH": 6.653846153846154,
+      "MY": 0.09615384615384616,
+      "MN": 0.2692307692307692,
+      "FJ": 1.7307692307692308
+    },
+    "edges": [
+      [
+        "SB",
+        "PG"
+      ],
+      [
+        "PG",
+        "ID"
+      ],
+      [
+        "ID",
+        "TL"
+      ],
+      [
+        "AZ",
+        "GE"
+      ],
+      [
+        "GE",
+        "AM"
+      ],
+      [
+        "KZ",
+        "KG"
+      ],
+      [
+        "KG",
+        "UZ"
+      ],
+      [
+        "KG",
+        "TJ"
+      ],
+      [
+        "VN",
+        "LA"
+      ],
+      [
+        "UZ",
+        "TJ"
+      ],
+      [
+        "UZ",
+        "TM"
+      ],
+      [
+        "UZ",
+        "AF"
+      ],
+      [
+        "TJ",
+        "AF"
+      ],
+      [
+        "TM",
+        "AF"
+      ],
+      [
+        "LA",
+        "MM"
+      ],
+      [
+        "TH",
+        "MM"
+      ],
+      [
+        "AF",
+        "PK"
+      ],
+      [
+        "MM",
+        "IN"
+      ],
+      [
+        "PK",
+        "IN"
+      ],
+      [
+        "NP",
+        "IN"
+      ],
+      [
+        "BD",
+        "IN"
+      ],
+      [
+        "IN",
+        "BT"
+      ]
+    ],
+    "n_both": {
+      "IN-NP": 7,
+      "AF-TJ": 16,
+      "IN-MM": 22,
+      "MM-TH": 4,
+      "PG-SB": 14,
+      "KG-TJ": 14,
+      "BT-IN": 7,
+      "ID-TL": 20,
+      "AF-PK": 24,
+      "KZ-KG": 8,
+      "ID-PG": 10,
+      "TM-UZ": 1,
+      "KG-UZ": 8,
+      "AZ-GE": 2,
+      "LA-VN": 2,
+      "TJ-UZ": 2,
+      "BD-IN": 6,
+      "AM-GE": 2,
+      "AF-UZ": 1,
+      "AF-TM": 1,
+      "IN-PK": 2,
+      "LA-MM": 1
+    },
+    "rain_share": 0.022222222222222223,
+    "events": 7424,
+    "bandwidth": 5,
+    "max_degree": 5,
+    "pair": [
+      8,
+      11
+    ]
+  },
+  "rows": [
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 450,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 0.001795839594804731,
+      "rel_rmse": 0.08535083208338375,
+      "rel_bias": -0.028184920261096272,
+      "reps": 24,
+      "ci_coverage": 0.9583333333333334,
+      "seconds": 4.720997316499961
+    },
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 450,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 0.001795839594804731,
+      "rel_rmse": 0.003422775657256279,
+      "rel_bias": -0.0003900325035814326,
+      "reps": 24,
+      "ci_coverage": 0.9583333333333334,
+      "seconds": 18.37809123916683
+    },
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 450,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 0.001795839594804731,
+      "rel_rmse": 0.008107290625110838,
+      "rel_bias": 0.0010397046775745358,
+      "reps": 24,
+      "seconds": 0.5859292387917776
+    },
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 850,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 9.507045703536346e-09,
+      "rel_rmse": 1.0,
+      "rel_bias": -1.0,
+      "reps": 24,
+      "ci_coverage": 0.0,
+      "seconds": 4.76322298416638
+    },
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 850,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 9.507045703536346e-09,
+      "rel_rmse": 0.007553004655183021,
+      "rel_bias": 0.00245874195430901,
+      "reps": 24,
+      "ci_coverage": 0.9583333333333334,
+      "seconds": 21.187414768625178
+    },
+    {
+      "case": "asia_pacific",
+      "target": "exceedance",
+      "threshold_musd": 850,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 9.507045703536346e-09,
+      "rel_rmse": 0.022812000812649058,
+      "rel_bias": 0.0020657055399533266,
+      "reps": 24,
+      "seconds": 0.604290458999761
+    },
+    {
+      "case": "asia_pacific",
+      "target": "joint_exhaustion",
+      "threshold_musd": null,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 1.4125325365389949e-05,
+      "rel_rmse": 0.05925118634669738,
+      "rel_bias": -0.0015360243614813232,
+      "reps": 24,
+      "ci_coverage": 0.7083333333333334,
+      "seconds": 2.1486477621242557
+    },
+    {
+      "case": "asia_pacific",
+      "target": "stop_loss",
+      "threshold_musd": 850,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 0.2665607503258491,
+      "rel_rmse": 1.0,
+      "rel_bias": -1.0,
+      "reps": 24,
+      "ci_coverage": 0.0,
+      "seconds": 4.763997683499686
+    },
+    {
+      "case": "asia_pacific",
+      "target": "stop_loss",
+      "threshold_musd": 850,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 0.2665607503258491,
+      "rel_rmse": 0.005504076063372889,
+      "rel_bias": 0.0015970703590684299,
+      "reps": 24,
+      "ci_coverage": 1.0,
+      "seconds": 21.794630917500097
+    },
+    {
+      "case": "asia_pacific",
+      "target": "stop_loss",
+      "threshold_musd": 850,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 0.2665607503258491,
+      "rel_rmse": 0.018389912924744293,
+      "rel_bias": 0.0034591041031569528,
+      "reps": 24,
+      "seconds": 0.578643184208128
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 1150,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 4.113979305058385e-09,
+      "rel_rmse": 1.0,
+      "rel_bias": -1.0,
+      "reps": 24,
+      "ci_coverage": 0.0,
+      "seconds": 9.188618959041227
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 1150,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 4.113979305058385e-09,
+      "rel_rmse": 0.007934596188230064,
+      "rel_bias": 0.0015018725603487845,
+      "reps": 24,
+      "ci_coverage": 1.0,
+      "seconds": 33.14920045312525
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 1150,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 4.113979305058385e-09,
+      "rel_rmse": 0.01824466487274311,
+      "rel_bias": 0.0009756519844232474,
+      "reps": 24,
+      "seconds": 1.286721714291313
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 650,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 0.0014507279191974206,
+      "rel_rmse": 0.07468531733118902,
+      "rel_bias": -0.015250132659664635,
+      "reps": 24,
+      "ci_coverage": 1.0,
+      "seconds": 9.160415916249955
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 650,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 0.0014507279191974206,
+      "rel_rmse": 0.004650360888149043,
+      "rel_bias": -0.00039352477773397506,
+      "reps": 24,
+      "ci_coverage": 0.9583333333333334,
+      "seconds": 36.78812770316654
+    },
+    {
+      "case": "ring50",
+      "target": "exceedance",
+      "threshold_musd": 650,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 0.0014507279191974206,
+      "rel_rmse": 0.008052119522937315,
+      "rel_bias": -8.270787588694834e-05,
+      "reps": 24,
+      "seconds": 1.2413000777913414
+    },
+    {
+      "case": "ring50",
+      "target": "joint_exhaustion",
+      "threshold_musd": null,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 1.898967295193546e-05,
+      "rel_rmse": 0.007178909604355591,
+      "rel_bias": 0.0005077183729614559,
+      "reps": 24,
+      "ci_coverage": 0.9166666666666666,
+      "seconds": 3.6691529300414913
+    },
+    {
+      "case": "ring50",
+      "target": "stop_loss",
+      "threshold_musd": 1150,
+      "method": "mc",
+      "budget": 65536,
+      "mu": 0.1395672807077454,
+      "rel_rmse": 1.0,
+      "rel_bias": -1.0,
+      "reps": 24,
+      "ci_coverage": 0.0,
+      "seconds": 9.208608046250143
+    },
+    {
+      "case": "ring50",
+      "target": "stop_loss",
+      "threshold_musd": 1150,
+      "method": "rdpo",
+      "budget": 65536,
+      "mu": 0.1395672807077454,
+      "rel_rmse": 0.009526704497324167,
+      "rel_bias": 0.0003904291362216184,
+      "reps": 24,
+      "ci_coverage": 0.9166666666666666,
+      "seconds": 33.354926431666776
+    },
+    {
+      "case": "ring50",
+      "target": "stop_loss",
+      "threshold_musd": 1150,
+      "method": "twist",
+      "budget": 65536,
+      "mu": 0.1395672807077454,
+      "rel_rmse": 0.013398768581991335,
+      "rel_bias": -0.0006341526924493637,
+      "reps": 24,
+      "seconds": 1.2609871904169268
+    }
+  ]
+}

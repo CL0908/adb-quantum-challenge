@@ -90,6 +90,9 @@ All numbers come from `results/*.json` (fixed seeds), with **training included i
 | Loss records (NOAA 1900–2020, EM-DAT 1990–2020) | 120-year record rejects independence (p = 0.005); shared share **48% (12–79%)**; short records uninformative |
 | Implied bond risk | joint exhaustion **≈ 3× the brief's base case** (4.0×10⁻⁵–1.5×10⁻⁴) |
 | **WP2: data-calibrated 10-country CAREC pool** (exact tensor-network references) | Pr(pool payout > US$500m) = 4.3×10⁻⁹: RDPO **1.25%** error with 65,536 paths (WP2 target ≤ 10%; twisting 7.0%; plain Monte Carlo sees nothing) |
+| **WP2 at scale** (exact references) | 28 real Asia–Pacific countries: Pr(pool > US$850m) = 9.5×10⁻⁹ at **0.76%** error; 50-country ring: 4.1×10⁻⁹ at **0.79%** (65,536 paths; twisting 1.8–2.3%; Monte Carlo sees nothing) |
+| Rain dependence from station data (NOAA GHCN-Daily) | extreme-rain shared share **2.2% (0.6–7.7%)** vs the brief's 25%; with both dependences from data, pool exceedance 2.8× the brief, joint exhaustion about unchanged |
+| Projected Doob sampler (simplified RDPO for pair targets) | zero variance (relative spread ~10⁻¹⁵), exact conditional stress scenarios |
 | Data-calibrated five-country Central Asian pool | RDPO ×1.7–×15 more accurate than the best of Monte Carlo / twisting on rare questions, against exact answers; weak spot: pair exhaustion (9.5%, answered exactly instead) |
 
 ### Quantum stage (projected, future feature)
@@ -142,6 +145,9 @@ PYTHONPATH=. python -m src.realdata.eq_check            # real catalogue check
 PYTHONPATH=. python -m src.realdata.loss_backtest       # loss-data backtest
 PYTHONPATH=. python -m src.realdata.central_asia_pool   # data-calibrated 5-country pool
 PYTHONPATH=. python -m src.realdata.carec_pool          # WP2: 10-country CAREC pool
+PYTHONPATH=. python -m src.realdata.rain_check          # rain dependence from GHCN-Daily stations
+PYTHONPATH=. python -m src.realdata.asia_pacific_pool   # WP2 at scale: 28 countries + 50-country ring
+PYTHONPATH=. python -m src.rdpo.projected               # projected Doob sampler (pair targets)
 ```
 
 Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
@@ -173,7 +179,7 @@ data/real/           cached public data (sources in file headers)
 src/viz/             figure style, concept art, data figures, paper build
 docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
 docs/RDPO_Proposal.pdf   the technical proposal
-results/  figures/   all numbers and plots; tests/  50 tests
+results/  figures/   all numbers and plots; tests/  51 tests
 ```
 
 ## Roadmap
@@ -184,7 +190,8 @@ results/  figures/   all numbers and plots; tests/  50 tests
 - [x] Quantum-ready stage: exact structured / twisted loading, resource estimates, NISQ analysis
 - [x] RDPO v2: table-driven engine, exact compressed training, stage-dependent and spline soft values, exact pair reduction, transfer warm start
 - [x] Real-world checks: catalogue, loss-data backtest, calibrated 5-country pool; WP2 first results (10-country CAREC pool, criterion met)
-- [ ] WP1 GPU batching · WP2 20–50-country pools with ground-motion and exposure models · WP3 heavy-tail diagnostics
+- [x] WP2 at scale (28 real countries, 50-country ring), rain dependence from station data, projected Doob sampler
+- [ ] WP1 GPU batching · WP2 ground-motion / exposure models and gridded rainfall · WP3 heavy-tail diagnostics
 - [x] Quantum evidence standard: wall-clock break-even map, noise/miscalibration study with trust guard
 - [ ] WP4 compiled quantum stage + AI-for-Quantum · WP5 web app with AI analyst agent and MCP tools · WP6 validation and delivery
 
@@ -208,5 +215,5 @@ plan; all numbers come from the scripts in this repository.
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-50%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-51%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

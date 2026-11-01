@@ -730,14 +730,15 @@ countries of Asia and the Pacific (`src/realdata/asia_pacific_pool.py`):
   rare targets with heavy-tailed weights. Heavy-tail diagnostics remain part of WP3.
 * **Dense dependence.** Complete graphs are limited to 7 countries by the exact references. Larger dense
   portfolios need reference-free validation (WP2).
-* **Real-data scope.** Earthquake assumptions were checked against a catalogue and two loss records, and
-  RDPO was tested on a data-calibrated five-country pool (§6.6). Loss data are yearly and smaller than bond
-  triggers, the rain cover could not be calibrated from data, and no actual bond payout history exists to
-  backtest against. A full calibration with hazard, exposure and vulnerability models is WP2.
+* **Real-data scope.** Earthquake dependence was checked against a catalogue and two loss records, rain
+  dependence against station data, and RDPO was tested on data-calibrated pools of 5, 10 and 28 countries
+  (§6.6–6.7). Remaining gaps: loss records are yearly and smaller than bond triggers; the station network is
+  sparse; epicentre distance stands in for ground motion and exposure; and no bond payout history exists to
+  backtest against.
 
 ::: {.takeaway}
-RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 28 countries. The
-Phase 2 engine is several times faster and up to {{V2_GAIN_MAX}} more accurate at scale, overnight transfer makes small
+RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 50 countries and on
+real-data pools of up to 28. The Phase 2 engine is several times faster and up to {{V2_GAIN_MAX}} more accurate at scale, overnight transfer makes small
 budgets usable, and pair targets are solved exactly. Scrambled Sobol remains better on expected loss.
 :::
 

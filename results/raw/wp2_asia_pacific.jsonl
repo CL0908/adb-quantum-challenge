@@ -1,0 +1,480 @@
+{"id": "ring50-exceedance-650-twist-0", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014397012445143214, "ci": null, "sec": 1.8036592989992641}
+{"id": "ring50-exceedance-650-mc-0", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014801025390625186, "ci": [0.0011857665314750168, 0.0017744385466500205], "sec": 9.6930358110003}
+{"id": "ring50-exceedance-1150-mc-0", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.988247923000017}
+{"id": "ring50-exceedance-1150-twist-0", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.2476069334136025e-09, "ci": null, "sec": 1.6579257250014052}
+{"id": "ring50-stop_loss-1150-mc-0", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.442215507002402}
+{"id": "ring50-stop_loss-1150-twist-0", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14084954737336142, "ci": null, "sec": 1.9012956119986484}
+{"id": "ring50-pairsampled-0", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8964335911602645e-05, "ci": [1.8850957245350854e-05, 1.9077714577854435e-05], "sec": 3.5785731180003495}
+{"id": "ring50-exceedance-1150-rdpo-0", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.128406240804215e-09, "ci": [4.049349608564871e-09, 4.20746287304356e-09], "sec": 39.88172675799797}
+{"id": "ring50-stop_loss-1150-rdpo-0", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13973682170219945, "ci": [0.1370481692588025, 0.1424254741455964], "sec": 31.61145092300285}
+{"id": "ring50-exceedance-650-twist-1", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014708471069255213, "ci": null, "sec": 1.2553877020000073}
+{"id": "ring50-exceedance-650-mc-1", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0015869140625000206, "ci": [0.0012821594978425607, 0.0018916686271574805], "sec": 8.919820159997471}
+{"id": "ring50-exceedance-650-rdpo-0", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014496010773378545, "ci": [0.0014387286496911418, 0.001460473504984567], "sec": 50.52332378700157}
+{"id": "ring50-exceedance-1150-twist-1", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.131069021152316e-09, "ci": null, "sec": 1.1798244630008412}
+{"id": "ring50-exceedance-1150-mc-1", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.77701075799996}
+{"id": "ring50-exceedance-1150-rdpo-1", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.192558959217102e-09, "ci": [4.0905520138500974e-09, 4.294565904584107e-09], "sec": 21.783594396998524}
+{"id": "ring50-exceedance-650-rdpo-1", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014450636993210328, "ci": [0.0014354594968811623, 0.0014546679017609033], "sec": 39.57826075200137}
+{"id": "ring50-stop_loss-1150-twist-1", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13789728507415064, "ci": null, "sec": 1.1826079829988885}
+{"id": "ring50-stop_loss-1150-mc-1", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.469045988997095}
+{"id": "ring50-pairsampled-1", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8998013687245097e-05, "ci": [1.8876399819368646e-05, 1.9119627555121548e-05], "sec": 3.8027116449993628}
+{"id": "ring50-exceedance-650-twist-2", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014430172180004996, "ci": null, "sec": 1.261535596997419}
+{"id": "ring50-exceedance-650-mc-2", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.00157165527343752, "ci": [0.0012683675983112847, 0.0018749429485637552], "sec": 9.47233332900214}
+{"id": "ring50-exceedance-1150-mc-2", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.142482006998762}
+{"id": "ring50-stop_loss-1150-rdpo-1", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14192618958019493, "ci": [0.13874048222671317, 0.14511189693367668], "sec": 36.05310289100089}
+{"id": "ring50-exceedance-1150-twist-2", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.1691857785691736e-09, "ci": null, "sec": 1.1668869370005268}
+{"id": "ring50-stop_loss-1150-mc-2", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.52581394200024}
+{"id": "ring50-stop_loss-1150-twist-2", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13848998238902477, "ci": null, "sec": 1.2466937760000292}
+{"id": "ring50-exceedance-1150-rdpo-2", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.088921468445988e-09, "ci": [3.985358777798191e-09, 4.192484159093785e-09], "sec": 30.52264232500238}
+{"id": "ring50-exceedance-650-rdpo-2", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014416052505669505, "ci": [0.0014296647595387617, 0.0014535457415951393], "sec": 35.15361336099886}
+{"id": "ring50-pairsampled-2", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9006154868616535e-05, "ci": [1.8904362033946493e-05, 1.9107947703286576e-05], "sec": 3.6504667029985285}
+{"id": "ring50-exceedance-650-twist-3", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014588058503612466, "ci": null, "sec": 1.2281224449980073}
+{"id": "ring50-exceedance-650-mc-3", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0013427734375000171, "ci": [0.001062400793323733, 0.0016231460816763014], "sec": 9.341144330999668}
+{"id": "ring50-exceedance-1150-mc-3", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.67359261599995}
+{"id": "ring50-exceedance-1150-twist-3", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.144201499067793e-09, "ci": null, "sec": 1.2749660029985534}
+{"id": "ring50-stop_loss-1150-rdpo-2", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13962475408489805, "ci": [0.13737593533141096, 0.14187357283838514], "sec": 36.96627772699867}
+{"id": "ring50-stop_loss-1150-mc-3", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.673937651001324}
+{"id": "ring50-stop_loss-1150-twist-3", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14150992753561448, "ci": null, "sec": 1.137688019000052}
+{"id": "ring50-exceedance-650-rdpo-3", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014474207392829452, "ci": [0.0014350740431599825, 0.001459767435405908], "sec": 33.37925780099977}
+{"id": "ring50-pairsampled-3", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9017537408361682e-05, "ci": [1.8925679009551608e-05, 1.9109395807171756e-05], "sec": 3.579031365999981}
+{"id": "ring50-exceedance-1150-rdpo-3", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.103018759697451e-09, "ci": [4.00578185262952e-09, 4.200255666765382e-09], "sec": 38.31815700700099}
+{"id": "ring50-exceedance-650-twist-4", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014499594276859316, "ci": null, "sec": 1.173085873000673}
+{"id": "ring50-exceedance-650-mc-4", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0015106201171875193, "ci": [0.0012132701533449208, 0.0018079700810301178], "sec": 9.768374754999968}
+{"id": "ring50-stop_loss-1150-rdpo-3", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13864007035122453, "ci": [0.1368172063010388, 0.14046293440141025], "sec": 33.9152690109986}
+{"id": "ring50-exceedance-1150-twist-4", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.267113155222679e-09, "ci": null, "sec": 1.2622501569967426}
+{"id": "ring50-exceedance-1150-mc-4", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.75711087399759}
+{"id": "ring50-stop_loss-1150-mc-4", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.011064665002777}
+{"id": "ring50-stop_loss-1150-twist-4", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.1413948197640858, "ci": null, "sec": 1.189744518000225}
+{"id": "ring50-pairsampled-4", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9240755110018945e-05, "ci": [1.8667975310882325e-05, 1.9813534909155566e-05], "sec": 3.969547902001068}
+{"id": "ring50-exceedance-650-rdpo-4", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014458035450427976, "ci": [0.001431383921521402, 0.0014602231685641933], "sec": 38.54624553300164}
+{"id": "ring50-exceedance-1150-rdpo-4", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.149164146828491e-09, "ci": [4.069718618204823e-09, 4.228609675452159e-09], "sec": 37.66820213900064}
+{"id": "ring50-exceedance-650-twist-5", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014466657089981054, "ci": null, "sec": 1.2179962789996353}
+{"id": "ring50-exceedance-650-mc-5", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014648437500000186, "ci": [0.001172024396035814, 0.0017576631039642233], "sec": 8.87322434899761}
+{"id": "ring50-stop_loss-1150-rdpo-4", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13942442582079437, "ci": [0.13617877556813832, 0.14267007607345042], "sec": 33.417947952999384}
+{"id": "ring50-exceedance-1150-twist-5", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.10324754883449e-09, "ci": null, "sec": 1.207812491000368}
+{"id": "ring50-exceedance-1150-mc-5", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.963254539001355}
+{"id": "ring50-stop_loss-1150-mc-5", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.981242729001679}
+{"id": "ring50-stop_loss-1150-twist-5", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13949032046844412, "ci": null, "sec": 1.174166682001669}
+{"id": "ring50-pairsampled-5", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.927334485578221e-05, "ci": [1.8399222830553642e-05, 2.0147466881010776e-05], "sec": 3.398907030998089}
+{"id": "ring50-exceedance-650-rdpo-5", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.001455873118263011, "ci": [0.0014434862648227986, 0.0014682599717032235], "sec": 37.41972578000059}
+{"id": "ring50-exceedance-1150-rdpo-5", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.051969633865666e-09, "ci": [3.988501176342696e-09, 4.115438091388636e-09], "sec": 36.357039049002196}
+{"id": "ring50-exceedance-650-mc-6", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0012969970703125165, "ci": [0.0010214397693611168, 0.0015725543712639162], "sec": 10.097730892000982}
+{"id": "ring50-exceedance-650-twist-6", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014623365744600284, "ci": null, "sec": 1.1976918750006007}
+{"id": "ring50-stop_loss-1150-rdpo-5", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14225906483146034, "ci": [0.13916609550997575, 0.14535203415294493], "sec": 33.67029395099962}
+{"id": "ring50-exceedance-1150-twist-6", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.0693555291379275e-09, "ci": null, "sec": 1.1824953659997846}
+{"id": "ring50-exceedance-1150-mc-6", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.015741888000775}
+{"id": "ring50-stop_loss-1150-mc-6", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.783846009999252}
+{"id": "ring50-exceedance-650-rdpo-6", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014541276548432236, "ci": [0.0014434597020900044, 0.0014647956075964428], "sec": 33.251521153000795}
+{"id": "ring50-stop_loss-1150-twist-6", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13892065208907345, "ci": null, "sec": 1.0349997670018638}
+{"id": "ring50-pairsampled-6", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.908255505307445e-05, "ci": [1.878924023180968e-05, 1.937586987433922e-05], "sec": 3.5617735400010133}
+{"id": "ring50-stop_loss-1150-rdpo-6", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14195137324083446, "ci": [0.13981540586349403, 0.14408734061817488], "sec": 24.086389861000498}
+{"id": "ring50-exceedance-650-mc-7", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.001495361328125019, "ci": [0.0011995085067699827, 0.0017912141494800555], "sec": 8.567001797997364}
+{"id": "ring50-exceedance-650-twist-7", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014342402950382285, "ci": null, "sec": 1.200954190997436}
+{"id": "ring50-exceedance-1150-rdpo-6", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.1061886823360885e-09, "ci": [4.020556111531584e-09, 4.191821253140593e-09], "sec": 36.96251634699729}
+{"id": "ring50-exceedance-1150-twist-7", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.081583881024085e-09, "ci": null, "sec": 1.158040603997506}
+{"id": "ring50-exceedance-1150-mc-7", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.727332792997913}
+{"id": "ring50-stop_loss-1150-mc-7", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.518072734997986}
+{"id": "ring50-stop_loss-1150-twist-7", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.1393221588954534, "ci": null, "sec": 1.1968538500004797}
+{"id": "ring50-pairsampled-7", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9036616530765567e-05, "ci": [1.878655230213775e-05, 1.9286680759393384e-05], "sec": 4.0086628120006935}
+{"id": "ring50-exceedance-650-rdpo-7", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014467677058672245, "ci": [0.0014353425061765736, 0.0014581929055578755], "sec": 36.019753590997425}
+{"id": "ring50-exceedance-650-mc-8", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0016326904296875208, "ci": [0.001323571484935815, 0.0019418093744392267], "sec": 8.838329066998995}
+{"id": "ring50-exceedance-1150-rdpo-7", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.123780896435336e-09, "ci": [4.053682784394403e-09, 4.193879008476269e-09], "sec": 33.54331465400173}
+{"id": "ring50-exceedance-650-twist-8", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014661611043681648, "ci": null, "sec": 1.236000688997592}
+{"id": "ring50-stop_loss-1150-rdpo-7", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1378329075203551, "ci": [0.13504046564460578, 0.1406253493961044], "sec": 27.48385797100127}
+{"id": "ring50-exceedance-1150-twist-8", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.107551357804832e-09, "ci": null, "sec": 1.306306508002308}
+{"id": "ring50-exceedance-1150-mc-8", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.797161426002276}
+{"id": "ring50-stop_loss-1150-mc-8", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.228099927997391}
+{"id": "ring50-stop_loss-1150-twist-8", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14071103406675656, "ci": null, "sec": 1.3013154710024537}
+{"id": "ring50-pairsampled-8", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.892419863177891e-05, "ci": [1.8624817089729525e-05, 1.9223580173828293e-05], "sec": 3.6376597140006197}
+{"id": "ring50-exceedance-650-rdpo-8", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014405055220578675, "ci": [0.001430098988685267, 0.001450912055430468], "sec": 34.016329108999344}
+{"id": "ring50-exceedance-650-mc-9", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0013580322265625171, "ci": [0.0010760719032357946, 0.0016399925498892397], "sec": 9.272414536000724}
+{"id": "ring50-exceedance-650-twist-9", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014451103783139551, "ci": null, "sec": 1.1362942870000552}
+{"id": "ring50-exceedance-1150-rdpo-8", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.128580156271696e-09, "ci": [4.04788075379012e-09, 4.209279558753272e-09], "sec": 35.93965198499791}
+{"id": "ring50-stop_loss-1150-rdpo-8", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1402509820274517, "ci": [0.13761225776421435, 0.14288970629068906], "sec": 33.623005532001116}
+{"id": "ring50-exceedance-1150-twist-9", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.120881424446725e-09, "ci": null, "sec": 1.3424736870001652}
+{"id": "ring50-exceedance-1150-mc-9", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.13700687200253}
+{"id": "ring50-stop_loss-1150-mc-9", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.832129791000625}
+{"id": "ring50-stop_loss-1150-twist-9", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14041872554460472, "ci": null, "sec": 1.3197476240020478}
+{"id": "ring50-exceedance-650-rdpo-9", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014495000215093798, "ci": [0.0014393085017892653, 0.0014596915412294943], "sec": 35.51281911600017}
+{"id": "ring50-pairsampled-9", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8854494398743722e-05, "ci": [1.872624033151292e-05, 1.8982748465974524e-05], "sec": 4.098711734997778}
+{"id": "ring50-stop_loss-1150-rdpo-9", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1398388222433687, "ci": [0.13699077132676743, 0.14268687315996995], "sec": 27.78038729799664}
+{"id": "ring50-exceedance-650-twist-10", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014481147880976261, "ci": null, "sec": 1.251650021000387}
+{"id": "ring50-exceedance-1150-rdpo-9", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.103380458357907e-09, "ci": [4.019936747254229e-09, 4.186824169461584e-09], "sec": 33.79658521999954}
+{"id": "ring50-exceedance-650-mc-10", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.001327514648437517, "ci": [0.0010487400962743607, 0.0016062892006006731], "sec": 9.299439570000686}
+{"id": "ring50-exceedance-1150-twist-10", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.029819966483868e-09, "ci": null, "sec": 1.3676524469992728}
+{"id": "ring50-exceedance-1150-mc-10", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.29701374799697}
+{"id": "ring50-stop_loss-1150-mc-10", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.501867314000265}
+{"id": "ring50-stop_loss-1150-twist-10", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.1397453672003209, "ci": null, "sec": 1.1778812679986004}
+{"id": "ring50-pairsampled-10", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.889573126853036e-05, "ci": [1.877985476307044e-05, 1.901160777399028e-05], "sec": 3.503593263998482}
+{"id": "ring50-exceedance-650-rdpo-10", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.00144826637656964, "ci": [0.0014352271003466484, 0.0014613056527926316], "sec": 42.216229820998706}
+{"id": "ring50-exceedance-1150-rdpo-10", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.1292400645172014e-09, "ci": [4.0281083178519294e-09, 4.2303718111824734e-09], "sec": 37.52415580000161}
+{"id": "ring50-exceedance-650-twist-11", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014658582333263411, "ci": null, "sec": 1.1815697530000762}
+{"id": "ring50-stop_loss-1150-rdpo-10", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14000446387030022, "ci": [0.13736438372033358, 0.14264454402026686], "sec": 35.72071846000108}
+{"id": "ring50-exceedance-650-mc-11", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014038085937500178, "ci": [0.0011171444620493146, 0.001690472725450721], "sec": 8.70673050500045}
+{"id": "ring50-exceedance-1150-twist-11", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.218546929892789e-09, "ci": null, "sec": 1.3983269380005368}
+{"id": "ring50-exceedance-1150-mc-11", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.06906689400057}
+{"id": "ring50-stop_loss-1150-mc-11", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.23447329800183}
+{"id": "ring50-stop_loss-1150-twist-11", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.1425207662562427, "ci": null, "sec": 1.1896581990004051}
+{"id": "ring50-exceedance-650-rdpo-11", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014553476306256095, "ci": [0.0014445876671078228, 0.0014661075941433963], "sec": 34.9685758630003}
+{"id": "ring50-pairsampled-11", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8978661128088602e-05, "ci": [1.8711837148215e-05, 1.9245485107962202e-05], "sec": 3.494408945000032}
+{"id": "ring50-exceedance-1150-rdpo-11", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.158914403159691e-09, "ci": [4.0835160097443886e-09, 4.234312796574994e-09], "sec": 30.20607611700325}
+{"id": "ring50-exceedance-650-twist-12", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014596735126131124, "ci": null, "sec": 1.1938059450003493}
+{"id": "ring50-exceedance-650-mc-12", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.001327514648437517, "ci": [0.0010487426422313285, 0.0016062866546437053], "sec": 8.708869100999436}
+{"id": "ring50-stop_loss-1150-rdpo-11", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13721952925685468, "ci": [0.1344064080205109, 0.14003265049319846], "sec": 32.85964351900111}
+{"id": "ring50-exceedance-1150-twist-12", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.07681337168225e-09, "ci": null, "sec": 1.257614324997121}
+{"id": "ring50-exceedance-1150-mc-12", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.992009612000402}
+{"id": "ring50-stop_loss-1150-mc-12", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.698214627002017}
+{"id": "ring50-stop_loss-1150-twist-12", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13883345476600828, "ci": null, "sec": 1.2586913960003585}
+{"id": "ring50-pairsampled-12", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9034771277803615e-05, "ci": [1.892768219439197e-05, 1.914186036121526e-05], "sec": 3.6213174530021206}
+{"id": "ring50-exceedance-650-rdpo-12", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.001457447753259328, "ci": [0.0014435971491845673, 0.0014712983573340885], "sec": 34.17217795599936}
+{"id": "ring50-exceedance-1150-rdpo-12", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.081907827719569e-09, "ci": [3.996467816022843e-09, 4.167347839416294e-09], "sec": 25.69814586800203}
+{"id": "ring50-exceedance-650-twist-13", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.001447418632230222, "ci": null, "sec": 1.1549698029994033}
+{"id": "ring50-exceedance-650-mc-13", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0013732910156250173, "ci": [0.0010897551766150967, 0.001656826854634938], "sec": 8.477500311000767}
+{"id": "ring50-stop_loss-1150-rdpo-12", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1395664648368922, "ci": [0.13708049870822625, 0.14205243096555814], "sec": 29.414102647002437}
+{"id": "ring50-exceedance-1150-twist-13", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.022458743114518e-09, "ci": null, "sec": 1.2287567029998172}
+{"id": "ring50-exceedance-1150-mc-13", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.468279537999479}
+{"id": "ring50-stop_loss-1150-mc-13", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.821742161999282}
+{"id": "ring50-stop_loss-1150-twist-13", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13794609406041058, "ci": null, "sec": 1.1281852329993853}
+{"id": "ring50-exceedance-1150-rdpo-13", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.130756500913543e-09, "ci": [4.042576657895665e-09, 4.218936343931422e-09], "sec": 28.582002522001858}
+{"id": "ring50-pairsampled-13", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9041214138529214e-05, "ci": [1.8904982769601807e-05, 1.9177445507456622e-05], "sec": 3.786003676999826}
+{"id": "ring50-exceedance-650-rdpo-13", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014560277779493108, "ci": [0.001442142154136557, 0.0014699134017620646], "sec": 33.774936769001215}
+{"id": "ring50-exceedance-650-twist-14", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014692502108224897, "ci": null, "sec": 1.2284380689998216}
+{"id": "ring50-exceedance-650-mc-14", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014648437500000186, "ci": [0.0011720258876282254, 0.0017576616123718119], "sec": 9.128103519000433}
+{"id": "ring50-exceedance-1150-mc-14", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.523771151998517}
+{"id": "ring50-exceedance-1150-twist-14", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.054393317526905e-09, "ci": null, "sec": 1.3762046669980919}
+{"id": "ring50-stop_loss-1150-rdpo-13", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14083262399409138, "ci": [0.13837477321072583, 0.14329047477745693], "sec": 37.21168222900087}
+{"id": "ring50-stop_loss-1150-mc-14", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.323854307000147}
+{"id": "ring50-stop_loss-1150-twist-14", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13778702077998528, "ci": null, "sec": 1.338305216999288}
+{"id": "ring50-pairsampled-14", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9049508484521236e-05, "ci": [1.892927151621149e-05, 1.9169745452830983e-05], "sec": 3.7696987469971646}
+{"id": "ring50-exceedance-1150-rdpo-14", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.1747608932176484e-09, "ci": [4.07102743789529e-09, 4.278494348540007e-09], "sec": 33.01475482399837}
+{"id": "ring50-exceedance-650-rdpo-14", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014611655482914762, "ci": [0.0014499973364778605, 0.0014723337601050919], "sec": 41.50758444899839}
+{"id": "ring50-exceedance-650-twist-15", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014360322528363515, "ci": null, "sec": 1.3230537229974288}
+{"id": "ring50-exceedance-650-mc-15", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0012207031250000156, "ci": [0.0009533668610942289, 0.0014880393889058023], "sec": 9.221998945999076}
+{"id": "ring50-stop_loss-1150-rdpo-14", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1407052463006698, "ci": [0.13847458374552296, 0.14293590885581664], "sec": 31.53947858799802}
+{"id": "ring50-exceedance-1150-twist-15", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.137237442026314e-09, "ci": null, "sec": 1.2391900699985854}
+{"id": "ring50-exceedance-1150-mc-15", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.789689815999736}
+{"id": "ring50-stop_loss-1150-mc-15", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.171987518002425}
+{"id": "ring50-stop_loss-1150-twist-15", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13735882118480147, "ci": null, "sec": 1.4805590530013433}
+{"id": "ring50-pairsampled-15", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.899691533757909e-05, "ci": [1.8875743480347564e-05, 1.911808719481062e-05], "sec": 3.60865245199966}
+{"id": "ring50-exceedance-650-rdpo-15", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.001453513519597137, "ci": [0.001438751157173394, 0.0014682758820208802], "sec": 42.228131076000864}
+{"id": "ring50-exceedance-1150-rdpo-15", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.095464494013207e-09, "ci": [4.019592359701212e-09, 4.171336628325202e-09], "sec": 36.92810804500186}
+{"id": "ring50-exceedance-650-twist-16", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.001434555828947518, "ci": null, "sec": 1.1710006289977173}
+{"id": "ring50-stop_loss-1150-rdpo-15", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1392653621108132, "ci": [0.13725896284731554, 0.14127176137431086], "sec": 31.860848705000535}
+{"id": "ring50-exceedance-650-mc-16", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0013580322265625173, "ci": [0.0010760879749174058, 0.001639976478207629], "sec": 9.263542257998779}
+{"id": "ring50-exceedance-1150-twist-16", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.142564293409766e-09, "ci": null, "sec": 1.1931585890015413}
+{"id": "ring50-exceedance-1150-mc-16", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.143451650998031}
+{"id": "ring50-exceedance-650-rdpo-16", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.001457077461451542, "ci": [0.00144473230968783, 0.0014694226132152541], "sec": 32.66156608000165}
+{"id": "ring50-stop_loss-1150-twist-16", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13749200497190459, "ci": null, "sec": 1.2998559700026817}
+{"id": "ring50-stop_loss-1150-mc-16", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.413950693997322}
+{"id": "ring50-pairsampled-16", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9108937911516644e-05, "ci": [1.896613347871757e-05, 1.9251742344315717e-05], "sec": 3.4755523019994143}
+{"id": "ring50-exceedance-650-mc-17", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.001327514648437517, "ci": [0.0010487557640705954, 0.0016062735328044384], "sec": 8.709130593000737}
+{"id": "ring50-exceedance-650-twist-17", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014373675296540348, "ci": null, "sec": 1.2138218360014434}
+{"id": "ring50-exceedance-1150-rdpo-16", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.113417459640813e-09, "ci": [4.046896834959855e-09, 4.179938084321772e-09], "sec": 39.292044433997944}
+{"id": "ring50-stop_loss-1150-rdpo-16", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1375154125229684, "ci": [0.13547189505090834, 0.13955892999502845], "sec": 36.39204856099968}
+{"id": "ring50-exceedance-1150-twist-17", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 3.999401267698964e-09, "ci": null, "sec": 1.1836093040001288}
+{"id": "ring50-exceedance-1150-mc-17", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 8.841142080000282}
+{"id": "ring50-exceedance-650-rdpo-17", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014486164918718102, "ci": [0.0014363755773682055, 0.001460857406375415], "sec": 32.659211651996884}
+{"id": "ring50-stop_loss-1150-twist-17", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13827214738686497, "ci": null, "sec": 1.117101685002126}
+{"id": "ring50-stop_loss-1150-mc-17", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.155204833001335}
+{"id": "ring50-pairsampled-17", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8887154184365156e-05, "ci": [1.8680213084076565e-05, 1.9094095284653747e-05], "sec": 3.2413846499985084}
+{"id": "ring50-exceedance-1150-rdpo-17", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.083329742403995e-09, "ci": [4.0089284625920746e-09, 4.157731022215915e-09], "sec": 32.793498904000444}
+{"id": "ring50-exceedance-650-mc-18", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0015563964843750197, "ci": [0.0012545953099676683, 0.0018581976587823711], "sec": 8.935404579999158}
+{"id": "ring50-exceedance-650-twist-18", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.001444480960565508, "ci": null, "sec": 1.2207822180025687}
+{"id": "ring50-exceedance-1150-mc-18", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.368099193998205}
+{"id": "ring50-stop_loss-1150-rdpo-17", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13989832709159547, "ci": [0.13765713980763356, 0.14213951437555739], "sec": 34.36699423100072}
+{"id": "ring50-exceedance-1150-twist-18", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.117299512734819e-09, "ci": null, "sec": 1.4775052660006622}
+{"id": "ring50-stop_loss-1150-mc-18", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 10.01615423000112}
+{"id": "ring50-stop_loss-1150-twist-18", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13843385935141772, "ci": null, "sec": 1.2490125429976615}
+{"id": "ring50-pairsampled-18", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.886222109593827e-05, "ci": [1.8716770197319044e-05, 1.9007671994557496e-05], "sec": 3.576951431998168}
+{"id": "ring50-exceedance-650-rdpo-18", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014395068022528832, "ci": [0.00142637282964327, 0.0014526407748624963], "sec": 40.375749546001316}
+{"id": "ring50-exceedance-1150-rdpo-18", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.1568046536159615e-09, "ci": [4.091663565298179e-09, 4.221945741933744e-09], "sec": 32.88461196100252}
+{"id": "ring50-exceedance-650-twist-19", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014472728055278303, "ci": null, "sec": 1.1178732840016892}
+{"id": "ring50-stop_loss-1150-rdpo-18", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.14093829692803636, "ci": [0.13900907578349697, 0.14286751807257575], "sec": 26.64191265699992}
+{"id": "ring50-exceedance-650-mc-19", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014343261718750184, "ci": [0.0011445705338965296, 0.0017240818098535073], "sec": 9.476161968002998}
+{"id": "ring50-exceedance-1150-twist-19", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.177391273332422e-09, "ci": null, "sec": 1.339425422000204}
+{"id": "ring50-exceedance-1150-mc-19", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.409553207999124}
+{"id": "ring50-stop_loss-1150-mc-19", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.068931776000682}
+{"id": "ring50-stop_loss-1150-twist-19", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14012605375884576, "ci": null, "sec": 1.2179967750016658}
+{"id": "ring50-pairsampled-19", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.888424112541032e-05, "ci": [1.8755697480254212e-05, 1.9012784770566426e-05], "sec": 3.563025675000972}
+{"id": "ring50-exceedance-650-rdpo-19", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014477210094983308, "ci": [0.0014375640086830685, 0.0014578780103135932], "sec": 35.68794213000001}
+{"id": "ring50-exceedance-1150-rdpo-19", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.111930410484847e-09, "ci": [4.0573833093472e-09, 4.166477511622494e-09], "sec": 32.106321461000334}
+{"id": "ring50-exceedance-650-twist-20", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014358341332162958, "ci": null, "sec": 1.299260930998571}
+{"id": "ring50-exceedance-650-mc-20", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0015106201171875195, "ci": [0.0012132675828478183, 0.0018079726515272208], "sec": 9.547004480999021}
+{"id": "ring50-stop_loss-1150-rdpo-19", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13935273975912402, "ci": [0.13733096878682782, 0.1413745107314202], "sec": 35.63425140399704}
+{"id": "ring50-exceedance-1150-twist-20", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 3.964086072010879e-09, "ci": null, "sec": 1.2697543280009995}
+{"id": "ring50-exceedance-1150-mc-20", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.347450668999954}
+{"id": "ring50-stop_loss-1150-mc-20", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.445339444999263}
+{"id": "ring50-stop_loss-1150-twist-20", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13484515564241484, "ci": null, "sec": 1.0987850169985904}
+{"id": "ring50-pairsampled-20", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8609629391360194e-05, "ci": [1.790784867958402e-05, 1.9311410103136368e-05], "sec": 3.506740515000274}
+{"id": "ring50-exceedance-650-rdpo-20", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014536032756361586, "ci": [0.00144006257191094, 0.0014671439793613771], "sec": 34.6879397470002}
+{"id": "ring50-exceedance-1150-rdpo-20", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.1318489277245746e-09, "ci": [4.062191177497692e-09, 4.201506677951457e-09], "sec": 31.34292556500077}
+{"id": "ring50-exceedance-650-twist-21", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014671833831529542, "ci": null, "sec": 1.1679878009999811}
+{"id": "ring50-exceedance-650-mc-21", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0012817382812500165, "ci": [0.0010078063659772591, 0.0015556701965227738], "sec": 9.174228996998863}
+{"id": "ring50-exceedance-1150-mc-21", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.125362609996955}
+{"id": "ring50-exceedance-1150-twist-21", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.121733077599128e-09, "ci": null, "sec": 1.3514362599999004}
+{"id": "ring50-stop_loss-1150-rdpo-20", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13882281037086744, "ci": [0.13681275372787693, 0.14083286701385794], "sec": 38.795121495000785}
+{"id": "ring50-stop_loss-1150-mc-21", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.094820612997864}
+{"id": "ring50-stop_loss-1150-twist-21", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.13987661731988765, "ci": null, "sec": 1.1932422850004514}
+{"id": "ring50-exceedance-650-rdpo-21", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014474818046689827, "ci": [0.0014365792963047198, 0.0014583843130332457], "sec": 35.34494701899894}
+{"id": "ring50-pairsampled-21", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.9063306199811837e-05, "ci": [1.8919546070020304e-05, 1.920706632960337e-05], "sec": 4.382975172000442}
+{"id": "ring50-exceedance-1150-rdpo-21", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.151100109302935e-09, "ci": [4.075170942837696e-09, 4.227029275768173e-09], "sec": 33.8484224169988}
+{"id": "ring50-exceedance-650-twist-22", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.0014576328711606121, "ci": null, "sec": 1.2619236009995802}
+{"id": "ring50-exceedance-650-mc-22", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0014343261718750182, "ci": [0.0011445658234352984, 0.001724086520314738], "sec": 9.360703263002506}
+{"id": "ring50-exceedance-1150-mc-22", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.404485470000509}
+{"id": "ring50-exceedance-1150-twist-22", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.097063854091882e-09, "ci": null, "sec": 1.2706608899970888}
+{"id": "ring50-stop_loss-1150-rdpo-21", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1385194638589376, "ci": [0.13615270961994055, 0.14088621809793464], "sec": 36.6661841890018}
+{"id": "ring50-stop_loss-1150-mc-22", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.57536725799946}
+{"id": "ring50-stop_loss-1150-twist-22", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14243922652460297, "ci": null, "sec": 1.4431215279983007}
+{"id": "ring50-exceedance-650-rdpo-22", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.001437354340937519, "ci": [0.001424740346110807, 0.001449968335764231], "sec": 34.71733443099947}
+{"id": "ring50-pairsampled-22", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.8965484137641857e-05, "ci": [1.8822259178425754e-05, 1.910870909685796e-05], "sec": 3.679566661001445}
+{"id": "ring50-exceedance-1150-rdpo-22", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.09119374974093e-09, "ci": [4.015256829162585e-09, 4.167130670319275e-09], "sec": 33.91576077999707}
+{"id": "ring50-exceedance-650-twist-23", "key": ["ring50", "exceedance", 650, "twist", 65536], "est": 0.001447070330928715, "ci": null, "sec": 1.2943360160024895}
+{"id": "ring50-exceedance-650-mc-23", "key": ["ring50", "exceedance", 650, "mc", 65536], "est": 0.0015258789062500193, "ci": [0.0012270296177443612, 0.0018247281947556774], "sec": 8.99775487000079}
+{"id": "ring50-exceedance-1150-mc-23", "key": ["ring50", "exceedance", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 9.768537678999564}
+{"id": "ring50-exceedance-1150-twist-23", "key": ["ring50", "exceedance", 1150, "twist", 65536], "est": 4.2312295608716624e-09, "ci": null, "sec": 1.189043992999359}
+{"id": "ring50-stop_loss-1150-rdpo-22", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.13812234406802867, "ci": [0.13586984574599248, 0.14037484239006487], "sec": 36.32203481399847}
+{"id": "ring50-exceedance-1150-rdpo-23", "key": ["ring50", "exceedance", 1150, "rdpo", 65536], "est": 4.097152825857022e-09, "ci": [4.011499463922769e-09, 4.1828061877912745e-09], "sec": 22.670552296000096}
+{"id": "ring50-stop_loss-1150-twist-23", "key": ["ring50", "stop_loss", 1150, "twist", 65536], "est": 0.14280952737748498, "ci": null, "sec": 1.3861830989990267}
+{"id": "ring50-stop_loss-1150-mc-23", "key": ["ring50", "stop_loss", 1150, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 10.019216087999666}
+{"id": "ring50-pairsampled-23", "key": ["ring50", "joint_exhaustion", null, "rdpo", 65536], "est": 1.920776244986623e-05, "ci": [1.9060113750079408e-05, 1.9355411149653054e-05], "sec": 3.563753810001799}
+{"id": "ring50-exceedance-650-rdpo-23", "key": ["ring50", "exceedance", 650, "rdpo", 65536], "est": 0.0014643703968691723, "ci": [0.0014500188880187388, 0.0014787219057196058], "sec": 34.511888353998074}
+{"id": "asia_pacific-exceedance-450-twist-0", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018194808938504566, "ci": null, "sec": 0.632044540001516}
+{"id": "asia_pacific-exceedance-450-mc-0", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0016784667968750024, "ci": [0.001365055562421719, 0.0019918780313282858], "sec": 5.142645853997237}
+{"id": "asia_pacific-exceedance-850-mc-0", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.792288357999496}
+{"id": "asia_pacific-exceedance-850-twist-0", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.737695663407338e-09, "ci": null, "sec": 0.5668116830020153}
+{"id": "asia_pacific-exceedance-450-rdpo-0", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0018014459627099834, "ci": [0.0017875222265591735, 0.0018153696988607933], "sec": 18.76342040900272}
+{"id": "asia_pacific-exceedance-850-rdpo-0", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.658972140557286e-09, "ci": [9.512608004500984e-09, 9.805336276613588e-09], "sec": 18.90393958400091}
+{"id": "asia_pacific-stop_loss-850-twist-0", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.27677761200986584, "ci": null, "sec": 0.5829805890025455}
+{"id": "asia_pacific-stop_loss-850-mc-0", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.806239448997076}
+{"id": "asia_pacific-pairsampled-0", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3959285972322557e-05, "ci": [1.3628071657095052e-05, 1.4290500287550062e-05], "sec": 2.1059975570024108}
+{"id": "ring50-stop_loss-1150-rdpo-23", "key": ["ring50", "stop_loss", 1150, "rdpo", 65536], "est": 0.1386740278023654, "ci": [0.1358257544971523, 0.1415223011075785], "sec": 38.48522974300067}
+{"id": "asia_pacific-exceedance-450-twist-1", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001789842667938749, "ci": null, "sec": 0.6071335199994792}
+{"id": "asia_pacific-exceedance-450-mc-1", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0017089843750000026, "ci": [0.0013927554303572263, 0.002025213319642779], "sec": 4.9071134610021545}
+{"id": "asia_pacific-stop_loss-850-rdpo-0", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2680014161112626, "ci": [0.26471726486282215, 0.27128556735970305], "sec": 18.885027091000666}
+{"id": "asia_pacific-exceedance-850-twist-1", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.415247034654152e-09, "ci": null, "sec": 0.5788712519970431}
+{"id": "asia_pacific-exceedance-850-mc-1", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.927984829999332}
+{"id": "asia_pacific-stop_loss-850-mc-1", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.832981106999796}
+{"id": "asia_pacific-stop_loss-850-twist-1", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2653899803292098, "ci": null, "sec": 0.5649470740027027}
+{"id": "asia_pacific-pairsampled-1", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4134704563205794e-05, "ci": [1.393663763684444e-05, 1.433277148956715e-05], "sec": 2.1084038189983403}
+{"id": "asia_pacific-exceedance-450-rdpo-1", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017839948833133056, "ci": [0.0017725714530273478, 0.0017954183135992635], "sec": 19.64004295199993}
+{"id": "asia_pacific-exceedance-450-mc-2", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001831054687500003, "ci": [0.0015037326962946418, 0.0021583766787053645], "sec": 4.519024294000701}
+{"id": "asia_pacific-exceedance-850-rdpo-1", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.529275806556252e-09, "ci": [9.416390383526278e-09, 9.642161229586227e-09], "sec": 18.75624388200231}
+{"id": "asia_pacific-exceedance-450-twist-2", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017742625179751692, "ci": null, "sec": 0.6003632430001744}
+{"id": "asia_pacific-stop_loss-850-rdpo-1", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2654373233493356, "ci": [0.2628758526800948, 0.26799879401857646], "sec": 19.26723826200032}
+{"id": "asia_pacific-exceedance-850-twist-2", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.437102322654928e-09, "ci": null, "sec": 0.5685382039991964}
+{"id": "asia_pacific-exceedance-850-mc-2", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.753709185002663}
+{"id": "asia_pacific-stop_loss-850-mc-2", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.543507119000424}
+{"id": "asia_pacific-stop_loss-850-twist-2", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26042555596200856, "ci": null, "sec": 0.4954282209982921}
+{"id": "asia_pacific-exceedance-450-rdpo-2", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017939357312185059, "ci": [0.0017784798147068815, 0.0018093916477301302], "sec": 17.2685265709988}
+{"id": "asia_pacific-pairsampled-2", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4080224495516277e-05, "ci": [1.3898444923991736e-05, 1.4262004067040817e-05], "sec": 2.0377645150001626}
+{"id": "asia_pacific-exceedance-450-mc-3", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001861572265625003, "ci": [0.001531535100683938, 0.002191609430566068], "sec": 4.67031733299882}
+{"id": "asia_pacific-exceedance-450-twist-3", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018011258184227662, "ci": null, "sec": 0.581886988999031}
+{"id": "asia_pacific-exceedance-850-rdpo-2", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.440329224767402e-09, "ci": [9.291915389741678e-09, 9.588743059793126e-09], "sec": 19.170740031000605}
+{"id": "asia_pacific-exceedance-850-mc-3", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.905754111998249}
+{"id": "asia_pacific-exceedance-850-twist-3", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.57332399919855e-09, "ci": null, "sec": 0.551908982997702}
+{"id": "asia_pacific-stop_loss-850-rdpo-2", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26674052738518106, "ci": [0.26282352894310934, 0.2706575258272528], "sec": 22.78768252900045}
+{"id": "asia_pacific-exceedance-450-rdpo-3", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017877475864514483, "ci": [0.0017758077339638898, 0.0017996874389390068], "sec": 17.997526661998563}
+{"id": "asia_pacific-stop_loss-850-twist-3", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.27429695821661915, "ci": null, "sec": 0.6120384749992809}
+{"id": "asia_pacific-stop_loss-850-mc-3", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.766915934997087}
+{"id": "asia_pacific-pairsampled-3", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4513101861943327e-05, "ci": [1.3327276656435218e-05, 1.5698927067451436e-05], "sec": 2.1320916730001045}
+{"id": "asia_pacific-exceedance-450-mc-4", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0016632080078125026, "ci": [0.001351223308344014, 0.001975192707280991], "sec": 4.867480575001537}
+{"id": "asia_pacific-exceedance-450-twist-4", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001819178004439643, "ci": null, "sec": 0.6667649100018025}
+{"id": "asia_pacific-exceedance-850-rdpo-3", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.618178755463373e-09, "ci": [9.501797538687584e-09, 9.734559972239161e-09], "sec": 24.978063829999883}
+{"id": "asia_pacific-exceedance-850-mc-4", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.759712636998302}
+{"id": "asia_pacific-exceedance-850-twist-4", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.467301473436858e-09, "ci": null, "sec": 0.7876181120009278}
+{"id": "asia_pacific-stop_loss-850-rdpo-3", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2665693964179211, "ci": [0.2625052389244538, 0.2706335539113884], "sec": 24.087443087999418}
+{"id": "asia_pacific-exceedance-450-rdpo-4", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017842676288161372, "ci": [0.0017710560428488946, 0.0017974792147833797], "sec": 19.365326324001217}
+{"id": "asia_pacific-stop_loss-850-twist-4", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26770523986885353, "ci": null, "sec": 0.6397833589981019}
+{"id": "asia_pacific-pairsampled-4", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4194855688406658e-05, "ci": [1.3952987815853317e-05, 1.443672356096e-05], "sec": 2.0784043649982777}
+{"id": "asia_pacific-stop_loss-850-mc-4", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.997406008998951}
+{"id": "asia_pacific-exceedance-450-mc-5", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0018157958984375028, "ci": [0.001489868869434924, 0.0021417229274400817], "sec": 4.9780874909993145}
+{"id": "asia_pacific-exceedance-450-twist-5", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017819628646973816, "ci": null, "sec": 0.6248786180003663}
+{"id": "asia_pacific-exceedance-850-rdpo-4", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.606266894967108e-09, "ci": [9.472191172508198e-09, 9.740342617426019e-09], "sec": 24.11870391300181}
+{"id": "asia_pacific-exceedance-850-mc-5", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.6870856509995065}
+{"id": "asia_pacific-exceedance-850-twist-5", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.586772757425138e-09, "ci": null, "sec": 0.6399120210007823}
+{"id": "asia_pacific-exceedance-450-rdpo-5", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.001801457063610393, "ci": [0.0017893253377949737, 0.0018135887894258124], "sec": 18.94430916700003}
+{"id": "asia_pacific-stop_loss-850-rdpo-4", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2693007581898764, "ci": [0.2662979219142622, 0.27230359446549063], "sec": 25.155985587000032}
+{"id": "asia_pacific-stop_loss-850-twist-5", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26991438075130947, "ci": null, "sec": 0.6722580759997072}
+{"id": "asia_pacific-pairsampled-5", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3744386510129835e-05, "ci": [1.3436658857915386e-05, 1.4052114162344283e-05], "sec": 2.1399516870005755}
+{"id": "asia_pacific-stop_loss-850-mc-5", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.036003907000122}
+{"id": "asia_pacific-exceedance-450-mc-6", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0018920898437500026, "ci": [0.0015593695061272166, 0.0022248101813727886], "sec": 4.596818987000006}
+{"id": "asia_pacific-exceedance-450-twist-6", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018043638346547763, "ci": null, "sec": 0.5959857830021065}
+{"id": "asia_pacific-exceedance-850-rdpo-5", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.489646754869864e-09, "ci": [9.35268717894854e-09, 9.626606330791187e-09], "sec": 23.747601655002654}
+{"id": "asia_pacific-exceedance-850-mc-6", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.722047688999737}
+{"id": "asia_pacific-exceedance-850-twist-6", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.866971703553661e-09, "ci": null, "sec": 0.5832929940006579}
+{"id": "asia_pacific-stop_loss-850-rdpo-5", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26769253030215784, "ci": [0.26354543873005026, 0.2718396218742654], "sec": 23.112326868998935}
+{"id": "asia_pacific-exceedance-450-rdpo-6", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017940921202789408, "ci": [0.0017790945219841074, 0.0018090897185737743], "sec": 18.00285305899888}
+{"id": "asia_pacific-stop_loss-850-twist-6", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2692350909209271, "ci": null, "sec": 0.5204665849996672}
+{"id": "asia_pacific-stop_loss-850-mc-6", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.56750403100159}
+{"id": "asia_pacific-pairsampled-6", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3391327957030484e-05, "ci": [1.2881970792559963e-05, 1.3900685121501006e-05], "sec": 2.2129664059975767}
+{"id": "asia_pacific-exceedance-450-mc-7", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0017395019531250028, "ci": [0.0014204589642901634, 0.0020585449419598424], "sec": 4.497220412002207}
+{"id": "asia_pacific-exceedance-450-twist-7", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017812771788650443, "ci": null, "sec": 0.5646574689999397}
+{"id": "asia_pacific-exceedance-850-rdpo-6", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.537899825064868e-09, "ci": [9.407522809179884e-09, 9.668276840949852e-09], "sec": 22.441325847998087}
+{"id": "asia_pacific-exceedance-850-mc-7", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.712128580998979}
+{"id": "asia_pacific-exceedance-850-twist-7", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.29305392311514e-09, "ci": null, "sec": 0.5567614749998029}
+{"id": "asia_pacific-stop_loss-850-rdpo-6", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2695180802107154, "ci": [0.2664191048320281, 0.2726170555894027], "sec": 23.42520330300249}
+{"id": "asia_pacific-exceedance-450-rdpo-7", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.001788543077582615, "ci": [0.001776864126636203, 0.0018002220285290272], "sec": 18.684798056001455}
+{"id": "asia_pacific-stop_loss-850-twist-7", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26447292927391963, "ci": null, "sec": 0.5950597150003887}
+{"id": "asia_pacific-pairsampled-7", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.5317530494353282e-05, "ci": [1.3135255580861852e-05, 1.7499805407844712e-05], "sec": 2.173583032999886}
+{"id": "asia_pacific-stop_loss-850-mc-7", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.9435434240003815}
+{"id": "asia_pacific-exceedance-450-mc-8", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0013275146484375022, "ci": [0.0010487399004324685, 0.0016062893964425358], "sec": 4.616402421001112}
+{"id": "asia_pacific-exceedance-450-twist-8", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001790009337933575, "ci": null, "sec": 0.5801833609984897}
+{"id": "asia_pacific-exceedance-850-rdpo-7", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.549553465235107e-09, "ci": [9.400536644330646e-09, 9.698570286139568e-09], "sec": 23.88003627299986}
+{"id": "asia_pacific-exceedance-850-mc-8", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.988135700001294}
+{"id": "asia_pacific-exceedance-850-twist-8", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.027354758967715e-09, "ci": null, "sec": 0.6616566060001787}
+{"id": "asia_pacific-stop_loss-850-rdpo-7", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26579210358967925, "ci": [0.26238555579977824, 0.26919865137958027], "sec": 24.070826830000442}
+{"id": "asia_pacific-exceedance-450-rdpo-8", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017995910441855987, "ci": [0.001786972572493675, 0.0018122095158775223], "sec": 18.40622680099841}
+{"id": "asia_pacific-stop_loss-850-twist-8", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.25972324963183824, "ci": null, "sec": 0.5910073800005193}
+{"id": "asia_pacific-pairsampled-8", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.5084334103269866e-05, "ci": [1.0860703859421859e-05, 1.9307964347117873e-05], "sec": 1.9465535460003593}
+{"id": "asia_pacific-stop_loss-850-mc-8", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.940008659999876}
+{"id": "asia_pacific-exceedance-450-mc-9", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0015106201171875026, "ci": [0.0012132694189148964, 0.0018079708154601088], "sec": 4.924382059998607}
+{"id": "asia_pacific-exceedance-450-twist-9", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001796457081323678, "ci": null, "sec": 0.590472169998975}
+{"id": "asia_pacific-exceedance-850-rdpo-8", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.435272466407354e-09, "ci": [9.243474182749773e-09, 9.627070750064935e-09], "sec": 23.87872038000205}
+{"id": "asia_pacific-exceedance-850-mc-9", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.077969885998755}
+{"id": "asia_pacific-exceedance-850-twist-9", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.533411180539483e-09, "ci": null, "sec": 0.641540062999411}
+{"id": "asia_pacific-exceedance-450-rdpo-9", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0018035007611247723, "ci": [0.0017912690580702544, 0.0018157324641792903], "sec": 18.19756134400086}
+{"id": "asia_pacific-stop_loss-850-rdpo-8", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2662348932243693, "ci": [0.26243024688787375, 0.2700395395608648], "sec": 24.390973141002178}
+{"id": "asia_pacific-stop_loss-850-twist-9", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2684758967481271, "ci": null, "sec": 0.584449873000267}
+{"id": "asia_pacific-pairsampled-9", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4033387976238414e-05, "ci": [1.2332954890326376e-05, 1.5733821062150452e-05], "sec": 2.589268091000122}
+{"id": "asia_pacific-stop_loss-850-mc-9", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.082689070000924}
+{"id": "asia_pacific-exceedance-450-mc-10", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0016326904296875024, "ci": [0.0013235748406826122, 0.0019418060186923926], "sec": 4.6780121230003715}
+{"id": "asia_pacific-exceedance-450-twist-10", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001784980154822721, "ci": null, "sec": 0.549571671999729}
+{"id": "asia_pacific-exceedance-850-rdpo-9", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.395743272022505e-09, "ci": [9.198383237159528e-09, 9.593103306885481e-09], "sec": 23.45933086199875}
+{"id": "asia_pacific-stop_loss-850-rdpo-9", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26611955365385, "ci": [0.26135406763772234, 0.2708850396699776], "sec": 19.67823833700095}
+{"id": "asia_pacific-exceedance-850-twist-10", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.41740604670635e-09, "ci": null, "sec": 0.5736272239992104}
+{"id": "asia_pacific-exceedance-850-mc-10", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.534227688000101}
+{"id": "asia_pacific-stop_loss-850-mc-10", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.719758960000036}
+{"id": "asia_pacific-exceedance-450-rdpo-10", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017969458514297588, "ci": [0.0017843472766781302, 0.0018095444261813874], "sec": 18.062320402001205}
+{"id": "asia_pacific-stop_loss-850-twist-10", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26477409522998635, "ci": null, "sec": 0.6134945689991582}
+{"id": "asia_pacific-pairsampled-10", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3759623406223765e-05, "ci": [1.3132042466999619e-05, 1.4387204345447911e-05], "sec": 2.034042283998133}
+{"id": "asia_pacific-exceedance-450-mc-11", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0017242431640625028, "ci": [0.0014066113859949134, 0.002041874942130092], "sec": 4.662314345001505}
+{"id": "asia_pacific-exceedance-450-twist-11", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.001784456937692279, "ci": null, "sec": 0.5620130660026916}
+{"id": "asia_pacific-exceedance-850-rdpo-10", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.473498480184187e-09, "ci": [9.354269123345808e-09, 9.592727837022566e-09], "sec": 23.346094345000893}
+{"id": "asia_pacific-stop_loss-850-rdpo-10", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26679916437812873, "ci": [0.26336719079596144, 0.270231137960296], "sec": 20.083678303999477}
+{"id": "asia_pacific-exceedance-850-twist-11", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.646438468018144e-09, "ci": null, "sec": 0.5805596129976038}
+{"id": "asia_pacific-exceedance-850-mc-11", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.645881267999357}
+{"id": "asia_pacific-exceedance-450-rdpo-11", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0018060192246060422, "ci": [0.0017928540443697008, 0.0018191844048423835], "sec": 19.376586820999364}
+{"id": "asia_pacific-stop_loss-850-twist-11", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26941629463414407, "ci": null, "sec": 0.5941945919985301}
+{"id": "asia_pacific-stop_loss-850-mc-11", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.59212419799951}
+{"id": "asia_pacific-pairsampled-11", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.413726977505444e-05, "ci": [1.3978366674054805e-05, 1.4296172876054075e-05], "sec": 2.6220895670012396}
+{"id": "asia_pacific-exceedance-850-rdpo-11", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.54877126050774e-09, "ci": [9.41541615149544e-09, 9.682126369520041e-09], "sec": 20.283948560998397}
+{"id": "asia_pacific-exceedance-450-mc-12", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0019378662109375028, "ci": [0.0016011457184001026, 0.002274586703474903], "sec": 4.636962938999204}
+{"id": "asia_pacific-exceedance-450-twist-12", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017944632109208125, "ci": null, "sec": 0.6146672499999113}
+{"id": "asia_pacific-exceedance-850-mc-12", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.5032783599999675}
+{"id": "asia_pacific-exceedance-850-twist-12", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.275953821118571e-09, "ci": null, "sec": 0.5899097750007058}
+{"id": "asia_pacific-stop_loss-850-rdpo-11", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2657303848802171, "ci": [0.26263669366365283, 0.2688240760967814], "sec": 23.039507790999778}
+{"id": "asia_pacific-exceedance-450-rdpo-12", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.00179174720650015, "ci": [0.0017788421836761803, 0.00180465222932412], "sec": 18.01327512699936}
+{"id": "asia_pacific-stop_loss-850-twist-12", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.263307711037316, "ci": null, "sec": 0.5674997050009551}
+{"id": "asia_pacific-pairsampled-12", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4109072739046101e-05, "ci": [1.150100151244813e-05, 1.6717143965644073e-05], "sec": 2.4074446509985137}
+{"id": "asia_pacific-stop_loss-850-mc-12", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.729159629001515}
+{"id": "asia_pacific-exceedance-850-rdpo-12", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.502785312911242e-09, "ci": [9.376033106245705e-09, 9.62953751957678e-09], "sec": 18.119886138996662}
+{"id": "asia_pacific-exceedance-450-twist-13", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018071210637172505, "ci": null, "sec": 0.5537735910002084}
+{"id": "asia_pacific-exceedance-450-mc-13", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0017547607421875028, "ci": [0.0014343236613826521, 0.0020751978229923535], "sec": 4.624771374001284}
+{"id": "asia_pacific-exceedance-850-mc-13", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.069493892002356}
+{"id": "asia_pacific-exceedance-850-twist-13", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.458817567855014e-09, "ci": null, "sec": 0.6251917019981192}
+{"id": "asia_pacific-stop_loss-850-rdpo-12", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26911550245302474, "ci": [0.2663162755195884, 0.27191472938646105], "sec": 24.824871974000416}
+{"id": "asia_pacific-exceedance-450-rdpo-13", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017964541418396159, "ci": [0.001781885750150384, 0.0018110225335288476], "sec": 17.624834411002666}
+{"id": "asia_pacific-stop_loss-850-twist-13", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2662191140114683, "ci": null, "sec": 0.6155444119976892}
+{"id": "asia_pacific-pairsampled-13", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3226906661449259e-05, "ci": [1.2459169454493154e-05, 1.3994643868405363e-05], "sec": 2.1993785869999556}
+{"id": "asia_pacific-stop_loss-850-mc-13", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.771578724998108}
+{"id": "asia_pacific-exceedance-450-mc-14", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001846313476562503, "ci": [0.0015176318422676681, 0.002174995110857338], "sec": 4.9117514779973135}
+{"id": "asia_pacific-exceedance-450-twist-14", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018033552824579173, "ci": null, "sec": 0.5671036370004003}
+{"id": "asia_pacific-exceedance-850-rdpo-13", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.640787348314652e-09, "ci": [9.483617941949475e-09, 9.797956754679829e-09], "sec": 23.91512921499816}
+{"id": "asia_pacific-exceedance-850-mc-14", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.938232143998903}
+{"id": "asia_pacific-stop_loss-850-rdpo-13", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26806983490622893, "ci": [0.2652938279375919, 0.270845841874866], "sec": 22.53340401600144}
+{"id": "asia_pacific-exceedance-850-twist-14", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.574046549548314e-09, "ci": null, "sec": 0.7317555959998572}
+{"id": "asia_pacific-stop_loss-850-mc-14", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.76267368399931}
+{"id": "asia_pacific-stop_loss-850-twist-14", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2650351057595268, "ci": null, "sec": 0.6149157710024156}
+{"id": "asia_pacific-exceedance-450-rdpo-14", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017899767382209579, "ci": [0.0017777131281467976, 0.001802240348295118], "sec": 18.603901526999834}
+{"id": "asia_pacific-pairsampled-14", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3153879635877861e-05, "ci": [1.2452122876208014e-05, 1.3855636395547708e-05], "sec": 2.0363379269983852}
+{"id": "asia_pacific-exceedance-450-mc-15", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0016937255859375028, "ci": [0.0013788916790386891, 0.0020085594928363165], "sec": 4.3928483620002226}
+{"id": "asia_pacific-exceedance-450-twist-15", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.00182203718842902, "ci": null, "sec": 0.6112353319986141}
+{"id": "asia_pacific-exceedance-850-rdpo-14", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.511149645772608e-09, "ci": [9.314983483384482e-09, 9.707315808160734e-09], "sec": 23.000639496000076}
+{"id": "asia_pacific-stop_loss-850-rdpo-14", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2672708485084753, "ci": [0.26398553073294867, 0.270556166284002], "sec": 18.516951358997176}
+{"id": "asia_pacific-exceedance-850-twist-15", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.682805321775229e-09, "ci": null, "sec": 0.5586203780003416}
+{"id": "asia_pacific-exceedance-850-mc-15", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.187084246997983}
+{"id": "asia_pacific-exceedance-450-rdpo-15", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0018054374915877922, "ci": [0.0017927344166501068, 0.0018181405665254776], "sec": 18.293130825000844}
+{"id": "asia_pacific-stop_loss-850-twist-15", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26914933538004715, "ci": null, "sec": 0.5749771609989693}
+{"id": "asia_pacific-stop_loss-850-mc-15", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.743593995000992}
+{"id": "asia_pacific-pairsampled-15", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.4042425697047722e-05, "ci": [1.3840696931967863e-05, 1.424415446212758e-05], "sec": 2.3374171759969613}
+{"id": "asia_pacific-exceedance-450-mc-16", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001876831054687503, "ci": [0.0015454498348396926, 0.0022082122745353135], "sec": 4.475099467999826}
+{"id": "asia_pacific-exceedance-850-rdpo-15", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.56327115483673e-09, "ci": [9.358318277230714e-09, 9.768224032442747e-09], "sec": 19.059469002000696}
+{"id": "asia_pacific-exceedance-450-twist-16", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017878852231544263, "ci": null, "sec": 0.5635955389989249}
+{"id": "asia_pacific-exceedance-850-mc-16", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.74023681700055}
+{"id": "asia_pacific-exceedance-850-twist-16", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 1.0050103356575995e-08, "ci": null, "sec": 0.5380634819994157}
+{"id": "asia_pacific-stop_loss-850-rdpo-15", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.264954573856157, "ci": [0.2608771517694418, 0.2690319959428722], "sec": 23.266755156000727}
+{"id": "asia_pacific-exceedance-450-rdpo-16", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017954608170137139, "ci": [0.0017819177889818031, 0.0018090038450456246], "sec": 17.94701407499815}
+{"id": "asia_pacific-stop_loss-850-twist-16", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.27558458455091395, "ci": null, "sec": 0.5651553009993222}
+{"id": "asia_pacific-pairsampled-16", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.7296168521630273e-05, "ci": [1.2078032449592579e-05, 2.2514304593667967e-05], "sec": 1.9816858359990874}
+{"id": "asia_pacific-stop_loss-850-mc-16", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.534579437000502}
+{"id": "asia_pacific-exceedance-850-rdpo-16", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.50884590874118e-09, "ci": [9.385620114299966e-09, 9.632071703182393e-09], "sec": 17.780356225001015}
+{"id": "asia_pacific-exceedance-450-twist-17", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017693453355376646, "ci": null, "sec": 0.6787629040009051}
+{"id": "asia_pacific-exceedance-450-mc-17", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001892089843750003, "ci": [0.0015593842744661263, 0.00222479541303388], "sec": 4.889791147001233}
+{"id": "asia_pacific-exceedance-850-mc-17", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.700739823998447}
+{"id": "asia_pacific-exceedance-850-twist-17", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.28545540565195e-09, "ci": null, "sec": 0.5469537139979366}
+{"id": "asia_pacific-stop_loss-850-rdpo-16", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2664842491740769, "ci": [0.26314860889960123, 0.2698198894485526], "sec": 23.782285387002048}
+{"id": "asia_pacific-exceedance-450-rdpo-17", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0018003542060311, "ci": [0.0017876295114771254, 0.0018130789005850747], "sec": 19.384160916000837}
+{"id": "asia_pacific-stop_loss-850-twist-17", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26153286595068254, "ci": null, "sec": 0.5276894370035734}
+{"id": "asia_pacific-stop_loss-850-mc-17", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 5.028464326998801}
+{"id": "asia_pacific-pairsampled-17", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3824393579803326e-05, "ci": [1.3464228908901061e-05, 1.418455825070559e-05], "sec": 2.1071674179984257}
+{"id": "asia_pacific-exceedance-850-rdpo-17", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.480792233604383e-09, "ci": [9.319221634574538e-09, 9.642362832634228e-09], "sec": 20.008372633001272}
+{"id": "asia_pacific-exceedance-450-twist-18", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018030981537929614, "ci": null, "sec": 0.48296242200012784}
+{"id": "asia_pacific-exceedance-450-mc-18", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001968383789062503, "ci": [0.0016290455124374752, 0.002307722065687531], "sec": 4.882455680999556}
+{"id": "asia_pacific-stop_loss-850-rdpo-17", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2664307893435555, "ci": [0.2641570406211895, 0.26870453806592154], "sec": 19.58774658599941}
+{"id": "asia_pacific-exceedance-850-twist-18", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.628035249375802e-09, "ci": null, "sec": 0.5099431460002961}
+{"id": "asia_pacific-exceedance-850-mc-18", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.572869584000728}
+{"id": "asia_pacific-stop_loss-850-mc-18", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.685339998999552}
+{"id": "asia_pacific-stop_loss-850-twist-18", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26995210244141243, "ci": null, "sec": 0.547990179999033}
+{"id": "asia_pacific-exceedance-450-rdpo-18", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017921449613588685, "ci": [0.0017776433155880858, 0.001806646607129651], "sec": 17.856159099999786}
+{"id": "asia_pacific-pairsampled-18", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.328156049419973e-05, "ci": [1.2681659574705982e-05, 1.3881461413693479e-05], "sec": 1.9528968289996556}
+{"id": "asia_pacific-exceedance-450-mc-19", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0015869140625000022, "ci": [0.0012821580646729153, 0.001891670060327089], "sec": 4.28761743799987}
+{"id": "asia_pacific-exceedance-450-twist-19", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018233678741680207, "ci": null, "sec": 0.5916334230023494}
+{"id": "asia_pacific-exceedance-850-rdpo-18", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.645323518382281e-09, "ci": [9.49838450708558e-09, 9.792262529678983e-09], "sec": 22.436500144998718}
+{"id": "asia_pacific-stop_loss-850-rdpo-18", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26901835220324694, "ci": [0.2664069091996301, 0.27162979520686376], "sec": 18.59376884499943}
+{"id": "asia_pacific-exceedance-850-twist-19", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.783198835843039e-09, "ci": null, "sec": 0.6129024580004625}
+{"id": "asia_pacific-exceedance-850-mc-19", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.38917936299913}
+{"id": "asia_pacific-exceedance-450-rdpo-19", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017937380699439935, "ci": [0.0017811159019865922, 0.0018063602379013949], "sec": 17.756819689999247}
+{"id": "asia_pacific-stop_loss-850-mc-19", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.624914806998277}
+{"id": "asia_pacific-stop_loss-850-twist-19", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2747550394494331, "ci": null, "sec": 0.5903882949969557}
+{"id": "asia_pacific-pairsampled-19", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3886200753300167e-05, "ci": [1.3737310874257606e-05, 1.4035090632342728e-05], "sec": 2.108447802998853}
+{"id": "asia_pacific-exceedance-850-rdpo-19", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.571921562699549e-09, "ci": [9.382146517754065e-09, 9.761696607645032e-09], "sec": 18.96606741100186}
+{"id": "asia_pacific-exceedance-450-mc-20", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0015869140625000026, "ci": [0.0012821541234911825, 0.0018916740015088227], "sec": 4.659895120999863}
+{"id": "asia_pacific-exceedance-450-twist-20", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018103341691042885, "ci": null, "sec": 0.6206530519993976}
+{"id": "asia_pacific-exceedance-850-mc-20", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.942404762998194}
+{"id": "asia_pacific-exceedance-850-twist-20", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.362214175290386e-09, "ci": null, "sec": 0.5785335239997949}
+{"id": "asia_pacific-stop_loss-850-rdpo-19", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26452397192924976, "ci": [0.2615611754024106, 0.26748676845608893], "sec": 18.663091733997135}
+{"id": "asia_pacific-stop_loss-850-mc-20", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.739651857998979}
+{"id": "asia_pacific-stop_loss-850-twist-20", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.2605107384282592, "ci": null, "sec": 0.5354880429986224}
+{"id": "asia_pacific-exceedance-450-rdpo-20", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.00180083874813392, "ci": [0.0017894982495281213, 0.0018121792467397186], "sec": 18.45106307000242}
+{"id": "asia_pacific-pairsampled-20", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.33539637339229e-05, "ci": [1.2632265794800934e-05, 1.4075661673044866e-05], "sec": 2.2233893779994105}
+{"id": "asia_pacific-exceedance-450-mc-21", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001831054687500003, "ci": [0.001503734697843702, 0.002158374677156304], "sec": 5.082326792999083}
+{"id": "asia_pacific-exceedance-450-twist-21", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0018009535741711695, "ci": null, "sec": 0.5236842989979777}
+{"id": "asia_pacific-exceedance-850-rdpo-20", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.554748618553436e-09, "ci": [9.382633411494313e-09, 9.726863825612559e-09], "sec": 19.98635968400049}
+{"id": "asia_pacific-exceedance-850-mc-21", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.645910686998832}
+{"id": "asia_pacific-exceedance-850-twist-21", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.723746377889818e-09, "ci": null, "sec": 0.7036005150002893}
+{"id": "asia_pacific-exceedance-450-rdpo-21", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017893478265738388, "ci": [0.0017726349872524611, 0.0018060606658952165], "sec": 18.427848209998047}
+{"id": "asia_pacific-stop_loss-850-rdpo-20", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26659850707689614, "ci": [0.2624941629453885, 0.27070285120840376], "sec": 25.965945482999814}
+{"id": "asia_pacific-stop_loss-850-twist-21", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26964984059945263, "ci": null, "sec": 0.5750827259980724}
+{"id": "asia_pacific-pairsampled-21", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.417108668307928e-05, "ci": [1.3293276900817088e-05, 1.5048896465341473e-05], "sec": 2.0331378109985963}
+{"id": "asia_pacific-stop_loss-850-mc-21", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.809432548998302}
+{"id": "asia_pacific-exceedance-450-mc-22", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.001800537109375003, "ci": [0.0014759452665629737, 0.0021251289521870323], "sec": 4.6329092899977695}
+{"id": "asia_pacific-exceedance-450-twist-22", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017964645364937012, "ci": null, "sec": 0.5835923140002706}
+{"id": "asia_pacific-exceedance-850-rdpo-21", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.522383088562085e-09, "ci": [9.355660245278208e-09, 9.689105931845961e-09], "sec": 21.919058744999347}
+{"id": "asia_pacific-exceedance-850-mc-22", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.498534929000016}
+{"id": "asia_pacific-exceedance-850-twist-22", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.441616864795046e-09, "ci": null, "sec": 0.5699465040015639}
+{"id": "asia_pacific-stop_loss-850-rdpo-21", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26908113189055183, "ci": [0.26590600317931506, 0.2722562606017886], "sec": 21.152636893999443}
+{"id": "asia_pacific-stop_loss-850-mc-22", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.525009353001224}
+{"id": "asia_pacific-stop_loss-850-twist-22", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.27090785525584976, "ci": null, "sec": 0.5464675209987035}
+{"id": "asia_pacific-exceedance-450-rdpo-22", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017943229213643011, "ci": [0.0017813427193251374, 0.0018073031234034649], "sec": 17.638306035001733}
+{"id": "asia_pacific-pairsampled-22", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.410150421111293e-05, "ci": [1.3724836820961088e-05, 1.4478171601264771e-05], "sec": 1.910210145997553}
+{"id": "asia_pacific-exceedance-850-rdpo-22", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.468179754976563e-09, "ci": [9.309734265692742e-09, 9.626625244260384e-09], "sec": 17.45338227100001}
+{"id": "asia_pacific-exceedance-450-twist-23", "key": ["asia_pacific", "exceedance", 450, "twist", 65536], "est": 0.0017991387985954836, "ci": null, "sec": 0.5146826269992744}
+{"id": "asia_pacific-exceedance-450-mc-23", "key": ["asia_pacific", "exceedance", 450, "mc", 65536], "est": 0.0017242431640625024, "ci": [0.0014065938543328382, 0.0020418924737921665], "sec": 4.767687149000267}
+{"id": "asia_pacific-exceedance-850-mc-23", "key": ["asia_pacific", "exceedance", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.622461425002257}
+{"id": "asia_pacific-exceedance-850-twist-23", "key": ["asia_pacific", "exceedance", 850, "twist", 65536], "est": 9.372354194956898e-09, "ci": null, "sec": 0.6464519920009479}
+{"id": "asia_pacific-stop_loss-850-rdpo-22", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.2657534195382171, "ci": [0.2624963577798466, 0.26901048129658756], "sec": 19.562025418999838}
+{"id": "asia_pacific-exceedance-450-rdpo-23", "key": ["asia_pacific", "exceedance", 450, "rdpo", 65536], "est": 0.0017919757519011758, "ci": [0.0017802788251617399, 0.0018036726786406117], "sec": 18.368178185999568}
+{"id": "asia_pacific-stop_loss-850-mc-23", "key": ["asia_pacific", "stop_loss", 850, "mc", 65536], "est": 0.0, "ci": [0.0, 0.0], "sec": 4.5528641720011365}
+{"id": "asia_pacific-stop_loss-850-twist-23", "key": ["asia_pacific", "stop_loss", 850, "twist", 65536], "est": 0.26237590462383314, "ci": null, "sec": 0.5601293610016}
+{"id": "asia_pacific-pairsampled-23", "key": ["asia_pacific", "joint_exhaustion", null, "rdpo", 65536], "est": 1.3689889002192422e-05, "ci": [1.2562985895513527e-05, 1.4816792108871316e-05], "sec": 2.088916185999551}
+{"id": "asia_pacific-exceedance-850-rdpo-23", "key": ["asia_pacific", "exceedance", 850, "rdpo", 65536], "est": 9.476509322102185e-09, "ci": [9.33246662892976e-09, 9.62055201527461e-09], "sec": 18.88798431699979}
+{"id": "asia_pacific-stop_loss-850-rdpo-23", "key": ["asia_pacific", "stop_loss", 850, "rdpo", 65536], "est": 0.26643788580567845, "ci": [0.26378206611919724, 0.26909370549215966], "sec": 18.637528035000287}
