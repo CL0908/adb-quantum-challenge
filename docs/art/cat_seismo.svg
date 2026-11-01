@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 150" width="220" height="150" font-family="Inter, 'Helvetica Neue', Arial, sans-serif"><rect x="6" y="80" width="208" height="54" rx="8" fill="#FBF8F1" stroke="#DDD4C4"/>
+<polyline points="0,104.0 6,101.0 12,104.8 18,106.8 24,102.5 30,101.6 36,106.1 42,105.9 48,101.3 54,102.6 60,107.9 66,104.8 72,96.6 78,105.1 84,118.4 90,96.9 96,82.6 102,120.2 108,125.1 114,82.5 120,91.1 126,121.9 132,108.4 138,93.6 144,103.7 150,109.3 156,103.1 162,100.7 168,105.5 174,106.5 180,102.0 186,102.0 192,106.5 198,105.3 204,101.2 210,103.4 216,107.0" fill="none" stroke="#C8553A" stroke-width="2.4" stroke-linejoin="round"/>
+<g transform="translate(60,82) scale(1.05)">
+  <circle cx="0" cy="-14" r="22" fill="#1F3557"/>
+  <path d="M -19 -24 L -22 -46 L -5 -33 Z" fill="#1F3557"/>
+  <path d="M 19 -24 L 22 -46 L 5 -33 Z" fill="#1F3557"/>
+  <path d="M -16 -28 L -18 -40 L -9 -32 Z" fill="#C8553A"/>
+  <path d="M 16 -28 L 18 -40 L 9 -32 Z" fill="#C8553A"/>
+  <circle cx="-8" cy="-16" r="3.2" fill="#F6F1E7"/><circle cx="8" cy="-16" r="3.2" fill="#F6F1E7"/>
+  <circle cx="-7.2" cy="-16.8" r="1.2" fill="#1F3557"/><circle cx="8.8" cy="-16.8" r="1.2" fill="#1F3557"/>
+  <path d="M -2 -9 l 2 2 l 2 -2" fill="none" stroke="#C8553A" stroke-width="1.6"/>
+  <ellipse cx="-14" cy="2" rx="9" ry="5" fill="#1F3557"/><ellipse cx="14" cy="2" rx="9" ry="5" fill="#1F3557"/>
+</g></svg>

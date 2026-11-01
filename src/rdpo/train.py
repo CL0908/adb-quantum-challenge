@@ -67,11 +67,30 @@ def v2_config(**kw):
     return RDPOConfig(**base)
 
 
+def _best_twist_sources(P):
+    """Optimal exponential twist of the (per-source capped) total loss, from the source laws themselves."""
+    from scipy.optimize import minimize_scalar
+    ells = []
+    for src in P.src:
+        ell = np.zeros(len(src["p"]))
+        for _, inc in src["da"]:
+            ell += P.a_u * inc
+        for _, inc in src["dr"]:
+            ell += P.r_u * inc
+        ells.append(ell)
+    cgf = lambda eta: sum(np.log(np.sum(src["p"] * np.exp(eta * ell))) for src, ell in zip(P.src, ells))
+    r = minimize_scalar(lambda eta: -(eta * P.T - cgf(eta)), bounds=(0.0, 5.0), method="bounded")
+    return float(r.x)
+
+
 def _warm_start(pol: RDPOPolicy):
     P = pol.P
     if P.target in ("exceedance", "stop_loss"):
-        from src.quantum.twisted import best_twist
-        eta, _ = best_twist(P.model, P.T)
+        if hasattr(P.model, "custom_sources"):
+            eta = _best_twist_sources(P)
+        else:
+            from src.quantum.twisted import best_twist
+            eta, _ = best_twist(P.model, P.T)
         for b in range(getattr(pol, "stages", 1)):
             pol.theta[pol.off_h + b * pol.G] = eta * P.T
         return eta

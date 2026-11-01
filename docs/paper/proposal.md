@@ -96,6 +96,8 @@ hardware speed-up quantum would need to beat RDPO: a falsifiable target
   benchmark, plain Monte Carlo with 16,384 paths returns *zero* in about 60% of runs. Exact enumeration
   is instant for two countries but grows as 10ⁿ, and regional pools cover 5–30 countries.
 
+![**Figure [fig:bvd].** What public data say about the bond's two dependence assumptions (details in §6.6). Earthquakes hit both countries far more often than the brief assumes, and extreme rain far less often. Together, the chance of a large pool payout rises 2.8-fold. Indicative findings, not a re-pricing of the bond.](../art/brief_vs_data.svg){.wide}
+
 ::: {.takeaway}
 The bottleneck is accuracy per query in the joint tail, and how it degrades as portfolios grow.
 :::
@@ -273,6 +275,13 @@ sampler, and a quantum loader, can exploit.
 
 # 3 Related Work
 
+::: {.opener}
+![](../art/cat_books.svg){.mascot}
+
+Where RDPO sits: rare-event simulation, control as inference, and quantum methods for risk, and the evidence standard we hold ourselves to.
+:::
+
+
 * **Catastrophe modelling practice.** Vendor platforms and the open-source Oasis Loss Modelling
   Framework chain hazard, vulnerability and financial modules. They estimate portfolio metrics by
   aggregating simulated event or year loss tables, usually by plain Monte Carlo, and they express
@@ -423,6 +432,13 @@ error, inside one budget, without bias.
 
 # 5 Experimental Protocol
 
+::: {.opener}
+![](../art/cat_laptop.svg){.mascot}
+
+Every method gets the same simulation budget, RDPO's training counts against it, and every answer is checked against an exact reference.
+:::
+
+
 * **Budget.** Every method receives the same total number of sampled term scenarios $B$; RDPO's training
   paths count against $B$.
 * **Metrics.** Relative RMSE against the exact value over independent replications (40 for the
@@ -435,6 +451,13 @@ error, inside one budget, without bias.
 * **Compute.** One CPU core per run (Intel Xeon 2.1 GHz); NumPy/SciPy; fixed seeds in every result file.
 
 # 6 Results {.newpage}
+
+::: {.opener}
+![](../art/cat_chart.svg){.mascot}
+
+How accurate, how fast, and where it fails: the benchmark, scaling to 50 countries, the Phase 2 engine, real-world data and catastrophe-model output.
+:::
+
 
 ## 6.1 Benchmark: five scenarios × five targets
 
@@ -483,6 +506,13 @@ Sparse dependence stays constant; dense dependence grows.](../../figures/paper/t
 
 ## 6.5 Phase 2 engine: complete results
 
+::: {.opener}
+![](../art/cat_stopwatch.svg){.mascot}
+
+Phase 2 engine: the same answers several times faster, a little more accuracy at scale, and exact answers for questions about two countries.
+:::
+
+
 Sections 6.1–6.4 report the **Phase 1 engine** (RDPO v1). We then implemented the first work packages of
 the Deep Development plan (WP1 engineering, WP3 RL improvements) as the **Phase 2 engine** (RDPO v2), and
 re-ran every study at the same total budgets, with more replications and identical seeds for every method.
@@ -530,7 +560,7 @@ re-ran every study at the same total budgets, with more replications and identic
 identical seeds). (a, b) Relative RMSE for the portfolio-wide targets, with exponential twisting as the
 classical reference. (c) Wall-clock time per estimate on one core.](../../figures/paper/v2_results.png){.wide}
 
-{{V2_SCALE_TABLE}}
+*Table [tab:v2scale] in Appendix A lists every setting: method, coverage, twisting and run time.*
 
 * **Accuracy.** On the portfolio-wide targets, at the same budget and seeds, the Phase 2 engine
   {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings.
@@ -567,6 +597,13 @@ reusing the parameters as the initial policy after a change of scenario or a 20%
   were large, and the trained policy always beat the initial one. They are kept as safeguards.
 
 ## 6.6 Real-world checks
+
+::: {.opener}
+![](../art/cat_seismo.svg){.mascot}
+
+Do the bond's assumptions survive contact with data? An earthquake catalogue, 120 years of loss records, 48 weather stations, and calibrated pools.
+:::
+
 
 The benchmark model is calibrated to the brief's parameters, not to observations. We tested its earthquake
 assumptions, the peril behind US$70m of each country's US$80m cover, against public data.
@@ -622,6 +659,12 @@ of loss years identifies the shared rate by maximum likelihood (`src/realdata/lo
   short data.
 * **Implied bond risk.** With the loss-data share for earthquakes (rain at the brief's value), the
   joint-exhaustion probability is {{LOSS_EXH}}: {{LOSS_EXH_FACTOR}} the brief's base case.
+
+::: {.opener}
+![](../art/cat_umbrella.svg){.mascot}
+
+Rain is the other half of the bond. Is extreme rain shared between neighbours as often as the brief assumes?
+:::
 
 **Meteorological calibration of the rain cover.** The rain cover is parametric: it pays when an
 extreme-precipitation index passes its 1-in-50-year level. Its frequency is a design choice, but the brief's 25%
@@ -697,6 +740,13 @@ it (`src/realdata/central_asia_pool.py`):
 
 ## 6.7 WP2: calibrated regional pools
 
+::: {.opener}
+![](../art/cat_globe.svg){.mascot}
+
+From two countries to regional pools built from public data: 5, 10 and 28 real countries, and a 50-country stress test.
+:::
+
+
 The work plan's WP2 asks for realistic portfolios (public hazard data, heterogeneous perils, dense dependence,
 10–50 countries). Its success criterion is a relative RMSE of at most 10% at μ ≤ 10⁻⁸ within 10⁵ paths. As a
 first step we built the pool of ADB's Central Asia Regional Economic Cooperation programme (CAREC) from public
@@ -734,6 +784,8 @@ countries of Asia and the Pacific (`src/realdata/asia_pacific_pool.py`):
   tensor network has maximum bond dimension {{AP_BOND}} and builds in {{AP_MPS_S}}, and a 100× tighter truncation
   agrees to {{AP_CHECK}}. A 50-country ring (bond dimension {{R50_BOND}}) completes the 10–50-country range of WP2.
 
+![**Figure [fig:apmap].** The data-calibrated Asia–Pacific pool. Countries with at least one main shock within 50 km (CAREC members blue, other ADB developing members teal) and the shared-earthquake links found in the catalogue; line width grows with the number of shared main shocks. Cambodia, Sri Lanka and Samoa had no main shock within 50 km in 1965–2016 and are not in the pool.](../../figures/paper/pool_map.png){.wide}
+
 {{AP_TABLE}}
 
 * **WP2 criterion at scale {{AP_CRIT_OK}}.** {{AP_CRIT}}, all with 65,536 paths (target: ≤ 10% within 10⁵
@@ -741,7 +793,52 @@ countries of Asia and the Pacific (`src/realdata/asia_pacific_pool.py`):
 
 
 
-## 6.8 Limitations
+## 6.8 Running on catastrophe-model output (ELT/YLT)
+
+::: {.opener}
+![](../art/cat_table.svg){.mascot}
+
+Analysts already have event and year loss tables. The converter lets RDPO run on them directly.
+:::
+
+
+Catastrophe models deliver an *event loss table* (ELT: each stochastic event with its annual rate and the loss it
+causes in each country) or a *year loss table* (YLT: simulated years and the events in them). The converter in
+`src/elt/convert.py` turns either into RDPO's source form, so the engine runs on model output without changing
+the analyst's workflow:
+
+1. **Payouts.** Each event's loss per country is mapped to the cover (earthquake quarter steps, rain trigger).
+2. **Footprints.** Events paying in the same set of countries form one compound Poisson source. A footprint may
+   contain any number of countries, not only pairs.
+3. **Term law.** Each source's capped three-year increment is computed exactly on its joint state space
+   (Proposition 1 per source).
+4. **Year loss tables.** Event rates are estimated as occurrences divided by the number of simulated years.
+
+![**Figure [fig:eltpipe].** From catastrophe-model output to RDPO. Events are grouped by the countries they pay
+in; each group becomes one Poisson source with an exactly computed capped three-year law.](../art/elt_pipeline.svg){.wide}
+
+*Demonstration.* No vendor ELT is public, so we built an illustrative stochastic event set from public data
+(`src/elt/demo.py`):
+
+* **Event set.** Every catalogue main shock within 300 km of the five Central Asian countries ({{ELT_LOC}}
+  locations) generates magnitudes M7.0–8.5 at Gutenberg–Richter rates.
+* **Payouts.** An event pays in every country within a magnitude-dependent radius (cat-in-a-circle), with the
+  bond's tiers. Rain uses the 2% design and the station-calibrated shared share.
+* **Size.** The resulting ELT has {{ELT_EVENTS}} events. Conversion takes {{ELT_CONV}} and yields {{ELT_SOURCES}}
+  sources, {{ELT_MULTI}} of which pay in three or more countries at once (up to {{ELT_MAXFP}}).
+* **YLT.** A 10,000-year YLT is simulated from the ELT, as a modelling agent would deliver it.
+
+{{ELT_TABLE}}
+
+* **The YLT is the bottleneck on rare questions.** For the rarest pool question, reading the answer off a
+  10,000-year YLT gives a relative error of {{ELT_RARE_YLT}}. RDPO on the converted sources gives
+  {{ELT_RARE_RDPO}} with 16,384 simulated terms.
+* **Exact where possible.** On the converted model, pair questions are exact (projected Doob sampler:
+  {{ELT_PAIR_DOOB}} for KG and TJ both exhausted).
+* **Next steps.** Next come secondary uncertainty within an event (here the mean loss is used) and Oasis LMF
+  file formats.
+
+## 6.9 Limitations
 
 * **Smooth targets.** On expected loss, scrambled Sobol remains more accurate and should be preferred.
 * **Level functions.** The cross-entropy stage is indispensable for the rarest targets, so new targets
@@ -866,6 +963,13 @@ rate near {{Q_PL_28}} (28 countries). We state both as testable targets.
 
 # 8 Resource Estimation
 
+::: {.opener}
+![](../art/cat_stopwatch.svg){.mascot}
+
+What it costs to run: seconds on one CPU core today; a fault-tolerant quantum computer far beyond today's assumptions.
+:::
+
+
 ## 8.1 Classical (the Phase 1 deliverable and the core of Phase 2)
 
 | Task | Hardware | Wall time | Memory |
@@ -892,6 +996,13 @@ magic-state factories; twisted loading with the bitwise oracle; 10% target relat
 
 # 9 Work Plan for the Deep Development Phase {.newpage}
 
+::: {.opener}
+![](../art/cat_calendar.svg){.mascot}
+
+Twelve weeks, six work packages, and a measurable success criterion for each.
+:::
+
+
 ![**Figure [fig:gantt].** Work plan in weeks from the start of the Deep Development phase. The indicative
 calendar maps W1 to November 2026; the plan shifts one-to-one if the phase starts later.](../../figures/paper/gantt.png){.wide}
 
@@ -912,6 +1023,13 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 | Single-person team capacity | Modular packages; WP4 is descoped first, then WP5. |
 
 # 10 Commercialisation and Product {.newpage}
+
+::: {.opener}
+![](../art/cat_briefcase.svg){.mascot}
+
+Who would use this, how it fits their day, and how it reaches the market.
+:::
+
 
 ::: {.advisory}
 
@@ -1082,6 +1200,13 @@ business-to-business and business-to-government, starting with public pilots.
 
 # 11 Team {.newpage}
 
+::: {.opener}
+![](../art/cat_team.svg){.mascot}
+
+One researcher, with a background that spans quantum information, reinforcement learning and stochastic climate models.
+:::
+
+
 ::: {.profile}
 **Tan Chun Loong**, sole member: research, implementation, quantum resource estimation, product and
 business case.
@@ -1118,6 +1243,13 @@ A short CV is attached as an annex.
 
 # 12 Platform Requirement, Prototype Package and AI Use
 
+::: {.opener}
+![](../art/cat_laptop.svg){.mascot}
+
+Everything runs on a laptop-class CPU. The code, data and this document are open.
+:::
+
+
 * **Platform.** No platform access is required at this stage; all results were produced on the author's
   own compute (4-core CPU, no GPU, no quantum hardware). In Deep Development the QAI Ventures sandbox
   would serve GPU-batched RDPO sweeps, compilation of the loading circuits, and emulator or hardware runs.
@@ -1130,6 +1262,10 @@ A short CV is attached as an annex.
   pair-programmer and writing assistant, following the author's research plan. The author directed the
   research questions and design decisions and reviewed all results. All numbers are produced by the
   scripts in the repository.
+
+# Appendix A: Full Phase 2 scaling table {.newpage}
+
+{{V2_SCALE_TABLE}}
 
 # References {.newpage}
 

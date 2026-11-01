@@ -93,6 +93,7 @@ All numbers come from `results/*.json` (fixed seeds), with **training included i
 | **WP2 at scale** (exact references) | 28 real Asia–Pacific countries: Pr(pool > US$850m) = 9.5×10⁻⁹ at **0.76%** error; 50-country ring: 4.1×10⁻⁹ at **0.79%** (65,536 paths; twisting 1.8–2.3%; Monte Carlo sees nothing) |
 | Rain dependence from station data (NOAA GHCN-Daily) | extreme-rain shared share **2.2% (0.6–7.7%)** vs the brief's 25%; with both dependences from data, pool exceedance 2.8× the brief, joint exhaustion about unchanged |
 | Projected Doob sampler (simplified RDPO for pair targets) | zero variance (relative spread ~10⁻¹⁵), exact conditional stress scenarios |
+| **ELT/YLT converter** (`src/elt`) | catastrophe-model event/year loss tables → RDPO sources (any footprint size); 2,411-event ELT converted in 0.1 s; rarest pool question: RDPO 5.4% vs 132% read off a 10,000-year YLT |
 | Data-calibrated five-country Central Asian pool | RDPO ×1.7–×15 more accurate than the best of Monte Carlo / twisting on rare questions, against exact answers; weak spot: pair exhaustion (9.5%, answered exactly instead) |
 
 ### Quantum stage (projected, future feature)
@@ -148,6 +149,7 @@ PYTHONPATH=. python -m src.realdata.carec_pool          # WP2: 10-country CAREC 
 PYTHONPATH=. python -m src.realdata.rain_check          # rain dependence from GHCN-Daily stations
 PYTHONPATH=. python -m src.realdata.asia_pacific_pool   # WP2 at scale: 28 countries + 50-country ring
 PYTHONPATH=. python -m src.rdpo.projected               # projected Doob sampler (pair targets)
+PYTHONPATH=. python -m src.elt.demo                     # ELT/YLT converter demonstration
 ```
 
 Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
@@ -174,12 +176,13 @@ src/tensor/          n-country model, tilted-gauge MPS (exact references), bond-
 src/quantum/         structured & twisted loading, IQAE/MLAE emulation, QCBM, NISQ analysis, resources
 src/learned/ src/scale/ src/hybrid/ src/causal/   earlier prototypes (documented in REPORT.md)
 src/realdata/        real-world checks: USGS catalogue, NOAA / EM-DAT losses, calibrated Central Asian pool
+src/elt/             ELT / YLT converter: catastrophe-model output -> RDPO sources
 api/estimate.py      estimation API (Vercel Python function) for a future web front end
 data/real/           cached public data (sources in file headers)
 src/viz/             figure style, concept art, data figures, paper build
 docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
 docs/RDPO_Proposal.pdf   the technical proposal
-results/  figures/   all numbers and plots; tests/  51 tests
+results/  figures/   all numbers and plots; tests/  54 tests
 ```
 
 ## Roadmap
@@ -215,5 +218,5 @@ plan; all numbers come from the scripts in this repository.
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-51%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-54%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

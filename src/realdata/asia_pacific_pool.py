@@ -209,3 +209,45 @@ if __name__ == "__main__":
         print(json.dumps({k: v for k, v in c.items() if k not in ("model", "n_both")}, indent=0, default=str)[:3000])
     else:
         run()
+
+
+def pool_map(path="figures/paper/pool_map.png"):
+    """Map of the data-calibrated Asia–Pacific pool: countries, CAREC members, shared-event links."""
+    import matplotlib.pyplot as plt
+    from src.viz import style as S
+    S.apply()
+    d = json.loads(Path("results/wp2_asia_pacific.json").read_text())
+    cal = d["calibration"]
+    geo = json.loads((DATA / "asia_pacific_boundaries.geojson").read_text())
+    carec = {"AF", "AZ", "GE", "KZ", "KG", "MN", "PK", "TJ", "TM", "UZ"}
+    cen = {}
+    fig, ax = plt.subplots(figsize=(10.4, 5.2))
+    for f in geo["features"]:
+        c = f["properties"]["ISO3166-1-Alpha-2"]
+        g = f["geometry"]
+        rings = [p[0] for p in g["coordinates"]] if g["type"] == "MultiPolygon" else [g["coordinates"][0]]
+        rings = [np.array(r) for r in rings]
+        rings = [np.where(r[:, :1] < 0, r + [[360, 0]], r) for r in rings]   # Pacific: shift west longitudes
+        inpool = c in cal["order"]
+        for r in rings:
+            ax.fill(r[:, 0], r[:, 1], color=(S.BLUE if c in carec else S.TEAL) if inpool else S.RULE,
+                    alpha=0.35 if inpool else 0.6, lw=0)
+            ax.plot(r[:, 0], r[:, 1], color=S.INK2, lw=0.4)
+        big = max(rings, key=len)
+        cen[c] = big.mean(0)
+    for a, b in cal["edges"]:
+        k = cal["n_both"].get(f"{a}-{b}", cal["n_both"].get(f"{b}-{a}", 1))
+        (x1, y1), (x2, y2) = cen[a], cen[b]
+        ax.plot([x1, x2], [y1, y2], color=S.TERRA, lw=0.8 + 0.12 * k, alpha=0.85, solid_capstyle="round")
+    for c in cal["order"]:
+        ax.plot(*cen[c], "o", ms=4, color=S.NAVY)
+        ax.text(cen[c][0] + 0.8, cen[c][1] + 0.8, c, fontsize=7, color=S.NAVY)
+    ax.set_xlim(38, 192); ax.set_ylim(-24, 56); ax.set_aspect(1.15)
+    ax.set_xticks([]); ax.set_yticks([])
+    for s in ax.spines.values():
+        s.set_visible(False)
+    ax.plot([], [], "s", color=S.BLUE, alpha=0.5, label="CAREC members in the pool")
+    ax.plot([], [], "s", color=S.TEAL, alpha=0.5, label="other ADB developing members in the pool")
+    ax.plot([], [], "-", color=S.TERRA, lw=2, label="shared-earthquake link found in the catalogue")
+    ax.legend(loc="lower left", fontsize=8, frameon=False)
+    S.save(fig, Path(path))

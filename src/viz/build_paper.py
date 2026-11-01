@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import art, art2, art3, paper_figs
+from . import art, art2, art3, art4, paper_figs
 from ..business import market
 
 ROOT = Path(".")
@@ -650,6 +650,44 @@ def headline_values():
     return v
 
 
+def elt_values():
+    d = json.loads((R / "elt_demo.json").read_text())
+    v = {}
+    es = d["event_set"]
+    v["ELT_EVENTS"] = f"{es['events']:,}"; v["ELT_SOURCES"] = str(d["n_sources"]); v["ELT_MAXFP"] = str(d["max_footprint"])
+    v["ELT_CONV"] = f"{1e3 * d['conversion_seconds']:.0f} ms"
+    v["ELT_LOC"] = str(es["locations"])
+    multi = sum(1 for k in d["footprints"] if k.count("-") >= 2)
+    v["ELT_MULTI"] = str(multi)
+    tl = {"exceedance": "Pr(pool payout > US${}m)", "stop_loss": "stop-loss above US${}m", "expected_loss": "expected pool payout",
+          "joint_exhaustion": "KG and TJ both exhausted"}
+    get = {(r["target"], r["threshold_musd"], r["method"]): r for r in d["rows"]}
+    keys = list(dict.fromkeys((r["target"], r["threshold_musd"]) for r in d["rows"]))
+    order = {"exceedance": 0, "stop_loss": 1, "joint_exhaustion": 2, "expected_loss": 3}
+    keys.sort(key=lambda k: (order[k[0]], k[1] or 0))
+    lines = [f"**Table [tab:elt].** RDPO on a converted event loss table against exact answers, {d['reps']} replications. "
+             "*RDPO* and *plain MC*: 16,384 simulated terms from the converted sources. *YLT, 10,000 years*: the estimate "
+             "an analyst would read directly off a 10,000-year year loss table (3,333 three-year terms).", "",
+             "| Question | exact value | RDPO | plain Monte Carlo | YLT, 10,000 years | exact from the YLT itself |",
+             "|---|---|---|---|---|---|"]
+    for t, thr in keys:
+        r = get.get((t, thr, "rdpo")); mc = get.get((t, thr, "mc")); y = get.get((t, thr, "ylt"))
+        if not r:
+            continue
+        val = (money(r["mu"]) if t in ("stop_loss", "expected_loss") else sci(r["mu"]))
+        ey = d["exact_from_ylt"][f"{t}|{thr}"]
+        eyv = money(ey) if t in ("stop_loss", "expected_loss") else sci(ey)
+        lines.append(f"| {tl[t].format(thr)} | {val} | **{pct(r['rel_rmse'])}** ({pct(r['ci_coverage'], 0)}) | "
+                     f"{pct(mc['rel_rmse']) if mc else '—'} | {pct(y['rel_rmse']) if y else '—'} | {eyv} |")
+    v["ELT_TABLE"] = "\n".join(lines)
+    rare = get.get(("exceedance", max(k[1] for k in keys if k[0] == "exceedance"), "rdpo"))
+    yr = get.get(("exceedance", max(k[1] for k in keys if k[0] == "exceedance"), "ylt"))
+    v["ELT_RARE_RDPO"] = pct(rare["rel_rmse"], 1) if rare else "—"
+    v["ELT_RARE_YLT"] = pct(yr["rel_rmse"], 0) if yr else "—"
+    v["ELT_PAIR_DOOB"] = sci(d["projected_doob_pair"])
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -680,7 +718,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values):
         try:
             vals.update(fn())
         except Exception as ex:
@@ -724,6 +762,12 @@ def build(cv=None):
     art2.main()
     (R / "market_model.json").write_text(json.dumps(market.model(), indent=2))
     art3.main()
+    art4.main()
+    try:
+        from ..realdata.asia_pacific_pool import pool_map
+        pool_map()
+    except FileNotFoundError as ex:
+        print('pool map skipped:', ex)
     paper_figs.main()
     left = fill()
     html = PAPER / "proposal.html"

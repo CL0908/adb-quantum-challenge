@@ -1,0 +1,360 @@
+{"id": "exceedance-160-mc-0", "key": ["exceedance", 160, "mc"], "est": 0.03521728515625002, "ci": [0.03239475247333418, 0.03803981783916586], "sec": 0.23298008699930506}
+{"id": "exceedance-160-ylt-0", "key": ["exceedance", 160, "ylt"], "est": 0.032403240324032405, "ci": null, "sec": 0.30677764500069316}
+{"id": "exceedance-320-mc-0", "key": ["exceedance", 320, "mc"], "est": 0.0003662109375000002, "ci": [7.325272538316336e-05, 0.0006591691496168371], "sec": 0.1930456759982917}
+{"id": "exceedance-320-rdpo-0", "key": ["exceedance", 320, "rdpo"], "est": 0.00022982900098626914, "ci": [0.00022557098127641903, 0.00023408702069611925], "sec": 0.5271217080007773}
+{"id": "exceedance-320-ylt-0", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.2986465460016916}
+{"id": "exceedance-160-rdpo-0", "key": ["exceedance", 160, "rdpo"], "est": 0.03492530700924292, "ci": [0.03454616607278787, 0.035304447945697974], "sec": 0.6227919010016194}
+{"id": "stop_loss-240-mc-0", "key": ["stop_loss", 240, "mc"], "est": 286102.29492187523, "ci": [228179.36641197995, 344025.2234317705], "sec": 0.18149843100036378}
+{"id": "stop_loss-240-ylt-0", "key": ["stop_loss", 240, "ylt"], "est": 246774.67746774678, "ci": null, "sec": 0.2883641109983728}
+{"id": "expected_loss-None-mc-0", "key": ["expected_loss", null, "mc"], "est": 29866790.77148439, "ci": [29080310.565227613, 30653270.977741167], "sec": 0.2150113829993643}
+{"id": "stop_loss-240-rdpo-0", "key": ["stop_loss", 240, "rdpo"], "est": 260219.36968594664, "ci": [257298.66766375818, 263140.07170813513], "sec": 0.663496289998875}
+{"id": "expected_loss-None-ylt-0", "key": ["expected_loss", null, "ylt"], "est": 29051155.11551155, "ci": null, "sec": 0.2593190930019773}
+{"id": "joint_exhaustion-None-mc-0", "key": ["joint_exhaustion", null, "mc"], "est": 0.0001220703125000001, "ci": [-4.7089850910361536e-05, 0.00029123047591036175], "sec": 0.09954340399781358}
+{"id": "joint_exhaustion-None-rdpo-0", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.0001346291338338812, "ci": [0.00012930342675987244, 0.00013995484090788995], "sec": 0.2635840329967323}
+{"id": "expected_loss-None-rdpo-0", "key": ["expected_loss", null, "rdpo"], "est": 30214402.494795702, "ci": [30028983.77606807, 30399821.213523336], "sec": 0.6530031790025532}
+{"id": "exceedance-160-mc-1", "key": ["exceedance", 160, "mc"], "est": 0.03405761718750002, "ci": [0.03128009354417115, 0.036835140830828894], "sec": 0.2233984459999192}
+{"id": "joint_exhaustion-None-ylt-0", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.28136370399806765}
+{"id": "exceedance-160-ylt-1", "key": ["exceedance", 160, "ylt"], "est": 0.031203120312031204, "ci": null, "sec": 0.28801662199839484}
+{"id": "exceedance-320-mc-1", "key": ["exceedance", 320, "mc"], "est": 6.103515625000008e-05, "ci": [-5.859375000000008e-05, 0.00018066406250000024], "sec": 0.18546095299825538}
+{"id": "exceedance-160-rdpo-1", "key": ["exceedance", 160, "rdpo"], "est": 0.034747519810710004, "ci": [0.034460298770847844, 0.03503474085057216], "sec": 0.4479831249991548}
+{"id": "exceedance-320-ylt-1", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.2771583579997241}
+{"id": "stop_loss-240-mc-1", "key": ["stop_loss", 240, "mc"], "est": 219268.79882812523, "ci": [172338.50080145756, 266199.0968547929], "sec": 0.21957522199954838}
+{"id": "exceedance-320-rdpo-1", "key": ["exceedance", 320, "rdpo"], "est": 0.00023308169130151595, "ci": [0.00022643339072164808, 0.00023972999188138383], "sec": 0.5138225369992142}
+{"id": "stop_loss-240-rdpo-1", "key": ["stop_loss", 240, "rdpo"], "est": 262717.97041345685, "ci": [257444.41846923914, 267991.52235767455], "sec": 0.3588917000015499}
+{"id": "stop_loss-240-ylt-1", "key": ["stop_loss", 240, "ylt"], "est": 282028.202820282, "ci": null, "sec": 0.2991941529980977}
+{"id": "expected_loss-None-mc-1", "key": ["expected_loss", null, "mc"], "est": 29876403.808593765, "ci": [29104234.39147048, 30648573.22571705], "sec": 0.2167080180006451}
+{"id": "joint_exhaustion-None-mc-1", "key": ["joint_exhaustion", null, "mc"], "est": 0.00030517578125000027, "ci": [3.7703545343893946e-05, 0.0005726480171561067], "sec": 0.12456212799952482}
+{"id": "joint_exhaustion-None-rdpo-1", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013472840031168108, "ci": [0.00012995172035807465, 0.0001395050802652875], "sec": 0.23552582999764127}
+{"id": "expected_loss-None-ylt-1", "key": ["expected_loss", null, "ylt"], "est": 28942394.23942394, "ci": null, "sec": 0.2748624279993237}
+{"id": "joint_exhaustion-None-ylt-1", "key": ["joint_exhaustion", null, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.2982754120021127}
+{"id": "exceedance-160-mc-2", "key": ["exceedance", 160, "mc"], "est": 0.031860351562500014, "ci": [0.029170754521597, 0.03454994860340303], "sec": 0.18765655099923606}
+{"id": "expected_loss-None-rdpo-1", "key": ["expected_loss", null, "rdpo"], "est": 30346392.491909217, "ci": [30149475.9518033, 30543309.032015134], "sec": 0.5678855969999859}
+{"id": "exceedance-160-ylt-2", "key": ["exceedance", 160, "ylt"], "est": 0.035703570357035704, "ci": null, "sec": 0.27960149700084}
+{"id": "exceedance-160-rdpo-2", "key": ["exceedance", 160, "rdpo"], "est": 0.03501943576498385, "ci": [0.034751547483789405, 0.03528732404617829], "sec": 0.47834963700006483}
+{"id": "exceedance-320-mc-2", "key": ["exceedance", 320, "mc"], "est": 0.0003662109375000002, "ci": [7.32288678797958e-05, 0.0006591930071202046], "sec": 0.20107669400022132}
+{"id": "stop_loss-240-mc-2", "key": ["stop_loss", 240, "mc"], "est": 260467.52929687523, "ci": [202799.98099046302, 318135.0776032874], "sec": 0.2021423890000733}
+{"id": "exceedance-320-ylt-2", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.27749681000204873}
+{"id": "exceedance-320-rdpo-2", "key": ["exceedance", 320, "rdpo"], "est": 0.00023285860593729157, "ci": [0.00022791086909758194, 0.0002378063427770012], "sec": 0.5338719219980703}
+{"id": "stop_loss-240-rdpo-2", "key": ["stop_loss", 240, "rdpo"], "est": 259737.6708168543, "ci": [255617.71245450643, 263857.6291792022], "sec": 0.4641998999977659}
+{"id": "expected_loss-None-mc-2", "key": ["expected_loss", null, "mc"], "est": 29327087.402343765, "ci": [28561046.15091237, 30093128.65377516], "sec": 0.20429408400013926}
+{"id": "stop_loss-240-ylt-2", "key": ["stop_loss", 240, "ylt"], "est": 410291.0291029103, "ci": null, "sec": 0.2895320690004155}
+{"id": "joint_exhaustion-None-mc-2", "key": ["joint_exhaustion", null, "mc"], "est": 0.00012207031250000008, "ci": [-4.711050917060954e-05, 0.0002912511341706097], "sec": 0.10577554799965583}
+{"id": "joint_exhaustion-None-rdpo-2", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013719534623461566, "ci": [0.0001341099774571021, 0.00014028071501212924], "sec": 0.2357038010013639}
+{"id": "expected_loss-None-ylt-2", "key": ["expected_loss", null, "ylt"], "est": 31068856.88568857, "ci": null, "sec": 0.27272524400177645}
+{"id": "expected_loss-None-rdpo-2", "key": ["expected_loss", null, "rdpo"], "est": 30121305.771513257, "ci": [29944103.27707098, 30298508.265955534], "sec": 0.5203882259993406}
+{"id": "joint_exhaustion-None-ylt-2", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.27385129100002814}
+{"id": "exceedance-160-mc-3", "key": ["exceedance", 160, "mc"], "est": 0.03533935546875002, "ci": [0.03251230585077179, 0.03816640508672825], "sec": 0.214200759997766}
+{"id": "exceedance-160-ylt-3", "key": ["exceedance", 160, "ylt"], "est": 0.0354035403540354, "ci": null, "sec": 0.270031182000821}
+{"id": "exceedance-320-mc-3", "key": ["exceedance", 320, "mc"], "est": 0.00024414062499999997, "ci": [4.897419649957109e-06, 0.00048338383035004284], "sec": 0.20403876999989734}
+{"id": "exceedance-160-rdpo-3", "key": ["exceedance", 160, "rdpo"], "est": 0.03528312118149137, "ci": [0.03488870590003986, 0.03567753646294288], "sec": 0.45244550999996136}
+{"id": "exceedance-320-ylt-3", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.2765288580012566}
+{"id": "stop_loss-240-mc-3", "key": ["stop_loss", 240, "mc"], "est": 230255.1269531252, "ci": [179691.45023699754, 280818.8036692529], "sec": 0.2303270189986506}
+{"id": "exceedance-320-rdpo-3", "key": ["exceedance", 320, "rdpo"], "est": 0.0002471896525316114, "ci": [0.00022028580769709684, 0.000274093497366126], "sec": 0.6143406760020298}
+{"id": "stop_loss-240-rdpo-3", "key": ["stop_loss", 240, "rdpo"], "est": 260209.14307438582, "ci": [257510.1984342207, 262908.08771455096], "sec": 0.3977827629969397}
+{"id": "stop_loss-240-ylt-3", "key": ["stop_loss", 240, "ylt"], "est": 314281.42814281426, "ci": null, "sec": 0.2941345770013868}
+{"id": "expected_loss-None-mc-3", "key": ["expected_loss", null, "mc"], "est": 30225524.902343765, "ci": [29445181.663148377, 31005868.141539153], "sec": 0.2673518480005441}
+{"id": "joint_exhaustion-None-rdpo-3", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.000113835303355391, "ci": [7.512453673423709e-05, 0.00015254606997654492], "sec": 0.2355600820010295}
+{"id": "expected_loss-None-ylt-3", "key": ["expected_loss", null, "ylt"], "est": 31224122.412241224, "ci": null, "sec": 0.33732923199931975}
+{"id": "joint_exhaustion-None-mc-3", "key": ["joint_exhaustion", null, "mc"], "est": 0.00012207031250000008, "ci": [-4.711050917060954e-05, 0.0002912511341706097], "sec": 0.11807890999989468}
+{"id": "expected_loss-None-rdpo-3", "key": ["expected_loss", null, "rdpo"], "est": 30366821.622246694, "ci": [30113611.244011424, 30620032.000481963], "sec": 0.5146746250029537}
+{"id": "exceedance-160-mc-4", "key": ["exceedance", 160, "mc"], "est": 0.03601074218750003, "ci": [0.033157703099057044, 0.03886378127594301], "sec": 0.205885217001196}
+{"id": "joint_exhaustion-None-ylt-3", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.285521810001228}
+{"id": "exceedance-160-ylt-4", "key": ["exceedance", 160, "ylt"], "est": 0.030903090309030903, "ci": null, "sec": 0.2327319610012637}
+{"id": "exceedance-160-rdpo-4", "key": ["exceedance", 160, "rdpo"], "est": 0.034608019130862235, "ci": [0.03431265500227692, 0.03490338325944755], "sec": 0.46656575800079736}
+{"id": "exceedance-320-mc-4", "key": ["exceedance", 320, "mc"], "est": 0.0003051757812500001, "ci": [3.775581408950137e-05, 0.0005725957484104989], "sec": 0.23939436299770023}
+{"id": "exceedance-320-ylt-4", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.32221991299957153}
+{"id": "stop_loss-240-mc-4", "key": ["stop_loss", 240, "mc"], "est": 259246.82617187523, "ci": [203189.59310513237, 315304.0592386181], "sec": 0.18791515400153003}
+{"id": "stop_loss-240-ylt-4", "key": ["stop_loss", 240, "ylt"], "est": 172517.2517251725, "ci": null, "sec": 0.24517400299737346}
+{"id": "exceedance-320-rdpo-4", "key": ["exceedance", 320, "rdpo"], "est": 0.00023129636333622642, "ci": [0.00022523925854246778, 0.00023735346812998507], "sec": 0.6238772890028486}
+{"id": "stop_loss-240-rdpo-4", "key": ["stop_loss", 240, "rdpo"], "est": 261994.3043781433, "ci": [258082.5256533874, 265906.08310289925], "sec": 0.3974735359988699}
+{"id": "expected_loss-None-mc-4", "key": ["expected_loss", null, "mc"], "est": 30634155.273437515, "ci": [29843735.077099044, 31424575.469775986], "sec": 0.18547081500219065}
+{"id": "joint_exhaustion-None-rdpo-4", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00014233719366535063, "ci": [0.0001365312689730688, 0.00014814311835763247], "sec": 0.22568384500118555}
+{"id": "joint_exhaustion-None-mc-4", "key": ["joint_exhaustion", null, "mc"], "est": 0.00012207031250000016, "ci": [-4.711050917060954e-05, 0.00029125113417060986], "sec": 0.09475706000011996}
+{"id": "expected_loss-None-rdpo-4", "key": ["expected_loss", null, "rdpo"], "est": 30105412.28111988, "ci": [29927591.470987484, 30283233.091252275], "sec": 0.47670989700054633}
+{"id": "expected_loss-None-ylt-4", "key": ["expected_loss", null, "ylt"], "est": 29327932.793279327, "ci": null, "sec": 0.29859987899908447}
+{"id": "exceedance-160-mc-5", "key": ["exceedance", 160, "mc"], "est": 0.03631591796875003, "ci": [0.033451379766575244, 0.03918045617092481], "sec": 0.18593711799985613}
+{"id": "joint_exhaustion-None-ylt-4", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.27176192000115407}
+{"id": "exceedance-160-ylt-5", "key": ["exceedance", 160, "ylt"], "est": 0.0348034803480348, "ci": null, "sec": 0.2512748109984386}
+{"id": "exceedance-160-rdpo-5", "key": ["exceedance", 160, "rdpo"], "est": 0.03551345646332971, "ci": [0.03502976285773915, 0.035997150068920264], "sec": 0.4012964009998541}
+{"id": "exceedance-320-mc-5", "key": ["exceedance", 320, "mc"], "est": 0.0001220703125000001, "ci": [-4.7110509170609566e-05, 0.0002912511341706098], "sec": 0.2021502559982764}
+{"id": "exceedance-320-ylt-5", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.3451106049978989}
+{"id": "stop_loss-240-mc-5", "key": ["stop_loss", 240, "mc"], "est": 267333.9843750003, "ci": [212782.90626697053, 321885.06248303], "sec": 0.1980783809995046}
+{"id": "exceedance-320-rdpo-5", "key": ["exceedance", 320, "rdpo"], "est": 0.0002295331637684721, "ci": [0.00022452281307312126, 0.00023454351446382292], "sec": 0.5643514580006013}
+{"id": "stop_loss-240-rdpo-5", "key": ["stop_loss", 240, "rdpo"], "est": 259562.42877531974, "ci": [255965.53005742125, 263159.32749321824], "sec": 0.39983596699676127}
+{"id": "stop_loss-240-ylt-5", "key": ["stop_loss", 240, "ylt"], "est": 297779.7779777978, "ci": null, "sec": 0.23024742099732975}
+{"id": "expected_loss-None-mc-5", "key": ["expected_loss", null, "mc"], "est": 30332489.01367189, "ci": [29544044.94510092, 31120933.08224286], "sec": 0.19268191200171714}
+{"id": "expected_loss-None-ylt-5", "key": ["expected_loss", null, "ylt"], "est": 30765826.582658265, "ci": null, "sec": 0.2501497750017734}
+{"id": "joint_exhaustion-None-mc-5", "key": ["joint_exhaustion", null, "mc"], "est": 0.0004882812500000004, "ci": [0.00014997125309781223, 0.0008265912469021886], "sec": 0.10142158800226753}
+{"id": "joint_exhaustion-None-rdpo-5", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013678586224545895, "ci": [0.00012799591748304976, 0.00014557580700786814], "sec": 0.21441494499958935}
+{"id": "expected_loss-None-rdpo-5", "key": ["expected_loss", null, "rdpo"], "est": 30306361.306637153, "ci": [30119394.265201077, 30493328.34807323], "sec": 0.4815624869988824}
+{"id": "exceedance-160-mc-6", "key": ["exceedance", 160, "mc"], "est": 0.03442382812500002, "ci": [0.03163196494264577, 0.03721569130735427], "sec": 0.16096014899812872}
+{"id": "joint_exhaustion-None-ylt-5", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.25626128099975176}
+{"id": "exceedance-160-ylt-6", "key": ["exceedance", 160, "ylt"], "est": 0.039903990399039906, "ci": null, "sec": 0.25958098599949153}
+{"id": "exceedance-320-mc-6", "key": ["exceedance", 320, "mc"], "est": 0.00018310546875000016, "ci": [-2.408100787333438e-05, 0.0003902919453733347], "sec": 0.18243739399986225}
+{"id": "exceedance-160-rdpo-6", "key": ["exceedance", 160, "rdpo"], "est": 0.035146474654926256, "ci": [0.03484304808126947, 0.03544990122858304], "sec": 0.4144298559986055}
+{"id": "exceedance-320-rdpo-6", "key": ["exceedance", 320, "rdpo"], "est": 0.0002394647717929579, "ci": [0.00022571738098104032, 0.00025321216260487553], "sec": 0.3607939610010362}
+{"id": "exceedance-320-ylt-6", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.24383216299975174}
+{"id": "stop_loss-240-mc-6", "key": ["stop_loss", 240, "mc"], "est": 249786.37695312523, "ci": [196818.622585076, 302754.13132117444], "sec": 0.16109294499983662}
+{"id": "expected_loss-None-mc-6", "key": ["expected_loss", null, "mc"], "est": 29903869.628906265, "ci": [29127362.685008418, 30680376.572804112], "sec": 0.15720842500013532}
+{"id": "stop_loss-240-rdpo-6", "key": ["stop_loss", 240, "rdpo"], "est": 262838.9943977443, "ci": [259503.46400495863, 266174.52479053], "sec": 0.41055990700260736}
+{"id": "stop_loss-240-ylt-6", "key": ["stop_loss", 240, "ylt"], "est": 190519.0519051905, "ci": null, "sec": 0.28418541999781155}
+{"id": "expected_loss-None-ylt-6", "key": ["expected_loss", null, "ylt"], "est": 30966846.684668466, "ci": null, "sec": 0.20911437699760427}
+{"id": "joint_exhaustion-None-mc-6", "key": ["joint_exhaustion", null, "mc"], "est": 0.00018310546875000014, "ci": [-2.4081007873334406e-05, 0.0003902919453733347], "sec": 0.13189693099775468}
+{"id": "joint_exhaustion-None-rdpo-6", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013654299448798393, "ci": [0.0001338037320055662, 0.00013928225697040165], "sec": 0.22466103600163478}
+{"id": "expected_loss-None-rdpo-6", "key": ["expected_loss", null, "rdpo"], "est": 30341040.36383021, "ci": [30116169.308834188, 30565911.41882623], "sec": 0.5518829569991794}
+{"id": "joint_exhaustion-None-ylt-6", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.27281809199848794}
+{"id": "exceedance-160-mc-7", "key": ["exceedance", 160, "mc"], "est": 0.03454589843750003, "ci": [0.031749532517412714, 0.03734226435758734], "sec": 0.19877645800079335}
+{"id": "exceedance-160-ylt-7", "key": ["exceedance", 160, "ylt"], "est": 0.030003000300030003, "ci": null, "sec": 0.310655207002128}
+{"id": "exceedance-160-rdpo-7", "key": ["exceedance", 160, "rdpo"], "est": 0.035070503327906094, "ci": [0.03471508791796213, 0.03542591873785006], "sec": 0.48845114600044326}
+{"id": "exceedance-320-mc-7", "key": ["exceedance", 320, "mc"], "est": 0.0003051757812500002, "ci": [3.770354534389389e-05, 0.0005726480171561065], "sec": 0.21321209400048247}
+{"id": "exceedance-320-rdpo-7", "key": ["exceedance", 320, "rdpo"], "est": 0.00024108607719360123, "ci": [0.00022124836470496922, 0.0002609237896822332], "sec": 0.3570753469975898}
+{"id": "exceedance-320-ylt-7", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.22115146700161858}
+{"id": "stop_loss-240-mc-7", "key": ["stop_loss", 240, "mc"], "est": 247955.32226562523, "ci": [193435.10878290012, 302475.5357483503], "sec": 0.21246345400140854}
+{"id": "stop_loss-240-rdpo-7", "key": ["stop_loss", 240, "rdpo"], "est": 261646.2262701428, "ci": [259114.5253517446, 264177.927188541], "sec": 0.44037068100078613}
+{"id": "stop_loss-240-ylt-7", "key": ["stop_loss", 240, "ylt"], "est": 166516.65166516652, "ci": null, "sec": 0.3333879959973274}
+{"id": "expected_loss-None-mc-7", "key": ["expected_loss", null, "mc"], "est": 30581054.687500015, "ci": [29801007.231098026, 31361102.143902004], "sec": 0.24635064200265333}
+{"id": "expected_loss-None-rdpo-7", "key": ["expected_loss", null, "rdpo"], "est": 30364185.944621373, "ci": [30153782.021010116, 30574589.86823263], "sec": 0.4261001880004187}
+{"id": "joint_exhaustion-None-mc-7", "key": ["joint_exhaustion", null, "mc"], "est": 0.0003051757812500002, "ci": [3.7716611572665315e-05, 0.0005726349509273352], "sec": 0.1695015940022131}
+{"id": "expected_loss-None-ylt-7", "key": ["expected_loss", null, "ylt"], "est": 29355685.568556856, "ci": null, "sec": 0.3003151090015308}
+{"id": "joint_exhaustion-None-rdpo-7", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00016453907395321137, "ci": [0.00011931640093031334, 0.0002097617469761094], "sec": 0.27622507699925336}
+{"id": "exceedance-160-mc-8", "key": ["exceedance", 160, "mc"], "est": 0.03588867187500003, "ci": [0.033040238559478706, 0.03873710519052135], "sec": 0.20707490300264908}
+{"id": "joint_exhaustion-None-ylt-7", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.30840860399985104}
+{"id": "exceedance-160-ylt-8", "key": ["exceedance", 160, "ylt"], "est": 0.025502550255025503, "ci": null, "sec": 0.30287045200020657}
+{"id": "exceedance-320-mc-8", "key": ["exceedance", 320, "mc"], "est": 0.00030517578125000027, "ci": [3.7716611572665315e-05, 0.0005726349509273352], "sec": 0.23934203799944953}
+{"id": "exceedance-160-rdpo-8", "key": ["exceedance", 160, "rdpo"], "est": 0.0350008539099359, "ci": [0.034665668123919864, 0.03533603969595194], "sec": 0.6008050229975197}
+{"id": "exceedance-320-ylt-8", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.2846830479975324}
+{"id": "exceedance-320-rdpo-8", "key": ["exceedance", 320, "rdpo"], "est": 0.00023093288317835447, "ci": [0.0002249175008601193, 0.00023694826549658965], "sec": 0.4795076150003297}
+{"id": "stop_loss-240-mc-8", "key": ["stop_loss", 240, "mc"], "est": 284423.8281250003, "ci": [227786.96288746677, 341060.6933625338], "sec": 0.19660884800032363}
+{"id": "stop_loss-240-ylt-8", "key": ["stop_loss", 240, "ylt"], "est": 246774.67746774678, "ci": null, "sec": 0.29307270199933555}
+{"id": "stop_loss-240-rdpo-8", "key": ["stop_loss", 240, "rdpo"], "est": 258440.460724028, "ci": [255243.66023003357, 261637.26121802244], "sec": 0.45650463700076216}
+{"id": "expected_loss-None-mc-8", "key": ["expected_loss", null, "mc"], "est": 30605468.750000015, "ci": [29816779.67960607, 31394157.82039396], "sec": 0.20041569499881007}
+{"id": "joint_exhaustion-None-mc-8", "key": ["joint_exhaustion", null, "mc"], "est": 0.0001831054687500001, "ci": [-2.4081007873334433e-05, 0.00039029194537333465], "sec": 0.11829234000106226}
+{"id": "expected_loss-None-ylt-8", "key": ["expected_loss", null, "ylt"], "est": 28983648.364836484, "ci": null, "sec": 0.2413880810017872}
+{"id": "expected_loss-None-rdpo-8", "key": ["expected_loss", null, "rdpo"], "est": 30443557.051720794, "ci": [30195089.700731903, 30692024.402709685], "sec": 0.5135627400013618}
+{"id": "joint_exhaustion-None-rdpo-8", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.0001333563664720698, "ci": [0.00012554062905254591, 0.00014117210389159366], "sec": 0.3208812150005542}
+{"id": "joint_exhaustion-None-ylt-8", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.272671339000226}
+{"id": "exceedance-160-mc-9", "key": ["exceedance", 160, "mc"], "est": 0.03472900390625003, "ci": [0.03192531714001676, 0.0375326906724833], "sec": 0.21196517100179335}
+{"id": "exceedance-160-ylt-9", "key": ["exceedance", 160, "ylt"], "est": 0.0333033303330333, "ci": null, "sec": 0.3307146279985318}
+{"id": "exceedance-160-rdpo-9", "key": ["exceedance", 160, "rdpo"], "est": 0.035109575066352657, "ci": [0.03479196000788144, 0.03542719012482387], "sec": 0.43918821699844557}
+{"id": "exceedance-320-mc-9", "key": ["exceedance", 320, "mc"], "est": 0.00012207031250000005, "ci": [-4.708985091036148e-05, 0.0002912304759103616], "sec": 0.2232691690005595}
+{"id": "exceedance-320-rdpo-9", "key": ["exceedance", 320, "rdpo"], "est": 0.0002342425095089679, "ci": [0.0002232170696976705, 0.0002452679493202653], "sec": 0.5117402779978875}
+{"id": "stop_loss-240-mc-9", "key": ["stop_loss", 240, "mc"], "est": 249633.78906250023, "ci": [197972.8584359302, 301294.7196890703], "sec": 0.20411401499950443}
+{"id": "exceedance-320-ylt-9", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.320546759001445}
+{"id": "expected_loss-None-mc-9", "key": ["expected_loss", null, "mc"], "est": 30025634.765625015, "ci": [29246643.668374423, 30804625.862875607], "sec": 0.22438640899781603}
+{"id": "stop_loss-240-rdpo-9", "key": ["stop_loss", 240, "rdpo"], "est": 261244.62795721888, "ci": [258400.98679284833, 264088.26912158943], "sec": 0.5385176349991525}
+{"id": "stop_loss-240-ylt-9", "key": ["stop_loss", 240, "ylt"], "est": 222022.202220222, "ci": null, "sec": 0.3968952540017199}
+{"id": "expected_loss-None-ylt-9", "key": ["expected_loss", null, "ylt"], "est": 30114011.401140112, "ci": null, "sec": 0.24524282199854497}
+{"id": "joint_exhaustion-None-mc-9", "key": ["joint_exhaustion", null, "mc"], "est": 0.00030517578125000027, "ci": [3.771661157266537e-05, 0.0005726349509273352], "sec": 0.14466457899834495}
+{"id": "expected_loss-None-rdpo-9", "key": ["expected_loss", null, "rdpo"], "est": 30400380.420072366, "ci": [30196553.602635823, 30604207.237508908], "sec": 0.5392856859980384}
+{"id": "joint_exhaustion-None-rdpo-9", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013134080865562093, "ci": [0.0001268602167780284, 0.00013582140053321345], "sec": 0.3565122420004627}
+{"id": "exceedance-160-mc-10", "key": ["exceedance", 160, "mc"], "est": 0.03112792968750002, "ci": [0.02846842799611804, 0.033787431378882], "sec": 0.20033522200174048}
+{"id": "joint_exhaustion-None-ylt-9", "key": ["joint_exhaustion", null, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.3475587499997346}
+{"id": "exceedance-160-ylt-10", "key": ["exceedance", 160, "ylt"], "est": 0.030903090309030903, "ci": null, "sec": 0.36085964599988074}
+{"id": "exceedance-320-mc-10", "key": ["exceedance", 320, "mc"], "est": 0.0001831054687500001, "ci": [-2.4081007873334406e-05, 0.0003902919453733346], "sec": 0.20424177500171936}
+{"id": "exceedance-160-rdpo-10", "key": ["exceedance", 160, "rdpo"], "est": 0.03500782196497913, "ci": [0.03472817374691328, 0.03528747018304498], "sec": 0.6110314239995205}
+{"id": "exceedance-320-rdpo-10", "key": ["exceedance", 320, "rdpo"], "est": 0.0002265756873366756, "ci": [0.00022260425277338672, 0.0002305471218999645], "sec": 0.5185851669994008}
+{"id": "exceedance-320-ylt-10", "key": ["exceedance", 320, "ylt"], "est": 0.0012001200120012002, "ci": null, "sec": 0.3032996060028381}
+{"id": "stop_loss-240-mc-10", "key": ["stop_loss", 240, "mc"], "est": 245666.5039062502, "ci": [194439.8591395925, 296893.1486729079], "sec": 0.2814944159981678}
+{"id": "stop_loss-240-ylt-10", "key": ["stop_loss", 240, "ylt"], "est": 322532.2532253225, "ci": null, "sec": 0.3436791419990186}
+{"id": "expected_loss-None-mc-10", "key": ["expected_loss", null, "mc"], "est": 29270782.47070314, "ci": [28512062.33848092, 30029502.60292536], "sec": 0.24089105899838614}
+{"id": "stop_loss-240-rdpo-10", "key": ["stop_loss", 240, "rdpo"], "est": 260798.96805224163, "ci": [256923.16579965275, 264674.7703048305], "sec": 0.5963516359988716}
+{"id": "expected_loss-None-rdpo-10", "key": ["expected_loss", null, "rdpo"], "est": 30150515.096564647, "ci": [29968116.259228427, 30332913.933900867], "sec": 0.39730686099937884}
+{"id": "joint_exhaustion-None-mc-10", "key": ["joint_exhaustion", null, "mc"], "est": 0.00012207031250000008, "ci": [-4.711050917060954e-05, 0.0002912511341706097], "sec": 0.12794598200343898}
+{"id": "joint_exhaustion-None-rdpo-10", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.0001363535372533494, "ci": [0.0001297478059336013, 0.00014295926857309748], "sec": 0.2760101649982971}
+{"id": "expected_loss-None-ylt-10", "key": ["expected_loss", null, "ylt"], "est": 28747374.73747375, "ci": null, "sec": 0.3505373099978897}
+{"id": "joint_exhaustion-None-ylt-10", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.2995231499990041}
+{"id": "exceedance-160-mc-11", "key": ["exceedance", 160, "mc"], "est": 0.03350830078125002, "ci": [0.03075240161299226, 0.03626419994950778], "sec": 0.2623482339986367}
+{"id": "exceedance-160-ylt-11", "key": ["exceedance", 160, "ylt"], "est": 0.0405040504050405, "ci": null, "sec": 0.3033555059992068}
+{"id": "exceedance-160-rdpo-11", "key": ["exceedance", 160, "rdpo"], "est": 0.0350507911025515, "ci": [0.03461137612293133, 0.03549020608217167], "sec": 0.5352752520011563}
+{"id": "exceedance-320-mc-11", "key": ["exceedance", 320, "mc"], "est": 0.00012207031250000005, "ci": [-4.711050917060951e-05, 0.0002912511341706096], "sec": 0.24323252399699413}
+{"id": "exceedance-320-ylt-11", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.25599602600050275}
+{"id": "exceedance-320-rdpo-11", "key": ["exceedance", 320, "rdpo"], "est": 0.00023187926143865333, "ci": [0.0002272057585067058, 0.00023655276437060084], "sec": 0.6036174239998218}
+{"id": "stop_loss-240-mc-11", "key": ["stop_loss", 240, "mc"], "est": 242462.15820312526, "ci": [190884.1561843452, 294040.16022190533], "sec": 0.23583441399750882}
+{"id": "stop_loss-240-rdpo-11", "key": ["stop_loss", 240, "rdpo"], "est": 258011.96218172894, "ci": [254607.93451985114, 261415.98984360675], "sec": 0.4221273849980207}
+{"id": "stop_loss-240-ylt-11", "key": ["stop_loss", 240, "ylt"], "est": 231773.17731773178, "ci": null, "sec": 0.2585664389989688}
+{"id": "expected_loss-None-mc-11", "key": ["expected_loss", null, "mc"], "est": 29473114.01367189, "ci": [28698900.353130184, 30247327.674213596], "sec": 0.20504132899804972}
+{"id": "joint_exhaustion-None-mc-11", "key": ["joint_exhaustion", null, "mc"], "est": 0.0, "ci": [0.0, 0.0], "sec": 0.1020985289978853}
+{"id": "joint_exhaustion-None-rdpo-11", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013662472652449715, "ci": [0.00013358036979555353, 0.00013966908325344077], "sec": 0.22271447999810334}
+{"id": "expected_loss-None-ylt-11", "key": ["expected_loss", null, "ylt"], "est": 32656015.601560157, "ci": null, "sec": 0.27567547699800343}
+{"id": "expected_loss-None-rdpo-11", "key": ["expected_loss", null, "rdpo"], "est": 30459183.101167336, "ci": [30243368.100255292, 30674998.10207938], "sec": 0.5315664159970765}
+{"id": "exceedance-160-mc-12", "key": ["exceedance", 160, "mc"], "est": 0.03686523437500003, "ci": [0.03397973317816832, 0.03975073557183174], "sec": 0.19668118700064952}
+{"id": "joint_exhaustion-None-ylt-11", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.34381367199966917}
+{"id": "exceedance-160-ylt-12", "key": ["exceedance", 160, "ylt"], "est": 0.030303030303030304, "ci": null, "sec": 0.28367967800295446}
+{"id": "exceedance-160-rdpo-12", "key": ["exceedance", 160, "rdpo"], "est": 0.03478163411910599, "ci": [0.0343241572451547, 0.03523911099305727], "sec": 0.42239869499826455}
+{"id": "exceedance-320-mc-12", "key": ["exceedance", 320, "mc"], "est": 0.00018310546875, "ci": [-2.4097874928894007e-05, 0.00039030881242889403], "sec": 0.20180353799878503}
+{"id": "exceedance-320-rdpo-12", "key": ["exceedance", 320, "rdpo"], "est": 0.00023046709226665904, "ci": [0.00022199575318019104, 0.00023893843135312703], "sec": 0.44597835700187716}
+{"id": "exceedance-320-ylt-12", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.2746407589984301}
+{"id": "stop_loss-240-mc-12", "key": ["stop_loss", 240, "mc"], "est": 259552.00195312523, "ci": [206591.9916306108, 312512.01227563963], "sec": 0.19742296100230305}
+{"id": "stop_loss-240-rdpo-12", "key": ["stop_loss", 240, "rdpo"], "est": 262447.7729680065, "ci": [259373.48538656213, 265522.06054945086], "sec": 0.42868133400043007}
+{"id": "expected_loss-None-mc-12", "key": ["expected_loss", null, "mc"], "est": 30449066.16210939, "ci": [29658177.445819523, 31239954.878399257], "sec": 0.2022011629996996}
+{"id": "stop_loss-240-ylt-12", "key": ["stop_loss", 240, "ylt"], "est": 91509.15091509151, "ci": null, "sec": 0.289305204001721}
+{"id": "joint_exhaustion-None-mc-12", "key": ["joint_exhaustion", null, "mc"], "est": 0.0, "ci": [0.0, 0.0], "sec": 0.10674083799676737}
+{"id": "expected_loss-None-ylt-12", "key": ["expected_loss", null, "ylt"], "est": 29312181.21812181, "ci": null, "sec": 0.2733409809989098}
+{"id": "joint_exhaustion-None-rdpo-12", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013083454369268972, "ci": [0.00012726952939245742, 0.00013439955799292202], "sec": 0.22685460199863883}
+{"id": "expected_loss-None-rdpo-12", "key": ["expected_loss", null, "rdpo"], "est": 30185670.753867023, "ci": [29982993.117197637, 30388348.39053641], "sec": 0.6141615099986666}
+{"id": "exceedance-160-mc-13", "key": ["exceedance", 160, "mc"], "est": 0.03417968750000003, "ci": [0.03139731634565365, 0.0369620586543464], "sec": 0.22135949700168567}
+{"id": "joint_exhaustion-None-ylt-12", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.37522405499839806}
+{"id": "exceedance-160-ylt-13", "key": ["exceedance", 160, "ylt"], "est": 0.034203420342034205, "ci": null, "sec": 0.36146813700179337}
+{"id": "exceedance-320-mc-13", "key": ["exceedance", 320, "mc"], "est": 0.0002441406250000002, "ci": [4.970468781564431e-06, 0.000483310781218436], "sec": 0.22749287099941284}
+{"id": "exceedance-160-rdpo-13", "key": ["exceedance", 160, "rdpo"], "est": 0.03496875223832493, "ci": [0.0346981754109471, 0.035239329065702756], "sec": 0.7001436399987142}
+{"id": "exceedance-320-rdpo-13", "key": ["exceedance", 320, "rdpo"], "est": 0.00022980514015262206, "ci": [0.00022388207514615932, 0.0002357282051590848], "sec": 0.48832192899863003}
+{"id": "exceedance-320-ylt-13", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.26967897200302104}
+{"id": "stop_loss-240-rdpo-13", "key": ["stop_loss", 240, "rdpo"], "est": 258547.11577799256, "ci": [251990.16331435178, 265104.0682416333], "sec": 0.37082767100218916}
+{"id": "stop_loss-240-mc-13", "key": ["stop_loss", 240, "mc"], "est": 237884.5214843752, "ci": [185681.84637845017, 290087.19659030024], "sec": 0.20779020600093645}
+{"id": "stop_loss-240-ylt-13", "key": ["stop_loss", 240, "ylt"], "est": 348784.8784878488, "ci": null, "sec": 0.2731786349977483}
+{"id": "expected_loss-None-mc-13", "key": ["expected_loss", null, "mc"], "est": 29985198.97460939, "ci": [29209191.450234424, 30761206.498984355], "sec": 0.20832982399952016}
+{"id": "joint_exhaustion-None-mc-13", "key": ["joint_exhaustion", null, "mc"], "est": 0.0001220703125000001, "ci": [-4.711050917060954e-05, 0.00029125113417060976], "sec": 0.10540315599791938}
+{"id": "joint_exhaustion-None-rdpo-13", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00012939452079731647, "ci": [9.834848574250774e-05, 0.0001604405558521252], "sec": 0.2763272900010634}
+{"id": "expected_loss-None-ylt-13", "key": ["expected_loss", null, "ylt"], "est": 29159165.91659166, "ci": null, "sec": 0.3771215829983703}
+{"id": "expected_loss-None-rdpo-13", "key": ["expected_loss", null, "rdpo"], "est": 30326749.758755468, "ci": [30115138.13412725, 30538361.383383684], "sec": 0.5143977820007422}
+{"id": "joint_exhaustion-None-ylt-13", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.27368488000138314}
+{"id": "exceedance-160-mc-14", "key": ["exceedance", 160, "mc"], "est": 0.03363037109375003, "ci": [0.030869809245405715, 0.03639093294209434], "sec": 0.23504872599733062}
+{"id": "exceedance-160-ylt-14", "key": ["exceedance", 160, "ylt"], "est": 0.0315031503150315, "ci": null, "sec": 0.2719140189983591}
+{"id": "exceedance-320-mc-14", "key": ["exceedance", 320, "mc"], "est": 0.00012207031250000016, "ci": [-4.7089850910361536e-05, 0.00029123047591036186], "sec": 0.20018671499929042}
+{"id": "exceedance-160-rdpo-14", "key": ["exceedance", 160, "rdpo"], "est": 0.034904595747936244, "ci": [0.03462690413293089, 0.0351822873629416], "sec": 0.49841496299995924}
+{"id": "exceedance-320-ylt-14", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.2698389809993387}
+{"id": "exceedance-320-rdpo-14", "key": ["exceedance", 320, "rdpo"], "est": 0.00023693168622958437, "ci": [0.0002285863444260182, 0.0002452770280331505], "sec": 0.4232177670019155}
+{"id": "stop_loss-240-mc-14", "key": ["stop_loss", 240, "mc"], "est": 271759.0332031253, "ci": [218582.69927988987, 324935.3671263607], "sec": 0.20140372999958345}
+{"id": "stop_loss-240-ylt-14", "key": ["stop_loss", 240, "ylt"], "est": 419291.9291929193, "ci": null, "sec": 0.27886749600293115}
+{"id": "stop_loss-240-rdpo-14", "key": ["stop_loss", 240, "rdpo"], "est": 259507.46525537796, "ci": [256415.64820543415, 262599.2823053218], "sec": 0.3942768029992294}
+{"id": "expected_loss-None-mc-14", "key": ["expected_loss", null, "mc"], "est": 29613647.460937515, "ci": [28838965.83893105, 30388329.08294398], "sec": 0.1992606430030719}
+{"id": "joint_exhaustion-None-mc-14", "key": ["joint_exhaustion", null, "mc"], "est": 6.103515625000005e-05, "ci": [-5.859375000000005e-05, 0.00018066406250000016], "sec": 0.10346359799950733}
+{"id": "joint_exhaustion-None-rdpo-14", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013849496108423405, "ci": [0.00013532282152988086, 0.00014166710063858725], "sec": 0.23561508300190326}
+{"id": "expected_loss-None-ylt-14", "key": ["expected_loss", null, "ylt"], "est": 28920642.06420642, "ci": null, "sec": 0.27188267999736127}
+{"id": "expected_loss-None-rdpo-14", "key": ["expected_loss", null, "rdpo"], "est": 30191845.436268035, "ci": [29944596.54843963, 30439094.32409644], "sec": 0.5079927280021366}
+{"id": "joint_exhaustion-None-ylt-14", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.27007972200226504}
+{"id": "exceedance-160-mc-15", "key": ["exceedance", 160, "mc"], "est": 0.03601074218750003, "ci": [0.03315763572880097, 0.03886384864619909], "sec": 0.2059153049995075}
+{"id": "exceedance-160-ylt-15", "key": ["exceedance", 160, "ylt"], "est": 0.03840384038403841, "ci": null, "sec": 0.2563132040013443}
+{"id": "exceedance-320-mc-15", "key": ["exceedance", 320, "mc"], "est": 0.0003051757812500002, "ci": [3.770354534389384e-05, 0.0005726480171561067], "sec": 0.19115111800056184}
+{"id": "exceedance-160-rdpo-15", "key": ["exceedance", 160, "rdpo"], "est": 0.03494516898108665, "ci": [0.034630276183379397, 0.0352600617787939], "sec": 0.48343689900139}
+{"id": "exceedance-320-ylt-15", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.21812679000140633}
+{"id": "stop_loss-240-mc-15", "key": ["stop_loss", 240, "mc"], "est": 303039.5507812503, "ci": [243122.6860692502, 362956.41549325036], "sec": 0.21011573800205952}
+{"id": "exceedance-320-rdpo-15", "key": ["exceedance", 320, "rdpo"], "est": 0.00023263731484495415, "ci": [0.00022864493040885796, 0.00023662969928105033], "sec": 0.5383255999986432}
+{"id": "stop_loss-240-ylt-15", "key": ["stop_loss", 240, "ylt"], "est": 298529.85298529855, "ci": null, "sec": 0.23779320899848244}
+{"id": "stop_loss-240-rdpo-15", "key": ["stop_loss", 240, "rdpo"], "est": 262747.7170886754, "ci": [259840.20133812402, 265655.2328392268], "sec": 0.3894395679999434}
+{"id": "expected_loss-None-mc-15", "key": ["expected_loss", null, "mc"], "est": 30467681.88476564, "ci": [29677789.17669684, 31257574.59283444], "sec": 0.19840792099785176}
+{"id": "joint_exhaustion-None-mc-15", "key": ["joint_exhaustion", null, "mc"], "est": 6.103515625000005e-05, "ci": [-5.859375000000005e-05, 0.00018066406250000016], "sec": 0.0962266130009084}
+{"id": "expected_loss-None-ylt-15", "key": ["expected_loss", null, "ylt"], "est": 30909090.90909091, "ci": null, "sec": 0.26635374699981185}
+{"id": "joint_exhaustion-None-rdpo-15", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013769031813913815, "ci": [0.00013281977767665016, 0.00014256085860162615], "sec": 0.21653170799982036}
+{"id": "expected_loss-None-rdpo-15", "key": ["expected_loss", null, "rdpo"], "est": 30275498.8798304, "ci": [30094788.3163885, 30456209.443272304], "sec": 0.4636480799999845}
+{"id": "exceedance-160-mc-16", "key": ["exceedance", 160, "mc"], "est": 0.03436279296875003, "ci": [0.03157334486767821, 0.037152241069821845], "sec": 0.19512955200116266}
+{"id": "joint_exhaustion-None-ylt-15", "key": ["joint_exhaustion", null, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.2579199730025721}
+{"id": "exceedance-160-ylt-16", "key": ["exceedance", 160, "ylt"], "est": 0.039003900390039, "ci": null, "sec": 0.26448807300039334}
+{"id": "exceedance-160-rdpo-16", "key": ["exceedance", 160, "rdpo"], "est": 0.03492562592300326, "ci": [0.034606068301194906, 0.03524518354481161], "sec": 0.41308587599996827}
+{"id": "exceedance-320-mc-16", "key": ["exceedance", 320, "mc"], "est": 6.103515625000004e-05, "ci": [-5.859375000000004e-05, 0.0001806640625000001], "sec": 0.18027180400167708}
+{"id": "stop_loss-240-mc-16", "key": ["stop_loss", 240, "mc"], "est": 303039.55078125035, "ci": [245273.00187854562, 360806.0996839551], "sec": 0.17686605299968505}
+{"id": "exceedance-320-ylt-16", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.26523049699972034}
+{"id": "exceedance-320-rdpo-16", "key": ["exceedance", 320, "rdpo"], "est": 0.00023181177004041035, "ci": [0.00022554803759938734, 0.00023807550248143336], "sec": 0.5230248230000143}
+{"id": "stop_loss-240-rdpo-16", "key": ["stop_loss", 240, "rdpo"], "est": 260484.91719506003, "ci": [257062.38492495875, 263907.4494651613], "sec": 0.3872598969974206}
+{"id": "stop_loss-240-ylt-16", "key": ["stop_loss", 240, "ylt"], "est": 207770.77707770778, "ci": null, "sec": 0.27149888100029784}
+{"id": "expected_loss-None-mc-16", "key": ["expected_loss", null, "mc"], "est": 30264587.402343765, "ci": [29482059.729332738, 31047115.075354792], "sec": 0.19427972999983467}
+{"id": "joint_exhaustion-None-mc-16", "key": ["joint_exhaustion", null, "mc"], "est": 6.103515625000005e-05, "ci": [-5.859375000000005e-05, 0.00018066406250000016], "sec": 0.10987024900168763}
+{"id": "expected_loss-None-ylt-16", "key": ["expected_loss", null, "ylt"], "est": 31485898.589858986, "ci": null, "sec": 0.265048648998345}
+{"id": "joint_exhaustion-None-rdpo-16", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.0001367216924512382, "ci": [0.00012958424566484515, 0.00014385913923763122], "sec": 0.21369442099967273}
+{"id": "expected_loss-None-rdpo-16", "key": ["expected_loss", null, "rdpo"], "est": 30413154.08632446, "ci": [30218028.37246068, 30608279.800188243], "sec": 0.4700944050018734}
+{"id": "exceedance-160-mc-17", "key": ["exceedance", 160, "mc"], "est": 0.03283691406250002, "ci": [0.03010814959341918, 0.035565678531580866], "sec": 0.1985781350012985}
+{"id": "joint_exhaustion-None-ylt-16", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.2796205340018787}
+{"id": "exceedance-160-ylt-17", "key": ["exceedance", 160, "ylt"], "est": 0.0351035103510351, "ci": null, "sec": 0.25925305700002355}
+{"id": "exceedance-160-rdpo-17", "key": ["exceedance", 160, "rdpo"], "est": 0.034747708306111895, "ci": [0.03441884835995666, 0.03507656825226713], "sec": 0.40129932000127155}
+{"id": "exceedance-320-mc-17", "key": ["exceedance", 320, "mc"], "est": 6.103515625000008e-05, "ci": [-5.859375000000008e-05, 0.00018066406250000024], "sec": 0.2266115920028824}
+{"id": "exceedance-320-ylt-17", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.261696182002197}
+{"id": "stop_loss-240-mc-17", "key": ["stop_loss", 240, "mc"], "est": 265808.1054687503, "ci": [212990.03364592002, 318626.1772915806], "sec": 0.18928461800169316}
+{"id": "exceedance-320-rdpo-17", "key": ["exceedance", 320, "rdpo"], "est": 0.0002879265562217176, "ci": [0.00014895517586557613, 0.0004268979365778591], "sec": 0.4623610330017982}
+{"id": "stop_loss-240-rdpo-17", "key": ["stop_loss", 240, "rdpo"], "est": 260613.16361413704, "ci": [257932.23851396306, 263294.088714311], "sec": 0.43375410299995565}
+{"id": "stop_loss-240-ylt-17", "key": ["stop_loss", 240, "ylt"], "est": 222022.202220222, "ci": null, "sec": 0.2580849900004978}
+{"id": "expected_loss-None-mc-17", "key": ["expected_loss", null, "mc"], "est": 29901733.398437515, "ci": [29123417.692740485, 30680049.104134545], "sec": 0.2000958799981163}
+{"id": "joint_exhaustion-None-mc-17", "key": ["joint_exhaustion", null, "mc"], "est": 0.0001220703125000001, "ci": [-4.711050917060954e-05, 0.00029125113417060976], "sec": 0.10672724100004416}
+{"id": "joint_exhaustion-None-rdpo-17", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013556484641895326, "ci": [0.00013316614667780938, 0.00013796354616009714], "sec": 0.19635220499912975}
+{"id": "expected_loss-None-ylt-17", "key": ["expected_loss", null, "ylt"], "est": 29825232.523252327, "ci": null, "sec": 0.2714875839992601}
+{"id": "expected_loss-None-rdpo-17", "key": ["expected_loss", null, "rdpo"], "est": 30330306.30534782, "ci": [30091335.80435227, 30569276.80634337], "sec": 0.47028842700092355}
+{"id": "joint_exhaustion-None-ylt-17", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.2726956739970774}
+{"id": "exceedance-160-mc-18", "key": ["exceedance", 160, "mc"], "est": 0.03546142578125003, "ci": [0.032629244454939976, 0.03829360710756008], "sec": 0.19485297999926843}
+{"id": "exceedance-160-ylt-18", "key": ["exceedance", 160, "ylt"], "est": 0.031203120312031204, "ci": null, "sec": 0.25849716100128717}
+{"id": "exceedance-160-rdpo-18", "key": ["exceedance", 160, "rdpo"], "est": 0.035153060912907916, "ci": [0.03481568726564374, 0.03549043456017209], "sec": 0.4138665830032551}
+{"id": "exceedance-320-mc-18", "key": ["exceedance", 320, "mc"], "est": 0.0001831054687500001, "ci": [-2.409787492889406e-05, 0.00039030881242889425], "sec": 0.20784685800026637}
+{"id": "exceedance-320-ylt-18", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.28625754099994083}
+{"id": "exceedance-320-rdpo-18", "key": ["exceedance", 320, "rdpo"], "est": 0.0002267175036146749, "ci": [0.00022109433872118556, 0.00023234066850816423], "sec": 0.43624065200128825}
+{"id": "stop_loss-240-mc-18", "key": ["stop_loss", 240, "mc"], "est": 300598.1445312503, "ci": [242880.61613029172, 358315.67293220886], "sec": 0.2043596540024737}
+{"id": "expected_loss-None-mc-18", "key": ["expected_loss", null, "mc"], "est": 30451812.74414064, "ci": [29657870.56804115, 31245754.92024013], "sec": 0.20993493900095928}
+{"id": "stop_loss-240-rdpo-18", "key": ["stop_loss", 240, "rdpo"], "est": 261130.31999971505, "ci": [257869.1856028712, 264391.4543965589], "sec": 0.48242356600167113}
+{"id": "stop_loss-240-ylt-18", "key": ["stop_loss", 240, "ylt"], "est": 232523.25232523252, "ci": null, "sec": 0.272840483001346}
+{"id": "joint_exhaustion-None-mc-18", "key": ["joint_exhaustion", null, "mc"], "est": 0.00012207031250000008, "ci": [-4.711050917060954e-05, 0.0002912511341706097], "sec": 0.11090546799823642}
+{"id": "joint_exhaustion-None-rdpo-18", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00014036670807244378, "ci": [0.00013004133958812114, 0.00015069207655676642], "sec": 0.26437499500025297}
+{"id": "expected_loss-None-ylt-18", "key": ["expected_loss", null, "ylt"], "est": 29659465.94659466, "ci": null, "sec": 0.2867339449985593}
+{"id": "expected_loss-None-rdpo-18", "key": ["expected_loss", null, "rdpo"], "est": 30237987.520907436, "ci": [30048394.150735687, 30427580.891079184], "sec": 0.5068717199974344}
+{"id": "joint_exhaustion-None-ylt-18", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.2788985799998045}
+{"id": "exceedance-160-mc-19", "key": ["exceedance", 160, "mc"], "est": 0.03448486328125002, "ci": [0.03169081974263463, 0.03727890681986541], "sec": 0.21082856199791422}
+{"id": "exceedance-160-ylt-19", "key": ["exceedance", 160, "ylt"], "est": 0.04020402040204021, "ci": null, "sec": 0.2617878759992891}
+{"id": "exceedance-320-mc-19", "key": ["exceedance", 320, "mc"], "est": 0.00018310546875000016, "ci": [-2.4097874928894007e-05, 0.00039030881242889436], "sec": 0.19045416800145176}
+{"id": "exceedance-160-rdpo-19", "key": ["exceedance", 160, "rdpo"], "est": 0.03483251422389122, "ci": [0.03455353595786172, 0.03511149248992072], "sec": 0.47395814699848415}
+{"id": "exceedance-320-ylt-19", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.3222936870006379}
+{"id": "exceedance-320-rdpo-19", "key": ["exceedance", 320, "rdpo"], "est": 0.0002264358733457652, "ci": [0.00022114129862592992, 0.0002317304480656005], "sec": 0.4646430649991089}
+{"id": "stop_loss-240-mc-19", "key": ["stop_loss", 240, "mc"], "est": 235290.52734375023, "ci": [184358.81825000595, 286222.2364374945], "sec": 0.18732852500033914}
+{"id": "stop_loss-240-rdpo-19", "key": ["stop_loss", 240, "rdpo"], "est": 260404.42068773025, "ci": [257892.06695268454, 262916.77442277595], "sec": 0.3991274880027049}
+{"id": "expected_loss-None-mc-19", "key": ["expected_loss", null, "mc"], "est": 30389709.472656265, "ci": [29608691.96123359, 31170726.98407894], "sec": 0.17419243900076253}
+{"id": "stop_loss-240-ylt-19", "key": ["stop_loss", 240, "ylt"], "est": 256525.65256525652, "ci": null, "sec": 0.26606447499943897}
+{"id": "joint_exhaustion-None-mc-19", "key": ["joint_exhaustion", null, "mc"], "est": 0.00018310546875000016, "ci": [-2.4097874928894007e-05, 0.00039030881242889436], "sec": 0.10494315300093149}
+{"id": "expected_loss-None-rdpo-19", "key": ["expected_loss", null, "rdpo"], "est": 30197733.67222093, "ci": [29967843.3921239, 30427623.95231796], "sec": 0.4430048980029824}
+{"id": "joint_exhaustion-None-rdpo-19", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013880481567390084, "ci": [0.0001324666699982267, 0.000145142961349575], "sec": 0.23297661199831055}
+{"id": "expected_loss-None-ylt-19", "key": ["expected_loss", null, "ylt"], "est": 31419141.914191417, "ci": null, "sec": 0.35042478300238145}
+{"id": "joint_exhaustion-None-ylt-19", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.28593914299926837}
+{"id": "exceedance-160-mc-20", "key": ["exceedance", 160, "mc"], "est": 0.03533935546875003, "ci": [0.03251185962170603, 0.038166851315794025], "sec": 0.2035034539985645}
+{"id": "exceedance-160-ylt-20", "key": ["exceedance", 160, "ylt"], "est": 0.0348034803480348, "ci": null, "sec": 0.28872866299934685}
+{"id": "exceedance-320-mc-20", "key": ["exceedance", 320, "mc"], "est": 0.0001220703125000001, "ci": [-4.711050917060954e-05, 0.00029125113417060976], "sec": 0.20212524199814652}
+{"id": "exceedance-160-rdpo-20", "key": ["exceedance", 160, "rdpo"], "est": 0.034922782216636916, "ci": [0.03463306949872574, 0.035212494934548096], "sec": 0.5363890059998084}
+{"id": "exceedance-320-ylt-20", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.27281672900062404}
+{"id": "exceedance-320-rdpo-20", "key": ["exceedance", 320, "rdpo"], "est": 0.00023033666202918474, "ci": [0.0002261607976917668, 0.00023451252636660268], "sec": 0.5029029549987172}
+{"id": "stop_loss-240-mc-20", "key": ["stop_loss", 240, "mc"], "est": 244903.56445312523, "ci": [194296.93558862215, 295510.19331762835], "sec": 0.2087219989989535}
+{"id": "stop_loss-240-rdpo-20", "key": ["stop_loss", 240, "rdpo"], "est": 262972.5341415451, "ci": [259667.64031293205, 266277.42797015817], "sec": 0.43032240699903923}
+{"id": "stop_loss-240-ylt-20", "key": ["stop_loss", 240, "ylt"], "est": 210021.00210021003, "ci": null, "sec": 0.2690349479998986}
+{"id": "expected_loss-None-mc-20", "key": ["expected_loss", null, "mc"], "est": 30446014.40429689, "ci": [29660667.31449443, 31231361.49409935], "sec": 0.24663523599883774}
+{"id": "joint_exhaustion-None-mc-20", "key": ["joint_exhaustion", null, "mc"], "est": 0.00024414062500000027, "ci": [4.897419649957163e-06, 0.0004833838303500434], "sec": 0.10443521599881933}
+{"id": "expected_loss-None-ylt-20", "key": ["expected_loss", null, "ylt"], "est": 30584308.430843085, "ci": null, "sec": 0.2670194479978818}
+{"id": "joint_exhaustion-None-rdpo-20", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013492205301536282, "ci": [0.00013032889075563473, 0.0001395152152750909], "sec": 0.28541439900072874}
+{"id": "expected_loss-None-rdpo-20", "key": ["expected_loss", null, "rdpo"], "est": 30119863.33043059, "ci": [29859649.986371677, 30380076.674489502], "sec": 0.5217212890020164}
+{"id": "exceedance-160-mc-21", "key": ["exceedance", 160, "mc"], "est": 0.03417968750000002, "ci": [0.031397352771037446, 0.036962022228962596], "sec": 0.22501557400028105}
+{"id": "joint_exhaustion-None-ylt-20", "key": ["joint_exhaustion", null, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.3806319159994018}
+{"id": "exceedance-160-ylt-21", "key": ["exceedance", 160, "ylt"], "est": 0.033003300330033, "ci": null, "sec": 0.273174107001978}
+{"id": "exceedance-160-rdpo-21", "key": ["exceedance", 160, "rdpo"], "est": 0.035050358406149444, "ci": [0.0347818713413866, 0.03531884547091229], "sec": 0.5329714750005223}
+{"id": "exceedance-320-mc-21", "key": ["exceedance", 320, "mc"], "est": 0.00024414062500000016, "ci": [4.897419649957163e-06, 0.00048338383035004316], "sec": 0.23040734099777183}
+{"id": "exceedance-320-ylt-21", "key": ["exceedance", 320, "ylt"], "est": 0.0006000600060006001, "ci": null, "sec": 0.3063821399991866}
+{"id": "stop_loss-240-mc-21", "key": ["stop_loss", 240, "mc"], "est": 247344.9707031252, "ci": [193231.88791926656, 301458.0534869839], "sec": 0.20561962099964148}
+{"id": "exceedance-320-rdpo-21", "key": ["exceedance", 320, "rdpo"], "est": 0.00023101152818956626, "ci": [0.00022388052750121296, 0.00023814252887791957], "sec": 0.45568756500142626}
+{"id": "stop_loss-240-rdpo-21", "key": ["stop_loss", 240, "rdpo"], "est": 260742.06646156244, "ci": [257452.5994684231, 264031.53345470177], "sec": 0.3776377930007584}
+{"id": "stop_loss-240-ylt-21", "key": ["stop_loss", 240, "ylt"], "est": 366786.6786678668, "ci": null, "sec": 0.2734698580024997}
+{"id": "expected_loss-None-mc-21", "key": ["expected_loss", null, "mc"], "est": 30015716.55273439, "ci": [29235613.220938027, 30795819.884530753], "sec": 0.18392052000126569}
+{"id": "joint_exhaustion-None-mc-21", "key": ["joint_exhaustion", null, "mc"], "est": 0.0002441406250000002, "ci": [4.897419649957163e-06, 0.00048338383035004327], "sec": 0.0981972740009951}
+{"id": "expected_loss-None-ylt-21", "key": ["expected_loss", null, "ylt"], "est": 28911641.164116412, "ci": null, "sec": 0.1985416269999405}
+{"id": "joint_exhaustion-None-rdpo-21", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013269218882191417, "ci": [0.00012653581667360905, 0.0001388485609702193], "sec": 0.2372605829987151}
+{"id": "expected_loss-None-rdpo-21", "key": ["expected_loss", null, "rdpo"], "est": 30389916.464092936, "ci": [30198434.22852857, 30581398.699657302], "sec": 0.5091634109994629}
+{"id": "joint_exhaustion-None-ylt-21", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.2859960610003327}
+{"id": "exceedance-160-mc-22", "key": ["exceedance", 160, "mc"], "est": 0.03558349609375003, "ci": [0.03274705714088502, 0.038419935046615034], "sec": 0.19539349100159598}
+{"id": "exceedance-160-ylt-22", "key": ["exceedance", 160, "ylt"], "est": 0.0369036903690369, "ci": null, "sec": 0.21512897899810923}
+{"id": "exceedance-160-rdpo-22", "key": ["exceedance", 160, "rdpo"], "est": 0.03507893468832843, "ci": [0.034795417828993966, 0.03536245154766289], "sec": 0.43878778100042837}
+{"id": "exceedance-320-mc-22", "key": ["exceedance", 320, "mc"], "est": 0.00012207031250000008, "ci": [-4.711050917060954e-05, 0.0002912511341706097], "sec": 0.18556790799993905}
+{"id": "exceedance-320-rdpo-22", "key": ["exceedance", 320, "rdpo"], "est": 0.00023327969162783096, "ci": [0.00022728831271848075, 0.00023927107053718118], "sec": 0.34690842800046084}
+{"id": "exceedance-320-ylt-22", "key": ["exceedance", 320, "ylt"], "est": 0.0, "ci": null, "sec": 0.22821715499958373}
+{"id": "stop_loss-240-mc-22", "key": ["stop_loss", 240, "mc"], "est": 279693.6035156253, "ci": [224996.89519189863, 334390.31183935195], "sec": 0.18781039399982546}
+{"id": "stop_loss-240-ylt-22", "key": ["stop_loss", 240, "ylt"], "est": 193519.35193519352, "ci": null, "sec": 0.2486694239996723}
+{"id": "expected_loss-None-mc-22", "key": ["expected_loss", null, "mc"], "est": 30438079.83398439, "ci": [29646587.882416036, 31229571.785552744], "sec": 0.20303092600079253}
+{"id": "stop_loss-240-rdpo-22", "key": ["stop_loss", 240, "rdpo"], "est": 260341.03690838732, "ci": [256517.8555311477, 264164.21828562696], "sec": 0.42885040100009064}
+{"id": "joint_exhaustion-None-mc-22", "key": ["joint_exhaustion", null, "mc"], "est": 0.0, "ci": [0.0, 0.0], "sec": 0.10499223599981633}
+{"id": "joint_exhaustion-None-rdpo-22", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00014034885980830362, "ci": [0.0001347395001024961, 0.00014595821951411114], "sec": 0.2026042379984574}
+{"id": "expected_loss-None-rdpo-22", "key": ["expected_loss", null, "rdpo"], "est": 30382946.20034074, "ci": [30193873.407013424, 30572018.993668057], "sec": 0.4423211260000244}
+{"id": "expected_loss-None-ylt-22", "key": ["expected_loss", null, "ylt"], "est": 29969996.99969997, "ci": null, "sec": 0.2614958199992543}
+{"id": "joint_exhaustion-None-ylt-22", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.26482484499865677}
+{"id": "exceedance-160-mc-23", "key": ["exceedance", 160, "mc"], "est": 0.03210449218750002, "ci": [0.029405041919694376, 0.034803942455305666], "sec": 0.2035218620003434}
+{"id": "exceedance-160-ylt-23", "key": ["exceedance", 160, "ylt"], "est": 0.0336033603360336, "ci": null, "sec": 0.28212372499911}
+{"id": "exceedance-320-mc-23", "key": ["exceedance", 320, "mc"], "est": 0.0003051757812500002, "ci": [3.770354534389389e-05, 0.0005726480171561065], "sec": 0.21353378300045733}
+{"id": "exceedance-160-rdpo-23", "key": ["exceedance", 160, "rdpo"], "est": 0.03517298776092496, "ci": [0.034835015744105816, 0.0355109597777441], "sec": 0.4724526540012448}
+{"id": "exceedance-320-ylt-23", "key": ["exceedance", 320, "ylt"], "est": 0.00030003000300030005, "ci": null, "sec": 0.3577658930007601}
+{"id": "stop_loss-240-mc-23", "key": ["stop_loss", 240, "mc"], "est": 281524.65820312523, "ci": [223891.67513040893, 339157.64127584157], "sec": 0.23125689000153216}
+{"id": "exceedance-320-rdpo-23", "key": ["exceedance", 320, "rdpo"], "est": 0.00023244249948552214, "ci": [0.00022864516163311182, 0.00023623983733793246], "sec": 0.5588945659983438}
+{"id": "expected_loss-None-mc-23", "key": ["expected_loss", null, "mc"], "est": 29756317.13867189, "ci": [28982696.131531436, 30529938.145812344], "sec": 0.27454245899934904}
+{"id": "stop_loss-240-rdpo-23", "key": ["stop_loss", 240, "rdpo"], "est": 259981.68706519392, "ci": [257258.20012765247, 262705.17400273535], "sec": 0.5976382160006324}
+{"id": "stop_loss-240-ylt-23", "key": ["stop_loss", 240, "ylt"], "est": 318781.8781878188, "ci": null, "sec": 0.3549790260003647}
+{"id": "joint_exhaustion-None-mc-23", "key": ["joint_exhaustion", null, "mc"], "est": 0.00018310546875000016, "ci": [-2.4097874928894007e-05, 0.00039030881242889436], "sec": 0.11191051800051355}
+{"id": "expected_loss-None-ylt-23", "key": ["expected_loss", null, "ylt"], "est": 29564956.495649565, "ci": null, "sec": 0.20842442199864308}
+{"id": "joint_exhaustion-None-rdpo-23", "key": ["joint_exhaustion", null, "rdpo"], "est": 0.00013454705585161521, "ci": [9.064244995835494e-05, 0.0001784516617448755], "sec": 0.200797148001584}
+{"id": "expected_loss-None-rdpo-23", "key": ["expected_loss", null, "rdpo"], "est": 30266560.10385703, "ci": [30090581.92074274, 30442538.28697132], "sec": 0.5371577839978272}
+{"id": "joint_exhaustion-None-ylt-23", "key": ["joint_exhaustion", null, "ylt"], "est": 0.0, "ci": null, "sec": 0.27635376200123574}

@@ -49,6 +49,10 @@ class PortfolioProblem:
         self.Lmax = self.n * self.F
         self.T = (threshold if threshold is not None else 40e6 * self.n) / UNIT
         self.src = []
+        if hasattr(model, "custom_sources"):          # e.g. sources built from an event loss table (src/elt)
+            self.src = [dict(c) for c in model.custom_sources]
+            self.K = len(self.src)
+            return
         for s in model_sources(model):
             v = np.arange(len(s.law))
             if s.kind == "eq1":
@@ -113,8 +117,11 @@ class PortfolioProblem:
 
     # --- exact reference by dense enumeration (n <= 6) -------------------------------------
     def exact_dense(self):
-        P = dense_term_distribution(self.model).reshape(-1)
         n = self.n
+        if hasattr(self.model, "custom_sources"):
+            P = self._dense_from_sources()
+        else:
+            P = dense_term_distribution(self.model).reshape(-1)
         idx = np.arange(10 ** n)
         digits = np.stack([(idx // 10 ** (n - 1 - i)) % 10 for i in range(n)], 1)
         a, r = digits // 2, digits % 2
@@ -150,3 +157,27 @@ class PortfolioProblem:
         Li = self.site_loss(a_of, r_of)
         f = self.payoff_from(np.zeros((10, 10)), Li[:, None].repeat(10, 1), Li[None, :].repeat(10, 0))
         return float((dist * f).sum())
+
+    def _dense_from_sources(self):
+        """Exact 10^n joint law by applying every source's term law (capped increments) to the start state."""
+        n = self.n
+        assert n <= 6, "dense enumeration is limited to 6 countries"
+        P = np.zeros(10 ** n); P[0] = 1.0
+        idx = np.arange(10 ** n)
+        digits = np.stack([(idx // 10 ** (n - 1 - i)) % 10 for i in range(n)], 1)
+        a0, r0 = digits // 2, digits % 2
+        for src in self.src:
+            new = np.zeros_like(P)
+            for v, pv in enumerate(src["p"]):
+                if pv == 0:
+                    continue
+                a, r = a0.copy(), r0.copy()
+                for site, inc in src["da"]:
+                    a[:, site] = np.minimum(a[:, site] + inc[v], 4)
+                for site, inc in src["dr"]:
+                    r[:, site] = np.minimum(r[:, site] + inc[v], 1)
+                code = 2 * a + r
+                target = (code * (10 ** np.arange(n - 1, -1, -1))).sum(1)
+                np.add.at(new, target, pv * P)
+            P = new
+        return P
