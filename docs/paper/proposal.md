@@ -649,9 +649,9 @@ calendar maps W1 to November 2026; the plan shifts one-to-one if the phase start
 
 ## 10.1 From data to decision: end-to-end data flow
 
-![**Exhibit 1.** End-to-end data flow of the planned product. Phase 1 has built the source model, the
+![**Figure [fig:flow].** End-to-end data flow of the planned product. Phase 1 has built the source model, the
 RDPO engine, the exact checks and the diagnostics. Data agents, calibration from open data, the
-advisory agent and the delivery layer are planned.](../art/data_flow.svg){.wide}
+advisory agent and the delivery layer are planned. Data sources are examples of open or licensable datasets, subject to licence terms.](../art/data_flow.svg){.wide}
 
 | Stage | What happens | Status |
 |---|---|---|
@@ -671,10 +671,10 @@ advisory agent and the delivery layer are planned.](../art/data_flow.svg){.wide}
 
 ## 10.2 Operating cycle: wake by day, sleep by night
 
-![**Exhibit 2.** Wake–sleep operating cycle, adapted from the sleep framework for continual learning
+![**Figure [fig:wake].** Wake–sleep operating cycle, adapted from the sleep framework for continual learning
 [@behrouz2026sleep]. By day the system serves frozen, validated policies and writes a short-term memory.
 Overnight it consolidates that memory into the risk model, retrains policies on self-generated stress
-scenarios, and promotes them only after passing exact regression checks.](../art/wake_sleep.svg){.wide}
+scenarios, and promotes them only after passing exact regression checks. Planned for WP3 and WP5; Phase 1 already provides the exact references and the warm-start mechanism.](../art/wake_sleep.svg){.wide}
 
 * **Why a sleep phase.** Hazard information arrives continuously, but a risk number used for pricing must be
   reproducible. Separating *serving* (day) from *learning* (night) gives both.
@@ -709,10 +709,10 @@ uninsured natural-catastrophe losses in 2024, the protection gap (Swiss Re Insti
 :::
 :::
 
-![**Exhibit 3.** Total, serviceable and obtainable market. The TAM is a third-party estimate of the
+![**Figure [fig:market].** Total, serviceable and obtainable market. The TAM is a third-party estimate of the
 catastrophe-modelling and exposure-management software market. The SAM and SOM are bottom-up:
 institutions per segment × annual contract value, with all assumptions in
-`src/business/market.py`.](../art/market_sizing.svg){.wide}
+`src/business/market.py`. Sources: TrendX Insights and Market Intelo (software, 2025); Artemis (cat bonds, end-2025); Global Market Insights (parametric, 2025); Swiss Re Institute sigma 1/2025.](../art/market_sizing.svg){.wide}
 
 * **TAM, US$2.1bn (2025).** Catastrophe-modelling and exposure-management software. Third-party estimates
   range from US$2.1bn to US$2.8bn, growing 9–12% a year.
@@ -748,8 +748,8 @@ institutions per segment × annual contract value, with all assumptions in
 
 ## 10.5 Fit with the analyst's daily workflow
 
-![**Exhibit 4.** A day with the product. Agents prepare (news scan, hazard refresh, re-estimation);
-the analyst decides (morning brief, questions, recommendation, sign-off).](../art/workflow_day.svg){.wide}
+![**Figure [fig:day].** A day with the product. Agents prepare (news scan, hazard refresh, re-estimation);
+the analyst decides (morning brief, questions, recommendation, sign-off). Illustrative; times are indicative.](../art/workflow_day.svg){.wide}
 
 * **No new habit required.** The product produces a morning brief, answers questions in plain language,
   and drafts the memo the analyst already writes.
@@ -760,8 +760,8 @@ the analyst decides (morning brief, questions, recommendation, sign-off).](../ar
 
 ## 10.6 Go-to-market
 
-![**Exhibit 5.** Go-to-market in three phases, from public pilots to private-capital
-scale.](../art/gtm.svg){.wide}
+![**Figure [fig:gtm].** Go-to-market in three phases, from public pilots to private-capital
+scale. Phases are indicative and follow the work plan of Section 9.](../art/gtm.svg){.wide}
 
 | Competitor type | Examples | Their strength | Our position |
 |---|---|---|---|

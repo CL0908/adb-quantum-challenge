@@ -99,24 +99,11 @@ ul, ol { padding-left: 16pt; } li { margin: 2pt 0; }
 li { margin: 2.5pt 0; }
 li p { margin: 0; }
 
-/* ---------- section 10: financial-advisory style ---------- */
-.advisory { --adv: #0B2341; --gold: #B8893B; }
-.advisory h2 { color: var(--adv); font-family: Inter, sans-serif; font-weight: 700; border-bottom: 1.5px solid var(--adv);
-               padding-bottom: 3pt; }
-.advisory h2::before { content: ""; display: inline-block; width: 7pt; height: 7pt; background: var(--gold); margin-right: 7pt;
-                       vertical-align: 1pt; }
-.advisory table thead tr { background: var(--adv); }
-.advisory table thead th { color: #FFFFFF; border-bottom: none; padding: 4pt 5pt; }
-.advisory table tbody tr:nth-child(even) { background: #EEF2F7; }
-.advisory table td { padding: 3.5pt 5pt; vertical-align: top; }
-.advisory p, .advisory li { font-size: 10pt; }
-.exec { background: #FFFFFF; border: 1px solid #C9CED6; border-top: 5pt solid #0B2341; padding: 6pt 16pt 8pt; margin: 4pt 0 14pt;
-        page-break-inside: avoid; }
-.exec h2 { border: none !important; font-size: 8.5pt !important; letter-spacing: 0.12em; text-transform: uppercase;
-           color: #B8893B !important; margin: 4pt 0 2pt; }
-.exec h2::before { display: none !important; }
-.tiles.market { grid-template-columns: repeat(3, 1fr); display: grid; }
-.tiles.market .tile { border-top: 4pt solid #0B2341; background: #FFFFFF; }
-.tiles.market .big { color: #0B2341; }
-.profile { border-left: 4pt solid #B8893B; background: #FFFFFF; padding: 6pt 14pt; margin: 4pt 0 10pt; }
+/* ---------- section 10 (same design language as the rest of the paper) ---------- */
+.exec { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--navy); border-radius: 8pt;
+        padding: 6pt 16pt 8pt; margin: 4pt 0 14pt; page-break-inside: avoid; }
+.exec h2 { font-size: 9pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terra); margin: 4pt 0 2pt; }
+.tiles.market { grid-template-columns: repeat(3, 1fr); }
+.profile { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--terra); border-radius: 8pt;
+           padding: 6pt 14pt; margin: 4pt 0 10pt; }
 .profile p { margin: 3pt 0; }

@@ -8,20 +8,26 @@ from pathlib import Path
 from .art import svg, text, box, OUT
 from .art2 import path_arrow
 
-NAVY = "#0B2341"      # deep advisory navy
-NAVY2 = "#1F3A5F"
-STEEL = "#5B7FA6"
-STEEL2 = "#A9BED6"
-ICE = "#E6EDF5"
+# palette shared with the paper and the architecture figure (art2): light-blue blocks, dark-blue core
+# blocks, gold frames, card fills on the off-white page
+NAVY = "#24426A"
+NAVY2 = "#33598A"
+STEEL = "#24426A"
+STEEL2 = "#C9DBEF"
+ICE = "#DCE8F5"
 GOLD = "#B8893B"
-GOLD2 = "#F1E4CB"
+GOLD2 = "#F3E7CF"
 INK = "#1E2430"
-GREY = "#6B7280"
-LINE = "#C9CED6"
-PAPER = "#FBFAF7"
+GREY = "#4F5563"
+LINE = "#DDD4C4"
+PAPER = "#FBF8F1"
 
 
 def header(W, label, title, sub=None):
+    return ""
+
+
+def _header_unused(W, label, title, sub=None):
     out = [text(30, 34, label, 12.5, GOLD, 700),
            text(30, 62, title, 21, NAVY, 700),
            f'<line x1="30" y1="76" x2="{W - 30}" y2="76" stroke="{NAVY}" stroke-width="2"/>']
@@ -31,6 +37,10 @@ def header(W, label, title, sub=None):
 
 
 def footer(W, H, s):
+    return ""
+
+
+def _footer_unused(W, H, s):
     return (f'<line x1="30" y1="{H - 34}" x2="{W - 30}" y2="{H - 34}" stroke="{LINE}" stroke-width="1"/>'
             + text(30, H - 14, s, 11, GREY, 400))
 
@@ -39,7 +49,7 @@ def item(x, y, w, h, title, sub=None, planned=True, dark=False, dashed=False):
     fill = NAVY if dark else (PAPER if planned else ICE)
     stroke = NAVY if dark else (STEEL if not dashed else GOLD)
     da = ' stroke-dasharray="5 4"' if dashed else ""
-    out = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="3" fill="{fill}" stroke="{stroke}" stroke-width="1.3"{da}/>']
+    out = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="{fill}" stroke="{stroke}" stroke-width="1.3"{da}/>']
     if not dark and not planned:
         out.append(f'<rect x="{x}" y="{y}" width="4" height="{h}" fill="{GOLD}"/>')
     tc, sc = ("#FFFFFF", STEEL2) if dark else (NAVY, GREY)
@@ -50,6 +60,11 @@ def item(x, y, w, h, title, sub=None, planned=True, dark=False, dashed=False):
         out.append(text(x + 12, y + h / 2 + 5, title, 13, tc, 600))
     return "".join(out)
 
+
+
+def crop(W, H, body, top, bottom):
+    """Drop the empty title/footer bands: the figure caption carries the title and the notes."""
+    return svg(W, H - top - bottom, f'<g transform="translate(0,{-top})">{body}</g>')
 
 # ------------------------------------------------------------------------------------------------
 def data_flow():
@@ -108,7 +123,7 @@ def data_flow():
     b.append(text(xs[2], 588, "to the open data in stage 1.", 11, GREY))
 
     # 4 estimate (core, navy)
-    b.append(f'<rect x="{xs[3] - 6}" y="196" width="{cw + 12}" height="452" rx="4" fill="{GOLD2}" stroke="{GOLD}" stroke-width="1.5"/>')
+    b.append(f'<rect x="{xs[3] - 6}" y="196" width="{cw + 12}" height="452" rx="10" fill="{GOLD2}" stroke="{GOLD}" stroke-width="1.5"/>')
     b.append(item(xs[3], 206, cw, 140, "", None, dark=True))
     b.append(text(xs[3] + 12, 232, "RDPO engine", 16, "#FFFFFF", 700))
     for k, s in enumerate(["learned change of measure", "KL → χ² policy training", "fixed path budget", "unbiased estimate + 95% CI"]):
@@ -126,7 +141,7 @@ def data_flow():
         b.append(text(xs[4] + 14, 254 + 19 * k, "· " + s, 11.5, INK))
     b.append(text(xs[4], 404, "MCP TOOL SERVER", 10.5, GOLD, 700))
     for k, t in enumerate(["estimate_joint_tail()", "stress_test()", "validate_exact()", "event_impact()"]):
-        b.append(f'<rect x="{xs[4]}" y="{414 + 44 * k}" width="{cw}" height="36" rx="3" fill="{PAPER}" stroke="{STEEL}" stroke-width="1.2"/>')
+        b.append(f'<rect x="{xs[4]}" y="{414 + 44 * k}" width="{cw}" height="36" rx="8" fill="{PAPER}" stroke="{STEEL}" stroke-width="1.2"/>')
         b.append(text(xs[4] + 12, 437 + 44 * k, t, 12.5, NAVY, 500, family="'JetBrains Mono', Menlo, monospace"))
 
     # 6 deliver
@@ -159,7 +174,7 @@ def data_flow():
     yb = 720
     b.append(path_arrow([(xs[5] + cw / 2, 640), (xs[5] + cw / 2, yb - 8), (xs[1] + cw / 2, yb - 8), (xs[1] + cw / 2, 648)], STEEL, 1.6, dash="4 4"))
     b.append(text(xs[3] - 40, yb - 14, "analyst feedback, new questions, approved decisions", 11.5, STEEL, 600))
-    b.append(f'<rect x="30" y="{yb + 8}" width="{W - 60}" height="70" rx="3" fill="{NAVY}"/>')
+    b.append(f'<rect x="30" y="{yb + 8}" width="{W - 60}" height="70" rx="8" fill="{NAVY}"/>')
     b.append(text(48, yb + 36, "GOVERNANCE", 12, GOLD, 700))
     gov = ["human approves every recommendation", "audit trail of data & model versions", "estimates with stated uncertainty",
            "data licences & provenance", "validation pack for regulators"]
@@ -175,7 +190,7 @@ def data_flow():
     b.append(f'<rect x="370" y="{ly - 12}" width="22" height="14" fill="{PAPER}" stroke="{GOLD}" stroke-dasharray="4 3"/>' + text(400, ly, "future, gated by evidence", 11.5, INK))
     b.append(footer(W, H, "Data sources named are examples of open or licensable datasets; inclusion is subject to licence terms. "
                           "WeatherNext 2 data are distributed via Google Earth Engine / Cloud on request."))
-    return svg(W, H, "".join(b), bg=PAPER)
+    return crop(W, H, "".join(b), 112, 50)
 
 
 # ------------------------------------------------------------------------------------------------
@@ -235,7 +250,7 @@ def market_sizing():
     b.append(text(x0, yt + 52, "premiums ≈ US$19bn (2025); uninsured nat-cat losses (protection gap) US$181bn (2024).", 11.5, GREY))
     b.append(footer(W, H, "Sources: TrendX Insights / Market Intelo (software, 2025); Artemis.bm (cat bonds, end-2025); Global Market Insights (parametric, 2025); "
                           "Swiss Re Institute sigma 1/2025. ACVs and counts: author assumptions (src/business/market.py)."))
-    return svg(W, H, "".join(b), bg=PAPER)
+    return crop(W, H, "".join(b), 118, 40)
 
 
 # ------------------------------------------------------------------------------------------------
@@ -265,7 +280,7 @@ def workflow_day():
     for t, lane, head, lines in steps:
         x = xs[t]; y = lanes[lane][0] - 30
         dark = lane == 1
-        b.append(f'<rect x="{x}" y="{y}" width="150" height="100" rx="3" fill="{NAVY if dark else PAPER}" stroke="{NAVY if dark else STEEL}" stroke-width="1.3"/>')
+        b.append(f'<rect x="{x}" y="{y}" width="150" height="100" rx="8" fill="{NAVY if dark else PAPER}" stroke="{NAVY if dark else STEEL}" stroke-width="1.3"/>')
         b.append(text(x + 10, y + 24, head, 13.5, "#FFFFFF" if dark else NAVY, 700))
         for k, s in enumerate(lines):
             b.append(text(x + 10, y + 48 + 18 * k, s, 11.5, STEEL2 if dark else INK))
@@ -280,7 +295,7 @@ def workflow_day():
     for k in range(2):
         b.append(path_arrow([(xs[k] + 150, 170), (xs[k + 1], 170)], STEEL, 1.6))
     b.append(text(30, H - 14, "Illustrative workflow for the planned product; times indicative.", 11, GREY))
-    return svg(W, H, "".join(b), bg=PAPER)
+    return crop(W, H, "".join(b), 108, 40)
 
 
 # ------------------------------------------------------------------------------------------------
@@ -304,7 +319,7 @@ def gtm():
         b.append(f'<line x1="{x}" y1="{312}" x2="{x + w}" y2="{312}" stroke="{LINE}"/>')
         b.append(text(x + 4, 334, rev, 12, NAVY2, 600))
     b.append(footer(W, H, "Phases are indicative and follow the Deep Development work plan (Section 9)."))
-    return svg(W, H, "".join(b), bg=PAPER)
+    return crop(W, H, "".join(b), 108, 50)
 
 
 # ------------------------------------------------------------------------------------------------
@@ -314,7 +329,7 @@ def wake_sleep():
                 "Adapted from the wake–sleep framework for continual learning (Behrouz et al., 2026); what is consolidated here is the risk model, not the language model.")]
     # wake panel
     wx, wy, ww, wh = 30, 170, 520, 450
-    b.append(f'<rect x="{wx}" y="{wy}" width="{ww}" height="{wh}" rx="4" fill="{ICE}" stroke="{STEEL}" stroke-width="1.3"/>')
+    b.append(f'<rect x="{wx}" y="{wy}" width="{ww}" height="{wh}" rx="10" fill="{ICE}" stroke="{STEEL}" stroke-width="1.3"/>')
     b.append(text(wx + 18, wy + 30, "WAKE PHASE", 13, GOLD, 700)); b.append(text(wx + 18, wy + 54, "Serving the day: frozen, validated policies", 16, NAVY, 700))
     ins = [("Daily news & reports", "news-scout agent"), ("Hazard & forecast feeds", "data agent"), ("Analyst questions", "advisory agent")]
     for k, (t, sub) in enumerate(ins):
@@ -334,7 +349,7 @@ def wake_sleep():
     b.append(text(wx + 18, wy + 428, "served is reproducible from a versioned policy and source model.", 12, INK))
     # sleep panel
     sx, sy, sw, sh = 600, 170, 710, 450
-    b.append(f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="4" fill="{NAVY}"/>')
+    b.append(f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="10" fill="{NAVY}"/>')
     b.append(text(sx + 18, sy + 30, "SLEEP PHASE", 13, GOLD, 700)); b.append(text(sx + 18, sy + 54, "Overnight: consolidate, dream, then gate", 16, "#FFFFFF", 700))
     stages = [("1  Consolidation", ["event log → credibility-weighted", "rate updates (analyst-approved)", "new shared events → graph edges",
                                     "path buffer → warm start θ"]),
@@ -345,13 +360,13 @@ def wake_sleep():
     cwid = (sw - 36 - 2 * 16) / 3
     for k, (t, lines) in enumerate(stages):
         x = sx + 18 + k * (cwid + 16)
-        b.append(f'<rect x="{x}" y="{sy + 80}" width="{cwid}" height="180" rx="3" fill="{NAVY2}" stroke="{STEEL}" stroke-width="1"/>')
+        b.append(f'<rect x="{x}" y="{sy + 80}" width="{cwid}" height="180" rx="8" fill="{NAVY2}" stroke="{STEEL}" stroke-width="1"/>')
         b.append(text(x + 12, sy + 106, t, 14, "#FFFFFF", 700))
         for j, l in enumerate(lines):
             b.append(text(x + 12, sy + 134 + 22 * j, l, 11.2, STEEL2))
         if k < 2:
             b.append(path_arrow([(x + cwid, sy + 170), (x + cwid + 16, sy + 170)], GOLD, 1.8))
-    b.append(f'<rect x="{sx + 18}" y="{sy + 280}" width="{sw - 36}" height="56" rx="3" fill="{GOLD2}"/>')
+    b.append(f'<rect x="{sx + 18}" y="{sy + 280}" width="{sw - 36}" height="56" rx="8" fill="{GOLD2}"/>')
     b.append(text(sx + 34, sy + 304, "Long-term memory (versioned)", 13, NAVY, 700))
     b.append(text(sx + 34, sy + 324, "source laws p_k · dependence graph · policy library θ per target and scenario · validation record", 12, NAVY2))
     b.append(text(sx + 18, sy + 380, "Why this is safe: the estimator stays unbiased whatever θ is learned, so a weaker", 12, STEEL2))
@@ -362,7 +377,7 @@ def wake_sleep():
     b.append(path_arrow([(sx + 60, sy + sh + 6), (sx + 60, sy + sh + 24), (wx + ww - 60, sy + sh + 24), (wx + ww - 60, sy + sh + 6)], GOLD, 2))
     b.append(text((wx + ww + sx) / 2, sy + sh + 42, "morning: promoted policies θ_t+1 + updated model + morning brief", 12, GOLD, 600, "middle"))
     b.append(footer(W, H, "Planned for WP3 (overnight retraining, capacity growth) and WP5 (agents). Phase 1 already provides the gate's exact references and the warm-start mechanism."))
-    return svg(W, H, "".join(b), bg=PAPER)
+    return crop(W, H, "".join(b), 118, 80)
 
 
 def main():
