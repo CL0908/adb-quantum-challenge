@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import art, art2, art3, art4, paper_figs
+from . import art, art2, art3, art4, art5, paper_figs
 from ..business import market
 
 ROOT = Path(".")
@@ -688,6 +688,24 @@ def elt_values():
     return v
 
 
+def qs_values():
+    d = json.loads((R / "quantum_scaling.json").read_text())
+    f = d["fits"]; v = {}
+    lab = {"logical_qubits": "logical qubits", "toffoli_A": "Toffoli gates per A", "rotations_A": "single-qubit rotations per A",
+           "cnot_Q": "CNOTs per Grover iterate Q", "depth_A": "CNOT depth of A"}
+    lines = ["**Table [tab:qscale].** Fitted resource laws, value ≈ c₀ + c_n·n + c_E·|E|, over eight compiled settings.", "",
+             "| Resource | c₀ | per country c_n | per edge c_E | max deviation |", "|---|---|---|---|---|"]
+    for k, l in lab.items():
+        x = f[k]
+        lines.append(f"| {l} | {x['const']:.0f} | {x['per_country']:.1f} | {x['per_edge']:.1f} | {pct(x['max_rel_err'], 1)} |")
+    v["QS_FITS"] = "\n".join(lines)
+    v["QS_FIT_ERR"] = pct(max(x["max_rel_err"] for x in f.values()), 0)
+    rho = [r["rho2"] for r in d["rows"]]; be = [r["rho2_breakeven_at_1pct"] for r in d["rows"]]
+    v["QS_RHO2"] = f"{min(rho):.2g}–{max(rho):.0f}"
+    v["QS_BREAKEVEN_1"] = f"{sci(min(be))}–{sci(max(be))}"
+    return v
+
+
 def mk_values():
     m = json.loads((R / "market_model.json").read_text())
     return {"MK_SAM": f"{m['sam_m']:.0f}", "MK_SOM": f"{m['som_m']:.1f}", "MK_CUST": str(m["customers_y5"]),
@@ -718,7 +736,7 @@ def toc(md):
 def fill():
     md = (PAPER / "proposal.md").read_text()
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values):
         try:
             vals.update(fn())
         except Exception as ex:
@@ -763,6 +781,7 @@ def build(cv=None):
     (R / "market_model.json").write_text(json.dumps(market.model(), indent=2))
     art3.main()
     art4.main()
+    art5.main()
     try:
         from ..realdata.asia_pacific_pool import pool_map
         pool_map()

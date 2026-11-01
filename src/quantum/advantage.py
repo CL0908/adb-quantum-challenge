@@ -199,3 +199,43 @@ def run():
 
 if __name__ == "__main__":
     run()
+
+
+def scaling_laws():
+    """Resource scaling of the Q-RDPO circuits and the quantum/classical crossover ('phase diagram').
+
+    1. Least-squares fits of logical qubits, Toffolis per A, CNOTs per Grover iterate and A-depth against the
+       portfolio size n and the number of dependence edges |E| (8 compiled settings, ring and complete graphs).
+    2. Crossover law. For relative error ε, classical RDPO needs N_C = ρ²/ε² paths of cost τ_C each; amplitude
+       estimation on the loaded measure needs N_Q ≈ c_Q / (ε √a) calls of A (IQAE) of cost τ_A each. Hence
+           s*(ε, ρ²) = T_Q / T_C = (c_Q τ_A / τ_C) · ε / (ρ² √a),
+       and quantum wins in wall-clock iff the hardware speed-up over the stated fault-tolerant baseline
+       exceeds s*. c_Q, τ_A, τ_C and a are measured per setting from results/quantum_advantage.json (ε = 10%).
+    """
+    adv = json.loads((R / "quantum_advantage.json").read_text())["advantage"]
+    rows = []
+    for r in adv:
+        n = r["n"]
+        E = (1 if n == 2 else n) if r["topology"] == "ring" else n * (n - 1) // 2
+        eps = r["eps_rel"]
+        tau_C = r["classical_seconds"] / r["classical_paths"]
+        tau_A = r["quantum_seconds"] / r["quantum_calls"]
+        cQ = r["quantum_calls"] * eps * math.sqrt(r["a_twisted"])
+        rows.append({"topology": r["topology"], "n": n, "E": E, "rho2": r["classical_rho2"], "a": r["a_twisted"],
+                     "tau_C": tau_C, "tau_A": tau_A, "c_Q": cQ, "overhead": tau_A / tau_C, "s_star_10pct": r["required_speedup"],
+                     **{k: r[k] for k in ("logical_qubits", "toffoli_A", "rotations_A", "cnot_Q", "depth_A")}})
+    X = np.array([[1.0, r["n"], r["E"]] for r in rows])
+    fits = {}
+    for k in ("logical_qubits", "toffoli_A", "rotations_A", "cnot_Q", "depth_A"):
+        y = np.array([r[k] for r in rows], float)
+        coef, *_ = np.linalg.lstsq(X, y, rcond=None)
+        pred = X @ coef
+        fits[k] = {"const": float(coef[0]), "per_country": float(coef[1]), "per_edge": float(coef[2]),
+                   "max_rel_err": float(np.max(np.abs(pred - y) / y))}
+    # crossover: rho^2 at which s* = 1 for a target error eps, per setting
+    for r in rows:
+        r["rho2_breakeven_at_1pct"] = r["c_Q"] * r["overhead"] * 0.01 / math.sqrt(r["a"])
+        r["rho2_breakeven_at_10pct"] = r["c_Q"] * r["overhead"] * 0.10 / math.sqrt(r["a"])
+    out = {"fits": fits, "rows": rows}
+    (R / "quantum_scaling.json").write_text(json.dumps(out, indent=2))
+    return out

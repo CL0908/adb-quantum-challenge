@@ -274,11 +274,53 @@ def v2_fig():
     ax.set_title("(c) Wall-clock, Pr(L > Tₙ)", fontsize=9.5); ax.legend(fontsize=7.5)
     S.save(fig, OUT / "v2_results.png")
 
+def quantum_phase_fig():
+    """Phase diagram: where amplitude estimation on the loaded measure beats classical RDPO in wall-clock."""
+    d = _load("quantum_scaling.json")["rows"]
+    adv = {(r["topology"], r["n"]): r for r in _load("quantum_advantage.json")["advantage"]}
+    fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.1), gridspec_kw={"wspace": 0.3, "width_ratios": [1.35, 1]})
+    ax = axes[0]
+    eps = np.logspace(-4, -0.7, 50)
+    K = [r["c_Q"] * r["overhead"] / np.sqrt(r["a"]) for r in d]
+    Kmid = float(np.exp(np.mean(np.log(K))))
+    ax.fill_between(eps, Kmid * eps, 1e14, color=S.TEAL, alpha=0.13, lw=0)
+    ax.fill_between(eps, 1e-2, Kmid * eps, color=S.TERRA, alpha=0.07, lw=0)
+    ax.fill_between(eps, min(K) * eps, max(K) * eps, color=S.NAVY, alpha=0.12, lw=0)
+    for h, ls, lab in ((1, "-", "break-even (stated fault-tolerant baseline)"), (1e2, "--", "break-even, hardware 100× faster"),
+                       (1e4, ":", "break-even, hardware 10⁴× faster")):
+        ax.plot(eps, Kmid * eps / h, ls=ls, color=S.NAVY, lw=1.6, label=lab)
+    for r in d:
+        mk = "o" if r["topology"] == "ring" else "s"
+        ax.plot(0.1, r["rho2"], mk, color=S.TERRA, ms=6, zorder=5, mec="white", mew=0.6)
+        mu = adv[(r["topology"], r["n"])]["mu"]
+        ax.plot(0.1, (1 - mu) / mu, mk, mfc="none", color=S.INK2, ms=6, zorder=5)
+    ax.annotate("RDPO (measured,\n2–28 countries)", (0.095, 3), (0.0045, 0.08), fontsize=7.5, color=S.TERRA,
+                arrowprops=dict(arrowstyle="->", color=S.TERRA, lw=0.8))
+    ax.annotate("plain Monte Carlo\n(same targets)", (0.095, 1e9), (0.003, 1e7), fontsize=7.5, color=S.INK2,
+                arrowprops=dict(arrowstyle="->", color=S.INK2, lw=0.8))
+    ax.text(1.4e-4, 2e12, "quantum faster", fontsize=9, color=S.TEAL, fontweight="bold")
+    ax.text(1.4e-4, 0.04, "classical RDPO faster", fontsize=9, color=S.TERRA, fontweight="bold")
+    ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlim(1e-4, 0.2); ax.set_ylim(1e-2, 1e14)
+    ax.set_xlabel("target relative error ε"); ax.set_ylabel("classical relative variance per path ρ²")
+    ax.set_title("(a) Wall-clock phase diagram", fontsize=9.5)
+    ax.legend(fontsize=6.8, loc="upper left", bbox_to_anchor=(0.0, 0.9), frameon=False)
+    ax = axes[1]
+    n = np.array([r["n"] for r in d]); ring = np.array([r["topology"] == "ring" for r in d])
+    for k, c, lab, f in (("logical_qubits", S.BLUE, "logical qubits", 1), ("toffoli_A", S.TERRA, "Toffolis per A (÷10)", 10),
+                         ("depth_A", S.TEAL, "depth of A", 1)):
+        y = np.array([r[k] for r in d], float) / f
+        ax.plot(n[ring], y[ring], "o-", color=c, ms=4.5, label=lab)
+        ax.plot(n[~ring], y[~ring], "s", color=c, ms=5, mfc="none")
+    ax.set_xlabel("countries n (circles: ring, squares: every pair)")
+    ax.set_title("(b) Circuit resources: linear in n and |E|", fontsize=9.5)
+    ax.legend(fontsize=7.5, loc="upper left")
+    S.save(fig, OUT / "quantum_phase.png")
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     S.apply()
     done = []
-    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, quantum_queries, gantt, quantum_advantage_fig, mitigation_fig, v2_fig):
+    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, quantum_queries, gantt, quantum_advantage_fig, mitigation_fig, v2_fig, quantum_phase_fig):
         try:
             f(); done.append(f.__name__)
         except Exception as ex:   # partial results while experiments are running

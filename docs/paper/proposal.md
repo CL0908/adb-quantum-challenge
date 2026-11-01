@@ -876,17 +876,95 @@ construction and to measure the fourth:
 
 | Barrier for QML on classical data | Q-RDPO |
 |---|---|
-| Advantage relies on strong **input-loading assumptions** | Loading is *exact* and cheap: one small register per Poisson source, O(n + \|E\|) gates (Proposition 2, §7.2) |
+| Advantage relies on strong **input-loading assumptions** | Loading is *exact* and cheap: one small register per Poisson source, O(n + \|E\|) gates (Proposition 2, §7.4) |
 | **Trainability** (barren plateaus, noisy gradients) | Nothing is trained on the quantum device; the classical RL agent learns the measure (AI-for-Quantum) |
-| **Noise** makes deep circuits unreliable | Noise is modelled explicitly, and a calibration trust guard falls back to the classical estimate (§7.4) |
-| No convincing **wall-clock** wins | A falsifiable wall-clock criterion against our own best classical method (§7.3) |
+| **Noise** makes deep circuits unreliable | Noise is modelled explicitly, and a calibration trust guard falls back to the classical estimate (§7.7) |
+| No convincing **wall-clock** wins | A falsifiable wall-clock criterion against our own best classical method (§7.6) |
 
-## 7.2 Construction: exact structured loading with bounded weights
+## 7.2 The estimation problem and the quantum primitive
 
-![**Figure [fig:qcirc].** State-preparation operator A and the guarded estimation loop. ① Each source
-register is prepared in the twisted law $\sqrt{q_k}$. ② In-place adders form per-country sums. ③ The loss
-and threshold flag are computed. ④ The importance weight $e^{-\eta D}$ is written bit by bit onto ancillas.
-⑤ Good states are marked. Amplitude estimation then runs with a trust guard.](../art/quantum_circuit_v2.svg){.wide}
+* **Task.** Estimate $\mu = \mathbb{E}_p[f]$ for a pool target $f \ge 0$ to relative error $\varepsilon$ with confidence
+  $1-\delta$, where $p$ is the source law of Proposition 2 and $f$ is bounded on its support.
+* **Classical reference.** RDPO draws paths from a learned measure $q_\theta$ with per-path relative variance $\rho^2$,
+  so it needs $N_C = \rho^2 / \varepsilon^2$ paths of cost $\tau_C$ each ($\varepsilon$ measured as relative RMSE).
+* **Quantum primitive.** Amplitude estimation on a state-preparation unitary $A$ whose "good" amplitude is
+  proportional to $\mu$.
+
+::: {.proposition}
+**Proposition 6 (amplitude encoding with bounded weights).** Let $q$ be a law that $A$ loads exactly, with
+$w = p/q$, and let $C \ge \sup_x f(x) w(x)$. If $A$ prepares
+$$A|0\rangle = \sum_x \sqrt{q(x)}\,|x\rangle\big(\sqrt{1-g(x)}\,|0\rangle + \sqrt{g(x)}\,|1\rangle\big), \qquad g = f w / C \in [0, 1],$$
+then the probability of measuring the objective qubit in $|1\rangle$ is $a = \mu / C$. For the exponentially
+twisted law $q_\eta \propto p\, e^{\eta U}$ and $f = \mathbb{1}\{L > T\}$, one may take $C = e^{\Lambda(\eta) - \eta T}$, giving
+$g = \mathbb{1}\{L>T\}\, e^{-\eta (U - T)}$ and $a = \mu\, e^{\eta T - \Lambda(\eta)}$.
+
+*Proof.* $\Pr(1) = \sum_x q(x) g(x) = \sum_x p(x) f(x) / C = \mu/C$. Under $q_\eta$, $w = e^{-\eta U + \Lambda(\eta)}$, and
+$U \ge L > T$ on the target event, so $f w \le e^{\Lambda(\eta) - \eta T}$. $\square$
+:::
+
+::: {.proposition}
+**Proposition 7 (query complexity).** Iterative amplitude estimation [@grinko2021] returns $\hat a$ with
+$|\hat a - a| \le \varepsilon a$ with probability at least $1-\delta$ using
+$N_Q = O\big(\varepsilon^{-1} a^{-1/2} \log(1/\delta)\big)$ applications of $A$, against $O(\varepsilon^{-2} a^{-1})$ samples for
+classical sampling of the same measure [@brassard2002; @montanaro2015]. We write $N_Q = c_Q/(\varepsilon\sqrt a)$ and
+measure $c_Q$ (which absorbs the confidence level, $\delta = 0.05$) by exact emulation of the algorithm.
+:::
+
+**Corollary (crossover law).** With $\tau_A$ the fault-tolerant time per application of $A$, the wall-clock
+ratio of the quantum and classical estimators is
+$$s^*(\varepsilon, \rho^2) = \frac{N_Q \tau_A}{N_C \tau_C} = \kappa\,\frac{\varepsilon}{\rho^2}, \qquad \kappa = \frac{c_Q\,\tau_A}{\tau_C\,\sqrt{a}} .$$
+Two consequences follow:
+
+* **What the quantum stage needs.** It wins only where the *best classical* estimator is hard (large $\rho^2$) or
+  where very high precision is required (small $\varepsilon$).
+* **What a quantum advantage claim must compare against.** Comparing with plain Monte Carlo ($\rho^2 = (1-\mu)/\mu$)
+  instead of RDPO overstates the advantage by the factor $\rho^2_{\text{MC}}/\rho^2_{\text{RDPO}}$, which here is up to $10^{11}$.
+
+## 7.3 Algorithm design
+
+::: {.algorithm}
+**Algorithm 2: Q-RDPO (guarded quantum estimation stage)**
+
+1. **Classical stage.** Run RDPO (Algorithm 1) on the target. Keep its estimate $\hat\mu_C$, its interval, and its
+   per-path variance $\hat\rho^2$.
+2. **Choose a loadable measure.** Among product-form (state-independent) laws, choose the twist that
+   maximises the encoded amplitude $a$. Each source's law and weight then factorise, so $A$ is a tensor product
+   of small exact rotations followed by arithmetic.
+3. **Decide whether to go quantum.** Predict $s^*$ from the crossover law with the calibrated hardware
+   parameters. If $s^*$ exceeds the hardware's speed-up, stop and report $\hat\mu_C$.
+4. **Compile.** Build $A$ (Proposition 6, §7.4) and the iterate $Q = A S_0 A^\dagger S_\chi$. Set the depth cap $k_{\max}$ so
+   that the deepest circuit succeeds with probability at least one half at the device's logical error rate.
+5. **Estimate.** Run iterative or depth-capped maximum-likelihood amplitude estimation, with Grover powers
+   $k \le k_{\max}$ and a noise-aware likelihood.
+6. **Guard.** Accept $\hat\mu_Q = C\hat a$ only if the fit passes the goodness-of-fit test across depths *and* $\hat\mu_Q$
+   agrees with $\hat\mu_C$ within 3σ. Otherwise report $\hat\mu_C$.
+:::
+
+* **Why the learned RDPO policy itself is not loaded.** Its transition probabilities depend on the
+  current state (country codes and running loss). Loading it exactly needs multiplexed rotations whose cost
+  grows exponentially with the size of each source's context, and its importance weights are bounded only by
+  $\alpha^{-K}$. Either cost would destroy the scaling.
+* **Product-form laws.** State-independent laws, such as twists and per-source tilts, keep both costs linear and
+  the weights bounded (Proposition 6).
+
+| Loadable measure | Gate cost of A | Weight bound C | Status |
+|---|---|---|---|
+| Untwisted law $p$ | $O(n + \|E\|)$ | 1 ($a = \mu$) | baseline; $N_Q \propto \mu^{-1/2}$ |
+| Exponential twist $q_\eta$ | $O(n + \|E\|)$ + one rotation per bit of $D$ | $e^{\Lambda(\eta) - \eta T}$ | **used** |
+| Per-source tilts $q_k \propto p_k e^{\eta_k \ell_k}$ (learned) | same | $\sup_{L > T} e^{\sum_k (\Lambda_k(\eta_k) - \eta_k \ell_k)}$ | WP4 |
+| Full RDPO policy $q_\theta(\cdot\mid s)$ | exponential in context size | up to $\alpha^{-K}$ | not loadable |
+
+* **The classical agent as the quantum stage's compiler.** The quantum cost $N_Q \propto a^{-1/2}$ depends on the
+  loaded measure. Choosing that measure is a reinforcement-learning problem of the same kind as RDPO: maximise
+  the encoded amplitude over product-form laws. This is the AI-for-Quantum component of the design.
+
+## 7.4 Construction: exact structured loading with bounded weights
+
+![**Figure [fig:qcirc].** Q-RDPO. Top: the hybrid pipeline of Algorithm 2. Bottom: one Grover iterate. ① Each
+source register is loaded exactly in its twisted law. ② Reversible adders form per-country sums. ③ The
+uncapped loss minus the threshold is computed. ④ The threshold flag is set. ⑤ The weight $e^{-\eta D}$ is
+written onto the objective qubit one bit of $D$ at a time. The oracle $S_\chi$, the inverse $A^\dagger$ and the
+reflection $S_0$ complete the iterate.](../art/quantum_v3.svg){.wide}
 
 * **Exact loading.** One register per source (3, 6 or 1 qubits), prepared in $\sum_x \sqrt{q_k(x)}\,|x\rangle$; no
   truncation of Poisson counts. A sparse-statevector simulation reproduces the joint law to $10^{-16}$.
@@ -904,7 +982,34 @@ and threshold flag are computed. ④ The importance weight $e^{-\eta D}$ is writ
 Quantum curves are projections from an exact emulation of iterative amplitude estimation, not hardware
 runs.](../../figures/paper/quantum_queries.png){.wide}
 
-## 7.3 A falsifiable wall-clock criterion
+## 7.5 Scalability
+
+* **Resource laws.** Least-squares fits over the eight compiled settings (rings and complete graphs, 2–28
+  countries) give the laws below, each within {{QS_FIT_ERR}} of every compiled count:
+
+{{QS_FITS}}
+
+* **Depth.** Source registers load in parallel and their adders commute, so the depth of $A$ grows with the
+  number of shared-event edges but not with the number of countries.
+* **Connectivity.** A shared source couples two country registers. On a 2D nearest-neighbour lattice, a dense
+  dependence graph needs long-range gates: SWAP routing inflates CNOT counts by 10–40×, and lattice surgery
+  inflates time instead. Sparse geographic graphs (bandwidth 5 for the 28-country pool, §6.7) map onto a
+  line of country blocks.
+* **Parallelism.** Amplitude-estimation rounds at different Grover powers are independent, so $m$ QPUs cut the
+  wall-clock by up to $m$. A single Grover iterate cannot be parallelised.
+* **Where the quantum stage could win.** The phase diagram (Figure [fig:qphase]) places every measured
+  portfolio. RDPO's measured relative variances are $\rho^2 =$ {{QS_RHO2}}, while break-even at 1% error needs
+  $\rho^2 \approx$ {{QS_BREAKEVEN_1}} at the stated fault-tolerant baseline. Against plain Monte Carlo, every
+  rare target would sit deep in the quantum region. This is the misleading comparison that Proposition 7's
+  corollary rules out.
+
+![**Figure [fig:qphase].** (a) Wall-clock phase diagram. Quantum amplitude estimation beats classical RDPO above
+the break-even band (which spans the eight compiled settings), which moves down by two orders of magnitude
+for every 100× of hardware speed-up. Filled markers: RDPO's measured variance at ε = 10%. Open markers:
+plain Monte Carlo on the same targets. (b) Logical qubits, Toffolis per state preparation and depth of $A$
+versus portfolio size.](../../figures/paper/quantum_phase.png){.wide}
+
+## 7.6 A falsifiable wall-clock criterion
 
 Query counts are not wall-clock time. For a target relative error $\varepsilon$ we compare measured
 classical time with projected fault-tolerant time:
@@ -923,7 +1028,7 @@ amplitude-estimation circuit to succeed with probability one half.](../../figure
 
 {{Q_ADV_TEXT}}
 
-## 7.4 Noise, mitigation and a calibration trust boundary
+## 7.7 Noise, mitigation and a calibration trust boundary
 
 Error mitigation is not monotone: under miscalibration it can increase error [@errmit2026]. We test this
 directly on low-depth maximum-likelihood amplitude estimation.
@@ -945,8 +1050,12 @@ fraction of instances; the combined guard bounds the tail.](../../figures/paper/
 
 {{MIT_TEXT}}
 
-## 7.5 Near-term component and AI-for-Quantum roadmap
+## 7.8 Verification, near-term component and AI-for-Quantum roadmap
 
+* **Verification protocol.** (i) On instances small enough for exact classical simulation (up to three
+  countries), hardware estimates are compared with the exact value. (ii) Every production run is checked
+  against the classical RDPO pilot (Algorithm 2, step 6). (iii) Raw counts per Grover power and the fitted
+  noise parameters are published with each estimate.
 * **Near-term sampler.** An 8-qubit circuit Born machine (depth 9, 32 entangling gates) can serve as a
   proposal sampler. Hardware noise biases the importance weights by 9–60%. Calibrating the *sampled* law
   with $10^5$ shots reduces the bias to at most 0.6%; inverting readout errors is the wrong mitigation in
