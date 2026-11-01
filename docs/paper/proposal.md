@@ -610,8 +610,8 @@ it (`src/realdata/central_asia_pool.py`):
 {{POOL_TABLE}}
 
 * **Result.** On the data-calibrated pool, RDPO beats the better of plain Monte Carlo and exponential
-  twisting by {{POOL_GAIN}} on the rare questions, against exact answers, with honest intervals. On expected pool
-  payout, a smooth target, the factor is {{POOL_EL}}.
+  twisting by {{POOL_GAIN}} on the rare questions, against exact answers. On expected pool
+  payout, a smooth target, the factor over Monte Carlo is {{POOL_EL}}.
 * **Weak spot.** The joint exhaustion of two countries inside the heterogeneous pool is the hardest question
   at this budget. RDPO's error is {{POOL_PAIR}} with {{POOL_PAIR_COV}} interval coverage: far better than Monte
   Carlo, but the intervals are optimistic. The Phase 2 engine therefore answers pair questions exactly (pair

@@ -261,6 +261,7 @@ def v2_fig():
         ax.set_yscale("log"); ax.set_xlabel("countries n (circles: ring, squares: every pair)")
         ax.set_ylabel("relative RMSE (B = 65,536)"); ax.set_title(title, fontsize=9.5)
         ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{100 * v:g}%"))
+        ax.yaxis.set_minor_formatter(plt.FuncFormatter(lambda v, _: f"{100 * v:g}%" if f"{100 * v:.2g}"[0] in "25" else ""))
     axes[0].legend(fontsize=7.5, loc="upper left")
     ax = axes[2]
     for kind, mk in (("ring", "o"), ("complete", "s")):

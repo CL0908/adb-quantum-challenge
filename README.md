@@ -60,27 +60,47 @@ h-transform of the loss process, i.e. the optimal policy of a KL-regularised (so
 
 ## Key results
 
-All numbers come from `results/rdpo_e*.json` (fixed seeds), with **training included in every budget**.
+All numbers come from `results/*.json` (fixed seeds), with **training included in every budget**.
+
+### Phase 1 engine (RDPO v1)
 
 | Result | Number |
 |---|---|
-| Benchmark, 5 scenarios × 5 targets, 16,384 paths | RDPO more accurate than the best reference method in **20/25** cells |
+| Benchmark, 5 scenarios × 5 targets, 16,384 paths | more accurate than the best reference method in **20/25** cells |
 | Joint exhaustion (≈ 3×10⁻⁵) | **×6.3 to ×171** lower error than the best reference method (median ×19) |
-| Expected loss (smooth target) | scrambled Sobol remains better (×0.5); we recommend it there |
-| Interval coverage (75 settings) | **95%** mean empirical coverage of nominal 95% intervals |
-| Scaling, ring of 2 → 28 countries, Pr(L > Tₙ) down to **1.3×10⁻¹³** | relative error **0.1% → 4.2%** (Monte Carlo would need ~10¹⁵ paths) |
-| Joint exhaustion of one pair inside an 8–28-country portfolio | **0.4%–1.0%** relative error |
-| vs classical exponential twisting | RDPO more accurate in **15/16** settings (median ×3.5) |
+| Scaling, ring of 2 → 28 countries, Pr(L > Tₙ) down to **1.3×10⁻¹³** | relative error 0.1% → 4.2% (plain Monte Carlo would need ~10¹⁵ paths) |
 | Ablation | indispensable: cross-entropy (×81), twist warm start (×37 at scale), target-relevance freezing (×2.6) |
-| Quantum stage (projected) | exact twisted loader + bitwise weight oracle; amplitude-estimation calls at 28 countries cut from 2.8×10⁹ to 3.4×10⁴ |
-| Falsifiable wall-clock criterion | quantum needs **8.2×10⁴ – 4.4×10⁶×** faster hardware to beat RDPO (s* shrinks with portfolio size) |
-| **RDPO v2** (roadmap WP1 + WP3) | 6.5–9.9× faster rollouts (identical policy), 2.4–4.3× less wall-clock per estimate; more accurate than v1 in 6/8 large-portfolio settings (up to ×1.7); beats exponential twisting in 8/8 |
-| Exact pair reduction | pair targets (joint attachment / exhaustion) exact in ≤ 3 ms for any portfolio size |
-| Overnight transfer (sleep phase) | warm-starting from yesterday's policy cuts small-budget error by ×1.8–×84 |
-| Error-mitigation trust boundary | mitigation worse than none in 21–38% of instances under miscalibration; pilot-disagreement guard caps p99 error at ≤ 0.17 |
+
+### Phase 2 engine (RDPO v2: roadmap WP1 + WP3)
+
+| Result | Number |
+|---|---|
+| Engine | table-driven, identical policy (tested): **6.5–9.9×** rollout throughput; exact compressed training |
+| Scaling study (8 portfolio sizes up to 28 countries, 24 replications, same seeds) | more accurate than Phase 1 in **13/16** portfolio-wide settings (up to ×1.7); beats exponential twisting in **16/16**; 2.3–11.9× less wall-clock |
+| Coverage of 95% intervals (portfolio-wide targets) | 88–100%, mean 95% |
+| Pair targets (joint attachment / exhaustion) | **exact** for any portfolio size in ≤ 3 ms (pair reduction) |
+| Overnight transfer (sleep phase) | small-budget error cut by ×1.8–×84 |
+| Benchmark | keeps 20/25; expected loss closer to Sobol (×0.6–0.8 instead of ×0.5) |
+
+### Real-world tests
+
+| Test | Finding |
+|---|---|
+| USGS catalogue, M ≥ 5.5, 1965–2016 | Poisson arrivals supported; 25%-payout trigger ≈ M7; 29–75% of large quakes reach both countries (brief: 7.5%) |
+| Loss records (NOAA 1900–2020, EM-DAT 1990–2020) | 120-year record rejects independence (p = 0.005); shared share **48% (12–79%)**; short records uninformative |
+| Implied bond risk | joint exhaustion **≈ 3× the brief's base case** (4.0×10⁻⁵–1.5×10⁻⁴) |
+| Data-calibrated five-country Central Asian pool | RDPO ×1.7–×15 more accurate than the best of Monte Carlo / twisting on rare questions, against exact answers; weak spot: pair exhaustion (9.5%, answered exactly instead) |
+
+### Quantum stage (projected, future feature)
+
+| Result | Number |
+|---|---|
+| Loading | exact twisted loader + bitwise weight oracle; amplitude-estimation calls at 28 countries cut from 2.8×10⁹ to 3.4×10⁴ |
+| Falsifiable wall-clock criterion | needs **8.2×10⁴ – 4.4×10⁶×** faster hardware to beat classical RDPO |
+| Error-mitigation trust boundary | mitigation worse than none in 21–38% of instances; pilot-disagreement guard caps p99 error at ≤ 0.17 |
 
 <p align="center">
-  <img src="figures/paper/e2_scaling.png" width="96%" alt="Scaling with portfolio size">
+  <img src="figures/paper/v2_results.png" width="96%" alt="Phase 1 vs Phase 2 engine at scale">
 </p>
 
 ## What we do not claim
@@ -92,7 +112,7 @@ All numbers come from `results/rdpo_e*.json` (fixed seeds), with **training incl
   as 78% in one benchmark cell).
 * **Budget competition at scale.** At 28 countries the one-parameter twist beats RDPO on the stop-loss
   (3.5% vs 5.9%).
-* **Synthetic scaling.** All scaling results use a synthetic but calibrated extension of the benchmark.
+* **Real-data scope.** Earthquake assumptions are checked against public catalogues and loss records, and a data-calibrated five-country pool is tested; rainfall is not calibrated from data, and no bond payout history exists to backtest against.
 * **Classical exact methods suffice for sparse dependence.** Exact tilted tensor networks solve chain,
   star and ring portfolios exactly.
 
@@ -116,7 +136,10 @@ Final experiments (≈ 7 CPU-hours in total; set `OMP_NUM_THREADS=1` when runnin
 PYTHONPATH=. python -m src.rdpo.experiments e1   # benchmark: 5 scenarios x 5 targets x 3 budgets
 PYTHONPATH=. python -m src.rdpo.experiments e2   # scaling to 28 countries vs exact tensor networks
 PYTHONPATH=. python -m src.rdpo.experiments e3   # ablation
-PYTHONPATH=. python -m src.rdpo.experiments_v2 throughput|scale|bench|transfer   # RDPO v2 (resumable)
+PYTHONPATH=. python -m src.rdpo.experiments_v2 throughput|scale|bench|transfer   # Phase 2 engine (resumable)
+PYTHONPATH=. python -m src.realdata.eq_check            # real catalogue check
+PYTHONPATH=. python -m src.realdata.loss_backtest       # loss-data backtest
+PYTHONPATH=. python -m src.realdata.central_asia_pool   # data-calibrated 5-country pool
 ```
 
 Build the proposal PDF. This needs Node.js with Playwright/Chromium for printing and MathJax for
@@ -142,10 +165,13 @@ src/baselines/       MC, scrambled Sobol, stratified, brief IS, zero-variance ba
 src/tensor/          n-country model, tilted-gauge MPS (exact references), bond-dimension scaling
 src/quantum/         structured & twisted loading, IQAE/MLAE emulation, QCBM, NISQ analysis, resources
 src/learned/ src/scale/ src/hybrid/ src/causal/   earlier prototypes (documented in REPORT.md)
+src/realdata/        real-world checks: USGS catalogue, NOAA / EM-DAT losses, calibrated Central Asian pool
+api/estimate.py      estimation API (Vercel Python function) for a future web front end
+data/real/           cached public data (sources in file headers)
 src/viz/             figure style, concept art, data figures, paper build
 docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
 docs/RDPO_Proposal.pdf   the technical proposal
-results/  figures/   all numbers and plots; tests/  49 tests
+results/  figures/   all numbers and plots; tests/  50 tests
 ```
 
 ## Roadmap
@@ -179,5 +205,5 @@ plan; all numbers come from the scripts in this repository.
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-49%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-50%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

@@ -140,7 +140,7 @@ def scale(B=65536, reps=24, seed=7000, procs=4):
                      if (kind, n, t) in v1old else None,
                      "v1_study_seconds": v1old[(kind, n, t)]["seconds_per_fit"] if (kind, n, t) in v1old else None,
                      "twisted": v1old[(kind, n, t)].get("twisted", {}).get("rel_rmse") if (kind, n, t) in v1old else None})
-        print(f"{kind:8s} n={n:2d} {t:16s} {v:7s} rel={s['rel_rmse']:.4f} cov={s['ci_coverage']:.2f}", file=sys.stderr)
+        print(f"{kind:8s} n={n:2d} {t:16s} {v:7s} rel={s['rel_rmse']:.4f} cov={s.get('ci_coverage', float('nan')):.2f}", file=sys.stderr)
     (R / "rdpo_v2_scale.json").write_text(json.dumps({"reps": reps, "rows": rows, "exact_pair": exact_ms}, indent=2))
 
 
@@ -214,7 +214,7 @@ def transfer(budgets=(2048, 4096), reps=40, seed=9000, procs=4):
             mu = _ring_target_exact(dst, P)
         s = summarise([e for e, _ in xs], mu, [ci for _, ci in xs])
         rows.append({"case": c, "target": t, "budget": B, "transfer": wt, "mu": mu, **s})
-        print(f"{c:32s} {t:16s} B={B} transfer={wt} rel={s['rel_rmse']:.4f} cov={s['ci_coverage']:.2f}", file=sys.stderr)
+        print(f"{c:32s} {t:16s} B={B} transfer={wt} rel={s['rel_rmse']:.4f} cov={s.get('ci_coverage', float('nan')):.2f}", file=sys.stderr)
     (R / "rdpo_v2_transfer.json").write_text(json.dumps({"reps": reps, "rows": rows}, indent=2))
 
 
