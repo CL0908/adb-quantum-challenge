@@ -12,11 +12,14 @@ lang: en
 ::: {.headline}
 ## Headline findings
 
-1. **The joint tail of the bond is likely underestimated.** We replaced the two dependence assumptions with
-   public data: 120 years of earthquake loss records and daily rainfall at {{RAIN_NST}} weather stations. The
-   chance that the pool pays more than US$80m in a term then rises from {{HL_EXC_BRIEF}} to **{{HL_EXC_DATA}}:
-   {{RAIN_EXC_FACTOR}} the challenge's base case.** Earthquakes hit both countries far more often than
-   assumed ({{HL_EQ_SHARE}} of events, not 7.5%); extreme rain far less often ({{HL_RAIN_SHARE}}, not 25%).
+1. **The joint tail of the bond is likely underestimated.** We replaced the two dependence assumptions
+   with public data (120 years of earthquake loss records and daily rainfall at {{RAIN_NST}} weather
+   stations) and propagated the posterior uncertainty on both shares through the exact two-country
+   model. The posterior for the chance that the pool pays more than US$80m in a term has median
+   **{{PU_EXC_MED}} ({{PU_EXC_X}}× the brief's {{PU_EXC_BRIEF}})** and 95% credible interval
+   **[{{PU_EXC_LO}}, {{PU_EXC_HI}}]** — the whole interval sits above the brief. Earthquakes hit both
+   countries far more often than assumed ({{HL_EQ_SHARE}} of events, not 7.5%); extreme rain far less
+   often ({{HL_RAIN_SHARE}}, not 25%).
 2. **Joint tails that simulation cannot see, at about 1% error.** In a 28-country Asia–Pacific pool
    calibrated from public data, RDPO estimates a {{HL_AP_MU}} pool loss to **{{HL_AP_ERR}} relative error**
    with 65,536 simulated terms ({{HL_AP_SEC}} on one core). Plain Monte Carlo sees no such event.
@@ -445,9 +448,13 @@ Every method gets the same simulation budget, RDPO's training counts against it,
   benchmark, 6–20 at scale), relative bias, and the empirical coverage of nominal 95% intervals.
 * **References.** Benchmark: exact enumeration, which reproduces the brief's Table 5. Scaling: exact
   tensor networks in a tail-preserving tilted gauge (§6.4), validated against dense enumeration for $n \le 6$.
-* **Baselines.** The challenge's four reference methods: plain Monte Carlo, scrambled Sobol (8 scrambles),
-  stratification by first payout year, and the brief's importance sampling. At scale we add classical
-  exponential twisting [@glasserman2003].
+* **Baselines.** Three groups. (i) The challenge's four reference methods: plain Monte Carlo, scrambled
+  Sobol (8 scrambles), stratification by first payout year, and the brief's importance sampling. (ii) At
+  scale we add classical exponential twisting [@glasserman2003]. (iii) Three stronger rare-event methods,
+  compared on the ADB benchmark and the ring-16 scaling case, at the same budget and seeds as RDPO
+  (§6.5.5): adaptive multilevel splitting / subset simulation [@cerou2007; @aubeck2001],
+  SMC on exponential tilts [@delmoral2006], and a diagonal normalising-flow importance sampler trained by
+  REINFORCE on $\chi^2$ (product-of-categoricals, warm-started from the optimal twist) [@muller2019].
 * **Compute.** One CPU core per run (Intel Xeon 2.1 GHz); NumPy/SciPy; fixed seeds in every result file.
 
 # 6 Results {.newpage}
@@ -596,6 +603,27 @@ reusing the parameters as the initial policy after a change of scenario or a 20%
 * t-intervals and model selection changed no result in these studies: the effective degrees of freedom
   were large, and the trained policy always beat the initial one. They are kept as safeguards.
 
+### 6.5.5 Comparison with stronger rare-event methods
+
+Reviewers of rare-event methods expect comparisons against adaptive multilevel splitting, SMC on
+exponential tilts, and neural importance sampling, not just the brief's four reference methods. We
+implemented all three on the identical source-form problem (`src/baselines/stronger.py`) at the same
+budget and seeds; the normalising-flow IS is warm-started from the optimal exponential twist, so it
+dominates the SMC baseline by construction.
+
+{{STR_TABLE}}
+
+* **RDPO beats every one of them** on every rare target we tested, by factors of {{STR_RANGE}}.
+* **SMC on exponential tilts is the strongest fixed baseline.** It is what good practitioners actually
+  deploy; RDPO's advantage against SMC is the gain from a learned *state-dependent* policy over the best
+  product proposal.
+* **Splitting struggles with the discrete, ties-heavy score** of the capped per-country loss, where the
+  default rare-event score (total loss) jumps in large steps. We advance past ties and run Gibbs
+  mutations, but acceptance stays low on the joint targets.
+* **The flow IS does not beat SMC on joint exhaustion**, because a product proposal in source space can't
+  easily force both countries to their respective maxima simultaneously; state-dependent transitions are
+  needed, which is exactly what RDPO adds.
+
 ## 6.6 Real-world checks
 
 ::: {.opener}
@@ -737,6 +765,28 @@ it (`src/realdata/central_asia_pool.py`):
   at this budget. RDPO's error is {{POOL_PAIR}} with {{POOL_PAIR_COV}} interval coverage: far better than Monte
   Carlo, but the intervals are optimistic. The Phase 2 engine therefore answers pair questions exactly (pair
   reduction, §6.5) and uses RDPO for pool-wide questions.
+
+### 6.6.5 Parameter uncertainty: posterior credible intervals for the headline findings
+
+The data give *ranges*, not points. The headline findings compared the brief with the data endpoints,
+which hides how much comes from the data itself. We now propagate parameter uncertainty end-to-end. On
+each shared share we place a Jeffreys-prior Beta posterior from the bivariate-Poisson occurrence table
+(earthquake: NOAA 1900–2020; rain: pooled station analysis at the 1-in-5-year level), draw {{PU_N}}
+samples, and recompute the exact two-country targets at each sample
+(`src/realdata/param_uncertainty.py`).
+
+{{PU_TABLE}}
+
+* **Pool exceedance:** posterior median {{PU_EXC_MED}} (**{{PU_EXC_X}}× the brief**); 95% credible
+  interval **[{{PU_EXC_LO}}, {{PU_EXC_HI}}]**; the whole interval sits above the brief's {{PU_EXC_BRIEF}}.
+* **Joint attachment:** posterior median {{PU_ATT_MED}} ({{PU_ATT_X}}× the brief); 95% credible interval
+  [{{PU_ATT_LO}}, {{PU_ATT_HI}}].
+* **Joint exhaustion:** posterior median {{PU_EXH_MED}} ({{PU_EXH_X}}× the brief); 95% credible interval
+  [{{PU_EXH_LO}}, {{PU_EXH_HI}}]. The two dependence corrections cancel on this target: more earthquakes
+  shared, but less rain shared, and exhaustion needs both.
+* **Reading.** A credible interval that lies entirely above the brief's value is strong evidence of
+  underestimation; one that straddles it is not. By this standard the pool exceedance and joint
+  attachment are robust findings and the joint exhaustion is not.
 
 ## 6.7 WP2: calibrated regional pools
 

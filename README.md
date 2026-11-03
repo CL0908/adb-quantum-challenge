@@ -9,7 +9,9 @@
   <p align="center">
     ADB Quantum Challenge: Joint-Loss Modelling for Natural Catastrophe Risk · Phase 1
     <br /><br />
-    <a href="docs/RDPO_Proposal.pdf"><strong>Technical proposal (PDF) »</strong></a>
+    <a href="docs/RDPO_Proposal_Short.pdf"><strong>6-page proposal »</strong></a>
+    &middot;
+    <a href="docs/RDPO_Proposal.pdf"><strong>Full technical proposal »</strong></a>
     &middot;
     <a href="#reproduce">Reproduce</a>
     &middot;
@@ -90,6 +92,8 @@ All numbers come from `results/*.json` (fixed seeds), with **training included i
 | Loss records (NOAA 1900–2020, EM-DAT 1990–2020) | 120-year record rejects independence (p = 0.005); shared share **48% (12–79%)**; short records uninformative |
 | Implied bond risk | joint exhaustion **≈ 3× the brief's base case** (4.0×10⁻⁵–1.5×10⁻⁴) |
 | **WP2: data-calibrated 10-country CAREC pool** (exact tensor-network references) | Pr(pool payout > US$500m) = 4.3×10⁻⁹: RDPO **1.25%** error with 65,536 paths (WP2 target ≤ 10%; twisting 7.0%; plain Monte Carlo sees nothing) |
+| **Stronger rare-event baselines** (same budget, same seeds) | RDPO vs adaptive multilevel splitting + SMC on exponential tilts + diagonal flow IS (warm-started from the optimal twist): **wins on every rare target by ×1.4–×18** |
+| **Parameter-uncertainty propagation** | Jeffreys-prior Beta posteriors on both shared shares; posterior for pool exceedance has median 3.76% (3.1× brief) and 95% CI [2.08%, 5.27%], entirely above the brief's 1.2% |
 | **WP2 at scale** (exact references) | 28 real Asia–Pacific countries: Pr(pool > US$850m) = 9.5×10⁻⁹ at **0.76%** error; 50-country ring: 4.1×10⁻⁹ at **0.79%** (65,536 paths; twisting 1.8–2.3%; Monte Carlo sees nothing) |
 | Rain dependence from station data (NOAA GHCN-Daily) | extreme-rain shared share **2.2% (0.6–7.7%)** vs the brief's 25%; with both dependences from data, pool exceedance 2.8× the brief, joint exhaustion about unchanged |
 | Projected Doob sampler (simplified RDPO for pair targets) | zero variance (relative spread ~10⁻¹⁵), exact conditional stress scenarios |
@@ -183,7 +187,7 @@ data/real/           cached public data (sources in file headers)
 src/viz/             figure style, concept art, data figures, paper build
 docs/paper/          manuscript source (proposal.md, references.bib, paper.css)
 docs/RDPO_Proposal.pdf   the technical proposal
-results/  figures/   all numbers and plots; tests/  54 tests
+results/  figures/   all numbers and plots; tests/  59 tests
 ```
 
 ## Roadmap
@@ -219,5 +223,5 @@ plan; all numbers come from the scripts in this repository.
 [python-shield]: https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white
 [numpy-shield]: https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
-[tests-shield]: https://img.shields.io/badge/tests-54%20passing-2ea44f?style=for-the-badge
+[tests-shield]: https://img.shields.io/badge/tests-59%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge

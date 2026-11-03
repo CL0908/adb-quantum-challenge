@@ -712,6 +712,123 @@ def mk_values():
             "MK_INST": str(sum(r["institutions"] for r in m["segments"])), "MK_SHARE": pct(m["som_share_of_sam"], 0)}
 
 
+def stronger_values():
+    """Table and summary for the stronger-baselines comparison (6.5.5)."""
+    try:
+        d = json.loads((R / "stronger_baselines.json").read_text())
+    except FileNotFoundError:
+        return {"STR_TABLE": "*(table not available; run `python -m src.baselines.stronger`)*", "STR_RANGE": "—"}
+    rdpo_e1 = {(r["scenario"], r["target"]): r for r in json.loads((R / "rdpo_e1.json").read_text())["rows"]
+               if r["budget"] == 16384}
+    rdpo_e2 = {(r["topology"], r["n"], r["target"]): r for r in json.loads((R / "rdpo_e2.json").read_text())["rows"]}
+    rows = d["rows"]
+    cells = {}
+    for r in rows:
+        cells[(r["case"], r["target"], r["method"])] = r
+    cases = []
+    seen = []
+    for r in rows:
+        key = (r["case"], r["target"], r["budget"])
+        if key not in seen:
+            seen.append(key); cases.append(key)
+    lines = ["**Table [tab:stronger].** RDPO (Phase 2 engine) vs three stronger rare-event methods on the ADB benchmark "
+             "and ring-16 scaling case, at the same budget and seeds (20 replications). Relative RMSE.",
+             "",
+             "| Case | Target | Budget | μ | RDPO (Phase 2) | Splitting | SMC (twist) | Flow IS |",
+             "|---|---|---|---|---|---|---|---|"]
+    ratios = []
+    for case, tgt, B in cases:
+        mu = cells[(case, tgt, "splitting")]["mu"]
+        if case.startswith("adb"):
+            rdpo = rdpo_e1.get((case, tgt))
+            rdpo_rmse = rdpo["rdpo"]["rel_rmse"] if rdpo else None
+        else:
+            rdpo = rdpo_e2.get(("ring", 16, tgt))
+            rdpo_rmse = rdpo["rdpo"]["rel_rmse"] if rdpo else None
+        case_lab = case
+        bud = f"{B:,}"
+        r_split = cells[(case, tgt, "splitting")]["rel_rmse"]
+        r_smc = cells[(case, tgt, "smc")]["rel_rmse"]
+        r_flow = cells[(case, tgt, "flow")]["rel_rmse"]
+        best_other = min(r_split, r_smc, r_flow)
+        if rdpo_rmse:
+            ratios.append(best_other / rdpo_rmse)
+            rdpo_cell = f"**{pct(rdpo_rmse)}**"
+        else:
+            rdpo_cell = "—"
+        lines.append(f"| {case_lab} | {tgt} | {bud} | {sci(mu) if mu < 0.1 else pct(mu)} | {rdpo_cell} | "
+                     f"{pct(r_split)} | {pct(r_smc)} | {pct(r_flow)} |")
+    v = {"STR_TABLE": "\n".join(lines)}
+    if ratios:
+        v["STR_RANGE"] = f"×{min(ratios):.1f}–×{max(ratios):.0f}"
+    else:
+        v["STR_RANGE"] = "—"
+    return v
+
+
+def qs_inline_values():
+    """Inline summary of the fitted quantum resource laws for the short proposal."""
+    try:
+        d = json.loads((R / "quantum_scaling.json").read_text())["fits"]
+    except FileNotFoundError:
+        return {"QS_FITS_INLINE": "linear laws (not computed in this build)"}
+    def line(name, label):
+        x = d[name]
+        return f"{label} ≈ {x['const']:.0f} + {x['per_country']:.1f}n + {x['per_edge']:.1f}|E|"
+    return {"QS_FITS_INLINE": "; ".join([line("logical_qubits", "logical qubits"),
+                                         line("toffoli_A", "Toffolis per A"),
+                                         line("depth_A", "depth of A")])}
+
+
+def pu_values():
+    """Parameter-uncertainty posterior summary (6.6.5)."""
+    try:
+        d = json.loads((R / "param_uncertainty.json").read_text())
+    except FileNotFoundError:
+        return {"PU_TABLE": "*(not available; run `python -m src.realdata.param_uncertainty`)*",
+                "PU_N": "—", "PU_EXC_MED": "—", "PU_EXC_LO": "—", "PU_EXC_HI": "—", "PU_EXC_X": "—",
+                "PU_EXC_BRIEF": "—", "PU_ATT_MED": "—", "PU_ATT_LO": "—", "PU_ATT_HI": "—",
+                "PU_ATT_X": "—", "PU_EXH_MED": "—", "PU_EXH_LO": "—", "PU_EXH_HI": "—", "PU_EXH_X": "—"}
+    brief = d["brief_point"]
+    s = d["posterior_summary"]
+    fx = d["factor_vs_brief"]
+    N = next(iter(s.values()))["n"]
+    def fmt_p(x):
+        return pct(x, 2) if x is None or x >= 1e-3 else sci(x)
+    def fmt_m(x):
+        return f"US${x / 1e6:.2f}m" if x >= 1e5 else sci(x)
+    lines = [f"**Table [tab:pu].** Posterior credible intervals for the ADB bond's two-country targets, from Jeffreys-prior "
+             f"posteriors on the two shared shares. {N} Monte Carlo samples; exact dense enumeration per sample.",
+             "",
+             "| Target | Brief (point) | Posterior median | 50% credible interval | 95% credible interval | Factor vs brief (median) |",
+             "|---|---|---|---|---|---|"]
+    for k, lab in (("exceedance", "Pr(L > 80m)"), ("joint_attachment", "Joint attachment"),
+                   ("joint_exhaustion", "Joint exhaustion"), ("stop_loss", "Stop-loss"),
+                   ("expected_loss", "Expected loss")):
+        if s.get(k) is None:
+            continue
+        b = brief[k]
+        med = s[k]["median"]
+        c50 = s[k]["ci50"]; c95 = s[k]["ci95"]
+        f = fx[k]["median_x"]
+        fmt = fmt_m if k in ("stop_loss", "expected_loss") else fmt_p
+        lines.append(f"| {lab} | {fmt(b)} | **{fmt(med)}** | [{fmt(c50[0])}, {fmt(c50[1])}] | "
+                     f"[{fmt(c95[0])}, {fmt(c95[1])}] | **×{f:.2f}** |")
+    v = {"PU_TABLE": "\n".join(lines), "PU_N": f"{N:,}"}
+    for key, prefix in (("exceedance", "PU_EXC"), ("joint_attachment", "PU_ATT"), ("joint_exhaustion", "PU_EXH")):
+        if s.get(key):
+            fmt = pct if s[key]["median"] >= 1e-3 else sci
+            v[f"{prefix}_MED"] = fmt(s[key]["median"])
+            v[f"{prefix}_LO"] = fmt(s[key]["ci95"][0])
+            v[f"{prefix}_HI"] = fmt(s[key]["ci95"][1])
+            v[f"{prefix}_X"] = f"{fx[key]['median_x']:.2f}"
+        else:
+            for suf in ("MED", "LO", "HI", "X"):
+                v[f"{prefix}_{suf}"] = "—"
+    v["PU_EXC_BRIEF"] = pct(brief["exceedance"])
+    return v
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -733,22 +850,28 @@ def toc(md):
     return f"::: {{.toc}}\n{items}\n\n**·**  References\n:::"
 
 
-def fill():
-    md = (PAPER / "proposal.md").read_text()
+def _collect_values():
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values):
         try:
             vals.update(fn())
         except Exception as ex:
             print("placeholder group failed:", fn.__name__, type(ex).__name__, ex, file=sys.stderr)
-    md = md.replace("# 1 Introduction {.newpage}", toc(md) + "\n\n# 1 Introduction", 1)
+    return vals
+
+
+def fill(src="proposal.md", dst="proposal.filled.md", add_toc=True):
+    md = (PAPER / src).read_text()
+    vals = _collect_values()
+    if add_toc:
+        md = md.replace("# 1 Introduction {.newpage}", toc(md) + "\n\n# 1 Introduction", 1)
     for k, val in vals.items():
         md = md.replace("{{" + k + "}}", val)
     md = number_labels(md)
     left = sorted(set(re.findall(r"\{\{(\w+)\}\}", md)))
     if left:
-        print("UNFILLED:", left, file=sys.stderr)
-    (PAPER / "proposal.filled.md").write_text(md)
+        print(f"UNFILLED in {src}:", left, file=sys.stderr)
+    (PAPER / dst).write_text(md)
     return left
 
 
@@ -809,6 +932,22 @@ def build(cv=None):
     subprocess.run(["node", str(js), str(cov_html.resolve()), str(cover), "cover"], check=True)
     out = ROOT / "docs/RDPO_Proposal.pdf"
     subprocess.run(["pdfunite", str(cover), str(body), str(out)], check=True)
+    # ---- short version: separate pandoc build from short.md, no cover ----
+    try:
+        fill(src="short.md", dst="short.filled.md", add_toc=False)
+        html_s = PAPER / "short.html"
+        subprocess.run(["pandoc", str(PAPER / "short.filled.md"), "-f", "markdown", "-t", "html5", "-s",
+                        "--mathjax=node_modules/mathjax-full/es5/tex-svg-full.js", "-H", str(mj),
+                        "--citeproc", "--bibliography", str(PAPER / "references.bib"), "--css", "paper.css",
+                        "-H", str(PAPER / "fonts.html"), "-o", str(html_s)], check=True)
+        body_s = PAPER / "short_body.pdf"
+        subprocess.run(["node", str(js), str(html_s.resolve()), str(body_s), "body"], check=True)
+        short_out = ROOT / "docs/RDPO_Proposal_Short.pdf"
+        import shutil
+        shutil.copy(str(body_s), str(short_out))
+        print("short built", short_out)
+    except Exception as ex:
+        print("short build skipped:", ex)
     if cv:
         Path("submission").mkdir(exist_ok=True)
         subprocess.run(["pdfunite", str(cover), str(body), cv, "submission/RDPO_Proposal_with_CV_annex.pdf"], check=True)
