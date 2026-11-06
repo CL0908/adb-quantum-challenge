@@ -1,0 +1,35 @@
+exact {'exceedance|160': 0.034927096445035, 'exceedance|320': 0.00023145995416835156, 'stop_loss|240': 261219.7953976883, 'expected_loss|None': 30264044.15340704, 'joint_exhaustion|None': 0.00013790059120998447}
+elt_demo: 0 done, 360 to run
+elt_demo: 20/360
+elt_demo: 40/360
+elt_demo: 60/360
+elt_demo: 80/360
+elt_demo: 100/360
+elt_demo: 120/360
+elt_demo: 140/360
+elt_demo: 160/360
+elt_demo: 180/360
+elt_demo: 200/360
+elt_demo: 220/360
+elt_demo: 240/360
+elt_demo: 260/360
+elt_demo: 280/360
+elt_demo: 300/360
+elt_demo: 320/360
+elt_demo: 340/360
+elt_demo: 360/360
+exceedance       160   mc    mu=3.493e-02 rel=0.0425 cov=0.88
+exceedance       160   rdpo  mu=3.493e-02 rel=0.0055 cov=0.92
+exceedance       160   ylt   mu=3.493e-02 rel=0.1075 cov=nan
+exceedance       320   mc    mu=2.315e-04 rel=0.4271 cov=0.88
+exceedance       320   rdpo  mu=2.315e-04 rel=0.0340 cov=0.88
+exceedance       320   ylt   mu=2.315e-04 rel=1.3153 cov=nan
+expected_loss    None  mc    mu=3.026e+07 rel=0.0143 cov=0.88
+expected_loss    None  rdpo  mu=3.026e+07 rel=0.0036 cov=1.00
+expected_loss    None  ylt   mu=3.026e+07 rel=0.0351 cov=nan
+joint_exhaustion None  mc    mu=1.379e-04 rel=0.8298 cov=0.83
+joint_exhaustion None  rdpo  mu=1.379e-04 rel=0.0601 cov=0.92
+joint_exhaustion None  ylt   mu=1.379e-04 rel=1.5306 cov=nan
+stop_loss        240   mc    mu=2.612e+05 rel=0.0876 cov=1.00
+stop_loss        240   rdpo  mu=2.612e+05 rel=0.0058 cov=0.96
+stop_loss        240   ylt   mu=2.612e+05 rel=0.2975 cov=nan

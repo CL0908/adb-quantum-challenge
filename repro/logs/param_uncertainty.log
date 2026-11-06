@@ -1,0 +1,6 @@
+done in 19.4s
+exceedance         brief=0.012  median=0.0376 (3.12x)  50% CI=[0.0315,0.0436]  95% CI=[0.0208,0.0527]
+joint_attachment   brief=0.0441  median=0.0763 (1.73x)  50% CI=[0.0662,0.0864]  95% CI=[0.0493,0.102]
+joint_exhaustion   brief=3.16e-05  median=3.12e-05 (0.99x)  50% CI=[2.55e-05,3.82e-05]  95% CI=[1.59e-05,5.64e-05]
+stop_loss          brief=2.82e+05  median=9.44e+05 (3.34x)  50% CI=[7.88e+05,1.1e+06]  95% CI=[5.16e+05,1.33e+06]
+expected_loss      brief=1.01e+07  median=1.01e+07 (1.00x)  50% CI=[1.01e+07,1.01e+07]  95% CI=[1.01e+07,1.01e+07]

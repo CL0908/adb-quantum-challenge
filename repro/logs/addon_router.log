@@ -1,0 +1,25 @@
+selftest ok: routing branches, MPS == dense at ring-6 (rel diff 2.7e-13)
+ring     n= 2 exceedance       exact_dense    0.002s  ref diff 2.8e-10  RDPO 0.14% in 1.5s
+ring     n= 2 stop_loss        exact_dense    0.001s  ref diff 2.9e-11  RDPO 0.14% in 1.6s
+ring     n= 2 joint_exhaustion exact_pair     0.001s  ref diff 3.8e-15  RDPO 0.34% in 1.9s
+ring     n= 8 exceedance       mps            0.218s  ref diff 2.7e-10  RDPO 0.31% in 41.8s
+ring     n= 8 stop_loss        mps            0.228s  ref diff 4.9e-10  RDPO 0.42% in 50.2s
+ring     n= 8 joint_exhaustion exact_pair     0.004s  ref diff 1.1e-13  RDPO 0.87% in 8.2s
+ring     n=16 exceedance       mps            1.203s  ref diff 6.1e-09  RDPO 0.57% in 89.2s
+ring     n=16 stop_loss        mps            1.166s  ref diff 5.5e-09  RDPO 0.56% in 118.0s
+ring     n=16 joint_exhaustion exact_pair     0.005s  ref diff 5.6e-13  RDPO 0.42% in 14.9s
+ring     n=20 exceedance       mps            1.880s  ref diff 9.3e-09  RDPO 0.98% in 146.2s
+ring     n=20 stop_loss        mps            2.130s  ref diff 8.4e-09  RDPO 0.76% in 149.1s
+ring     n=20 joint_exhaustion exact_pair     0.007s  ref diff 6.7e-13  RDPO 0.42% in 19.5s
+ring     n=28 exceedance       mps            5.012s  ref diff 1.4e-08  RDPO 0.99% in 168.0s
+ring     n=28 stop_loss        mps            5.053s  ref diff 1.4e-08  RDPO 5.55% in 87.7s
+ring     n=28 joint_exhaustion exact_pair     0.010s  ref diff 5.1e-13  RDPO 0.50% in 11.4s
+complete n= 4 exceedance       exact_dense    0.008s  ref diff 1.6e-10  RDPO 0.29% in 27.0s
+complete n= 4 stop_loss        exact_dense    0.006s  ref diff 4.7e-10  RDPO 0.28% in 37.9s
+complete n= 4 joint_exhaustion exact_pair     0.004s  ref diff 5.0e-14  RDPO 0.44% in 10.2s
+complete n= 6 exceedance       exact_dense    0.411s  ref diff 4.9e-10  RDPO 0.63% in 143.6s
+complete n= 6 stop_loss        exact_dense    0.520s  ref diff 4.3e-11  RDPO 0.48% in 113.8s
+complete n= 6 joint_exhaustion exact_pair     0.024s  ref diff 4.0e-13  RDPO 1.10% in 17.0s
+complete n= 7 exceedance       mps           77.724s  ref diff 2.4e-05  RDPO 0.48% in 192.8s
+complete n= 7 stop_loss        mps           72.669s  ref diff 3.1e-05  RDPO 0.59% in 187.8s
+complete n= 7 joint_exhaustion exact_pair     0.008s  ref diff 1.8e-10  RDPO 3.41% in 20.7s

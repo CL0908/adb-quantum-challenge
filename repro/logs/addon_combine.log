@@ -1,0 +1,8 @@
+ring     n= 2  s* 8.34e+06 -> Q1c 2.94e+06 / Q1 2.29e+06, Q2 1.41e+06, both 5.18e+05..4.41e+05 (/16.1..18.9)  exact exact_dense 0.00s, beats RDPO below ε=4.0%
+ring     n= 8  s* 7.98e+05 -> Q1c 2.19e+05 / Q1 1.89e+05, Q2 1.64e+05, both 4.32e+04..3.75e+04 (/18.5..21.3)  exact mps 0.22s, beats RDPO below ε=4.3%
+ring     n=16  s* 3.03e+05 -> Q1c 7.59e+04 / Q1 6.58e+04, Q2 1.05e+05, both 2.7e+04..2.33e+04 (/11.2..13.0)  exact mps 1.20s, beats RDPO below ε=4.9%
+ring     n=20  s* 1e+05 -> Q1c 2.68e+04 / Q1 2.32e+04, Q2 3.7e+04, both 9.39e+03..8.12e+03 (/10.7..12.3)  exact mps 1.88s, beats RDPO below ε=8.7%
+ring     n=28  s* 5.8e+05 -> Q1c 1.51e+05 / Q1 1.29e+05, Q2 8.7e+04, both 2.33e+04..2.02e+04 (/24.9..28.7)  exact mps 5.01s, beats RDPO below ε=5.7%
+complete n= 4  s* 8.57e+05 -> Q1c 2.08e+05 / Q1 1.82e+05, Q2 1.36e+05, both 3.73e+04..3.26e+04 (/23.0..26.3)  exact exact_dense 0.01s, beats RDPO below ε=16.5%
+complete n= 6  s* 9.29e+04 -> Q1c 2.05e+04 / Q1 1.79e+04, Q2 1.59e+04, both 3.58e+03..3.17e+03 (/25.9..29.3)  exact exact_dense 0.41s, beats RDPO below ε=11.8%
+complete n= 7  s* 2.03e+05 -> Q1c 4.29e+04 / Q1 3.78e+04, Q2 3.61e+04, both 8.49e+03..7.51e+03 (/24.0..27.1)  exact mps 77.72s, beats RDPO below ε=0.8%

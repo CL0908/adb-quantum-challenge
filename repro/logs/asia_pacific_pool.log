@@ -1,0 +1,47 @@
+ring50 refs {'exceedance|650': 0.001450727919198432, 'stop_loss|650': 70051.95537285839, 'exceedance|1150': 4.113979305063575e-09, 'stop_loss|1150': 0.13956728070793573, 'joint_exhaustion|None': 1.898967295193546e-05} 650 1150 bond 64 329s
+asia_pacific refs {'exceedance|450': 0.0017958395948045574, 'stop_loss|450': 75247.89619490196, 'exceedance|850': 9.507045703535937e-09, 'stop_loss|850': 0.26656075032583804, 'joint_exhaustion|None': 1.4125325365389949e-05} 450 850 bond 367 603s
+wp2_asia_pacific: 0 done, 480 to run
+wp2_asia_pacific: 20/480
+wp2_asia_pacific: 40/480
+wp2_asia_pacific: 60/480
+wp2_asia_pacific: 80/480
+wp2_asia_pacific: 100/480
+wp2_asia_pacific: 120/480
+wp2_asia_pacific: 140/480
+wp2_asia_pacific: 160/480
+wp2_asia_pacific: 180/480
+wp2_asia_pacific: 200/480
+wp2_asia_pacific: 220/480
+wp2_asia_pacific: 240/480
+wp2_asia_pacific: 260/480
+wp2_asia_pacific: 280/480
+wp2_asia_pacific: 300/480
+wp2_asia_pacific: 320/480
+wp2_asia_pacific: 340/480
+wp2_asia_pacific: 360/480
+wp2_asia_pacific: 380/480
+wp2_asia_pacific: 400/480
+wp2_asia_pacific: 420/480
+wp2_asia_pacific: 440/480
+wp2_asia_pacific: 460/480
+wp2_asia_pacific: 480/480
+asia_pacific exceedance       450   mc     mu=1.796e-03 rel=0.0854 cov=0.96
+asia_pacific exceedance       450   rdpo   mu=1.796e-03 rel=0.0034 cov=0.96
+asia_pacific exceedance       450   twist  mu=1.796e-03 rel=0.0081 cov=nan
+asia_pacific exceedance       850   mc     mu=9.507e-09 rel=1.0000 cov=0.00
+asia_pacific exceedance       850   rdpo   mu=9.507e-09 rel=0.0089 cov=0.88
+asia_pacific exceedance       850   twist  mu=9.507e-09 rel=0.0228 cov=nan
+asia_pacific joint_exhaustion None  rdpo   mu=1.413e-05 rel=0.0593 cov=0.71
+asia_pacific stop_loss        850   mc     mu=2.666e-01 rel=1.0000 cov=0.00
+asia_pacific stop_loss        850   rdpo   mu=2.666e-01 rel=0.0051 cov=1.00
+asia_pacific stop_loss        850   twist  mu=2.666e-01 rel=0.0184 cov=nan
+ring50       exceedance       1150  mc     mu=4.114e-09 rel=1.0000 cov=0.00
+ring50       exceedance       1150  rdpo   mu=4.114e-09 rel=0.0079 cov=1.00
+ring50       exceedance       1150  twist  mu=4.114e-09 rel=0.0182 cov=nan
+ring50       exceedance       650   mc     mu=1.451e-03 rel=0.0747 cov=1.00
+ring50       exceedance       650   rdpo   mu=1.451e-03 rel=0.0047 cov=0.96
+ring50       exceedance       650   twist  mu=1.451e-03 rel=0.0081 cov=nan
+ring50       joint_exhaustion None  rdpo   mu=1.899e-05 rel=0.0072 cov=0.92
+ring50       stop_loss        1150  mc     mu=1.396e-01 rel=1.0000 cov=0.00
+ring50       stop_loss        1150  rdpo   mu=1.396e-01 rel=0.0095 cov=0.92
+ring50       stop_loss        1150  twist  mu=1.396e-01 rel=0.0134 cov=nan

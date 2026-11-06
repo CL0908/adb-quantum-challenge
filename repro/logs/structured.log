@@ -1,0 +1,38 @@
+IQAE C = 101.90936833400963
+verify chain 2 {'topology': 'chain', 'n': 2, 'exceedance': 0.012046720907534048, 'support': 3400, 'norm_err': 0.0, 'max_abs_err_vs_dense': 4.440892098500626e-16, 'stop_loss_scaled': 0.003529433732076763, 'at_least_two_pay': 0.044137768730843616, 'all_exhausted': 3.163304630917913e-05, 'expected_loss_scaled': 0.06289695843096321}
+verify chain 3 {'topology': 'chain', 'n': 3, 'exceedance': 0.009108553513551979, 'support': 1156000, 'norm_err': 4.440892098500626e-16, 'max_abs_err_vs_dense': 2.220446049250313e-16, 'stop_loss_scaled': 0.0013256556194734472, 'at_least_two_pay': 0.0882538567390418, 'all_exhausted': 8.87060170147946e-08, 'expected_loss_scaled': 0.06409810089339164}
+scale chain 2 q 52 tof 156 chi 9
+scale chain 3 q 73 tof 240 chi 9
+scale chain 4 q 96 tof 342 chi 9
+scale chain 5 q 117 tof 430 chi 9
+scale chain 6 q 138 tof 518 chi 9
+scale chain 7 q 159 tof 606 chi 9
+scale chain 8 q 182 tof 728 chi 9
+scale chain 10 q 224 tof 912 chi 9
+scale chain 12 q 266 tof 1096 chi 9
+scale chain 16 q 352 tof 1530 chi 9
+scale chain 20 q 436 tof 1914 chi 9
+scale chain 28 q 604 tof 2682 chi 9
+scale chain 50 q 1068 tof 4996 chi None
+scale ring 2 q 52 tof 156 chi 9
+scale ring 3 q 80 tof 264 chi 10
+scale ring 4 q 103 tof 366 chi 58
+scale ring 5 q 124 tof 454 chi 56
+scale ring 6 q 145 tof 542 chi 58
+scale ring 7 q 166 tof 630 chi 56
+scale ring 8 q 189 tof 752 chi 58
+scale ring 10 q 231 tof 936 chi 58
+scale ring 12 q 273 tof 1120 chi 58
+scale ring 16 q 359 tof 1554 chi 58
+scale ring 20 q 443 tof 1938 chi 58
+scale ring 28 q 611 tof 2706 chi 58
+scale ring 50 q 1075 tof 5020 chi None
+scale complete 2 q 52 tof 156 chi 9
+scale complete 3 q 80 tof 264 chi 10
+scale complete 4 q 125 tof 494 chi 58
+scale complete 5 q 169 tof 694 chi 69
+scale complete 6 q 220 tof 926 chi 135
+scale complete 7 q 278 tof 1190 chi 162
+scale complete 8 q 361 tof 1808 chi None
+scale complete 10 q 516 tof 2656 chi None
+scale complete 12 q 699 tof 3664 chi None

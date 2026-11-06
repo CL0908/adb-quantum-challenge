@@ -1,0 +1,8 @@
+NOAA significant earthquakes, 1975–2020          table=[[5, 3], [11, 27]] both=0.109 indep=0.060 share(KG)=0.45 [0.00,0.82] share(min)=0.45 [0.00,0.82] p_indep=0.077
+NOAA significant earthquakes, 1900–2020          table=[[5, 4], [15, 97]] both=0.041 indep=0.012 share(KG)=0.48 [0.12,0.79] share(min)=0.48 [0.12,0.79] p_indep=0.005
+EM-DAT earthquake losses, 1990–2020              table=[[2, 4], [7, 18]] both=0.065 indep=0.056 share(KG)=0.07 [0.00,0.57] share(min)=0.07 [0.00,0.57] p_indep=0.798
+EM-DAT flood/landslide/storm losses, 1990–2020   table=[[3, 2], [15, 11]] both=0.097 indep=0.094 share(KG)=0.05 [0.00,0.80] share(min)=0.05 [0.00,0.80] p_indep=0.924
+brief {'eq_share': 0.0745, 'rain_share': 0.25, 'joint_attachment': 0.044138, 'exceedance': 0.012047, 'joint_exhaustion': 3.2e-05}
+loss data, lower 95% bound {'eq_share': 0.124314, 'rain_share': 0.25, 'm': 1.66865, 'joint_attachment': 0.048403, 'exceedance': 0.014736, 'joint_exhaustion': 4e-05}
+loss data, point estimate {'eq_share': 0.477183, 'rain_share': 0.25, 'm': 6.405135, 'joint_attachment': 0.079352, 'exceedance': 0.033659, 'joint_exhaustion': 9.9e-05}
+loss data, upper 95% bound {'eq_share': 0.791555, 'rain_share': 0.25, 'm': 10.624901, 'joint_attachment': 0.108046, 'exceedance': 0.050316, 'joint_exhaustion': 0.000151}
