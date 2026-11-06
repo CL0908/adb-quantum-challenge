@@ -1,0 +1,6 @@
+selftest ok: variant.targets == param_uncertainty.targets_at at (s_eq, s_rain) = (0.06, 0.05)
+friend (shares only): median 3.12e-05, 95% [1.59e-05, 5.64e-05]
+shares_only  joint exhaustion median 3.13e-05 (0.99x brief), 95% [1.64e-05, 5.42e-05] width x0.93 of friend's; EL median 10.06m 95% [10.06, 10.06]  invalid 0
+rates_only   joint exhaustion median 1.95e-05 (0.62x brief), 95% [3.63e-08, 0.000106] width x2.60 of friend's; EL median 10.22m 95% [5.26, 19.12]  invalid 0
+all          joint exhaustion median 2.2e-05 (0.70x brief), 95% [3.46e-08, 0.000123] width x3.02 of friend's; EL median 10.22m 95% [5.26, 19.12]  invalid 0
+multipliers (2.5/50/97.5%): {'eqKG': [0.45, 1.01, 2.04], 'eqTJ': [0.45, 1.01, 2.23], 'rnKG': [0.0, 0.88, 2.56], 'rnTJ': [0.11, 1.01, 2.54]}

@@ -1,0 +1,4 @@
+selftest ok: on true-pairwise data, observed >=3 = 70 vs fitted pairwise 71.6
+u=0.99: 3774 blocks  >=3: obs 22 vs pairwise 27.6 (x0.80, p=0.876) vs indep 6.4  >=4: obs 5 vs pairwise 5.5 (x0.91, p=0.648) vs indep 0.3
+u=0.995: 3774 blocks  >=3: obs 8 vs pairwise 8.7 (x0.92, p=0.642) vs indep 1.0  >=4: obs 2 vs pairwise 1.5 (x1.36, p=0.438) vs indep 0.0
+u=0.998: 3774 blocks  >=3: obs 0 vs pairwise 0.1 (x0.00, p=1.000) vs indep 0.1  >=4: obs 0 vs pairwise 0.0 (x0.00, p=1.000) vs indep 0.0

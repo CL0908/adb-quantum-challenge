@@ -69,6 +69,9 @@ JOBS = [
     *[(f"addon_{s}", 6, [PY, str(HERE.parent / "addons" / f"{s}.py")], deps, cpu, False)
       for s, deps, cpu in [("rotations", [], 1), ("router", [], 1), ("measure", [], 1), ("q2_ae", [], 1),
                            ("psis", [], ALL), ("combine", ["addon_rotations", "addon_router", "addon_q2_ae"], 1)]],
+    # phase 7: quality add-ons (methods borrowed from the QContagion CDS work; same read-only rules)
+    *[(f"quality_{s}", 7, [PY, str(HERE.parent / "addons" / f"{s}.py")], [], 1, False)
+      for s in ("rain_lag", "eq_cluster", "joint_k", "rates_unc", "risk_measures", "data_gaps")],
 ]
 BY = {j[0]: j for j in JOBS}
 

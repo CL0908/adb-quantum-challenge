@@ -1,0 +1,5021 @@
+{
+  "null": "year-derangement surrogate (calendar dates kept)",
+  "n_perm": 2000,
+  "seed": 20261107,
+  "windows_days": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    15
+  ],
+  "pairs": {
+    "AZ-GE": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 39,
+          "n_other": 39,
+          "years": 47,
+          "w0": {
+            "observed": 2,
+            "E0": 0.17391304347826086,
+            "null_q95": 1.0,
+            "p_value": 0.01813110181311018,
+            "share_raw": 0.05128205128205128,
+            "share_corrected": 0.04682274247491639
+          },
+          "w1": {
+            "observed": 3,
+            "E0": 0.5652173913043478,
+            "null_q95": 2.0,
+            "p_value": 0.026499302649930265,
+            "share_raw": 0.07692307692307693,
+            "share_corrected": 0.06243032329988852
+          },
+          "w2": {
+            "observed": 5,
+            "E0": 0.8913043478260869,
+            "null_q95": 3.0,
+            "p_value": 0.005578800557880056,
+            "share_raw": 0.1282051282051282,
+            "share_corrected": 0.10535117056856187
+          },
+          "w3": {
+            "observed": 5,
+            "E0": 1.1521739130434783,
+            "null_q95": 3.0,
+            "p_value": 0.009762900976290097,
+            "share_raw": 0.1282051282051282,
+            "share_corrected": 0.09866220735785952
+          },
+          "w7": {
+            "observed": 5,
+            "E0": 2.652173913043478,
+            "null_q95": 5.0,
+            "p_value": 0.09065550906555091,
+            "share_raw": 0.1282051282051282,
+            "share_corrected": 0.06020066889632108
+          },
+          "w15": {
+            "observed": 7,
+            "E0": 4.913043478260869,
+            "null_q95": 8.0,
+            "p_value": 0.20920502092050208,
+            "share_raw": 0.1794871794871795,
+            "share_corrected": 0.05351170568561874
+          }
+        },
+        "0.2": {
+          "n_rare": 11,
+          "n_other": 13,
+          "years": 47,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.10869565217391304,
+            "null_q95": 1.0,
+            "p_value": 0.10026041666666667,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.08102766798418971
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.13043478260869565,
+            "null_q95": 1.0,
+            "p_value": 0.1171875,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.07905138339920949
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.15217391304347827,
+            "null_q95": 1.0,
+            "p_value": 0.13411458333333334,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.07707509881422925
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.32608695652173914,
+            "null_q95": 1.0,
+            "p_value": 0.265625,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.06126482213438735
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.6304347826086957,
+            "null_q95": 2.0,
+            "p_value": 0.4479166666666667,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.03359683794466403
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 47,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.021739130434782608,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004347826086956522
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.043478260869565216,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008695652173913044
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.043478260869565216,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008695652173913044
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.06521739130434782,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013043478260869565
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.10869565217391304,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.021739130434782608
+          }
+        }
+      }
+    },
+    "AZ-KG": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 24,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.125,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005208333333333333
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.275,
+            "null_q95": 1.0,
+            "p_value": 0.23182441700960219,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.030208333333333334
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.45,
+            "null_q95": 2.0,
+            "p_value": 0.3676268861454047,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.02291666666666667
+          },
+          "w3": {
+            "observed": 2,
+            "E0": 0.6,
+            "null_q95": 2.0,
+            "p_value": 0.12071330589849108,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": 0.05833333333333333
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.075,
+            "null_q95": 3.0,
+            "p_value": 0.29492455418381347,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": 0.03854166666666667
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 2.2,
+            "null_q95": 4.0,
+            "p_value": 0.710562414266118,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": -0.00833333333333334
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005555555555555556
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005555555555555556
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.15,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.016666666666666666
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.275,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.030555555555555558
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          }
+        }
+      }
+    },
+    "AZ-KZ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.275,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.4,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012121212121212121
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.65,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0196969696969697
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 1.0,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.030303030303030304
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 1.775,
+            "null_q95": 4.0,
+            "p_value": 0.84593837535014,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": -0.023484848484848483
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 3.025,
+            "null_q95": 6.0,
+            "p_value": 0.9649859943977591,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": -0.06136363636363636
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 11,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.075,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0075
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.125,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0125
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.35,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.034999999999999996
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.075,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.015
+          }
+        }
+      }
+    },
+    "AZ-MN": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 24,
+          "n_other": 35,
+          "years": 31,
+          "w0": {
+            "observed": 0,
+            "E0": 0.2,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.5333333333333333,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.022222222222222223
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.8333333333333334,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.034722222222222224
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 1.0333333333333334,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.04305555555555556
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 2.0,
+            "null_q95": 4.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.08333333333333333
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 3.7666666666666666,
+            "null_q95": 6.0,
+            "p_value": 0.7486338797814208,
+            "share_raw": 0.125,
+            "share_corrected": -0.03194444444444444
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 31,
+          "w0": {
+            "observed": 0,
+            "E0": 0.06666666666666667,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007407407407407408
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011111111111111112
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.13333333333333333,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014814814814814815
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.13333333333333333,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014814814814814815
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.2,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.022222222222222223
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.3333333333333333,
+            "null_q95": 1.0,
+            "p_value": 0.28415300546448086,
+            "share_raw": 0.1111111111111111,
+            "share_corrected": 0.07407407407407408
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 4,
+          "years": 31,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.03333333333333333,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.03333333333333333,
+            "null_q95": 0.0,
+            "p_value": 0.036585365853658534,
+            "share_raw": 0.25,
+            "share_corrected": 0.24166666666666667
+          }
+        }
+      }
+    },
+    "AZ-TJ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 35,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002857142857142857
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.225,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0064285714285714285
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.525,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.015000000000000001
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.75,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.02142857142857143
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 1.4,
+            "null_q95": 4.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.04
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 1.975,
+            "null_q95": 4.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.05642857142857143
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011111111111111112
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011111111111111112
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.25,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.027777777777777776
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.3,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03333333333333333
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01
+          }
+        }
+      }
+    },
+    "AZ-TM": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0015151515151515152
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.2,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006060606060606061
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.35,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010606060606060605
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.45,
+            "null_q95": 2.0,
+            "p_value": 0.3827683615819209,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.016666666666666666
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.95,
+            "null_q95": 3.0,
+            "p_value": 0.6299435028248588,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.0015151515151515165
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 1.5,
+            "null_q95": 4.0,
+            "p_value": 0.7937853107344632,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": -0.015151515151515152
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002777777777777778
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011111111111111112
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011111111111111112
+          }
+        },
+        "0.1": {
+          "n_rare": 3,
+          "n_other": 5,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          }
+        }
+      }
+    },
+    "AZ-UZ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 32,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00078125
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.175,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00546875
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.3,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.009375
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.375,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01171875
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.85,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0265625
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 1.5,
+            "null_q95": 4.0,
+            "p_value": 0.5013966480446927,
+            "share_raw": 0.0625,
+            "share_corrected": 0.015625
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 10,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0025
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.075,
+            "null_q95": 1.0,
+            "p_value": 0.08298755186721991,
+            "share_raw": 0.1,
+            "share_corrected": 0.0925
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 6,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          }
+        }
+      }
+    },
+    "GE-KG": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 24,
+          "n_other": 38,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.15,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0062499999999999995
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.3,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012499999999999999
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.525,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.021875000000000002
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.65,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.027083333333333334
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 1.325,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.05520833333333333
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 2.5,
+            "null_q95": 5.0,
+            "p_value": 0.9612903225806452,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": -0.0625
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 13,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.075,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008333333333333333
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.125,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013888888888888888
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.15,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.016666666666666666
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.15,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.016666666666666666
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.275,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.030555555555555558
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.45,
+            "null_q95": 2.0,
+            "p_value": 0.36787564766839376,
+            "share_raw": 0.1111111111111111,
+            "share_corrected": 0.061111111111111116
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 41,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.05,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.125,
+            "null_q95": 1.0,
+            "p_value": 0.12104539202200826,
+            "share_raw": 0.2,
+            "share_corrected": 0.175
+          }
+        }
+      }
+    },
+    "GE-KZ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 38,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.17073170731707318,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005173688100517369
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.4634146341463415,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014042867701404288
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.6585365853658537,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.019955654101995568
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.9024390243902439,
+            "null_q95": 3.0,
+            "p_value": 0.6198125836680054,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.0029563932002956385
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 1.7804878048780488,
+            "null_q95": 4.0,
+            "p_value": 0.8621151271753681,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": -0.023651145602365115
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 3.341463414634146,
+            "null_q95": 6.0,
+            "p_value": 0.8835341365461847,
+            "share_raw": 0.06060606060606061,
+            "share_corrected": -0.04065040650406504
+          }
+        },
+        "0.2": {
+          "n_rare": 11,
+          "n_other": 13,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0066518847006651885
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0066518847006651885
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.12195121951219512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011086474501108647
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.21951219512195122,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.019955654101995565
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.2926829268292683,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.026607538802660754
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.5853658536585366,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.05321507760532151
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00975609756097561
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014634146341463414
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014634146341463414
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.17073170731707318,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03414634146341464
+          }
+        }
+      }
+    },
+    "GE-MN": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 24,
+          "n_other": 29,
+          "years": 32,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0967741935483871,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004032258064516129
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.3870967741935484,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.016129032258064516
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.7419354838709677,
+            "null_q95": 2.0,
+            "p_value": 0.5533333333333333,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.01075268817204301
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.9032258064516129,
+            "null_q95": 3.0,
+            "p_value": 0.616,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.00403225806451613
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.7096774193548387,
+            "null_q95": 4.0,
+            "p_value": 0.54,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": 0.012096774193548385
+          },
+          "w15": {
+            "observed": 4,
+            "E0": 3.5483870967741935,
+            "null_q95": 6.0,
+            "p_value": 0.524,
+            "share_raw": 0.16666666666666666,
+            "share_corrected": 0.01881720430107527
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 11,
+          "years": 32,
+          "w0": {
+            "observed": 0,
+            "E0": 0.03225806451612903,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0032258064516129032
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0967741935483871,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00967741935483871
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.0967741935483871,
+            "null_q95": 1.0,
+            "p_value": 0.10317460317460317,
+            "share_raw": 0.1,
+            "share_corrected": 0.09032258064516129
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.12903225806451613,
+            "null_q95": 1.0,
+            "p_value": 0.10317460317460317,
+            "share_raw": 0.1,
+            "share_corrected": 0.08709677419354839
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.22580645161290322,
+            "null_q95": 1.0,
+            "p_value": 0.18253968253968253,
+            "share_raw": 0.1,
+            "share_corrected": 0.07741935483870968
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 0.5806451612903226,
+            "null_q95": 2.0,
+            "p_value": 0.09656084656084656,
+            "share_raw": 0.2,
+            "share_corrected": 0.14193548387096774
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 4,
+          "years": 32,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.03225806451612903,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008064516129032258
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.03225806451612903,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008064516129032258
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.03225806451612903,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008064516129032258
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.06451612903225806,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.016129032258064516
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.0967741935483871,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.024193548387096774
+          }
+        }
+      }
+    },
+    "GE-TJ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 35,
+          "n_other": 38,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.12195121951219512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.003484320557491289
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.2926829268292683,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008362369337979094
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.5121951219512195,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014634146341463415
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.7804878048780488,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.02229965156794425
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 1.3414634146341464,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.038327526132404185
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 2.4634146341463414,
+            "null_q95": 5.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.07038327526132404
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 13,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0027100271002710027
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0027100271002710027
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.1951219512195122,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.02168021680216802
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.3170731707317073,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03523035230352303
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.43902439024390244,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.04878048780487805
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00975609756097561
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0975609756097561,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01951219512195122
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.14634146341463414,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.029268292682926828
+          }
+        }
+      }
+    },
+    "GE-TM": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 38,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0014781966001478197
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.14634146341463414,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004434589800443459
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.2682926829268293,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008130081300813009
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.36585365853658536,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011086474501108647
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.6585365853658537,
+            "null_q95": 2.0,
+            "p_value": 0.5128865979381443,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.010347376201034736
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 1.4146341463414633,
+            "null_q95": 3.0,
+            "p_value": 0.15335051546391754,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.04804138950480414
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 13,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0027100271002710027
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005420054200542005
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005420054200542005
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.12195121951219512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013550135501355013
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.21951219512195122,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.024390243902439025
+          }
+        },
+        "0.1": {
+          "n_rare": 3,
+          "n_other": 5,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008130081300813009
+          }
+        }
+      }
+    },
+    "GE-UZ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 38,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0007390983000739098
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.14634146341463414,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004434589800443459
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.2682926829268293,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008130081300813009
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.34146341463414637,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010347376201034738
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.7804878048780488,
+            "null_q95": 3.0,
+            "p_value": 0.5424403183023873,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.006651884700665188
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 1.3902439024390243,
+            "null_q95": 3.0,
+            "p_value": 0.8037135278514589,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": -0.011825572801182554
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 13,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007317073170731707
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007317073170731707
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.12195121951219512,
+            "null_q95": 1.0,
+            "p_value": 0.12175102599179206,
+            "share_raw": 0.1,
+            "share_corrected": 0.08780487804878048
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.14634146341463414,
+            "null_q95": 1.0,
+            "p_value": 0.1545827633378933,
+            "share_raw": 0.1,
+            "share_corrected": 0.08536585365853658
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 6,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          }
+        }
+      }
+    },
+    "KG-KZ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 26,
+          "n_other": 33,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.13636363636363635,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005244755244755244
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.22727272727272727,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00874125874125874
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.29545454545454547,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011363636363636364
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.45454545454545453,
+            "null_q95": 2.0,
+            "p_value": 0.35075653370013754,
+            "share_raw": 0.038461538461538464,
+            "share_corrected": 0.020979020979020976
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.0909090909090908,
+            "null_q95": 3.0,
+            "p_value": 0.29573590096286106,
+            "share_raw": 0.07692307692307693,
+            "share_corrected": 0.03496503496503497
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 2.2954545454545454,
+            "null_q95": 5.0,
+            "p_value": 0.7015130674002751,
+            "share_raw": 0.07692307692307693,
+            "share_corrected": -0.011363636363636362
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 11,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.022727272727272728,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0022727272727272726
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.045454545454545456,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004545454545454545
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.06818181818181818,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006818181818181818
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.13636363636363635,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013636363636363636
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.25,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.025
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.5,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.05
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.022727272727272728,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004545454545454545
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.09090909090909091,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01818181818181818
+          }
+        }
+      }
+    },
+    "KG-MN": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 21,
+          "n_other": 27,
+          "years": 34,
+          "w0": {
+            "observed": 0,
+            "E0": 0.15151515151515152,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007215007215007215
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.18181818181818182,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008658008658008658
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.21212121212121213,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010101010101010102
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.3333333333333333,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.015873015873015872
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.7272727272727273,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03463203463203463
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 1.5757575757575757,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.07503607503607504
+          }
+        },
+        "0.2": {
+          "n_rare": 8,
+          "n_other": 10,
+          "years": 34,
+          "w0": {
+            "observed": 0,
+            "E0": 0.030303030303030304,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.003787878787878788
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.030303030303030304,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.003787878787878788
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.030303030303030304,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.003787878787878788
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.06060606060606061,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007575757575757576
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.12121212121212122,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.015151515151515152
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.21212121212121213,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.026515151515151516
+          }
+        },
+        "0.1": {
+          "n_rare": 3,
+          "n_other": 4,
+          "years": 34,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.030303030303030304,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010101010101010102
+          }
+        }
+      }
+    },
+    "KG-TJ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 24,
+          "n_other": 35,
+          "years": 42,
+          "w0": {
+            "observed": 1,
+            "E0": 0.21951219512195122,
+            "null_q95": 1.0,
+            "p_value": 0.17454068241469817,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.032520325203252036
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.3170731707317073,
+            "null_q95": 1.0,
+            "p_value": 0.26115485564304464,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.028455284552845527
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.4878048780487805,
+            "null_q95": 2.0,
+            "p_value": 0.3766404199475066,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.021341463414634148
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.5853658536585366,
+            "null_q95": 2.0,
+            "p_value": 0.43832020997375326,
+            "share_raw": 0.041666666666666664,
+            "share_corrected": 0.017276422764227643
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.170731707317073,
+            "null_q95": 3.0,
+            "p_value": 0.3425196850393701,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": 0.034552845528455285
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 1.829268292682927,
+            "null_q95": 4.0,
+            "p_value": 0.2559055118110236,
+            "share_raw": 0.125,
+            "share_corrected": 0.048780487804878044
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 9,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0027100271002710027
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008130081300813007
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008130081300813007
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.12195121951219512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013550135501355013
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.17073170731707318,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01897018970189702
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.34146341463414637,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03794037940379404
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 42,
+          "w0": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.024390243902439025,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004878048780487805
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.04878048780487805,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00975609756097561
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.07317073170731707,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014634146341463414
+          }
+        }
+      }
+    },
+    "KG-TM": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 27,
+          "n_other": 34,
+          "years": 44,
+          "w0": {
+            "observed": 0,
+            "E0": 0.06976744186046512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002583979328165375
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.13953488372093023,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00516795865633075
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.23255813953488372,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008613264427217916
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.3953488372093023,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014642549526270456
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.813953488372093,
+            "null_q95": 2.0,
+            "p_value": 0.5983827493261455,
+            "share_raw": 0.037037037037037035,
+            "share_corrected": 0.0068906115417743325
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 1.5116279069767442,
+            "null_q95": 3.0,
+            "p_value": 0.839622641509434,
+            "share_raw": 0.037037037037037035,
+            "share_corrected": -0.018949181739879414
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 44,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.023255813953488372,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002583979328165375
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.06976744186046512,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007751937984496124
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.11627906976744186,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012919896640826873
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.18604651162790697,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.020671834625323
+          }
+        },
+        "0.1": {
+          "n_rare": 3,
+          "n_other": 5,
+          "years": 44,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.046511627906976744,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.015503875968992248
+          }
+        }
+      }
+    },
+    "KG-UZ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 30,
+          "n_other": 36,
+          "years": 48,
+          "w0": {
+            "observed": 0,
+            "E0": 0.06382978723404255,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002127659574468085
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.2127659574468085,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0070921985815602835
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.3829787234042553,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01276595744680851
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.44680851063829785,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.014893617021276595
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 1.0425531914893618,
+            "null_q95": 3.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03475177304964539
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 1.9574468085106382,
+            "null_q95": 4.0,
+            "p_value": 0.8981612446958982,
+            "share_raw": 0.03333333333333333,
+            "share_corrected": -0.031914893617021274
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 11,
+          "years": 48,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.06382978723404255,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006382978723404255
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.10638297872340426,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010638297872340425
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.10638297872340426,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010638297872340425
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.1702127659574468,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01702127659574468
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.2765957446808511,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.027659574468085108
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 6,
+          "years": 48,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.02127659574468085,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00425531914893617
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0425531914893617,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00851063829787234
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0425531914893617,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00851063829787234
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0425531914893617,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00851063829787234
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.0425531914893617,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00851063829787234
+          }
+        }
+      }
+    },
+    "KZ-MN": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 25,
+          "n_other": 27,
+          "years": 37,
+          "w0": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0011111111111111111
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.1111111111111111,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0044444444444444444
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.1111111111111111,
+            "null_q95": 1.0,
+            "p_value": 0.10755441741357234,
+            "share_raw": 0.04,
+            "share_corrected": 0.035555555555555556
+          },
+          "w3": {
+            "observed": 2,
+            "E0": 0.1111111111111111,
+            "null_q95": 1.0,
+            "p_value": 0.0038412291933418692,
+            "share_raw": 0.08,
+            "share_corrected": 0.07555555555555556
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 0.3611111111111111,
+            "null_q95": 2.0,
+            "p_value": 0.05377720870678617,
+            "share_raw": 0.08,
+            "share_corrected": 0.06555555555555555
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 0.7222222222222222,
+            "null_q95": 2.0,
+            "p_value": 0.16261203585147246,
+            "share_raw": 0.08,
+            "share_corrected": 0.05111111111111111
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 37,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0030864197530864196
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0030864197530864196
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0030864197530864196
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0030864197530864196
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.08333333333333333,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.009259259259259259
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 5,
+          "years": 37,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006944444444444444
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006944444444444444
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006944444444444444
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.027777777777777776,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.006944444444444444
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.05555555555555555,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013888888888888888
+          }
+        }
+      }
+    },
+    "KZ-TJ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 34,
+          "n_other": 35,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.1590909090909091,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004679144385026738
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.2727272727272727,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00802139037433155
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.45454545454545453,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013368983957219251
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.7045454545454546,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.02072192513368984
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.2272727272727273,
+            "null_q95": 3.0,
+            "p_value": 0.33201058201058203,
+            "share_raw": 0.058823529411764705,
+            "share_corrected": 0.022727272727272728
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 2.659090909090909,
+            "null_q95": 5.0,
+            "p_value": 0.4933862433862434,
+            "share_raw": 0.08823529411764706,
+            "share_corrected": 0.010026737967914437
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 11,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.09090909090909091,
+            "null_q95": 1.0,
+            "p_value": 0.0871313672922252,
+            "share_raw": 0.1111111111111111,
+            "share_corrected": 0.10101010101010101
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.3409090909090909,
+            "null_q95": 1.0,
+            "p_value": 0.3203753351206434,
+            "share_raw": 0.1111111111111111,
+            "share_corrected": 0.07323232323232325
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.11363636363636363,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.022727272727272728
+          }
+        }
+      }
+    },
+    "KZ-TM": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 35,
+          "n_other": 35,
+          "years": 47,
+          "w0": {
+            "observed": 0,
+            "E0": 0.043478260869565216,
+            "null_q95": 0.10000000000002274,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0012422360248447205
+          },
+          "w1": {
+            "observed": 2,
+            "E0": 0.32608695652173914,
+            "null_q95": 1.0,
+            "p_value": 0.031081081081081083,
+            "share_raw": 0.05714285714285714,
+            "share_corrected": 0.047826086956521734
+          },
+          "w2": {
+            "observed": 2,
+            "E0": 0.6956521739130435,
+            "null_q95": 2.0,
+            "p_value": 0.1445945945945946,
+            "share_raw": 0.05714285714285714,
+            "share_corrected": 0.037267080745341616
+          },
+          "w3": {
+            "observed": 2,
+            "E0": 0.8043478260869565,
+            "null_q95": 2.0,
+            "p_value": 0.1837837837837838,
+            "share_raw": 0.05714285714285714,
+            "share_corrected": 0.034161490683229816
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.6521739130434783,
+            "null_q95": 4.0,
+            "p_value": 0.5391891891891892,
+            "share_raw": 0.05714285714285714,
+            "share_corrected": 0.009937888198757764
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 2.6956521739130435,
+            "null_q95": 5.0,
+            "p_value": 0.5108108108108108,
+            "share_raw": 0.08571428571428572,
+            "share_corrected": 0.008695652173913044
+          }
+        },
+        "0.2": {
+          "n_rare": 10,
+          "n_other": 11,
+          "years": 47,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.043478260869565216,
+            "null_q95": 0.0,
+            "p_value": 0.04,
+            "share_raw": 0.1,
+            "share_corrected": 0.09565217391304348
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.06521739130434782,
+            "null_q95": 1.0,
+            "p_value": 0.068,
+            "share_raw": 0.1,
+            "share_corrected": 0.09347826086956522
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.06521739130434782,
+            "null_q95": 1.0,
+            "p_value": 0.068,
+            "share_raw": 0.1,
+            "share_corrected": 0.09347826086956522
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.2391304347826087,
+            "null_q95": 1.0,
+            "p_value": 0.21466666666666667,
+            "share_raw": 0.1,
+            "share_corrected": 0.07608695652173914
+          },
+          "w15": {
+            "observed": 2,
+            "E0": 0.30434782608695654,
+            "null_q95": 1.0,
+            "p_value": 0.030666666666666665,
+            "share_raw": 0.2,
+            "share_corrected": 0.16956521739130434
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 5,
+          "years": 47,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.021739130434782608,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005434782608695652
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.021739130434782608,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005434782608695652
+          }
+        }
+      }
+    },
+    "KZ-UZ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 36,
+          "n_other": 38,
+          "years": 51,
+          "w0": {
+            "observed": 0,
+            "E0": 0.02,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0005555555555555556
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.48,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.013333333333333332
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.74,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.020555555555555556
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.9,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.025
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 1.68,
+            "null_q95": 4.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.04666666666666666
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 3.02,
+            "null_q95": 6.0,
+            "p_value": 0.6066225165562914,
+            "share_raw": 0.08333333333333333,
+            "share_corrected": -0.0005555555555555561
+          }
+        },
+        "0.2": {
+          "n_rare": 11,
+          "n_other": 11,
+          "years": 51,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.04,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0036363636363636364
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.08,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007272727272727273
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.1,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.009090909090909092
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.18,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01636363636363636
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.38,
+            "null_q95": 2.0,
+            "p_value": 0.35437589670014347,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.056363636363636366
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 6,
+          "years": 51,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.02,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.04,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.04,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.04,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.06,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012
+          }
+        }
+      }
+    },
+    "MN-TJ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 25,
+          "n_other": 30,
+          "years": 35,
+          "w0": {
+            "observed": 0,
+            "E0": 0.058823529411764705,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002352941176470588
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.058823529411764705,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.002352941176470588
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.29411764705882354,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011764705882352941
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.3235294117647059,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012941176470588235
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.5882352941176471,
+            "null_q95": 2.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.023529411764705882
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 1.2647058823529411,
+            "null_q95": 4.0,
+            "p_value": 0.7042640990371389,
+            "share_raw": 0.04,
+            "share_corrected": -0.010588235294117645
+          }
+        },
+        "0.2": {
+          "n_rare": 6,
+          "n_other": 10,
+          "years": 35,
+          "w0": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004901960784313725
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004901960784313725
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.058823529411764705,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00980392156862745
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.058823529411764705,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00980392156862745
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.17647058823529413,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.029411764705882356
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.2647058823529412,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.04411764705882353
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 4,
+          "years": 35,
+          "w0": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007352941176470588
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007352941176470588
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007352941176470588
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007352941176470588
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.029411764705882353,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007352941176470588
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.11764705882352941,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.029411764705882353
+          }
+        }
+      }
+    },
+    "MN-TM": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 29,
+          "n_other": 32,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.07692307692307693,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0026525198938992045
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.07692307692307693,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0026525198938992045
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.15384615384615385,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005305039787798409
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.28205128205128205,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.009725906277630415
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 11,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0028490028490028487
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0028490028490028487
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.07692307692307693,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008547008547008548
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.10256410256410256,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.011396011396011395
+          }
+        },
+        "0.1": {
+          "n_rare": 4,
+          "n_other": 5,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00641025641025641
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.05128205128205128,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.01282051282051282
+          }
+        }
+      }
+    },
+    "MN-UZ": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 29,
+          "n_other": 31,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0008841732979664014
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0008841732979664014
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0008841732979664014
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.05128205128205128,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0017683465959328027
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.15384615384615385,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005305039787798409
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 11,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0028490028490028487
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.07692307692307693,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008547008547008548
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 5,
+          "years": 40,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005128205128205128
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.02564102564102564,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.005128205128205128
+          }
+        }
+      }
+    },
+    "TJ-TM": {
+      "neighbours": false,
+      "levels": {
+        "0.5": {
+          "n_rare": 34,
+          "n_other": 35,
+          "years": 45,
+          "w0": {
+            "observed": 1,
+            "E0": 0.045454545454545456,
+            "null_q95": 0.0,
+            "p_value": 0.04365620736698499,
+            "share_raw": 0.029411764705882353,
+            "share_corrected": 0.02807486631016043
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.22727272727272727,
+            "null_q95": 1.0,
+            "p_value": 0.1937244201909959,
+            "share_raw": 0.029411764705882353,
+            "share_corrected": 0.022727272727272728
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.5,
+            "null_q95": 2.0,
+            "p_value": 0.38472032742155526,
+            "share_raw": 0.029411764705882353,
+            "share_corrected": 0.014705882352941176
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.5681818181818182,
+            "null_q95": 2.0,
+            "p_value": 0.4201909959072306,
+            "share_raw": 0.029411764705882353,
+            "share_corrected": 0.012700534759358287
+          },
+          "w7": {
+            "observed": 3,
+            "E0": 1.3636363636363635,
+            "null_q95": 3.0,
+            "p_value": 0.1446111869031378,
+            "share_raw": 0.08823529411764706,
+            "share_corrected": 0.04812834224598931
+          },
+          "w15": {
+            "observed": 5,
+            "E0": 2.909090909090909,
+            "null_q95": 6.0,
+            "p_value": 0.15279672578444747,
+            "share_raw": 0.14705882352941177,
+            "share_corrected": 0.06149732620320855
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 9,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.022727272727272728,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0025252525252525255
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.11363636363636363,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.012626262626262626
+          }
+        },
+        "0.1": {
+          "n_rare": 3,
+          "n_other": 5,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          }
+        }
+      }
+    },
+    "TJ-UZ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 33,
+          "n_other": 35,
+          "years": 45,
+          "w0": {
+            "observed": 1,
+            "E0": 0.06818181818181818,
+            "null_q95": 1.0,
+            "p_value": 0.05320600272851296,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.028236914600550965
+          },
+          "w1": {
+            "observed": 1,
+            "E0": 0.4090909090909091,
+            "null_q95": 1.0,
+            "p_value": 0.29195088676671216,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.017906336088154267
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.6136363636363636,
+            "null_q95": 2.0,
+            "p_value": 0.4324693042291951,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.011707988980716254
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.7272727272727273,
+            "null_q95": 2.0,
+            "p_value": 0.4965893587994543,
+            "share_raw": 0.030303030303030304,
+            "share_corrected": 0.008264462809917356
+          },
+          "w7": {
+            "observed": 2,
+            "E0": 1.5909090909090908,
+            "null_q95": 4.0,
+            "p_value": 0.4379263301500682,
+            "share_raw": 0.06060606060606061,
+            "share_corrected": 0.012396694214876035
+          },
+          "w15": {
+            "observed": 3,
+            "E0": 3.159090909090909,
+            "null_q95": 6.0,
+            "p_value": 0.6016371077762619,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": -0.00482093663911846
+          }
+        },
+        "0.2": {
+          "n_rare": 9,
+          "n_other": 10,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.022727272727272728,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0025252525252525255
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.06818181818181818,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.007575757575757575
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.09090909090909091,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010101010101010102
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.09090909090909091,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.010101010101010102
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.18181818181818182,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.020202020202020204
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.29545454545454547,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.03282828282828283
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 6,
+          "years": 45,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.022727272727272728,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.004545454545454545
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.045454545454545456,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00909090909090909
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.045454545454545456,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00909090909090909
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.045454545454545456,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.00909090909090909
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.11363636363636363,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.022727272727272728
+          }
+        }
+      }
+    },
+    "TM-UZ": {
+      "neighbours": true,
+      "levels": {
+        "0.5": {
+          "n_rare": 38,
+          "n_other": 39,
+          "years": 50,
+          "w0": {
+            "observed": 2,
+            "E0": 0.1836734693877551,
+            "null_q95": 1.0,
+            "p_value": 0.012465373961218837,
+            "share_raw": 0.05263157894736842,
+            "share_corrected": 0.04779806659505908
+          },
+          "w1": {
+            "observed": 6,
+            "E0": 0.5510204081632653,
+            "null_q95": 2.0,
+            "p_value": 0.0013850415512465374,
+            "share_raw": 0.15789473684210525,
+            "share_corrected": 0.14339419978517723
+          },
+          "w2": {
+            "observed": 7,
+            "E0": 0.9795918367346939,
+            "null_q95": 2.0,
+            "p_value": 0.0013850415512465374,
+            "share_raw": 0.18421052631578946,
+            "share_corrected": 0.15843179377013963
+          },
+          "w3": {
+            "observed": 7,
+            "E0": 1.4081632653061225,
+            "null_q95": 3.0,
+            "p_value": 0.0013850415512465374,
+            "share_raw": 0.18421052631578946,
+            "share_corrected": 0.14715359828141783
+          },
+          "w7": {
+            "observed": 8,
+            "E0": 2.3469387755102042,
+            "null_q95": 5.0,
+            "p_value": 0.0013850415512465374,
+            "share_raw": 0.21052631578947367,
+            "share_corrected": 0.14876476906552094
+          },
+          "w15": {
+            "observed": 9,
+            "E0": 4.591836734693878,
+            "null_q95": 8.0,
+            "p_value": 0.012465373961218837,
+            "share_raw": 0.23684210526315788,
+            "share_corrected": 0.11600429645542426
+          }
+        },
+        "0.2": {
+          "n_rare": 11,
+          "n_other": 12,
+          "years": 50,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.061224489795918366,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.0055658627087198514
+          },
+          "w2": {
+            "observed": 1,
+            "E0": 0.08163265306122448,
+            "null_q95": 1.0,
+            "p_value": 0.08333333333333333,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.08348794063079777
+          },
+          "w3": {
+            "observed": 1,
+            "E0": 0.12244897959183673,
+            "null_q95": 1.0,
+            "p_value": 0.12568306010928962,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.07977736549165121
+          },
+          "w7": {
+            "observed": 1,
+            "E0": 0.2653061224489796,
+            "null_q95": 1.0,
+            "p_value": 0.2390710382513661,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.06679035250463822
+          },
+          "w15": {
+            "observed": 1,
+            "E0": 0.4489795918367347,
+            "null_q95": 2.0,
+            "p_value": 0.38934426229508196,
+            "share_raw": 0.09090909090909091,
+            "share_corrected": 0.050092764378478656
+          }
+        },
+        "0.1": {
+          "n_rare": 5,
+          "n_other": 7,
+          "years": 50,
+          "w0": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w1": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w2": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w3": {
+            "observed": 0,
+            "E0": 0.0,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": 0.0
+          },
+          "w7": {
+            "observed": 0,
+            "E0": 0.04081632653061224,
+            "null_q95": 0.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.008163265306122448
+          },
+          "w15": {
+            "observed": 0,
+            "E0": 0.10204081632653061,
+            "null_q95": 1.0,
+            "p_value": 1.0,
+            "share_raw": 0.0,
+            "share_corrected": -0.020408163265306124
+          }
+        }
+      }
+    }
+  },
+  "pooled": {
+    "neighbours": {
+      "0.5": {
+        "w0": {
+          "n_rare": 286,
+          "observed": 6,
+          "E0": 0.9367299884148073,
+          "share_raw": 0.02097902097902098,
+          "share_corrected": 0.017703741299248926,
+          "corrected_ci95_approx": [
+            0.0063740821634511065,
+            0.04173141889069282
+          ]
+        },
+        "w1": {
+          "n_rare": 286,
+          "observed": 13,
+          "E0": 3.1996386316426153,
+          "share_raw": 0.045454545454545456,
+          "share_corrected": 0.034266997791459385,
+          "corrected_ci95_approx": [
+            0.015565666397889373,
+            0.06501754377797822
+          ]
+        },
+        "w2": {
+          "n_rare": 286,
+          "observed": 17,
+          "E0": 5.19753398012888,
+          "share_raw": 0.05944055944055944,
+          "share_corrected": 0.04126736370584307,
+          "corrected_ci95_approx": [
+            0.019265968544613207,
+            0.07494722839562334
+          ]
+        },
+        "w3": {
+          "n_rare": 286,
+          "observed": 19,
+          "E0": 6.589788661662684,
+          "share_raw": 0.06643356643356643,
+          "share_corrected": 0.04339234733684376,
+          "corrected_ci95_approx": [
+            0.01989772118295939,
+            0.0783800704870793
+          ]
+        },
+        "w7": {
+          "n_rare": 286,
+          "observed": 23,
+          "E0": 13.587500793332888,
+          "share_raw": 0.08041958041958042,
+          "share_corrected": 0.032910836386947945,
+          "corrected_ci95_approx": [
+            0.006674211390899215,
+            0.07026981331494944
+          ]
+        },
+        "w15": {
+          "n_rare": 286,
+          "observed": 33,
+          "E0": 25.18401516482903,
+          "share_raw": 0.11538461538461539,
+          "share_corrected": 0.0273286183047936,
+          "corrected_ci95_approx": [
+            -0.004706506593120635,
+            0.06955923247366455
+          ]
+        }
+      },
+      "0.2": {
+        "w0": {
+          "n_rare": 90,
+          "observed": 0,
+          "E0": 0.06984478935698449,
+          "share_raw": 0.0,
+          "share_corrected": -0.0007760532150776054,
+          "corrected_ci95_approx": [
+            -0.0007760532150776054,
+            0.04016101520660317
+          ]
+        },
+        "w1": {
+          "n_rare": 90,
+          "observed": 2,
+          "E0": 0.5318130631948976,
+          "share_raw": 0.022222222222222223,
+          "share_corrected": 0.01631318818672336,
+          "corrected_ci95_approx": [
+            0.00020627975936474054,
+            0.07153773977257695
+          ]
+        },
+        "w2": {
+          "n_rare": 90,
+          "observed": 3,
+          "E0": 0.7237072242736762,
+          "share_raw": 0.03333333333333333,
+          "share_corrected": 0.02529214195251471,
+          "corrected_ci95_approx": [
+            0.0033589922516208733,
+            0.0854332221803106
+          ]
+        },
+        "w3": {
+          "n_rare": 90,
+          "observed": 3,
+          "E0": 0.9232249872257673,
+          "share_raw": 0.03333333333333333,
+          "share_corrected": 0.0230752779197137,
+          "corrected_ci95_approx": [
+            0.0011421282188198607,
+            0.08321635814750959
+          ]
+        },
+        "w7": {
+          "n_rare": 90,
+          "observed": 3,
+          "E0": 1.811063946623807,
+          "share_raw": 0.03333333333333333,
+          "share_corrected": 0.013210400593068812,
+          "corrected_ci95_approx": [
+            -0.008722749107825025,
+            0.0733514808208647
+          ]
+        },
+        "w15": {
+          "n_rare": 90,
+          "observed": 5,
+          "E0": 3.260609238635263,
+          "share_raw": 0.05555555555555555,
+          "share_corrected": 0.019326564015163743,
+          "corrected_ci95_approx": [
+            -0.012268373256048633,
+            0.08731000655009234
+          ]
+        }
+      },
+      "0.1": {
+        "w0": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.024390243902439025,
+          "share_raw": 0.0,
+          "share_corrected": -0.0005672149744753262,
+          "corrected_ci95_approx": [
+            -0.0005672149744753262,
+            0.08144535504875189
+          ]
+        },
+        "w1": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.13791102058695298,
+          "share_raw": 0.0,
+          "share_corrected": -0.003207233036905883,
+          "corrected_ci95_approx": [
+            -0.003207233036905883,
+            0.07880533698632133
+          ]
+        },
+        "w2": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.22365401949368918,
+          "share_raw": 0.0,
+          "share_corrected": -0.005201256267295097,
+          "corrected_ci95_approx": [
+            -0.005201256267295097,
+            0.07681131375593211
+          ]
+        },
+        "w3": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.22365401949368918,
+          "share_raw": 0.0,
+          "share_corrected": -0.005201256267295097,
+          "corrected_ci95_approx": [
+            -0.005201256267295097,
+            0.07681131375593211
+          ]
+        },
+        "w7": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.35506612352357836,
+          "share_raw": 0.0,
+          "share_corrected": -0.008257351709850659,
+          "corrected_ci95_approx": [
+            -0.008257351709850659,
+            0.07375521831337656
+          ]
+        },
+        "w15": {
+          "n_rare": 43,
+          "observed": 0,
+          "E0": 0.6683005322329151,
+          "share_raw": 0.0,
+          "share_corrected": -0.015541872842625933,
+          "corrected_ci95_approx": [
+            -0.015541872842625933,
+            0.06647069718060128
+          ]
+        }
+      }
+    },
+    "all_pairs": {
+      "0.5": {
+        "w0": {
+          "n_rare": 848,
+          "observed": 7,
+          "E0": 2.8090094178326157,
+          "share_raw": 0.008254716981132075,
+          "share_corrected": 0.004942205875197387,
+          "corrected_ci95_approx": [
+            0.0006916695335307016,
+            0.013628047276502585
+          ]
+        },
+        "w1": {
+          "n_rare": 848,
+          "observed": 15,
+          "E0": 7.6496668475662775,
+          "share_raw": 0.01768867924528302,
+          "share_corrected": 0.008667845698624672,
+          "corrected_ci95_approx": [
+            0.001727487828298152,
+            0.0199584188432729
+          ]
+        },
+        "w2": {
+          "n_rare": 848,
+          "observed": 20,
+          "E0": 13.07602642632839,
+          "share_raw": 0.02358490566037736,
+          "share_corrected": 0.00816506317649954,
+          "corrected_ci95_approx": [
+            -0.00010130400124769463,
+            0.020728464512745483
+          ]
+        },
+        "w3": {
+          "n_rare": 848,
+          "observed": 25,
+          "E0": 17.16909466148537,
+          "share_raw": 0.0294811320754717,
+          "share_corrected": 0.009234558182210648,
+          "corrected_ci95_approx": [
+            -0.0001992828162105907,
+            0.02291225222330758
+          ]
+        },
+        "w7": {
+          "n_rare": 848,
+          "observed": 38,
+          "E0": 34.15865262824359,
+          "share_raw": 0.04481132075471698,
+          "share_corrected": 0.004529890768580676,
+          "corrected_ci95_approx": [
+            -0.007461760134561665,
+            0.020627123813258902
+          ]
+        },
+        "w15": {
+          "n_rare": 848,
+          "observed": 63,
+          "E0": 64.16499564499739,
+          "share_raw": 0.07429245283018868,
+          "share_corrected": -0.0013738156191006956,
+          "corrected_ci95_approx": [
+            -0.017169388392022755,
+            0.018261433716242226
+          ]
+        }
+      },
+      "0.2": {
+        "w0": {
+          "n_rare": 263,
+          "observed": 0,
+          "E0": 0.4016550472560099,
+          "share_raw": 0.0,
+          "share_corrected": -0.0015272055028745625,
+          "corrected_ci95_approx": [
+            -0.0015272055028745625,
+            0.0128693503564817
+          ]
+        },
+        "w1": {
+          "n_rare": 263,
+          "observed": 2,
+          "E0": 1.2340337590692705,
+          "share_raw": 0.0076045627376425855,
+          "share_corrected": 0.0029124191670369943,
+          "corrected_ci95_approx": [
+            -0.002604258662862898,
+            0.022606693831816245
+          ]
+        },
+        "w2": {
+          "n_rare": 263,
+          "observed": 4,
+          "E0": 1.7851308333915348,
+          "share_raw": 0.015209125475285171,
+          "share_corrected": 0.00842155576657211,
+          "corrected_ci95_approx": [
+            -0.0008576536004961206,
+            0.0316594029440428
+          ]
+        },
+        "w3": {
+          "n_rare": 263,
+          "observed": 4,
+          "E0": 2.3870140019965915,
+          "share_raw": 0.015209125475285171,
+          "share_corrected": 0.006133026608377979,
+          "corrected_ci95_approx": [
+            -0.003146182758690252,
+            0.02937087378584867
+          ]
+        },
+        "w7": {
+          "n_rare": 263,
+          "observed": 6,
+          "E0": 4.6706911802374,
+          "share_raw": 0.022813688212927757,
+          "share_corrected": 0.005054406158793157,
+          "corrected_ci95_approx": [
+            -0.007262737942965714,
+            0.031111229046477576
+          ]
+        },
+        "w15": {
+          "n_rare": 263,
+          "observed": 12,
+          "E0": 8.411737875832637,
+          "share_raw": 0.045627376425855515,
+          "share_corrected": 0.01364358222116868,
+          "corrected_ci95_approx": [
+            -0.0056934910100930256,
+            0.04606345716492524
+          ]
+        }
+      },
+      "0.1": {
+        "w0": {
+          "n_rare": 124,
+          "observed": 0,
+          "E0": 0.0781922525107604,
+          "share_raw": 0.0,
+          "share_corrected": -0.0006305826815383903,
+          "corrected_ci95_approx": [
+            -0.0006305826815383903,
+            0.029419103805489306
+          ]
+        },
+        "w1": {
+          "n_rare": 124,
+          "observed": 0,
+          "E0": 0.2733613376138424,
+          "share_raw": 0.0,
+          "share_corrected": -0.0022045269162406646,
+          "corrected_ci95_approx": [
+            -0.0022045269162406646,
+            0.02784515957078703
+          ]
+        },
+        "w2": {
+          "n_rare": 124,
+          "observed": 0,
+          "E0": 0.4578848243254567,
+          "share_raw": 0.0,
+          "share_corrected": -0.0036926195510117474,
+          "corrected_ci95_approx": [
+            -0.0036926195510117474,
+            0.026357066936015947
+          ]
+        },
+        "w3": {
+          "n_rare": 124,
+          "observed": 0,
+          "E0": 0.5066653121303347,
+          "share_raw": 0.0,
+          "share_corrected": -0.004086010581696248,
+          "corrected_ci95_approx": [
+            -0.004086010581696248,
+            0.025963675905331447
+          ]
+        },
+        "w7": {
+          "n_rare": 124,
+          "observed": 0,
+          "E0": 0.8787313530966157,
+          "share_raw": 0.0,
+          "share_corrected": -0.007086543170133997,
+          "corrected_ci95_approx": [
+            -0.007086543170133997,
+            0.022963143316893697
+          ]
+        },
+        "w15": {
+          "n_rare": 124,
+          "observed": 2,
+          "E0": 1.8492828752441979,
+          "share_raw": 0.016129032258064516,
+          "share_corrected": 0.0012154606835145332,
+          "corrected_ci95_approx": [
+            -0.010479300030105743,
+            0.04199056315877451
+          ]
+        }
+      }
+    }
+  }
+}

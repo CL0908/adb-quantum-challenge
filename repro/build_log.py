@@ -332,6 +332,128 @@ def addons_sheet(wb, d):
                 c.alignment = Alignment(wrap_text=True, vertical="top")
 
 
+def quality_sheet(wb, d):
+    """Quality add-ons (methods borrowed from QContagion's CDS work), additive; friend's src/ read-only."""
+    ws = wb.create_sheet("Quality")
+    for i, w in enumerate([16, 10, 12, 12, 12, 12, 12, 12, 12, 12, 46], 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    bold, heads = Font(name=FONT, bold=True), set()
+
+    def title(text):
+        ws.append([]); ws.append([text]); ws.cell(ws.max_row, 1).font = bold
+
+    def head(values):
+        ws.append(values); heads.add(ws.max_row)
+        for c in ws[ws.max_row]:
+            c.font = Font(name=FONT, bold=True, color="FFFFFF"); c.fill = HEAD
+            c.alignment = Alignment(wrap_text=True, vertical="top")
+
+    def fmt(cols, f):
+        for col in cols:
+            ws[f"{col}{ws.max_row}"].number_format = f
+
+    r = d.get("rain")
+    if r:
+        title("1 降雨共享比例：扣除随机巧合（年份错配替代数据，保留季节）并看窗口宽度（rain_lag.py）。朋友用 ±1 天，未扣巧合；brief 假设 25%")
+        head(["级别 q", "窗口 ±天", "稀有国事件数", "观测共享数", "巧合期望 E0", "原始比例", "校正比例", "", "", "", "说明"])
+        for q, byw in r["pooled"]["neighbours"].items():
+            for w, x in byw.items():
+                i = ws.max_row + 1
+                ws.append([float(q), int(w[1:]), x["n_rare"], x["observed"], x["E0"], f"=D{i}/C{i}", f"=(D{i}-E{i})/C{i}",
+                           None, None, None, "朋友的口径" if w == "w1" else ""])
+                fmt("E", "0.0"); fmt("FG", "0.0%")
+    e = d.get("eq")
+    if e:
+        title("2 地震触发聚集（eq_cluster.py）：KG/TJ 50 km 内，原始目录 vs Gardner–Knopoff 去余震；ν = 每个主震带来的同级余震数")
+        head(["震级 ≥", "原始", "去余震", "余震占比", "ν", "ν 95% 下", "ν 95% 上", "离散度（原始）", "p（原始）",
+              "离散度（去余震）", "相邻年依赖 r（p）"])
+        for M, x in e["by_magnitude"].items():
+            y, i = x["KG_or_TJ"], ws.max_row + 1
+            ws.append([float(M), y["raw"], y["declustered"], f"=1-C{i}/B{i}", y["nu"], *y["nu_ci95"],
+                       y["dispersion_raw"][0], y["dispersion_raw"][1], y["dispersion_declustered"][0],
+                       f"{y['lag1_declustered'][0]:.2f}（p={y['lag1_declustered'][1]:.2f}）"])
+            fmt("D", "0%"); fmt("EFGHJ", "0.00"); fmt("I", "0.000")
+        h = e["hawkes_raw_m55"]
+        ws.append([f"Hawkes（原始 M≥5.5，日分辨率，单指数核）：分支比 {h['n_hat']:.2f}，95% [{h['n_ci95'][0]:.2f}, {h['n_ci95'][1]:.2f}]；"
+                   "单指数核抓不到 Omori 长尾，余震占比以 Gardner–Knopoff 为准"])
+        head(["合同读法", "ν", "两债同时耗尽", "相对读法 A", "联合附着", "EL (US$m)", "", "", "", "", "说明"])
+        K = "term_both_bonds_exhausted_probability"
+        base_row = None
+        for lab, v in e["impact_adb_base"].items():
+            i = ws.max_row + 1
+            base_row = base_row or i
+            ws.append([lab, v.get("nu", 0.0), v[K], f"=C{i}/C${base_row}", v["term_joint_attachment_probability"],
+                       v["term_expected_principal_loss_usd"] / 1e6, None, None, None, None,
+                       "A = 余震并入同一事件（朋友模型）" if lab.startswith("reading_A") else "B = 余震单独赔付、brief 尾部只含主震"])
+            fmt("B", "0.00"); fmt("C", "0.00E+00"); fmt("D", "0.00"); fmt("E", "0.0000"); fmt("F", "0.00")
+    j = d.get("joint")
+    if j:
+        title("3 多国同时极端是否超出两两依赖（joint_k.py）：8 国、3 天时间块、分季节拟合两两最大熵模型（Ising）")
+        head(["日分位 u", "≥k 国", "时间块", "观测", "两两模型期望", "独立期望", "观测/两两", "p（相对两两）", "", "", "说明"])
+        for u, x in j["levels"].items():
+            for k in (3, 4):
+                t, i = x[f"ge{k}"], ws.max_row + 1
+                ws.append([float(u), k, x["blocks"], t["obs"], t["m2"], t["m0"], f'=IF(E{i}>0,D{i}/E{i},"")', t["p_value_vs_pairwise"],
+                           None, None, "比值接近 1 = 两两依赖足以解释多国同时极端"])
+                fmt("EF", "0.0"); fmt("G", "0.00"); fmt("H", "0.000")
+    u = d.get("rates")
+    if u:
+        title("4 基础触发率的数据不确定性（rates_unc.py）：地震 = G-R 外推（发生率 Poisson + b 值误差），降雨 = GEV（GML + Martins–Stedinger 先验）bootstrap")
+        head(["倍数", "2.5%", "中位", "97.5%", "", "", "", "", "", "", "说明"])
+        for k, q in u["multiplier_q"].items():
+            ws.append([k, *q]); fmt("BCD", "0.00")
+        head(["抽样范围", "两债同时耗尽中位", "95% 下", "95% 上", "区间宽度/朋友", "EL 中位 (US$m)", "EL 95% 下", "EL 95% 上", "", "",
+              "说明"])
+        f = u["friend_shares_only_joint_exhaustion"]
+        fr = ws.max_row + 1
+        ws.append(["朋友 param_uncertainty（只含共享比例）", f["median"], f["ci95"][0], f["ci95"][1], f"=(D{fr}-C{fr})/(D${fr}-C${fr})"])
+        fmt("BCD", "0.00E+00"); fmt("E", "0.00")
+        for lab, x in u["sweeps"].items():
+            s_, el, i = x["summary"]["joint_exhaustion"], x["summary"]["expected_loss"], ws.max_row + 1
+            ws.append([lab, s_["median"], s_["ci95"][0], s_["ci95"][1], f"=(D{i}-C{i})/(D${fr}-C${fr})", el["median"] / 1e6,
+                       el["ci95"][0] / 1e6, el["ci95"][1] / 1e6, None, None,
+                       {"shares_only": "复现朋友的口径", "rates_only": "只加发生率不确定性", "all": "两者都加"}[lab]])
+            fmt("BCD", "0.00E+00"); fmt("E", "0.00"); fmt("FGH", "0.00")
+    k = d.get("risk")
+    if k:
+        title("5 风险度量层（risk_measures.py）：朋友已校准资金池的精确损失分布 → VaR / ES / EVaR、分散化收益、各国 Euler 贡献")
+        head(["资金池", "α", "VaR (US$m)", "ES (US$m)", "EVaR (US$m)", "ES 池/单独之和", "EVaR 池/单独之和", "", "", "", "ES 贡献份额"])
+        for pool, x in k.items():
+            for a, y in x["levels"].items():
+                ws.append([pool, float(a), y["VaR_musd"], y["ES_musd"], y["EVaR_musd"], y["diversification_ES"], y["diversification_EVaR"],
+                           None, None, None, "  ".join(f"{c} {v / y['ES_musd']:.0%}" for c, v in y["ES_contrib_musd"].items())])
+                fmt("B", "0.0%"); fmt("CDE", "0.0"); fmt("FG", "0.00")
+        for pool, x in k.items():
+            y = x["levels"]["0.995"]
+            head([f"{pool}（α = 99.5%）", "", "ES 贡献 (US$m)", "份额", "单独 ES (US$m)", "EVaR 贡献 (US$m)", "单独 EVaR (US$m)", "", "", "",
+                  "说明"])
+            top = ws.max_row + 1
+            for c in x["countries"]:
+                i = ws.max_row + 1
+                ws.append([c, None, y["ES_contrib_musd"][c], f"=C{i}/SUM(C${top}:C${top + len(x['countries']) - 1})",
+                           y["standalone"][c]["ES_musd"], y["EVaR_contrib_musd"][c], y["standalone"][c]["EVaR_musd"]])
+                fmt("CEFG", "0.0"); fmt("D", "0%")
+    g = d.get("gaps")
+    if g:
+        title("6 数据缺口审计（data_gaps.py）：朋友的 GHCN 流程有没有把「没数据」当成「没事件」")
+        head(["国家", "有效年数", "缺失天数", "缺失比例", "可能漏掉的事件", "q=0.5 事件数", "阈值（朋友）", "阈值（近完整年）", "", "", "说明"])
+        for c, x in g["countries"].items():
+            t = g["threshold"][c]["0.5"]
+            ws.append([c, x["valid_years"], x["missing_days"], x["missing_share"], x["events_possibly_hidden_q50"], x["events_q50"],
+                       t["friend"], t["near_complete_years"], None, None, f"近完整年 {t['n_near_complete']} 个"])
+            fmt("D", "0.0%"); fmt("E", "0.00"); fmt("GH", "0.000")
+        head(["级别 q", "朋友共享比例", "事件数", "对方窗口有缺口", "完整窗口共享比例", "完整窗口事件数", "", "", "", "", "说明"])
+        for q, x in g["pooled"].items():
+            ws.append([float(q), x["friend_share"], x["events"], x["events_with_gap_in_other_window"], x["share_complete_windows"],
+                       x["complete_events"]])
+            fmt("BE", "0.0%")
+    for row in ws.iter_rows(min_row=1):
+        for c in row:
+            if c.row not in heads:
+                c.font = Font(name=FONT, size=10, bold=c.font.bold)
+                c.alignment = Alignment(wrap_text=True, vertical="top")
+
+
 # ------------------------------------------------------------------------------------------------ build
 def build():
     paper = paper_values.collect()   # chdirs into adb-repro; every path below is absolute
@@ -356,6 +478,8 @@ def build():
                      "RDPO 训练会把 1e-16 级浮点差放大，跨平台不能逐位复现，随机实验需按统计口径判断"),
         ("计算提升 add-on", "D:\\adb-quantum-challenge\\addons：只做新增或同类替换，不碰主轴；只 import 朋友的 src（只读），结果写 addons/results/；"
                          "repro/run.py 第 6 阶段登记运行；数字见 Addons 表。ae.py 由 QContagion session 起草、本 session 审核集成"),
+        ("质量提升 add-on", "addons/ 下 rain_lag / eq_cluster / joint_k / rates_unc / risk_measures / data_gaps：方法借自 QContagion 的 CDS 工作，"
+                         "只新增、不碰主轴；repro/run.py 第 7 阶段登记运行；数字见 Quality 表"),
         ("颜色", "Claims 判定列：绿 = 一致/统计一致；黄 = 结论成立但数字变/机器相关；红 = 需核对文字；灰 = 无法复现"),
     ]
     for r in readme:
@@ -457,6 +581,10 @@ def build():
              "c2": "c2_router.json", "c1": "c1_psis.json"}
     if (ar / "combined.json").exists():
         addons_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in files.items() if (ar / f).exists()})
+    qf = {"rain": "quality_rain_lag.json", "eq": "quality_eq_cluster.json", "joint": "quality_joint_k.json",
+          "rates": "quality_rates_unc.json", "risk": "quality_risk_measures.json", "gaps": "quality_data_gaps.json"}
+    if any((ar / f).exists() for f in qf.values()):
+        quality_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in qf.items() if (ar / f).exists()})
 
     # Env ----------------------------------------------------------------------------------------
     ws = sheet(wb, "Env", ["项目", "作者（README / proposal 声明）", "我们"], [16, 40, 60])
