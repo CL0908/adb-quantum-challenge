@@ -38,7 +38,7 @@ h3 { font-size: 10.5pt; margin: 12pt 0 4pt; }
 .tile p { margin: 0; }
 .tile .big { display: block; font-family: "Source Serif 4", serif; font-size: 22pt; font-weight: 700; color: var(--terra);
              line-height: 1.1; margin-bottom: 3pt; font-variant-numeric: lining-nums; }
-.toc { page-break-before: always; break-before: page; margin-bottom: 18pt; background: var(--cardalt); border-radius: 10pt; padding: 10pt 16pt; font-family: Inter, sans-serif; font-size: 9pt; columns: 2; column-gap: 20pt; }
+.toc { margin-bottom: 18pt; background: var(--cardalt); border-radius: 10pt; padding: 10pt 16pt; font-family: Inter, sans-serif; font-size: 9pt; columns: 2; column-gap: 20pt; }
 .toc p { margin: 2pt 0; text-align: left; }
 .toc strong { color: var(--navy); }
 
@@ -62,7 +62,9 @@ img.mascot-end { height: 54pt; }
 
 /* ---------- tables (booktabs style) ---------- */
 table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt; font-family: Inter, sans-serif; font-size: 8.1pt;
-        line-height: 1.35; page-break-inside: avoid; font-variant-numeric: tabular-nums lining-nums; }
+        line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+thead { display: table-header-group; }
 thead tr { border-top: 1.4pt solid var(--navy); border-bottom: 0.8pt solid var(--navy); }
 tbody tr:last-child { border-bottom: 1.4pt solid var(--navy); }
 th { text-align: left; font-weight: 650; color: var(--navy); padding: 4pt 6pt; }
@@ -119,3 +121,8 @@ li p { margin: 0; }
 .tiles.four .tile { padding: 6pt 9pt; font-size: 7.6pt; }
 .tiles.four .big { font-size: 17pt; }
 .glance { page-break-inside: avoid; }
+
+.runin, .runin p { page-break-after: avoid; break-after: avoid; }
+.runin { margin: 0; }
+h3 { page-break-after: avoid; break-after: avoid; }
+.toc { page-break-inside: avoid; }

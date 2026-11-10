@@ -53,7 +53,9 @@ importance-sampling measure is the Doob h-transform of the source process, equiv
 policy of a KL-regularised control problem. RDPO learns it with a compact log-linear soft-value
 function and a defensive mixture of weight 5%.
 
+::: {.runin}
 **Two-stage training on the right divergence (Proposition 4).**
+:::
 
 * **Stage 1: cross-entropy (KL).** Multilevel policy search raises the elite level until the target
   level is reached.

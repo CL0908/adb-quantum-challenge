@@ -237,7 +237,7 @@ all five scenarios.
 * An edge $\{i,j\}$ of the dependence graph means that $i$ and $j$ can be hit by common events (a shared
   fault system, river basin or weather regime).
 * Each edge carries a shared EQ source (rate $c_{ij}$, the rule of §2.5) and a shared rain source
-  ($c^r_{ij} = s_r\min(\mu_i,\mu_j)/d_{\max}$); solo rates are reduced so that total rates are preserved.
+  $(c^r_{ij} = s_r\min(\mu_i,\mu_j)/d_{\max})$; solo rates are reduced so that total rates are preserved.
 * For $n = 2$ with one edge this *is* the benchmark: all 25 reference values are recovered to
   $4\times10^{-14}$.
 
@@ -311,7 +311,7 @@ Where RDPO sits: rare-event simulation, control as inference, and quantum method
 divergence that governs variance, and carry it unchanged into a quantum loader whose cost follows the
 dependence graph.
 
-# 4 Method: Rényi-Doob Policy Optimization {.newpage}
+# 4 Method: Rényi-Doob Policy Optimization
 
 ::: {.opener}
 ![](../art/cat_sitting.svg){.mascot}
@@ -394,6 +394,7 @@ The bound runs one way only: a policy with small KL can still have very large va
   training. In a preliminary benchmark study this stage removed every heavy-tailed cross-entropy failure
   (2 of 15 fits) and reduced the exact per-path relative standard deviation of a failed fit from 14.5 to
   0.60. Its role is to repair fits whose KL is small but whose χ² is not.
+
 * **Warm start.** For threshold targets the policy starts at the optimal exponential twist of the total
   loss, $\theta_h \leftarrow \eta^\star T$ with $\eta^\star = \arg\max_\eta\, \eta T - \Lambda(\eta)$ (the large-deviation Doob
   transform).
@@ -452,7 +453,7 @@ Every method gets the same simulation budget, RDPO's training counts against it,
   Sobol (8 scrambles), stratification by first payout year, and the brief's importance sampling. (ii) At
   scale we add classical exponential twisting [@glasserman2003]. (iii) Three stronger rare-event methods,
   compared on the ADB benchmark and the ring-16 scaling case, at the same budget and seeds as RDPO
-  (§6.5.5): adaptive multilevel splitting / subset simulation [@cerou2007; @aubeck2001],
+  (§6.5): adaptive multilevel splitting / subset simulation [@cerou2007; @aubeck2001],
   SMC on exponential tilts [@delmoral2006], and a diagonal normalising-flow importance sampler trained by
   REINFORCE on $\chi^2$ (product-of-categoricals, warm-started from the optimal twist) [@muller2019].
 * **Compute.** One CPU core per run (Intel Xeon 2.1 GHz); NumPy/SciPy; fixed seeds in every result file.
@@ -567,7 +568,7 @@ re-ran every study at the same total budgets, with more replications and identic
 identical seeds). (a, b) Relative RMSE for the portfolio-wide targets, with exponential twisting as the
 classical reference. (c) Wall-clock time per estimate on one core.](../../figures/paper/v2_results.png){.wide}
 
-*Table [tab:v2scale] in Appendix A lists every setting: method, coverage, twisting and run time.*
+*Table [tab:app_v2scale] in Appendix A lists every setting: method, coverage, twisting and run time.*
 
 * **Accuracy.** On the portfolio-wide targets, at the same budget and seeds, the Phase 2 engine
   {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings.
@@ -603,7 +604,7 @@ reusing the parameters as the initial policy after a change of scenario or a 20%
 * t-intervals and model selection changed no result in these studies: the effective degrees of freedom
   were large, and the trained policy always beat the initial one. They are kept as safeguards.
 
-### 6.5.5 Comparison with stronger rare-event methods
+**Comparison with stronger rare-event methods.**
 
 Reviewers of rare-event methods expect comparisons against adaptive multilevel splitting, SMC on
 exponential tilts, and neural importance sampling, not just the brief's four reference methods. We
@@ -766,7 +767,7 @@ it (`src/realdata/central_asia_pool.py`):
   Carlo, but the intervals are optimistic. The Phase 2 engine therefore answers pair questions exactly (pair
   reduction, §6.5) and uses RDPO for pool-wide questions.
 
-### 6.6.5 Parameter uncertainty: posterior credible intervals for the headline findings
+**Parameter uncertainty: posterior credible intervals for the headline findings.**
 
 The data give *ranges*, not points. The headline findings compared the brief with the data endpoints,
 which hides how much comes from the data itself. We now propagate parameter uncertainty end-to-end. On
@@ -1086,8 +1087,12 @@ directly on low-depth maximum-likelihood amplitude estimation.
 * **Model.** Grover powers $k = 0, 1, 2, 4, \dots$ (depth capped by circuit fidelity), 100 shots each, with
   depolarising decay $f$ and a coherent control offset $\delta$ per Grover iterate:
   $P_k = \tfrac12 - \tfrac12 f^{2k+1}\cos\big((4k+2)\theta + 2k\delta\big)$.
-* **Estimators.** (i) no mitigation ($f = 1$, $\delta = 0$); (ii) noise-aware mitigation (fit $f$, assume $\delta = 0$);
-  (iii) + goodness-of-fit guard (likelihood-ratio test across depths); (iv) + pilot-disagreement guard,
+* **Estimators.** Four, compared:
+
+  (i) no mitigation ($f = 1$, $\delta = 0$);
+  (ii) noise-aware mitigation (fit $f$, assume $\delta = 0$);
+  (iii) mitigation plus a goodness-of-fit guard (likelihood-ratio test across depths);
+  (iv) mitigation plus a pilot-disagreement guard,
   which also rejects the quantum estimate when it disagrees by more than 3σ with a cheap RDPO pilot
   (5% error). Rejected estimates fall back to the full classical RDPO estimate.
 * **Instances.** 250 per offset level; amplitude $a \in [10^{-3}, 10^{-1}]$, two-qubit error $p_2 \in [10^{-7}, 10^{-5}]$.
@@ -1153,7 +1158,7 @@ magic-state factories; twisted loading with the bitwise oracle; 10% target relat
   which favours trapped-ion and reconfigurable neutral-atom platforms. SWAP routing on 2D superconducting
   lattices inflates CNOT counts by 10–40×.
 
-# 9 Work Plan for the Deep Development Phase {.newpage}
+# 9 Work Plan for the Deep Development Phase
 
 ::: {.opener}
 ![](../art/cat_calendar.svg){.mascot}
@@ -1357,7 +1362,7 @@ business-to-business and business-to-government, starting with public pilots.
 
 :::
 
-# 11 Team {.newpage}
+# 11 Team
 
 ::: {.opener}
 ![](../art/cat_team.svg){.mascot}
@@ -1422,7 +1427,7 @@ Everything runs on a laptop-class CPU. The code, data and this document are open
   research questions and design decisions and reviewed all results. All numbers are produced by the
   scripts in the repository.
 
-# Appendix A: Full Phase 2 scaling table {.newpage}
+# Appendix A: Full Phase 2 scaling table
 
 {{V2_SCALE_TABLE}}
 

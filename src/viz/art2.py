@@ -3,6 +3,21 @@ product/agent architecture. Run: python -m src.viz.art2 -> docs/art/*.svg"""
 import math
 from pathlib import Path
 
+def _n_tests():
+    """Number of collected tests (pytest collection); falls back to a count of test functions."""
+    import re, subprocess, sys
+    root = Path(__file__).resolve().parents[2]
+    try:
+        out = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "tests/"], cwd=root,
+                             capture_output=True, text=True, timeout=120).stdout
+        m = re.search(r"(\d+) tests? collected", out)
+        if m:
+            return int(m.group(1))
+    except Exception:
+        pass
+    return sum(len(re.findall(r"^\s*def test_", f.read_text(), flags=re.M)) for f in (root / "tests").glob("test_*.py"))
+
+
 from .art import svg, text, box, arrow, cat_in_box, cat_peeking, FONT, SERIF, OUT
 from .style import PAGE, CARD, INK, INK2, MUTED, RULE, NAVY, BLUE, TERRA, TEAL, OCHRE, PLUM, GREEN
 
@@ -101,7 +116,7 @@ def architecture():
     b.append(box(X0 + 25, Y0 + 470, 520, 120, "#EEF3F9", LB2, 8, 1.2))
     b.append(text(X0 + 285, Y0 + 494, "Validation layer", 13, NAVY, 700, "middle"))
     for i, (l, s) in enumerate([("Exact enumeration", "n ≤ 6 · all 25 ADB values"), ("Tilted-gauge MPS", "exact for sparse graphs"),
-                                 ("44 tests", "gradients · unbiasedness")]):
+                                 (f"{_n_tests()} tests", "gradients · unbiasedness")]):
         b.append(blk(X0 + 40 + i * 170, Y0 + 510, 150, 64, l, s, PAGE, LB2, NAVY, 12))
     # ---- outputs
     b.append(f'<line x1="1040" y1="143" x2="1040" y2="{Y0 + 397}" stroke="{DARK}" stroke-width="1.8"/>')

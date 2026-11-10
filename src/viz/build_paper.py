@@ -307,7 +307,7 @@ def v2_values():
     keys = sorted({(r["topology"], r["n"], r["target"]) for r in rows}, key=lambda k: (k[0] != "ring", k[1], k[2]))
     tl = {"exceedance": "Pr(L > T)", "stop_loss": "stop-loss", "joint_exhaustion": "pair exhaustion"}
     ep = sc["exact_pair"]
-    lines = [f"**Table [tab:v2scale].** Scaling study at B = 65,536 with {reps} replications per cell and identical seeds for "
+    lines = [f"**Table [tab:app_v2scale].** Scaling study at B = 65,536 with {reps} replications per cell and identical seeds for "
              "every method. Relative RMSE, with empirical 95%-interval coverage in parentheses. *Phase 1 study*: the original "
              "results (6–20 replications). Pair exhaustion is answered exactly by the Phase 2 engine (pair reduction); its "
              "sampled estimate is shown for comparison.", "",
@@ -833,11 +833,20 @@ def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
         order = []
+        # number by position of the caption, so numbers run in order of appearance even if a table is cited early
+        cap = "Table" if kind == "tab" else "Figure"
+        for k in re.findall(r"\*\*" + cap + r" \[" + kind + r":(\w+)\]", md):
+            if k not in order:
+                order.append(k)
         for k in re.findall(r"\[" + kind + r":(\w+)\]", md):
             if k not in order:
                 order.append(k)
-        for i, k in enumerate(order, 1):
+        main = [k for k in order if not k.startswith("app_")]
+        app = [k for k in order if k.startswith("app_")]
+        for i, k in enumerate(main, 1):
             md = md.replace(f"[{kind}:{k}]", str(i))
+        for i, k in enumerate(app, 1):  # appendix items: A1, A2, ... (kept out of the main sequence)
+            md = md.replace(f"[{kind}:{k}]", f"A{i}")
     left = re.findall(r"\[(?:fig|tab):\w+\]", md)
     if left:
         print("UNRESOLVED LABELS:", left, file=sys.stderr)
@@ -868,6 +877,8 @@ def fill(src="proposal.md", dst="proposal.filled.md", add_toc=True):
     for k, val in vals.items():
         md = md.replace("{{" + k + "}}", val)
     md = number_labels(md)
+    # bold run-in headings on their own line: keep with the following block
+    md = re.sub(r"^(\*\*[^*\n]+\.\*\*)[ \t]*$", r"::: {.runin}\n\1\n:::", md, flags=re.M)
     left = sorted(set(re.findall(r"\{\{(\w+)\}\}", md)))
     if left:
         print(f"UNFILLED in {src}:", left, file=sys.stderr)
