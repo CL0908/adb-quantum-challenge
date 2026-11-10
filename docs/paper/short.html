@@ -74,7 +74,8 @@ the data.</li>
 quantum-inspired tensor network answers sparse 28-country pools exactly
 in about a minute; the learned sampler RDPO covers dense dependence,
 estimating a 9.5×10⁻⁹-probability pool loss to <strong>0.8% relative
-error</strong> in 21 s on one core.</li>
+error</strong> in 21 s on one core (its edge is per path; at equal CPU
+time simple twisting remains competitive on threshold targets).</li>
 <li><strong>A quantum stage with a falsifiable bar.</strong> Exact
 loading with resources linear in countries and edges; against our best
 classical method it needs hardware 8.2×10⁴ times faster than today’s
@@ -159,11 +160,18 @@ normalising-flow importance sampler, RDPO wins on every rare target by
 ×5.4–×8. SMC on the optimal twist is the strongest fixed baseline.</p>
 <p><strong>Scaling to 28 and 50 countries.</strong> Against exact
 tensor-network references RDPO keeps 0.1%–4.2% error as the target falls
-to 10⁻¹³ and beats exponential twisting in 16 of 16 settings. On
-data-calibrated pools (10 CAREC countries, 28 Asia–Pacific countries, a
-50-country ring) it reaches <strong>0.8%</strong> error at μ ≈ 10⁻⁹ with
-65,536 paths, against a work-plan target of 10% at μ ≤ 10⁻⁸ in 10⁵
-paths. All 25 ADB cells are re-estimated in 5 seconds.</p>
+to 10⁻¹³ and beats exponential twisting in 16 of 16 settings at the same
+path budget. New exact references for dense, bounded-treewidth graphs
+reach 28 countries; there RDPO beats twisting in 10 of 10 cells by
+×1.9–×3.9. <em>Caveat:</em> twisting needs no training, so at equal CPU
+time it is at least as accurate on most threshold targets (13 of 16
+scaling settings); RDPO’s edge is per path, which matters when paths are
+expensive, for joint targets a single twist cannot reach, and once
+policies are transferred rather than retrained. On data-calibrated pools
+(10 CAREC countries, 28 Asia–Pacific countries, a 50-country ring) it
+reaches <strong>0.8%</strong> error at μ ≈ 10⁻⁹ with 65,536 paths,
+against a work-plan target of 10% at μ ≤ 10⁻⁸ in 10⁵ paths. All 25 ADB
+cells are re-estimated in 5 seconds.</p>
 <p><strong>Real data and model risk.</strong> Earthquake arrivals are
 Poisson (USGS catalogue). The brief’s 7.5% shared earthquake share is
 low against 120 years of NOAA loss records (48%, 95% CI 12–79%) and the
@@ -319,7 +327,8 @@ Deep Development (30 Nov 2026 – 22 Jan 2027)</h1>
 <tr class="odd">
 <td>1 (W1–2)</td>
 <td>Library API, GPU-batched rollouts, sandbox onboarding</td>
-<td>M1: Phase 1 results reproduced; ≥ 10× throughput</td>
+<td>M1: Phase 1 results reproduced; ≥ 10× throughput; RDPO ≥ twisting at
+equal wall-clock</td>
 </tr>
 <tr class="even">
 <td>2 (W1–4)</td>
@@ -329,7 +338,8 @@ trigger, data-constrained bounds</td>
 </tr>
 <tr class="odd">
 <td>3 (W3–5)</td>
-<td>Exact references for dense bounded-treewidth graphs; RDPO v3</td>
+<td>RDPO v3 on dense pools beyond the exact references (which now reach
+28 countries)</td>
 <td>M3: ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths, dense graphs</td>
 </tr>
 <tr class="even">

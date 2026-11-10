@@ -21,7 +21,8 @@ lang: en
    under the data.
 2. **Exact where possible, learned where not.** A quantum-inspired tensor network answers sparse 28-country
    pools exactly in about a minute; the learned sampler RDPO covers dense dependence, estimating a
-   9.5×10⁻⁹-probability pool loss to **0.8% relative error** in 21 s on one core.
+   9.5×10⁻⁹-probability pool loss to **0.8% relative error** in 21 s on one core
+   (its edge is per path; at equal CPU time simple twisting remains competitive on threshold targets).
 3. **A quantum stage with a falsifiable bar.** Exact loading with resources linear in countries and edges;
    against our best classical method it needs hardware 8.2×10⁴ times faster than today's fault-tolerant
    assumptions, so no advantage is claimed. Deep Development verifies the guarded pipeline on hardware.
@@ -90,7 +91,12 @@ tilts and a normalising-flow importance sampler, RDPO wins on every rare target 
 optimal twist is the strongest fixed baseline.
 
 **Scaling to 28 and 50 countries.** Against exact tensor-network references RDPO keeps 0.1%–4.2% error
-as the target falls to 10⁻¹³ and beats exponential twisting in 16 of 16 settings. On data-calibrated pools
+as the target falls to 10⁻¹³ and beats exponential twisting in 16 of 16 settings at the same path budget.
+New exact references for dense, bounded-treewidth graphs reach 28 countries; there RDPO beats twisting in
+10 of 10 cells by ×1.9–×3.9. *Caveat:* twisting needs no training, so at equal CPU time it is at
+least as accurate on most threshold targets (13 of 16 scaling settings); RDPO's edge is per path, which
+matters when paths are expensive, for joint targets a single twist cannot reach, and once policies are
+transferred rather than retrained. On data-calibrated pools
 (10 CAREC countries, 28 Asia–Pacific countries, a 50-country ring) it reaches **0.8%** error at μ ≈ 10⁻⁹
 with 65,536 paths, against a work-plan target of 10% at μ ≤ 10⁻⁸ in 10⁵ paths. All 25 ADB cells are
 re-estimated in 5 seconds.
@@ -145,9 +151,9 @@ Development the sandbox serves GPU sweeps, compilation and emulation, and a smal
 
 | WP (weeks) | Scope | Milestone and success criterion |
 |---|---|---|
-| 1 (W1–2) | Library API, GPU-batched rollouts, sandbox onboarding | M1: Phase 1 results reproduced; ≥ 10× throughput |
+| 1 (W1–2) | Library API, GPU-batched rollouts, sandbox onboarding | M1: Phase 1 results reproduced; ≥ 10× throughput; RDPO ≥ twisting at equal wall-clock |
 | 2 (W1–4) | Gridded rainfall, ground-motion proxies for the cat-in-a-box trigger, data-constrained bounds | M2: stress range for the ADB bond and the CAREC pool |
-| 3 (W3–5) | Exact references for dense bounded-treewidth graphs; RDPO v3 | M3: ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths, dense graphs |
+| 3 (W3–5) | RDPO v3 on dense pools beyond the exact references (which now reach 28 countries) | M3: ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths, dense graphs |
 | 4 (W4–7) | Compiled loader; guarded amplitude estimation on the two-country bond, emulator then IBM hardware | M4: measured fidelity vs depth and guard verdict on hardware, compared with the emulated prediction; the error rate at which the rare targets become estimable |
 | 5 (W6–8) | Pooling and stress-test calculator, validation pack, pitch | M5 (22 Jan): three ADB questions answered end to end, reproducibly |
 

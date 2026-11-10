@@ -935,6 +935,50 @@ def hw_values():
             "HW_DM_MIN": f"{d['emulator_fallback']['wall_seconds_this_run'] / 60:.0f}"}
 
 
+def dense_values():
+    """Dense-regime exact references (src/tensor/junction.py) and RDPO vs twisting (src/rdpo/experiments_dense.py)."""
+    d = json.loads((R / "dense_exact.json").read_text())
+    ex, rows = d["exact"], d["rows"]
+    gname = {"ladder-xdiag": "ladder + diagonals"}
+    out = ["**Table [tab:dense].** Dense, bounded-treewidth dependence (band-k: each country linked to its next k "
+           "neighbours; ladder with both diagonals), exact references by frontier variable elimination, B = 65,536, "
+           "identical seeds. Relative RMSE. *Equal time*: twisting's error if given RDPO's wall-clock, "
+           "scaled as 1/√(paths).", "",
+           "| Graph | n | edges | target | exact μ | RDPO | twisting | twisting, equal time | RDPO coverage | reps |",
+           "|---|---|---|---|---|---|---|---|---|---|"]
+    gains, eq = [], []
+    for r in rows:
+        g = gname.get(r["graph"], r["graph"])
+        mu = sci(r["mu"]) if r["target"] == "exceedance" else "US$" + (sci(r["mu"]) if r["mu"] < 1 else f"{r['mu']:,.0f}")
+        te = r["twist_rel_rmse"] * (r["twist_sec_per_estimate_median"] / r["rdpo_sec_per_estimate_median"]) ** 0.5
+        gains.append(r["twist_over_rdpo"]); eq.append(te < r["rdpo_rel_rmse"])
+        tgt = "Pr(L > T)" if r["target"] == "exceedance" else "stop-loss"
+        out.append(f"| {g} | {r['n']} | {r['edges']} | {tgt} | {mu} | **{pct(r['rdpo_rel_rmse'], 1)}** | "
+                   f"{pct(r['twist_rel_rmse'], 1)} | {pct(te, 1)} | {pct(r['rdpo_coverage'], 0)} | {r['reps']} |")
+    big = max(ex, key=lambda e: (e["frontier_width"], e["n"]))
+    sc = json.loads((R / "rdpo_v2_scale.json").read_text())["rows"]
+    by = {}
+    for r in sc:
+        by.setdefault((r["topology"], r["n"], r["target"]), {})[r["variant"]] = r
+    sw, st = 0, 0
+    for v in by.values():
+        if "twist" in v and "v2-final" in v:
+            tw, rd = v["twist"], v["v2-final"]
+            st += 1
+            sw += tw["rel_rmse"] * (tw["seconds_per_fit"] / rd["seconds_per_fit"]) ** 0.5 < rd["rel_rmse"]
+    return {"DENSE_TABLE": "\n".join(out),
+            "DENSE_GAIN": f"×{min(gains):.1f}–×{max(gains):.1f}",
+            "DENSE_NWIN": f"{len(gains)} of {len(gains)}",
+            "DENSE_EQ_TWIST_WINS": f"{sum(eq)} of {len(eq)}",
+            "DENSE_NEXACT": str(len(ex)),
+            "DENSE_MINMU": sci(min(e["exceedance"] for e in ex)),
+            "DENSE_BIG": f"band-{big['frontier_width']} with n = {big['n']} ({big['edges']} edges)",
+            "DENSE_BIG_SEC": f"{big['exact_seconds']:.0f} s",
+            "DENSE_RDPO_SEC": f"{min(r['rdpo_sec_per_estimate_median'] for r in rows):.0f}–{max(r['rdpo_sec_per_estimate_median'] for r in rows):.0f} s",
+            "DENSE_TWIST_SEC": f"{max(r['twist_sec_per_estimate_median'] for r in rows):.0f} s",
+            "EQT_SCALE": f"{sw} of {st}"}
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -967,7 +1011,7 @@ def toc(md):
 
 def _collect_values():
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values, dense_values):
         try:
             vals.update(fn())
         except Exception as ex:

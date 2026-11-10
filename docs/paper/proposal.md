@@ -24,8 +24,8 @@ lang: en
    tail-preserving tilted gauge, answers sparse 28-country pools exactly in about a minute, and any
    two-country question exactly in milliseconds. Where it cannot (dense dependence, events that reach
    three or more countries), the learned sampler RDPO estimates a {{HL_AP_MU}} pool loss to
-   **{{HL_AP_ERR}} relative error** in {{HL_AP_SEC}} on one core, and beats the best of the brief's four
-   reference methods in 20 of 25 benchmark cells.
+   **{{HL_AP_ERR}} relative error** in {{HL_AP_SEC}} on one core, and, per simulated path, beats the best of
+   the brief's four reference methods in 20 of 25 benchmark cells.
 3. **A quantum stage with a falsifiable bar.** The learned change of measure loads exactly into
    amplitude estimation with resources linear in countries and dependence edges. Against our best classical
    method it needs hardware {{Q_SSTAR_28}} times faster than today's fault-tolerant assumptions, so we claim
@@ -521,6 +521,17 @@ are exact, sampling is unnecessary.
 * Real pools are sparse: ordered west to east, the data-calibrated 10-country CAREC pool has bond dimension
   588 and the 28-country Asia–Pacific pool 367 (§6.7), both exact in minutes. These serve as references for
   RDPO and as the production answer whenever they fit in memory.
+* **Dense, bounded-treewidth graphs.** A frontier variable-elimination solver (`src/tensor/junction.py`) is
+  exact for any graph of small pathwidth, with only non-negative sums (no gauge needed). It agrees with dense
+  enumeration to 10⁻¹⁶ and with the tilted MPS to 10⁻¹³, and gives {{DENSE_NEXACT}} exact references for graphs
+  where each country is linked to its next 2–4 neighbours or to a ladder with diagonals, down to
+  μ = {{DENSE_MINMU}}; the largest, {{DENSE_BIG}}, takes {{DENSE_BIG_SEC}}. Against these references RDPO beats
+  exponential twisting in {{DENSE_NWIN}} cells at the same path budget, by {{DENSE_GAIN}} (Table [tab:dense]);
+  at equal wall-clock twisting is ahead in {{DENSE_EQ_TWIST_WINS}} (RDPO {{DENSE_RDPO_SEC}} per estimate
+  including training, twisting about {{DENSE_TWIST_SEC}}).
+
+{{DENSE_TABLE}}
+
 * **Division of labour.** Pair questions: exact product of kernels (≤ 3 ms). Sparse pools: tilted tensor
   network. Dense dependence or events reaching three or more countries: RDPO, validated against the network
   wherever both run.
@@ -587,7 +598,14 @@ classical reference. (c) Wall-clock time per estimate on one core.](../../figure
 *Table [tab:app_v2scale] in Appendix A lists every setting: method, coverage, twisting and run time.*
 
 * **Accuracy.** On the portfolio-wide targets, at the same budget and seeds, the Phase 2 engine
-  {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings.
+  {{V2_GAIN}}. It beats exponential twisting in {{V2_TW_WINS}} settings at the same path budget.
+* **Equal wall-clock.** Twisting needs no training, so one estimate costs well under a second against
+  RDPO's seconds to tens of seconds. Giving twisting RDPO's wall-clock instead of its path budget, it is at
+  least as accurate in {{EQT_SCALE}} of these settings. RDPO's advantage is *per path*: it matters when paths
+  are expensive (event-set or ground-motion simulation, Monte Carlo inside a pricing loop, amplitude-estimation
+  queries), when the target is not a threshold on the total loss (joint or pair events, where a single twist
+  does not apply), or when a transferred policy removes the training cost (Table [tab:v2transfer]). Closing the
+  wall-clock gap on CPU is a WP1 criterion.
 * **Speed.** One estimate takes {{V2_TIME}} less wall-clock time than in the Phase 1 study.
 * **Error bars.** With 24 replications, coverage of the Phase 2 intervals on portfolio-wide targets is
   {{V2_COV}}. Most low-coverage cells of the Phase 1 study (6–10 replications) were sampling noise.
@@ -952,8 +970,11 @@ in; each group becomes one Poisson source with an exactly computed capped three-
   need a sensible score function.
 * **Error bars under heavy tails.** In the Phase 2 benchmark, coverage is {{V2_BENCH_COV}} per cell (40 replications); the lowest cells are
   rare targets with heavy-tailed weights. Heavy-tail diagnostics remain part of WP3.
-* **Dense dependence.** Complete graphs are limited to 7 countries by the exact references. Larger dense
-  portfolios need reference-free validation (WP2).
+* **Dense dependence.** Exact references now reach 28 countries for bounded-treewidth graphs (§6.4); complete
+  graphs remain limited to 7, and dense pools with large treewidth need reference-free validation (WP3).
+* **Wall-clock.** All method comparisons are at equal path budget. At equal CPU time, exponential twisting is
+  at least as accurate as RDPO on most threshold targets ({{EQT_SCALE}} scaling settings, {{DENSE_EQ_TWIST_WINS}}
+  dense settings), because RDPO's training is not yet amortised or batched.
 * **Real-data scope.** Earthquake dependence was checked against a catalogue and two loss records, rain
   dependence against station data, and RDPO was tested on data-calibrated pools of 5, 10 and 28 countries
   (§6.6–6.7). Remaining gaps: loss records are yearly and smaller than bond triggers; the station network is
@@ -961,8 +982,8 @@ in; each group becomes one Poisson source with an exactly computed capped three-
   backtest against.
 
 ::: {.takeaway}
-RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 50 countries and on
-real-data pools of up to 28. The Phase 2 engine is several times faster and up to {{V2_GAIN_MAX}} more accurate at scale, overnight transfer makes small
+Per path, RDPO is the most accurate method on every rare portfolio-wide target we tested, up to 50 countries
+and on real-data pools of up to 28; per second of CPU, simple twisting is still competitive on threshold targets. The Phase 2 engine is several times faster and up to {{V2_GAIN_MAX}} more accurate at scale, overnight transfer makes small
 budgets usable, and pair targets are solved exactly. Scrambled Sobol remains better on expected loss.
 :::
 
@@ -1247,9 +1268,9 @@ holiday weeks carry long compute jobs and writing rather than new development.](
 
 | Work package | Milestone (week) | Success criterion |
 |---|---|---|
-| WP1 Engineering: library API, GPU-batched rollouts, onboarding to the sandbox. *CPU engine done (§6.5)* | M1 library v0.1 (W2) | all Phase 1 results reproduced in the sandbox; ≥ 10× rollout throughput on GPU |
+| WP1 Engineering: library API, GPU-batched rollouts, onboarding to the sandbox. *CPU engine done (§6.5)* | M1 library v0.1 (W2) | all Phase 1 results reproduced in the sandbox; ≥ 10× rollout throughput on GPU; RDPO at least as accurate as twisting at equal wall-clock on the 28-country ring |
 | WP2 Dependence realism: gridded rainfall (ERA5/GPCP mirrors) for the rain index; ground-motion proxies for the cat-in-a-box trigger; coupling bounds with data constraints | M2 dependence report (W4) | stress range for the ADB bond and the 10-country CAREC pool, each with stated proxies and intervals |
-| WP3 Dense regime: exact references for bounded-treewidth graphs; RDPO v3 (neural soft values, heavy-tail diagnostics) | M3 dense benchmark (W5) | RDPO ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths on dense graphs, checked against exact values; coverage ≥ 93% |
+| WP3 Dense regime: RDPO v3 (neural soft values, heavy-tail diagnostics) on dense pools beyond the exact references. *Exact references to 28 countries done (§6.4)* | M3 dense benchmark (W5) | RDPO ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths on dense graphs, checked against exact values; coverage ≥ 93% |
 | WP4 Quantum stage: compiled loader; guarded amplitude estimation on the two-country bond, emulator then IBM hardware (§7.8); updated s* map | M4 hardware report (W7) | measured fidelity versus depth and the guard's verdict on hardware, against the emulated prediction (Table [tab:hw]); updated error-rate threshold for the rare targets |
 | WP5 Decision tools for ADB: pooling and stress-test calculator on the engine's API; validation pack; documentation; pitch | M5 final package (W8, 22 Jan) | three ADB questions answered end to end (pooled limit, dependence stress, ELT input), every number reproducible from the repository |
 
