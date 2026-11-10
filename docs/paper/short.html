@@ -224,6 +224,14 @@ Indicative: public data as proxies for payout triggers.</figcaption>
 year loss tables into RDPO’s source form. On a demonstration event set,
 the rarest pool question read off a 10,000-year YLT has 132% error; RDPO
 on the converted sources gives 5.4%.</p>
+<p><strong>Near-term hardware, costed and emulated.</strong> Loading the
+exact two-country joint law (7–8 qubits) and transpiling for an IBM
+Heron-class device model, one Grover iterate costs 700–1,200 two-qubit
+gates; with the device noise the best estimates are off by 25%–23%, so
+the trust guard falls back to the classical value. The tilted circuits
+reach a few percent at two-qubit error 10⁻⁴ and sub-percent at 10⁻⁵.
+This is the honest near-term picture, and it fixes the hardware
+milestone below.</p>
 <p><strong>Quantum stage, emulated.</strong> Exact sparse-statevector
 emulation reproduces the joint law to 10⁻¹⁶; compiled resources fit
 logical qubits ≈ 38 + 13.2n + 8.2|E|; Toffolis per A ≈ -26 + 106.0n +
@@ -277,6 +285,12 @@ fallback.</p>
 <td>hours per sweep</td>
 </tr>
 <tr class="odd">
+<td>Hardware milestone: two-country amplitude estimation, IBM
+Heron-class</td>
+<td>7–8 qubits, ≤ 2,300 two-qubit gates, 9×10⁵ shots</td>
+<td>3–15 QPU min (emulator fallback 18 CPU min)</td>
+</tr>
+<tr class="even">
 <td>Fault-tolerant amplitude estimation, 28 countries (projected)</td>
 <td>635 logical qubits, ≈ 1.2 million physical</td>
 <td>≈ 11 days per estimate</td>
@@ -320,10 +334,11 @@ trigger, data-constrained bounds</td>
 </tr>
 <tr class="even">
 <td>4 (W4–7)</td>
-<td>Compiled loader; guarded amplitude estimation, emulator then
-hardware</td>
-<td>M4: hardware estimate accepted by the guard and consistent with the
-exact value, or documented fallback</td>
+<td>Compiled loader; guarded amplitude estimation on the two-country
+bond, emulator then IBM hardware</td>
+<td>M4: measured fidelity vs depth and guard verdict on hardware,
+compared with the emulated prediction; the error rate at which the rare
+targets become estimable</td>
 </tr>
 <tr class="odd">
 <td>5 (W6–8)</td>
@@ -350,7 +365,7 @@ URECA work on stochastic climate models (Prof. François Gay-Balmaz).
 Quantum security intern, Fraunhofer Singapore. Clifford+T compilation
 (MIT iQuHACK 2026), quantum reservoir computing for systemic risk (QAI
 Ventures GenQ 2025). A short CV is attached.</p>
-<p><strong>Prototype and AI use.</strong> Python package with 77 passing
+<p><strong>Prototype and AI use.</strong> Python package with 84 passing
 tests, fixed seeds in every result file, no proprietary code or data;
 private until results are announced, as the rules ask, and available to
 the jury on request. Developed with Claude Code (Anthropic) as AI

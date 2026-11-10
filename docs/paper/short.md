@@ -115,6 +115,12 @@ Indicative: public data as proxies for payout triggers.](../art/brief_vs_data.sv
 demonstration event set, the rarest pool question read off a 10,000-year YLT has 132% error; RDPO on the
 converted sources gives 5.4%.
 
+**Near-term hardware, costed and emulated.** Loading the exact two-country joint law (7–8 qubits) and
+transpiling for an IBM Heron-class device model, one Grover iterate costs 700–1,200 two-qubit gates; with
+the device noise the best estimates are off by {{HW_EXC_BEST}}–{{HW_EXH_BEST}}, so the trust guard falls
+back to the classical value. The tilted circuits reach a few percent at two-qubit error 10⁻⁴ and
+sub-percent at 10⁻⁵. This is the honest near-term picture, and it fixes the hardware milestone below.
+
 **Quantum stage, emulated.** Exact sparse-statevector emulation reproduces the joint law to 10⁻¹⁶;
 compiled resources fit {{QS_FITS_INLINE}} within 7%. Noise-aware mitigation is *worse* than none in 21–38% of
 miscalibrated instances; the trust guard caps p99 error at ≤ 0.17 with 10–22% fallback.
@@ -129,6 +135,7 @@ miscalibrated instances; the trust guard caps p99 error at ≤ 0.17 with 10–22
 | Exact tilted tensor network, 28 countries | 1 core, < 1 GB | ≈ 1 min |
 | Reproduce every experiment | 4 cores, 15 GB RAM | ≈ 3 h wall-clock |
 | Deep Development sweeps (GPU-batched) | 1 GPU in the sandbox | hours per sweep |
+| Hardware milestone: two-country amplitude estimation, IBM Heron-class | 7–8 qubits, ≤ 2,300 two-qubit gates, {{HW_SHOTS}} shots | {{HW_QPU_MIN}} QPU min (emulator fallback {{HW_DM_MIN}} CPU min) |
 | Fault-tolerant amplitude estimation, 28 countries (projected) | 635 logical qubits, ≈ 1.2 million physical | ≈ 11 days per estimate |
 
 No platform access was needed for Phase 1: all results come from one laptop-class CPU. In Deep
@@ -141,7 +148,7 @@ Development the sandbox serves GPU sweeps, compilation and emulation, and a smal
 | 1 (W1–2) | Library API, GPU-batched rollouts, sandbox onboarding | M1: Phase 1 results reproduced; ≥ 10× throughput |
 | 2 (W1–4) | Gridded rainfall, ground-motion proxies for the cat-in-a-box trigger, data-constrained bounds | M2: stress range for the ADB bond and the CAREC pool |
 | 3 (W3–5) | Exact references for dense bounded-treewidth graphs; RDPO v3 | M3: ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths, dense graphs |
-| 4 (W4–7) | Compiled loader; guarded amplitude estimation, emulator then hardware | M4: hardware estimate accepted by the guard and consistent with the exact value, or documented fallback |
+| 4 (W4–7) | Compiled loader; guarded amplitude estimation on the two-country bond, emulator then IBM hardware | M4: measured fidelity vs depth and guard verdict on hardware, compared with the emulated prediction; the error rate at which the rare targets become estimable |
 | 5 (W6–8) | Pooling and stress-test calculator, validation pack, pitch | M5 (22 Jan): three ADB questions answered end to end, reproducibly |
 
 **Risks and fallbacks.** Hardware access or noise → emulation with the device noise model, the classical

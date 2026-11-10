@@ -897,6 +897,44 @@ def test_values():
     return {"N_TESTS": str(_n_tests())}
 
 
+def hw_values():
+    """Near-term hardware plan (src/quantum/hardware_plan.py): costed, emulated IBM Heron-class run."""
+    d = json.loads((R / "hardware_plan.json").read_text())
+    lab = {"exceedance/direct": ("Pr(L > 80m)", "direct"), "exceedance/tilt": ("Pr(L > 80m)", "tilted"),
+           "joint_exhaustion/direct": ("Joint exhaustion", "direct"), "joint_exhaustion/tilt": ("Joint exhaustion", "tilted")}
+    def best(e, shots=100000):
+        rr = [r for rows in d["noisy"][e]["schedules"].values() for r in rows if r["shots"] == shots]
+        return min(r["rel_rmse"] for r in rr)
+    def scan(e, p2):
+        rr = [r for r in d["scan"].get(e, []) if abs(r["p2"] - p2) < 1e-12 and abs(r["readout_error"] - 0.01) < 1e-12]
+        return rr[0] if rr else None
+    rows = ["**Table [tab:hw].** Costed near-term run of the two-country bond, emulated. Circuits transpiled for an "
+            "IBM Heron-class device model (heavy-hex, native CZ; median of 5 transpiler seeds); noise from the device "
+            "snapshot (gate errors, relaxation, readout). *Best error*: lowest relative RMSE over Grover schedules at "
+            "10⁵ shots. Last columns: relative RMSE at 3×10⁴ shots under depolarising two-qubit error p₂, and the share of "
+            "runs the trust guard accepts.", "",
+            "| Target | Loading | Qubits | Amplitude a | Two-qubit gates, k = 0 / 1 / 2 | Best error, device model | p₂ = 10⁻³ | p₂ = 10⁻⁴ | p₂ = 10⁻⁵ (guard accepts) |",
+            "|---|---|---|---|---|---|---|---|---|"]
+    for e, (t, l) in lab.items():
+        enc = d["encodings"][e]
+        g = " / ".join(f"{r['device_n2q_median']:,.0f}" for r in d["resources"][e][:3])
+        sc = [scan(e, p) for p in (1e-3, 1e-4, 1e-5)]
+        a = enc["a"]
+        af = sci(a) if a < 1e-3 else f"{a:.3f}"
+        c = ["—" if r is None else pct(r["rel_rmse"], 1) for r in sc]
+        if sc[2] is not None:
+            c[2] += f" ({pct(sc[2]['guard_acceptance'], 0)})"
+        rows.append(f"| {t} | {l} | {enc['qubits']} | {af} | {g} | {pct(best(e), 0)} | {c[0]} | {c[1]} | {c[2]} |")
+    b = d["budget"]
+    q = b["qpu_minutes_total"]
+    return {"HW_TABLE": "\n".join(rows),
+            "HW_SHOTS": f"{b['recommended_run']['total_shots'] / 1e5:.0f}×10⁵",
+            "HW_QPU_MIN": f"{q['high']['qpu_minutes']:.0f}–{q['low']['qpu_minutes']:.0f}",
+            "HW_EXC_BEST": pct(best("exceedance/tilt"), 0),
+            "HW_EXH_BEST": pct(best("joint_exhaustion/tilt"), 0),
+            "HW_DM_MIN": f"{d['emulator_fallback']['wall_seconds_this_run'] / 60:.0f}"}
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -929,7 +967,7 @@ def toc(md):
 
 def _collect_values():
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values):
         try:
             vals.update(fn())
         except Exception as ex:

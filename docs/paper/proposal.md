@@ -1167,6 +1167,22 @@ fraction of instances; the combined guard bounds the tail.](../../figures/paper/
   countries), hardware estimates are compared with the exact value. (ii) Every production run is checked
   against the classical RDPO pilot (Algorithm 2, step 6). (iii) Raw counts per Grover power and the fitted
   noise parameters are published with each estimate.
+* **A costed near-term run.** We compiled and emulated the Deep Development hardware milestone
+  (`src/quantum/hardware_plan.py`): amplitude estimation on the two-country bond with the exact 100-state
+  joint law loaded on 7–8 qubits, directly or under the exponential twist of Proposition 6, transpiled for an
+  IBM Heron-class device model and run with its noise (Table [tab:hw]). Every encoding reproduces μ to 10⁻¹⁴
+  in noiseless simulation, and tilting raises the encoded amplitude about 10× for pool exceedance and
+  3×10⁴× for joint exhaustion. On today's device model one Grover iterate costs 700–1,200 two-qubit gates,
+  so the best estimates are off by {{HW_EXC_BEST}} (exceedance) and {{HW_EXH_BEST}} (exhaustion), and the
+  trust guard rejects them and returns the classical value, as designed. The tilted circuits reach a few
+  percent at a two-qubit error of 10⁻⁴ and sub-percent at 10⁻⁵, which is where early fault tolerance must
+  deliver. The run needs about {{HW_SHOTS}} shots, {{HW_QPU_MIN}} QPU minutes (within two months of IBM's
+  open allocation); the fallback is the same pipeline on the emulator ({{HW_DM_MIN}} CPU minutes). For two
+  countries the loaded law is computed classically, so this run tests the hardware path and the guard,
+  not the model; the structured source-wise loader of §7.4, the non-circular version, needs about 52 qubits.
+
+{{HW_TABLE}}
+
 * **Near-term sampler.** An 8-qubit circuit Born machine (depth 9, 32 entangling gates) can serve as a
   proposal sampler. Hardware noise biases the importance weights by 9–60%. Calibrating the *sampled* law
   with $10^5$ shots reduces the bias to at most 0.6%; inverting readout errors is the wrong mitigation in
@@ -1202,7 +1218,11 @@ What it costs to run: seconds on one CPU core today; a fault-tolerant quantum co
 
 ## 8.2 Quantum (projected; future feature)
 
-Logical-level estimates from explicit component formulas, not compiled circuits. Assumptions: Toffoli = 4 T
+**Near-term (Deep Development).** The costed hardware run of §7.8 needs 7–8 qubits, 200–2,300 two-qubit
+gates per circuit, about {{HW_SHOTS}} shots and {{HW_QPU_MIN}} QPU minutes on an IBM Heron-class device,
+with a CPU emulator fallback of {{HW_DM_MIN}} minutes (Table [tab:hw]).
+
+**Fault-tolerant (projected).** Logical-level estimates from explicit component formulas, not compiled circuits. Assumptions: Toffoli = 4 T
 = 6 CNOT; Ross–Selinger rotation synthesis; surface code at physical error $10^{-3}$, 1 µs cycles, 4
 magic-state factories; twisted loading with the bitwise oracle; 10% target relative error.
 
@@ -1230,13 +1250,13 @@ holiday weeks carry long compute jobs and writing rather than new development.](
 | WP1 Engineering: library API, GPU-batched rollouts, onboarding to the sandbox. *CPU engine done (§6.5)* | M1 library v0.1 (W2) | all Phase 1 results reproduced in the sandbox; ≥ 10× rollout throughput on GPU |
 | WP2 Dependence realism: gridded rainfall (ERA5/GPCP mirrors) for the rain index; ground-motion proxies for the cat-in-a-box trigger; coupling bounds with data constraints | M2 dependence report (W4) | stress range for the ADB bond and the 10-country CAREC pool, each with stated proxies and intervals |
 | WP3 Dense regime: exact references for bounded-treewidth graphs; RDPO v3 (neural soft values, heavy-tail diagnostics) | M3 dense benchmark (W5) | RDPO ≤ 10% error at μ ≤ 10⁻⁸ in 10⁵ paths on dense graphs, checked against exact values; coverage ≥ 93% |
-| WP4 Quantum stage: compiled loader; guarded amplitude estimation on the two-country bond, emulator then hardware; updated s* map | M4 hardware report (W7) | hardware estimate accepted by the trust guard and within its interval of the exact value, or a documented fallback with measured noise |
+| WP4 Quantum stage: compiled loader; guarded amplitude estimation on the two-country bond, emulator then IBM hardware (§7.8); updated s* map | M4 hardware report (W7) | measured fidelity versus depth and the guard's verdict on hardware, against the emulated prediction (Table [tab:hw]); updated error-rate threshold for the rare targets |
 | WP5 Decision tools for ADB: pooling and stress-test calculator on the engine's API; validation pack; documentation; pitch | M5 final package (W8, 22 Jan) | three ADB questions answered end to end (pooled limit, dependence stress, ELT input), every number reproducible from the repository |
 
 | Risk | Mitigation and fallback |
 |---|---|
 | Hardware access or queue time | Emulation with the device noise model gives the same report; hardware is the confirmation, not the dependency. |
-| Hardware noise too high for amplitude estimation | Report depth-0/1 estimates with the trust guard and the measured error rate needed (§7.6); the classical estimate stands. |
+| Hardware noise too high for amplitude estimation (expected, §7.8) | The milestone measures the noise and the guard's verdict rather than promising an estimate; the classical estimate stands. |
 | Dense-dependence cases turn out to be classically easy | Then the tensor network is the answer and we publish the crossover map; the decision tools do not change. |
 | Training instability on new targets | Warm starts, Rényi-2 repair, model selection; the estimator stays unbiased for any policy. |
 | Public proxies mislead on dependence | Coupling bounds hold for any dependence; posterior results are reported as a stress range, never as a price. |
@@ -1321,8 +1341,8 @@ Everything runs on a laptop-class CPU, with fixed seeds and a test for every exa
   repository (`CL0908/adb-quantum-challenge`), kept private until the challenge results are announced, as
   the rules ask; the jury can be given read access on request.
   Python 3.13, NumPy 2.5, SciPy 1.18, Matplotlib 3.11, pytest 9.2 (`requirements.txt`); Linux x86-64. All
-  quantum circuits are simulated by exact simulators written for this project; no quantum SDK or hardware
-  was used. Every experiment uses fixed seeds recorded in its output, and a test suite checks every
+  quantum circuits are simulated by exact simulators written for this project; the near-term hardware plan
+  additionally uses Qiskit and Qiskit Aer with a fake IBM device model. No quantum hardware was used. Every experiment uses fixed seeds recorded in its output, and a test suite checks every
   exactness claim.
 * **AI use.** The code, experiments and this document were developed with Claude Code (Anthropic) as an AI
   pair-programmer and writing assistant, following the author's research plan. The author directed the
