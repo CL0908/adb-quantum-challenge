@@ -829,6 +829,74 @@ def pu_values():
     return v
 
 
+def fin_values():
+    """Finance analyses (src/finance/analysis.py): bond anchor, pooled limit, model-free coupling bounds."""
+    d = json.loads((R / "finance.json").read_text())
+    an, po, cb = d["anchor"], d["pooling"], d["coupling_bounds"]["targets"]
+    def m(x):
+        return "0" if x < 1 else f"US${x / 1e6:.2f}m"
+    def p(x, dd=1):
+        return "0" if x < 1e-12 else (pct(x, dd) if x >= 1e-3 else sci(x))
+    def sx(x):
+        return "0" if x < 1e-12 else sci(x)
+    v = {}
+    for c in ("KG", "TJ"):
+        v[f"FIN_EL_{c}"] = pct(an["computed"][c]["annual_EL_fraction_of_eq_sublimit"], 3)
+        v[f"FIN_ELC_{c}"] = pct(an["cited"]["initial_expected_loss"][c], 3)
+        v[f"FIN_RM_X_{c}"] = f"{an['ratios_computed_over_cited'][c]['risk_margin_over_cited_EL']:.1f}"
+    v["FIN_RM"] = pct(an["cited"]["risk_margin"]["KG"], 0)
+    b80, d80 = po["brief"]["shared"]["80m"], po["both_from_data"]["shared"]["80m"]
+    post = po["posterior"]
+    df = post["delivered_fraction"]
+    v.update({"FIN_POOL_BRIEF": pct(b80["delivered_fraction"], 1), "FIN_POOL_DATA": pct(d80["delivered_fraction"], 1),
+              "FIN_POOL_MED": pct(df["median"], 1), "FIN_POOL_LO": pct(df["ci95"][0], 1), "FIN_POOL_HI": pct(df["ci95"][1], 1),
+              "FIN_SHORT_BRIEF": m(b80["expected_payout_given_up"]), "FIN_SHORT_MED": m(post["shortfall"]["median"]),
+              "FIN_EL_TERM": m(b80["expected_payout_separate"]),
+              "FIN_POOL100_BRIEF": pct(po["brief"]["shared"]["100m"]["delivered_fraction"], 1),
+              "FIN_POOL100_MED": pct(post["delivered_100"]["median"], 1),
+              "FIN_POOL120_BRIEF": pct(po["brief"]["shared"]["120m"]["delivered_fraction"], 1),
+              "FIN_POOL120_MED": pct(post["delivered_120"]["median"], 1)})
+    rows = ["**Table [tab:pool].** Pooling decision, exact. Two separate US$80m covers (status quo) against one shared limit "
+            "for both countries. *Delivered*: share of the expected three-year payout of the separate covers that the shared "
+            f"limit still pays. Posterior: median and 95% credible interval over {post['n_samples']:,} draws of the two shared shares.",
+            "", "| Shared limit | Capital saved | Delivered, brief | Delivered, both from data | Delivered, posterior |",
+            "|---|---|---|---|---|"]
+    for k, key in (("80m", "delivered_fraction"), ("100m", "delivered_100"), ("120m", "delivered_120")):
+        q = post[key]
+        rows.append(f"| US${k} | {m(po['brief']['shared'][k]['capital_saving_usd'])} | "
+                    f"{pct(po['brief']['shared'][k]['delivered_fraction'], 1)} | "
+                    f"{pct(po['both_from_data']['shared'][k]['delivered_fraction'], 1)} | "
+                    f"**{pct(q['median'], 1)}** [{pct(q['ci95'][0], 1)}, {pct(q['ci95'][1], 1)}] |")
+    v["FIN_TABLE_POOL"] = "\n".join(rows)
+    lab = {"prob_exceed": "Pr(L > 80m)", "joint_attachment": "Joint attachment", "joint_exhaustion": "Joint exhaustion",
+           "stop_loss": "Stop-loss E[(L−80m)⁺]"}
+    rows = ["**Table [tab:bounds].** Model-free range of each target. Both countries' term laws are fixed at the brief's "
+            "values; a linear program over all 100-state couplings gives the smallest and largest value any dependence "
+            "structure can produce. Position: where a value sits inside that range (0% = minimum, 100% = maximum).",
+            "", "| Target | Feasible range | Independent | Brief (position) | Posterior median (position) |",
+            "|---|---|---|---|---|"]
+    for k, t in cb.items():
+        f = m if k == "stop_loss" else (sx if k == "joint_exhaustion" else p)
+        fc, pt = t["full_coupling"], t["points"]
+        rows.append(f"| {lab[k]} | [{f(fc['min'])}, {f(fc['max'])}] | {f(t['independent_countries'])} | "
+                    f"{f(pt['brief']['value'])} ({pct(pt['brief']['position_in_full_range'], 0)}) | "
+                    f"{f(pt['posterior_median']['value'])} ({pct(pt['posterior_median']['position_in_full_range'], 0)}) |")
+    v["FIN_TABLE_BOUNDS"] = "\n".join(rows)
+    e, x = cb["prob_exceed"], cb["joint_exhaustion"]
+    v.update({"FIN_EXC_MAX": pct(e["full_coupling"]["max"], 1),
+              "FIN_EXC_POS_BRIEF": pct(e["points"]["brief"]["position_in_full_range"], 0),
+              "FIN_EXC_POS_MED": pct(e["points"]["posterior_median"]["position_in_full_range"], 0),
+              "FIN_EXH_MAX": sci(x["full_coupling"]["max"]),
+              "FIN_EXH_X": f"{x['full_coupling']['max'] / x['points']['brief']['value']:.0f}",
+              "FIN_ATT_MAX": pct(cb["joint_attachment"]["full_coupling"]["max"], 1)})
+    return v
+
+
+def test_values():
+    from .art2 import _n_tests
+    return {"N_TESTS": str(_n_tests())}
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -861,7 +929,7 @@ def toc(md):
 
 def _collect_values():
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values):
         try:
             vals.update(fn())
         except Exception as ex:

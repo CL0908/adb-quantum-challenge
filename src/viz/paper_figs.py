@@ -175,23 +175,26 @@ def quantum_queries():
 
 
 def gantt():
-    wps = [("WP1  Engineering: GPU-batched RDPO, library API", 1, 2, S.BLUE, "M1"),
-           ("WP2  Realistic portfolios: perils, dense graphs, 10–50 countries", 3, 6, S.TEAL, "M2"),
-           ("WP3  RL improvements: neural soft values, adaptive levels", 5, 8, S.TERRA, "M3"),
-           ("WP4  Quantum stage + AI-for-Quantum: compiled loader, guarded AE", 8, 10, S.PLUM, "M4"),
-           ("WP5  Web application, AI analyst agent, MCP tool server", 9, 11, S.GREEN, "M5"),
-           ("WP6  Validation, documentation, business case", 11, 12, S.OCHRE, "M6")]
-    fig, ax = plt.subplots(figsize=(9.6, 3.3))
-    for k, (lab, s, e, c, m) in enumerate(wps):
+    """Deep Development work plan: 30 Nov 2026 - 22 Jan 2027 (8 weeks), pitch 25 Jan 2027."""
+    wps = [("WP1  Engineering: library API, GPU-batched rollouts, sandbox", 1, 2, S.BLUE, "M1"),
+           ("WP2  Dependence realism: gridded rain, trigger proxies, bounds", 1, 4, S.TEAL, "M2"),
+           ("WP3  Dense regime: treewidth-exact references, RDPO v3", 3, 5, S.TERRA, "M3"),
+           ("WP4  Quantum: compiled loader, guarded hardware run", 4, 7, S.PLUM, "M4"),
+           ("WP5  Decision tools for ADB, validation pack, pitch", 6, 8, S.OCHRE, "M5")]
+    fig, ax = plt.subplots(figsize=(9.6, 3.0))
+    ax.axvspan(3.5, 5.5, color=S.RULE, alpha=0.35, lw=0)
+    ax.text(4.5, -0.85, "holiday period: reduced load, compute jobs run", fontsize=7, color=S.INK2, ha="center")
+    for k, (lab, s0, e, c, m) in enumerate(wps):
         y = len(wps) - 1 - k
-        ax.barh(y, e - s + 1, left=s - 0.5, color=c, height=0.5, alpha=0.9)
+        ax.barh(y, e - s0 + 1, left=s0 - 0.5, color=c, height=0.5, alpha=0.9)
         ax.text(0.2, y, lab, va="center", ha="right", fontsize=8, color=S.INK)
         ax.plot(e + 0.5, y, marker="D", color=S.NAVY, ms=6)
-        ax.text(e + 0.85, y, m, va="center", fontsize=7.5, color=S.NAVY, fontweight="bold")
-    ax.set_xlim(0.4, 13.2); ax.set_yticks([])
-    ax.set_xticks(range(1, 13)); ax.set_xticklabels([f"W{w}" for w in range(1, 13)], fontsize=7.5)
-    for w0, lab in [(1, "Nov 2026"), (5, "Dec 2026"), (9, "Jan 2027")]:
-        ax.text(w0 - 0.4, len(wps) - 0.35, lab, fontsize=7.5, color=S.INK2)
+        ax.text(e + 0.75, y, m, va="center", fontsize=7.5, color=S.NAVY, fontweight="bold")
+    starts = ["30 Nov", "7 Dec", "14 Dec", "21 Dec", "28 Dec", "4 Jan", "11 Jan", "18 Jan"]
+    ax.set_xlim(0.4, 9.3); ax.set_ylim(-1.1, len(wps) - 0.4); ax.set_yticks([])
+    ax.set_xticks(range(1, 9)); ax.set_xticklabels([f"W{w}\n{d}" for w, d in zip(range(1, 9), starts)], fontsize=7)
+    ax.axvline(8.5, color=S.NAVY, lw=1, ls=":")
+    ax.text(8.55, len(wps) - 0.7, "final package\n22 Jan · pitch 25 Jan", fontsize=7, color=S.NAVY)
     ax.grid(axis="y", visible=False)
     ax.spines["left"].set_visible(False)
     S.save(fig, OUT / "gantt.png")

@@ -133,7 +133,7 @@ def brief_vs_data():
     eq = json.loads((R / "realdata_losses.json").read_text())["tests"]["eq_noaa_1900"]
     rain = json.loads((R / "realdata_rain.json").read_text())
     pr = rain["pooled"]["0.2"]; im = rain["implied"]
-    W2, H2 = 1180, 420
+    W2, H2 = 1180, 432
     b = [text(30, 40, "What the data say about the bond's two dependence assumptions", 22, NAVY, 700)]
 
     def row(y, title, sub, brief, data, lo, hi, col, note):
@@ -155,14 +155,23 @@ def brief_vs_data():
                  eq["share_of_A"], eq["share_of_A_ci95"][0], eq["share_of_A_ci95"][1], TERRA, "much higher"))
     b.append(row(230, "Extreme rain hitting both countries", "share of events · 48 weather stations (GHCN-Daily)", 0.25,
                  pr["share"], pr["share_ci95"][0], pr["share_ci95"][1], TEAL, "much lower"))
-    exb, exd = im["brief"]["exceedance"], im["both from data"]["exceedance"]
-    b.append(box(30, 300, 860, 96, CARD, RULE, 14, 1.5))
-    b.append(text(52, 334, "Chance that the pool pays more than US$80m in a three-year term", 15, INK, 600))
-    b.append(text(52, 376, f"{100 * exb:.1f}%", 30, INK2, 700))
-    b.append(text(150, 372, "→", 28, INK2, 400))
-    b.append(text(192, 376, f"{100 * exd:.1f}%", 34, TERRA, 700))
-    b.append(text(310, 374, f"{exd / exb:.1f}× the challenge's base case", 19, TERRA, 700))
-    b.append(text(52, 392, "Indicative: public data as proxies for payout triggers; not a re-pricing of the actual bond.", 11, MUTED))
+    pu = json.loads((R / "param_uncertainty.json").read_text())
+    exb = pu["brief_point"]["exceedance"]
+    ps = pu["posterior_summary"]["exceedance"]
+    exd, lo, hi = ps["median"], ps["ci95"][0], ps["ci95"][1]
+    fin = json.loads((R / "finance.json").read_text())["pooling"]
+    pb = fin["brief"]["shared"]["80m"]["delivered_fraction"]
+    pd = fin["posterior"]["delivered_fraction"]["median"]
+    b.append(box(30, 300, 860, 110, CARD, RULE, 14, 1.5))
+    b.append(text(52, 330, "Chance that the pool pays more than US$80m in a three-year term", 15, INK, 600))
+    b.append(text(52, 368, f"{100 * exb:.1f}%", 30, INK2, 700))
+    b.append(text(150, 364, "→", 28, INK2, 400))
+    b.append(text(192, 368, f"{100 * exd:.1f}%", 34, TERRA, 700))
+    b.append(text(310, 360, f"{exd / exb:.1f}× the brief (posterior median)", 18, TERRA, 700))
+    b.append(text(310, 380, f"95% credible interval {100 * lo:.1f}%–{100 * hi:.1f}%", 13, TERRA, 600))
+    b.append(text(52, 402, f"A shared US$80m limit for both countries would pay {100 * pb:.0f}% of expected payouts under the brief, "
+                           f"{100 * pd:.0f}% under the data.", 12.5, INK, 600))
+    b.append(text(52, 418, "Indicative: public data as proxies for payout triggers; not a re-pricing of the actual bond.", 11, MUTED))
     b.append(cat_sitting(1010, 400, 1.05))
     b.append(f'<path d="M 978 296 q 30 -26 62 0" fill="none" stroke="{TERRA}" stroke-width="3"/>')
     b.append(text(1010, 284, "!", 26, TERRA, 700, "middle"))
