@@ -215,13 +215,20 @@ class FastPolicy(RDPOPolicy):
             v = acts[:, k]; plan = self.plan[k]
             if not plan["frozen"]:
                 ends = sorted({i for e in plan["edges"] for i in P.edges[e]} | set(plan["sites"]))
-                keycols = [S[:, i] for i in ends] + ([Li, Lj] if self.pair_target else [Lt])
-                key = np.stack(keycols, 1)
-                _, rep, inv = np.unique(key, axis=0, return_index=True, return_inverse=True)
+                # integer-encode the key (most significant column first): np.unique on a 1-d int array gives the same
+                # groups and ordering as the lexicographic row-unique, without the slow row sort
+                key = np.zeros(N, dtype=np.int64)
+                for i in ends:
+                    key = key * 10 + S[:, i]
+                if self.pair_target:
+                    key = (key * (P.F + 1) + Li) * (P.F + 1) + Lj
+                else:
+                    key = key * (P.Lmax + 1) + Lt
+                _, rep, inv = np.unique(key, return_index=True, return_inverse=True)
                 inv = inv.reshape(-1)
                 dPhi, *_ = self.delta_codes(k, S[rep], Lt[rep], Li[rep], Lj[rep])
                 out.append({"cols": plan["idx"], "dPhi": dPhi, "inv": inv, "v": v, "logp": P.src[k]["logp"],
-                            "p": P.src[k]["p"]})
+                            "p": P.src[k]["p"], "dPhi2": dPhi.reshape(-1, dPhi.shape[-1])})
             newS = {i: self.next[k][i][S[:, i]] for i in plan["sites"]}
             dL = sum(self.loss_tab[newS[i]][idx, v] - self.loss_tab[S[:, i]] for i in plan["sites"])
             for i in newS:
@@ -247,27 +254,29 @@ class FastPolicy(RDPOPolicy):
     def ce_from(self, compiled, Cs):
         """Same value/gradient as replay(acts, coef, 'ce') up to a θ-independent constant."""
         g = np.zeros(self.d); val = 0.0
+        th = self.theta
         for st, C in zip(compiled, Cs):
-            lp = st["logp"][None, :] + st["dPhi"] @ self.theta[st["cols"]]
+            cols = st["cols"]
+            lp = st["logp"][None, :] + st["dPhi"] @ th[cols]
             m = lp.max(1, keepdims=True)
             e = np.exp(lp - m); Z = e.sum(1, keepdims=True); qt = e / Z
             lse = (m + np.log(Z))[:, 0]
             Cs_ = C.sum(1)
             val -= (C * lp).sum() - Cs_ @ lse
             W = C - Cs_[:, None] * qt
-            np.add.at(g, st["cols"], np.einsum("uv,uvd->d", W, st["dPhi"]))
+            g[cols] += W.reshape(-1) @ st["dPhi2"]          # cols are distinct within a step
         return val, -g
 
     def mix_from(self, compiled, Cs):
         """Same as replay(acts, coef, 'mix')."""
         g = np.zeros(self.d); a = self.alpha
         for st, C in zip(compiled, Cs):
-            lp = st["logp"][None, :] + st["dPhi"] @ self.theta[st["cols"]]
+            cols = st["cols"]
+            lp = st["logp"][None, :] + st["dPhi"] @ self.theta[cols]
             lp -= lp.max(1, keepdims=True)
             qt = np.exp(lp); qt /= qt.sum(1, keepdims=True)
             q = (1 - a) * qt + a * st["p"][None, :]
             R = C * (1 - a) * qt / q
             mean = np.einsum("uv,uvd->ud", qt, st["dPhi"])
-            np.add.at(g, st["cols"], np.einsum("uv,uvd->d", R, st["dPhi"]) - np.einsum("u,ud->d", R.sum(1), mean))
+            g[cols] += R.reshape(-1) @ st["dPhi2"] - R.sum(1) @ mean
         return g
-
