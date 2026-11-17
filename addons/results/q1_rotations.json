@@ -8,13 +8,13 @@
       "rotations_A": 88,
       "toffoli_A": 236,
       "declared_T": 37485514.41758487,
-      "declared_s_star": 8338537.158598032,
+      "declared_s_star": 4422108.193783756,
       "rs": {
         "T_count": 37485514.41758487,
         "runtime_s": 2577.1291162089597,
         "code_distance": 25,
         "physical_qubits": 109000,
-        "s_star": 8338537.158598032,
+        "s_star": 4422108.193783756,
         "rotation_share": 0.8608358433637283
       },
       "fallback": {
@@ -22,7 +22,7 @@
         "runtime_s": 1167.9972837065368,
         "code_distance": 23,
         "physical_qubits": 95944,
-        "s_star": 3779162.1265974753,
+        "s_star": 2004172.133289831,
         "rotation_share": 0.717505781389384
       },
       "qrom_fallback": {
@@ -30,7 +30,7 @@
         "runtime_s": 908.2570059257268,
         "code_distance": 25,
         "physical_qubits": 184000,
-        "s_star": 2938748.681947911,
+        "s_star": 1558482.5466074934,
         "rotation_share": null
       },
       "mixed": {
@@ -38,7 +38,7 @@
         "runtime_s": 806.5780212878295,
         "code_distance": 23,
         "physical_qubits": 95944,
-        "s_star": 2609757.0197455743,
+        "s_star": 1384011.0898710585,
         "rotation_share": 0.5909230461385762
       },
       "qrom_mixed": {
@@ -46,17 +46,17 @@
         "runtime_s": 707.6469296131595,
         "code_distance": 23,
         "physical_qubits": 161540,
-        "s_star": 2289656.4167601024,
+        "s_star": 1214254.7558313876,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.029935189051308,
       "T_reduction_qrom_fallback": 2.837444797447238,
       "T_reduction_mixed": 2.9395281353273566,
       "T_reduction_qrom_mixed": 3.350482688038151,
-      "s_star_reduction_fallback": 2.206451292447074,
+      "s_star_reduction_fallback": 2.2064512924470736,
       "s_star_reduction_qrom_fallback": 2.837444797447239,
       "s_star_reduction_mixed": 3.1951392775297363,
-      "s_star_reduction_qrom_mixed": 3.641829008737121
+      "s_star_reduction_qrom_mixed": 3.6418290087371203
     },
     {
       "topology": "ring",
@@ -65,13 +65,13 @@
       "rotations_A": 586,
       "toffoli_A": 1092,
       "declared_T": 434195860.8423562,
-      "declared_s_star": 797874.8366952254,
+      "declared_s_star": 1990313.212792322,
       "rs": {
         "T_count": 434195860.8423562,
         "runtime_s": 32239.04266754494,
         "code_distance": 27,
         "physical_qubits": 328722,
-        "s_star": 797874.8366952254,
+        "s_star": 1990313.212792322,
         "rotation_share": 0.9152034753888001
       },
       "fallback": {
@@ -79,7 +79,7 @@
         "runtime_s": 14633.967772898763,
         "code_distance": 27,
         "physical_qubits": 328722,
-        "s_star": 362171.878594866,
+        "s_star": 903444.3024357784,
         "rotation_share": 0.8131908708954001
       },
       "qrom_fallback": {
@@ -87,7 +87,7 @@
         "runtime_s": 8843.874428772231,
         "code_distance": 27,
         "physical_qubits": 424950,
-        "s_star": 218874.5161689714,
+        "s_star": 545986.4397766856,
         "rotation_share": null
       },
       "mixed": {
@@ -95,7 +95,7 @@
         "runtime_s": 9442.445716599606,
         "code_distance": 27,
         "physical_qubits": 328722,
-        "s_star": 233688.3855958853,
+        "s_star": 582939.9050283156,
         "rotation_share": 0.7104819178156234
       },
       "qrom_mixed": {
@@ -103,17 +103,17 @@
         "runtime_s": 7655.763340226952,
         "code_distance": 27,
         "physical_qubits": 427866,
-        "s_star": 189470.29500383217,
+        "s_star": 472637.0781910422,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.2030281307062687,
       "T_reduction_qrom_fallback": 3.6453528289207737,
       "T_reduction_mixed": 3.414268255825865,
       "T_reduction_qrom_mixed": 4.211081408191653,
-      "s_star_reduction_fallback": 2.2030281307062687,
+      "s_star_reduction_fallback": 2.203028130706269,
       "s_star_reduction_qrom_fallback": 3.6453528289207733,
-      "s_star_reduction_mixed": 3.414268255825865,
-      "s_star_reduction_qrom_mixed": 4.211081408191653
+      "s_star_reduction_mixed": 3.4142682558258644,
+      "s_star_reduction_qrom_mixed": 4.211081408191652
     },
     {
       "topology": "ring",
@@ -122,13 +122,13 @@
       "rotations_A": 1163,
       "toffoli_A": 2280,
       "declared_T": 1094883761.0558286,
-      "declared_s_star": 302510.6763006811,
+      "declared_s_star": 942322.490494311,
       "rs": {
         "T_count": 1094883761.0558286,
         "runtime_s": 87316.97994420232,
         "code_distance": 29,
         "physical_qubits": 664842,
-        "s_star": 302510.6763006811,
+        "s_star": 942322.490494311,
         "rotation_share": 0.9159083335830887
       },
       "fallback": {
@@ -136,7 +136,7 @@
         "runtime_s": 39413.60619921779,
         "code_distance": 29,
         "physical_qubits": 664842,
-        "s_star": 136548.889739352,
+        "s_star": 425350.57415799884,
         "rotation_share": 0.8137031584248761
       },
       "qrom_fallback": {
@@ -144,7 +144,7 @@
         "runtime_s": 21908.324699025477,
         "code_distance": 27,
         "physical_qubits": 678642,
-        "s_star": 75901.64164578583,
+        "s_star": 236434.04875129883,
         "rotation_share": null
       },
       "mixed": {
@@ -152,7 +152,7 @@
         "runtime_s": 23620.826947399833,
         "code_distance": 27,
         "physical_qubits": 579498,
-        "s_star": 81834.62528371296,
+        "s_star": 254915.32678790114,
         "rotation_share": 0.7105841355502361
       },
       "qrom_mixed": {
@@ -160,7 +160,7 @@
         "runtime_s": 19001.60908162154,
         "code_distance": 27,
         "physical_qubits": 681558,
-        "s_star": 65831.2921238885,
+        "s_star": 205064.8522731211,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.215401947816062,
@@ -169,8 +169,8 @@
       "T_reduction_qrom_mixed": 4.278328162062041,
       "s_star_reduction_fallback": 2.215401947816062,
       "s_star_reduction_qrom_fallback": 3.985561705139706,
-      "s_star_reduction_mixed": 3.6966097816407784,
-      "s_star_reduction_qrom_mixed": 4.595241359251821
+      "s_star_reduction_mixed": 3.696609781640779,
+      "s_star_reduction_qrom_mixed": 4.595241359251822
     },
     {
       "topology": "ring",
@@ -179,13 +179,13 @@
       "rotations_A": 1451,
       "toffoli_A": 2840,
       "declared_T": 1770864020.0055265,
-      "declared_s_star": 100281.6837093183,
+      "declared_s_star": 440988.1622146042,
       "rs": {
         "T_count": 1770864020.0055265,
         "runtime_s": 141226.40559544074,
         "code_distance": 29,
         "physical_qubits": 806130,
-        "s_star": 100281.6837093183,
+        "s_star": 440988.1622146042,
         "rotation_share": 0.9177699143723381
       },
       "fallback": {
@@ -193,7 +193,7 @@
         "runtime_s": 63442.73828549715,
         "code_distance": 29,
         "physical_qubits": 806130,
-        "s_star": 45049.256812669846,
+        "s_star": 198103.86339880555,
         "rotation_share": 0.8169521092746604
       },
       "qrom_fallback": {
@@ -201,7 +201,7 @@
         "runtime_s": 37698.076017785395,
         "code_distance": 29,
         "physical_qubits": 923870,
-        "s_star": 26768.553088399476,
+        "s_star": 117714.56755567472,
         "rotation_share": null
       },
       "mixed": {
@@ -209,7 +209,7 @@
         "runtime_s": 40706.09722096953,
         "code_distance": 29,
         "physical_qubits": 806130,
-        "s_star": 28904.48106600973,
+        "s_star": 127107.29929519552,
         "rotation_share": 0.7147095836292163
       },
       "qrom_mixed": {
@@ -217,7 +217,7 @@
         "runtime_s": 32651.525120568076,
         "code_distance": 29,
         "physical_qubits": 927234,
-        "s_star": 23185.11117635763,
+        "s_star": 101956.40111149402,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.2260452403537685,
@@ -225,7 +225,7 @@
       "T_reduction_mixed": 3.4694165060532676,
       "T_reduction_qrom_mixed": 4.325262145457286,
       "s_star_reduction_fallback": 2.2260452403537685,
-      "s_star_reduction_qrom_fallback": 3.746249690005724,
+      "s_star_reduction_qrom_fallback": 3.7462496900057234,
       "s_star_reduction_mixed": 3.4694165060532676,
       "s_star_reduction_qrom_mixed": 4.325262145457286
     },
@@ -236,13 +236,13 @@
       "rotations_A": 2028,
       "toffoli_A": 4074,
       "declared_T": 11235801223.210682,
-      "declared_s_star": 580123.093482308,
+      "declared_s_star": 81871.24854823409,
       "rs": {
         "T_count": 11235801223.210682,
         "runtime_s": 957852.0542787106,
         "code_distance": 31,
         "physical_qubits": 1244470,
-        "s_star": 580123.093482308,
+        "s_star": 81871.24854823409,
         "rotation_share": 0.921736007737175
       },
       "fallback": {
@@ -250,7 +250,7 @@
         "runtime_s": 424499.339392624,
         "code_distance": 31,
         "physical_qubits": 1244470,
-        "s_star": 257098.02348869757,
+        "s_star": 36283.568812874386,
         "rotation_share": 0.8234029624822012
       },
       "qrom_fallback": {
@@ -258,7 +258,7 @@
         "runtime_s": 248733.24066885124,
         "code_distance": 31,
         "physical_qubits": 1390542,
-        "s_star": 150645.2863823028,
+        "s_star": 21260.173612449977,
         "rotation_share": null
       },
       "mixed": {
@@ -266,7 +266,7 @@
         "runtime_s": 270168.1569674556,
         "code_distance": 31,
         "physical_qubits": 1244470,
-        "s_star": 163627.3433671307,
+        "s_star": 23092.297218652522,
         "rotation_share": 0.7225234586989824
       },
       "qrom_mixed": {
@@ -274,16 +274,16 @@
         "runtime_s": 213590.28682514877,
         "code_distance": 31,
         "physical_qubits": 1390542,
-        "s_star": 129360.9565039618,
+        "s_star": 18256.37203787018,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.2564276675888606,
       "T_reduction_qrom_fallback": 3.8509209774416044,
       "T_reduction_mixed": 3.5453921181173595,
       "T_reduction_qrom_mixed": 4.4845300248266255,
-      "s_star_reduction_fallback": 2.2564276675888606,
-      "s_star_reduction_qrom_fallback": 3.850920977441605,
-      "s_star_reduction_mixed": 3.5453921181173595,
+      "s_star_reduction_fallback": 2.256427667588861,
+      "s_star_reduction_qrom_fallback": 3.8509209774416053,
+      "s_star_reduction_mixed": 3.54539211811736,
       "s_star_reduction_qrom_mixed": 4.484530024826626
     },
     {
@@ -293,13 +293,13 @@
       "rotations_A": 426,
       "toffoli_A": 674,
       "declared_T": 262670788.03856638,
-      "declared_s_star": 857052.9208371236,
+      "declared_s_star": 1503964.2907228381,
       "rs": {
         "T_count": 262670788.03856638,
         "runtime_s": 19503.30601186355,
         "code_distance": 27,
         "physical_qubits": 235410,
-        "s_star": 857052.9208371236,
+        "s_star": 1503964.2907228381,
         "rotation_share": 0.9242332954166264
       },
       "fallback": {
@@ -307,7 +307,7 @@
         "runtime_s": 8771.385104948153,
         "code_distance": 27,
         "physical_qubits": 235410,
-        "s_star": 385449.58579895395,
+        "s_star": 676390.4524697415,
         "rotation_share": 0.8315315987931721
       },
       "qrom_fallback": {
@@ -315,7 +315,7 @@
         "runtime_s": 4743.243119411601,
         "code_distance": 25,
         "physical_qubits": 285250,
-        "s_star": 208436.98843978037,
+        "s_star": 365767.13042765943,
         "rotation_share": null
       },
       "mixed": {
@@ -323,7 +323,7 @@
         "runtime_s": 5181.573550551754,
         "code_distance": 25,
         "physical_qubits": 205250,
-        "s_star": 227698.97284754942,
+        "s_star": 399568.23653607693,
         "rotation_share": 0.735940856257014
       },
       "qrom_mixed": {
@@ -331,7 +331,7 @@
         "runtime_s": 4141.344797244921,
         "code_distance": 25,
         "physical_qubits": 287750,
-        "s_star": 181987.179635769,
+        "s_star": 319352.7644409884,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.223514961264357,
@@ -350,13 +350,13 @@
       "rotations_A": 1019,
       "toffoli_A": 1212,
       "declared_T": 661903238.5666646,
-      "declared_s_star": 92882.07132439825,
+      "declared_s_star": 190436.02532677294,
       "rs": {
         "T_count": 661903238.5666646,
         "runtime_s": 52786.783275691494,
         "code_distance": 29,
         "physical_qubits": 431044,
-        "s_star": 92882.07132439825,
+        "s_star": 190436.02532677294,
         "rotation_share": 0.9448190039391666
       },
       "fallback": {
@@ -364,7 +364,7 @@
         "runtime_s": 21386.520325260695,
         "code_distance": 27,
         "physical_qubits": 376836,
-        "s_star": 37631.09215912977,
+        "s_star": 77154.99360970558,
         "rotation_share": 0.8731938343052101
       },
       "qrom_fallback": {
@@ -372,7 +372,7 @@
         "runtime_s": 11623.862415489037,
         "code_distance": 27,
         "physical_qubits": 475980,
-        "s_star": 20453.00643348023,
+        "s_star": 41934.780260997,
         "rotation_share": null
       },
       "mixed": {
@@ -380,7 +380,7 @@
         "runtime_s": 13224.575124098223,
         "code_distance": 27,
         "physical_qubits": 376836,
-        "s_star": 23269.573436519713,
+        "s_star": 47709.584994324316,
         "rotation_share": 0.7949315864932238
       },
       "qrom_mixed": {
@@ -388,16 +388,16 @@
         "runtime_s": 10152.52968240148,
         "code_distance": 27,
         "physical_qubits": 475980,
-        "s_star": 17864.09263013634,
+        "s_star": 36626.73267342213,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.2980042903718965,
       "T_reduction_qrom_fallback": 4.228053783403903,
       "T_reduction_mixed": 3.7162869129926857,
       "T_reduction_qrom_mixed": 4.8407950531546495,
-      "s_star_reduction_fallback": 2.4682268303994443,
-      "s_star_reduction_qrom_fallback": 4.541242952544932,
-      "s_star_reduction_mixed": 3.9915674250662176,
+      "s_star_reduction_fallback": 2.468226830399444,
+      "s_star_reduction_qrom_fallback": 4.541242952544931,
+      "s_star_reduction_mixed": 3.991567425066217,
       "s_star_reduction_qrom_mixed": 5.199372464499439
     },
     {
@@ -407,13 +407,13 @@
       "rotations_A": 1411,
       "toffoli_A": 1520,
       "declared_T": 1124944945.011103,
-      "declared_s_star": 203458.63036778834,
+      "declared_s_star": 442275.2959966916,
       "rs": {
         "T_count": 1124944945.011103,
         "runtime_s": 89714.35936463544,
         "code_distance": 29,
         "physical_qubits": 528600,
-        "s_star": 203458.63036778834,
+        "s_star": 442275.2959966916,
         "rotation_share": 0.9509142200737166
       },
       "fallback": {
@@ -421,7 +421,7 @@
         "runtime_s": 38601.42793854567,
         "code_distance": 29,
         "physical_qubits": 528600,
-        "s_star": 87542.214136495,
+        "s_star": 190297.94213907133,
         "rotation_share": 0.8859187461404073
       },
       "qrom_fallback": {
@@ -429,7 +429,7 @@
         "runtime_s": 18937.055101384813,
         "code_distance": 27,
         "physical_qubits": 560544,
-        "s_star": 42946.38362703254,
+        "s_star": 93356.19971636478,
         "rotation_share": null
       },
       "mixed": {
@@ -437,7 +437,7 @@
         "runtime_s": 21994.15578910814,
         "code_distance": 27,
         "physical_qubits": 461400,
-        "s_star": 49879.42671205953,
+        "s_star": 108427.14400142759,
         "rotation_share": 0.8135870301496008
       },
       "qrom_mixed": {
@@ -445,16 +445,16 @@
         "runtime_s": 16674.4307502918,
         "code_distance": 27,
         "physical_qubits": 563460,
-        "s_star": 37815.09299785757,
+        "s_star": 82201.87769148443,
         "rotation_share": null
       },
       "T_reduction_fallback": 2.324120224450316,
       "T_reduction_qrom_fallback": 4.410778852355257,
       "T_reduction_mixed": 3.7976980325127268,
       "T_reduction_qrom_mixed": 5.009296174360415,
-      "s_star_reduction_fallback": 2.324120224450316,
+      "s_star_reduction_fallback": 2.3241202244503154,
       "s_star_reduction_qrom_fallback": 4.73750321178898,
-      "s_star_reduction_mixed": 4.079008997884039,
+      "s_star_reduction_mixed": 4.07900899788404,
       "s_star_reduction_qrom_mixed": 5.380355150238963
     }
   ]

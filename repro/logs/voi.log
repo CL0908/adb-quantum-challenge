@@ -1,0 +1,20 @@
+selftest ok: Sobol estimators on an analytic case; Beta-binomial preposterior; brief point reproduced
+joint_exhaustion: 95% range 10^[-6.51, -3.89] (median 10^-4.66), Var(log10) 0.450, rows 4096
+  s_eq       S 0.025 [0.018, 0.031]  T 0.025 [0.023, 0.027]  | perfect info: interval -1%; +10/30/100 yr removes 0%/0%/1%  | grid S 0.024, exact preposterior 0%/0%/1%
+  s_rain     S 0.011 [0.006, 0.015]  T 0.011 [0.010, 0.012]  | perfect info: interval -1%; +10/30/100 yr removes 0%/0%/1%  | grid S 0.010, exact preposterior 0%/0%/1%
+  eq_rates   S 0.094 [0.081, 0.108]  T 0.089 [0.082, 0.095]  | perfect info: interval -5%; +10/30/100 yr removes 2%/3%/6%
+  rain_rates S 0.808 [0.745, 0.868]  T 0.853 [0.820, 0.884]  | perfect info: interval -56%; +10/30/100 yr removes 14%/32%/55%
+  contract reading B: x2.72; as a coin flip it would carry 9% of the variance
+expected_loss: 95% range 10^[6.74, 7.28] (median 10^7.00), Var(log10) 0.020, rows 4096
+  s_eq       S -0.000 [-0.000, 0.000]  T 0.000 [0.000, 0.000]  | perfect info: interval -0%; +10/30/100 yr removes -0%/-0%/-0%  | grid S 0.000, exact preposterior 0%/0%/0%
+  s_rain     S -0.000 [-0.000, 0.000]  T 0.000 [0.000, 0.000]  | perfect info: interval -0%; +10/30/100 yr removes -0%/-0%/-0%  | grid S 0.000, exact preposterior 0%/0%/0%
+  eq_rates   S 0.968 [0.922, 1.010]  T 0.962 [0.930, 0.993]  | perfect info: interval -82%; +10/30/100 yr removes 16%/35%/64%
+  rain_rates S 0.025 [0.018, 0.032]  T 0.028 [0.026, 0.030]  | perfect info: interval -1%; +10/30/100 yr removes 0%/1%/2%
+  contract reading B: x1.20; as a coin flip it would carry 7% of the variance
+joint_attachment: 95% range 10^[-1.48, -0.80] (median 10^-1.13), Var(log10) 0.031, rows 4096
+  s_eq       S 0.206 [0.187, 0.225]  T 0.213 [0.202, 0.223]  | perfect info: interval -11%; +10/30/100 yr removes 2%/4%/9%  | grid S 0.203, exact preposterior 2%/3%/8%
+  s_rain     S 0.000 [-0.001, 0.001]  T 0.000 [0.000, 0.000]  | perfect info: interval -0%; +10/30/100 yr removes 0%/0%/0%  | grid S 0.000, exact preposterior 0%/0%/0%
+  eq_rates   S 0.750 [0.711, 0.785]  T 0.744 [0.716, 0.772]  | perfect info: interval -50%; +10/30/100 yr removes 12%/27%/49%
+  rain_rates S 0.035 [0.026, 0.043]  T 0.042 [0.039, 0.045]  | perfect info: interval -2%; +10/30/100 yr removes 1%/1%/2%
+  contract reading B: x1.00; as a coin flip it would carry 0% of the variance
+checks: {'grid_vs_saltelli': True, 'sum_S': True, 'T_ge_S': True, 'preposterior': True} | ranking (T): ['rain_rates', 'eq_rates', 's_eq', 's_rain'] | top separated: True | top S 0.808 | verdict: strong

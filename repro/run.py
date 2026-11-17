@@ -1,6 +1,6 @@
 """Reproduction runner for the RDPO experiments (adb-repro/ is a separate clone; the original repo is untouched).
 
-    python repro/run.py <phase> [--cpus 14] [--only name1,name2] [--dry]
+    python repro/run.py <phase> [--cpus 14] [--only name1,name2] [--dry] [--force]
 
 Runs every job of <phase> in dependency order, in parallel up to a CPU budget, inside adb-repro/ with the pinned
 .venv. Each run appends one record to repro/runs.jsonl and writes its output to repro/logs/<name>.log.
@@ -67,11 +67,25 @@ JOBS = [
     ("i25", 5, [PY, str(HERE / "i25_rho2.py"), "--procs", "14"], [], ALL, False),
     # phase 6: computation add-ons in ../addons (import src/ read-only, write only addons/results/)
     *[(f"addon_{s}", 6, [PY, str(HERE.parent / "addons" / f"{s}.py")], deps, cpu, False)
-      for s, deps, cpu in [("rotations", [], 1), ("router", [], 1), ("measure", [], 1), ("q2_ae", [], 1),
-                           ("psis", [], ALL), ("combine", ["addon_rotations", "addon_router", "addon_q2_ae"], 1)]],
+      for s, deps, cpu in [("rotations", [], 1), ("q2_ae", [], 1), ("combine", ["addon_rotations", "addon_q2_ae"], 1)]],
     # phase 7: quality add-ons (methods borrowed from the QContagion CDS work; same read-only rules)
     *[(f"quality_{s}", 7, [PY, str(HERE.parent / "addons" / f"{s}.py")], [], 1, False)
-      for s in ("rain_lag", "eq_cluster", "joint_k", "rates_unc", "risk_measures", "data_gaps")],
+      for s in ("eq_cluster", "rates_unc")],
+    # phase 9: climate layers on the friend's two-country model (exact, outside RDPO; src/ read-only)
+    ("climate_cc", 9, [PY, str(HERE.parent / "addons" / "climate_cc.py")], [], 1, False),
+    # phase 10 (NEX-GDDP ensemble, daily POT) and phase 12 M2 (rain tail dependence): tested and withdrawn, see archive/
+    # phase 11: RDPO value experiments (E3 sensitivities, E2 nested uncertainty + transfer; E1 rain event set withdrawn)
+    *[(s, 11, [PY, str(HERE.parent / "addons" / f"{s}.py")], [], ALL, False) for s in ("sensitivity", "nested_uq")],
+    # phase 13 (exact tail, Rao–Blackwellised RDPO): tested and withdrawn, see archive/
+    # phase 14: global sensitivity (Sobol) + value of information on the friend's two-country bond (exact)
+    ("voi", 14, [PY, str(HERE.parent / "addons" / "voi.py")], [], ALL, False),
+    # phase 15 (quantum-stage loading variants): tested and withdrawn, see archive/
+    # phase 16 (quantum nested expectation on a dense pool): tested and withdrawn, see archive/
+    # phase 17: model-risk engine on the friend's CAREC pool (posterior predictive, P(> friend), Sobol, value of information)
+    ("model_risk", 17, [PY, str(HERE.parent / "addons" / "model_risk.py")], [], ALL, False),
+    # phase 18 (earthquake data upgrade): tested and withdrawn, see archive/
+    # phase 19 (ambiguity premium -> spread): tested and withdrawn, see archive/
+    # phase 20 (Asia-Pacific RDPO + MIS model-risk engine): tested and withdrawn, see archive/
 ]
 BY = {j[0]: j for j in JOBS}
 
@@ -120,7 +134,8 @@ def main():
     only = set(args[args.index("--only") + 1].split(",")) if "--only" in args else None
     todo = [j for j in JOBS if j[1] == phase and (only is None or j[0] in only)]
     ok = done_ok()
-    todo = [j for j in todo if j[0] not in ok]
+    if "--force" not in args:                    # --force: rerun jobs that already have a successful record
+        todo = [j for j in todo if j[0] not in ok]
     if "--dry" in args:
         for j in todo:
             print(j[0], "deps:", j[3], "cpu:", j[4], "|", " ".join(j[2][1:]))

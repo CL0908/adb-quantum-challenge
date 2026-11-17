@@ -1,0 +1,8 @@
+selftest ok: bit-space exact law equals the friend's dense enumeration; storm merge rule
+33 models, 2112 model-years, 546 storms, footprint sizes [0, 444, 73, 19, 5, 3, 0, 2], sources 61
+exact P(>=k): {1: '0.54', 2: '0.243', 3: '0.102', 4: '0.0419', 5: '0.018', 6: '0.00772', 7: '0.00258', 8: '0.00071'} | empirical 3-yr windows: {1: 0.4791, 2: 0.2496, 3: 0.1198}
+k=8 mu 0.00071: B=4096 RMSE 0.040 cov 0.67  B=16384 RMSE 0.014 cov 0.90  B=65536 RMSE 0.004 cov 0.97  | RDPO paths for 10% 4.1e+03 vs plain MC 1.41e+05 (x34)
+k=9 mu 0.000166: B=4096 RMSE 0.054 cov 0.80  B=16384 RMSE 0.019 cov 0.97  B=65536 RMSE 0.005 cov 0.97  | RDPO paths for 10% 4.1e+03 vs plain MC 6.03e+05 (x147)
+k=11 mu 4.82e-06: B=4096 RMSE 0.167 cov 0.87  B=16384 RMSE 0.053 cov 0.73  B=65536 RMSE 0.008 cov 0.87  | RDPO paths for 10% 1.64e+04 vs plain MC 2.07e+07 (x1266)
+k=12 mu 5.97e-07: B=4096 RMSE 0.312 cov 0.53  B=16384 RMSE 0.071 cov 0.73  B=65536 RMSE 0.013 cov 0.93  | RDPO paths for 10% 1.64e+04 vs plain MC 1.68e+08 (x10225)
+verdict: not strong

@@ -42,12 +42,13 @@ def inventory(row):
     return n, E, [(n, LEVELS_EQ), (E, LEVELS_EDGE)], n + E + row["w_U"]
 
 
-def price(row, model, calls=None):
-    """calls overrides the friend's IQAE call count (used to combine with a better AE algorithm)."""
+def price(row, model, calls=None, inv=None):
+    """calls overrides the friend's IQAE call count (used to combine with a better AE algorithm);
+    inv = (n, E, groups, singles) overrides the rotation inventory (used for other loadings, q_loading.py)."""
     calls = row["quantum_calls"] if calls is None else calls
     qubits = row["logical_qubits"]
     tof_A = row["toffoli_A"] + qubits                    # friend: + reflection
-    n, E, groups, singles = inventory(row)
+    n, E, groups, singles = inventory(row) if inv is None else inv
     # first pass: rotation count for the δ budget (synthesised + phase-gradient both consume budget)
     extra_q = 0
     if model.startswith("qrom_"):

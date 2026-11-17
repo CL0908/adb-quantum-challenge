@@ -1,0 +1,11 @@
+meteorology/precipitation/ghcn-daily/stations              54 files      2.00 MB
+meteorology/precipitation/ghcn-daily                        1 files      0.04 MB
+meteorology/precipitation/derived                           1 files      0.46 MB
+seismology/catalogs/usgs_m55_1965_2016                      4 files      0.63 MB
+seismology/catalogs/usgs_comcat                             5 files      3.74 MB
+seismology/shakemap                                       184 files    819.50 MB
+disasters/impacts/emdat                                     2 files      0.14 MB
+disasters/impacts/ngdc-noaa-earthquakes                     2 files      0.12 MB
+geography/boundaries/geo-countries                          4 files      2.62 MB
+climate/indices/enso/noaa_cpc_oni                           1 files      0.02 MB
+climate/projections/nex-gddp-cmip6                       3122 files   4647.90 MB

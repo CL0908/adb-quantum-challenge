@@ -1,0 +1,49 @@
+D:\adb-quantum-challenge\addons\climate_ens.py:105: UserWarning: Parameter `variant` has been introduced to replace `midrank`; `midrank` will be removed in SciPy 1.19.0. Specify `variant` to silence this warning. Note that the returned object will no longer be unpackable as a tuple, and `critical_values` will be omitted.
+  ad = stats.anderson_ksamp([obs_h[c], h])
+D:\adb-quantum-challenge\addons\climate_ens.py:105: UserWarning: p-value capped: true value larger than 0.25. Consider specifying `method` (e.g. `method=stats.PermutationMethod()`.)
+  ad = stats.anderson_ksamp([obs_h[c], h])
+selftest ok: annual maxima by period; data path follows the field layout
+ACCESS-CM2         KG AD p 0.023 warm x2.41 | TJ AD p 0.250 warm x1.87
+ACCESS-ESM1-5      KG AD p 0.081 warm x0.83 | TJ AD p 0.220 warm x2.71
+BCC-CSM2-MR        KG AD p 0.221 warm x2.31 | TJ AD p 0.024 warm x0.79
+CanESM5            KG AD p 0.020 warm x9.60 | TJ AD p 0.067 warm x3.60
+CESM2              KG AD p 0.051 warm x1.93 | TJ AD p 0.194 warm x1.77
+CESM2-WACCM        KG AD p 0.051 warm x1.49 | TJ AD p 0.250 warm x1.86
+CMCC-CM2-SR5       KG AD p 0.047 warm x1.37 | TJ AD p 0.250 warm x1.84
+CMCC-ESM2          KG AD p 0.105 warm x0.15 | TJ AD p 0.250 warm x2.97
+CNRM-CM6-1         KG AD p 0.250 warm x0.27 | TJ AD p 0.250 warm x2.54
+CNRM-ESM2-1        KG AD p 0.250 warm x1.49 | TJ AD p 0.250 warm x2.92
+EC-Earth3          KG AD p 0.112 warm x0.90 | TJ AD p 0.250 warm x0.52
+EC-Earth3-Veg-LR   KG AD p 0.216 warm x0.36 | TJ AD p 0.013 warm x0.70
+FGOALS-g3          KG AD p 0.022 warm x2.63 | TJ AD p 0.250 warm x4.52
+GFDL-CM4           KG AD p 0.180 warm x0.96 | TJ AD p 0.250 warm x0.56
+GFDL-ESM4          KG AD p 0.250 warm x0.30 | TJ AD p 0.250 warm x0.34
+GISS-E2-1-G        KG AD p 0.117 warm x1.64 | TJ AD p 0.140 warm x2.31
+HadGEM3-GC31-LL    KG AD p 0.131 warm x0.36 | TJ AD p 0.250 warm x4.13
+IITM-ESM           KG AD p 0.080 warm x1.98 | TJ AD p 0.155 warm x0.23
+INM-CM4-8          KG AD p 0.012 warm x2.91 | TJ AD p 0.250 warm x2.61
+INM-CM5-0          KG AD p 0.077 warm x2.46 | TJ AD p 0.250 warm x0.91
+IPSL-CM6A-LR       KG AD p 0.181 warm x1.55 | TJ AD p 0.250 warm x0.90
+D:\adb-quantum-challenge\addons\climate_ens.py:105: UserWarning: p-value floored: true value smaller than 0.001. Consider specifying `method` (e.g. `method=stats.PermutationMethod()`.)
+  ad = stats.anderson_ksamp([obs_h[c], h])
+KACE-1-0-G         KG AD p 0.001 warm x3.22 | TJ AD p 0.005 warm x3.17
+KIOST-ESM          KG AD p 0.019 warm x2.12 | TJ AD p 0.173 warm x1.33
+MIROC-ES2L         KG AD p 0.005 warm x0.87 | TJ AD p 0.058 warm x1.15
+MIROC6             KG AD p 0.025 warm x2.32 | TJ AD p 0.250 warm x1.20
+MPI-ESM1-2-HR      KG AD p 0.240 warm x2.73 | TJ AD p 0.095 warm x2.91
+MPI-ESM1-2-LR      KG AD p 0.024 warm x1.05 | TJ AD p 0.250 warm x0.68
+MRI-ESM2-0         KG AD p 0.015 warm x2.44 | TJ AD p 0.015 warm x0.41
+NESM3              KG AD p 0.035 warm x1.55 | TJ AD p 0.250 warm x0.03
+NorESM2-LM         KG AD p 0.016 warm x1.59 | TJ AD p 0.109 warm x0.06
+NorESM2-MM         KG AD p 0.106 warm x1.63 | TJ AD p 0.250 warm x1.72
+TaiESM1            KG AD p 0.161 warm x0.53 | TJ AD p 0.250 warm x1.74
+UKESM1-0-LL        KG AD p 0.063 warm x2.43 | TJ AD p 0.250 warm x0.17
+models 33; passing fidelity KG 20, TJ 29
+KG: ensemble p 0.0000 [0.0000, 0.0000] vs AM [0.0000, 0.0572] width x0.00, obs inside False
+TJ: ensemble p 0.0356 [0.0242, 0.0463] vs AM [0.0023, 0.0523] width x0.44, obs inside False
+joint exhaustion width ensemble / AM: x0.00
+verdict (tail): not strong
+warming KG: median x1.59 (10–90% 0.36–2.71), share > 1: 70%
+warming TJ: median x1.72 (10–90% 0.25–3.13), share > 1: 61%
+brief (adb-base): joint exhaustion x[0.22469536262657852, 0.9734296442607991, 3.193456212041548] (10/50/90% over models)
+rain share from data: joint exhaustion x[0.30060822844051277, 1.5041739208676024, 5.812855986001791] (10/50/90% over models)

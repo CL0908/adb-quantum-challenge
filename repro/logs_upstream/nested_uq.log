@@ -1,0 +1,6 @@
+selftest ok: posterior draws valid; (m, rain share) = (1, 0.25) reproduces the friend's ring model
+exact posterior: mean 3.17e-07, 95% of draws [4.34e-08, 9.1e-07]
+refit     paths/rep 1.64e+06  cpu 632s  summary rel RMSE mean 0.003 q025 0.016 q975 0.019  per-draw 0.024  coverage 0.944
+cold      paths/rep 2.05e+05  cpu 267s  summary rel RMSE mean 0.030 q025 0.191 q975 0.028  per-draw 0.285  coverage 0.854
+transfer  paths/rep 2.7e+05  cpu 261s  summary rel RMSE mean 0.002 q025 0.034 q975 0.049  per-draw 0.057  coverage 0.936
+verdict: strong

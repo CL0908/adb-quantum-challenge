@@ -7,6 +7,9 @@
   - Assist：协助项；
   - I25：n = 28 的 ρ² 补充实验；
   - Addons：计算提升 add-on，代码在 `../addons`；
+  - Quality：风险 add-on（地震余震读法、基础触发率的不确定性）；
+  - Value：RDPO 价值实验（E3 一次运行出敏感度、E2 嵌套不确定性 + 策略迁移）；
+  - Climate：Clausius–Clapeyron 气候情景；
   - Env：运行环境。
 - `run.py`：按阶段跑全部驱动脚本，每次运行写入 `runs.jsonl` 和 `logs/`。
 - `claims_inventory.md`、`claims.py`、`paper_values.py`、`verdicts.py`：声明清单、取数方法和判定结果。

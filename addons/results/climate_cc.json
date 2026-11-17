@@ -1,0 +1,156 @@
+{
+  "gev": {
+    "KG": [
+      -0.08051229397943754,
+      1.3087720298899752,
+      0.34939858003852464
+    ],
+    "TJ": [
+      -0.02605782536493932,
+      1.220675488133701,
+      0.3031755299400829
+    ]
+  },
+  "cc_multipliers": {
+    "0.5": [
+      1.2263672190184187,
+      1.2778439906970755
+    ],
+    "1.0": [
+      1.498649165742427,
+      1.6220513595441746
+    ],
+    "1.5": [
+      1.824906862080887,
+      2.0456037074253373
+    ],
+    "2.0": [
+      2.2143484615280657,
+      2.5633587150463697
+    ]
+  },
+  "targets": {
+    "brief (adb-base)": {
+      "friend": {
+        "term_expected_principal_loss_usd": 10063513.348954108,
+        "term_joint_attachment_probability": 0.04413776873084346,
+        "term_portfolio_loss_exceedance_probability": 0.012046720907534033,
+        "term_portfolio_stop_loss_usd": 282354.698566141,
+        "term_both_bonds_exhausted_probability": 3.163304630917887e-05
+      },
+      "CC dT=0.5": {
+        "point": {
+          "term_expected_principal_loss_usd": 10348926.198234646,
+          "term_joint_attachment_probability": 0.05033866644132217,
+          "term_portfolio_loss_exceedance_probability": 0.012305343537741079,
+          "term_portfolio_stop_loss_usd": 288098.77240982663,
+          "term_both_bonds_exhausted_probability": 3.995909488805132e-05
+        },
+        "mults": [
+          1.2263672190184187,
+          1.2778439906970755
+        ]
+      },
+      "CC dT=1.0": {
+        "point": {
+          "term_expected_principal_loss_usd": 10691943.306830026,
+          "term_joint_attachment_probability": 0.05804036642032763,
+          "term_portfolio_loss_exceedance_probability": 0.012634335491086994,
+          "term_portfolio_stop_loss_usd": 295183.88103810186,
+          "term_both_bonds_exhausted_probability": 5.055060029275369e-05
+        },
+        "mults": [
+          1.498649165742427,
+          1.6220513595441746
+        ]
+      },
+      "CC dT=1.5": {
+        "point": {
+          "term_expected_principal_loss_usd": 11100449.462001842,
+          "term_joint_attachment_probability": 0.06758751814465377,
+          "term_portfolio_loss_exceedance_probability": 0.013053467966497423,
+          "term_portfolio_stop_loss_usd": 303894.97482536564,
+          "term_both_bonds_exhausted_probability": 6.404407280309275e-05
+        },
+        "mults": [
+          1.824906862080887,
+          2.0456037074253373
+        ]
+      },
+      "CC dT=2.0": {
+        "point": {
+          "term_expected_principal_loss_usd": 11582201.12947394,
+          "term_joint_attachment_probability": 0.07939266031903648,
+          "term_portfolio_loss_exceedance_probability": 0.013587541797061732,
+          "term_portfolio_stop_loss_usd": 314565.880720277,
+          "term_both_bonds_exhausted_probability": 8.12379458002972e-05
+        },
+        "mults": [
+          2.2143484615280657,
+          2.5633587150463697
+        ]
+      }
+    },
+    "rain share from data": {
+      "friend": {
+        "term_expected_principal_loss_usd": 10063513.348954108,
+        "term_joint_attachment_probability": 0.03434102402135967,
+        "term_portfolio_loss_exceedance_probability": 0.011333306873221306,
+        "term_portfolio_stop_loss_usd": 275220.5582230137,
+        "term_both_bonds_exhausted_probability": 8.665528339920446e-06
+      },
+      "CC dT=0.5": {
+        "point": {
+          "term_expected_principal_loss_usd": 10348926.198234648,
+          "term_joint_attachment_probability": 0.038664030890623556,
+          "term_portfolio_loss_exceedance_probability": 0.011455178600882831,
+          "term_portfolio_stop_loss_usd": 279597.1230412441,
+          "term_both_bonds_exhausted_probability": 1.2589043942899998e-05
+        },
+        "mults": [
+          1.2263672190184187,
+          1.2778439906970755
+        ]
+      },
+      "CC dT=1.0": {
+        "point": {
+          "term_expected_principal_loss_usd": 10691943.306830026,
+          "term_joint_attachment_probability": 0.04426593304593084,
+          "term_portfolio_loss_exceedance_probability": 0.011631260043536817,
+          "term_portfolio_stop_loss_usd": 285153.12656260014,
+          "term_both_bonds_exhausted_probability": 1.8257776969864404e-05
+        },
+        "mults": [
+          1.498649165742427,
+          1.6220513595441746
+        ]
+      },
+      "CC dT=1.5": {
+        "point": {
+          "term_expected_principal_loss_usd": 11100449.46200184,
+          "term_joint_attachment_probability": 0.05151622734946122,
+          "term_portfolio_loss_exceedance_probability": 0.011883131824971553,
+          "term_portfolio_stop_loss_usd": 292191.613410107,
+          "term_both_bonds_exhausted_probability": 2.636648998617645e-05
+        },
+        "mults": [
+          1.824906862080887,
+          2.0456037074253373
+        ]
+      },
+      "CC dT=2.0": {
+        "point": {
+          "term_expected_principal_loss_usd": 11582201.12947394,
+          "term_joint_attachment_probability": 0.06087536006563316,
+          "term_portfolio_loss_exceedance_probability": 0.012239083480538282,
+          "term_portfolio_stop_loss_usd": 301081.29755504255,
+          "term_both_bonds_exhausted_probability": 3.7825931001087175e-05
+        },
+        "mults": [
+          2.2143484615280657,
+          2.5633587150463697
+        ]
+      }
+    }
+  }
+}

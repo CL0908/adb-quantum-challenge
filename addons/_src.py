@@ -10,6 +10,8 @@ HERE = Path(__file__).resolve().parent
 _DEFAULT = HERE.parent if (HERE.parent / "src").is_dir() else HERE.parent / "adb-repro"
 REPO = Path(os.environ.get("ADB_REPO", _DEFAULT)).resolve()
 OUT = HERE / "results"
+# shared data library, organised by field (not by project); see DATA/README.md
+DATA = Path(os.environ.get("DATA_ROOT", "E:/data"))
 sys.path.insert(0, str(REPO))
 
 

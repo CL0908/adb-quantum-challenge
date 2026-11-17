@@ -1,0 +1,10 @@
+selftest ok: two-statistic bounded encoding exact on ring-2 (g <= 1, a = mu e^(b - Lambda)); price() unchanged
+ring     n= 2 a 0.0720 -> A1 0.0956 A12 0.0971 | calls 850 (resim 848) -> 699 | s* best 4.41e+05: A1 /1.19, A12 /0.72, A4 best case /0.26 | A3 sigma2 5.75 C* 3.47 vs ChebAE C 22.81
+ring     n= 8 a 0.0249 -> A1 0.0271 A12 0.0306 | calls 1556 (resim 1575) -> 1377 | s* best 3.75e+04: A1 /1.04, A12 /0.99, A4 best case /0.30 | A3 sigma2 16.35 C* 11.02 vs ChebAE C 24.57
+ring     n=16 a 0.0060 -> A1 0.0065 A12 0.0071 | calls 3127 (resim 3159) -> 2866 | s* best 2.33e+04: A1 /1.03, A12 /1.02, A4 best case /0.67 | A3 sigma2 56.30 C* 15.29 vs ChebAE C 24.19
+ring     n=20 a 0.0030 -> A1 0.0033 A12 0.0035 | calls 4222 (resim 4266) -> 4022 | s* best 8.12e+03: A1 /1.02, A12 /0.99, A4 best case /0.95 | A3 sigma2 100.04 C* 16.41 vs ChebAE C 23.19
+ring     n=28 a 0.0009 -> A1 0.0010 A12 0.0010 | calls 8000 (resim 7870) -> 7589 | s* best 2.02e+04: A1 /1.07, A12 /1.01, A4 best case /1.80 | A3 sigma2 310.29 C* 19.00 vs ChebAE C 23.76
+complete n= 4 a 0.0416 -> A1 0.0450 A12 0.0606 | calls 1125 (resim 1134) -> 926 | s* best 3.26e+04: A1 /1.04, A12 /1.00, A4 best case /0.23 | A3 sigma2 8.41 C* 9.38 vs ChebAE C 22.95
+complete n= 6 a 0.0354 -> A1 0.0379 A12 0.0404 | calls 1237 (resim 1274) -> 1125 | s* best 3.17e+03: A1 /1.02, A12 /1.00, A4 best case /0.20 | A3 sigma2 11.79 C* 12.06 vs ChebAE C 23.27
+complete n= 7 a 0.0252 -> A1 0.0269 A12 0.0352 | calls 1549 (resim 1532) -> 1234 | s* best 7.51e+03: A1 /1.06, A12 /1.18, A4 best case /0.25 | A3 sigma2 14.06 C* 16.41 vs ChebAE C 24.56
+A1+A2 passes (s* halved): [] | A4 best case could pass: [] | verdict: not strong

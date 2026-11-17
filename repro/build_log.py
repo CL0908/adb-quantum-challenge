@@ -248,14 +248,12 @@ def addons_sheet(wb, d):
     title("合计：量子所需硬件加速 s*（ε = 10%，越小对量子越有利）。全部是同类替换，主轴（倾斜加载 → 振幅估计；RDPO 的 CE → Rényi-2 → RQMC）不动。"
           "Q1 = 旋转合成方法的同类替换（保守 = fallback+QROM，无需随机化；mixed = mixed fallback+QROM，每个门实例每个 shot 须独立重抽）；"
           "Q2 = 振幅估计算法的同类替换（IQAE → ChebAE，同一 Grover 幂电路族）；经典侧沿用作者口径（我们复现的 ρ²）")
-    head(["网络", "n", "原 s*", "Q2 后", "Q1 保守 + Q2", "Q1 mixed + Q2", "缩小倍数（保守）", "缩小倍数（mixed）", "精确引擎",
-          "精确耗时 (s)", "精确快于 RDPO 的 ε", "说明"])
+    head(["网络", "n", "原 s*", "Q2 后", "Q1 保守 + Q2", "Q1 mixed + Q2", "缩小倍数（保守）", "缩小倍数（mixed）", "", "", "", "说明"])
     for r in comb:
         i, s = ws.max_row + 1, r["s_star"]
         ws.append([r["topology"], r["n"], s["declared"], s["Q2"], s["Q1cQ2"], s["Q1Q2"], f"=C{i}/E{i}", f"=C{i}/F{i}",
-                   r["exact_engine"], r["exact_seconds"], r["crossover_eps_exact_beats_rdpo"],
-                   "原 s* 由 rotations.price('rs') 逐位复现作者 quantum_advantage.json"])
-        fmt(i, "CDEF", "0.00E+00"); fmt(i, "GH", "0.0"); fmt(i, "J", "0.000"); fmt(i, "K", "0.0%")
+                   None, None, None, "原 s* 由 rotations.price('rs') 逐位复现作者 quantum_advantage.json"])
+        fmt(i, "CDEF", "0.00E+00"); fmt(i, "GH", "0.0")
     r28 = next(r for r in comb if r["topology"] == "ring" and r["n"] == 28)
     for cfg in ("e2", "v2-final"):
         if f"s_star_Q1Q2_rho2_i25_{cfg}" in r28:
@@ -289,42 +287,6 @@ def addons_sheet(wb, d):
                    r["chebae_odd"]["kmax_max"], "ChebAE 只用奇次（Grover 幂电路），沿用作者电路族与资源账；MIQAE 为有证明的 Chernoff 版"])
         fmt(i, "C", "0.00E+00"); fmt(i, "DEF", "0.0"); fmt(i, "GH", "0.0%"); fmt(i, "I", "0.00")
 
-    title("Q3 会碰主轴的替换（只评估、不采用）——加载测度（measure.py）：b0 = 同电路改方差型估计（需 c_var/c < 1/调用比 才不亏，文献无显式常数，按算法结构判为无收益）；"
-          "b1 = 加载 RDPO 学到的策略（Toffoli 增量取下界；即便改用 QROM 查表把加载减半，净工作量仍 ≥ 16 倍）。比值 < 1 才划算")
-    head(["网络", "n", "a", "E[g²]/a", "ρ² 倾斜", "1/a − 1", "ρ² RDPO", "b0 调用比", "b1 调用比", "b1 每次 A Toffoli 倍数",
-          "b1 净工作量比（下界）", "结论"])
-    for r in d["q3"]["rows"]:
-        i = ws.max_row + 1
-        ws.append([r["topology"], r["n"], r["a_sampled"], r["E_g2_over_a"], r["rho2_twisted"], r["inv_a_minus_1"],
-                   r["rho2_rdpo"], r["b0_calls_ratio"], r["b1_calls_ratio"], r["toffoli_A_rdpo_loading_lb"] / r["toffoli_A_now"],
-                   f"=I{i}*J{i}", f'=IF(K{i}>1,"b1 不划算","b1 划算")'])
-        fmt(i, "C", "0.00E+00"); fmt(i, "DEGHI", "0.000"); fmt(i, "F", "0.0"); fmt(i, "JK", "0.0")
-
-    title("C2 新增精确参考值（router.py）：用朋友已有的精确引擎，把精确值并列附在 RDPO 估计旁边（朋友的 api/estimate.py 已对 pair 目标和 n ≤ 5 这样做）；"
-          "RDPO 仍是主估计器，不替换。E2 全部 24 格：与作者参考值的相对差，以及与 RDPO 单次拟合的耗时对比")
-    head(["网络", "n", "目标", "引擎", "精确耗时 (s)", "与参考值相对差", "RDPO rel RMSE", "RDPO 单次耗时 (s)", "耗时缩小", "", "",
-          "路由理由"])
-    for r in d["c2"]["rows"]:
-        i = ws.max_row + 1
-        ws.append([r["topology"], r["n"], r["target"], r["engine"], r["seconds"], r["rel_diff_vs_ref"], r["rdpo_rel_rmse"],
-                   r["rdpo_seconds_per_fit"], f"=H{i}/E{i}", None, None, r["why"]])
-        fmt(i, "E", "0.000"); fmt(i, "F", "0.0E+00"); fmt(i, "G", "0.00%"); fmt(i, "H", "0.0"); fmt(i, "I", "0")
-
-    p = d.get("c1")
-    if p:
-        title(f"C1 新增诊断 k̂（psis.py，只加诊断、不替换朋友的估计器）：ring-28 exceedance，E2 配置，{p['fits']} 次独立拟合；每次拟合用其 θ 新抽 "
-              f"{p['n_est']} 条 iid 路径；误差对精确 MPS 值")
-        head(["估计器", "", "rel RMSE", "rel 偏差", "最大 |err|", "", "", "", "", "", "", "说明"])
-        notes = {"friend_est": "作者 rdpo_estimate 自己的估计（含 RQMC 阶段）", "raw": "同一 θ，iid 路径普通均值",
-                 "psis": "同一 θ，iid 路径 Pareto 平滑后均值"}
-        for k in ("friend_est", "raw", "psis"):
-            s = p["summary"][k]
-            ws.append([k, None, s["rel_rmse"], s["rel_bias"], s["max_abs"], None, None, None, None, None, None, notes[k]])
-            fmt(ws.max_row, "CDE", "0.00%")
-        ws.append(["k̂ ≥ 0.7 的拟合数", None, p["summary"]["khat_ge_0.7"]])
-        ws.append(["k̂ 与 |raw 误差| 相关系数", None, p["summary"]["corr_khat_abs_raw_err"]])
-        fmt(ws.max_row, "C", "0.00")
-
     for row in ws.iter_rows(min_row=1):
         for c in row:
             if c.row not in heads:
@@ -352,19 +314,9 @@ def quality_sheet(wb, d):
         for col in cols:
             ws[f"{col}{ws.max_row}"].number_format = f
 
-    r = d.get("rain")
-    if r:
-        title("1 降雨共享比例：扣除随机巧合（年份错配替代数据，保留季节）并看窗口宽度（rain_lag.py）。朋友用 ±1 天，未扣巧合；brief 假设 25%")
-        head(["级别 q", "窗口 ±天", "稀有国事件数", "观测共享数", "巧合期望 E0", "原始比例", "校正比例", "", "", "", "说明"])
-        for q, byw in r["pooled"]["neighbours"].items():
-            for w, x in byw.items():
-                i = ws.max_row + 1
-                ws.append([float(q), int(w[1:]), x["n_rare"], x["observed"], x["E0"], f"=D{i}/C{i}", f"=(D{i}-E{i})/C{i}",
-                           None, None, None, "朋友的口径" if w == "w1" else ""])
-                fmt("E", "0.0"); fmt("FG", "0.0%")
     e = d.get("eq")
     if e:
-        title("2 地震触发聚集（eq_cluster.py）：KG/TJ 50 km 内，原始目录 vs Gardner–Knopoff 去余震；ν = 每个主震带来的同级余震数")
+        title("1 地震触发聚集（eq_cluster.py）：KG/TJ 50 km 内，原始目录 vs Gardner–Knopoff 去余震；ν = 每个主震带来的同级余震数")
         head(["震级 ≥", "原始", "去余震", "余震占比", "ν", "ν 95% 下", "ν 95% 上", "离散度（原始）", "p（原始）",
               "离散度（去余震）", "相邻年依赖 r（p）"])
         for M, x in e["by_magnitude"].items():
@@ -386,19 +338,9 @@ def quality_sheet(wb, d):
                        v["term_expected_principal_loss_usd"] / 1e6, None, None, None, None,
                        "A = 余震并入同一事件（朋友模型）" if lab.startswith("reading_A") else "B = 余震单独赔付、brief 尾部只含主震"])
             fmt("B", "0.00"); fmt("C", "0.00E+00"); fmt("D", "0.00"); fmt("E", "0.0000"); fmt("F", "0.00")
-    j = d.get("joint")
-    if j:
-        title("3 多国同时极端是否超出两两依赖（joint_k.py）：8 国、3 天时间块、分季节拟合两两最大熵模型（Ising）")
-        head(["日分位 u", "≥k 国", "时间块", "观测", "两两模型期望", "独立期望", "观测/两两", "p（相对两两）", "", "", "说明"])
-        for u, x in j["levels"].items():
-            for k in (3, 4):
-                t, i = x[f"ge{k}"], ws.max_row + 1
-                ws.append([float(u), k, x["blocks"], t["obs"], t["m2"], t["m0"], f'=IF(E{i}>0,D{i}/E{i},"")', t["p_value_vs_pairwise"],
-                           None, None, "比值接近 1 = 两两依赖足以解释多国同时极端"])
-                fmt("EF", "0.0"); fmt("G", "0.00"); fmt("H", "0.000")
     u = d.get("rates")
     if u:
-        title("4 基础触发率的数据不确定性（rates_unc.py）：地震 = G-R 外推（发生率 Poisson + b 值误差），降雨 = GEV（GML + Martins–Stedinger 先验）bootstrap")
+        title("2 基础触发率的数据不确定性（rates_unc.py）：地震 = G-R 外推（发生率 Poisson + b 值误差），降雨 = GEV（GML + Martins–Stedinger 先验）bootstrap")
         head(["倍数", "2.5%", "中位", "97.5%", "", "", "", "", "", "", "说明"])
         for k, q in u["multiplier_q"].items():
             ws.append([k, *q]); fmt("BCD", "0.00")
@@ -414,39 +356,150 @@ def quality_sheet(wb, d):
                        el["ci95"][0] / 1e6, el["ci95"][1] / 1e6, None, None,
                        {"shares_only": "复现朋友的口径", "rates_only": "只加发生率不确定性", "all": "两者都加"}[lab]])
             fmt("BCD", "0.00E+00"); fmt("E", "0.00"); fmt("FGH", "0.00")
-    k = d.get("risk")
-    if k:
-        title("5 风险度量层（risk_measures.py）：朋友已校准资金池的精确损失分布 → VaR / ES / EVaR、分散化收益、各国 Euler 贡献")
-        head(["资金池", "α", "VaR (US$m)", "ES (US$m)", "EVaR (US$m)", "ES 池/单独之和", "EVaR 池/单独之和", "", "", "", "ES 贡献份额"])
-        for pool, x in k.items():
-            for a, y in x["levels"].items():
-                ws.append([pool, float(a), y["VaR_musd"], y["ES_musd"], y["EVaR_musd"], y["diversification_ES"], y["diversification_EVaR"],
-                           None, None, None, "  ".join(f"{c} {v / y['ES_musd']:.0%}" for c, v in y["ES_contrib_musd"].items())])
-                fmt("B", "0.0%"); fmt("CDE", "0.0"); fmt("FG", "0.00")
-        for pool, x in k.items():
-            y = x["levels"]["0.995"]
-            head([f"{pool}（α = 99.5%）", "", "ES 贡献 (US$m)", "份额", "单独 ES (US$m)", "EVaR 贡献 (US$m)", "单独 EVaR (US$m)", "", "", "",
-                  "说明"])
-            top = ws.max_row + 1
-            for c in x["countries"]:
+    for row in ws.iter_rows(min_row=1):
+        for c in row:
+            if c.row not in heads:
+                c.font = Font(name=FONT, size=10, bold=c.font.bold)
+                c.alignment = Alignment(wrap_text=True, vertical="top")
+
+
+def climate_sheet(wb, d):
+    """Climate add-on: climate_cc (Clausius–Clapeyron scenarios)."""
+    ws = wb.create_sheet("Climate")
+    for i, w in enumerate([24, 20, 13, 13, 13, 13, 13, 13, 13, 13, 40], 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    bold, heads = Font(name=FONT, bold=True), set()
+    J, A = "term_both_bonds_exhausted_probability", "term_joint_attachment_probability"
+
+    def title(text):
+        ws.append([]); ws.append([text]); ws.cell(ws.max_row, 1).font = bold
+
+    def head(values):
+        ws.append(values); heads.add(ws.max_row)
+        for c in ws[ws.max_row]:
+            c.font = Font(name=FONT, bold=True, color="FFFFFF"); c.fill = HEAD
+            c.alignment = Alignment(wrap_text=True, vertical="top")
+
+    def fmt(i, cols, f):
+        for col in cols:
+            ws[f"{col}{i}"].number_format = f
+
+    ws.append(["气候：Clausius–Clapeyron 情景（情景，不是预测）。在朋友模型外层精确计算，主轴不动"])
+    ws.cell(1, 1).font = bold
+
+    cc = d.get("cc")
+    if cc:
+        title("1 Clausius–Clapeyron 情景（climate_cc.py）：强度 × 1.07^ΔT，用 GEV（GML + Martins–Stedinger 先验）换算成朋友 2% 阈值的超越频率；情景，不是预测")
+        head(["场景", "ΔT", "KG 降雨率倍数", "TJ 降雨率倍数", "两国同时触发", "× 朋友", "两债同时耗尽", "× 朋友", "", "", "说明"])
+        for sn, r in cc["targets"].items():
+            f0 = ws.max_row + 1
+            ws.append([sn, "朋友原模型", 1.0, 1.0, r["friend"][A], None, r["friend"][J]])
+            fmt(f0, "CD", "0.000"); fmt(f0, "E", "0.0000"); fmt(f0, "G", "0.000E+00")
+            for lab, v in r.items():
+                if lab == "friend":
+                    continue
                 i = ws.max_row + 1
-                ws.append([c, None, y["ES_contrib_musd"][c], f"=C{i}/SUM(C${top}:C${top + len(x['countries']) - 1})",
-                           y["standalone"][c]["ES_musd"], y["EVaR_contrib_musd"][c], y["standalone"][c]["EVaR_musd"]])
-                fmt("CEFG", "0.0"); fmt("D", "0%")
-    g = d.get("gaps")
-    if g:
-        title("6 数据缺口审计（data_gaps.py）：朋友的 GHCN 流程有没有把「没数据」当成「没事件」")
-        head(["国家", "有效年数", "缺失天数", "缺失比例", "可能漏掉的事件", "q=0.5 事件数", "阈值（朋友）", "阈值（近完整年）", "", "", "说明"])
-        for c, x in g["countries"].items():
-            t = g["threshold"][c]["0.5"]
-            ws.append([c, x["valid_years"], x["missing_days"], x["missing_share"], x["events_possibly_hidden_q50"], x["events_q50"],
-                       t["friend"], t["near_complete_years"], None, None, f"近完整年 {t['n_near_complete']} 个"])
-            fmt("D", "0.0%"); fmt("E", "0.00"); fmt("GH", "0.000")
-        head(["级别 q", "朋友共享比例", "事件数", "对方窗口有缺口", "完整窗口共享比例", "完整窗口事件数", "", "", "", "", "说明"])
-        for q, x in g["pooled"].items():
-            ws.append([float(q), x["friend_share"], x["events"], x["events_with_gap_in_other_window"], x["share_complete_windows"],
-                       x["complete_events"]])
-            fmt("BE", "0.0%")
+                ws.append([sn, lab.replace("CC dT=", "+") + " °C", v["mults"][0], v["mults"][1], v["point"][A], f"=E{i}/E${f0}",
+                           v["point"][J], f"=G{i}/G${f0}"])
+                fmt(i, "CD", "0.000"); fmt(i, "E", "0.0000"); fmt(i, "G", "0.000E+00"); fmt(i, "FH", "0.00")
+
+    for row in ws.iter_rows(min_row=1):
+        for c in row:
+            if c.row not in heads:
+                c.font = Font(name=FONT, size=10, bold=c.font.bold)
+                c.alignment = Alignment(wrap_text=True, vertical="top")
+
+
+def value_sheet(wb, d):
+    """RDPO value experiments (addons/sensitivity.py E3, nested_uq.py E2); each block has its pre-set rule."""
+    ws = wb.create_sheet("Value")
+    for i, w in enumerate([26, 16, 13, 13, 13, 13, 13, 13, 13, 13, 40], 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    bold, heads = Font(name=FONT, bold=True), set()
+    verdict = lambda v: "强" if v == "strong" else "不强"
+
+    def title(text):
+        ws.append([]); ws.append([text]); ws.cell(ws.max_row, 1).font = bold
+
+    def head(values):
+        ws.append(values); heads.add(ws.max_row)
+        for c in ws[ws.max_row]:
+            c.font = Font(name=FONT, bold=True, color="FFFFFF"); c.fill = HEAD
+            c.alignment = Alignment(wrap_text=True, vertical="top")
+
+    def fmt(i, cols, f):
+        for col in cols:
+            ws[f"{col}{i}"].number_format = f
+
+    ws.append(["提升 RDPO 价值的实验：朋友的 rdpo_estimate / ELT 转换 / 策略迁移原样调用，只在外层新增；每项都有事先定的判定标准"])
+    ws.cell(1, 1).font = bold
+
+    e3 = d.get("e3")
+    if e3:
+        title(f"E3 一次运行同时给出敏感度（sensitivity.py）：同一批路径给出估计值和每个源发生率的弹性（score function + 有限状态半群导数）；"
+              f"判定：|弹性| ≥ 0.05 的源，中位相对误差 ≤ 20%。结论：{verdict(e3['verdict'])}")
+        head(["测试床", "源", "精确弹性", "RDPO 均值", "RDPO RMSE", "相对误差", "", "", "", "", "说明"])
+        for bed, v in e3["beds"].items():
+            ex, est, rm = v["elasticity_exact"], v["elasticity_rdpo_mean"], v["elasticity_rmse"]
+            for k in sorted(range(len(ex)), key=lambda k: -abs(ex[k]))[:6]:
+                i = ws.max_row + 1
+                ws.append([bed, v["sources"][k], ex[k], est[k], rm[k], f'=IF(ABS(C{i})>0,E{i}/ABS(C{i}),"")', None, None, None, None,
+                           f"μ = {v['mu_exact']:.3g}，K = {v['K']} 个源" if k == max(range(len(ex)), key=lambda j: abs(ex[j])) else ""])
+                fmt(i, "CDE", "+0.000;-0.000"); fmt(i, "F", "0.0%")
+            ws.append([f"{bed} 汇总", f"中位 {v['median_rel_rmse_big']:.1%}，最大 {v['max_rel_rmse_big']:.1%}", None, None, None, None, None, None, None, None,
+                       f"路径：拟合 {v['paths']['rdpo_fit']} + 敏感度批 {v['paths']['sensitivity_batch']}；有限差分需 {v['paths']['finite_difference_would_need_fits']} 次拟合"])
+
+    e2 = d.get("e2")
+    if e2:
+        ex = e2["exact_summary"]
+        title(f"E2 嵌套不确定性 + 策略迁移（nested_uq.py）：{e2['bed']}，朋友的共享比例后验抽 {e2['draws']} 次，每次精确值由 MPS 给出；"
+              f"精确后验：均值 {ex['mean']:.3g}，95% [{ex['q025']:.3g}, {ex['q975']:.3g}]。判定：transfer 的后验摘要误差都 ≤ 10%、路径 ≤ refit 的 1/5、且优于同预算 cold。"
+              f"结论：{verdict(e2['verdict'])}")
+        head(["方法", "每次预算", "后验均值误差", "2.5% 分位误差", "97.5% 分位误差", "逐次 rel RMSE", "覆盖率", "每轮路径", "每轮 CPU (s)", "", "说明"])
+        notes = {"refit": "每次从零拟合", "cold": "每次从零拟合，同 transfer 的小预算", "transfer": "中位数处拟合一次（65536），之后每次用其策略起步"}
+        for m, v in e2["methods"].items():
+            e, i = v["summary_rel_rmse"], ws.max_row + 1
+            ws.append([m, v["per_draw_budget"], e["mean"], e["q025"], e["q975"], v["per_draw_rel_rmse"], v["coverage"], v["paths_per_rep"],
+                       v["cpu_sec_per_rep"], None, notes.get(m, "")])
+            fmt(i, "CDEF", "0.0%"); fmt(i, "G", "0%"); fmt(i, "H", "0.00E+00"); fmt(i, "I", "0")
+
+    vo = d.get("voi")
+    if vo:
+        title(f"V 全局敏感度 + 信息价值（voi.py）：朋友两国模型精确计算，{vo['n']} 行 pick-freeze；输入 = 朋友的两个共享比例后验 + rates_unc 的地震 / 降雨触发率不确定性；"
+              "输出取 log10。S = 一阶指数（完全知道该输入后平均消掉的方差比例），T = 总指数。判定：方法自检通过、两债同时耗尽的前两名总指数区间不重叠、"
+              f"第一名 S ≥ 0.5。结论：{verdict(vo['verdict'])}")
+        head(["输出", "输入组", "S", "S 95% 下", "S 95% 上", "T", "T 95% 下", "T 95% 上", "完全信息：区间收窄", "多 10 / 30 / 100 年记录消掉的方差", "说明"])
+        names = {"joint_exhaustion": "两债同时耗尽", "expected_loss": "期望损失 EL", "joint_attachment": "两国同时触发"}
+        groups = {"s_eq": "地震共享比例", "s_rain": "降雨共享比例", "eq_rates": "地震触发率（KG、TJ）", "rain_rates": "降雨 1-in-50 水平（KG、TJ）"}
+        for o, r in vo["outputs"].items():
+            s, q = r["sobol"], r["log10_quantiles"]
+            for g in groups:
+                i, v = ws.max_row + 1, r["voi"][g]
+                note = ""
+                if g == "s_eq":
+                    c = r["contract_reading_B"]
+                    note = (f"95% 范围 10^[{q['0.025']:.2f}, {q['0.975']:.2f}]；合同读法 B（余震单独赔付）×{c['factor']:.2f}，"
+                            f"若当作五五开的不确定，占方差 {c['share_if_coin_flip']:.0%}（读合同即可消除）")
+                ws.append([names[o], groups[g], s["S"][g], *s["S_ci"][g], s["T"][g], *s["T_ci"][g], f"=1-SQRT(MAX(0,1-C{i}))",
+                           " / ".join(f"{x:.0%}" for x in v["years"].values()), note])
+                fmt(i, "CDEFGHI", "0.000"); fmt(i, "I", "0%")
+
+    mr = d.get("mr")
+    if mr:
+        title(f"R 模型风险引擎（model_risk.py）：朋友的 CAREC 10 国池，每次抽样重跑他的标定公式（各国地震事件数 + G-R 斜率、共享地震事件数、"
+              f"EM-DAT 水文灾害年数、降雨共享比例）；精确目标由按独立分量的稠密枚举 + 卷积给出（与他的 MPS 参考值相对差 < 1e-6，单次 1.3 秒，MPS 约 130 秒）；"
+              f"{mr['n']} 行 pick-freeze。判定同 V（以 US${mr['thresholds_musd'][0]}m 超额概率为主）。结论：{verdict(mr['verdict'])}")
+        head(["目标", "朋友的值", "数据中心值", "后验预测", "95% 下", "95% 上", "P(高于朋友)", "地震费率 S", "共享地震 S", "降雨费率 S", "说明"])
+        names = {"exc_moderate": f"池超额 > US${mr['thresholds_musd'][0]}m", "exc_rare": f"池超额 > US${mr['thresholds_musd'][1]}m",
+                 "expected_loss": "期望损失 EL (USD)", "joint_exhaustion_KG_TJ": "KG–TJ 两债同时耗尽"}
+        for k, t in mr["targets"].items():
+            s, i = t["sobol"], ws.max_row + 1
+            ws.append([names.get(k, k), t["friend"], mr["data_center_point"][k], t["posterior_predictive"], *t["range95"], t["P_above_friend"],
+                       s["S"]["eq_rates"], s["S"]["eq_shared"], s["S"]["rain_rates"],
+                       f"总指数 T：地震费率 {s['T']['eq_rates']:.2f}、共享地震 {s['T']['eq_shared']:.2f}、降雨费率 {s['T']['rain_rates']:.2f}、"
+                       f"降雨共享 {s['T']['rain_share']:.2f}"])
+            fmt(i, "BCDEF", "0.000E+00"); fmt(i, "G", "0%"); fmt(i, "HIJ", "0.00")
+
     for row in ws.iter_rows(min_row=1):
         for c in row:
             if c.row not in heads:
@@ -466,7 +519,7 @@ def build():
         ("目的", "复现 CL0908/adb-quantum-challenge（commit d29bd43）里 README / proposal 声明的实验数字，并记录我们这边的复现结果与发现的问题。"),
         ("原仓库", "D:\\adb-quantum-challenge\\adb-quantum-challenge（未改动）"),
         ("复现副本", "D:\\adb-quantum-challenge\\adb-repro：results_declared/ = 作者提交的结果；results/ = 我们从空目录重新跑出的结果"),
-        ("运行方式", "repro/run.py 按依赖顺序分 3 个阶段运行全部驱动脚本；每次运行写入 repro/runs.jsonl 与 repro/logs/"),
+        ("运行方式", "repro/run.py 按依赖顺序分阶段运行全部驱动脚本（1–3 复现，5 补充实验，6–9 add-on）；每次运行写入 repro/runs.jsonl 与 repro/logs/"),
         ("取数方式", "paper 里的数字用作者自己的 src/viz/build_paper.py 取值函数分别对两套结果计算（PaperNumbers 表）；其余声明用 repro/claims.py 中的小提取函数"),
         ("Claims 判定", "一致 = 逐位或浮点末位一致；统计一致 = 随机实验，数值落在作者结果的抽样误差内且结论不变；"
                        "结论成立但数字变 = 结论仍成立，但文中具体数字超出抽样误差；需核对文字 = 原文的数字/表述与数据（作者自己的或我们复现的）对不上，原文不改，列给作者核对；"
@@ -478,8 +531,42 @@ def build():
                      "RDPO 训练会把 1e-16 级浮点差放大，跨平台不能逐位复现，随机实验需按统计口径判断"),
         ("计算提升 add-on", "D:\\adb-quantum-challenge\\addons：只做新增或同类替换，不碰主轴；只 import 朋友的 src（只读），结果写 addons/results/；"
                          "repro/run.py 第 6 阶段登记运行；数字见 Addons 表。ae.py 由 QContagion session 起草、本 session 审核集成"),
-        ("质量提升 add-on", "addons/ 下 rain_lag / eq_cluster / joint_k / rates_unc / risk_measures / data_gaps：方法借自 QContagion 的 CDS 工作，"
-                         "只新增、不碰主轴；repro/run.py 第 7 阶段登记运行；数字见 Quality 表"),
+        ("风险 add-on", "addons/eq_cluster.py（地震余震读法）、rates_unc.py（基础触发率的数据不确定性）：只新增、不碰主轴；"
+                       "repro/run.py 第 7 阶段登记运行；数字见 Quality 表"),
+        ("气候 add-on", "addons/climate_cc.py（Clausius–Clapeyron 情景）；repro/run.py 第 9 阶段；数字见 Climate 表；"
+                      "下载的数据都在 E:\\data，按领域分类"),
+        ("RDPO 价值实验", "addons/nested_uq.py（E2 嵌套不确定性 + 策略迁移）、sensitivity.py（E3 一次运行出敏感度）、voi.py（V 全局敏感度 + 信息价值）、model_risk.py（R CAREC 池模型风险引擎）；"
+                        "repro/run.py 第 11、14、17 阶段；数字见 Value 表"),
+        ("已撤销（非强项）", "router、risk_measures、rain_lag、joint_k、data_gaps、boost、climate_regime、cascade 于 2026-11-07 移入 "
+                          "D:\\adb-quantum-challenge\\archive\\2026-11-07_non_strong；更早撤销的 measure、psis 在 xzy 分支 4031fc5；"
+                          "rain_tail（日数据 POT）测试后撤销：两债同时耗尽区间只缩到年最大值方法的 0.65–0.77 倍（标准 ≤ 0.5），"
+                          "9 国共用尾部形状反而把 TJ 拉偏到 5.2%、区间变宽 1.79 倍；"
+                          "NEX-GDDP-CMIP6 33 个模型的三项测试后撤销：climate_ens（KG 观测尾部比所有模型都重、TJ 相反，观测点估计不在集合区间内）；"
+                          "E1 rain_elt（16 区 61 个源，最稀有 μ = 6e-7：65536 路径误差 1.3%、覆盖 0.93、比普通 MC 少约 2600 倍，"
+                          "但事先定的规则看最小达标预算 16384 处的覆盖率，只有 0.73）；"
+                          "M2 rain_share_gcm（降雨越严重越局部：KG–TJ 共享比例 6.2% → 3.5% → 1.3% → 0.8% → 1-in-50 为 0/66，"
+                          "但区间宽度是朋友后验的 0.57 倍，标准 ≤ 0.5，且不排除朋友的 2.2%）；"
+                          "A 精确收尾 rb_tail（Rao–Blackwell 化：少数国家内的源精确积分；精确核对误差 1e-15、同一策略下方差降 4.6–12 倍，"
+                          "但策略是为原目标训练的，前缀权重仍是重尾，只有 complete-4 达标；E1 在 B = 4096 时 z = −5.1、覆盖 0.40）；"
+                          "M1 eq_footprint（地震物理足迹：ComCat 带深度目录 + Allen–Wald–Worden 2012 烈度公式，ShakeMap 验证 182 次地震："
+                          "档位完全一致 33%、差一档内 67%，标准 70% / 90%；朋友 50 km 规则 24%；境内最大烈度在 MMI 8 附近饱和，4 档阈值挤在 7.76–8.12，"
+                          "分不出档位）及其后续多保真控制变量（前提不成立：物理事件集里只有 1.7% 的地震触发 3 国以上，朋友的两两截断几乎无损，未实现）；"
+                          "降雨尾部数据计划（GSOD 延长朋友指数 + GHCN 站点部分合并形状参数，R1–R3）经功效分析未做：形状完全已知且多 25 年时，"
+                          "KG / TJ 的 2% 触发概率区间也只缩到 0.68 / 0.64 倍（标准 ≤ 0.5），降雨 1-in-50 的不确定性是约 46 年记录决定的结构性下限"
+                          "（rain_power.py 与输出在 archive）；"
+                          "方向 2 量子加载 q_loading（Q1+Q2 计价下比当前最好 s*）：格点界免费但只降 1.02–1.19 倍，两参数倾斜 0.72–1.18 倍，"
+                          "局部可加载 RDPO 策略即使完美也只有 0.20–1.80 倍（多路受控加载太贵，未训练），O(σ/ε) 均值估计要降一半需常数 ≤ 3.5–19"
+                          "（ChebAE 实测约 23，论文无常数）；8 个设置无一减半；"
+                          "量子嵌套期望 nested（Blanchet 等 NeurIPS 2025 只覆盖 Lipschitz g，目标改为 E[(μ−L)⁺]；complete-7 稠密枚举 4 秒，经典无嵌套惩罚）："
+                          "照证明计价 s* = 1.7e7–2.6e7，是单一期望的 2300–3500 倍；去掉 2L⁴ = 1250 后仍为 1.2e4–1.8e4（按 θ 加载每次多 290–610 万 Toffoli）；"
+                          "只有常数全去掉且加载便宜时 s* 才到 18–27；"
+                          "地震数据升级 eq_data（ComCat 1965–2025、只用 Mw 估 b、ISC-GEM 样本外检验）：两国 EL 区间只缩 19%、池超额缩 26%（标准 30%），"
+                          "KG/TJ 区域 b 随完备震级变动 0.115（标准 0.1）；但两国 EL 的不确定性 88–90% 来自 b，池子则来自各国事件数（b 被对齐 brief 抵消）；"
+                          "1918–1964 年 M≥6.5 实测 27、预测 [17, 43]，百年数据也不需要有上限的 G-R（p = 0.72），朋友的外推经得起检验；"
+                          "模糊溢价→利差 ambiguity（smooth ambiguity 定价，用两只 ADB 债券都是 600 bp 风险利差校准）：点估计 α = 0.016/bp、m₀ = 1.76，"
+                          "模糊溢价占利差 30%（KG）/ 37%（TJ），但 200 次 bootstrap 有 59% 根本解不出校准，同价无法用数据不确定性稳健解释；"
+                          "亚太 28 国 RDPO + MIS 模型风险引擎 ap_risk：精度（中位误差 0.2% / 0.8%）和算力（MPS 的 0.022）达标，"
+                          "但 US$850m 只有 39% 的后验点有效样本量过线（标准 90%）"),
         ("颜色", "Claims 判定列：绿 = 一致/统计一致；黄 = 结论成立但数字变/机器相关；红 = 需核对文字；灰 = 无法复现"),
     ]
     for r in readme:
@@ -552,7 +639,8 @@ def build():
     finish(ws)
 
     # Runs ---------------------------------------------------------------------------------------
-    recs = [json.loads(l) for l in (HERE / "runs.jsonl").read_text().splitlines()]
+    import run as runner   # runs.jsonl stays the full append-only history; the sheet lists jobs still in run.py
+    recs = [r for r in map(json.loads, (HERE / "runs.jsonl").read_text().splitlines()) if r["name"] in runner.BY]
     ws = sheet(wb, "Runs", ["任务", "阶段", "命令", "开始", "结束", "耗时(秒)", "退出码", "占用核数", "日志", "commit", "data/src/tests 改动"],
                [18, 6, 46, 18, 18, 10, 7, 8, 18, 12, 30])
     for r in recs:
@@ -577,14 +665,18 @@ def build():
 
     # computation add-ons (addons/results/*.json) ---------------------------------------------------
     ar = HERE.parent / "addons" / "results"
-    files = {"combined": "combined.json", "q1": "q1_rotations.json", "q2": "q2_ae.json", "q3": "q3_measure.json",
-             "c2": "c2_router.json", "c1": "c1_psis.json"}
+    files = {"combined": "combined.json", "q1": "q1_rotations.json", "q2": "q2_ae.json"}
     if (ar / "combined.json").exists():
         addons_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in files.items() if (ar / f).exists()})
-    qf = {"rain": "quality_rain_lag.json", "eq": "quality_eq_cluster.json", "joint": "quality_joint_k.json",
-          "rates": "quality_rates_unc.json", "risk": "quality_risk_measures.json", "gaps": "quality_data_gaps.json"}
+    qf = {"eq": "quality_eq_cluster.json", "rates": "quality_rates_unc.json"}
     if any((ar / f).exists() for f in qf.values()):
         quality_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in qf.items() if (ar / f).exists()})
+    vf = {"e2": "nested_uq.json", "e3": "sensitivity.json", "voi": "voi.json", "mr": "model_risk.json"}
+    if any((ar / f).exists() for f in vf.values()):
+        value_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in vf.items() if (ar / f).exists()})
+    cf = {"cc": "climate_cc.json"}
+    if any((ar / f).exists() for f in cf.values()):
+        climate_sheet(wb, {k: json.loads((ar / f).read_text(encoding="utf-8")) for k, f in cf.items() if (ar / f).exists()})
 
     # Env ----------------------------------------------------------------------------------------
     ws = sheet(wb, "Env", ["项目", "作者（README / proposal 声明）", "我们"], [16, 40, 60])
