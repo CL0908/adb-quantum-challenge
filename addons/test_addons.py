@@ -53,6 +53,11 @@ def test_nested_uq_draws_and_brief_point():
 
 
 
+def test_twin_estimator_checks():
+    import twin
+    twin.selftest_fast()
+
+
 def test_spread_band_curves():
     import spread_band
     spread_band.selftest()

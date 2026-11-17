@@ -85,7 +85,9 @@ JOBS = [
     ("model_risk", 17, [PY, str(HERE.parent / "addons" / "model_risk.py")], [], ALL, False),
     # phase 18 (earthquake data upgrade): tested and withdrawn, see archive/
     # phase 19 (ambiguity premium -> spread): tested and withdrawn, see archive/
-    # phase 20 (Asia-Pacific RDPO + MIS model-risk engine): tested and withdrawn, see archive/
+    # phase 20: risk twin of the Asia-Pacific pool (yearly posterior update 2017-2025, answers by reweighting fixed paths;
+    # ap_risk.py is its engine). Needs the ComCat catalogue from fetch_usgs.asia_pacific() in DATA.
+    ("twin", 20, [PY, str(HERE.parent / "addons" / "twin.py")], [], ALL, False),
     # phase 21: expected-loss interval -> spread band with three published market curves (a calculation)
     ("spread_band", 21, [PY, str(HERE.parent / "addons" / "spread_band.py")], ["quality_rates_unc"], 1, False),
 ]
