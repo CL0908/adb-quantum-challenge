@@ -395,7 +395,8 @@ descoping order. A domain contact at ADB or QAI Ventures for the pooling questio
 # 7 Prototype package, environment and AI use
 
 * **Source code.** The complete repository (code, cached public data, result files, tests and the build of both
-  documents) ships with the submission as an archive.
+  documents) is public at <https://github.com/CL0908/adb-quantum-challenge>; `README.md` gives the
+  one-command reproduction.
 * **Environment.** Python {{ENV_PY}}, NumPy {{ENV_NUMPY}}, SciPy {{ENV_SCIPY}}, Matplotlib {{ENV_MPL}}, pytest
   {{ENV_PYTEST}} (`requirements.txt`), Linux x86-64, one 4-core Intel Xeon CPU, no GPU.
 * **Simulators.** Exact state-vector and resource simulators written for this project; the near-term plan uses

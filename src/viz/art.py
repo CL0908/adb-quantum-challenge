@@ -149,7 +149,7 @@ def cover():
     b.append(text(60, 1010, "Tan Chun Loong", 15, INK, 700))
     b.append(text(60, 1032, "Nanyang Technological University, Singapore", 12, INK2))
     b.append(text(60, 1052, "November 2026", 12, INK2))
-    b.append(text(734, 1052, "Source code and data ship with the submission", 11, MUTED, anchor="end"))
+    b.append(text(734, 1052, "github.com/CL0908/adb-quantum-challenge", 11, MUTED, anchor="end"))
     return svg(W, H, "".join(b))
 
 

@@ -1424,7 +1424,7 @@ Everything runs on one 4-core CPU, with fixed seeds and a test for every exactne
   own compute (4-core CPU, no GPU, no quantum hardware). In Deep Development the QAI Ventures sandbox
   would serve GPU-batched RDPO sweeps, compilation of the loading circuits, and emulator or hardware runs.
 * **Prototype package.** The complete repository (source code, cached public data, result files, tests and the
-  build of this document) ships with the submission as an archive. Python {{ENV_PY}}, NumPy {{ENV_NUMPY}}, SciPy
+  build of this document) is public at <https://github.com/CL0908/adb-quantum-challenge>. Python {{ENV_PY}}, NumPy {{ENV_NUMPY}}, SciPy
   {{ENV_SCIPY}}, Matplotlib {{ENV_MPL}}, pytest {{ENV_PYTEST}} (`requirements.txt`); Linux x86-64. All
   quantum circuits are simulated by exact simulators written for this project; the near-term hardware plan
   additionally uses Qiskit {{HW_QISKIT}} and Qiskit Aer {{HW_AER}} with the fake IBM backend {{HW_DEVICE}}. No quantum hardware was used. Every experiment uses fixed seeds recorded in its output, and a test suite checks every

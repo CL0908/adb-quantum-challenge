@@ -1,5 +1,10 @@
 # HANDOFF: state of the project (for a new Claude Code session)
 
+**New team member: start with `TEAMMATE.md`** (to-do list before the 22 Nov deadline).
+
+**Status 17 Nov 2026.** Main proposal rewritten around the brief's five Phase 1 deliverables (`docs/paper/short.md`, ~12 pages) and the annex aligned (`proposal.md`, ~58 pages). New since 10 Nov: equal wall-clock audit (`results/equal_time.json`: at equal CPU time RDPO keeps 5/25 benchmark cells and 4/9 pool cells, the joint-exhaustion ones), method v3 negative result (`results/rdpo_v3_equal_time.json`: a learned product-form tilt and an automatic selector only tie twisting), exploratory cutset conditioning (`src/tensor/cutset.py`, unfinished). Portal package: `python -m src.viz.package_submission --cv ...` (organisers want a PDF proposal, a GitHub URL and a CV PDF). The repository is public.
+
+
 Repo: https://github.com/CL0908/adb-quantum-challenge (branch `main`). Everything below is in git except the
 CV (see "Not in git"). To continue: clone, read this file and `README.md`, run `pytest -q tests/` (84 tests pass; hardware-plan tests skip without qiskit).
 
