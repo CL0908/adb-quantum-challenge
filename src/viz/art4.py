@@ -178,6 +178,67 @@ def brief_vs_data():
     return svg(W2, H2, "".join(b))
 
 
+def brief_vs_data_clean():
+    """Print-size version of the dependence infographic for the main proposal: no mascot, fonts >= 15 px on a 900 px canvas
+    (about 8.5 pt at full text width), all three earthquake loss records shown."""
+    R = Path("results")
+    L = json.loads((R / "realdata_losses.json").read_text())["tests"]
+    rain = json.loads((R / "realdata_rain.json").read_text())["pooled"]["0.2"]
+    pu = json.loads((R / "param_uncertainty.json").read_text())
+    fin = json.loads((R / "finance.json").read_text())
+    W2, H2 = 900, 560
+    x0, x1 = 330, 870
+    sc = lambda v: x0 + (x1 - x0) * v
+    b = []
+
+    def axis(y_top, y_bot, brief, brief_lab):
+        out = []
+        for t in (0, 0.25, 0.5, 0.75, 1.0):
+            out.append(f'<line x1="{sc(t)}" y1="{y_top}" x2="{sc(t)}" y2="{y_bot}" stroke="{RULE}" stroke-width="1"/>')
+            out.append(text(sc(t), y_bot + 20, f"{int(t * 100)}%", 15, MUTED, 400, "middle"))
+        out.append(f'<line x1="{sc(brief)}" y1="{y_top - 6}" x2="{sc(brief)}" y2="{y_bot}" stroke="{INK2}" stroke-width="2" stroke-dasharray="5 4"/>')
+        out.append(text(sc(brief) + 6, y_top - 8, brief_lab, 15, INK2, 600))
+        return "".join(out)
+
+    def row(y, label, share, lo, hi, col):
+        return (text(20, y + 5, label, 16, INK, 400)
+                + f'<line x1="{sc(lo)}" y1="{y}" x2="{sc(hi)}" y2="{y}" stroke="{col}" stroke-width="9" stroke-linecap="round" opacity="0.35"/>'
+                + f'<circle cx="{sc(share)}" cy="{y}" r="9" fill="{col}"/>')
+
+    b.append(text(20, 30, "Earthquakes: share of one country's loss events that also hit the other", 18, NAVY, 700))
+    b.append(axis(62, 178, 0.075, "brief 7.5%"))
+    for y, k, lab in ((82, "eq_noaa_1900", "NOAA losses 1900–2020"), (122, "eq_noaa_1975", "NOAA losses 1975–2020"),
+                      (162, "eq_emdat_1990", "EM-DAT losses 1990–2020")):
+        t = L[k]
+        b.append(row(y, f"{lab}: {100 * t['share_of_A']:.0f}%", t["share_of_A"], t["share_of_A_ci95"][0], t["share_of_A_ci95"][1], TERRA))
+    b.append(text(20, 238, "Extreme rain: share of events shared by neighbouring countries", 18, NAVY, 700))
+    b.append(axis(270, 300, 0.25, "brief 25%"))
+    nst = sum(len(x) for x in json.loads((R / "realdata_rain.json").read_text())["stations"].values())
+    b.append(row(288, f"{nst} stations, 1-in-5-year: {100 * rain['share']:.0f}%", rain["share"], rain["share_ci95"][0],
+                 rain["share_ci95"][1], TEAL))
+    exb = pu["brief_point"]["exceedance"]; ps = pu["posterior_summary"]["exceedance"]
+    mx = fin["coupling_bounds"]["targets"]["prob_exceed"]["full_coupling"]["max"]
+    po = fin["pooling"]
+    pb = po["brief"]["shared"]["80m"]["delivered_fraction"]; pd = po["posterior"]["delivered_fraction"]["median"]
+    b.append(box(20, 350, 420, 160, CARD, RULE, 12, 1.5))
+    b.append(text(38, 380, "Pool pays more than US$80m in a term", 16, INK, 700))
+    b.append(text(38, 428, f"{100 * exb:.1f}%", 32, INK2, 700))
+    b.append(text(130, 424, "→", 28, INK2, 400))
+    b.append(text(170, 428, f"{100 * ps['median']:.1f}%", 32, TERRA, 700))
+    b.append(text(38, 458, f"brief → data (posterior median; 95%: {100 * ps['ci95'][0]:.1f}–{100 * ps['ci95'][1]:.1f}%)", 15, INK2))
+    b.append(text(38, 488, f"Any dependence, same country risks: 0–{100 * mx:.1f}%", 15, INK2))
+    b.append(box(460, 350, 420, 160, CARD, RULE, 12, 1.5))
+    b.append(text(478, 380, "One shared US$80m limit for both", 16, INK, 700))
+    b.append(text(478, 428, f"{100 * pb:.0f}%", 32, INK2, 700))
+    b.append(text(560, 424, "→", 28, INK2, 400))
+    b.append(text(600, 428, f"{100 * pd:.0f}%", 32, TERRA, 700))
+    b.append(text(478, 458, "of expected payouts kept: brief → data", 15, INK2))
+    b.append(text(478, 488, "(posterior median)", 15, INK2))
+    b.append(text(20, 545, "Public proxies (loss years, station rain), not the bond's trigger definitions: a stress range, not a re-pricing.",
+                  15, MUTED))
+    return svg(W2, H2, "".join(b))
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     files = {"cat_magnifier": magnifier(), "cat_umbrella": umbrella(), "cat_seismo": seismo(), "cat_stopwatch": stopwatch(),
@@ -186,6 +247,7 @@ def main():
     files["elt_pipeline"] = elt_pipeline()
     try:
         files["brief_vs_data"] = brief_vs_data()
+        files["brief_vs_data_clean"] = brief_vs_data_clean()
     except FileNotFoundError:
         pass
     for k, v in files.items():

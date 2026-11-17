@@ -126,3 +126,36 @@ li p { margin: 0; }
 .runin { margin: 0; }
 h3 { page-break-after: avoid; break-after: avoid; }
 .toc { page-break-inside: avoid; }
+
+/* ---------- main proposal (short.md): title block, claims, glossary, limitations ---------- */
+.titleblock { margin: 0 0 8pt; }
+.titleblock p { margin: 0; text-align: left; }
+.titleblock .ttl { display: block; font-family: Inter, "Helvetica Neue", Arial, sans-serif; font-size: 19pt; font-weight: 700;
+  color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
+.titleblock .sub { display: block; font-family: Inter, sans-serif; font-size: 10.5pt; color: var(--ink2); margin-top: 4pt; line-height: 1.35; }
+.titleblock .byline { display: block; font-family: Inter, sans-serif; font-size: 8.6pt; color: var(--muted); margin-top: 6pt; }
+.pitch { border-left: 4pt solid var(--terra); padding: 2pt 0 2pt 10pt; margin: 6pt 0 8pt; }
+.pitch p { margin: 0 0 4pt; text-align: left; }
+.motto { font-family: Inter, sans-serif; font-weight: 650; color: var(--navy); font-size: 10.5pt; margin: 6pt 0 4pt; }
+.motto p { margin: 0; text-align: left; }
+.results ol { margin: 2pt 0 6pt; padding-left: 16pt; }
+.results li { margin: 3pt 0; text-align: left; }
+.claims { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; margin: 6pt 0 8pt; page-break-inside: avoid; break-inside: avoid; }
+.claims > div { background: var(--card); border: 1px solid var(--rule); border-radius: 8pt; padding: 5pt 10pt 3pt; font-size: 8.6pt; line-height: 1.38; }
+.claims .yes { border-top: 4pt solid var(--teal); }
+.claims .no { border-top: 4pt solid var(--terra); }
+.claims p { margin: 0 0 2pt; text-align: left; }
+.claims ul { margin: 2pt 0 3pt; padding-left: 12pt; }
+.claims li { margin: 1.5pt 0; text-align: left; }
+.glossary { background: var(--cardalt); border-radius: 8pt; padding: 5pt 11pt 3pt; font-size: 8.4pt; line-height: 1.36;
+  margin: 6pt 0 6pt; page-break-inside: avoid; break-inside: avoid; }
+.glossary p { margin: 0 0 2.5pt; text-align: left; }
+.limits { background: var(--card); border: 1px solid var(--rule); border-left: 4pt solid var(--ochre); border-radius: 8pt;
+  padding: 6pt 12pt 3pt; font-size: 9pt; margin: 10pt 0; page-break-inside: avoid; break-inside: avoid; }
+.limits p { margin: 0 0 3pt; text-align: left; }
+.limits ul { margin: 2pt 0 4pt; padding-left: 14pt; }
+.compact table { font-size: 7.8pt; }
+.compact td, .compact th { padding: 2.4pt 5pt; }
+.keep { page-break-inside: avoid; break-inside: avoid; }
+
+.abstract { page-break-inside: avoid; break-inside: avoid; }

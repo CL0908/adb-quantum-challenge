@@ -95,8 +95,8 @@ def mcfmt(x):
     return pct(x, 0) if x < 10 else f"{x:,.0f}×"
 
 
-def sci(x):
-    m, e = f"{x:.1e}".split("e")
+def sci(x, d=1):
+    m, e = f"{x:.{d}e}".split("e")
     sup = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
     return f"{m}×10{str(int(e)).translate(sup)}"
 
@@ -112,7 +112,7 @@ def e2_values():
     v["E2_RING28_EXC"] = pct(r28["rdpo"]["rel_rmse"], 1) if r28 else "—"
     v["E2_SEC_28"] = f"{r28['seconds_per_fit']:.0f}" if r28 else "—"
     hdr = ("| Graph | n | μ exceedance | RDPO | Exp. twisting | MC (theory) | RDPO stop-loss | Exp. twisting stop-loss | μ pair exhaustion | RDPO | MC (theory) |")
-    lines = ["**Table [tab:e2].** Scaling results at a total budget of 65,536 paths (relative RMSE; training included). MC entries are theoretical relative errors at the same budget.", "", hdr, "|---" * 11 + "|"]
+    lines = ["**Table [tab:e2].** Scaling results, Phase 1 engine, at a total budget of 65,536 paths (relative RMSE; training included; 6–20 replications). MC entries are theoretical relative errors at the same budget, shown as a percentage below 1,000% and as a multiple of μ above.", "", hdr, "|---" * 11 + "|"]
     keys = sorted({(r["topology"], r["n"]) for r in d}, key=lambda k: (k[0] != "ring", k[1]))
     for kind, n in keys:
         e, s, j = get.get((kind, n, "exceedance")), get.get((kind, n, "stop_loss")), get.get((kind, n, "joint_exhaustion"))
@@ -155,7 +155,7 @@ def e3_values():
     abl = list(dict.fromkeys(r["ablation"] for r in d))
     get = {(r["case"], r["ablation"]): r for r in d}
     hdr = "| Configuration | " + " | ".join(cases) + " |"
-    lines = ["**Table [tab:e3].** Ablation: relative RMSE at B = 16,384 paths (40 replications). Ratios to full RDPO in parentheses.", "", hdr, "|---" * (len(cases) + 1) + "|"]
+    lines = ["**Table [tab:e3].** Ablation: relative RMSE at B = 16,384 paths (40 replications). Ratios to full RDPO in parentheses. The ablation uses its own seeds, so its full-RDPO row is an independent replicate of Table [tab:e1] (e.g. base joint exhaustion); with 40 heavy-tailed replications the relative RMSE itself varies by tens of percent between replicates.", "", hdr, "|---" * (len(cases) + 1) + "|"]
     for a in abl:
         cells = []
         for c in cases:
@@ -309,7 +309,7 @@ def v2_values():
     ep = sc["exact_pair"]
     lines = [f"**Table [tab:app_v2scale].** Scaling study at B = 65,536 with {reps} replications per cell and identical seeds for "
              "every method. Relative RMSE, with empirical 95%-interval coverage in parentheses. *Phase 1 study*: the original "
-             "results (6–20 replications). Pair exhaustion is answered exactly by the Phase 2 engine (pair reduction); its "
+             "results (6–20 replications); its twisting errors differ from this table's, which re-runs twisting with 24 replications and RDPO's seeds. Pair exhaustion is answered exactly by the Phase 2 engine (pair reduction); its "
              "sampled estimate is shown for comparison.", "",
              "| Graph | n | target | Phase 1 study | Phase 1 engine | Phase 2 engine | exp. twisting | time per estimate |",
              "|---|---|---|---|---|---|---|---|"]
@@ -856,7 +856,7 @@ def fin_values():
               "FIN_POOL100_MED": pct(post["delivered_100"]["median"], 1),
               "FIN_POOL120_BRIEF": pct(po["brief"]["shared"]["120m"]["delivered_fraction"], 1),
               "FIN_POOL120_MED": pct(post["delivered_120"]["median"], 1)})
-    rows = ["**Table [tab:pool].** Pooling decision, exact. Two separate US$80m covers (status quo) against one shared limit "
+    rows = ["**Table [tab:pooling].** Pooling decision, exact. Two separate US$80m covers (status quo) against one shared limit "
             "for both countries. *Delivered*: share of the expected three-year payout of the separate covers that the shared "
             f"limit still pays. Posterior: median and 95% credible interval over {post['n_samples']:,} draws of the two shared shares.",
             "", "| Shared limit | Capital saved | Delivered, brief | Delivered, both from data | Delivered, posterior |",
@@ -979,6 +979,383 @@ def dense_values():
             "EQT_SCALE": f"{sw} of {st}"}
 
 
+BRIEF_METHODS = ("mc", "sobol", "stratified", "importance")
+MNAME = {"mc": "Monte Carlo", "sobol": "Sobol", "stratified": "stratified", "importance": "brief IS", "smc": "SMC (twist)",
+         "flow": "flow IS", "twist": "exp. twisting", "rdpo": "RDPO"}
+
+
+def brief5_values():
+    """Reproduction of the brief's Table 5 (exact.json: our exact values and the brief's rounded references)."""
+    sc = json.loads((R / "exact.json").read_text())["scenarios"]
+    keys = [("term_expected_principal_loss_usd", "Expected loss"), ("term_joint_attachment_probability", "Both pay"),
+            ("term_portfolio_loss_exceedance_probability", "Pr(L > 80m)"), ("term_portfolio_stop_loss_usd", "Stop-loss"),
+            ("term_both_bonds_exhausted_probability", "Both exhausted")]
+
+    def f(k, x):
+        if k.endswith("usd"):
+            return f"US${x / 1e6:.2f}m" if x >= 1e6 else f"US${x:,.0f}"
+        return pct(x, 3) if x >= 1e-3 else pct(x, 4)
+    def g(k, x):  # more digits than the brief prints
+        if k.endswith("usd"):
+            return f"US${x / 1e6:.4f}m" if x >= 1e6 else f"US${x:,.1f}"
+        return pct(x, 4) if x >= 1e-3 else sci(x, 3)
+    lines = ["**Table [tab:brief5].** The brief's Table 5 reproduced: our exact values (dense enumeration of the source model, "
+             "more digits than the brief prints). *Match*: number of the five values that equal the brief's published value at "
+             "its printed rounding.", "",
+             "| Scenario | " + " | ".join(l for _, l in keys) + " | Match |", "|---" * (len(keys) + 2) + "|"]
+    for s in SCN:
+        r = sc[s]
+        cells, ok = [], 0
+        for k, _ in keys:
+            a, b = r["values"][k], r["reference_rounded"][k]
+            cells.append(g(k, a) if k != "term_both_bonds_exhausted_probability" else sci(a, 3))
+            ok += f(k, a) == f(k, b)
+        lines.append(f"| {paper_figs.SCN_LABEL[s]} | " + " | ".join(cells) + f" | {ok}/5 |")
+    rt = [sc[s]["runtime_s"] for s in SCN]
+    return {"BRIEF5_TABLE": "\n".join(lines),
+            "BRIEF5_MS": f"{1e3 * float(np.median(rt)):.1f} ms"}
+
+
+def eqt_values():
+    """Equal-wall-clock audit (results/equal_time.json): benchmark (A) and data-calibrated pools (B)."""
+    d = json.loads((R / "equal_time.json").read_text())
+    A, B, s = d["A_cells"], d["B_cells"], d["summary"]
+    pa, pb = d["protocol"]["A"], d["protocol"]["B"]
+    v = {}
+
+    def wins(cells, key, methods):
+        return sum(min(c[key][m] for m in methods if m in c[key]) > c[key]["rdpo"] for c in cells)
+    allA = [m for m in pa["methods"] if m != "rdpo"]
+    v["EQT_A_REPS"] = str(pa["reps"]); v["EQT_B_REPS"] = str(pb["reps"])
+    v["EQT_A_PATH_BRIEF"] = f"{wins(A, 'rmse_paths', BRIEF_METHODS)} of {len(A)}"
+    v["EQT_A_PATH_ALL"] = f"{wins(A, 'rmse_paths', allA)} of {len(A)}"
+    v["EQT_A_TIME_BRIEF"] = f"{wins(A, 'rmse_time', BRIEF_METHODS)} of {len(A)}"
+    v["EQT_A_TIME_ALL"] = f"{wins(A, 'rmse_time', allA)} of {len(A)}"
+    je = [c for c in A if c["target"] == "joint_exhaustion"]
+    v["EQT_A_TIME_JE"] = f"{wins(je, 'rmse_time', BRIEF_METHODS)} of {len(je)}"
+    other = [c for c in A if c["target"] != "joint_exhaustion"]
+    v["EQT_A_TIME_OTHER"] = str(wins(other, "rmse_time", BRIEF_METHODS))
+    ex = d["exact_enumeration_A"]
+    v["EQT_RDPO_MS"] = f"{1e3 * ex['rdpo_seconds_16384_median']:.0f} ms"
+    v["EQT_EXACT_MS"] = f"{1e3 * ex['exact_dense_enumeration_s_median']:.2f} ms"
+    v["EQT_BRIEFMODEL_MS"] = f"{1e3 * ex['exact_brief_model_s_median']:.2f} ms"
+    v["EQT_PAIR_MS"] = f"{1e3 * ex['exact_pair_s_median']:.2f} ms"
+    v["EQT_A_RDPO_SEC_TOTAL"] = f"{sum(c['seconds_rdpo_16384'] for c in A):.1f} s"
+    ratios_t = [c["ratio_best_baseline_over_rdpo_time"] for c in A]
+    v["EQT_A_TIME_MED"] = f"×{float(np.median(ratios_t)):.2f}"
+    # pools
+    v["EQT_B_PATH"] = f"{wins(B, 'rmse_paths', ['mc', 'twist'])} of {len(B)}"
+    v["EQT_B_TIME"] = f"{wins(B, 'rmse_time', ['mc', 'twist'])} of {len(B)}"
+    bje = [c for c in B if c["target"] == "joint_exhaustion"]
+    g = [c["rmse_time"]["mc"] / c["rmse_time"]["rdpo"] for c in bje]
+    v["EQT_B_JE_GAIN"] = f"×{min(g):.1f}–×{max(g):.1f}"
+    v["EQT_B_JE_GAIN_MED"] = f"×{float(np.median(g)):.0f}"
+    thr = [c for c in B if c["target"] != "joint_exhaustion"]
+    v["EQT_B_THR_TIME"] = f"{wins(thr, 'rmse_time', ['mc', 'twist'])} of {len(thr)}"
+    tr = [c["rmse_time"]["twist"] / c["rmse_time"]["rdpo"] for c in thr]
+    v["EQT_B_THR_RANGE"] = f"×{min(tr):.2f}–×{max(tr):.2f}"
+    # table A: per target
+    lab = {"expected_loss": "Expected loss", "joint_attachment": "Both pay", "exceedance": "Pr(L > 80m)",
+           "stop_loss": "Stop-loss", "joint_exhaustion": "Both exhausted"}
+    lines = [f"**Table [tab:eqtA].** Equal-budget and equal-time audit of the benchmark (25 cells, {pa['reps']} replications, "
+             "independent re-run of Table [tab:e1] with two more baselines: SMC on the optimal twist and a flow importance sampler). "
+             "*Same paths*: every method gets 16,384 paths, RDPO's training included. *Same CPU time*: every baseline gets as many "
+             "paths as it can draw in RDPO's wall-clock for one estimate. Cells won by RDPO against the brief's four methods and, "
+             "in brackets, against all six. *Error ratio*: median over the five scenarios of best baseline error / RDPO error "
+             "(> 1: RDPO better).", "",
+             "| Target | Same paths: cells won | error ratio | Same CPU time: cells won | error ratio | most accurate at same time |",
+             "|---|---|---|---|---|---|"]
+    for t in TGT:
+        cc = [c for c in A if c["target"] == t]
+        sp = s["A_by_target"][t]
+        best = ", ".join(f"{MNAME[k]} {n}" for k, n in sorted(sp["time"]["most_accurate_method_counts"].items(), key=lambda x: -x[1]))
+        lines.append(f"| {lab[t]} | {wins(cc, 'rmse_paths', BRIEF_METHODS)} ({wins(cc, 'rmse_paths', allA)}) of 5 | "
+                     f"×{sp['paths']['median_ratio_best_baseline_over_rdpo']:.1f} | "
+                     f"**{wins(cc, 'rmse_time', BRIEF_METHODS)}** ({wins(cc, 'rmse_time', allA)}) of 5 | "
+                     f"×{sp['time']['median_ratio_best_baseline_over_rdpo']:.2f} | {best} |")
+    lines.append(f"| **All** | **{wins(A, 'rmse_paths', BRIEF_METHODS)}** ({wins(A, 'rmse_paths', allA)}) of 25 | "
+                 f"×{s['A_overall']['paths']['median_ratio_best_baseline_over_rdpo']:.1f} | "
+                 f"**{wins(A, 'rmse_time', BRIEF_METHODS)}** ({wins(A, 'rmse_time', allA)}) of 25 | "
+                 f"×{s['A_overall']['time']['median_ratio_best_baseline_over_rdpo']:.2f} | |")
+    v["TABLE_EQT_A"] = "\n".join(lines)
+    # table B: pools
+    pool = {"carec": "CAREC (10)", "asia_pacific": "Asia–Pacific (28)"}
+    q = {"exceedance": "Pr(payout > US${}m)", "stop_loss": "stop-loss above US${}m", "joint_exhaustion": "KG and TJ both exhausted"}
+    lines = [f"**Table [tab:eqtB].** Equal-budget and equal-time audit on the data-calibrated pools (65,536 paths, "
+             f"{pb['reps']} replications, independent re-run of Tables [tab:carecres] and [tab:ap]). Relative RMSE. *Same CPU time*: "
+             "the baseline's error with as many paths as it draws in RDPO's wall-clock. Monte Carlo uses a lean sampler written for "
+             "this audit. Pair exhaustion is also available exactly by pair reduction.", "",
+             "| Pool | question | exact μ | RDPO | twisting, same paths | twisting, same time | Monte Carlo, same time | RDPO time |",
+             "|---|---|---|---|---|---|---|---|"]
+    for c in B:
+        rt, rp = c["rmse_time"], c["rmse_paths"]
+        mu = money(c["mu"]) if c["target"] == "stop_loss" else sci(c["mu"])
+        tw_p = pct(rp["twist"], 2) if "twist" in rp else "—"
+        tw_t = rt.get("twist")
+        win = min(x for k, x in rt.items() if k != "rdpo") > rt["rdpo"]
+        rd = f"**{pct(rt['rdpo'], 2)}**" if win else pct(rt["rdpo"], 2)
+        best_t = (f"**{pct(tw_t, 2)}**" if tw_t is not None and tw_t < rt["rdpo"] else (pct(tw_t, 2) if tw_t is not None else "—"))
+        lines.append(f"| {pool[c['case']]} | {q[c['target']].format(c['threshold_musd'])} | {mu} | {rd} | {tw_p} | {best_t} | "
+                     f"{pct(rt['mc'], 1)} | {c['seconds_rdpo_65536']:.1f} s |")
+    v["TABLE_EQT_B"] = "\n".join(lines)
+    return v
+
+
+def v3_values():
+    """Equal-time negative result: learned product-form tilt and automatic selector (results/rdpo_v3_equal_time.json)."""
+    d = json.loads((R / "rdpo_v3_equal_time.json").read_text())
+    s, m = d["summary"], d["meta"]
+    lab = {"tilt": "learned product-form tilt", "selector": "automatic selector", "selector_tr": "selector with transfer",
+           "rdpo_cold": "RDPO (trained per estimate)", "rdpo_transfer": "RDPO (transferred policy)"}
+    lines = [f"**Table [tab:v3].** Equal wall-clock against exponential twisting on the scaling (16 cells: rings to n = 28, "
+             f"complete graphs to n = 7) and dense (10 cells: band and ladder graphs) settings. Short budget: "
+             f"{m['short_budget_s']:.0f} s per estimate ({m['reps']['short']} replications); long budget: "
+             f"{m['long_budget_rule'].replace('min(RDPO-v2 seconds, 5.0 s)', 'the Phase 2 engine time, at most 5 s')} "
+             f"({m['reps']['long']} replications). Win: error below 0.8× twisting's; tie: 0.8–1.25×; loss: above 1.25×. "
+             "Median: method error / twisting error (< 1: better than twisting).", "",
+             "| Method | scaling, short: W/T/L (median) | scaling, long | dense, short | dense, long |", "|---|---|---|---|---|"]
+    for k in ("rdpo_cold", "rdpo_transfer", "tilt", "selector", "selector_tr"):
+        cells = []
+        for fam in ("scaling", "dense"):
+            for b in ("short", "long"):
+                x = s[f"{fam}|{b}|{k}"]
+                cells.append(f"{x['wins']}/{x['ties']}/{x['losses']} (×{x['median_ratio']:.2f})")
+        cells = [cells[0], cells[1], cells[2], cells[3]]
+        lines.append(f"| {lab[k]} | " + " | ".join(cells) + " |")
+    v = {"TABLE_V3": "\n".join(lines)}
+    tm = [s[f"{f}|{b}|tilt"]["median_ratio"] for f in ("scaling", "dense") for b in ("short", "long")]
+    v["V3_TILT_MED"] = f"×{min(tm):.2f}–×{max(tm):.2f}"
+    sm = [s[f"{f}|{b}|{k}"]["median_ratio"] for f in ("scaling", "dense") for b in ("short", "long") for k in ("selector", "selector_tr")]
+    v["V3_SEL_MED"] = f"×{min(sm):.2f}–×{max(sm):.2f}"
+    cl = [s[f"scaling|{b}|rdpo_cold"] for b in ("short", "long")]
+    v["V3_COLD_SCALE_LOSS"] = f"{min(x['losses'] for x in cl)}–{max(x['losses'] for x in cl)} of {cl[0]['cells']}"
+    v["V3_COLD_SCALE_MED"] = f"×{min(x['median_ratio'] for x in cl):.0f}–×{max(x['median_ratio'] for x in cl):.0f}"
+    dl = [s[f"dense|{b}|rdpo_cold"] for b in ("short", "long")]
+    v["V3_COLD_DENSE_LOSS"] = f"{min(x['losses'] for x in dl)} of {dl[0]['cells']}"
+    v["V3_COLD_DENSE_MED"] = f"×{min(x['median_ratio'] for x in dl):.0f}–×{max(x['median_ratio'] for x in dl):.0f}"
+    v["V3_SHORT_S"] = f"{m['short_budget_s']:.0f} s"
+    return v
+
+
+def eqt_short_values():
+    """One compact table for the main proposal: wins per path vs wins per CPU second, all four families."""
+    d = json.loads((R / "equal_time.json").read_text())
+    A, B = d["A_cells"], d["B_cells"]
+    v3 = json.loads((R / "rdpo_v3_equal_time.json").read_text())["summary"]
+    sc = json.loads((R / "rdpo_v2_scale.json").read_text())["rows"]
+    by = {}
+    for r in sc:
+        by.setdefault((r["topology"], r["n"], r["target"]), {})[r["variant"]] = r
+    sw = [x["twist"]["rel_rmse"] > x["v2-final"]["rel_rmse"] for x in by.values() if "twist" in x and "v2-final" in x]
+    dn = json.loads((R / "dense_exact.json").read_text())["rows"]
+    dw = [r["twist_over_rdpo"] > 1 for r in dn]
+
+    def wins(cells, key, methods):
+        return sum(min(c[key][m] for m in methods if m in c[key]) > c[key]["rdpo"] for c in cells)
+    aje = [c for c in A if c["target"] == "joint_exhaustion"]
+    bje = [c for c in B if c["target"] == "joint_exhaustion"]
+    g = [c["rmse_time"]["mc"] / c["rmse_time"]["rdpo"] for c in bje]
+    cs = [v3[f"scaling|{b}|rdpo_cold"] for b in ("short", "long")]
+    cd = [v3[f"dense|{b}|rdpo_cold"] for b in ("short", "long")]
+    rows = [
+        ("Benchmark: the brief's 25 cells (vs the brief's four methods)", len(A), wins(A, "rmse_paths", BRIEF_METHODS),
+         f"{wins(A, 'rmse_time', BRIEF_METHODS)} ({wins(aje, 'rmse_time', BRIEF_METHODS)} of 5 joint-exhaustion cells)",
+         "scrambled Sobol; RDPO or SMC for joint exhaustion"),
+        ("Data-calibrated pools of 10 and 28 countries (vs twisting, Monte Carlo)", len(B), wins(B, "rmse_paths", ["mc", "twist"]),
+         f"{wins(B, 'rmse_time', ['mc', 'twist'])} (pair exhaustion ×{min(g):.0f}–×{max(g):.0f} over Monte Carlo)",
+         "twisting on pool thresholds; pair targets exact"),
+        ("Scaling: rings to 28, complete graphs to 7 (vs twisting)", len(sw), sum(sw),
+         f"{min(x['wins'] for x in cs)}–{max(x['wins'] for x in cs)}", "twisting"),
+        ("Dense band and ladder graphs to 28 (vs twisting)", len(dw), sum(dw), f"{max(x['wins'] for x in cd)}", "twisting"),
+    ]
+    lines = ["**Table [tab:eqt].** Where RDPO wins, per path and per CPU second. *Same paths*: every method draws the same number "
+             "of simulated terms, RDPO's training included (the brief's criterion). *Same CPU time*: every competitor gets RDPO's "
+             "single-core wall-clock for one estimate. Cells in which RDPO has the lower relative RMSE.", "",
+             "| Setting | cells | RDPO better, same paths | RDPO better, same CPU time | best at same CPU time |",
+             "|---|---|---|---|---|"]
+    for lab, n, a, b, best in rows:
+        lines.append(f"| {lab} | {n} | **{a}** | {b} | {best} |")
+    return {"TABLE_EQT_SHORT": "\n".join(lines), "SCALE_TW_WINS": f"{sum(sw)} of {len(sw)}"}
+
+
+def env_values():
+    import platform
+    req = dict(l.strip().split("==") for l in (ROOT / "requirements.txt").read_text().splitlines() if "==" in l)
+    return {"ENV_PY": platform.python_version().rsplit(".", 1)[0], "ENV_NUMPY": req.get("numpy", "—"),
+            "ENV_SCIPY": req.get("scipy", "—"), "ENV_MPL": req.get("matplotlib", "—"), "ENV_PYTEST": req.get("pytest", "—")}
+
+
+def extra_values():
+    """Single-source numbers quoted in several places (short proposal and annex)."""
+    v = {}
+    # benchmark coverage
+    e1 = json.loads((R / "rdpo_e1.json").read_text())["rows"]
+    covs = [r["rdpo"]["ci_coverage"] for r in e1]
+    c16 = [r["rdpo"]["ci_coverage"] for r in e1 if r["budget"] == 16384]
+    v["E1_COV_MIN"] = pct(min(covs), 0)
+    v["E1_COV16_MEAN"] = pct(float(np.mean(c16)), 0); v["E1_COV16_MIN"] = pct(min(c16), 0)
+    base_je = next(r for r in e1 if r["scenario"] == "adb-base" and r["target"] == "joint_exhaustion" and r["budget"] == 16384)
+    v["E1_BASE_JE"] = pct(base_je["rdpo"]["rel_rmse"], 2)
+    v["MC_ZERO"] = pct((1 - base_je["mu"]) ** 16384, 0)
+    v["BASE_JE_MU"] = sci(base_je["mu"])
+    # per-path variance ratio, Phase 2 engine vs optimal twist (same paths)
+    sc = json.loads((R / "rdpo_v2_scale.json").read_text())["rows"]
+    by = {}
+    for r in sc:
+        by.setdefault((r["topology"], r["n"], r["target"]), {})[r["variant"]] = r
+    rv = [(v_["twist"]["rel_rmse"] / v_["v2-final"]["rel_rmse"]) ** 2 for (t, n, _), v_ in by.items()
+          if t == "ring" and n >= 8 and "twist" in v_ and "v2-final" in v_]
+    v["VAR_RING"] = f"{min(rv):.0f}–{max(rv):.0f}×"
+    dn = json.loads((R / "dense_exact.json").read_text())["rows"]
+    dv = [r["twist_over_rdpo"] ** 2 for r in dn]
+    v["VAR_DENSE"] = f"{min(dv):.0f}–{max(dv):.0f}×"
+    # Phase 2 engine on the ring-28 (synthetic) and the Asia-Pacific pool (data)
+    r28 = by[("ring", 28, "exceedance")]
+    v["V2_RING28_SEC"] = f"{r28['v2-final']['seconds_per_fit']:.0f} s"
+    v["V1_RING28_SEC"] = f"{r28['v1']['v1_study_seconds']:.0f} s"
+    v["TW_RING28_SEC"] = f"{r28['twist']['seconds_per_fit']:.1f} s"
+    # pools: pair exhaustion sampled inside pools
+    ap = json.loads((R / "wp2_asia_pacific.json").read_text())
+    ca = json.loads((R / "wp2_carec.json").read_text())
+    pj = [r for r in ap["rows"] if r["method"] == "rdpo" and r["target"] == "joint_exhaustion" and r["case"] == "asia_pacific"]
+    pj += [r for r in ca["rows"] if r["method"] == "rdpo" and r["target"] == "joint_exhaustion" and r["budget"] == 65536]
+    v["POOLPAIR_ERR"] = f"{pct(min(r['rel_rmse'] for r in pj), 1)}–{pct(max(r['rel_rmse'] for r in pj), 1)}"
+    v["POOLPAIR_COV"] = f"{pct(min(r['ci_coverage'] for r in pj), 0)}–{pct(max(r['ci_coverage'] for r in pj), 0)}"
+    rare = []
+    for name, d_, key in (("CAREC", ca, None), ("Asia–Pacific", ap, "asia_pacific"), ("ring-50", ap, "ring50")):
+        if key is None:
+            r = next(x for x in d_["rows"] if x["method"] == "rdpo" and x["target"] == "exceedance"
+                     and x["threshold_musd"] == d_["T_rare"] and x["budget"] == 65536)
+        else:
+            c = d_["cases"][key]
+            r = next(x for x in d_["rows"] if x["case"] == key and x["method"] == "rdpo" and x["target"] == "exceedance"
+                     and x["threshold_musd"] == c["T_rare"])
+        rare.append((name, r))
+    v["POOL_RARE_ERR"] = f"{pct(min(r['rel_rmse'] for _, r in rare), 2)}–{pct(max(r['rel_rmse'] for _, r in rare), 2)}"
+    v["POOL_RARE_MU"] = f"{sci(min(r['mu'] for _, r in rare))}–{sci(max(r['mu'] for _, r in rare))}"
+    v["POOL_RARE_LIST"] = "; ".join(f"{n} {pct(r['rel_rmse'], 2)} at μ = {sci(r['mu'])}" for n, r in rare)
+    apr = rare[1][1]
+    v["AP_RARE_ERR"] = pct(apr["rel_rmse"], 2); v["AP_RARE_MU"] = sci(apr["mu"]); v["AP_RARE_SEC"] = f"{apr['seconds']:.0f} s"
+    v["AP_MPS_SEC"] = f"{ap['cases']['asia_pacific']['mps_seconds']:.0f} s"
+    v["CAREC_MPS_MIN"] = f"{ca['mps']['mps_seconds'] / 60:.1f} min"
+    # tensor networks
+    t = json.loads((R / "tensor.json").read_text())["B_scaling_n"]
+    ring28 = [r for r in t if r["topology"] == "ring" and r["n"] == 28 and r["tol"] == 1e-9]
+    v["TN_RING28_S"] = f"{ring28[0]['runtime_s']:.0f} s" if ring28 else "—"
+    v["TN_RING28_BOND"] = str(ring28[0]["max_bond"]) if ring28 else "—"
+    sparse = [r["max_bond"] for r in t if r["topology"] in ("chain", "ring", "star") and r["tol"] == 1e-9]
+    v["TN_SPARSE_BOND"] = f"{min(sparse)}–{max(sparse)}"
+    # loss records (earthquake shared share)
+    L = json.loads((R / "realdata_losses.json").read_text())["tests"]
+
+    def sh(k):
+        x = L[k]
+        return f"{pct(x['share_of_A'], 0)} (95% CI {pct(x['share_of_A_ci95'][0], 0)}–{pct(x['share_of_A_ci95'][1], 0)})"
+    v["LOSS_NOAA1900"] = sh("eq_noaa_1900"); v["LOSS_NOAA1975"] = sh("eq_noaa_1975"); v["LOSS_EMDAT"] = sh("eq_emdat_1990")
+    v["LOSS_NBOTH"] = str(L["eq_noaa_1900"]["table_both_KGonly_TJonly_none"][0][0])
+    tab = L["eq_noaa_1900"]["table_both_KGonly_TJonly_none"]
+    v["LOSS_NKG"] = str(tab[0][0] + tab[0][1]); v["LOSS_NTJ"] = str(tab[0][0] + tab[1][0])
+    # rain and posterior point vs median
+    rain = json.loads((R / "realdata_rain.json").read_text())
+    v["RAIN_Q_LEVEL"] = "1-in-5-year"
+    im = rain["implied"]
+    v["RAIN_BOTH_EXH"] = sci(im["both from data"]["joint_exhaustion"])
+    # quantum resources (fault-tolerant projection)
+    qa = json.loads((R / "quantum_advantage.json").read_text())["advantage"]
+    q2 = next(r for r in qa if r["topology"] == "ring" and r["n"] == 2)
+    q28 = next(r for r in qa if r["topology"] == "ring" and r["n"] == 28)
+    for tag, r in (("2", q2), ("28", q28)):
+        v[f"Q_LQ_{tag}"] = str(r["logical_qubits"])
+        v[f"Q_PHYS_{tag}"] = f"{r['physical_qubits'] / 1e6:.1f} million" if r["physical_qubits"] >= 1e6 else f"{r['physical_qubits']:,}"
+        v[f"Q_TOFF_{tag}"] = f"{r['toffoli_A']:,}"
+        v[f"Q_CNOTQ_{tag}"] = f"{r['cnot_Q']:,}"
+        v[f"Q_DEPTHA_{tag}"] = f"{r['depth_A']:,}"
+        v[f"Q_D_{tag}"] = str(r["code_distance"])
+        v[f"Q_CALLS_{tag}"] = f"{r['quantum_calls']:,.0f}"
+        v[f"Q_KMAX_{tag}"] = f"{r['quantum_kmax']:.0f}"
+        v[f"Q_SHOTS_{tag}"] = f"{r['quantum_shots']:,.0f}"
+        s_ = r["quantum_seconds"]
+        v[f"Q_TIME_{tag}"] = f"{s_ / 86400:.0f} days" if s_ > 2 * 86400 else f"{s_ / 3600:.1f} h"
+        v[f"Q_TCOUNT_{tag}"] = sci(r["quantum_T_count"])
+        v[f"Q_CLS_{tag}"] = (f"{r['classical_seconds'] * 1e3:.1f} ms" if r["classical_seconds"] < 1 else f"{r['classical_seconds']:.0f} s")
+        v[f"Q_RHO2_{tag}"] = f"{r['classical_rho2']:.2g}" if r["classical_rho2"] < 10 else f"{r['classical_rho2']:.0f}"
+    v["Q_SSTAR_2"] = sci(q2["required_speedup"])
+    v["Q_MU_28"] = sci(q28["mu"])
+    # error mitigation summary
+    ms = json.loads((R / "quantum_advantage.json").read_text())["mitigation_summary"]
+    ks = sorted(ms, key=float)
+    v["MIT_WORSE0"] = pct(ms[ks[0]]["mitigation_worse_than_raw"], 0)
+    v["MIT_WORSE_MAX"] = pct(ms[ks[-1]]["mitigation_worse_than_raw"], 0)
+    v["MIT_DELTA_MAX"] = f"{float(ks[-1]):g}"
+    v["MIT_G2_P99"] = f"{min(ms[k]['guard2']['p99'] for k in ks):.2f}–{max(ms[k]['guard2']['p99'] for k in ks):.2f}"
+    v["MIT_FB"] = f"{pct(min(ms[k]['fallback2_rate'] for k in ks), 0)}–{pct(max(ms[k]['fallback2_rate'] for k in ks), 0)}"
+    # near-term Born-machine proposal
+    nq = json.loads((R / "nisq.json").read_text())["qcbm_bias"]
+    v["QCBM_BIAS"] = f"{pct(min(r['rel_bias_ideal_weights'] for r in nq), 0)}–{pct(max(r['rel_bias_ideal_weights'] for r in nq), 0)}"
+    v["QCBM_CAL"] = pct(max(abs(r["rel_bias_calibrated_rms"]) for r in nq if r["calib_shots"] == 100000), 1)
+    # hardware plan: direct and tilted circuits, depth and gate counts
+    hp = json.loads((R / "hardware_plan.json").read_text())
+
+    def best(e, shots=100000):
+        return min(r["rel_rmse"] for rows in hp["noisy"][e]["schedules"].values() for r in rows if r["shots"] == shots)
+    v["HW_EXC_DIRECT"] = pct(best("exceedance/direct"), 0)
+    v["HW_EXH_DIRECT"] = pct(best("joint_exhaustion/direct"), 0)
+    ok = [best(e) for e in hp["noisy"] if best(e) < 1]
+    v["HW_BEST_RANGE"] = f"{pct(min(ok), 0)}–{pct(max(ok), 0)}"
+    res = hp["resources"]
+    n2 = [r["device_n2q_median"] for rr in res.values() for r in rr if r["k"] <= 2]
+    dp = [r["device_depth_median"] for rr in res.values() for r in rr if r["k"] <= 2]
+    n1 = [r["device_n2q_median"] for rr in res.values() for r in rr if r["k"] == 1]
+    v["HW_N2Q_RANGE"] = f"{min(n2):,.0f}–{max(n2):,.0f}"
+    v["HW_DEPTH_RANGE"] = f"{min(dp):,.0f}–{max(dp):,.0f}"
+    v["HW_N2Q_K1"] = f"{min(n1):,.0f}–{max(n1):,.0f}"
+    v["HW_QUBITS"] = f"{min(e['qubits'] for e in hp['encodings'].values())}–{max(e['qubits'] for e in hp['encodings'].values())}"
+    v["HW_DEVICE"] = hp["meta"]["backend_model"].split(" (")[0]
+    v["HW_QISKIT"] = hp["meta"]["versions"]["qiskit"]; v["HW_AER"] = hp["meta"]["versions"]["qiskit_aer"]
+    v["HW_RUNTIME_V"] = hp["meta"]["versions"]["qiskit_ibm_runtime"]
+    v["HW_NUMPY"] = hp["meta"]["versions"]["numpy"]
+    sc_ = hp["scan"]
+
+    def scan(e, p2):
+        rr = [r for r in sc_.get(e, []) if abs(r["p2"] - p2) < 1e-12 and abs(r["readout_error"] - 0.01) < 1e-12]
+        return rr[0]["rel_rmse"] if rr else None
+    t4 = [scan(e, 1e-4) for e in ("exceedance/tilt", "joint_exhaustion/tilt")]
+    t5 = [scan(e, 1e-5) for e in ("exceedance/tilt", "joint_exhaustion/tilt")]
+    v["HW_TILT_P4"] = f"{pct(min(t4), 1)}–{pct(max(t4), 1)}"
+    v["HW_TILT_P5"] = f"{pct(min(t5), 1)}–{pct(max(t5), 1)}"
+    v["HW_SV_ERR"] = sci(max(e["statevector"]["mu_abs_err"] / e["mu"] for e in hp["encodings"].values()))
+    # tensor-network truncation: plain vs tilted gauge (rarest target, worst case over the correctness study)
+    tc = json.loads((R / "tensor.json").read_text())["A_correctness"]
+
+    def terr(tol, g):
+        return max(r["rel_err"]["all_exhausted_prob"] for r in tc if r["tilted_gauge"] == g and r["tol"] == tol)
+    v["TN_PLAIN_ERR9"] = pct(terr(1e-9, False), 1); v["TN_PLAIN_ERR12"] = pct(terr(1e-12, False), 3)
+    v["TN_TILT_ERR9"] = sci(terr(1e-9, True)); v["TN_TILT_ERR12"] = sci(terr(1e-12, True))
+    comp = [r["n"] for r in t if r["topology"] == "complete"]
+    v["TN_COMPLETE_N"] = str(max(comp))
+    # Monte Carlo paths needed for 10% relative error at the rarest pool target, and the MC-vs-RDPO variance factor
+    mu_min = min(r["mu"] for _, r in rare)
+    v["POOL_MC_PATHS"] = sci((1 - mu_min) / (mu_min * 0.01)).replace("1.0×", "")
+    v["Q_MC_OVER"] = sci(max(((1 - r["mu"]) / r["mu"]) / r["classical_rho2"] for r in qa)).replace("1.0×", "")
+    # SWAP-routing overhead on a 2D superconducting lattice (nisq.json compilations)
+    cnt = json.loads((R / "nisq.json").read_text())["counts"]
+    sw = [c["modality"]["superconducting_2d"]["cnot_Q"] / c["modality"]["trapped_ion_all_to_all"]["cnot_Q"] for c in cnt]
+    v["SWAP_RANGE"] = f"{min(sw):.0f}–{max(sw):.0f}×"
+    v["RAIN_NST2"] = str(sum(len(x) for x in rain["stations"].values()))
+    enc = hp["encodings"]
+    v["HW_GAIN_EXC"] = f"{enc['exceedance/tilt']['gain_a_over_mu']:.0f}×"
+    v["HW_GAIN_EXH"] = sci(enc["joint_exhaustion/tilt"]["gain_a_over_mu"]) + "×"
+    v["Q_WU_28"] = str(q28["w_U"])
+    v["Q_MC_PATHS_28"] = sci((1 - q28["mu"]) / (q28["mu"] * 0.01))
+    v["TN_COMPLETE_BOND"] = " → ".join(str(r["max_bond"]) for r in sorted(
+        [r for r in t if r["topology"] == "complete" and r["tol"] == 1e-9 and r["n"] in (4, 6)], key=lambda r: r["n"]))
+    star = [r["max_bond"] for r in t if r["topology"] == "star" and r["tol"] == 1e-9]
+    chain = [r["max_bond"] for r in t if r["topology"] == "chain" and r["tol"] == 1e-9]
+    v["TN_CHAIN_BOND"] = str(max(chain)); v["TN_STAR_BOND"] = str(max(star)) if star else "—"
+    v["TN_RING_BOND"] = str(max(r["max_bond"] for r in t if r["topology"] == "ring" and r["tol"] == 1e-9))
+    return v
+
+
 def number_labels(md):
     """Replace [fig:key] / [tab:key] by numbers in order of first appearance."""
     for kind in ("fig", "tab"):
@@ -1011,7 +1388,8 @@ def toc(md):
 
 def _collect_values():
     vals = {}
-    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values, dense_values):
+    for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values, dense_values,
+               brief5_values, eqt_values, v3_values, extra_values, eqt_short_values, env_values):
         try:
             vals.update(fn())
         except Exception as ex:
@@ -1095,7 +1473,8 @@ def build(cv=None):
     subprocess.run(["pdfunite", str(cover), str(body), str(out)], check=True)
     # ---- short version: separate pandoc build from short.md, no cover ----
     try:
-        fill(src="short.md", dst="short.filled.md", add_toc=False)
+        left_short = fill(src="short.md", dst="short.filled.md", add_toc=False)
+        left = sorted(set(left) | set(left_short))
         html_s = PAPER / "short.html"
         subprocess.run(["pandoc", str(PAPER / "short.filled.md"), "-f", "markdown", "-t", "html5", "-s",
                         "--mathjax=node_modules/mathjax-full/es5/tex-svg-full.js", "-H", str(mj),

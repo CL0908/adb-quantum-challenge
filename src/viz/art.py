@@ -139,17 +139,17 @@ def cover():
     b.append(cat_sitting(430, 860, 1.15, NAVY, TERRA))
     b.append(cat_peeking(200, 862, 0.9, TERRA, NAVY))
     # titles
-    b.append(text(60, 110, "ADB QUANTUM CHALLENGE · PHASE 1 TECHNICAL PROPOSAL", 12, TERRA, 700))
-    b.append(text(60, 170, "Information-Theoretic", 38, NAVY, 700, family=SERIF))
-    b.append(text(60, 214, "Reinforcement Learning for", 38, NAVY, 700, family=SERIF))
-    b.append(text(60, 258, "Joint Catastrophe Tails", 38, NAVY, 700, family=SERIF))
-    b.append(text(60, 306, "Quantum-Inspired Tensor Networks and Rényi-Doob Policy Optimization", 20, INK2, 400, family=SERIF, italic=True))
+    b.append(text(60, 110, "ADB QUANTUM CHALLENGE · PHASE 1 TECHNICAL ANNEX", 12, TERRA, 700))
+    b.append(text(60, 170, "Exact and Learned", 38, NAVY, 700, family=SERIF))
+    b.append(text(60, 214, "Joint-Tail Estimation for Pooled", 38, NAVY, 700, family=SERIF))
+    b.append(text(60, 258, "Disaster Risk Financing", 38, NAVY, 700, family=SERIF))
+    b.append(text(60, 306, "Tensor networks, Rényi-Doob Policy Optimization and a costed quantum stage", 20, INK2, 400, family=SERIF, italic=True))
     b.append(f'<rect x="60" y="336" width="90" height="4" fill="{TERRA}"/>')
     b.append(text(60, 380, "Joint-loss modelling for natural catastrophe risk", 13, INK2))
     b.append(text(60, 1010, "Tan Chun Loong", 15, INK, 700))
     b.append(text(60, 1032, "Nanyang Technological University, Singapore", 12, INK2))
     b.append(text(60, 1052, "November 2026", 12, INK2))
-    b.append(text(734, 1052, "Code and data available to the jury on request", 11, MUTED, anchor="end"))
+    b.append(text(734, 1052, "Source code and data ship with the submission", 11, MUTED, anchor="end"))
     return svg(W, H, "".join(b))
 
 
