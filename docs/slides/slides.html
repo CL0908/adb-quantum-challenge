@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Exact and Learned Joint-Tail Estimation: presentation</title>
+<!--
+  Source of docs/RDPO_Presentation.pdf. Build: PYTHONPATH=. python -m src.viz.build_slides
+  One <section> per 1920x1080 slide. Every number is a {{PLACEHOLDER}} filled from results/*.json
+  (src/viz/build_paper.py:_collect_values, plus slide-only values derived in src/viz/build_slides.py).
+  Never type a result number here. Slide numbers are filled automatically (<span class="pg"></span>).
+-->
+<!--FONTS-->
+<style>
+:root {
+  --page: #F6F1E7; --card: #FBF8F1; --cardalt: #F1EADB; --ink: #1E2430; --ink2: #4F5563; --muted: #8A8E98;
+  --rule: #DDD4C4; --navy: #1F3557; --terra: #C8553A; --teal: #00897B; --ochre: #AD7A00; --blue: #2F6AB0;
+  --sans: Inter, "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", Charter, Georgia, serif;
+  --padx: 136px;
+}
+@page { size: 1920px 1080px; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--page); }
+body { font-family: var(--sans); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact;
+       font-feature-settings: "ss01" 0; }
+section {
+  position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--page);
+  padding: 104px var(--padx) 128px; display: flex; flex-direction: column;
+  page-break-after: always; break-after: page;
+}
+section:last-child { page-break-after: auto; break-after: auto; }
+
+/* ---------- type ---------- */
+.kicker { font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra);
+          margin: 0 0 26px; padding-top: 22px;
+          background: linear-gradient(var(--terra), var(--terra)) left top / 56px 4px no-repeat; }
+h2.claim { font-size: 58px; line-height: 1.14; font-weight: 650; letter-spacing: -0.018em; color: var(--navy);
+           margin: 0; max-width: 1560px; }
+.lead { font-size: 29px; line-height: 1.45; color: var(--ink2); margin: 26px 0 0; max-width: 1300px; font-weight: 400; }
+.num { font-family: var(--serif); font-variant-numeric: lining-nums tabular-nums; font-weight: 600; }
+.note { font-size: 21px; line-height: 1.45; color: var(--muted); }
+b, strong { font-weight: 600; color: var(--ink); }
+sup { font-size: 0.58em; vertical-align: 0; position: relative; top: -0.8em; line-height: 0; margin-left: 0.04em; }
+.nw { white-space: nowrap; }
+.arr { font-family: var(--sans); font-weight: 300; font-size: 0.72em; position: relative; top: -0.12em; color: var(--muted); }
+
+/* ---------- footer ---------- */
+footer { position: absolute; left: var(--padx); right: var(--padx); bottom: 52px; display: flex;
+         justify-content: space-between; align-items: baseline; font-size: 18px; color: var(--muted); letter-spacing: 0.01em; }
+footer .pg { font-variant-numeric: tabular-nums; }
+
+/* ---------- body area ---------- */
+.body { flex: 1 1 auto; display: flex; min-height: 0; margin-top: 52px; }
+.split { display: grid; grid-template-columns: 1fr 440px; gap: 88px; align-items: center; width: 100%; }
+.split figure { margin: 0; display: flex; flex-direction: column; justify-content: center; height: 100%; min-height: 0; }
+.split figure img { max-width: 100%; max-height: 560px; object-fit: contain; object-position: left center; }
+figcaption { font-size: 19px; color: var(--muted); margin-top: 14px; line-height: 1.4; }
+.aside { display: flex; flex-direction: column; gap: 44px; }
+.stat .num { display: block; font-size: 66px; line-height: 1; color: var(--terra); margin-bottom: 12px; white-space: nowrap; }
+.stat .num.navy { color: var(--navy); }
+.stat .num.teal { color: var(--teal); }
+.stat p { margin: 0; font-size: 23px; line-height: 1.4; color: var(--ink2); }
+
+/* ---------- 1 title ---------- */
+section.title { padding-top: 150px; }
+section.title .kicker { margin-bottom: 44px; }
+section.title h1 { font-size: 84px; line-height: 1.06; font-weight: 700; letter-spacing: -0.025em; color: var(--navy);
+                   margin: 0; max-width: 1400px; }
+section.title .lead { font-size: 32px; max-width: 1240px; margin-top: 40px; }
+.byline { margin-top: auto; font-size: 26px; line-height: 1.5; color: var(--ink2); }
+.byline .who { font-size: 32px; font-weight: 650; color: var(--ink); display: block; margin-bottom: 4px; }
+.mascot { position: absolute; right: 150px; bottom: 112px; width: 168px; height: auto; }
+.tri { position: absolute; right: 150px; top: 150px; display: flex; gap: 14px; }
+.tri i { display: block; width: 18px; height: 18px; border-radius: 50%; }
+
+/* ---------- 2 problem ---------- */
+.stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; align-self: center; width: 100%; }
+.stats3 .num { font-size: 112px; line-height: 1; color: var(--terra); display: block; margin-bottom: 26px; letter-spacing: -0.01em; }
+.stats3 .num.navy { color: var(--navy); }
+.stats3 p { font-size: 26px; line-height: 1.45; color: var(--ink2); margin: 0; padding-top: 22px; border-top: 1.5px solid var(--rule); }
+
+/* ---------- 3 approach ---------- */
+.pipe { display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr; align-items: stretch; width: 100%; align-self: center; }
+.pipe .arrow { display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--muted); }
+.stage { background: var(--card); border: 1.5px solid var(--rule); border-radius: 18px; padding: 40px 40px 44px;
+         border-top: 8px solid var(--c); }
+.stage .tag { font-size: 20px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c); }
+.stage h3 { font-size: 38px; font-weight: 650; color: var(--navy); margin: 14px 0 18px; letter-spacing: -0.01em; }
+.stage p { font-size: 24px; line-height: 1.45; color: var(--ink2); margin: 0; }
+.base { margin-top: 34px; font-size: 24px; color: var(--ink2); text-align: center; }
+.base span { color: var(--navy); font-weight: 600; }
+
+/* ---------- 6 / 9 tables ---------- */
+table { border-collapse: collapse; width: 100%; font-size: 25px; }
+th { text-align: left; font-size: 19px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+     padding: 0 22px 16px 0; border-bottom: 2px solid var(--navy); vertical-align: bottom; line-height: 1.3; }
+td { padding: 17px 22px 17px 0; border-bottom: 1px solid var(--rule); color: var(--ink2); vertical-align: baseline; line-height: 1.3; }
+td .sub { display: block; font-size: 19px; color: var(--muted); margin-top: 4px; }
+td.n { font-family: var(--serif); font-variant-numeric: lining-nums tabular-nums; font-size: 38px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+td.n.win { color: var(--terra); }
+td.n small { font-size: 24px; color: var(--muted); font-weight: 400; }
+th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
+.eqt { width: 100%; }
+.eqt td:first-child { color: var(--ink); font-weight: 500; }
+.res { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 96px; width: 100%; align-self: center; }
+.res h4 { font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px; color: var(--c); }
+.res table { font-size: 23px; }
+.res td { padding: 18px 18px 18px 0; }
+.res td.n { font-size: 32px; }
+.res td.n.sm { font-size: 27px; }
+.res th.r, .res td.r { padding-left: 18px; }
+.res .note { margin-top: 18px; font-size: 19px; }
+
+/* ---------- 7 model risk ---------- */
+.risk { display: grid; grid-template-columns: 1fr; gap: 130px; width: 100%; align-self: center; }
+.range .lab { font-size: 24px; color: var(--ink2); margin-bottom: 112px; }
+.range .lab b { color: var(--ink); }
+.bar { position: relative; height: 18px; border-radius: 9px; background: var(--cardalt); border: 1.5px solid var(--rule); }
+.bar .band { position: absolute; top: -1.5px; bottom: -1.5px; background: rgba(200, 85, 58, 0.30); border-radius: 9px; }
+.bar .mk { position: absolute; top: 50%; width: 26px; height: 26px; border-radius: 50%; transform: translate(-50%, -50%);
+           border: 3px solid var(--page); }
+.bar .call { position: absolute; transform: translateX(-50%); white-space: nowrap; text-align: center; font-size: 21px; color: var(--ink2); line-height: 1.25; }
+.bar .call .num { font-size: 40px; display: block; }
+.bar .call.up { bottom: 34px; }
+.bar .call.down { top: 34px; }
+.bar .end { position: absolute; top: 34px; font-size: 21px; color: var(--muted); line-height: 1.25; }
+.risk3 { gap: 72px; }
+.risk3 .num { font-size: 58px; margin-bottom: 18px; white-space: nowrap; }
+.risk3 p { font-size: 22px; padding-top: 16px; }
+.stats3 .num.teal { color: var(--teal); }
+
+/* ---------- 10 plan ---------- */
+.plan { width: 100%; align-self: center; }
+.gantt { display: grid; grid-template-columns: 300px repeat(8, 1fr); row-gap: 18px; position: relative; }
+.gantt .wk { font-size: 19px; color: var(--muted); padding-bottom: 12px; border-bottom: 1.5px solid var(--rule); text-align: left; padding-left: 10px; }
+.gantt .wk b { display: block; font-size: 22px; color: var(--ink2); font-weight: 600; }
+.gantt .wp { font-size: 24px; font-weight: 600; color: var(--navy); align-self: center; line-height: 1.2; }
+.gantt .wp small { display: block; font-size: 19px; font-weight: 400; color: var(--muted); margin-top: 3px; }
+.gantt .bar2 { height: 54px; border-radius: 27px; background: var(--c); align-self: center; position: relative;
+               color: #fff; font-size: 20px; font-weight: 600; display: flex; align-items: center; padding-left: 24px; margin: 0 6px; }
+.gantt .ms { position: absolute; right: -14px; top: 50%; width: 28px; height: 28px; background: var(--page);
+             border: 4px solid var(--c); transform: translateY(-50%) rotate(45deg); }
+.gantt .hol { background: rgba(173, 122, 0, 0.09); border-radius: 10px; z-index: 0; }
+.gantt .holtxt { font-size: 18px; color: var(--ochre); text-align: center; align-self: start; padding-top: 2px; }
+.gantt > * { z-index: 1; }
+.mstones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 56px; }
+.mstones div { border-top: 4px solid var(--c); padding-top: 18px; font-size: 22px; line-height: 1.42; color: var(--ink2); }
+.mstones b { display: block; font-size: 24px; color: var(--navy); margin-bottom: 6px; }
+
+/* ---------- 11 team ---------- */
+.team { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; width: 100%; align-self: center; }
+.member, .howto { background: var(--card); border: 1.5px solid var(--rule); border-radius: 18px; padding: 44px 48px; }
+.member { border-left: 8px solid var(--navy); }
+.member h3 { font-size: 40px; font-weight: 650; color: var(--navy); margin: 0 0 6px; }
+.member .role { font-size: 23px; color: var(--terra); font-weight: 600; margin-bottom: 26px; }
+.member ul, .howto ul { margin: 0; padding: 0; list-style: none; }
+.member li, .howto li { font-size: 23px; line-height: 1.42; color: var(--ink2); padding-left: 28px; position: relative; margin: 0 0 14px; }
+.member li::before, .howto li::before { content: ""; position: absolute; left: 2px; top: 13px; width: 9px; height: 9px; border-radius: 50%; background: var(--rule); }
+.howto { background: transparent; border-style: dashed; }
+.howto h4 { font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0 0 22px; }
+
+/* ---------- 12 close ---------- */
+.claims { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; width: 100%; align-self: center; }
+.claims > div { border-top: 6px solid var(--c); padding-top: 26px; }
+.claims h4 { font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c); margin: 0 0 18px; }
+.claims ul { margin: 0; padding: 0; list-style: none; }
+.claims li { font-size: 25px; line-height: 1.42; color: var(--ink2); margin: 0 0 16px; padding-left: 30px; position: relative; }
+.claims .yes li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+.claims .no li::before { content: "✕"; position: absolute; left: 0; color: var(--terra); font-weight: 700; }
+.repo { margin-top: 54px; display: flex; align-items: flex-end; justify-content: space-between; }
+.repo .url { font-size: 30px; color: var(--navy); font-weight: 600; }
+.repo .url span { display: block; font-size: 20px; color: var(--muted); font-weight: 400; margin-bottom: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
+.repo img { width: 120px; height: auto; margin-right: 14px; }
+.ai { position: absolute; left: var(--padx); right: 420px; bottom: 52px; font-size: 16px; color: var(--muted); line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ 1 TITLE -->
+<section class="title">
+  <div class="kicker">ADB Quantum Innovation Challenge · Phase 1</div>
+  <h1>Exact and learned joint-tail estimation for pooled disaster risk financing</h1>
+  <p class="lead">How often several countries’ disaster covers pay out together: computed exactly where possible,
+    learned where not, and costed on quantum hardware.</p>
+  <div class="byline">
+    <span class="who">Tan Chun Loong</span>
+    Nanyang Technological University, Singapore · November 2026
+  </div>
+  <div class="tri"><i style="background:var(--navy)"></i><i style="background:var(--terra)"></i><i style="background:var(--teal)"></i></div>
+  <img class="mascot" src="../art/cat_sitting.svg" alt="">
+</section>
+
+<!-- ============================================================ 2 PROBLEM -->
+<section>
+  <div class="kicker">The problem</div>
+  <h2 class="claim">A pool’s shared capital depends on joint tails, and they are too rare to simulate.</h2>
+  <div class="body">
+    <div class="stats3">
+      <div><span class="num">{{BASE_JE_MU}}</span>
+        <p>chance that both countries exhaust their US$80m cover in the same three-year term</p></div>
+      <div><span class="num">{{MC_ZERO}}</span>
+        <p>of plain Monte Carlo runs with the benchmark’s 16,384 paths return exactly zero</p></div>
+      <div><span class="num navy">10<sup>n</sup></span>
+        <p>joint states a year for n countries; regional pools have 10–30, with tails near {{Q_MU_28}}</p></div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 3 APPROACH -->
+<section>
+  <div class="kicker">Our answer</div>
+  <h2 class="claim">Exact where possible, learned where not, quantum where it can be shown to pay.</h2>
+  <div class="body" style="flex-direction:column; justify-content:center;">
+    <div class="pipe">
+      <div class="stage" style="--c:var(--navy)"><div class="tag">1 · Exact</div><h3>Tensor networks</h3>
+        <p>Quantum-inspired. The full joint law with zero sampling error, for pools of up to 28 countries.</p></div>
+      <div class="arrow">→</div>
+      <div class="stage" style="--c:var(--terra)"><div class="tag">2 · Learned</div><h3>RDPO sampler</h3>
+        <p>Learns the zero-variance importance sampler where exact contraction fails. Unbiased, with 95% intervals.</p></div>
+      <div class="arrow">→</div>
+      <div class="stage" style="--c:var(--teal)"><div class="tag">3 · Quantum</div><h3>Amplitude estimation</h3>
+        <p>Exact state loading, resources linear in pool size, and a measured break-even bar.</p></div>
+    </div>
+    <p class="base">One exact model feeds all three: <span>payouts as a product of independent Poisson sources.</span></p>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 4 EXACT -->
+<section>
+  <div class="kicker">1 · Exact, quantum-inspired</div>
+  <h2 class="claim">A tensor network gives the pool’s joint law with zero sampling error, up to 28 countries.</h2>
+  <div class="body">
+    <div class="split">
+      <figure><img src="../../figures/slides/exact.svg" alt="Exact computation time against pool size">
+        <figcaption>Time for the full joint law, one CPU core. Stars: data-calibrated pools.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num navy">{{EQT_EXACT_MS}}</span><p>every value of the brief’s benchmark table, reproduced exactly</p></div>
+        <div class="stat"><span class="num navy">{{AP_MPS_SEC}}</span><p>28-country Asia–Pacific pool, calibrated to public data</p></div>
+        <div class="stat"><span class="num navy">{{DENSE_BIG_SEC}}</span><p>dense pool of 28, each country linked to its next four</p></div>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 5 RDPO -->
+<section>
+  <div class="kicker">2 · Learned: Rényi-Doob Policy Optimization</div>
+  <h2 class="claim">Per simulated scenario, RDPO beats the best of the brief’s four methods in {{EQT_A_PATH_BRIEF}} cells.</h2>
+  <div class="body">
+    <div class="split">
+      <figure><img src="../../figures/slides/heat.svg" alt="Improvement of RDPO over the best reference method">
+        <figcaption>Best reference method’s error ÷ RDPO’s; 16,384 paths, training included. Blue: Sobol is better.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num">{{E1_EXH_RANGE_SHORT}}</span><p>lower error on joint exhaustion, the rarest target</p></div>
+        <div class="stat"><span class="num">{{E1_COV16_MEAN}}</span><p>of nominal 95% intervals cover the exact value</p></div>
+        <div class="stat"><span class="num navy">{{STR_RANGE}}</span><p>more accurate on rare targets than splitting, SMC and flow-based sampling</p></div>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 6 WALL-CLOCK -->
+<section>
+  <div class="kicker">Honest accounting</div>
+  <h2 class="claim">Per CPU second, cheap methods win most cells; RDPO keeps the joint ones.</h2>
+  <div class="body" style="flex-direction:column; justify-content:center; gap:40px;">
+    <table class="eqt">
+      <thead><tr><th>Setting</th><th class="r">Cells</th><th class="r">RDPO better,<br>same paths</th><th class="r">RDPO better,<br>same CPU time</th></tr></thead>
+      <tbody>
+        <tr><td>{{EQ0_LAB}}<span class="sub">{{EQ0_VS}}</span></td><td class="n r"><small>{{EQ0_N}}</small></td><td class="n r win">{{EQ0_PATH}}</td><td class="n r">{{EQ0_TIME}}</td></tr>
+        <tr><td>{{EQ1_LAB}}<span class="sub">{{EQ1_VS}}</span></td><td class="n r"><small>{{EQ1_N}}</small></td><td class="n r win">{{EQ1_PATH}}</td><td class="n r">{{EQ1_TIME}}</td></tr>
+        <tr><td>{{EQ2_LAB}}<span class="sub">{{EQ2_VS}}</span></td><td class="n r"><small>{{EQ2_N}}</small></td><td class="n r win">{{EQ2_PATH}}</td><td class="n r">{{EQ2_TIME}}</td></tr>
+        <tr><td>{{EQ3_LAB}}<span class="sub">{{EQ3_VS}}</span></td><td class="n r"><small>{{EQ3_N}}</small></td><td class="n r win">{{EQ3_PATH}}</td><td class="n r">{{EQ3_TIME}}</td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin:0">At equal CPU time RDPO keeps joint exhaustion ({{EQT_A_TIME_JE}} benchmark cells). Phase 2 targets
+      the gap: a GPU engine and tensor-network value functions.</p>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 7 MODEL RISK -->
+<section>
+  <div class="kicker">Model risk</div>
+  <h2 class="claim">The bigger uncertainty is dependence itself: it moves the pool’s tail from 0 to {{FIN_EXC_MAX}}.</h2>
+  <div class="body" style="margin-top:40px">
+    <div class="risk">
+      <div class="range">
+        <div class="lab"><b>Pr(pool pays more than US$80m in a term)</b>, over every dependence consistent with each country’s own risk</div>
+        <div class="bar">
+          <div class="band" style="left:{{POS_LO}}; width:{{POS_W}}"></div>
+          <div class="mk" style="left:{{POS_BRIEF}}; background:var(--ink2)"></div>
+          <div class="mk" style="left:{{POS_MED}}; background:var(--terra)"></div>
+          <div class="call up" style="left:{{POS_BRIEF}}"><span class="num" style="color:var(--ink2)">{{PU_EXC_BRIEF}}</span>brief</div>
+          <div class="call up" style="left:{{POS_MED}}"><span class="num" style="color:var(--terra)">{{PU_EXC_MED}}</span>public data</div>
+          <div class="call down" style="left:{{POS_MED}}">95%: {{PU_EXC_LO}}–{{PU_EXC_HI}}</div>
+          <div class="end" style="left:0">0</div>
+          <div class="end" style="right:0">{{FIN_EXC_MAX}}</div>
+        </div>
+      </div>
+      <div class="stats3 risk3">
+        <div><span class="num">{{BRIEF_EQ_SHARE}} <span class="arr">→</span> {{DATA_EQ_SHARE}}</span>
+          <p>earthquake events shared by both countries: brief → loss records 1900–2020 <span class="nw">(95%: {{DATA_EQ_CI}})</span></p></div>
+        <div><span class="num teal">{{BRIEF_RAIN_SHARE}} <span class="arr">→</span> {{DATA_RAIN_SHARE}}</span>
+          <p>extreme rain shared by neighbours: brief → {{RAIN_NST}} weather stations <span class="nw">(95%: {{DATA_RAIN_CI}})</span></p></div>
+        <div><span class="num navy">{{FIN_POOL_BRIEF}} <span class="arr">→</span> {{FIN_POOL_MED}}</span>
+          <p>of expected payouts kept by one shared US$80m limit: brief → public data</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="note" style="margin:0">Public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.</p>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 8 QUANTUM -->
+<section>
+  <div class="kicker">3 · Quantum stage</div>
+  <h2 class="claim">A falsifiable bar: at 28 countries, quantum breaks even only on hardware {{Q_SSTAR_28}}× faster than projected.</h2>
+  <div class="body">
+    <div class="split">
+      <figure><img src="../../figures/slides/phase.svg" alt="Wall-clock phase diagram, amplitude estimation against RDPO">
+        <figcaption>Amplitude estimation with exact loading against our best classical sampler, in wall-clock.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num teal">{{HW_SV_ERR}}</span><p>emulated error of the exact loading circuits</p></div>
+        <div class="stat"><span class="num teal">{{Q_SSTAR_2}} <span class="arr">→</span> {{Q_SSTAR_28}}</span><p>speed-up needed, 2 → 28 countries: the gap closes with size</p></div>
+        <div class="stat"><span class="num teal">{{HW_BEST_RANGE}}</span><p>error on an IBM Heron-class noise model; the trust guard falls back to classical</p></div>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 9 RESOURCES -->
+<section>
+  <div class="kicker">Resource estimation</div>
+  <h2 class="claim">Classical answers take seconds on one core; the quantum stage needs fault tolerance.</h2>
+  <div class="body">
+    <div class="res">
+      <div style="--c:var(--navy)">
+        <h4>Classical · one CPU core</h4>
+        <table>
+          <tr><td>Brief’s benchmark, exact</td><td class="n r">{{EQT_EXACT_MS}}</td></tr>
+          <tr><td>RDPO estimate, training included</td><td class="n r">{{EQT_RDPO_MS}}</td></tr>
+          <tr><td>28-country pool, exact</td><td class="n r">{{AP_MPS_SEC}}</td></tr>
+          <tr><td>28-country pool, rarest tail, RDPO</td><td class="n r">{{AP_RARE_SEC}}</td></tr>
+        </table>
+        <p class="note">No GPU; memory under 1 GB throughout.</p>
+      </div>
+      <div style="--c:var(--teal)">
+        <h4>Quantum · amplitude estimation</h4>
+        <table>
+          <thead><tr><th></th><th class="r">Near-term<br>2 countries</th><th class="r">Fault-tolerant<br>2 countries</th><th class="r">Fault-tolerant<br>28 countries</th></tr></thead>
+          <tr><td>Physical qubits</td><td class="n r sm">{{HW_QUBITS}}</td><td class="n r sm">{{Q_PHYS_2}}</td><td class="n r sm">{{Q_PHYS_28}}</td></tr>
+          <tr><td>Logical qubits</td><td class="n r sm">–</td><td class="n r sm">{{Q_LQ_2}}</td><td class="n r sm">{{Q_LQ_28}}</td></tr>
+          <tr><td>Run time</td><td class="n r sm">{{HW_QPU_MIN}} min</td><td class="n r sm">{{Q_TIME_2}}</td><td class="n r sm">{{Q_TIME_28}}</td></tr>
+        </table>
+        <p class="note">Surface code at physical error 10⁻³; 10% relative error. RDPO on the 28-country task: {{Q_CLS_28}}.</p>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 10 PHASE 2 -->
+<section>
+  <div class="kicker">Phase 2 · 30 Nov 2026 – 22 Jan 2027</div>
+  <h2 class="claim">Eight weeks, three work packages, four measurable milestones.</h2>
+  <div class="body">
+    <div class="plan">
+      <div class="gantt">
+        <div></div>
+        <div class="wk"><b>W1</b>{{W1_DATE}}</div><div class="wk"><b>W2</b>{{W2_DATE}}</div><div class="wk"><b>W3</b>{{W3_DATE}}</div>
+        <div class="wk"><b>W4</b>{{W4_DATE}}</div><div class="wk"><b>W5</b>{{W5_DATE}}</div><div class="wk"><b>W6</b>{{W6_DATE}}</div>
+        <div class="wk"><b>W7</b>{{W7_DATE}}</div><div class="wk"><b>W8</b>{{W8_DATE}}</div>
+        <div class="hol" style="grid-column:5 / 7; grid-row:2 / 5;"></div>
+
+        <div class="wp" style="grid-row:2">WP1 Wall-clock<small>GPU engine, value functions</small></div>
+        <div class="bar2" style="--c:var(--terra); grid-column:2 / 5; grid-row:2">M1<span class="ms"></span></div>
+
+        <div class="wp" style="grid-row:3">WP2 Dependence<small>trigger-level data</small></div>
+        <div class="bar2" style="--c:var(--navy); grid-column:3 / 7; grid-row:3">M2<span class="ms"></span></div>
+
+        <div class="wp" style="grid-row:4">WP3 Quantum + package<small>hardware run, calculator, pitch</small></div>
+        <div class="bar2" style="--c:var(--teal); grid-column:6 / 10; grid-row:4">M3 · M4<span class="ms"></span></div>
+        <div class="holtxt" style="grid-column:5 / 7; grid-row:5">holiday weeks: long compute jobs</div>
+      </div>
+      <div class="mstones">
+        <div style="--c:var(--terra)"><b>M1 · week 3</b>At equal wall-clock, RDPO wins ≥ 10 of 25 benchmark cells (now {{EQT_A_TIME_BRIEF}}).</div>
+        <div style="--c:var(--navy)"><b>M2 · week 5</b>Both dependence shares at trigger level; a range narrower than <span class="nw">[0, {{FIN_EXC_MAX}}]</span>.</div>
+        <div style="--c:var(--teal)"><b>M3 · week 7</b>Guarded IBM hardware run, fidelity within the emulator’s predicted band.</div>
+        <div style="--c:var(--teal)"><b>M4 · {{P2_END}}</b>Three ADB questions answered end to end from one command.</div>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 11 TEAM -->
+<section>
+  <div class="kicker">Team</div>
+  <h2 class="claim">Quantum information, reinforcement learning and disaster response, in one reproducible codebase.</h2>
+  <div class="body">
+    <div class="team">
+      <!-- ===== MEMBER 1 ===== -->
+      <div class="member">
+        <h3>Tan Chun Loong</h3>
+        <div class="role">Physics and Quantum Technology, NTU Singapore</div>
+        <ul>
+          <li>Incoming Phortify Student Research Fellow, ICFO Barcelona (Prof. Antonio Acín’s group)</li>
+          <li>URECA Fellow with Prof. Mile Gu: relative entropy in model-based reinforcement learning, the mathematics of RDPO</li>
+          <li>Quantum security intern, Fraunhofer Singapore</li>
+          <li>MIT iQuHACK 2026; SEA Quantathon 2025 finalist; Track Lead, Wildfire &amp; Emergency Response, SEA Quantum Leaders Summit 2026</li>
+        </ul>
+      </div>
+      <!-- ===== MEMBER 2: to add a teammate, replace the .howto block below with a copy of the .member block above,
+           and move the .howto content into the footer note if it is still wanted. ===== -->
+      <div class="howto">
+        <h4>Built to be audited</h4>
+        <ul>
+          <li>Every result regenerated by one command from fixed seeds</li>
+          <li>{{N_TESTS}} tests check each exactness claim</li>
+          <li>Front-loaded plan with a stated descoping order</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
+</section>
+
+<!-- ============================================================ 12 CLOSE -->
+<section>
+  <div class="kicker">In one slide</div>
+  <h2 class="claim">What we claim, and what we do not.</h2>
+  <div class="body" style="flex-direction:column; justify-content:center;">
+    <div class="claims">
+      <div class="yes" style="--c:var(--teal)"><h4>We claim</h4>
+        <ul>
+          <li>Exact joint tails, zero sampling error, for every benchmark target and pools of up to 28 countries</li>
+          <li>Higher accuracy per query than the brief’s baselines in {{EQT_A_PATH_BRIEF}} cells, with unbiased 95% intervals</li>
+          <li>A falsifiable resource estimate for the quantum stage, and the classical bar it must beat</li>
+        </ul></div>
+      <div class="no" style="--c:var(--terra)"><h4>We do not claim</h4>
+        <ul>
+          <li>A quantum advantage today, on any hardware</li>
+          <li>Faster wall-clock than simple methods: at equal CPU time RDPO wins {{EQT_A_TIME_BRIEF}} cells</li>
+          <li>A re-pricing of the bond: dependence uses public proxies, not its triggers</li>
+        </ul></div>
+    </div>
+    <div class="repo">
+      <div class="url"><span>Code, data, results and tests</span>github.com/CL0908/adb-quantum-challenge</div>
+      <img src="../art/cat_sitting.svg" alt="">
+    </div>
+  </div>
+  <div class="ai">AI use: developed with Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the author’s research plan; all numbers are produced by the repository’s scripts.</div>
+  <footer style="justify-content:flex-end"><span class="pg"></span></footer>
+</section>
+
+</body>
+</html>

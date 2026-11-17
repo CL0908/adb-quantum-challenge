@@ -156,6 +156,55 @@ def tn_bond():
     S.save(fig, OUT / "tn_bond.png")
 
 
+def exact_scaling():
+    """Exact engine: compute time and representation size versus portfolio size (sparse MPS, dense frontier elimination,
+    data-calibrated pools)."""
+    t = _load("tensor.json")["B_scaling_n"]
+    dn = _load("dense_exact.json")["exact"]
+    ap = _load("wp2_asia_pacific.json")["cases"]
+    ca = _load("wp2_carec.json")
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.5), gridspec_kw={"wspace": 0.3})
+    ax = axes[0]
+    cols = {"chain": S.BLUE, "ring": S.TEAL, "complete": S.TERRA}  # legend placed below both panels
+    for kind in ("chain", "ring", "complete"):
+        rr = sorted([r for r in t if r["topology"] == kind and r["tol"] == 1e-9], key=lambda r: r["n"])
+        ax.plot([r["n"] for r in rr], [r["runtime_s"] for r in rr], "o-", color=cols[kind], ms=4, label=f"{kind} (tilted MPS)")
+    dcol = {"band2": S.OCHRE, "band3": S.PLUM, "band4": S.NAVY, "ladder-xdiag": S.GREEN}
+    dlab = {"band2": "band-2", "band3": "band-3", "band4": "band-4", "ladder-xdiag": "ladder + diagonals"}
+    for g in ("band2", "band3", "band4", "ladder-xdiag"):
+        rr = sorted([e for e in dn if e["graph"] == g], key=lambda e: e["n"])
+        ax.plot([e["n"] for e in rr], [e["exact_seconds"] for e in rr], "s--", color=dcol[g], ms=4, lw=1.5,
+                label=f"{dlab[g]} (frontier elim.)")
+    pts = [(10, ca["mps"]["mps_seconds"], "CAREC pool (10, data)"),
+           (ap["asia_pacific"]["n"], ap["asia_pacific"]["mps_seconds"], "Asia–Pacific pool (28, data)"),
+           (ap["ring50"]["n"], ap["ring50"]["mps_seconds"], "ring (50)")]
+    for n, sec, lab in pts:
+        ax.plot(n, sec, "*", color=S.INK, ms=12, zorder=6)
+        off = {"ring (50)": (-30, 10), "CAREC pool (10, data)": (8, -3)}.get(lab, (8, -10))
+        ax.annotate(lab, (n, sec), xytext=off, textcoords="offset points", fontsize=8.5, color=S.INK)
+    ax.set_yscale("log"); ax.set_xlabel("countries n"); ax.set_ylabel("seconds for the exact joint law (one core)")
+    ax.set_title("(a) Exact computation time", fontsize=10)
+    ax.set_xlim(0, 56)
+    h, l = ax.get_legend_handles_labels()
+    fig.legend(h, l, loc="lower center", ncol=4, fontsize=8, bbox_to_anchor=(0.5, -0.2), columnspacing=1.2)
+    ax.set_ylim(0.05, 2e3)
+    ax = axes[1]
+    for kind in ("chain", "ring", "complete"):
+        rr = sorted([r for r in t if r["topology"] == kind and r["tol"] == 1e-9], key=lambda r: r["n"])
+        ax.plot([r["n"] for r in rr], [r["max_bond"] for r in rr], "o-", color=cols[kind], ms=4)
+        ax.text(rr[-1]["n"] + 0.8, rr[-1]["max_bond"], kind, color=cols[kind], fontsize=8.5, va="center", fontweight="semibold")
+    for n, b, lab in ((10, ca["mps"]["max_bond"], "CAREC (data)"), (ap["asia_pacific"]["n"], ap["asia_pacific"]["max_bond"], "Asia–Pacific (data)")):
+        ax.plot(n, b, "*", color=S.INK, ms=12)
+        ax.annotate(lab, (n, b), xytext=(6, 4), textcoords="offset points", fontsize=8.5, color=S.INK)
+    ns = np.arange(2, 29)
+    ax.plot(ns, 10.0 ** (ns / 2), ":", color=S.MUTED, lw=1.5)
+    ax.text(9.5, 10 ** 5.4, "√(10ⁿ): bond dimension of a\ngeneric n-country law", fontsize=8, color=S.INK2)
+    ax.set_yscale("log"); ax.set_ylim(5, 1e7); ax.set_xlim(0, 33)
+    ax.set_xlabel("countries n"); ax.set_ylabel("max bond dimension χ")
+    ax.set_title("(b) Representation size", fontsize=10)
+    S.save(fig, OUT / "exact_scaling.png")
+
+
 def quantum_queries():
     tw = [r for r in _load("twisted.json")["rows"] if r["topology"] == "ring"]
     tw = sorted(tw, key=lambda r: r["n"])
@@ -175,23 +224,24 @@ def quantum_queries():
 
 
 def gantt():
-    wps = [("WP1  Engineering: GPU-batched RDPO, library API", 1, 2, S.BLUE, "M1"),
-           ("WP2  Realistic portfolios: perils, dense graphs, 10–50 countries", 3, 6, S.TEAL, "M2"),
-           ("WP3  RL improvements: neural soft values, adaptive levels", 5, 8, S.TERRA, "M3"),
-           ("WP4  Quantum stage + AI-for-Quantum: compiled loader, guarded AE", 8, 10, S.PLUM, "M4"),
-           ("WP5  Web application, AI analyst agent, MCP tool server", 9, 11, S.GREEN, "M5"),
-           ("WP6  Validation, documentation, business case", 11, 12, S.OCHRE, "M6")]
-    fig, ax = plt.subplots(figsize=(9.6, 3.3))
-    for k, (lab, s, e, c, m) in enumerate(wps):
+    """Deep Development work plan: 30 Nov 2026 - 22 Jan 2027 (8 weeks), pitch 25 Jan 2027."""
+    wps = [("WP1  Wall-clock: GPU engine, tensor-network value functions", 1, 3, S.BLUE, "M1"),
+           ("WP2  Dependence at trigger level: gridded rain, cat-in-a-box", 2, 5, S.TEAL, "M2"),
+           ("WP3  Quantum run on IBM hardware; decision package, pitch", 5, 8, S.PLUM, "M3, M4")]
+    fig, ax = plt.subplots(figsize=(9.6, 3.0))
+    ax.axvspan(3.5, 5.5, color=S.RULE, alpha=0.35, lw=0)
+    ax.text(4.5, -0.85, "holiday period: reduced load, compute jobs run", fontsize=7, color=S.INK2, ha="center")
+    for k, (lab, s0, e, c, m) in enumerate(wps):
         y = len(wps) - 1 - k
-        ax.barh(y, e - s + 1, left=s - 0.5, color=c, height=0.5, alpha=0.9)
+        ax.barh(y, e - s0 + 1, left=s0 - 0.5, color=c, height=0.5, alpha=0.9)
         ax.text(0.2, y, lab, va="center", ha="right", fontsize=8, color=S.INK)
         ax.plot(e + 0.5, y, marker="D", color=S.NAVY, ms=6)
-        ax.text(e + 0.85, y, m, va="center", fontsize=7.5, color=S.NAVY, fontweight="bold")
-    ax.set_xlim(0.4, 13.2); ax.set_yticks([])
-    ax.set_xticks(range(1, 13)); ax.set_xticklabels([f"W{w}" for w in range(1, 13)], fontsize=7.5)
-    for w0, lab in [(1, "Nov 2026"), (5, "Dec 2026"), (9, "Jan 2027")]:
-        ax.text(w0 - 0.4, len(wps) - 0.35, lab, fontsize=7.5, color=S.INK2)
+        ax.text(e + 0.75, y, m, va="center", fontsize=7.5, color=S.NAVY, fontweight="bold")
+    starts = ["30 Nov", "7 Dec", "14 Dec", "21 Dec", "28 Dec", "4 Jan", "11 Jan", "18 Jan"]
+    ax.set_xlim(0.4, 9.3); ax.set_ylim(-1.1, len(wps) - 0.4); ax.set_yticks([])
+    ax.set_xticks(range(1, 9)); ax.set_xticklabels([f"W{w}\n{d}" for w, d in zip(range(1, 9), starts)], fontsize=7)
+    ax.axvline(8.5, color=S.NAVY, lw=1, ls=":")
+    ax.text(8.55, len(wps) - 0.7, "final package\n22 Jan · pitch 25 Jan", fontsize=7, color=S.NAVY)
     ax.grid(axis="y", visible=False)
     ax.spines["left"].set_visible(False)
     S.save(fig, OUT / "gantt.png")
@@ -320,7 +370,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     S.apply()
     done = []
-    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, quantum_queries, gantt, quantum_advantage_fig, mitigation_fig, v2_fig, quantum_phase_fig):
+    for f in (e1_heatmap, e1_budget, e2_scaling, e3_ablation, tn_bond, exact_scaling, quantum_queries, gantt, quantum_advantage_fig, mitigation_fig, v2_fig, quantum_phase_fig):
         try:
             f(); done.append(f.__name__)
         except Exception as ex:   # partial results while experiments are running

@@ -1,0 +1,423 @@
+{
+  "meta": {
+    "description": "Exact finance-facing analyses: bond anchor, pooling decision, model-free coupling bounds.",
+    "units": "USD, 3-year term, two countries; loss in a country = 70m*a/4 + 10m*r",
+    "inputs": {
+      "eq_limit": 70000000.0,
+      "rain_limit": 10000000.0,
+      "threshold": 80000000.0,
+      "annual_rain_trigger_prob": 0.02,
+      "tier_exceedance": {
+        "KG": [
+          0.03883,
+          0.02331,
+          0.0179,
+          0.01184
+        ],
+        "TJ": [
+          0.03925,
+          0.01743,
+          0.01332,
+          0.01043
+        ]
+      },
+      "brief": {
+        "m": 1.0,
+        "rain_shared": 0.25
+      },
+      "both_from_data": {
+        "m": 6.405135311515741,
+        "rain_shared": 0.022222222222222223,
+        "source": "results/realdata_rain.json (implied: both from data)"
+      },
+      "posterior": {
+        "n": 2000,
+        "seed": 4242,
+        "prior": "Jeffreys Beta(1/2,1/2)",
+        "code": "src/realdata/param_uncertainty.py (re-drawn with its seed; pooled values read from results/param_uncertainty.json)"
+      }
+    },
+    "sources": {
+      "computed": "src/model, src/tensor/synthetic.py exact dense enumeration; scipy linprog (HiGHS)",
+      "cited": "Artemis, \"ADB prices first cat bonds\" (public market report); figures quoted as reported"
+    },
+    "seed": 4242,
+    "runtime_s": 11.1
+  },
+  "anchor": {
+    "computed": {
+      "KG": {
+        "tier_exceedance": [
+          0.03883,
+          0.02331,
+          0.0179,
+          0.01184
+        ],
+        "annual_EL_fraction_of_eq_sublimit": 0.02297,
+        "annual_EL_eq_usd": 1607900.0,
+        "annual_EL_rain_usd": 200000.0,
+        "annual_EL_full_80m_usd": 1807900.0,
+        "annual_EL_full_80m_fraction": 0.02259875
+      },
+      "TJ": {
+        "tier_exceedance": [
+          0.03925,
+          0.01743,
+          0.01332,
+          0.01043
+        ],
+        "annual_EL_fraction_of_eq_sublimit": 0.0201075,
+        "annual_EL_eq_usd": 1407525.0,
+        "annual_EL_rain_usd": 200000.0,
+        "annual_EL_full_80m_usd": 1607525.0,
+        "annual_EL_full_80m_fraction": 0.0200940625
+      }
+    },
+    "cited": {
+      "source": "Artemis, \"ADB prices first cat bonds\" (public market report); figures quoted as reported",
+      "initial_expected_loss": {
+        "KG": 0.02296,
+        "TJ": 0.02011
+      },
+      "risk_margin": {
+        "KG": 0.06,
+        "TJ": 0.06
+      }
+    },
+    "ratios_computed_over_cited": {
+      "KG": {
+        "risk_margin_over_cited_EL": 2.6132404181184667,
+        "risk_margin_over_computed_EL": 2.61210274270788,
+        "computed_minus_cited_EL": 9.999999999999593e-06
+      },
+      "TJ": {
+        "risk_margin_over_cited_EL": 2.9835902536051715,
+        "risk_margin_over_computed_EL": 2.9839612085042893,
+        "computed_minus_cited_EL": -2.4999999999990308e-06
+      }
+    }
+  },
+  "pooling": {
+    "brief": {
+      "separate_cap_total_usd": 160000000.0,
+      "shared": {
+        "80m": {
+          "limit_usd": 80000000.0,
+          "capital_saving_usd": 80000000.0,
+          "expected_payout_separate": 10063513.34895411,
+          "expected_payout_shared": 9781158.650387969,
+          "delivered_fraction": 0.9719427312534459,
+          "expected_payout_given_up": 282354.698566141,
+          "shortfall_per_usd_capital_saved": 0.0035294337320767627,
+          "prob_exceed_limit": 0.012046720907534038
+        },
+        "100m": {
+          "limit_usd": 100000000.0,
+          "capital_saving_usd": 60000000.0,
+          "expected_payout_separate": 10063513.34895411,
+          "expected_payout_shared": 9942871.31927868,
+          "delivered_fraction": 0.9880119372338322,
+          "expected_payout_given_up": 120642.02967542931,
+          "shortfall_per_usd_capital_saved": 0.0020107004945904886,
+          "prob_exceed_limit": 0.005106919141595615
+        },
+        "120m": {
+          "limit_usd": 120000000.0,
+          "capital_saving_usd": 40000000.0,
+          "expected_payout_separate": 10063513.34895411,
+          "expected_payout_shared": 10018924.621552734,
+          "delivered_fraction": 0.9955692683205901,
+          "expected_payout_given_up": 44588.72740137665,
+          "shortfall_per_usd_capital_saved": 0.0011147181850344162,
+          "prob_exceed_limit": 0.003251331293851867
+        }
+      },
+      "joint_attachment": 0.04413776873084355,
+      "joint_exhaustion": 3.163304630917903e-05
+    },
+    "both_from_data": {
+      "separate_cap_total_usd": 160000000.0,
+      "shared": {
+        "80m": {
+          "limit_usd": 80000000.0,
+          "capital_saving_usd": 80000000.0,
+          "expected_payout_separate": 10063513.348954111,
+          "expected_payout_shared": 9231793.941971032,
+          "delivered_fraction": 0.9173529782151559,
+          "expected_payout_given_up": 831719.4069830797,
+          "shortfall_per_usd_capital_saved": 0.010396492587288498,
+          "prob_exceed_limit": 0.03318477469271803
+        },
+        "100m": {
+          "limit_usd": 100000000.0,
+          "capital_saving_usd": 60000000.0,
+          "expected_payout_separate": 10063513.348954111,
+          "expected_payout_shared": 9693376.66026574,
+          "delivered_fraction": 0.963219933650027,
+          "expected_payout_given_up": 370136.688688371,
+          "shortfall_per_usd_capital_saved": 0.00616894481147285,
+          "prob_exceed_limit": 0.015451827799631154
+        },
+        "120m": {
+          "limit_usd": 120000000.0,
+          "capital_saving_usd": 40000000.0,
+          "expected_payout_separate": 10063513.348954111,
+          "expected_payout_shared": 9925486.544739012,
+          "delivered_fraction": 0.9862844317457536,
+          "expected_payout_given_up": 138026.80421509882,
+          "shortfall_per_usd_capital_saved": 0.0034506701053774705,
+          "prob_exceed_limit": 0.00991391167895096
+        }
+      },
+      "joint_attachment": 0.06907249115122562,
+      "joint_exhaustion": 2.699595720527616e-05
+    },
+    "posterior": {
+      "n_samples": 2000,
+      "seed": 4242,
+      "posteriors": {
+        "earthquake": {
+          "a": 5.5,
+          "b": 4.5,
+          "point": 0.55,
+          "ci95": [
+            0.25409386787461596,
+            0.8270322433271518
+          ],
+          "k_both": 5,
+          "n_kg": 9
+        },
+        "rain": {
+          "a": 2.5,
+          "b": 88.5,
+          "point": 0.027472527472527472,
+          "ci95": [
+            0.004645964729405221,
+            0.06937266030741875
+          ],
+          "k_both": 2,
+          "n_total": 90
+        }
+      },
+      "delivered_fraction": {
+        "median": 0.9062210993649478,
+        "ci95": [
+          0.8674451747712217,
+          0.9487667487295278
+        ],
+        "ci50": [
+          0.8909373238360626,
+          0.9217175972669076
+        ],
+        "n": 2000
+      },
+      "shortfall": {
+        "median": 943745.2183910889,
+        "ci95": [
+          515586.50807071704,
+          1333967.2531580885
+        ],
+        "ci50": [
+          787796.0048926774,
+          1097553.6974484439
+        ],
+        "n": 2000
+      },
+      "prob_exceed": {
+        "median": 0.03755631126381263,
+        "ci95": [
+          0.020800672455875142,
+          0.052725185317604686
+        ],
+        "ci50": [
+          0.031479111399480994,
+          0.04355332581235409
+        ],
+        "n": 2000
+      },
+      "delivered_100": {
+        "median": 0.9582039484478919,
+        "ci95": [
+          0.9406810549207185,
+          0.9773457327794504
+        ],
+        "ci50": [
+          0.9513106613578336,
+          0.9651923007828842
+        ],
+        "n": 2000
+      },
+      "delivered_120": {
+        "median": 0.9844052890965893,
+        "ci95": [
+          0.9778469653187498,
+          0.9915701018191733
+        ],
+        "ci50": [
+          0.9818276770223854,
+          0.9870237647056328
+        ],
+        "n": 2000
+      }
+    }
+  },
+  "coupling_bounds": {
+    "marginal_max_deviation_of_points": {
+      "both_from_data_vs_brief": 3.3306690738754696e-16
+    },
+    "targets": {
+      "prob_exceed": {
+        "unit": "probability",
+        "full_coupling": {
+          "min": 0.0,
+          "max": 0.08982173105633026
+        },
+        "eq_coupled_rain_independent": {
+          "min": 0.000233516258182678,
+          "max": 0.08882098946626268
+        },
+        "rain_coupled_eq_independent": {
+          "min": 0.006973150884672605,
+          "max": 0.010591434808931044
+        },
+        "independent_countries": 0.007185934925690394,
+        "points": {
+          "brief": {
+            "value": 0.012046720907534038,
+            "position_in_full_range": 0.13411811112813146
+          },
+          "both_from_data": {
+            "value": 0.03318477469271803,
+            "position_in_full_range": 0.3694515158242355
+          },
+          "posterior_median": {
+            "value": 0.037556311263812626,
+            "position_in_full_range": 0.4181205463548658
+          },
+          "posterior_ci95_low": {
+            "value": 0.020800672455875142,
+            "position_in_full_range": 0.23157728326155652
+          },
+          "posterior_ci95_high": {
+            "value": 0.05272518531760468,
+            "position_in_full_range": 0.5869980983169755
+          }
+        }
+      },
+      "joint_attachment": {
+        "unit": "probability",
+        "full_coupling": {
+          "min": 0.0,
+          "max": 0.16424525965444386
+        },
+        "eq_coupled_rain_independent": {
+          "min": 0.015923891069876437,
+          "max": 0.11516059635856174
+        },
+        "rain_coupled_eq_independent": {
+          "min": 0.024433015352328516,
+          "max": 0.07074231474234847
+        },
+        "independent_countries": 0.027156372630856775,
+        "points": {
+          "brief": {
+            "value": 0.04413776873084355,
+            "position_in_full_range": 0.2687308530164289
+          },
+          "both_from_data": {
+            "value": 0.06907249115122563,
+            "position_in_full_range": 0.4205448077865228
+          },
+          "posterior_median": {
+            "value": 0.0763128974127424,
+            "position_in_full_range": 0.4646277011178122
+          },
+          "posterior_ci95_low": {
+            "value": 0.049280250311484704,
+            "position_in_full_range": 0.30004062470457643
+          },
+          "posterior_ci95_high": {
+            "value": 0.10233987224370185,
+            "position_in_full_range": 0.6230917863871082
+          }
+        }
+      },
+      "joint_exhaustion": {
+        "unit": "probability",
+        "full_coupling": {
+          "min": 0.0,
+          "max": 0.001851456221426042
+        },
+        "eq_coupled_rain_independent": {
+          "min": 0.0,
+          "max": 0.000108880437469619
+        },
+        "rain_coupled_eq_independent": {
+          "min": 0.0,
+          "max": 6.6724220016886e-05
+        },
+        "independent_countries": 3.923917930753035e-06,
+        "points": {
+          "brief": {
+            "value": 3.163304630917903e-05,
+            "position_in_full_range": 0.01708549515948824
+          },
+          "both_from_data": {
+            "value": 2.699595720527616e-05,
+            "position_in_full_range": 0.014580931967423534
+          },
+          "posterior_median": {
+            "value": 3.1192585306939684e-05,
+            "position_in_full_range": 0.01684759539327066
+          },
+          "posterior_ci95_low": {
+            "value": 1.5874675579263e-05,
+            "position_in_full_range": 0.008574156599304246
+          },
+          "posterior_ci95_high": {
+            "value": 5.643773980183335e-05,
+            "position_in_full_range": 0.030482891871115084
+          }
+        }
+      },
+      "stop_loss": {
+        "unit": "USD",
+        "full_coupling": {
+          "min": 0.0,
+          "max": 2340000.734480563
+        },
+        "eq_coupled_rain_independent": {
+          "min": 2335.1625818267794,
+          "max": 2339693.133403965
+        },
+        "rain_coupled_eq_independent": {
+          "min": 169138.60502362883,
+          "max": 205321.4442662132
+        },
+        "independent_countries": 171266.44543380666,
+        "points": {
+          "brief": {
+            "value": 282354.69856614096,
+            "position_in_full_range": 0.12066436322244081
+          },
+          "both_from_data": {
+            "value": 831719.4069830797,
+            "position_in_full_range": 0.35543553244555115
+          },
+          "posterior_median": {
+            "value": 943745.218391089,
+            "position_in_full_range": 0.4033097957982406
+          },
+          "posterior_ci95_low": {
+            "value": 515586.5080707171,
+            "position_in_full_range": 0.22033604540092924
+          },
+          "posterior_ci95_high": {
+            "value": 1333967.2531580885,
+            "position_in_full_range": 0.5700712967742741
+          }
+        }
+      }
+    }
+  }
+}

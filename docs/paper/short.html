@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tan Chun Loong" />
-  <title>Information-Theoretic Reinforcement Learning for Joint Catastrophe Tails</title>
+  <title>Exact and Learned Joint-Tail Estimation for Pooled Disaster Risk Financing</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -50,184 +50,630 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Information-Theoretic Reinforcement Learning for Joint
-Catastrophe Tails</h1>
-<p class="subtitle">Rényi-Doob Policy Optimization — Phase 1 Technical
-Proposal</p>
+<h1 class="title">Exact and Learned Joint-Tail Estimation for Pooled
+Disaster Risk Financing</h1>
 <p class="author">Tan Chun Loong</p>
 <p class="date">November 2026</p>
 </header>
-<div class="frontmatter">
-<section id="headline-findings" class="headline">
-<h2>Headline findings</h2>
-<ol type="1">
-<li><strong>The joint tail of the ADB bond is likely
-underestimated.</strong> With the two dependence assumptions calibrated
-to public data and the posterior uncertainty propagated through the
-exact two-country model, the chance that the pool pays more than US$80m
-in a term has posterior median <strong>3.76% (3.12× the brief’s
-1.20%)</strong> and 95% credible interval <strong>[2.08%,
-5.27%]</strong> — entirely above the brief’s point value.</li>
-<li><strong>Joint tails that simulation cannot see, at about 1%
-error.</strong> In a 28-country Asia–Pacific pool calibrated from public
-data, RDPO estimates a 9.5×10⁻⁹-probability-probability pool loss to
-<strong>0.8% relative error</strong> with 65,536 simulated terms (21 s
-on one core). Plain Monte Carlo sees no such event.</li>
-<li><strong>Stress tests in seconds.</strong> All 25 ADB scenario ×
-question cells are re-estimated in <strong>5 seconds</strong> on one
-core. Overnight policy transfer (sleep phase) cuts small-budget error by
-×1.8–×83.8.</li>
-</ol>
-<p><em>Indicative findings. Public data serve as proxies; not a
-re-pricing of the actual bond. Methods and caveats in the full proposal
-§6.6–6.7.</em></p>
-</section>
+<style>body{font-size:9.7pt;line-height:1.45} h1{font-size:17pt;margin:14pt 0 8pt;padding-top:14pt} h2{font-size:11.5pt;margin:10pt 0 4pt} figure{margin:6pt 0 8pt} #refs{font-size:7.9pt;line-height:1.3} #refs .csl-entry{margin-bottom:2pt}</style>
+<div class="titleblock">
+<p><span class="ttl">Exact and Learned Joint-Tail Estimation for Pooled
+Disaster Risk Financing</span> <span class="sub">How often several
+countries’ disaster covers pay out together: computed with zero sampling
+error where possible, estimated with a learned sampler where not, and
+costed on quantum hardware.</span> <span class="byline">Tan Chun Loong ·
+Nanyang Technological University, Singapore · ADB Quantum Innovation
+Challenge, Phase 1 proposal · November 2026</span></p>
 </div>
-<h1 id="problem">1 Problem</h1>
-<p>Pooled catastrophe bonds are priced and stress-tested on their
-<strong>joint tails</strong>: how often several countries exhaust their
-cover together. For the ADB bond on the Kyrgyz Republic and Tajikistan
-the joint exhaustion probability is about 3×10⁻⁵, and the pool
-exceedance about 1% per three-year term. These probabilities are rare,
-poorly constrained by history, and must be re-computed under many
-dependence scenarios. Plain Monte Carlo returns zero in most runs at
-practical budgets; exact enumeration grows as 10ⁿ with the number of
-countries.</p>
-<p>A regional pool of 28 ADB developing members has 10²⁸ states, which
-no exact method can enumerate. Pricing, trigger design and stress
-testing all break down at exactly the questions that matter most.</p>
-<h1 id="method-rényi-doob-policy-optimization">2 Method — Rényi-Doob
-Policy Optimization</h1>
-<p><strong>Source-level formulation (Proposition 1).</strong> The capped
-three-year payout process is an exact product of commuting Poisson
-sources with finite increment laws. A scenario is a sequence of K = 2n +
-2|E| independent small draws, one per source. One register per source is
-all a classical or quantum solver ever needs.</p>
-<p><strong>Zero-variance sampler = Doob transform = optimal soft-RL
-policy (Proposition 3).</strong> The best importance-sampling measure is
-the Doob h-transform of the source process, equivalently the Boltzmann
-policy of a KL-regularised control problem. RDPO learns it with a
-compact log-linear soft-value function and a defensive mixture of weight
-5%.</p>
-<p><strong>Two-stage training on the right divergence (Proposition
-4).</strong></p>
+<div class="pitch">
+<p>ADB’s US$160m Disaster Relief Bond pays the Kyrgyz Republic and
+Tajikistan separately; whether such cover can be pooled, and how much
+shared capital a pool needs, depends on how often several countries need
+a payout in the same three-year term. We compute these joint
+probabilities exactly, with no sampling error, for pools of up to 28
+countries, and estimate the cases exact methods cannot reach with a
+learned sampler that is more accurate per simulated scenario than the
+challenge’s reference methods. We then cost the quantum version of the
+same calculation end to end and state the hardware it would need to
+pay.</p>
+</div>
+<div class="motto">
+<p>Exact where possible, learned where not, quantum where it can be
+shown to pay.</p>
+</div>
+<div class="results">
+<ol type="1">
+<li><strong>Exact answers at regional scale (quantum-inspired).</strong>
+A tensor network reproduces every value of the brief’s Table 5 in 0.64
+ms, and gives the full joint law of data-calibrated pools of 10 and 28
+countries in 4.5 min and 42 s on one CPU core. Dense dependence, where
+each country shares events with its next four neighbours, is exact up to
+28 countries (89 s).</li>
+<li><strong>Higher accuracy per query (learned).</strong> Where exact
+contraction is not available, Rényi-Doob Policy Optimization (RDPO)
+beats the best of the brief’s four methods in 20 of 25 benchmark cells
+at the same number of simulated scenarios, by ×6.3–171 on the rarest
+target, with training charged and no bias.</li>
+<li><strong>A quantum stage with a measured bar (quantum).</strong>
+Amplitude estimation with exact loading needs resources linear in
+countries and dependence links. Against our best classical method it
+breaks even only on hardware 8.2×10⁴ times faster than a projected
+fault-tolerant baseline at 28 countries; near-term circuits are costed
+for an IBM device.</li>
+</ol>
+</div>
+<p>For ADB the larger uncertainty is dependence itself: under any
+dependence consistent with the two countries’ own risks, the chance that
+the pool pays more than US$80m in a term ranges from 0 to 9.0% (brief
+1.20%). Public data give a stress range centred at 3.12 times the
+brief’s value (§3.5).</p>
+<div class="claims">
+<div class="yes">
+<p><strong>What we claim</strong></p>
 <ul>
-<li><strong>Stage 1: cross-entropy (KL).</strong> Multilevel policy
-search raises the elite level until the target level is reached.</li>
-<li><strong>Stage 2: Rényi-2 (χ²) policy gradient.</strong> The variance
-of an IS estimator is a χ² divergence, not a KL one — RDPO therefore
-takes REINFORCE steps on log E_Q[(wf)²].</li>
+<li>Exact joint tails, zero sampling error, for every benchmark target
+and for sparse or bounded-treewidth pools of up to 28 countries.</li>
+<li>Higher accuracy per query than the brief’s baselines in 20 of 25
+cells; unbiased estimates with 95% intervals.</li>
+<li>An end-to-end, falsifiable resource estimate for the quantum stage,
+and the classical method it must beat.</li>
 </ul>
-<p><strong>Fixed budget, unbiased estimator (Proposition 5).</strong>
-Training paths count against the total budget B. Eligible training
-batches are recycled; a final randomised quasi-Monte Carlo stage spends
-the rest. The combined estimator is exactly unbiased for <em>any</em>
-learned policy, with a reported 95% interval.</p>
-<p><strong>Pair reduction.</strong> For targets that depend on two
-countries only (joint attachment / exhaustion), the joint law of their
-100 states is the exact product of the kernels touching them: computed
-in ≤ 3 ms for any portfolio size.</p>
-<h1 id="results">3 Results</h1>
-<p><strong>Benchmark (all 25 ADB cells, 40 replications, 16,384 paths
-including training).</strong> RDPO is more accurate than the best of the
-brief’s four reference methods in <strong>20 of 25 cells</strong>. On
-the hardest target (joint exhaustion, μ ≈ 3×10⁻⁵) the median improvement
-over the best reference method is <strong>×19</strong>, and ranges from
-×6.3 to ×171. Interval coverage is 94% mean (nominal 95%).</p>
-<p><strong>Scaling (8 portfolio sizes up to 28 countries, 24
-replications, exact tensor-network references, same seeds for every
-method).</strong> On pool-wide questions RDPO beats exponential twisting
-in <strong>16 of 16 settings</strong>, with the Phase 2 engine 2.3–11.9×
-faster per estimate than the Phase 1 code.</p>
-<p><strong>Stronger baselines (same budget, same seeds).</strong>
-Against three strong rare-event methods — adaptive multilevel splitting
-<span class="citation" data-cites="cerou2007 aubeck2001">(Cérou and
-Guyader 2007; Au and Beck 2001)</span>, SMC on exponential tilts <span
-class="citation" data-cites="delmoral2006">(Del Moral, Doucet, and Jasra
-2006)</span>, and a diagonal normalising-flow importance sampler trained
-by REINFORCE on χ² <span class="citation"
-data-cites="muller2019">(Müller et al. 2019)</span>, warm-started from
-the optimal twist — <strong>RDPO wins on every rare target by factors of
-×5.4–×8</strong>. SMC on the optimal twist is the strongest fixed
-baseline; RDPO’s advantage over it is the gain from a learned
-state-dependent policy over the best product proposal.</p>
-<p><strong>Real-world validation.</strong> The bond’s assumptions were
-tested against USGS catalogue data, NOAA earthquake loss records
-(1900–2020) and 48 GHCN-Daily weather stations. Earthquake arrivals are
-Poisson (dispersion 0.66–1.24, every p ≥ 0.12). The brief’s
-shared-earthquake share of 7.5% is far too low: 120-year loss data give
-a posterior with median <strong>48%</strong> and 95% CI <strong>[12%,
-79%]</strong>. Extreme-rain sharing between neighbours is much lower
-than assumed: pooled posterior median <strong>2%</strong>, CI
-<strong>[0.6%, 7.7%]</strong>. Propagating both posteriors through the
-exact bond model gives the headline finding.</p>
-<p><strong>WP2 at scale: 28-country Asia–Pacific pool and 50-country
-ring.</strong> RDPO reaches <strong>0.76% / 0.79%</strong> error at μ ≈
-10⁻⁹ with 65,536 paths — the roadmap’s WP2 success criterion (≤ 10% at μ
-≤ 10⁻⁸) is met.</p>
-<p><strong>ELT/YLT integration.</strong> A converter turns
-catastrophe-model event or year loss tables into RDPO’s source form;
-events paying in any set of countries become one Poisson source with its
-exact three-year capped law. On a 10,000-year YLT the standard analyst
-estimate of a μ = 2×10⁻⁴ pool exceedance has 132% relative error; RDPO
-on the converted model gives <strong>5.4%</strong> at the same
+</div>
+<div class="no">
+<p><strong>What we do not claim</strong></p>
+<ul>
+<li>A quantum advantage today, on any hardware.</li>
+<li>Faster wall-clock than simple methods on our CPU engine: at equal
+CPU time RDPO wins 5 of 25 benchmark cells (Table 2).</li>
+<li>A re-pricing of the bond: dependence results use public proxies, not
+the bond’s trigger definitions.</li>
+</ul>
+</div>
+</div>
+<div class="glossary">
+<p><strong>Term</strong>: the bond’s three-year cover period.
+<strong>Joint tail</strong>: outcomes in which several countries pay
+together; <strong>joint exhaustion</strong>: both countries pay their
+full US$80m in the same term (μ = 3.2×10⁻⁵ on the benchmark).
+<strong>Exceedance</strong>: the pool’s total payout L exceeds a
+threshold T, Pr(L &gt; T). <strong>Stop-loss</strong>: the expected
+payout above T, E[(L − T)⁺]. <strong>Path</strong> or
+<strong>query</strong>: one simulated three-year scenario (classical),
+or one run of the quantum state-preparation circuit. <strong>μ</strong>:
+the exact value of a target. <strong>Relative RMSE</strong>:
+root-mean-square error divided by μ, over independent repetitions.
+<strong>Treewidth</strong>: how tangled the dependence graph is; exact
+cost grows exponentially in it, not in the number of countries n.</p>
+</div>
+<h1 id="problem-and-classical-bottleneck">1 Problem and classical
+bottleneck</h1>
+<p><strong>The model.</strong> Each country holds US$80m of cover over a
+three-year term: US$70m against earthquakes, paid in quarter steps, and
+US$10m against extreme rain, paid once. Earthquakes and rain arrive as
+Poisson processes; some events hit both countries. The brief’s five
+targets (expected loss, both pay, exceedance of US$80m, stop-loss above
+US$80m, joint exhaustion) are expectations μ = E[f(L₁, L₂)] of the two
+term losses, under five dependence scenarios: 25 cells.</p>
+<p><strong>The bottleneck is accuracy in the joint tail, and it grows
+with the portfolio.</strong> Joint exhaustion has μ = 3.2×10⁻⁵. Plain
+Monte Carlo with the benchmark’s 16,384 paths returns zero in 60% of
+runs. Exact enumeration is instant for two countries, but the annual
+state space is 10ⁿ for n countries, and regional pools cover 10–30
+countries, where pool targets fall to 4.1×10⁻⁹–9.5×10⁻⁹ per term and, on
+a 28-country ring, to 1.3×10⁻¹³. Each new dependence scenario needs a
+fresh computation, so a method must be accurate at a fixed, modest
 budget.</p>
-<h1 id="quantum-extension-evidence-first">4 Quantum extension —
-evidence-first</h1>
-<p>The quantum stage is designed, not demonstrated: no quantum processor
-is available in Phase 1, so no advantage is claimed. We specify it
-precisely enough to be <em>tested and falsified</em>.</p>
-<p><strong>Problem and primitive.</strong> Classical RDPO needs ρ²/ε²
-paths; iterative amplitude estimation needs ≈ c_Q/(ε √a) applications of
-a state-preparation operator A, so the wall-clock crossover is</p>
-<p><span class="math display">\[s^*(\varepsilon, \rho^2) =
-\frac{\varepsilon}{\rho^2} \cdot \frac{c_Q \tau_A}{\tau_C
-\sqrt{a}}.\]</span></p>
-<p>The quantum stage wins only where the <em>best classical</em> method
-is hard (large ρ²) or where very high precision is required (small ε).
-Comparing with plain Monte Carlo instead of RDPO overstates the
-advantage by up to 10¹¹.</p>
-<p><strong>Algorithm 2: guarded Q-RDPO.</strong> Classical RDPO → choose
-a loadable product-form measure → predict s* from the crossover law →
-compile A and Q = A S₀ A† S_χ → iterative amplitude estimation with
-noise-aware likelihood → accept the quantum result only if the fit
-passes and it agrees with the classical pilot within 3σ, else report the
-classical estimate.</p>
-<p><strong>Scalability.</strong> Compiled resources fit logical qubits ≈
-38 + 13.2n + 8.2|E|; Toffolis per A ≈ -26 + 106.0n + 39.0|E|; depth of A
-≈ 378 + 0.3n + 14.7|E|, all within 7% of every compiled count, so
-register counts and gate depths grow linearly in n and |E|.</p>
-<p><strong>Falsifiable criterion.</strong> At 28 countries the quantum
-stage needs hardware <strong>8×10⁴</strong> times faster than the stated
-fault-tolerant baseline, and a logical error rate near 10⁻⁷. Both are
-stated as measurable targets.</p>
-<p><strong>Error mitigation under miscalibration.</strong> Noise-aware
-mitigation is worse than no mitigation in 21–38% of instances under
-control-offset miscalibration (consistent with <span class="citation"
-data-cites="errmit2026">(<span>“When Error Mitigation Makes Things
-Worse: Budget-Aware Evaluation, Extrapolation Failure, and the
-Calibration Trust Boundary”</span> 2026)</span>). A pilot-disagreement
-guard caps p99 error at ≤ 0.17 at a 10–22% fallback rate.</p>
-<h1 id="prototype-deliverable">5 Prototype deliverable</h1>
-<p>Open-source Python package
-(<code>CL0908/adb-quantum-challenge</code>), <strong>59 passing
-tests</strong>, no proprietary code or data. Runs on one CPU core.
-Includes:</p>
+<p><strong>State of the art.</strong> Catastrophe-model platforms
+aggregate event and year loss tables by plain Monte Carlo, with
+dependence through shared events or copulas <span class="citation"
+data-cites="joe2014 embrechts1997">(Joe 2014; Embrechts, Klüppelberg,
+and Mikosch 1997)</span>. Rare-event methods reduce variance but need a
+good proposal <span class="citation"
+data-cites="glasserman2003 owen1997 rubinstein2004 cerou2007 delmoral2006">(Glasserman
+2003; Owen 1997; Rubinstein and Kroese 2004; Cérou and Guyader 2007; Del
+Moral, Doucet, and Jasra 2006)</span>. Amplitude estimation offers a
+quadratic query speed-up for risk measures <span class="citation"
+data-cites="montanaro2015 woerner2019 egger2021">(Montanaro 2015;
+Woerner and Egger 2019; Egger et al. 2021)</span>, but end-to-end
+studies find that state preparation and fault-tolerance overheads decide
+the outcome <span class="citation"
+data-cites="chakrabarti2021 herbert2021 herman2023">(Chakrabarti et al.
+2021; Herbert 2021; Herman et al. 2023)</span>. Section 2.5 positions
+our method against each approach the brief suggests.</p>
+<h1 id="scientific-approach">2 Scientific approach</h1>
+<h2 id="one-exact-representation">2.1 One exact representation</h2>
+<p>The capped multi-year payout process is an exact product of
+independent Poisson <strong>sources</strong>: for each country a solo
+earthquake source and a solo rain source, and for each dependence link
+(edge) between two countries a shared earthquake source and a shared
+rain source. With n countries and |E| edges there are K = 2n + 2|E|
+sources. Each source’s effect over the term is a capped increment with
+at most 25 values, and its law is computed exactly from the brief’s
+rates. Capping commutes with addition, so the term state is the capped
+sum of K independent draws (annex, Propositions 1–2). The same
+representation feeds three solvers.</p>
+<h2 id="exact-engine-quantum-inspired-tensor-networks">2.2 Exact engine:
+quantum-inspired tensor networks</h2>
+<p>A matrix-product state (MPS), the tensor network used to simulate
+quantum many-body systems and to model probability distributions <span
+class="citation" data-cites="orus2014 han2018">(Orús 2014; Han et al.
+2018)</span>, stores the joint law of n countries as a chain of small
+tensors. Applying the source kernels one by one gives the law exactly;
+its size is set by the <em>bond dimension</em> χ, which follows the
+dependence graph, not n.</p>
 <ul>
-<li>RDPO engine (Phase 1 + Phase 2), projected Doob sampler, exact
-tensor-network references.</li>
-<li>ELT/YLT converter; <code>api/estimate.py</code> runs as a Vercel
-Python function.</li>
-<li>Real-world checks: USGS catalogue, NOAA loss records, GHCN-Daily
-rainfall, three stronger rare-event methods, posterior-uncertainty
-propagation.</li>
-<li>Quantum stage: structured loading, bitwise weight oracle, IQAE
-emulation, surface-code resource model, NISQ mitigation study.</li>
+<li><strong>Tilted gauge.</strong> Plain truncation loses the rarest
+tails: 6.0% error on joint exhaustion at truncation tolerance 10⁻⁹,
+against 1.4×10⁻⁹ in the tilted gauge. We compress the law multiplied by
+the inverse of the independent marginals, so rare and common states have
+similar weight, then undo the tilt exactly.</li>
+<li><strong>Frontier variable elimination</strong> handles dense but
+narrow graphs (bounded treewidth): countries are added in a fixed order
+and summed out once no remaining link touches them <span
+class="citation" data-cites="dechter1999">(Dechter 1999)</span>. Only
+non-negative sums occur, so no gauge is needed.</li>
+<li><strong>Pair reduction.</strong> A question about two countries
+needs only the sources that touch them: exact in 3 ms at any pool
+size.</li>
+<li><strong>Limits.</strong> Cost grows exponentially with treewidth and
+with the number of countries a single event can hit. Complete graphs are
+exact to 7 countries only.</li>
 </ul>
-<p>Full method, proofs, resource tables, Asia–Pacific pool map, ELT
-demonstration and market-record comparison in the technical annex.</p>
-<h1 id="work-plan-12-weeks-deep-development">6 Work plan (12 weeks, Deep
-Development)</h1>
+<h2
+id="rdpo-learned-sampling-where-exact-contraction-is-not-available">2.3
+RDPO: learned sampling where exact contraction is not available</h2>
+<p>Importance sampling draws paths from a proposal and reweights them by
+w = p/q. The zero-variance proposal is the <strong>Doob
+h-transform</strong> of the source process: draw each source’s increment
+x in state s with probability p(x)·V(s ⊕ x)/V(s), where V is the exact
+conditional value of the target. Every path then returns μ. V is a value
+function, so this proposal is the optimal policy of a KL-regularised
+control problem <span class="citation"
+data-cites="todorov2009 kappen2005">(Todorov 2009; Kappen 2005)</span>,
+and RDPO learns it as a reinforcement-learning policy:</p>
+<ol type="1">
+<li><strong>Policy.</strong> A log-linear soft value over local features
+(country payout levels, link indicators, progress towards the
+threshold), mixed with 5% of the true law so that every likelihood ratio
+stays bounded. One path costs O(n + |E|) and never touches the 10ⁿ joint
+states.</li>
+<li><strong>Training.</strong> Cross-entropy (a KL objective) first, to
+reach the tail; then a Rényi-2 policy gradient, because the estimator’s
+relative variance <em>is</em> the χ² divergence from the zero-variance
+law, while a small KL does not bound it.</li>
+<li><strong>Estimate.</strong> Training paths count against the budget.
+Later batches are pooled with weights fixed before they are drawn, which
+makes the estimate exactly unbiased for any learned policy, with a
+Student-t 95% interval.</li>
+</ol>
+<p>RDPO’s role is what the exact engine cannot reach: high-treewidth
+dependence, events that hit three or more countries (vendor event sets),
+and any setting where a query is expensive: one catastrophe-model run,
+or one quantum state preparation.</p>
+<h2 id="quantum-stage-amplitude-estimation-with-exact-loading">2.4
+Quantum stage: amplitude estimation with exact loading</h2>
+<ul>
+<li><strong>Encoding.</strong> One register per source (1, 3 or 6
+qubits), prepared exactly in <span
+class="math inline">\(\sqrt{q_k(x)}\)</span> with a cascade of
+controlled rotations <span class="citation"
+data-cites="grover2002">(Grover and Rudolph 2002)</span>; no learned
+loader, no truncation. Reversible adders form the pool loss.</li>
+<li><strong>Twisted loading with a bounded weight.</strong> Loading the
+true law gives amplitude <span class="math inline">\(a = \mu\)</span>
+and needs of order <span class="math inline">\(\mu^{-1/2}\)</span>
+queries. We load an exponentially twisted law instead and write the
+bounded importance weight <span
+class="math inline">\(e^{-\eta(U-T)}\)</span> onto the objective qubit
+one bit of <span class="math inline">\(U - T\)</span> at a time (<span
+class="math inline">\(U\)</span>: uncapped loss, <span
+class="math inline">\(\eta\)</span>: twist, <span
+class="math inline">\(\Lambda\)</span>: its cumulant). Then <span
+class="math inline">\(a = \mu\, e^{\eta T - \Lambda(\eta)}\)</span>,
+which decays with the large-deviation gap rather than with <span
+class="math inline">\(\mu\)</span>.</li>
+<li><strong>Estimation.</strong> Iterative amplitude estimation <span
+class="citation" data-cites="grinko2021">(Grinko et al. 2021)</span>
+needs about <span class="math inline">\(c_Q/(\varepsilon\sqrt
+a)\)</span> state preparations for relative error <span
+class="math inline">\(\varepsilon\)</span> (<span
+class="math inline">\(c_Q\)</span> measured by exact emulation), against
+<span class="math inline">\(\rho^2/\varepsilon^2\)</span> paths for a
+classical sampler with per-path relative variance <span
+class="math inline">\(\rho^2\)</span>.</li>
+<li><strong>Crossover law.</strong> The quantum stage beats RDPO in
+wall-clock only on hardware <span class="math inline">\(s^*\)</span>
+times faster than the stated baseline, <span class="math inline">\(s^* =
+\kappa\,\varepsilon/\rho^2\)</span> with <span
+class="math inline">\(\kappa = c_Q\tau_A/(\tau_C\sqrt a)\)</span>; <span
+class="math inline">\(\tau_A\)</span> is the fault-tolerant time per
+state preparation, <span class="math inline">\(\tau_C\)</span> RDPO’s
+time per path. Comparing with plain Monte Carlo instead would overstate
+the quantum gain by up to 6.5×10¹⁰ here.</li>
+<li><strong>Error correction (projected fault-tolerant
+baseline).</strong> Surface code at physical error 10⁻³, 1 µs code
+cycles, four magic-state factories, Toffoli = 4 T, Ross–Selinger
+rotation synthesis <span class="citation"
+data-cites="fowler2012 litinski2019 rossselinger2016">(Fowler et al.
+2012; Litinski 2019; Ross and Selinger 2016)</span>.</li>
+<li><strong>Error mitigation and a trust guard.</strong> Near-term runs
+use a noise-aware likelihood across Grover depths. A quantum estimate is
+accepted only if the fit passes a goodness-of-fit test <em>and</em>
+agrees within 3σ with a cheap classical RDPO pilot; otherwise the
+classical estimate is reported.</li>
+</ul>
+<h2 id="position-against-the-approaches-the-brief-suggests">2.5 Position
+against the approaches the brief suggests</h2>
+<div class="compact">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>What it needs on this problem</th>
+<th>What we measured or cite</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Amplitude estimation <span class="citation"
+data-cites="woerner2019 egger2021">(Woerner and Egger 2019; Egger et al.
+2021)</span></td>
+<td>exact loading, payout oracle, deep circuits</td>
+<td>exact source-wise loading, linear resources; break-even needs
+hardware 8.2×10⁴× faster at 28 countries; near-term circuits off by
+19%–25%</td>
+<td>right primitive; needs fault tolerance</td>
+</tr>
+<tr class="even">
+<td>QCBM, QGAN, QBM, quantum copula as loaders <span class="citation"
+data-cites="benedetti2019 zoufal2019 amin2018 zhu2022">(Benedetti et al.
+2019; Zoufal, Lucchi, and Woerner 2019; Amin et al. 2018; Zhu et al.
+2022)</span></td>
+<td>learn p from data</td>
+<td>p is known exactly here; a learned loader errs in the tail it never
+sees. As a proposal, an 8-qubit Born machine’s noise biased weights by
+9%–60%, 0.6% after calibration</td>
+<td>only as a reweighted proposal</td>
+</tr>
+<tr class="odd">
+<td>Quantum kernels <span class="citation"
+data-cites="havlicek2019">(Havlíček et al. 2019)</span></td>
+<td>a surrogate or proposal</td>
+<td>payouts are exact and cheap; the optimal proposal is a value
+function</td>
+<td>no role found; not tested</td>
+</tr>
+<tr class="even">
+<td>Annealing, annealer QBM <span class="citation"
+data-cites="amin2018 benedetti2016">(Amin et al. 2018; Benedetti et al.
+2016)</span></td>
+<td>samples at unknown effective temperature</td>
+<td>unbiased weights need known proposal probabilities</td>
+<td>not used</td>
+</tr>
+<tr class="odd">
+<td>Tensor networks <span class="citation"
+data-cites="han2018 orus2014 kastoryano2022">(Han et al. 2018; Orús
+2014; Kastoryano and Pancotti 2022)</span></td>
+<td>low bond dimension or treewidth</td>
+<td>exact to 28 countries in seconds to minutes (Figure 2)</td>
+<td><strong>our exact engine</strong></td>
+</tr>
+<tr class="even">
+<td>Classical rare-event methods</td>
+<td>a good proposal</td>
+<td>MC, Sobol, stratified, brief IS, SMC, splitting, flow IS, twisting:
+all benchmarked</td>
+<td>the bar for every claim</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="prototype-and-results">3 Prototype and results</h1>
+<p>All results come from one Python package with 101 tests, fixed seeds
+and exact references.</p>
+<h2 id="the-briefs-benchmark-reproduced-exactly">3.1 The brief’s
+benchmark, reproduced exactly</h2>
+<p><strong>Table 1.</strong> The brief’s Table 5 reproduced: our exact
+values (dense enumeration of the source model, more digits than the
+brief prints). <em>Match</em>: number of the five values that equal the
+brief’s published value at its printed rounding.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Expected loss</th>
+<th>Both pay</th>
+<th>Pr(L &gt; 80m)</th>
+<th>Stop-loss</th>
+<th>Both exhausted</th>
+<th>Match</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Base</td>
+<td>US$10.0635m</td>
+<td>4.4138%</td>
+<td>1.2047%</td>
+<td>US$282,354.7</td>
+<td>3.163×10⁻⁵</td>
+<td>5/5</td>
+</tr>
+<tr class="even">
+<td>Independent</td>
+<td>US$10.0635m</td>
+<td>2.7156%</td>
+<td>0.7186%</td>
+<td>US$171,266.4</td>
+<td>3.924×10⁻⁶</td>
+<td>5/5</td>
+</tr>
+<tr class="odd">
+<td>Common shock</td>
+<td>US$10.0635m</td>
+<td>5.0526%</td>
+<td>1.6066%</td>
+<td>US$385,043.4</td>
+<td>4.400×10⁻⁵</td>
+<td>5/5</td>
+</tr>
+<tr class="even">
+<td>Rain stress</td>
+<td>US$11.1705m</td>
+<td>7.0464%</td>
+<td>1.3215%</td>
+<td>US$306,285.8</td>
+<td>6.925×10⁻⁵</td>
+<td>5/5</td>
+</tr>
+<tr class="odd">
+<td>Rain cover</td>
+<td>US$9.9701m</td>
+<td>4.4138%</td>
+<td>0.6997%</td>
+<td>US$170,927.5</td>
+<td>3.163×10⁻⁵</td>
+<td>5/5</td>
+</tr>
+</tbody>
+</table>
+<p>The full law (100 annual states, three-year capped term) takes 0.64
+ms by dense enumeration; the brief quotes about 0.2 ms for its own
+implementation. Two-country questions inside any pool take 0.36 ms by
+pair reduction. Because the brief lists the published annual expected
+loss of each note, matching it is a consistency check: our annual
+figures are 2.297% and 2.011% (published 2.296% and 2.011%).</p>
+<h2 id="accuracy-per-query-on-the-benchmark">3.2 Accuracy per query on
+the benchmark</h2>
+<figure>
+<img src="../../figures/paper/e1_heatmap.png" class="wide"
+alt="Figure 1. Benchmark, 16,384 paths per estimate with RDPO’s training included, 40 replications. (a) RDPO’s relative RMSE. (b) Error of the best of the brief’s four methods divided by RDPO’s (blue &lt; 1: a reference method is better)." />
+<figcaption aria-hidden="true"><strong>Figure 1.</strong> Benchmark,
+16,384 paths per estimate with RDPO’s training included, 40
+replications. (a) RDPO’s relative RMSE. (b) Error of the best of the
+brief’s four methods divided by RDPO’s (blue &lt; 1: a reference method
+is better).</figcaption>
+</figure>
+<ul>
+<li><strong>RDPO wins 20 of 25 cells</strong>, all except expected loss,
+where scrambled Sobol is better and should be used. On joint exhaustion
+the gain is ×6.3–171; RDPO’s error there is 1.39% in the base
+scenario.</li>
+<li><strong>Intervals.</strong> Nominal 95% intervals cover the exact
+value in 94% of replications (worst cell 85%).</li>
+<li><strong>Stronger baselines.</strong> Against adaptive multilevel
+splitting, SMC on the optimal exponential twist and a flow-based
+importance sampler, at the same budget and seeds, RDPO is more accurate
+on every rare target, by ×5.4–×8. SMC on the optimal twist is the
+strongest of the three.</li>
+</ul>
+<h2 id="scaling-exact-references-then-rdpo-beyond-two-countries">3.3
+Scaling: exact references, then RDPO beyond two countries</h2>
+<ul>
+<li><strong>Exact references.</strong> Sparse graphs keep χ = 9–58 up to
+28 countries; the data-calibrated CAREC (10 countries, χ = 588) and
+Asia–Pacific (28 countries, χ = 367) pools are exact in minutes; 21
+dense references reach band-4 with n = 28 (102 edges).</li>
+<li><strong>RDPO against these references.</strong> On the pools, RDPO’s
+relative RMSE on the rarest exceedance is CAREC 1.25% at μ = 4.3×10⁻⁹;
+Asia–Pacific 0.76% at μ = 9.5×10⁻⁹; ring-50 0.79% at μ = 4.1×10⁻⁹, with
+65,536 paths; plain Monte Carlo would need 2.4×10¹⁰ paths for 10%. Pair
+exhaustion inside a pool is harder to sample (5.2%–5.9%, coverage
+71%–75%) and is answered exactly by pair reduction instead.</li>
+<li><strong>Against exponential twisting</strong>, the strongest simple
+method for thresholds, at the same path budget RDPO is more accurate in
+16 of 16 scaling settings and 10 of 10 dense settings: its per-path
+variance is 11–38× lower on rings of 8–28 countries and 4–15× lower on
+dense graphs. The gain comes from state dependence: the proposal changes
+with the payouts already drawn, which a single twist cannot do.</li>
+</ul>
+<figure>
+<img src="../../figures/paper/exact_scaling.png" class="wide"
+style="width:92.0%"
+alt="Figure 2. The exact engine. (a) Time to compute the full joint law on one core: tilted MPS for chain, ring and complete dependence; frontier elimination for band-k graphs (each country linked to its next k neighbours) and a ladder with diagonals; stars: data-calibrated pools and a 50-country ring. (b) MPS bond dimension: constant for sparse dependence, far below the √(10ⁿ) a generic law would need." />
+<figcaption aria-hidden="true"><strong>Figure 2.</strong> The exact
+engine. (a) Time to compute the full joint law on one core: tilted MPS
+for chain, ring and complete dependence; frontier elimination for band-k
+graphs (each country linked to its next k neighbours) and a ladder with
+diagonals; stars: data-calibrated pools and a 50-country ring. (b) MPS
+bond dimension: constant for sparse dependence, far below the √(10ⁿ) a
+generic law would need.</figcaption>
+</figure>
+<h2 id="wall-clock-stated-once">3.4 Wall-clock, stated once</h2>
+<p>Per path is the brief’s criterion. Per CPU second the picture is
+different, because RDPO trains for each estimate while the simple
+methods draw paths almost for free.</p>
+<p><strong>Table 2.</strong> Where RDPO wins, per path and per CPU
+second. <em>Same paths</em>: every method draws the same number of
+simulated terms, RDPO’s training included (the brief’s criterion).
+<em>Same CPU time</em>: every competitor gets RDPO’s single-core
+wall-clock for one estimate. Cells in which RDPO has the lower relative
+RMSE.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>cells</th>
+<th>RDPO better, same paths</th>
+<th>RDPO better, same CPU time</th>
+<th>best at same CPU time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Benchmark: the brief’s 25 cells (vs the brief’s four methods)</td>
+<td>25</td>
+<td><strong>20</strong></td>
+<td>5 (4 of 5 joint-exhaustion cells)</td>
+<td>scrambled Sobol; RDPO or SMC for joint exhaustion</td>
+</tr>
+<tr class="even">
+<td>Data-calibrated pools of 10 and 28 countries (vs twisting, Monte
+Carlo)</td>
+<td>9</td>
+<td><strong>9</strong></td>
+<td>4 (pair exhaustion ×8–×13 over Monte Carlo)</td>
+<td>twisting on pool thresholds; pair targets exact</td>
+</tr>
+<tr class="odd">
+<td>Scaling: rings to 28, complete graphs to 7 (vs twisting)</td>
+<td>16</td>
+<td><strong>16</strong></td>
+<td>0–2</td>
+<td>twisting</td>
+</tr>
+<tr class="even">
+<td>Dense band and ladder graphs to 28 (vs twisting)</td>
+<td>10</td>
+<td><strong>10</strong></td>
+<td>0</td>
+<td>twisting</td>
+</tr>
+</tbody>
+</table>
+<p>At equal CPU time on our NumPy engine, cheap methods win most cells.
+RDPO keeps joint exhaustion on the benchmark and inside pools, where a
+single twist does not apply. Two cheaper variants were tried and only
+tie twisting: a learned product-form tilt (median error ratio
+×1.00–×1.04 of twisting’s) and an automatic selector (×0.94–×1.15); the
+gain is in the state dependence, which costs training. Phase 2 therefore
+targets the wall-clock gap directly: a GPU-batched engine, and value
+functions taken from tensor-network contractions instead of learned
+features (§5).</p>
+<!-- CUTSET-RESULTS -->
+<h2 id="model-risk-and-the-pooling-decision">3.5 Model risk and the
+pooling decision</h2>
+<figure>
+<img src="../art/brief_vs_data_clean.svg" class="wide"
+alt="Figure 3. The bond’s two dependence assumptions against public data, and the effect on a pool. Dots: point estimates; bars: 95% intervals. Earthquake shares come from years in which both countries recorded losses; rain shares from 48 weather stations at the 1-in-5-year level." />
+<figcaption aria-hidden="true"><strong>Figure 3.</strong> The bond’s two
+dependence assumptions against public data, and the effect on a pool.
+Dots: point estimates; bars: 95% intervals. Earthquake shares come from
+years in which both countries recorded losses; rain shares from 48
+weather stations at the 1-in-5-year level.</figcaption>
+</figure>
+<p>Expected loss does not depend on dependence; anything that shares
+capital does. Three results, all exact:</p>
+<ul>
+<li><strong>Model-free range.</strong> With both countries’ term laws
+fixed at the brief’s values, a linear program over all couplings bounds
+Pr(L &gt; 80m) in [0, 9.0%]; the brief’s 1.20% sits at 13% of that
+range. No sampling accuracy narrows it; only evidence on dependence
+can.</li>
+<li><strong>Stress range from public data.</strong> Posterior
+uncertainty on the two shared shares gives Pr(L &gt; 80m) of 3.76% (95%
+credible interval 2.08%–5.27%); joint exhaustion is unchanged within its
+interval, because more shared earthquakes and less shared rain
+cancel.</li>
+<li><strong>Pooling.</strong> One shared US$80m limit instead of two
+separate covers keeps 97.2% of expected payouts under the brief’s
+dependence and 90.6% (86.7%–94.9%) under the data; a US$100m shared
+limit keeps 95.8%.</li>
+</ul>
+<p><strong>Weaknesses, stated up front.</strong> The earthquake share
+rests on 5 coincident loss years: NOAA 1900–2020 gives 48% (95% CI
+12%–79%), NOAA 1975–2020 gives 45% (95% CI 0%–82%), and EM-DAT 1990–2020
+gives 7% (95% CI 0%–57%), consistent with the brief’s 7.5%. Rain sharing
+is measured at the 1-in-5-year level (2.2% (0.6%–7.7%)); the trigger is
+about 1-in-50, where the stations record too few events. Both proxies
+are loss years and station rain, not the bond’s cat-in-a-box and
+gridded-rain triggers. We therefore read the posterior as a stress range
+for dependence, not as an estimate, and Phase 2 measures both shares at
+trigger level.</p>
+<h2 id="catastrophe-model-input">3.6 Catastrophe-model input</h2>
+<p>A converter turns an event or year loss table into the source form,
+including events that pay in three or more countries. On a demonstration
+event set built from public data (2,411 events, 7 footprints hitting
+three or more countries), the rarest pool question read off a
+10,000-year year loss table has 132% relative error; RDPO on the
+converted sources gives 5.4% with 16,384 paths. No vendor table was
+available.</p>
+<h2 id="quantum-stage-emulated">3.7 Quantum stage, emulated</h2>
+<ul>
+<li><strong>Exactness.</strong> State-vector emulation of every loading
+circuit reproduces μ to a relative error of 1.2×10⁻¹²; compiled resource
+counts follow logical qubits ≈ 38 + 13.2n + 8.2|E|; Toffolis per A ≈ -26
++ 106.0n + 39.0|E|; depth of A ≈ 378 + 0.3n + 14.7|E|, each within 7% of
+the compiled circuits.</li>
+<li><strong>Where it could pay.</strong> RDPO’s measured per-path
+relative variances are ρ² = 0.13–117; break-even at 1% error needs ρ² ≈
+5.8×10⁴–9.6×10⁵ at the projected baseline (Figure 4). The gap closes
+with portfolio size (s* falls from 4.4×10⁶ at 2 countries to 8.2×10⁴ at
+28), so the test is re-run first where ρ² grows fastest: dense graphs
+and events touching many countries.</li>
+<li><strong>Near-term run, costed.</strong> The two-country law on 7–8
+qubits, transpiled for an IBM Heron-class device model (FakeFez): one
+Grover iterate costs 744–1,232 two-qubit gates. With the device’s noise
+the best estimates are off by 19%–25% (the direct joint-exhaustion
+circuit by 115%), so the trust guard falls back to the classical value.
+The twisted circuits reach 0.4%–2.8% error at two-qubit error 10⁻⁴ and
+0.1%–0.5% at 10⁻⁵: the error rate at which this calculation becomes
+usable.</li>
+<li><strong>Mitigation can hurt.</strong> Noise-aware fitting was worse
+than none in 21% of instances without miscalibration and 38% at a
+control offset of 0.01 (annex §7.7); the combined guard capped the
+99th-percentile error at 0.15–0.17 with 10%–22% fallback.</li>
+</ul>
+<figure>
+<img src="../../figures/paper/quantum_phase.png" class="wide"
+style="width:92.0%"
+alt="Figure 4. (a) Wall-clock phase diagram for amplitude estimation against RDPO. Above the break-even band the quantum stage is faster; each 100× hardware speed-up moves the band down two decades. Filled markers: RDPO’s measured ρ² at ε = 10%; open markers: plain Monte Carlo on the same targets, which would suggest a misleading quantum advantage. (b) Logical qubits, Toffolis per state preparation and depth: linear in n and |E|." />
+<figcaption aria-hidden="true"><strong>Figure 4.</strong> (a) Wall-clock
+phase diagram for amplitude estimation against RDPO. Above the
+break-even band the quantum stage is faster; each 100× hardware speed-up
+moves the band down two decades. Filled markers: RDPO’s measured ρ² at ε
+= 10%; open markers: plain Monte Carlo on the same targets, which would
+suggest a misleading quantum advantage. (b) Logical qubits, Toffolis per
+state preparation and depth: linear in n and |E|.</figcaption>
+</figure>
+<h1 id="resource-estimation">4 Resource estimation</h1>
+<p><strong>Classical</strong> (Phase 1, measured on one core of a 4-core
+Intel Xeon server CPU, 15 GB RAM, no GPU):</p>
+<div class="compact">
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -236,103 +682,291 @@ Development)</h1>
 </colgroup>
 <thead>
 <tr class="header">
-<th>WP</th>
-<th>Scope</th>
-<th>Milestone</th>
+<th>Task</th>
+<th>Time</th>
+<th>Memory</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>GPU-batched RDPO, library API, sandbox onboarding</td>
-<td>library v0.1, 10× throughput</td>
+<td>Brief’s benchmark, exact, 5 scenarios</td>
+<td>0.64 ms per scenario</td>
+<td>&lt; 1 MB</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>20–50-country pools with real hazard data; ground-motion and
-exposure models; gridded rainfall</td>
-<td>scaling report, ≤ 10% RMSE at μ ≤ 10⁻⁸ in 10⁵ paths (<strong>already
-achieved</strong> at 28/50 countries)</td>
+<td>RDPO, one benchmark estimate, 16,384 paths, training included</td>
+<td>58 ms</td>
+<td>&lt; 100 MB</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>Heavy-tail diagnostics, model selection, neural soft values;
-parameter-uncertainty propagation across all deliverables</td>
-<td>RDPO v3</td>
+<td>Exact tilted MPS: 28-country ring / Asia–Pacific pool / CAREC
+pool</td>
+<td>68 s / 42 s / 4.5 min</td>
+<td>&lt; 1 GB</td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td>Compiled quantum resource tables; calibrated sampler on sandbox
-hardware</td>
-<td>compiled s* map</td>
+<td>Exact frontier elimination, band-4 with n = 28 (102 edges)</td>
+<td>89 s</td>
+<td>&lt; 1 GB</td>
 </tr>
 <tr class="odd">
-<td>5</td>
-<td>Web application, AI analyst agent, MCP tool server</td>
-<td>public demo</td>
+<td>RDPO, 28-country ring, 65,536 paths (Phase 2 engine; twisting: 0.7
+s)</td>
+<td>24 s</td>
+<td>&lt; 1 GB</td>
 </tr>
 <tr class="even">
-<td>6</td>
-<td>Validation, documentation, business case, pilot engagement</td>
-<td>final deliverables</td>
+<td>RDPO, Asia–Pacific pool, rarest exceedance, 65,536 paths</td>
+<td>21 s</td>
+<td>&lt; 1 GB</td>
 </tr>
 </tbody>
 </table>
-<p>Done ahead of schedule: WP1 engineering (table-driven engine); WP2
-first results (28 countries); WP3 posterior-uncertainty propagation; WP5
-ELT/YLT converter.</p>
-<h1 id="commercialisation">7 Commercialisation</h1>
-<ul>
-<li><strong>Who buys.</strong> Development banks and sovereign risk
-pools (ADB, World Bank, CCRIF, ARC); reinsurers; ILS funds and cat-bond
-investors; brokers and catastrophe-model vendors (via Oasis plug-in);
-parametric MGAs. B2B/B2G.</li>
-<li><strong>How they use it today.</strong> Pricing and stress testing
-on event loss tables and year loss tables from vendor models (Verisk,
-Moody’s RMS). Our ELT/YLT converter plugs in there.</li>
-<li><strong>Why they would try it.</strong> On the public ADB bond data,
-a joint-tail finding that no vendor pipeline would surface (2.8×
-posterior median); stress sweeps that would take hours in Oasis in 5
-seconds; pair questions solved exactly.</li>
-<li><strong>Market.</strong> US$2.1bn software TAM (cat-modelling &amp;
-exposure management); bottom-up US$30m SAM; target US$3.5m ARR by year 5
-(28 institutions).</li>
-</ul>
-<h1 id="team">8 Team</h1>
-<p><strong>Tan Chun Loong</strong> (sole member). BAppSc Physics +
-Quantum Technology, NTU Singapore (2024–2028, CGPA 4.8/5.0). Incoming
-Phortify Student Research Fellow, ICFO Barcelona (hosted by
-Prof. Antonio Acín’s Quantum Information Theory group; one of three
-worldwide for this cycle). URECA Research Fellow with Prof. Mile Gu on
-relative-entropy foundations of model-based RL; Quantum Security Intern
-at Fraunhofer Singapore; prior work on tilted path-integral control,
-Clifford+T compilation (MIT iQuHACK), quantum reservoir computing (QAI
-Ventures GenQ). AI pair-programming by Claude Code; the author directed
-all research and reviewed all results. A short CV is attached as an
-annex.</p>
-<h1 id="platform">9 Platform</h1>
-<p>No platform access needed for Phase 1 (all results on one laptop CPU
-core). In Deep Development the QAI Ventures sandbox would serve
-GPU-batched sweeps, compiled loading circuits, and emulator or hardware
-amplitude-estimation runs.</p>
-<div class="takeaway">
-<p>Three deliverables for Phase 2: the pilot with ADB
-disaster-risk-financing, the first set of real vendor-model backtests,
-and a published AI-for-Quantum paper. We would open-source everything
-that is not a client’s data.</p>
 </div>
-<h1 class="newpage" id="references">References</h1>
+<p><strong>Quantum.</strong> Near-term: the costed emulation of §3.7.
+Fault-tolerant: projected from component formulas for the twisted loader
+with the bitwise weight oracle, 10% relative error on Pr(L &gt; T),
+surface code at physical error 10⁻³.</p>
+<div class="compact">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Near-term, 2 countries</th>
+<th>Fault-tolerant, 2 countries</th>
+<th>Fault-tolerant, 28 countries (ring)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qubits</td>
+<td>7–8 physical</td>
+<td>68 logical, 109,000 physical (d = 25)</td>
+<td>635 logical, 1.2 million physical (d = 31)</td>
+</tr>
+<tr class="even">
+<td>Circuit depth</td>
+<td>734–6,171 (Grover power 0–2)</td>
+<td>372 CNOT layers per state preparation</td>
+<td>806</td>
+</tr>
+<tr class="odd">
+<td>Two-qubit gates</td>
+<td>211–2,312 per circuit</td>
+<td>4,212 CNOTs per Grover iterate; 236 Toffolis per preparation</td>
+<td>67,360; 4,074</td>
+</tr>
+<tr class="even">
+<td>Shots / queries</td>
+<td>9×10⁵ shots, 3–15 QPU minutes</td>
+<td>4,290 state preparations, Grover depth ≤ 16</td>
+<td>46,685, depth ≤ 183</td>
+</tr>
+<tr class="odd">
+<td>Run time</td>
+<td>emulator fallback 18 CPU minutes</td>
+<td>0.7 h</td>
+<td>11 days (RDPO: 12 s)</td>
+</tr>
+<tr class="even">
+<td>Error handling</td>
+<td>noise-aware likelihood, readout calibration, trust guard</td>
+<td>surface code; guard against an RDPO pilot</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Hardware modality and fit with Phase 2.</strong> Each shared
+source couples two country registers. On 2D superconducting lattices
+SWAP routing inflates two-qubit counts by 12–41× in our compilations, so
+dense dependence suits all-to-all trapped-ion or neutral-atom machines;
+sparse, geographically ordered pools map onto a line. Classical Phase 2
+work uses the sandbox’s GPU credits (batched rollouts and contractions);
+the hardware run needs 3–15 QPU minutes, and the emulator gives the same
+report if access fails.</p>
+<h1 id="phase-2-plan-of-action-30-nov-2026-22-jan-2027">5 Phase 2 plan
+of action (30 Nov 2026 – 22 Jan 2027)</h1>
+<p><strong>Already done, not repeated in Phase 2.</strong> Exact engine
+to 28 countries; RDPO with unbiased estimator; all benchmarks at equal
+paths and equal time; data-calibrated pools; ELT/YLT converter; quantum
+resource model and costed hardware emulation.</p>
+<p><strong>Three work packages, one person.</strong> Planned effort: 20
+h/week for all eight weeks (about 160 hours); over the holiday weeks 4–5
+these hours go to long compute jobs and writing, and GPU sweeps run
+unattended outside them.</p>
+<div class="compact">
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Work package</th>
+<th>Milestone and measurable criterion (current value)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>WP1 Wall-clock (W1–W3).</strong> Port rollouts and training
+to GPU in the sandbox (array code, batched over replications and
+scenarios); replace learned features by tensor-network value functions
+or cutset conditioning on graphs too wide for exact contraction.</td>
+<td><strong>M1 (W3):</strong> at equal wall-clock, RDPO beats the
+brief’s four methods in ≥ 10 of 25 benchmark cells (now 5 of 25) and is
+within 2× of twisting on the dense threshold cells (now ×53–×103
+behind).</td>
+</tr>
+<tr class="even">
+<td><strong>WP2 Dependence at trigger level (W2–W5).</strong> Rain
+sharing from gridded data (ERA5 or GPCP open mirrors) at the
+1-in-50-year trigger level; earthquake sharing at trigger magnitudes
+with a cat-in-a-box proxy; coupling bounds with data constraints.</td>
+<td><strong>M2 (W5):</strong> both shared shares estimated at trigger
+level with intervals, and a data-constrained range for Pr(L &gt; 80m)
+narrower than [0, 9.0%].</td>
+</tr>
+<tr class="odd">
+<td><strong>WP3 Quantum run and decision package (W5–W8).</strong>
+Source-wise twisted loader on the emulator, then a guarded run on IBM
+hardware; pooling calculator; documentation, classical bottleneck
+analysis, business case, pitch.</td>
+<td><strong>M3 (W7):</strong> measured fidelity against depth on
+hardware within the emulator’s predicted band, and the guard’s verdict.
+<strong>M4 (22 Jan):</strong> three ADB questions (pooled limit,
+dependence stress, ELT input) answered end to end from one command.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="runin">
+<p><strong>Risks and fallbacks.</strong></p>
+</div>
+<ul>
+<li><strong>GPU port slower than planned</strong> → keep the CPU engine;
+report the equal-time table as is; M1 becomes “gap halved”.</li>
+<li><strong>Tensor-network value functions do not help</strong> → report
+the negative result; recommend twisting for threshold targets and RDPO
+for joint and pair targets, as Table 2 already does.</li>
+<li><strong>Data access</strong> (ERA5 needs an account; some hosts are
+blocked in our sandbox) → GPCP and CHIRPS open mirrors, then the cached
+station data with the level mismatch stated.</li>
+<li><strong>Hardware access or noise</strong> → the emulator with the
+device noise model produces the same report; the run is the first item
+descoped.</li>
+<li><strong>Holiday weeks and a one-person team</strong> → weeks 4–5 run
+long compute jobs only; descoping order: hardware run, then cutset
+conditioning, then the cat-in-a-box proxy. M4 is protected.</li>
+</ul>
+<p><strong>Business case.</strong> An open-source joint-tail engine with
+exact references and a validation pack, plus paid integration and
+support, placed after a catastrophe model: loss tables in, joint-tail
+answers with intervals out. First users: ADB’s disaster-risk-financing
+team (trigger design, CAREC pooling studies) and sovereign risk pools;
+then reinsurers and model vendors, replacing the plain Monte Carlo
+aggregation step. A bottom-up estimate gives a serviceable market of
+about US$30m a year (annex, Appendix B). The same source model fits
+correlated credit defaults, multi-site infrastructure outages and
+compound climate extremes.</p>
+<h1 id="team">6 Team</h1>
+<p><strong>Tan Chun Loong</strong> (sole member). BAppSc Physics with a
+Second Major in Quantum Technology, NTU Singapore (2024–2028, CGPA
+4.8/5.0). Incoming Phortify Student Research Fellow at ICFO Barcelona,
+in Prof. Antonio Acín’s Quantum Information Theory group. URECA Research
+Fellow with Prof. Mile Gu on relative entropy and belief revision in
+model-based reinforcement learning, the mathematics of RDPO; earlier
+URECA work on stochastic climate models (Prof. François Gay-Balmaz).
+Quantum security intern, Fraunhofer Singapore (QKD under device
+imperfections). Hands-on quantum software: Clifford+T compilation with
+the Qiskit transpiler, gridsynth and rmsynth (MIT iQuHACK 2026, sole
+Singapore representative); warm-start QAOA for wildfire response on
+satellite data (SEA Quantathon 2025 finalist); quantum reservoir
+computing for systemic risk (QAI Ventures GenQ Hackathon 2025).
+Disaster-response domain: Track Lead for Wildfire &amp; Emergency
+Response, SEA Quantum Leaders Summit 2026. A short CV is attached.</p>
+<p><strong>One-person team, mitigated.</strong> Every result is
+regenerated by one command from fixed seeds, and 101 tests check each
+exactness claim, so the work can be audited and handed over. The plan is
+front-loaded and has a stated descoping order. A domain contact at ADB
+or QAI Ventures for the pooling questions would strengthen WP2 and
+WP3.</p>
+<h1 id="prototype-package-environment-and-ai-use">7 Prototype package,
+environment and AI use</h1>
+<ul>
+<li><strong>Source code.</strong> The complete repository (code, cached
+public data, result files, tests and the build of both documents) is
+public at <a href="https://github.com/CL0908/adb-quantum-challenge"
+class="uri">https://github.com/CL0908/adb-quantum-challenge</a>;
+<code>README.md</code> gives the one-command reproduction.</li>
+<li><strong>Environment.</strong> Python 3.13, NumPy 2.5.3, SciPy
+1.18.1, Matplotlib 3.11.2, pytest 9.2.0 (<code>requirements.txt</code>),
+Linux x86-64, one 4-core Intel Xeon CPU, no GPU.</li>
+<li><strong>Simulators.</strong> Exact state-vector and resource
+simulators written for this project; the near-term plan uses Qiskit
+2.6.2 and Qiskit Aer 0.18.2 with the fake IBM backend FakeFez
+(Heron-class noise snapshot). No quantum hardware was used.</li>
+<li><strong>AI use.</strong> The code, experiments and this document
+were developed with Claude Code (Anthropic) as an AI pair-programmer and
+writing assistant, following the author’s research plan. The author
+directed the research questions and design decisions and reviewed all
+results. All numbers are produced by the scripts in the repository.</li>
+</ul>
+<div class="limits">
+<p><strong>Limitations</strong></p>
+<ul>
+<li>Dependence evidence uses public proxies (loss years, epicentre
+distance, station rain), not the bond’s triggers; the earthquake share
+rests on 5 coincident years.</li>
+<li>At equal CPU time RDPO wins only on joint and pair targets (Table
+2).</li>
+<li>Exact references for complete dependence stop at 7 countries;
+high-treewidth pools have no exact check.</li>
+<li>Scrambled Sobol remains better on expected loss.</li>
+<li>No vendor event set and no quantum hardware run in Phase 1.</li>
+</ul>
+</div>
+<h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent"
 role="list">
-<div id="ref-aubeck2001" class="csl-entry" role="listitem">
-Au, Siu-Kui, and James L. Beck. 2001. <span>“Estimation of Small Failure
-Probabilities in High Dimensions by Subset Simulation.”</span>
-<em>Probabilistic Engineering Mechanics</em> 16 (4): 263–77.
+<div id="ref-amin2018" class="csl-entry" role="listitem">
+Amin, Mohammad H., Evgeny Andriyash, Jason Rolfe, Bohdan Kulchytskyy,
+and Roger Melko. 2018. <span>“Quantum <span>B</span>oltzmann
+Machine.”</span> <em>Physical Review X</em> 8: 021050.
+</div>
+<div id="ref-benedetti2019" class="csl-entry" role="listitem">
+Benedetti, Marcello, Delfina Garcia-Pintos, Oscar Perdomo, Vicente
+Leyton-Ortega, Yunseong Nam, and Alejandro Perdomo-Ortiz. 2019. <span>“A
+Generative Modeling Approach for Benchmarking and Training Shallow
+Quantum Circuits.”</span> <em>Npj Quantum Information</em> 5: 45.
+</div>
+<div id="ref-benedetti2016" class="csl-entry" role="listitem">
+Benedetti, Marcello, John Realpe-Gómez, Rupak Biswas, and Alejandro
+Perdomo-Ortiz. 2016. <span>“Estimation of Effective Temperatures in
+Quantum Annealers for Sampling Applications: A Case Study with Possible
+Applications in Deep Learning.”</span> <em>Physical Review A</em> 94:
+022308.
 </div>
 <div id="ref-cerou2007" class="csl-entry" role="listitem">
 Cérou, Frédéric, and Arnaud Guyader. 2007. <span>“Adaptive Multilevel
 Splitting for Rare Event Analysis.”</span> <em>Stochastic Analysis and
 Applications</em> 25 (2): 417–43.
+</div>
+<div id="ref-chakrabarti2021" class="csl-entry" role="listitem">
+Chakrabarti, Shouvanik, Rajiv Krishnakumar, Guglielmo Mazzola, Nikitas
+Stamatopoulos, Stefan Woerner, and William J. Zeng. 2021. <span>“A
+Threshold for Quantum Advantage in Derivative Pricing.”</span>
+<em>Quantum</em> 5: 463.
+</div>
+<div id="ref-dechter1999" class="csl-entry" role="listitem">
+Dechter, Rina. 1999. <span>“Bucket Elimination: A Unifying Framework for
+Reasoning.”</span> <em>Artificial Intelligence</em> 113 (1–2): 41–85.
 </div>
 <div id="ref-delmoral2006" class="csl-entry" role="listitem">
 Del Moral, Pierre, Arnaud Doucet, and Ajay Jasra. 2006.
@@ -340,16 +974,114 @@ Del Moral, Pierre, Arnaud Doucet, and Ajay Jasra. 2006.
 Samplers.”</span> <em>Journal of the Royal Statistical Society: Series
 B</em> 68 (3): 411–36.
 </div>
-<div id="ref-muller2019" class="csl-entry" role="listitem">
-Müller, Thomas, Brian McWilliams, Fabrice Rousselle, Markus Gross, and
-Jan Novák. 2019. <span>“Neural Importance Sampling.”</span> <em>ACM
-Transactions on Graphics</em> 38 (5).
+<div id="ref-egger2021" class="csl-entry" role="listitem">
+Egger, Daniel J., Ricardo García Gutiérrez, Jordi Cahué Mestre, and
+Stefan Woerner. 2021. <span>“Credit Risk Analysis Using Quantum
+Computers.”</span> <em>IEEE Transactions on Computers</em> 70 (12):
+2136–45.
 </div>
-<div id="ref-errmit2026" class="csl-entry" role="listitem">
-<span>“When Error Mitigation Makes Things Worse: Budget-Aware
-Evaluation, Extrapolation Failure, and the Calibration Trust
-Boundary.”</span> 2026. In <em>Advances in Neural Information Processing
-Systems</em>.
+<div id="ref-embrechts1997" class="csl-entry" role="listitem">
+Embrechts, Paul, Claudia Klüppelberg, and Thomas Mikosch. 1997.
+<em>Modelling Extremal Events for Insurance and Finance</em>. Springer.
+</div>
+<div id="ref-fowler2012" class="csl-entry" role="listitem">
+Fowler, Austin G., Matteo Mariantoni, John M. Martinis, and Andrew N.
+Cleland. 2012. <span>“Surface Codes: Towards Practical Large-Scale
+Quantum Computation.”</span> <em>Physical Review A</em> 86: 032324.
+</div>
+<div id="ref-glasserman2003" class="csl-entry" role="listitem">
+Glasserman, Paul. 2003. <em>Monte Carlo Methods in Financial
+Engineering</em>. Springer.
+</div>
+<div id="ref-grinko2021" class="csl-entry" role="listitem">
+Grinko, Dmitry, Julien Gacon, Christa Zoufal, and Stefan Woerner. 2021.
+<span>“Iterative Quantum Amplitude Estimation.”</span> <em>Npj Quantum
+Information</em> 7: 52.
+</div>
+<div id="ref-grover2002" class="csl-entry" role="listitem">
+Grover, Lov, and Terry Rudolph. 2002. <span>“Creating Superpositions
+That Correspond to Efficiently Integrable Probability
+Distributions.”</span> arXiv:quant-ph/0208112.
+</div>
+<div id="ref-han2018" class="csl-entry" role="listitem">
+Han, Zhao-Yu, Jun Wang, Heng Fan, Lei Wang, and Pan Zhang. 2018.
+<span>“Unsupervised Generative Modeling Using Matrix Product
+States.”</span> <em>Physical Review X</em> 8: 031012.
+</div>
+<div id="ref-havlicek2019" class="csl-entry" role="listitem">
+Havlíček, Vojtěch, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow,
+Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. 2019.
+<span>“Supervised Learning with Quantum-Enhanced Feature Spaces.”</span>
+<em>Nature</em> 567: 209–12.
+</div>
+<div id="ref-herbert2021" class="csl-entry" role="listitem">
+Herbert, Steven. 2021. <span>“No Quantum Speedup with
+<span>G</span>rover-<span>R</span>udolph State Preparation for Quantum
+<span>M</span>onte <span>C</span>arlo Integration.”</span> <em>Physical
+Review E</em> 103: 063302.
+</div>
+<div id="ref-herman2023" class="csl-entry" role="listitem">
+Herman, Dylan et al. 2023. <span>“Quantum Computing for Finance.”</span>
+<em>Nature Reviews Physics</em> 5: 450–65.
+</div>
+<div id="ref-joe2014" class="csl-entry" role="listitem">
+Joe, Harry. 2014. <em>Dependence Modeling with Copulas</em>. CRC Press.
+</div>
+<div id="ref-kappen2005" class="csl-entry" role="listitem">
+Kappen, Hilbert J. 2005. <span>“Path Integrals and Symmetry Breaking for
+Optimal Control Theory.”</span> <em>Journal of Statistical Mechanics:
+Theory and Experiment</em>, P11011.
+</div>
+<div id="ref-kastoryano2022" class="csl-entry" role="listitem">
+Kastoryano, Michael, and Nicola Pancotti. 2022. <span>“A Highly
+Efficient Tensor Network Algorithm for Multi-Asset <span>F</span>ourier
+Options Pricing.”</span> arXiv:2203.02804.
+</div>
+<div id="ref-litinski2019" class="csl-entry" role="listitem">
+Litinski, Daniel. 2019. <span>“A Game of Surface Codes: Large-Scale
+Quantum Computing with Lattice Surgery.”</span> <em>Quantum</em> 3: 128.
+</div>
+<div id="ref-montanaro2015" class="csl-entry" role="listitem">
+Montanaro, Ashley. 2015. <span>“Quantum Speedup of <span>M</span>onte
+<span>C</span>arlo Methods.”</span> <em>Proceedings of the Royal Society
+A</em> 471: 20150301.
+</div>
+<div id="ref-orus2014" class="csl-entry" role="listitem">
+Orús, Román. 2014. <span>“A Practical Introduction to Tensor
+Networks.”</span> <em>Annals of Physics</em> 349: 117–58.
+</div>
+<div id="ref-owen1997" class="csl-entry" role="listitem">
+Owen, Art B. 1997. <span>“Scrambled Net Variance for Integrals of Smooth
+Functions.”</span> <em>Annals of Statistics</em> 25 (4): 1541–62.
+</div>
+<div id="ref-rossselinger2016" class="csl-entry" role="listitem">
+Ross, Neil J., and Peter Selinger. 2016. <span>“Optimal Ancilla-Free
+<span>C</span>lifford+<span>T</span> Approximation of
+z-Rotations.”</span> <em>Quantum Information and Computation</em> 16
+(11–12): 901–53.
+</div>
+<div id="ref-rubinstein2004" class="csl-entry" role="listitem">
+Rubinstein, Reuven Y., and Dirk P. Kroese. 2004. <em>The Cross-Entropy
+Method</em>. Springer.
+</div>
+<div id="ref-todorov2009" class="csl-entry" role="listitem">
+Todorov, Emanuel. 2009. <span>“Efficient Computation of Optimal
+Actions.”</span> <em>Proceedings of the National Academy of
+Sciences</em> 106 (28): 11478–83.
+</div>
+<div id="ref-woerner2019" class="csl-entry" role="listitem">
+Woerner, Stefan, and Daniel J. Egger. 2019. <span>“Quantum Risk
+Analysis.”</span> <em>Npj Quantum Information</em> 5: 15.
+</div>
+<div id="ref-zhu2022" class="csl-entry" role="listitem">
+Zhu, Elton Yechao et al. 2022. <span>“Generative Quantum Learning of
+Joint Probability Distribution Functions.”</span> <em>Physical Review
+Research</em> 4: 043092.
+</div>
+<div id="ref-zoufal2019" class="csl-entry" role="listitem">
+Zoufal, Christa, Aurélien Lucchi, and Stefan Woerner. 2019.
+<span>“Quantum Generative Adversarial Networks for Learning and Loading
+Random Distributions.”</span> <em>Npj Quantum Information</em> 5: 103.
 </div>
 </div>
 </body>

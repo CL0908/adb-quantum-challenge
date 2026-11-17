@@ -1,0 +1,165 @@
+{"id": "band2-28-stop_loss-twist-0", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.413197042560856e-05, "ci": null, "sec": 54.63704586299991}
+{"id": "band2-28-exceedance-twist-0", "key": ["band2", 28, "exceedance", "twist"], "est": 1.0714870174162611e-12, "ci": null, "sec": 54.69024026500006}
+{"id": "band3-12-exceedance-twist-0", "key": ["band3", 12, "exceedance", "twist"], "est": 3.115511357123906e-06, "ci": null, "sec": 23.990623905000007}
+{"id": "band3-12-exceedance-rdpo-0", "key": ["band3", 12, "exceedance", "rdpo"], "est": 3.124698419855704e-06, "ci": [3.0921276894882048e-06, 3.157269150223203e-06], "sec": 141.298662455}
+{"id": "band3-12-stop_loss-twist-0", "key": ["band3", 12, "stop_loss", "twist"], "est": 68.11951521435019, "ci": null, "sec": 0.9485533160000159}
+{"id": "band3-12-stop_loss-rdpo-0", "key": ["band3", 12, "stop_loss", "rdpo"], "est": 71.25021430479865, "ci": [70.53961968832672, 71.96080892127057], "sec": 63.75485028800017}
+{"id": "band3-20-exceedance-twist-0", "key": ["band3", 20, "exceedance", "twist"], "est": 3.1153114460918406e-09, "ci": null, "sec": 1.6430225260000952}
+{"id": "band2-28-stop_loss-rdpo-0", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.2550114536309825e-05, "ci": [2.203779425821074e-05, 2.306243481440891e-05], "sec": 82.50871487600011}
+{"id": "band3-20-stop_loss-twist-0", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.07784018094817591, "ci": null, "sec": 1.343667299000117}
+{"id": "band2-28-exceedance-rdpo-0", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.616114026239051e-13, "ci": [8.433367779223555e-13, 1.0798860273254548e-12], "sec": 88.79170525299992}
+{"id": "band3-28-exceedance-twist-0", "key": ["band3", 28, "exceedance", "twist"], "est": 3.955783089216191e-12, "ci": null, "sec": 1.6150964119999571}
+{"id": "band3-20-exceedance-rdpo-0", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.085255667893347e-09, "ci": [3.019401271361352e-09, 3.1511100644253416e-09], "sec": 106.06331336599987}
+{"id": "band3-28-stop_loss-twist-0", "key": ["band3", 28, "stop_loss", "twist"], "est": 0.00010184702525771906, "ci": null, "sec": 1.4333492739999656}
+{"id": "band4-12-exceedance-twist-0", "key": ["band4", 12, "exceedance", "twist"], "est": 4.675632237731625e-06, "ci": null, "sec": 1.2953548300001785}
+{"id": "band4-12-stop_loss-twist-0", "key": ["band4", 12, "stop_loss", "twist"], "est": 111.48974329382006, "ci": null, "sec": 0.6266656840000451}
+{"id": "band4-12-exceedance-rdpo-0", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.666205263327328e-06, "ci": [4.6178628483335745e-06, 4.714547678321081e-06], "sec": 84.89464320399998}
+{"id": "band4-20-exceedance-twist-0", "key": ["band4", 20, "exceedance", "twist"], "est": 6.5642597375921065e-09, "ci": null, "sec": 1.273509648000072}
+{"id": "band3-20-stop_loss-rdpo-0", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08155323389974226, "ci": [0.08034001245443359, 0.08276645534505092], "sec": 99.63227034400006}
+{"id": "band3-28-exceedance-rdpo-0", "key": ["band3", 28, "exceedance", "rdpo"], "est": 3.884791461156377e-12, "ci": [3.6918445542195525e-12, 4.077738368093201e-12], "sec": 115.01572031799992}
+{"id": "band4-12-stop_loss-rdpo-0", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 111.01223561274844, "ci": [109.90796542029891, 112.11650580519797], "sec": 56.90868157299997}
+{"id": "band4-20-stop_loss-twist-0", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.17743177801506582, "ci": null, "sec": 1.3079941999999392}
+{"id": "ladder-xdiag-28-exceedance-twist-0", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 2.0837913946623295e-12, "ci": null, "sec": 1.605535386000156}
+{"id": "ladder-xdiag-28-exceedance-rdpo-0", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 1.9732934795219593e-12, "ci": [1.8457674647211357e-12, 2.100819494322783e-12], "sec": 96.08442660800006}
+{"id": "ladder-xdiag-28-stop_loss-twist-0", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 5.068625312920543e-05, "ci": null, "sec": 1.2504393579999942}
+{"id": "band4-20-exceedance-rdpo-0", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.639341072890318e-09, "ci": [6.406863646464191e-09, 6.871818499316445e-09], "sec": 130.49057982499994}
+{"id": "band2-28-exceedance-twist-1", "key": ["band2", 28, "exceedance", "twist"], "est": 9.188953153518097e-13, "ci": null, "sec": 0.8116851990000669}
+{"id": "band2-28-exceedance-rdpo-1", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.009136065097018e-13, "ci": [8.615092749811246e-13, 9.40317938038279e-13], "sec": 58.72598350399994}
+{"id": "band2-28-stop_loss-twist-1", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.21035009496861e-05, "ci": null, "sec": 0.8883409880002091}
+{"id": "band2-28-stop_loss-rdpo-1", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.262371135999004e-05, "ci": [2.147935324966486e-05, 2.3768069470315222e-05], "sec": 50.52309223700013}
+{"id": "band3-20-exceedance-twist-1", "key": ["band3", 20, "exceedance", "twist"], "est": 3.112116010467106e-09, "ci": null, "sec": 0.6921958009997979}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-0", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 4.974531599307075e-05, "ci": [4.641126434531815e-05, 5.3079367640823354e-05], "sec": 90.67315923000001}
+{"id": "band3-20-stop_loss-twist-1", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.08257399371189879, "ci": null, "sec": 0.7609814570000708}
+{"id": "band4-12-exceedance-rdpo-1", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.710572454969726e-06, "ci": [4.653897043839945e-06, 4.767247866099507e-06], "sec": 54.74987028400005}
+{"id": "band3-20-exceedance-rdpo-1", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.04862226045523e-09, "ci": [2.9936282252081244e-09, 3.1036162957023357e-09], "sec": 83.22338410499992}
+{"id": "band4-12-exceedance-twist-1", "key": ["band4", 12, "exceedance", "twist"], "est": 4.6577259937990875e-06, "ci": null, "sec": 0.7692951149999772}
+{"id": "band4-12-stop_loss-twist-1", "key": ["band4", 12, "stop_loss", "twist"], "est": 111.71631365335139, "ci": null, "sec": 0.7452562920000219}
+{"id": "band3-20-stop_loss-rdpo-1", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08098645490481617, "ci": [0.07997340336526887, 0.08199950644436346], "sec": 112.88436582000008}
+{"id": "band4-20-exceedance-twist-1", "key": ["band4", 20, "exceedance", "twist"], "est": 6.749751627370344e-09, "ci": null, "sec": 1.5368687580000824}
+{"id": "band4-12-stop_loss-rdpo-1", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 111.06604043389179, "ci": [109.99800469246385, 112.13407617531972], "sec": 59.54694477299995}
+{"id": "band4-20-stop_loss-twist-1", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.18638638094717666, "ci": null, "sec": 1.3408479749998605}
+{"id": "ladder-xdiag-28-exceedance-twist-1", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 1.906250159682716e-12, "ci": null, "sec": 1.3274530099999993}
+{"id": "ladder-xdiag-28-exceedance-rdpo-1", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.04379165013137e-12, "ci": [1.895665686952027e-12, 2.1919176133107134e-12], "sec": 64.72591444599993}
+{"id": "ladder-xdiag-28-stop_loss-twist-1", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 5.305356950361599e-05, "ci": null, "sec": 1.0720450710000478}
+{"id": "band2-28-exceedance-twist-2", "key": ["band2", 28, "exceedance", "twist"], "est": 1.001021633215573e-12, "ci": null, "sec": 0.7995481619998372}
+{"id": "band2-28-exceedance-rdpo-2", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.49587886915643e-13, "ci": [8.6713625759499e-13, 1.032039516236296e-12], "sec": 45.753508510999836}
+{"id": "band2-28-stop_loss-twist-2", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.2569956383890086e-05, "ci": null, "sec": 0.9869030399997882}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-1", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 4.976834160634477e-05, "ci": [4.809410513758674e-05, 5.14425780751028e-05], "sec": 68.45128148599997}
+{"id": "band3-20-exceedance-twist-2", "key": ["band3", 20, "exceedance", "twist"], "est": 3.1199791508581196e-09, "ci": null, "sec": 0.9237206129998867}
+{"id": "band2-28-stop_loss-rdpo-2", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.3738808973472556e-05, "ci": [2.1260616407079333e-05, 2.621700153986578e-05], "sec": 70.43031423699972}
+{"id": "band3-20-stop_loss-twist-2", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.0829384981856738, "ci": null, "sec": 0.8881690410003102}
+{"id": "band3-20-exceedance-rdpo-2", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.062892658786504e-09, "ci": [2.997011876770531e-09, 3.128773440802477e-09], "sec": 73.39778726600002}
+{"id": "band4-12-exceedance-twist-2", "key": ["band4", 12, "exceedance", "twist"], "est": 4.639012259179552e-06, "ci": null, "sec": 0.49439002600001913}
+{"id": "band3-20-stop_loss-rdpo-2", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08182013198841766, "ci": [0.08018476037558962, 0.08345550360124569], "sec": 72.43158968099988}
+{"id": "band4-12-stop_loss-twist-2", "key": ["band4", 12, "stop_loss", "twist"], "est": 112.92080607165386, "ci": null, "sec": 0.5571247539996875}
+{"id": "band4-12-exceedance-rdpo-2", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.7243354573624945e-06, "ci": [4.675945139839125e-06, 4.772725774885864e-06], "sec": 39.363932181999644}
+{"id": "band4-20-exceedance-twist-2", "key": ["band4", 20, "exceedance", "twist"], "est": 6.4957004248765416e-09, "ci": null, "sec": 1.483984560999943}
+{"id": "band4-12-stop_loss-rdpo-2", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 112.11221828428903, "ci": [110.53089442674788, 113.69354214183018], "sec": 49.14673743200001}
+{"id": "band4-20-stop_loss-twist-2", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.18467875747092286, "ci": null, "sec": 1.1697318219999033}
+{"id": "ladder-xdiag-28-exceedance-twist-2", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 2.011851751278998e-12, "ci": null, "sec": 1.0330762690000483}
+{"id": "ladder-xdiag-28-exceedance-rdpo-2", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.2454988932468262e-12, "ci": [2.0285343588325753e-12, 2.462463427661077e-12], "sec": 63.43186789799984}
+{"id": "ladder-xdiag-28-stop_loss-twist-2", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 4.90831542555291e-05, "ci": null, "sec": 1.1537604479999573}
+{"id": "band4-20-stop_loss-rdpo-2", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.17646643705223525, "ci": [0.17314457527902768, 0.1797882988254428], "sec": 98.662441812}
+{"id": "band2-28-exceedance-twist-3", "key": ["band2", 28, "exceedance", "twist"], "est": 8.473925071820513e-13, "ci": null, "sec": 0.8356950029997279}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-2", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 5.1686430397712234e-05, "ci": [4.8714935719370526e-05, 5.465792507605394e-05], "sec": 64.60308942399979}
+{"id": "band2-28-stop_loss-twist-3", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.1096248842975213e-05, "ci": null, "sec": 0.9101598590000322}
+{"id": "band2-28-exceedance-rdpo-3", "key": ["band2", 28, "exceedance", "rdpo"], "est": 8.949064641980392e-13, "ci": [8.491504217229036e-13, 9.406625066731748e-13], "sec": 51.26878636699985}
+{"id": "band3-20-exceedance-twist-3", "key": ["band3", 20, "exceedance", "twist"], "est": 2.9785675141807733e-09, "ci": null, "sec": 1.0135462500002177}
+{"id": "band2-28-stop_loss-rdpo-3", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.2168388680383013e-05, "ci": [2.1574380585753383e-05, 2.2762396775012643e-05], "sec": 45.58103655400009}
+{"id": "band3-20-stop_loss-twist-3", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.08031231491067949, "ci": null, "sec": 0.8057348309998815}
+{"id": "band3-20-exceedance-rdpo-3", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.0538582722759324e-09, "ci": [2.9785635053527953e-09, 3.1291530391990695e-09], "sec": 71.41825333700035}
+{"id": "band4-12-exceedance-twist-3", "key": ["band4", 12, "exceedance", "twist"], "est": 4.767679456211619e-06, "ci": null, "sec": 0.5406675809999797}
+{"id": "band4-12-exceedance-rdpo-3", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.683243860344292e-06, "ci": [4.637317004159876e-06, 4.729170716528709e-06], "sec": 55.14160775299979}
+{"id": "band4-12-stop_loss-twist-3", "key": ["band4", 12, "stop_loss", "twist"], "est": 111.52461095326608, "ci": null, "sec": 0.5833393859998068}
+{"id": "band3-20-stop_loss-rdpo-3", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08227297924416373, "ci": [0.08059189089842833, 0.08395406758989912], "sec": 65.66156823099982}
+{"id": "band4-20-exceedance-twist-3", "key": ["band4", 20, "exceedance", "twist"], "est": 6.6865759569043445e-09, "ci": null, "sec": 0.9315162209995833}
+{"id": "band4-12-stop_loss-rdpo-3", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 111.46711556031529, "ci": [110.12326655667948, 112.8109645639511], "sec": 51.692859751000015}
+{"id": "band4-20-stop_loss-twist-3", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.1840747327380781, "ci": null, "sec": 1.0338960529998076}
+{"id": "ladder-xdiag-28-exceedance-twist-3", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 2.055371978221776e-12, "ci": null, "sec": 1.0359505290002744}
+{"id": "ladder-xdiag-28-exceedance-rdpo-3", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.026455580963823e-12, "ci": [1.9241427436366973e-12, 2.1287684182909484e-12], "sec": 65.89962203100004}
+{"id": "ladder-xdiag-28-stop_loss-twist-3", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 4.812248160146224e-05, "ci": null, "sec": 1.1042224590000842}
+{"id": "band4-20-exceedance-rdpo-3", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.414214163005498e-09, "ci": [6.266639896115777e-09, 6.561788429895219e-09], "sec": 143.67487940599995}
+{"id": "band2-28-exceedance-twist-4", "key": ["band2", 28, "exceedance", "twist"], "est": 1.0091140457396582e-12, "ci": null, "sec": 1.1920012530003987}
+{"id": "band2-28-exceedance-rdpo-4", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.059622777892393e-13, "ci": [8.565977068938416e-13, 9.553268486846371e-13], "sec": 59.54602741099961}
+{"id": "band2-28-stop_loss-twist-4", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.407949867450593e-05, "ci": null, "sec": 1.1679330799997842}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-3", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 5.004098416576422e-05, "ci": [4.668143905607789e-05, 5.340052927545055e-05], "sec": 101.77733084300007}
+{"id": "band3-20-exceedance-twist-4", "key": ["band3", 20, "exceedance", "twist"], "est": 3.1726783886447034e-09, "ci": null, "sec": 1.3505196800001613}
+{"id": "band2-28-stop_loss-rdpo-4", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.163572511899448e-05, "ci": [2.0702791698548644e-05, 2.2568658539440317e-05], "sec": 53.10649000000012}
+{"id": "band3-20-stop_loss-twist-4", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.0796603251855799, "ci": null, "sec": 1.1706490179999491}
+{"id": "band4-12-exceedance-rdpo-4", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.76427542600584e-06, "ci": [4.707372023881197e-06, 4.821178828130483e-06], "sec": 45.45717074799995}
+{"id": "band4-12-exceedance-twist-4", "key": ["band4", 12, "exceedance", "twist"], "est": 4.6834823298043525e-06, "ci": null, "sec": 0.4781310610001128}
+{"id": "band3-20-exceedance-rdpo-4", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.064055718563629e-09, "ci": [2.9784058266195363e-09, 3.1497056105077214e-09], "sec": 84.11995389599997}
+{"id": "band4-12-stop_loss-twist-4", "key": ["band4", 12, "stop_loss", "twist"], "est": 113.6936686450147, "ci": null, "sec": 0.4924924289998671}
+{"id": "band3-20-stop_loss-rdpo-4", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08140218120167297, "ci": [0.07918870675980708, 0.08361565564353887], "sec": 72.52106717099969}
+{"id": "band4-20-exceedance-twist-4", "key": ["band4", 20, "exceedance", "twist"], "est": 6.2307324675675705e-09, "ci": null, "sec": 1.0715266180000071}
+{"id": "band4-12-stop_loss-rdpo-4", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 110.84002453535861, "ci": [109.63789603681606, 112.04215303390116], "sec": 39.15431562899994}
+{"id": "band4-20-stop_loss-twist-4", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.18960446089832528, "ci": null, "sec": 1.1035880039999029}
+{"id": "ladder-xdiag-28-exceedance-twist-4", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 1.8900632369867098e-12, "ci": null, "sec": 0.8690913469999941}
+{"id": "ladder-xdiag-28-exceedance-rdpo-4", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.055121641859638e-12, "ci": [1.9058572761233946e-12, 2.2043860075958814e-12], "sec": 66.29515336800023}
+{"id": "ladder-xdiag-28-stop_loss-twist-4", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 4.597118367709823e-05, "ci": null, "sec": 0.8668182569999772}
+{"id": "band4-20-exceedance-rdpo-4", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.508831151078478e-09, "ci": [6.352792111321885e-09, 6.664870190835071e-09], "sec": 111.99110108200011}
+{"id": "band2-28-exceedance-twist-5", "key": ["band2", 28, "exceedance", "twist"], "est": 8.952130231573072e-13, "ci": null, "sec": 0.9842414489999101}
+{"id": "band2-28-exceedance-rdpo-5", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.252694113383446e-13, "ci": [8.93806559457837e-13, 9.567322632188523e-13], "sec": 43.972881330999826}
+{"id": "band2-28-stop_loss-twist-5", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.0157450474678542e-05, "ci": null, "sec": 0.8219316330000765}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-4", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 5.3099587439734085e-05, "ci": [4.796747923979036e-05, 5.823169563967781e-05], "sec": 79.3912448430001}
+{"id": "band2-28-stop_loss-rdpo-5", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.2508282521351242e-05, "ci": [2.16192054346163e-05, 2.3397359608086185e-05], "sec": 42.39853254399986}
+{"id": "band3-20-exceedance-twist-5", "key": ["band3", 20, "exceedance", "twist"], "est": 3.134932074426182e-09, "ci": null, "sec": 0.6776286220001566}
+{"id": "band3-20-stop_loss-twist-5", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.07920905428108574, "ci": null, "sec": 0.7023379320003187}
+{"id": "band4-12-exceedance-rdpo-5", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.715182247749814e-06, "ci": [4.651814859626097e-06, 4.7785496358735305e-06], "sec": 38.275329173000046}
+{"id": "band4-12-exceedance-twist-5", "key": ["band4", 12, "exceedance", "twist"], "est": 4.89222168082677e-06, "ci": null, "sec": 0.4512439979998817}
+{"id": "band3-20-exceedance-rdpo-5", "key": ["band3", 20, "exceedance", "rdpo"], "est": 2.9959044275780913e-09, "ci": [2.937962567158965e-09, 3.0538462879972175e-09], "sec": 63.72175379500004}
+{"id": "band4-12-stop_loss-twist-5", "key": ["band4", 12, "stop_loss", "twist"], "est": 113.8963871555913, "ci": null, "sec": 0.4668432179996671}
+{"id": "band4-20-exceedance-twist-5", "key": ["band4", 20, "exceedance", "twist"], "est": 5.911204269264936e-09, "ci": null, "sec": 1.1012411420001627}
+{"id": "band3-20-stop_loss-rdpo-5", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.07997952201160906, "ci": [0.07856570889704605, 0.08139333512617207], "sec": 79.12466145000008}
+{"id": "band4-20-stop_loss-twist-5", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.17081844298823162, "ci": null, "sec": 1.2592651889999615}
+{"id": "ladder-xdiag-28-exceedance-twist-5", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 2.3660769381086004e-12, "ci": null, "sec": 1.1936905370002933}
+{"id": "ladder-xdiag-28-exceedance-rdpo-5", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.0992567159147165e-12, "ci": [2.0093308445538452e-12, 2.1891825872755877e-12], "sec": 62.937430007999865}
+{"id": "ladder-xdiag-28-stop_loss-twist-5", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 4.942386009044767e-05, "ci": null, "sec": 0.9209685790001458}
+{"id": "band4-20-stop_loss-rdpo-5", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.17768068650041274, "ci": [0.17434209361512207, 0.18101927938570342], "sec": 110.13691455799972}
+{"id": "band2-28-exceedance-twist-6", "key": ["band2", 28, "exceedance", "twist"], "est": 8.526121621598771e-13, "ci": null, "sec": 0.9160355070002879}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-5", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 5.25382126851212e-05, "ci": [4.944134118556137e-05, 5.5635084184681035e-05], "sec": 63.56367800399994}
+{"id": "band2-28-stop_loss-twist-6", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.3329591168134336e-05, "ci": null, "sec": 0.860888525000064}
+{"id": "band2-28-exceedance-rdpo-6", "key": ["band2", 28, "exceedance", "rdpo"], "est": 8.786181592901565e-13, "ci": [8.300731746432472e-13, 9.271631439370659e-13], "sec": 43.87341772300033}
+{"id": "band3-20-exceedance-twist-6", "key": ["band3", 20, "exceedance", "twist"], "est": 2.994479942821213e-09, "ci": null, "sec": 0.7236580280000453}
+{"id": "band2-28-stop_loss-rdpo-6", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.277358705908508e-05, "ci": [2.1931194553016086e-05, 2.3615979565154075e-05], "sec": 48.90164035299995}
+{"id": "band3-20-stop_loss-twist-6", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.0841145242409313, "ci": null, "sec": 0.8464837829997123}
+{"id": "band4-12-exceedance-rdpo-6", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.687463257975426e-06, "ci": [4.633806456878045e-06, 4.741120059072807e-06], "sec": 39.448187852000046}
+{"id": "band4-12-exceedance-twist-6", "key": ["band4", 12, "exceedance", "twist"], "est": 4.634938326759393e-06, "ci": null, "sec": 0.48803012799999124}
+{"id": "band3-20-exceedance-rdpo-6", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.016435932273511e-09, "ci": [2.957959368173314e-09, 3.074912496373708e-09], "sec": 71.26423296699977}
+{"id": "band4-12-stop_loss-twist-6", "key": ["band4", 12, "stop_loss", "twist"], "est": 109.09412734017084, "ci": null, "sec": 0.4760006390001763}
+{"id": "band3-20-stop_loss-rdpo-6", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08114498225545506, "ci": [0.07965289442414633, 0.0826370700867638], "sec": 82.5439673789997}
+{"id": "band4-20-exceedance-twist-6", "key": ["band4", 20, "exceedance", "twist"], "est": 6.041517295078544e-09, "ci": null, "sec": 0.8566319909996309}
+{"id": "band4-12-stop_loss-rdpo-6", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 112.13829600716124, "ci": [111.08547651805529, 113.1911154962672], "sec": 53.14662863400008}
+{"id": "band4-20-stop_loss-twist-6", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.18172444418732994, "ci": null, "sec": 0.9275053790001948}
+{"id": "ladder-xdiag-28-exceedance-twist-6", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 2.1082203277292888e-12, "ci": null, "sec": 1.1316845869996541}
+{"id": "ladder-xdiag-28-exceedance-rdpo-6", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 2.0364026850795637e-12, "ci": [1.8181577031057194e-12, 2.254647667053408e-12], "sec": 66.99653145699995}
+{"id": "ladder-xdiag-28-stop_loss-twist-6", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 5.239378668151684e-05, "ci": null, "sec": 1.0150632149998273}
+{"id": "band4-20-stop_loss-rdpo-6", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.18044244572083484, "ci": [0.17574253823123157, 0.18514235321043812], "sec": 106.23442994900006}
+{"id": "band2-28-exceedance-twist-7", "key": ["band2", 28, "exceedance", "twist"], "est": 9.515851227605814e-13, "ci": null, "sec": 0.9115523860000394}
+{"id": "band2-28-exceedance-rdpo-7", "key": ["band2", 28, "exceedance", "rdpo"], "est": 9.75516084618125e-13, "ci": [9.004413730418351e-13, 1.0505907961944148e-12], "sec": 39.3022828510002}
+{"id": "band2-28-stop_loss-twist-7", "key": ["band2", 28, "stop_loss", "twist"], "est": 2.1883510000266492e-05, "ci": null, "sec": 0.9520265619999009}
+{"id": "band2-28-stop_loss-rdpo-7", "key": ["band2", 28, "stop_loss", "rdpo"], "est": 2.2089240338106402e-05, "ci": [2.096117417768205e-05, 2.3217306498530753e-05], "sec": 40.22452133700017}
+{"id": "band3-20-exceedance-twist-7", "key": ["band3", 20, "exceedance", "twist"], "est": 3.0396681005443654e-09, "ci": null, "sec": 0.829719527999714}
+{"id": "band3-20-stop_loss-twist-7", "key": ["band3", 20, "stop_loss", "twist"], "est": 0.08150519823640015, "ci": null, "sec": 0.7628031750000446}
+{"id": "band4-12-exceedance-rdpo-7", "key": ["band4", 12, "exceedance", "rdpo"], "est": 4.664309942258756e-06, "ci": [4.617226525630171e-06, 4.711393358887341e-06], "sec": 46.361125251999965}
+{"id": "band4-12-exceedance-twist-7", "key": ["band4", 12, "exceedance", "twist"], "est": 4.731136576516773e-06, "ci": null, "sec": 0.483245574999728}
+{"id": "band3-20-exceedance-rdpo-7", "key": ["band3", 20, "exceedance", "rdpo"], "est": 3.0694971226287942e-09, "ci": [3.021343396860099e-09, 3.1176508483974895e-09], "sec": 59.85202111799981}
+{"id": "band4-12-stop_loss-twist-7", "key": ["band4", 12, "stop_loss", "twist"], "est": 111.48556320832651, "ci": null, "sec": 0.6393929189998744}
+{"id": "band3-20-stop_loss-rdpo-7", "key": ["band3", 20, "stop_loss", "rdpo"], "est": 0.08134975616474528, "ci": [0.07958653959502358, 0.08311297273446698], "sec": 63.249854774999676}
+{"id": "band4-20-exceedance-twist-7", "key": ["band4", 20, "exceedance", "twist"], "est": 6.627867715644643e-09, "ci": null, "sec": 1.0104747479999787}
+{"id": "band4-12-stop_loss-rdpo-7", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 110.80004213956012, "ci": [109.61440790700208, 111.98567637211816], "sec": 57.080609302000084}
+{"id": "band4-20-stop_loss-twist-7", "key": ["band4", 20, "stop_loss", "twist"], "est": 0.18379204151674455, "ci": null, "sec": 0.8589494120001291}
+{"id": "ladder-xdiag-28-exceedance-twist-7", "key": ["ladder-xdiag", 28, "exceedance", "twist"], "est": 1.7427499313819092e-12, "ci": null, "sec": 0.8736378150001656}
+{"id": "band4-20-stop_loss-rdpo-7", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.17652757601231162, "ci": [0.17359530965517225, 0.17945984236945098], "sec": 95.61138420599991}
+{"id": "ladder-xdiag-28-stop_loss-twist-7", "key": ["ladder-xdiag", 28, "stop_loss", "twist"], "est": 4.874063393129359e-05, "ci": null, "sec": 0.9300452559996302}
+{"id": "ladder-xdiag-28-exceedance-rdpo-7", "key": ["ladder-xdiag", 28, "exceedance", "rdpo"], "est": 1.9865266316839563e-12, "ci": [1.8818780282769646e-12, 2.091175235090948e-12], "sec": 55.30245851799964}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-7", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 5.0658954481036284e-05, "ci": [4.82867435926696e-05, 5.3031165369402966e-05], "sec": 73.11197999800015}
+{"id": "band4-20-exceedance-rdpo-1", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.470288071653031e-09, "ci": [6.363121779568767e-09, 6.577454363737295e-09], "sec": 107.39683848500044}
+{"id": "band4-20-stop_loss-rdpo-1", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.1766065666542403, "ci": [0.17377043152531133, 0.17944270178316926], "sec": 121.11065443500001}
+{"id": "band4-20-exceedance-rdpo-2", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.349855072450688e-09, "ci": [6.1957455349461934e-09, 6.503964609955183e-09], "sec": 109.000981529}
+{"id": "band4-20-stop_loss-rdpo-3", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.18079923394205988, "ci": [0.17744900071477548, 0.18414946716934427], "sec": 96.1961796620003}
+{"id": "band4-20-stop_loss-rdpo-4", "key": ["band4", 20, "stop_loss", "rdpo"], "est": 0.17827628450890579, "ci": [0.17370944853253387, 0.1828431204852777], "sec": 98.13220754800022}
+{"id": "band4-12-stop_loss-rdpo-5", "key": ["band4", 12, "stop_loss", "rdpo"], "est": 110.70727014332681, "ci": [109.27054391788609, 112.14399636876753], "sec": 44.173782371000016}
+{"id": "ladder-xdiag-28-stop_loss-rdpo-6", "key": ["ladder-xdiag", 28, "stop_loss", "rdpo"], "est": 4.977976342745895e-05, "ci": [4.7673919165586996e-05, 5.1885607689330906e-05], "sec": 71.72375367299992}
+{"id": "band4-20-exceedance-rdpo-6", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.483482309807984e-09, "ci": [6.320852712650842e-09, 6.646111906965126e-09], "sec": 105.3795904499998}
+{"id": "band4-20-exceedance-rdpo-7", "key": ["band4", 20, "exceedance", "rdpo"], "est": 6.4035632029441926e-09, "ci": [6.267650933572121e-09, 6.539475472316264e-09], "sec": 107.68835909200016}
