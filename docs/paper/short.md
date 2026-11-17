@@ -345,8 +345,8 @@ needs {{HW_QPU_MIN}} QPU minutes, and the emulator gives the same report if acce
 benchmarks at equal paths and equal time; data-calibrated pools; ELT/YLT converter; quantum resource model and
 costed hardware emulation.
 
-**Three work packages, one person.** Planned effort: 30 h/week in weeks 1–3 and 6, 15 h/week over the holiday weeks
-4–5 (long compute jobs and writing only), 20 h/week in weeks 7–8.
+**Three work packages, one person.** Planned effort: 20 h/week for all eight weeks (about 160 hours); over the holiday weeks 4–5 these
+hours go to long compute jobs and writing, and GPU sweeps run unattended outside them.
 
 ::: {.compact}
 | Work package | Milestone and measurable criterion (current value) |
