@@ -6,7 +6,8 @@ Usage (from the repository root):
 Writes submission/upload/ (gitignored):
     01_Technical_Proposal.pdf   main proposal followed by the technical annex
     02_Team_Profile_CVs.pdf     CVs given with --cv (repeatable), never committed
-    03_Source_Code.pdf, 04_Source_Code.zip   only with --code-pdf (the portal takes a GitHub URL instead)
+    03_Presentation.pdf         the 16:9 slide deck (docs/RDPO_Presentation.pdf, built by src.viz.build_slides)
+    04_Source_Code.pdf, 05_Source_Code.zip   only with --code-pdf (the portal takes a GitHub URL instead)
     README_upload.txt                     what goes where, sizes, page counts, deliverable checklist
 
 The challenge accepts PDF/PPT/MP3/MPEG/MOV/MP4 only, so the source code is delivered as a PDF; the zip is optional.
@@ -68,6 +69,14 @@ def build_papers(cv):
         if "{{" in txt:
             left = sorted(set(re.findall(r"\{\{(\w+)\}\}", txt)))
             sys.exit(f"FAIL: placeholder survives in {f}: {left or 'stray {{'}")
+
+
+def build_slides():
+    cmd = [sys.executable, "-m", "src.viz.build_slides"]
+    print("building slides:", " ".join(cmd), flush=True)
+    r = subprocess.run(cmd, env={**__import__("os").environ, "PYTHONPATH": "."})
+    if r.returncode != 0:
+        sys.exit("FAIL: build_slides exited with status %d (unfilled placeholder or render error)" % r.returncode)
 
 
 # ---------------------------------------------------------------- step 2: code listing
@@ -292,7 +301,7 @@ def main():
     Technical Proposal [PDF], Lightweight Prototype [GitHub URL], Team Profile/CVs [PDF], optional presentation.
 
     --cv PATH may be given several times (one per team member, in order); CVs are never committed.
-    --code-pdf additionally writes the printable source listing (03) and a zip of HEAD (04).
+    --code-pdf additionally writes the printable source listing (04) and a zip of HEAD (05).
     """
     argv = sys.argv[1:]
     cvs = [argv[i + 1] for i, a in enumerate(argv) if a == "--cv"]
@@ -304,6 +313,7 @@ def main():
             f.write("submission/\n")
     if "--skip-build" not in argv:
         build_papers(None)          # the papers carry no CV; CVs go into the team file
+        build_slides()
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*"):
         old.unlink()
@@ -324,11 +334,18 @@ def main():
         made.append(p2)
     else:
         print("WARNING: no --cv given; 02_Team_Profile_CVs.pdf not written")
-    if "--code-pdf" in argv:
-        p3 = OUT / "03_Source_Code.pdf"
-        code_pdf(p3)
+    deck = ROOT / "docs/RDPO_Presentation.pdf"
+    p3 = OUT / "03_Presentation.pdf"
+    if deck.exists():
+        p3.write_bytes(deck.read_bytes())
         made.append(p3)
-        p4 = OUT / "04_Source_Code.zip"
+    else:
+        print("WARNING: docs/RDPO_Presentation.pdf missing; run PYTHONPATH=. python -m src.viz.build_slides")
+    if "--code-pdf" in argv:
+        p4c = OUT / "04_Source_Code.pdf"
+        code_pdf(p4c)
+        made.append(p4c)
+        p4 = OUT / "05_Source_Code.zip"
         subprocess.run(["git", "archive", "--format=zip", "-o", str(p4), "HEAD"], check=True)
         if any(n.startswith("submission/") for n in sh("unzip", "-Z1", str(p4)).split()):
             sys.exit("FAIL: submission/ leaked into the zip")
@@ -354,7 +371,8 @@ def main():
          f"pages {nshort + 1}-: technical annex)",
          f"  Lightweight Prototype [URL]  {REPO_URL}   (repository must be PUBLIC before submitting)",
          "  Team Profile/CVs [PDF] ..... 02_Team_Profile_CVs.pdf  (one CV per member, rebuild with --cv for each)",
-         "  Presentation [optional] .... not prepared", "", "FILES"]
+         "  Presentation [optional] .... " + (f"03_Presentation.pdf  ({info[p3.name][1]} slides, 16:9)"
+                                              if p3.name in info else "not built"), "", "FILES"]
     for name, (sz, n) in info.items():
         L.append(f"  {name:32s} {human(sz):>9s} {n:4d} pages")
     L += ["", "REBUILD", "  PYTHONPATH=. python -m src.viz.package_submission --cv submission/<member1>_CV.pdf "
