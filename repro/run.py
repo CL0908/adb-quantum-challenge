@@ -86,6 +86,8 @@ JOBS = [
     # phase 18 (earthquake data upgrade): tested and withdrawn, see archive/
     # phase 19 (ambiguity premium -> spread): tested and withdrawn, see archive/
     # phase 20 (Asia-Pacific RDPO + MIS model-risk engine): tested and withdrawn, see archive/
+    # phase 21: expected-loss interval -> spread band with three published market curves (a calculation)
+    ("spread_band", 21, [PY, str(HERE.parent / "addons" / "spread_band.py")], ["quality_rates_unc"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
 

@@ -51,3 +51,8 @@ def test_nested_uq_draws_and_brief_point():
     nested_uq.selftest()
 
 
+
+
+def test_spread_band_curves():
+    import spread_band
+    spread_band.selftest()

@@ -67,6 +67,26 @@ def extended():
         print(name, text.count("\n") - 1, "events", flush=True)
 
 
+def asia_pacific():
+    """ComCat M >= 5.5, 1965-2025, in the friend's Asia-Pacific window (lat -30..56, lon >= 38 or <= -165): twin.py.
+    Split in time and at the antimeridian to stay under the 20,000-event limit."""
+    CAT.mkdir(parents=True, exist_ok=True)
+    out = CAT / "asia_pacific_m55_1965_2025.csv"
+    if out.exists():
+        return out
+    text, urls = "", []
+    for t0, t1 in (("1965-01-01", "1989-12-31T23:59:59"), ("1990-01-01", "2009-12-31T23:59:59"), ("2010-01-01", "2025-12-31T23:59:59")):
+        for lon in ("&minlongitude=38&maxlongitude=180", "&minlongitude=-180&maxlongitude=-165"):
+            url = f"{FDSN}?format=csv&orderby=time-asc&starttime={t0}&endtime={t1}&minmagnitude=5.5&minlatitude=-30&maxlatitude=56{lon}"
+            body = get(url, timeout=300).decode()
+            text += body if not urls else body.split("\n", 1)[1]
+            urls.append(url)
+    b = text.encode()
+    out.write_bytes(b); log(out, " | ".join(urls), b)
+    print(out.name, text.count("\n") - 1, "events", flush=True)
+    return out
+
+
 def catalogue():
     CAT.mkdir(parents=True, exist_ok=True)
     out = CAT / "carec_m55_1965_2016.csv"
