@@ -1305,6 +1305,38 @@ magic-state factories; twisted loading with the bitwise oracle; 10% target relat
   which favours trapped-ion and reconfigurable neutral-atom platforms. SWAP routing on 2D superconducting
   lattices inflates CNOT counts by {{SWAP_RANGE}}.
 
+## 8.3 Resource reductions and data-uncertainty layers (add-ons)
+
+Xu Zi Yu re-priced the quantum stage and added data-uncertainty layers on top of our results, without changing our
+code or result files (`addons/`). We reproduced the numbers below from the add-on scripts. They hold only under the
+stated assumptions, which differ from the baseline of §8.2.
+
+* **Cheaper quantum stage (conditional).** Two same-type swaps on the same circuits, error target (10%) and surface-code
+  model: (i) rotation synthesis with the Clifford+T fallback or mixed-fallback counts of Kliuchnikov et al. instead
+  of 3 log₂(1/δ), with angle tables loaded by QROM and a phase-gradient adder, which cuts the T-count by {{ADD_T_C}}× (deterministic) or
+  {{ADD_T_M}}× (mixed, which needs every gate instance re-sampled independently in every shot); (ii) a Chebyshev amplitude
+  estimator restricted to odd degrees, so the circuits stay Grover powers, with a simulated constant c ≈ {{ADD_CHEB_C}}
+  (IQAE: {{ADD_IQAE_C}}), coverage ≥ {{ADD_CHEB_COV}} and {{ADD_CALLS_RED}}× fewer state preparations than our IQAE counts; this
+  constant is empirical, not proved. Together the required speed-up s* of §7.6 falls by {{ADD_RED_C}}× (deterministic) or
+  {{ADD_RED_M}}× (mixed) over the eight settings; at 28 countries from {{ADD_S28_DECL}} to {{ADD_S28_C}} / {{ADD_S28_M}}.
+  The baseline classical side (RDPO with training, unchanged), state preparation, weight oracle and all rounds stay in the
+  count. Caveats: the synthesis constants are quoted from the cited paper and not re-derived here; the deepest ChebAE
+  circuit is deeper (the logical error rate required at 28 countries goes from {{ADD_PL28}}); our own IQAE call counts
+  differ from the add-on's re-simulation by up to {{ADD_IQAE_DEV}}; the T-factory throughput model is unchanged and no reaction-time
+  floor is modelled. **s\* stays far above 1: no quantum advantage is claimed.**
+* **Model risk, CAREC pool (conditional; not re-run by us).** Re-drawing the five data inputs of our calibration
+  (event counts, Gutenberg–Richter slope, shared events, hydrological years, rain share) and recomputing the exact
+  pool distribution by component convolution (which matches our MPS reference to 10⁻⁶) gives for Pr(loss > US$240m)
+  {{ADD_MR_PP}} against our point value {{ADD_MR_FRIEND}}, 95% range [{{ADD_MR_LO}}, {{ADD_MR_HI}}], with {{ADD_MR_EQ_RATES}} of the variance from
+  earthquake rates; expected loss {{ADD_MR_EL_FRIEND}} with range [{{ADD_MR_EL_LO}}, {{ADD_MR_EL_HI}}]. KG–TJ joint exhaustion in this pool model
+  (which uses the brief's 25% rain share) is {{ADD_MR_JE_LO}}–{{ADD_MR_JE_HI}} against our {{ADD_MR_JE_FRIEND}}.
+* **Trigger-rate uncertainty, two-country bond (reproduced).** Adding data uncertainty in the base trigger rates (Gutenberg–Richter
+  extrapolation for earthquakes, GEV bootstrap for rainfall; 45–48 annual maxima) to the shared-share posterior of §6.6
+  widens the 95% interval of joint exhaustion to [{{ADD_RU_LO}}, {{ADD_RU_HI}}], about {{ADD_RU_WIDTH}}× the shares-only width, and
+  expected loss to US${{ADD_RU_EL}}m. A global sensitivity analysis attributes {{ADD_VOI_RAIN}} of its variance to the 1-in-50 rainfall level;
+  knowing it exactly would narrow the interval by {{ADD_VOI_NARROW}}, and 30 more years of record remove {{ADD_VOI_30}} of the variance.
+  The contract's definition of an "event" (aftershocks paid separately or not) is a separate, unresolved choice.
+
 # 9 Work Plan for the Deep Development Phase
 
 ::: {.opener}

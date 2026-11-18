@@ -348,6 +348,8 @@ twisted loader with the bitwise weight oracle, 10% relative error on Pr(L > T), 
 | Error handling | noise-aware likelihood, readout calibration, trust guard | surface code; guard against an RDPO pilot | same |
 :::
 
+**Add-on re-pricing (Xu Zi Yu; conditional).** Cheaper rotation synthesis (deterministic or randomised) and a Chebyshev amplitude estimator with an empirical constant lower the required hardware speed-up s* by 10.7–29.3× over the eight settings (ring-28: 8.2×10⁴ to 3.3×10³–2.9×10³); s* remains far above 1, and we claim no quantum advantage (annex §8.3).
+
 **Hardware modality and fit with Phase 2.** Each shared source couples two country registers. On 2D
 superconducting lattices SWAP routing inflates two-qubit counts by 12–41× in our compilations, so dense
 dependence suits all-to-all trapped-ion or neutral-atom machines; sparse, geographically ordered pools map onto a

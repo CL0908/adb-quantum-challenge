@@ -1386,10 +1386,62 @@ def toc(md):
     return f"::: {{.toc}}\n{items}\n\n**·**  References\n:::"
 
 
+def addon_values():
+    """Add-on results by Xu Zi Yu (addons/results/*.json): resource re-pricing and data-uncertainty layers."""
+    A = ROOT / "addons/results"
+    L = lambda n: json.loads((A / n).read_text())
+    v = {}
+    comb = L("combined.json")["rows"]
+    fc = [r["factor_Q1cQ2"] for r in comb]; fm = [r["factor_Q1Q2"] for r in comb]
+    v["ADD_RED_C"] = f"{min(fc):.1f}–{max(fc):.1f}"
+    v["ADD_RED_M"] = f"{min(fm):.1f}–{max(fm):.1f}"
+    v["ADD_RED_ALL"] = f"{min(fc + fm):.1f}–{max(fc + fm):.1f}"
+    r28 = next(r for r in comb if r["topology"] == "ring" and r["n"] == 28)
+    v["ADD_S28_DECL"] = sci(r28["s_star"]["declared"]); v["ADD_S28_C"] = sci(r28["s_star"]["Q1cQ2"])
+    v["ADD_S28_M"] = sci(r28["s_star"]["Q1Q2"])
+    rot = L("q1_rotations.json")["rows"]
+    tc = [r["T_reduction_qrom_fallback"] for r in rot]; tm = [r["T_reduction_qrom_mixed"] for r in rot]
+    v["ADD_T_C"] = f"{min(tc):.1f}–{max(tc):.1f}"; v["ADD_T_M"] = f"{min(tm):.1f}–{max(tm):.1f}"
+    q2 = L("q2_ae.json")["rows"]
+    ch = [r["chebae_odd"] for r in q2]; iq = [r["iqae"] for r in q2]
+    v["ADD_CHEB_C"] = f"{min(c['c'] for c in ch):.0f}–{max(c['c'] for c in ch):.0f}"
+    v["ADD_IQAE_C"] = f"{min(c['c'] for c in iq):.0f}–{max(c['c'] for c in iq):.0f}"
+    v["ADD_CHEB_COV"] = f"{min(c['coverage'] for c in ch):.2f}"
+    calls = [r["declared_calls"] / r["chebae_odd"]["calls_mean"] for r in q2]
+    v["ADD_CALLS_RED"] = f"{min(calls):.1f}–{max(calls):.1f}"
+    v["ADD_IQAE_DEV"] = pct(max(abs(r["declared_calls"] / r["iqae"]["calls_mean"] - 1) for r in q2), 0)
+    v["ADD_PL28"] = f"{sci(r28['pL_required_iqae'])} to {sci(r28['pL_required_chebae'])}"
+    mr = L("model_risk.json")["targets"]
+    e, ex, j = mr["exc_moderate"], mr["expected_loss"], mr["joint_exhaustion_KG_TJ"]
+    v["ADD_MR_FRIEND"] = sci(e["friend"], 2); v["ADD_MR_PP"] = sci(e["posterior_predictive"], 2)
+    v["ADD_MR_LO"] = sci(e["range95"][0], 2); v["ADD_MR_HI"] = sci(e["range95"][1], 2)
+    v["ADD_MR_PABOVE"] = pct(e["P_above_friend"], 0)
+    v["ADD_MR_EQ_RATES"] = pct(e["sobol"]["S"]["eq_rates"], 0)
+    v["ADD_MR_EL_LO"] = mcfmt_m(ex["range95"][0]); v["ADD_MR_EL_HI"] = mcfmt_m(ex["range95"][1])
+    v["ADD_MR_EL_FRIEND"] = mcfmt_m(ex["friend"])
+    v["ADD_MR_JE_FRIEND"] = sci(j["friend"], 2); v["ADD_MR_JE_LO"] = sci(j["range95"][0], 1)
+    v["ADD_MR_JE_HI"] = sci(j["range95"][1], 1); v["ADD_MR_JE_PABOVE"] = pct(j["P_above_friend"], 0)
+    ru = L("quality_rates_unc.json")["sweeps"]
+    a = ru["all"]["summary"]["joint_exhaustion"]["ci95"]; b = ru["shares_only"]["summary"]["joint_exhaustion"]["ci95"]
+    v["ADD_RU_LO"] = sci(a[0], 1); v["ADD_RU_HI"] = sci(a[1], 1)
+    v["ADD_RU_WIDTH"] = f"{(a[1] - a[0]) / (b[1] - b[0]):.0f}"
+    el = ru["all"]["summary"]["expected_loss"]["ci95"]
+    v["ADD_RU_EL"] = f"{el[0] / 1e6:.1f}–{el[1] / 1e6:.1f}"
+    vo = L("voi.json")["outputs"]["joint_exhaustion"]
+    v["ADD_VOI_RAIN"] = pct(vo["sobol"]["S"]["rain_rates"], 0)
+    v["ADD_VOI_NARROW"] = pct(vo["voi"]["rain_rates"]["interval_narrowing_perfect"], 0)
+    v["ADD_VOI_30"] = pct(vo["voi"]["rain_rates"]["years"]["30"], 0)
+    return v
+
+
+def mcfmt_m(x):
+    return f"US${x / 1e6:.1f}m"
+
+
 def _collect_values():
     vals = {}
     for fn in (e1_values, e2_values, e3_values, q_values, mk_values, v2_values, rd_values, loss_values, pool_values, wp2_values, proj_values, rain_values, ap_values, headline_values, elt_values, qs_values, stronger_values, pu_values, qs_inline_values, fin_values, test_values, hw_values, dense_values,
-               brief5_values, eqt_values, v3_values, extra_values, eqt_short_values, env_values):
+               brief5_values, eqt_values, v3_values, extra_values, eqt_short_values, env_values, addon_values):
         try:
             vals.update(fn())
         except Exception as ex:
