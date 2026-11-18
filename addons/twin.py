@@ -75,6 +75,36 @@ def yearly(ev, polys, order, edges, y0=Y0, y1=Y_CAL):
     return {"years": [y0, y1], "main_shocks": len(ev), "K": K, "Kp": Kp, "new_pairs": new}
 
 
+def phase0():
+    """Yearly counts 1965-2025 from ComCat, checked against the friend's catalogue on 1965-2016."""
+    from fetch_usgs import asia_pacific
+    inp = ap_risk.inputs()
+    order, edges = inp["order"], inp["edges"]
+    _, polys = friend_events()
+    ev = comcat_events(asia_pacific())
+    full = yearly(ev, polys, order, edges, Y0, Y1)
+    k16, p16 = full["K"][:Y_CAL - Y0 + 1].sum(0), full["Kp"][:Y_CAL - Y0 + 1].sum(0)
+    dropped = [c for c in AP.ISO if c in polys and c not in order]
+    extra = yearly(ev, polys, dropped, [], Y0, Y1)["K"].sum(0) if dropped else []
+    names = [f"{order[i]}-{order[j]}" for i, j in edges]
+    flag = lambda a, b: bool(abs(a - b) >= 3 and abs(a - b) > 0.1 * max(b, 1))
+    res = {"catalogue": "USGS ComCat M>=5.5, friend's Asia-Pacific window", "events": len(ev), "main_shocks": full["main_shocks"], "years": [Y0, Y1],
+           "order": order, "edges": names, "K_yearly": full["K"].tolist(), "Kp_yearly": full["Kp"].tolist(),
+           "check_1965_2016": {"countries": [{"iso": c, "friend": float(a), "comcat": float(b), "flag": flag(b, a)} for c, a, b in zip(order, inp["K"], k16)],
+                               "pairs": [{"pair": c, "friend": float(a), "comcat": float(b), "flag": flag(b, a)} for c, a, b in zip(names, inp["Kp"], p16)],
+                               "totals": {"friend_country_hits": float(inp["K"].sum()), "comcat_country_hits": float(k16.sum()),
+                                          "friend_shared": float(inp["Kp"].sum()), "comcat_shared": float(p16.sum())}},
+           "new_2017_2025": {"country_hits": dict(zip(order, full["K"][Y_CAL - Y0 + 1:].sum(0).tolist())), "shared": dict(zip(names, full["Kp"][Y_CAL - Y0 + 1:].sum(0).tolist()))},
+           "pairs_outside_graph": full["new_pairs"], "countries_without_events_in_calibration": dict(zip(dropped, [float(x) for x in extra]))}
+    save("twin_counts.json", res)
+    c = res["check_1965_2016"]
+    print(f"ComCat: {len(ev)} events, {full['main_shocks']} main shocks 1965-2025")
+    print("1965-2016 totals:", c["totals"])
+    print("flagged countries:", [(x["iso"], x["friend"], x["comcat"]) for x in c["countries"] if x["flag"]])
+    print("pairs outside the 2016 graph (all years):", res["pairs_outside_graph"])
+    return res
+
+
 # ------------------------------------------------------------------------------------------- twin core
 def state(inp, counts, year):
     k = year - Y_CAL

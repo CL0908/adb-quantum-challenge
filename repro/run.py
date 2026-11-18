@@ -1,6 +1,6 @@
 """Reproduction runner for the RDPO experiments (adb-repro/ is a separate clone; the original repo is untouched).
 
-    python repro/run.py <phase> [--cpus 14] [--only name1,name2] [--dry] [--force]
+    python repro/run.py <phase> [--cpus 14] [--only name1,name2] [--dry] [--force] --i-understand-this-wipes-results
 
 Runs every job of <phase> in dependency order, in parallel up to a CPU budget, inside adb-repro/ with the pinned
 .venv. Each run appends one record to repro/runs.jsonl and writes its output to repro/logs/<name>.log.
@@ -71,17 +71,17 @@ JOBS = [
     # phase 7: quality add-ons (methods borrowed from the QContagion CDS work; same read-only rules)
     *[(f"quality_{s}", 7, [PY, str(HERE.parent / "addons" / f"{s}.py")], [], 1, False)
       for s in ("eq_cluster", "rates_unc")],
-    # phase 9: climate layers on the friend's two-country model (exact, outside RDPO; src/ read-only)
+    # phase 9: climate layers on the the main author's two-country model (exact, outside RDPO; src/ read-only)
     ("climate_cc", 9, [PY, str(HERE.parent / "addons" / "climate_cc.py")], [], 1, False),
     # phase 10 (NEX-GDDP ensemble, daily POT) and phase 12 M2 (rain tail dependence): tested and withdrawn, see archive/
     # phase 11: RDPO value experiments (E3 sensitivities, E2 nested uncertainty + transfer; E1 rain event set withdrawn)
     *[(s, 11, [PY, str(HERE.parent / "addons" / f"{s}.py")], [], ALL, False) for s in ("sensitivity", "nested_uq")],
     # phase 13 (exact tail, Rao–Blackwellised RDPO): tested and withdrawn, see archive/
-    # phase 14: global sensitivity (Sobol) + value of information on the friend's two-country bond (exact)
+    # phase 14: global sensitivity (Sobol) + value of information on the the main author's two-country bond (exact)
     ("voi", 14, [PY, str(HERE.parent / "addons" / "voi.py")], [], ALL, False),
     # phase 15 (quantum-stage loading variants): tested and withdrawn, see archive/
     # phase 16 (quantum nested expectation on a dense pool): tested and withdrawn, see archive/
-    # phase 17: model-risk engine on the friend's CAREC pool (posterior predictive, P(> friend), Sobol, value of information)
+    # phase 17: model-risk engine on the the main author's CAREC pool (posterior predictive, P(> main author), Sobol, value of information)
     ("model_risk", 17, [PY, str(HERE.parent / "addons" / "model_risk.py")], [], ALL, False),
     # phase 18 (earthquake data upgrade): tested and withdrawn, see archive/
     # phase 19 (ambiguity premium -> spread): tested and withdrawn, see archive/
@@ -140,6 +140,9 @@ def main():
     args = sys.argv[1:]
     phase = int(args[0])
     cpus = int(args[args.index("--cpus") + 1]) if "--cpus" in args else 14
+    if "--dry" not in args and "--i-understand-this-wipes-results" not in args:
+        sys.exit("refusing to run: run.py re-runs the experiments in ../adb-repro and wipes its results/. "
+                 "Pass --i-understand-this-wipes-results to proceed (or --dry to list jobs).")
     only = set(args[args.index("--only") + 1].split(",")) if "--only" in args else None
     todo = [j for j in JOBS if j[1] == phase and (only is None or j[0] in only)]
     ok = done_ok()

@@ -1,7 +1,7 @@
 ---
 title: "Exact and Learned Joint-Tail Estimation for Pooled Disaster Risk Financing"
 subtitle: "Quantum-Inspired Tensor Networks, Rényi-Doob Policy Optimization and a Costed Quantum Stage: Technical Annex"
-author: "Tan Chun Loong"
+author: "Tan Chun Loong, Xu Zi Yu"
 affiliation: "Nanyang Technological University, Singapore"
 date: "November 2026"
 lang: en
@@ -1305,19 +1305,51 @@ magic-state factories; twisted loading with the bitwise oracle; 10% target relat
   which favours trapped-ion and reconfigurable neutral-atom platforms. SWAP routing on 2D superconducting
   lattices inflates CNOT counts by {{SWAP_RANGE}}.
 
+## 8.3 Resource reductions and data-uncertainty layers (add-ons)
+
+Xu Zi Yu re-priced the quantum stage and added data-uncertainty layers on top of our results, without changing our
+code or result files (`addons/`). We reproduced the numbers below from the add-on scripts. They hold only under the
+stated assumptions, which differ from the baseline of §8.2.
+
+* **Cheaper quantum stage (conditional).** Two same-type swaps on the same circuits, error target (10%) and surface-code
+  model: (i) rotation synthesis with the Clifford+T fallback or mixed-fallback counts of Kliuchnikov et al. instead
+  of 3 log₂(1/δ), with angle tables loaded by QROM and a phase-gradient adder, which cuts the T-count by {{ADD_T_C}}× (deterministic) or
+  {{ADD_T_M}}× (mixed, which needs every gate instance re-sampled independently in every shot); (ii) a Chebyshev amplitude
+  estimator restricted to odd degrees, so the circuits stay Grover powers, with a simulated constant c ≈ {{ADD_CHEB_C}}
+  (IQAE: {{ADD_IQAE_C}}), coverage ≥ {{ADD_CHEB_COV}} and {{ADD_CALLS_RED}}× fewer state preparations than our IQAE counts; this
+  constant is empirical, not proved. Together the required speed-up s* of §7.6 falls by {{ADD_RED_C}}× (deterministic) or
+  {{ADD_RED_M}}× (mixed) over the eight settings; at 28 countries from {{ADD_S28_DECL}} to {{ADD_S28_C}} / {{ADD_S28_M}}.
+  The baseline classical side (RDPO with training, unchanged), state preparation, weight oracle and all rounds stay in the
+  count. Caveats: the synthesis constants are quoted from the cited paper and not re-derived here; the deepest ChebAE
+  circuit is deeper (the logical error rate required at 28 countries goes from {{ADD_PL28}}); our own IQAE call counts
+  differ from the add-on's re-simulation by up to {{ADD_IQAE_DEV}}; the T-factory throughput model is unchanged and no reaction-time
+  floor is modelled. **s\* stays far above 1: no quantum advantage is claimed.**
+* **Model risk, CAREC pool (conditional; not re-run by us).** Re-drawing the five data inputs of our calibration
+  (event counts, Gutenberg–Richter slope, shared events, hydrological years, rain share) and recomputing the exact
+  pool distribution by component convolution (which matches our MPS reference to 10⁻⁶) gives for Pr(loss > US$240m)
+  {{ADD_MR_PP}} against our point value {{ADD_MR_FRIEND}}, 95% range [{{ADD_MR_LO}}, {{ADD_MR_HI}}], with {{ADD_MR_EQ_RATES}} of the variance from
+  earthquake rates; expected loss {{ADD_MR_EL_FRIEND}} with range [{{ADD_MR_EL_LO}}, {{ADD_MR_EL_HI}}]. KG–TJ joint exhaustion in this pool model
+  (which uses the brief's 25% rain share) is {{ADD_MR_JE_LO}}–{{ADD_MR_JE_HI}} against our {{ADD_MR_JE_FRIEND}}.
+* **Trigger-rate uncertainty, two-country bond (reproduced).** Adding data uncertainty in the base trigger rates (Gutenberg–Richter
+  extrapolation for earthquakes, GEV bootstrap for rainfall; 45–48 annual maxima) to the shared-share posterior of §6.6
+  widens the 95% interval of joint exhaustion to [{{ADD_RU_LO}}, {{ADD_RU_HI}}], about {{ADD_RU_WIDTH}}× the shares-only width, and
+  expected loss to US${{ADD_RU_EL}}m. A global sensitivity analysis attributes {{ADD_VOI_RAIN}} of its variance to the 1-in-50 rainfall level;
+  knowing it exactly would narrow the interval by {{ADD_VOI_NARROW}}, and 30 more years of record remove {{ADD_VOI_30}} of the variance.
+  The contract's definition of an "event" (aftershocks paid separately or not) is a separate, unresolved choice.
+
 # 9 Work Plan for the Deep Development Phase
 
 ::: {.opener}
 ![](../art/cat_calendar.svg){.mascot}
 
-Eight weeks, 30 November 2026 to 22 January 2027, three work packages, one person, each milestone measurable and
+Eight weeks, 30 November 2026 to 22 January 2027, three work packages, two people, each milestone measurable and
 not yet met.
 :::
 
 **Already done, not repeated.** Exact engine to 28 countries; RDPO with unbiased estimator; benchmarks at equal
 paths and equal time; data-calibrated pools; ELT/YLT converter; quantum resource model and costed hardware emulation.
 
-**Planned effort.** 20 h/week for all eight weeks (about 160 hours); over the holiday weeks 4–5 these hours go to long
+**Planned effort.** 20 h/week per person for all eight weeks (about 160 hours each); Tan leads WP1 and the quantum run, Xu leads WP2 with Tan and the decision tools; over the holiday weeks 4–5 these hours go to long
 compute jobs and writing, and GPU sweeps run unattended outside them.
 
 ![**Figure [fig:gantt].** Work plan for Deep Development (30 Nov 2026 – 22 Jan 2027; pitch 25 Jan). The
@@ -1336,7 +1368,7 @@ holiday weeks carry long compute jobs and writing rather than new development.](
 | Data access (ERA5 needs an account; some hosts are blocked in our sandbox) | GPCP and CHIRPS open mirrors, then the cached station data with the level mismatch stated. |
 | Hardware access or noise | The emulator with the device noise model gives the same report; the run is the first item descoped. |
 | Public proxies mislead on dependence | Coupling bounds hold for any dependence; posterior results are reported as a stress range, never as a price. |
-| Holiday weeks and a one-person team | Weeks 4–5 run long compute jobs only; descoping order: hardware run, cutset conditioning, cat-in-a-box proxy. M4 is protected. |
+| Holiday weeks and a two-person team | Weeks 4–5 run long compute jobs only; descoping order: hardware run, cutset conditioning, cat-in-a-box proxy. M4 is protected. |
 
 # 10 Use for Disaster Risk Financing
 
@@ -1362,12 +1394,12 @@ What a disaster-risk-financing team gets from this, during the challenge and aft
 ::: {.opener}
 ![](../art/cat_team.svg){.mascot}
 
-One researcher, with a background that spans quantum information, reinforcement learning and stochastic climate models.
+Two members: one with a background in quantum information, reinforcement learning and stochastic climate models, one in quantitative finance, applied AI and quantum contagion models.
 :::
 
 
 ::: {.profile}
-**Tan Chun Loong**, sole member: research, implementation, quantum resource estimation and decision tools.
+**Tan Chun Loong**: method, exact engine, RDPO, quantum resource model.
 
 Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang Technological University
 (2024–2028; CGPA 4.8/5.0, First Class Honours).
@@ -1400,16 +1432,36 @@ Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang T
   Fest Singapore 2025.
 * *Community:* founder of Quantum Wings (quantum outreach to more than 500 students); Country Lead
   (Singapore), Qiskit Fall Fest 2026.
+::: {.profile}
+**Xu Zi Yu**: quantum resource reductions, data-uncertainty and model-risk layers, decision tools and agents in Phase 2.
+
+Bachelor of Mechanical Engineering, Universiti Malaya (2023–2027; CGPA 3.88/4.00, Dean's List).
+:::
+
+* *SEA Quantathon 2026 (QC4SG), Vietnam, Honourable Mention (Top 8).* A quantum financial contagion model for ASEAN
+  markets with a multivariate Hawkes process as classical core. He benchmarked the first quantum design against
+  classical correlation, found that it underperformed, and rebuilt the model around the Hawkes core: the
+  evidence-first habit of this proposal.
+* *ADIA Lab Structural Break Challenge: Real-Time Edition, peak #37 of 1,220.* XGBoost and patch-network ensemble
+  over streaming features with per-series null calibration, 55+ controlled experiments validated by paired bootstrap.
+* *Reinforcement-learning trading system:* SAC and PPO agent hierarchy with a regime detector.
+* *AI engineer (Huntier AI, 2026):* conversational tools and RAG pipelines, agent context and memory engineering, a privacy layer
+  that masks customer data before it reaches model APIs. Chief AI Officer, BunkerGuard AI (winner, SuperAI NEXT
+  Hackathon 2026): a six-stage agent pipeline on the Claude API.
+* *In this repository:* co-author of the add-on resource reductions and data-uncertainty layers (`addons/`, §8).
+* *Speaking:* Quantum Fall Fest Malaysia (Monash University Malaysia, 2026), quantum finance session; QML tutor, IBM Qiskit Fall Fest, NUS.
+
 * **Why this profile fits.** Quantum information theory (ICFO, QKD security) underpins the quantum stage.
   Relative entropy and dynamic programming (NTU) underpin RDPO. Stochastic climate models and the
   disaster-response track connect to the hazard side; hands-on Qiskit compilation and QAOA work connect to the
   hardware plan; hackathon delivery under deadlines connects to the eight-week Deep Development plan.
 
-* **One-person team, mitigated.** Every result is regenerated by one command from fixed seeds, and {{N_TESTS}}
+* **Two-person team.** Tan Chun Loong: method, exact engine, RDPO, quantum resource model. Xu Zi Yu: quantum resource
+  reductions, data-uncertainty and model-risk layers, decision tools and agents in Phase 2. Every result is regenerated by one command from fixed seeds, and {{N_TESTS}}
   tests check each exactness claim, so the work can be audited and handed over. The plan is front-loaded with a
   stated descoping order. A domain contact at ADB or QAI Ventures for the pooling questions would strengthen it.
 
-A short CV is attached as an annex.
+Both CVs are attached as an annex.
 
 # 12 Platform Requirement, Prototype Package and AI Use
 
