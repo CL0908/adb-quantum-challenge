@@ -53,3 +53,17 @@
 
 - `HANDOFF.md` 写着仓库是公开的，同时写着比赛规则要求提交内容在结果公布前保密。
 - 合同对「一次事件」的定义（余震是否单独赔付）公开资料里没有，`eq_cluster` 的 2.5 倍取决于它。
+
+## 5. 参考文献核对（2026-11-18，逐条打开原页面核对；对应 TEAMMATE.md 第 3 节 a、b）
+
+| 条目 | 结果 |
+|---|---|
+| `kastoryano2022` | 一致。Kastoryano & Pancotti，A highly efficient tensor network algorithm for multi-asset Fourier options pricing，arXiv:2203.02804（2022-03-05），无期刊号 |
+| `benedetti2016` | 一致。Benedetti, Realpe-Gómez, Biswas, Perdomo-Ortiz，Phys. Rev. A 94, 022308 (2016)，DOI 10.1103/PhysRevA.94.022308 |
+| `herbert2021` | 一致。发表版标题就是 bib 里的这个（arXiv 版标题不同：The Problem with Grover-Rudolph State Preparation for Quantum Monte-Carlo），Phys. Rev. E 103, 063302 (2021) |
+| `errmit2026` | **要改两处**。作者：Guilin Zhang, Kai Zhao, Xiquan Cui, Henry Heng, Xu Chu, Aletta Johanna Blanken（Workday AI Research），arXiv:2609.38713（2026-09-30）。发表处不是 NeurIPS 正会论文集，而是 **NeurIPS 2026 Workshop on Secure and Trustworthy Quantum Machine Learning (SaTQuML)** 的短口头报告；bib 里的 `booktitle={Advances in Neural Information Processing Systems}` 应改成该 workshop。论文里的用法（校准失配下误差缓解可能使误差变大）和摘要一致：ZNE 在 38–63% 的模拟实例上不如不做缓解 |
+| arXiv:2603.15664 | 存在。Alexis Kirke，Quantum Amplitude Estimation for Catastrophe Insurance Tail-Risk Pricing: Empirical Convergence and NISQ Noise Analysis（2026-03-10）。正文：3–8 个索引量子比特加 1 个辅助；预算 8192 下 RMSE：振幅估计 484，重要性采样 45，条件尾采样 32，QMC 37；oracle 模型下优势 2.2–3.7 倍；「Discretisation, not estimation, is the current bottleneck」 |
+| arXiv:2608.26840 | 存在。Hernández Vera, Jamialahmadi, Mete, Schneider, De Pascale（Munich Quantum Valley；SAP Labs Munich），Quantum Rare-Event Estimation for Ising Graphical Models with Belief-Propagation State Preparation（2026-08-27）。正文：20 量子比特、38 个 CX；按查询计 RMSE 优势 1.2–2.1 倍；拟合斜率 −0.50（理想为 −1）；作者自己写明该基准树宽为 2、经典精确推断可行 |
+| Kliuchnikov 等，Quantum 7, 1208 (2023) | 一致。Shorter quantum circuits via single-qubit gate approximation，DOI 10.22331/q-2023-12-18-1208。表 1（Clifford+T，均值，ε 为 diamond 距离，ε < 1e-4 的线性拟合）：fallback 1.03·log₂(1/ε) + 5.75，mixed fallback 0.53·log₂(1/ε) + 4.86，diagonal 3.02·log₂(1/ε) + 1.77。和 `rotations.py` 用的常数相同 |
+
+没核对的：`benedetti2019`（npj Quantum Information 5, 45）这次没打开原页面。
