@@ -22,7 +22,15 @@ run.JOBS = [
 run.BY = {j[0]: j for j in run.JOBS}
 tmp = Path(tempfile.mkdtemp())
 run.RUNS, run.LOGS, run.HERE = tmp / "runs.jsonl", tmp / "logs", tmp
-sys.argv = ["run.py", "9"]
+run.PY, run.REPO = sys.executable, tmp  # portable: no Windows venv, no ../adb-repro needed
+sys.argv = ["run.py", "9", "--i-understand-this-wipes-results"]
+try:
+    sys.argv = ["run.py", "9"]
+    run.main()
+    raise AssertionError("run.py must refuse without the flag")
+except SystemExit as e:
+    assert "--i-understand-this-wipes-results" in str(e)
+sys.argv = ["run.py", "9", "--i-understand-this-wipes-results"]
 run.main()
 
 recs = {r["name"]: r for r in map(json.loads, run.RUNS.read_text().splitlines())}

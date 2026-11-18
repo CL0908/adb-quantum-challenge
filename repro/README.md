@@ -1,3 +1,5 @@
+> **警告 / WARNING**：`run.py` 会清空并重跑 `results/`。它默认拒绝运行，必须显式加 `--i-understand-this-wipes-results`（`--dry` 除外）；请只在独立克隆 `../adb-repro` 里使用，不要在本仓库里运行。
+
 # repro：RDPO 复现工具与实验记录
 
 这个目录用来复现本仓库 README 和 proposal 里声明的实验数字，并记录复现结果、发现的问题，以及我们能怎样协助。作者的原文和数字一律不改。

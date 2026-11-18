@@ -16,3 +16,5 @@ docs/paper/fonts.html
 docs/paper/mathjax-config.html
 docs/slides/slides.filled.html
 docs/slides/pdf.js
+repro/logs/*.log
+repro/out/
