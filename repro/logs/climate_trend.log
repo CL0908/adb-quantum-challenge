@@ -1,0 +1,21 @@
+selftest ok: β = 0 equals the friend's term law; Poisson trend fit recovers a planted β
+q=0.5: KG β +0.005/dec (+0.5%/dec) ±0.124 p=0.97 φ=1.00  TJ β -0.031/dec (-3.0%/dec) ±0.142 p=0.83 φ=1.19  KG+TJ β -0.012/dec (-1.2%/dec) ±0.091 p=0.90 φ=1.02  all9 β -0.039/dec (-3.8%/dec) ±0.039 p=0.32 φ=1.22
+q=0.2: KG β +0.116/dec (+12.4%/dec) ±0.205 p=0.57 φ=1.00  TJ β -0.263/dec (-23.1%/dec) ±0.266 p=0.32 φ=1.00  KG+TJ β -0.029/dec (-2.9%/dec) ±0.161 p=0.86 φ=1.00  all9 β -0.059/dec (-5.7%/dec) ±0.068 p=0.38 φ=1.10
+q=0.1: KG β -0.366/dec (-30.6%/dec) ±0.341 p=0.28 φ=1.00  TJ β -0.155/dec (-14.4%/dec) ±0.349 p=0.66 φ=1.00  KG+TJ β -0.267/dec (-23.4%/dec) ±0.241 p=0.27 φ=1.00  all9 β -0.095/dec (-9.1%/dec) ±0.097 p=0.32 φ=1.01
+CC multipliers (KG, TJ): {0.5: [1.226, 1.278], 1.0: [1.499, 1.622], 1.5: [1.825, 2.046], 2.0: [2.214, 2.563]}
+brief (adb-base): friend joint-attach 0.04414 exhaust 3.16e-05
+  trend q=0.5: mults [1.028, 0.846]  joint-attach x0.941  exhaust x0.855  draws exhaust x[0.19, 2.37]
+  trend q=0.2: mults [1.854, 0.236]  joint-attach x0.785  exhaust x0.274  draws exhaust x[0.02, 3.33]
+  trend q=0.5, KG+TJ pooled: mults [0.939, 0.937]  joint-attach x0.964  exhaust x0.931  draws exhaust x[0.33, 2.72]
+  CC dT=0.5: mults [1.226, 1.278]  joint-attach x1.140  exhaust x1.263
+  CC dT=1.0: mults [1.499, 1.622]  joint-attach x1.315  exhaust x1.598
+  CC dT=1.5: mults [1.825, 2.046]  joint-attach x1.531  exhaust x2.025
+  CC dT=2.0: mults [2.214, 2.563]  joint-attach x1.799  exhaust x2.568
+rain share from data: friend joint-attach 0.03434 exhaust 8.67e-06
+  trend q=0.5: mults [1.028, 0.846]  joint-attach x0.966  exhaust x0.867  draws exhaust x[0.15, 4.74]
+  trend q=0.2: mults [1.854, 0.236]  joint-attach x0.943  exhaust x0.384  draws exhaust x[0.02, 8.98]
+  trend q=0.5, KG+TJ pooled: mults [0.939, 0.937]  joint-attach x0.970  exhaust x0.899  draws exhaust x[0.20, 4.51]
+  CC dT=0.5: mults [1.226, 1.278]  joint-attach x1.126  exhaust x1.453
+  CC dT=1.0: mults [1.499, 1.622]  joint-attach x1.289  exhaust x2.107
+  CC dT=1.5: mults [1.825, 2.046]  joint-attach x1.500  exhaust x3.043
+  CC dT=2.0: mults [2.214, 2.563]  joint-attach x1.773  exhaust x4.365

@@ -1,0 +1,287 @@
+{
+  "reps": 200,
+  "seed": 7,
+  "alpha": 0.05,
+  "rows": [
+    {
+      "topology": "ring",
+      "n": 2,
+      "a": 0.07201417086547242,
+      "eps_rel": 0.1,
+      "declared_calls": 4290.0,
+      "iqae": {
+        "calls_mean": 3657.5,
+        "c": 98.15068099647867,
+        "coverage": 0.99,
+        "kmax_max": 24.0,
+        "kmax_mean": 13.345,
+        "k0_runs": 0,
+        "pL_required": 6.620316910792219e-06
+      },
+      "chebae_odd": {
+        "calls_mean": 849.83,
+        "c": 22.805575729661648,
+        "coverage": 0.98,
+        "kmax_max": 27.0,
+        "kmax_mean": 17.05,
+        "k0_runs": 0,
+        "pL_required": 5.9073701213604116e-06
+      },
+      "miqae_chernoff": {
+        "calls_mean": 1759.325,
+        "c": 47.212288952598726,
+        "coverage": 1.0,
+        "kmax_max": 24.0,
+        "kmax_mean": 14.32,
+        "k0_runs": 0,
+        "pL_required": 6.620316910792219e-06
+      },
+      "calls_ratio_chebae_vs_iqae": 4.303801936857959
+    },
+    {
+      "topology": "ring",
+      "n": 8,
+      "a": 0.02492872200199187,
+      "eps_rel": 0.1,
+      "declared_calls": 7075.0,
+      "iqae": {
+        "calls_mean": 6764.0,
+        "c": 106.79566052530616,
+        "coverage": 1.0,
+        "kmax_max": 42.0,
+        "kmax_mean": 25.68,
+        "k0_runs": 0,
+        "pL_required": 8.635023851025086e-07
+      },
+      "chebae_odd": {
+        "calls_mean": 1555.935,
+        "c": 24.5663965197283,
+        "coverage": 0.98,
+        "kmax_max": 46.0,
+        "kmax_mean": 35.655,
+        "k0_runs": 0,
+        "pL_required": 7.898249086822926e-07
+      },
+      "miqae_chernoff": {
+        "calls_mean": 3531.105,
+        "c": 55.75202407735233,
+        "coverage": 1.0,
+        "kmax_max": 27.0,
+        "kmax_mean": 23.41,
+        "k0_runs": 0,
+        "pL_required": 1.328081876317157e-06
+      },
+      "calls_ratio_chebae_vs_iqae": 4.3472253018281615
+    },
+    {
+      "topology": "ring",
+      "n": 16,
+      "a": 0.005985257636251191,
+      "eps_rel": 0.1,
+      "declared_calls": 8650.0,
+      "iqae": {
+        "calls_mean": 8669.0,
+        "c": 67.067238973395,
+        "coverage": 1.0,
+        "kmax_max": 87.0,
+        "kmax_mean": 32.46,
+        "k0_runs": 0,
+        "pL_required": 2.067405109134455e-07
+      },
+      "chebae_odd": {
+        "calls_mean": 3126.755,
+        "c": 24.189967100733384,
+        "coverage": 1.0,
+        "kmax_max": 88.0,
+        "kmax_mean": 72.45,
+        "k0_runs": 0,
+        "pL_required": 2.0441464907125958e-07
+      },
+      "miqae_chernoff": {
+        "calls_mean": 6934.09,
+        "c": 53.64520372511576,
+        "coverage": 1.0,
+        "kmax_max": 58.0,
+        "kmax_mean": 49.105,
+        "k0_runs": 0,
+        "pL_required": 3.0855251515278575e-07
+      },
+      "calls_ratio_chebae_vs_iqae": 2.772522951110656
+    },
+    {
+      "topology": "ring",
+      "n": 20,
+      "a": 0.003016298328830648,
+      "eps_rel": 0.1,
+      "declared_calls": 11015.0,
+      "iqae": {
+        "calls_mean": 10486.0,
+        "c": 57.589989602306346,
+        "coverage": 1.0,
+        "kmax_max": 123.0,
+        "kmax_mean": 39.925,
+        "k0_runs": 0,
+        "pL_required": 1.1796683683867423e-07
+      },
+      "chebae_odd": {
+        "calls_mean": 4221.78,
+        "c": 23.18636909243037,
+        "coverage": 0.98,
+        "kmax_max": 135.0,
+        "kmax_mean": 104.12,
+        "k0_runs": 0,
+        "pL_required": 1.0754945146840475e-07
+      },
+      "miqae_chernoff": {
+        "calls_mean": 11418.34,
+        "c": 62.71047891241642,
+        "coverage": 1.0,
+        "kmax_max": 82.0,
+        "kmax_mean": 72.04,
+        "k0_runs": 0,
+        "pL_required": 1.7631805514402235e-07
+      },
+      "calls_ratio_chebae_vs_iqae": 2.483786459739731
+    },
+    {
+      "topology": "ring",
+      "n": 28,
+      "a": 0.000881844066020961,
+      "eps_rel": 0.1,
+      "declared_calls": 46685.0,
+      "iqae": {
+        "calls_mean": 46479.5,
+        "c": 138.02486973864248,
+        "coverage": 0.995,
+        "kmax_max": 235.0,
+        "kmax_mean": 181.945,
+        "k0_runs": 0,
+        "pL_required": 4.362255262481175e-08
+      },
+      "chebae_odd": {
+        "calls_mean": 8000.32,
+        "c": 23.757637794456834,
+        "coverage": 1.0,
+        "kmax_max": 253.0,
+        "kmax_mean": 191.18,
+        "k0_runs": 0,
+        "pL_required": 4.052986964198062e-08
+      },
+      "miqae_chernoff": {
+        "calls_mean": 21616.465,
+        "c": 64.19195055529696,
+        "coverage": 1.0,
+        "kmax_max": 202.0,
+        "kmax_mean": 138.845,
+        "k0_runs": 0,
+        "pL_required": 5.0717695485074696e-08
+      },
+      "calls_ratio_chebae_vs_iqae": 5.8097051117955285
+    },
+    {
+      "topology": "complete",
+      "n": 4,
+      "a": 0.041637143698129236,
+      "eps_rel": 0.1,
+      "declared_calls": 6075.0,
+      "iqae": {
+        "calls_mean": 5917.0,
+        "c": 120.73745965077502,
+        "coverage": 1.0,
+        "kmax_max": 32.0,
+        "kmax_mean": 22.31,
+        "k0_runs": 0,
+        "pL_required": 1.7759343596206643e-06
+      },
+      "chebae_odd": {
+        "calls_mean": 1124.85,
+        "c": 22.9527685462522,
+        "coverage": 0.98,
+        "kmax_max": 44.0,
+        "kmax_mean": 25.92,
+        "k0_runs": 0,
+        "pL_required": 1.3010398235615494e-06
+      },
+      "miqae_chernoff": {
+        "calls_mean": 2459.985,
+        "c": 50.19644070965216,
+        "coverage": 0.99,
+        "kmax_max": 21.0,
+        "kmax_mean": 17.195,
+        "k0_runs": 0,
+        "pL_required": 2.6689481285133507e-06
+      },
+      "calls_ratio_chebae_vs_iqae": 5.260256923145309
+    },
+    {
+      "topology": "complete",
+      "n": 6,
+      "a": 0.03538059160395654,
+      "eps_rel": 0.1,
+      "declared_calls": 6280.0,
+      "iqae": {
+        "calls_mean": 5167.0,
+        "c": 97.18987125193468,
+        "coverage": 1.0,
+        "kmax_max": 35.0,
+        "kmax_mean": 19.53,
+        "k0_runs": 0,
+        "pL_required": 8.881310164313495e-07
+      },
+      "chebae_odd": {
+        "calls_mean": 1236.905,
+        "c": 23.265848209962115,
+        "coverage": 0.97,
+        "kmax_max": 39.0,
+        "kmax_mean": 27.5,
+        "k0_runs": 0,
+        "pL_required": 7.990500822627167e-07
+      },
+      "miqae_chernoff": {
+        "calls_mean": 2837.05,
+        "c": 53.36414248796232,
+        "coverage": 1.0,
+        "kmax_max": 23.0,
+        "kmax_mean": 20.29,
+        "k0_runs": 0,
+        "pL_required": 1.3344329586162294e-06
+      },
+      "calls_ratio_chebae_vs_iqae": 4.177362044781127
+    },
+    {
+      "topology": "complete",
+      "n": 7,
+      "a": 0.025153157099289194,
+      "eps_rel": 0.1,
+      "declared_calls": 7585.0,
+      "iqae": {
+        "calls_mean": 6619.5,
+        "c": 104.98359445029406,
+        "coverage": 1.0,
+        "kmax_max": 42.0,
+        "kmax_mean": 25.085,
+        "k0_runs": 0,
+        "pL_required": 5.857667610003966e-07
+      },
+      "chebae_odd": {
+        "calls_mean": 1548.73,
+        "c": 24.56246578034654,
+        "coverage": 0.98,
+        "kmax_max": 47.0,
+        "kmax_mean": 35.26,
+        "k0_runs": 0,
+        "pL_required": 5.245964420992308e-07
+      },
+      "miqae_chernoff": {
+        "calls_mean": 3480.85,
+        "c": 55.205399915749844,
+        "coverage": 0.995,
+        "kmax_max": 27.0,
+        "kmax_mean": 23.535,
+        "k0_runs": 0,
+        "pL_required": 9.009212407976663e-07
+      },
+      "calls_ratio_chebae_vs_iqae": 4.274147204483674
+    }
+  ]
+}

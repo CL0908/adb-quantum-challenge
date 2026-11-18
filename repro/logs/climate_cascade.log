@@ -1,0 +1,5 @@
+selftest ok: 2x2 counts and lag alignment
+KG same_year: both 1 vs 2.7 if independent (eq 7, hydro 10 of 26 years), p = 0.98
+KG next_year: both 3 vs 2.4 if independent (eq 6, hydro 10 of 25 years), p = 0.46
+TJ same_year: both 9 vs 8.5 if independent (eq 10, hydro 22 of 26 years), p = 0.50
+TJ next_year: both 8 vs 8.4 if independent (eq 10, hydro 21 of 25 years), p = 0.84

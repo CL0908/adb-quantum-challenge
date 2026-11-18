@@ -1,0 +1,7 @@
+selftest ok: brief EL reproduced (= published 2.296% / 2.011% earthquake EL); AP Taylor limit; calibration solvable
+KG: EL bp brief 226.0, posterior mean 240.0, 95% [116.3, 442.3], sd 84.3
+TJ: EL bp brief 200.9, posterior mean 215.3, 95% [101.9, 405.9], sd 78.6
+calibration: alpha 0.0159/bp (95% 0.0119–0.0573, 118 bootstrap failures), m0 1.76
+KG: 600 bp = risk 422 + ambiguity 178 (30%; US$4.27m over 3 years) | perfect info cuts eq_b 166bp, counts 85bp, rain -3bp | +30 years cuts eq_b 117bp, counts 34bp, rain 44bp
+TJ: 600 bp = risk 378 + ambiguity 222 (37%; US$5.32m over 3 years) | perfect info cuts eq_b 214bp, counts 125bp, rain 67bp | +30 years cuts eq_b 173bp, counts 107bp, rain 103bp
+checks: {'calibrated_alpha_positive': False, 'ambiguity_share_20pct': ['KG', 'TJ'], 'top_info_cut_25bp': True} | verdict: not strong

@@ -1,0 +1,43 @@
+refs {'exceedance|240': 0.0013290763346054913, 'stop_loss|240': 37535.38395771011, 'check|240': 4.0468195461329515e-10, 'exceedance|500': 4.349786095143021e-09, 'stop_loss|500': 0.0843739829063005, 'check|500': 3.389789560159784e-10, 'expected_loss|None': 35271647.094906345, 'joint_exhaustion|None': 1.5921925475879297e-05, 'joint_attachment|None': 0.05200325699506897} T 240 500 bond 588
+wp2_carec: 0 done, 456 to run
+wp2_carec: 20/456
+wp2_carec: 40/456
+wp2_carec: 60/456
+wp2_carec: 80/456
+wp2_carec: 100/456
+wp2_carec: 120/456
+wp2_carec: 140/456
+wp2_carec: 160/456
+wp2_carec: 180/456
+wp2_carec: 200/456
+wp2_carec: 220/456
+wp2_carec: 240/456
+wp2_carec: 260/456
+wp2_carec: 280/456
+wp2_carec: 300/456
+wp2_carec: 320/456
+wp2_carec: 340/456
+wp2_carec: 360/456
+wp2_carec: 380/456
+wp2_carec: 400/456
+wp2_carec: 420/456
+wp2_carec: 440/456
+exceedance        240   B= 65536 mc     mu=1.329e-03 rel=0.0985 cov=0.96
+exceedance        240   B= 65536 rdpo   mu=1.329e-03 rel=0.0040 cov=0.96
+exceedance        240   B= 65536 twist  mu=1.329e-03 rel=0.0095 cov=nan
+exceedance        500   B= 16384 mc     mu=4.350e-09 rel=1.0000 cov=0.00
+exceedance        500   B= 16384 rdpo   mu=4.350e-09 rel=0.0957 cov=0.92
+exceedance        500   B= 16384 twist  mu=4.350e-09 rel=0.1834 cov=nan
+exceedance        500   B= 65536 mc     mu=4.350e-09 rel=1.0000 cov=0.00
+exceedance        500   B= 65536 rdpo   mu=4.350e-09 rel=0.0122 cov=0.88
+exceedance        500   B= 65536 twist  mu=4.350e-09 rel=0.0697 cov=nan
+expected_loss     None  B= 65536 mc     mu=3.527e+07 rel=0.0057 cov=0.92
+expected_loss     None  B= 65536 rdpo   mu=3.527e+07 rel=0.0013 cov=1.00
+joint_exhaustion  None  B= 65536 mc     mu=1.592e-05 rel=1.1509 cov=0.71
+joint_exhaustion  None  B= 65536 rdpo   mu=1.592e-05 rel=0.0516 cov=0.75
+stop_loss         240   B= 65536 mc     mu=3.754e+04 rel=0.1217 cov=0.96
+stop_loss         240   B= 65536 rdpo   mu=3.754e+04 rel=0.0041 cov=0.96
+stop_loss         240   B= 65536 twist  mu=3.754e+04 rel=0.0076 cov=nan
+stop_loss         500   B= 65536 mc     mu=8.437e-02 rel=1.0000 cov=0.00
+stop_loss         500   B= 65536 rdpo   mu=8.437e-02 rel=0.0080 cov=1.00
+stop_loss         500   B= 65536 twist  mu=8.437e-02 rel=0.0762 cov=nan

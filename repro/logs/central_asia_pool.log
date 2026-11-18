@@ -1,0 +1,46 @@
+ca_pool: 0 done, 600 to run
+ca_pool: 20/600
+ca_pool: 40/600
+ca_pool: 60/600
+ca_pool: 80/600
+ca_pool: 100/600
+ca_pool: 120/600
+ca_pool: 140/600
+ca_pool: 160/600
+ca_pool: 180/600
+ca_pool: 200/600
+ca_pool: 220/600
+ca_pool: 240/600
+ca_pool: 260/600
+ca_pool: 280/600
+ca_pool: 300/600
+ca_pool: 320/600
+ca_pool: 340/600
+ca_pool: 360/600
+ca_pool: 380/600
+ca_pool: 400/600
+ca_pool: 420/600
+ca_pool: 440/600
+ca_pool: 460/600
+ca_pool: 480/600
+ca_pool: 500/600
+ca_pool: 520/600
+ca_pool: 540/600
+ca_pool: 560/600
+ca_pool: 580/600
+ca_pool: 600/600
+exceedance        200000000.0 mc     mu=6.398e-04 rel=0.2489 cov=0.97
+exceedance        200000000.0 rdpo   mu=6.398e-04 rel=0.0078 cov=0.97
+exceedance        200000000.0 twist  mu=6.398e-04 rel=0.0215 cov=nan
+exceedance        320000000.0 mc     mu=2.412e-07 rel=1.0000 cov=0.00
+exceedance        320000000.0 rdpo   mu=2.412e-07 rel=0.0247 cov=0.93
+exceedance        320000000.0 twist  mu=2.412e-07 rel=0.0893 cov=nan
+expected_loss     None     mc     mu=1.697e+07 rel=0.0156 cov=0.88
+expected_loss     None     rdpo   mu=1.697e+07 rel=0.0042 cov=0.97
+joint_attachment  None     mc     mu=5.632e-02 rel=0.0363 cov=0.95
+joint_attachment  None     rdpo   mu=5.632e-02 rel=0.0061 cov=0.93
+joint_exhaustion  None     mc     mu=3.324e-05 rel=1.4139 cov=0.45
+joint_exhaustion  None     rdpo   mu=3.324e-05 rel=0.0953 cov=0.72
+stop_loss         200000000.0 mc     mu=1.046e+04 rel=0.3291 cov=0.88
+stop_loss         200000000.0 rdpo   mu=1.046e+04 rel=0.0094 cov=0.93
+stop_loss         200000000.0 twist  mu=1.046e+04 rel=0.0157 cov=nan

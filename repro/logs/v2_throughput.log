@@ -1,0 +1,6 @@
+ring n=2: v1 93,127/s fast 311,487/s x3.3
+ring n=8: v1 10,314/s fast 41,451/s x4.0
+ring n=16: v1 5,011/s fast 19,822/s x4.0
+ring n=28: v1 2,912/s fast 11,716/s x4.0
+complete n=4: v1 11,671/s fast 51,463/s x4.4
+complete n=7: v1 2,104/s fast 10,715/s x5.1

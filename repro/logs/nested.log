@@ -1,0 +1,13 @@
+selftest ok: parameterised complete-graph model equals the friend's at the brief point; infeasible draws rejected
+s*_single (complete-7, Q1+Q2) 7.51e+03; ChebAE constant 24.6; as-proved log factor 2L^4 = 1250
+shares dims  2: mu(ref) 0.00037, posterior predictive 0.000378, P(mu > L) 0.53, G 5.33e-05 [4.56e-05, 6.16e-05], S/G^2 2.00, sigma2_twist 11.9
+        classical: 200 exact inner x 5.3s = 1.06e+03s
+        quantum as_proved : 1.49e+07 calls, +2.89e+06 Toffoli/call, 1.85e+10s -> s*_nested 1.74e+07 (2.32e+03 x s*_single)
+        quantum no_log    : 1.19e+04 calls, +2.89e+06 Toffoli/call, 1.25e+07s -> s*_nested 1.18e+04 (1.57 x s*_single)
+        quantum optimistic: 484 calls, +1.8e+05 Toffoli/call, 2.89e+04s -> s*_nested 27.2 (0.00362 x s*_single)
+full   dims 16: mu(ref) 0.000364, posterior predictive 0.000404, P(mu > L) 0.49, G 0.000103 [8.48e-05, 0.000121], S/G^2 2.79, sigma2_twist 11.3
+        classical: 279 exact inner x 5.4s = 1.5e+03s
+        quantum as_proved : 1.42e+07 calls, +6.14e+06 Toffoli/call, 3.94e+10s -> s*_nested 2.62e+07 (3.49e+03 x s*_single)
+        quantum no_log    : 1.14e+04 calls, +6.14e+06 Toffoli/call, 2.69e+07s -> s*_nested 1.79e+04 (2.38 x s*_single)
+        quantum optimistic: 463 calls, +1.8e+05 Toffoli/call, 2.76e+04s -> s*_nested 18.4 (0.00245 x s*_single)
+verdict: not strong

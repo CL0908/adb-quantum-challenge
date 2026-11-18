@@ -1,0 +1,332 @@
+{
+  "radius_km": 50.0,
+  "years": [
+    1965,
+    2016
+  ],
+  "by_magnitude": {
+    "5.5": {
+      "KG": {
+        "raw": 60,
+        "declustered": 41,
+        "aftershock_share": 0.31666666666666665,
+        "nu": 0.4634146341463415,
+        "nu_ci95": [
+          0.2884673726535734,
+          0.7087812162766626
+        ],
+        "dispersion_raw": [
+          1.6444444444444448,
+          0.002542916436974933
+        ],
+        "dispersion_declustered": [
+          0.6633189861310378,
+          0.9694070407898415
+        ],
+        "lag1_declustered": [
+          -0.15161290322580648,
+          0.8346330733853229
+        ]
+      },
+      "TJ": {
+        "raw": 90,
+        "declustered": 53,
+        "aftershock_share": 0.4111111111111111,
+        "nu": 0.6981132075471698,
+        "nu_ci95": [
+          0.499452261986159,
+          0.9513145132246544
+        ],
+        "dispersion_raw": [
+          1.362091503267974,
+          0.04368410350066527
+        ],
+        "dispersion_declustered": [
+          0.8653348131705512,
+          0.7409762712141357
+        ],
+        "lag1_declustered": [
+          0.11764705882352948,
+          0.1817636472705459
+        ]
+      },
+      "KG_or_TJ": {
+        "raw": 122,
+        "declustered": 76,
+        "aftershock_share": 0.3770491803278688,
+        "nu": 0.6052631578947368,
+        "nu_ci95": [
+          0.4487580621612262,
+          0.7998123883434657
+        ],
+        "dispersion_raw": [
+          1.6862745098039216,
+          0.0015744985395480043
+        ],
+        "dispersion_declustered": [
+          1.0319917440660475,
+          0.4106953777538134
+        ],
+        "lag1_declustered": [
+          0.01923076923076934,
+          0.33193361327734455
+        ]
+      }
+    },
+    "6.0": {
+      "KG": {
+        "raw": 27,
+        "declustered": 20,
+        "aftershock_share": 0.25925925925925924,
+        "nu": 0.35,
+        "nu_ci95": [
+          0.1565534448760813,
+          0.6872098215860744
+        ],
+        "dispersion_raw": [
+          1.5475671750181554,
+          0.007312909174534892
+        ],
+        "dispersion_declustered": [
+          0.8313725490196079,
+          0.7988964147873591
+        ],
+        "lag1_declustered": [
+          -0.05882352941176476,
+          0.612877424515097
+        ]
+      },
+      "TJ": {
+        "raw": 28,
+        "declustered": 18,
+        "aftershock_share": 0.35714285714285715,
+        "nu": 0.5555555555555556,
+        "nu_ci95": [
+          0.285636049514524,
+          0.9855243307146462
+        ],
+        "dispersion_raw": [
+          1.1260504201680677,
+          0.24920487049281678
+        ],
+        "dispersion_declustered": [
+          0.8932461873638344,
+          0.6889507794769554
+        ],
+        "lag1_declustered": [
+          -0.13333333333333341,
+          0.7946410717856429
+        ]
+      },
+      "KG_or_TJ": {
+        "raw": 44,
+        "declustered": 30,
+        "aftershock_share": 0.3181818181818182,
+        "nu": 0.4666666666666667,
+        "nu_ci95": [
+          0.2674511949227482,
+          0.762038096736242
+        ],
+        "dispersion_raw": [
+          1.4081996434937611,
+          0.028902221294688918
+        ],
+        "dispersion_declustered": [
+          0.9751633986928105,
+          0.5240274148015855
+        ],
+        "lag1_declustered": [
+          -0.19905956112852657,
+          0.9150169966006798
+        ]
+      }
+    },
+    "6.5": {
+      "KG": {
+        "raw": 7,
+        "declustered": 6,
+        "aftershock_share": 0.14285714285714285,
+        "nu": 0.16666666666666666,
+        "nu_ci95": [
+          0.017982940218658153,
+          0.7790336337080124
+        ],
+        "dispersion_raw": [
+          1.4649859943977592,
+          0.016877235249129457
+        ],
+        "dispersion_declustered": [
+          1.241830065359477,
+          0.11516874293204184
+        ],
+        "lag1_declustered": [
+          -0.09618052714575426,
+          0.41771645670865826
+        ]
+      },
+      "TJ": {
+        "raw": 9,
+        "declustered": 6,
+        "aftershock_share": 0.3333333333333333,
+        "nu": 0.5,
+        "nu_ci95": [
+          0.1408224317231129,
+          1.334397022885777
+        ],
+        "dispersion_raw": [
+          1.0697167755991284,
+          0.34094490021876284
+        ],
+        "dispersion_declustered": [
+          0.9019607843137254,
+          0.6720645356618086
+        ],
+        "lag1_declustered": [
+          0.08427009716003839,
+          0.11857628474305139
+        ]
+      },
+      "KG_or_TJ": {
+        "raw": 12,
+        "declustered": 8,
+        "aftershock_share": 0.3333333333333333,
+        "nu": 0.5,
+        "nu_ci95": [
+          0.1687743437487724,
+          1.188922987415102
+        ],
+        "dispersion_raw": [
+          1.2941176470588234,
+          0.07707862328271045
+        ],
+        "dispersion_declustered": [
+          1.1176470588235297,
+          0.26182842655461835
+        ],
+        "lag1_declustered": [
+          0.031209389196617903,
+          0.2411517696460708
+        ]
+      }
+    },
+    "6.9": {
+      "KG": {
+        "raw": 3,
+        "declustered": 3,
+        "aftershock_share": 0.0,
+        "nu": 0.0,
+        "nu_ci95": [
+          0.0001636781861958759,
+          0.8373143645524813
+        ],
+        "dispersion_raw": [
+          0.9607843137254904,
+          0.5534531438608967
+        ],
+        "dispersion_declustered": [
+          0.9607843137254904,
+          0.5534531438608967
+        ],
+        "lag1_declustered": [
+          -0.0625000000000001,
+          0.9082183563287343
+        ]
+      },
+      "TJ": {
+        "raw": 2,
+        "declustered": 2,
+        "aftershock_share": 0.0,
+        "nu": 0.0,
+        "nu_ci95": [
+          0.0002455172792938139,
+          1.255971546828722
+        ],
+        "dispersion_raw": [
+          0.980392156862745,
+          0.513358232549117
+        ],
+        "dispersion_declustered": [
+          0.980392156862745,
+          0.513358232549117
+        ],
+        "lag1_declustered": [
+          -0.040816326530612304,
+          1.0
+        ]
+      },
+      "KG_or_TJ": {
+        "raw": 4,
+        "declustered": 4,
+        "aftershock_share": 0.0,
+        "nu": 0.0,
+        "nu_ci95": [
+          0.00012275863964690694,
+          0.627985773414361
+        ],
+        "dispersion_raw": [
+          0.9411764705882353,
+          0.5935466657264794
+        ],
+        "dispersion_declustered": [
+          0.9411764705882353,
+          0.5935466657264794
+        ],
+        "lag1_declustered": [
+          -0.08510638297872355,
+          0.999000199960008
+        ]
+      }
+    }
+  },
+  "hawkes_raw_m55": {
+    "n_hat": 0.10655737613031661,
+    "mu_per_year": 2.09615384667552,
+    "decay_days": 9.76617781379513e-17,
+    "n_ci95": [
+      0.075,
+      0.175
+    ],
+    "events": 122
+  },
+  "impact_adb_base": {
+    "reading_A_aftershocks_merged": {
+      "term_expected_principal_loss_usd": 10063513.348954108,
+      "term_joint_attachment_probability": 0.04413776873084346,
+      "term_portfolio_loss_exceedance_probability": 0.012046720907534033,
+      "term_portfolio_stop_loss_usd": 282354.698566141,
+      "term_both_bonds_exhausted_probability": 3.163304630917887e-05
+    },
+    "reading_B_nu_M6.5_point": {
+      "nu": 0.5,
+      "term_expected_principal_loss_usd": 12078758.114751725,
+      "term_joint_attachment_probability": 0.044137768730843456,
+      "term_portfolio_loss_exceedance_probability": 0.016288337309446146,
+      "term_portfolio_stop_loss_usd": 517102.68203776784,
+      "term_both_bonds_exhausted_probability": 8.118952077621138e-05
+    },
+    "reading_B_nu_M6.5_ci_high": {
+      "nu": 1.188922987415102,
+      "term_expected_principal_loss_usd": 13959751.659379289,
+      "term_joint_attachment_probability": 0.04413776873084346,
+      "term_portfolio_loss_exceedance_probability": 0.019525793880783973,
+      "term_portfolio_stop_loss_usd": 770448.5701575822,
+      "term_both_bonds_exhausted_probability": 0.0001487710767419827
+    },
+    "reading_B_nu_M6.0_point": {
+      "nu": 0.4666666666666667,
+      "term_expected_principal_loss_usd": 11963989.120710764,
+      "term_joint_attachment_probability": 0.04413776873084346,
+      "term_portfolio_loss_exceedance_probability": 0.016066697278030603,
+      "term_portfolio_stop_loss_usd": 502706.61474245053,
+      "term_both_bonds_exhausted_probability": 7.780743022042044e-05
+    },
+    "reading_B_nu_M6.0_ci_high": {
+      "nu": 0.762038096736242,
+      "term_expected_principal_loss_usd": 12897865.577727728,
+      "term_joint_attachment_probability": 0.04413776873084346,
+      "term_portfolio_loss_exceedance_probability": 0.01779273983707257,
+      "term_portfolio_stop_loss_usd": 623412.747863556,
+      "term_both_bonds_exhausted_probability": 0.00010762669433781229
+    }
+  }
+}

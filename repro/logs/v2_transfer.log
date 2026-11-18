@@ -1,0 +1,61 @@
+transfer: 0 done, 800 to run
+transfer: 20/800
+transfer: 40/800
+transfer: 60/800
+transfer: 80/800
+transfer: 100/800
+transfer: 120/800
+transfer: 140/800
+transfer: 160/800
+transfer: 180/800
+transfer: 200/800
+transfer: 220/800
+transfer: 240/800
+transfer: 260/800
+transfer: 280/800
+transfer: 300/800
+transfer: 320/800
+transfer: 340/800
+transfer: 360/800
+transfer: 380/800
+transfer: 400/800
+transfer: 420/800
+transfer: 440/800
+transfer: 460/800
+transfer: 480/800
+transfer: 500/800
+transfer: 520/800
+transfer: 540/800
+transfer: 560/800
+transfer: 580/800
+transfer: 600/800
+transfer: 620/800
+transfer: 640/800
+transfer: 660/800
+transfer: 680/800
+transfer: 700/800
+transfer: 720/800
+transfer: 740/800
+transfer: 760/800
+transfer: 780/800
+transfer: 800/800
+ADB base -> common shock         joint_exhaustion B=2048 transfer=False rel=0.8081 cov=0.72
+ADB base -> common shock         joint_exhaustion B=2048 transfer=True rel=0.0114 cov=0.93
+ADB base -> common shock         joint_exhaustion B=4096 transfer=False rel=0.1968 cov=0.88
+ADB base -> common shock         joint_exhaustion B=4096 transfer=True rel=0.0072 cov=0.95
+ADB base -> common shock         stop_loss        B=2048 transfer=False rel=0.0155 cov=0.97
+ADB base -> common shock         stop_loss        B=2048 transfer=True rel=0.0061 cov=0.97
+ADB base -> common shock         stop_loss        B=4096 transfer=False rel=0.0082 cov=0.93
+ADB base -> common shock         stop_loss        B=4096 transfer=True rel=0.0045 cov=0.97
+ADB base -> rain stress          joint_exhaustion B=2048 transfer=False rel=0.9443 cov=0.65
+ADB base -> rain stress          joint_exhaustion B=2048 transfer=True rel=0.0113 cov=0.93
+ADB base -> rain stress          joint_exhaustion B=4096 transfer=False rel=0.1628 cov=0.85
+ADB base -> rain stress          joint_exhaustion B=4096 transfer=True rel=0.0072 cov=0.95
+ADB base -> rain stress          stop_loss        B=2048 transfer=False rel=0.0160 cov=0.97
+ADB base -> rain stress          stop_loss        B=2048 transfer=True rel=0.0071 cov=0.93
+ADB base -> rain stress          stop_loss        B=4096 transfer=False rel=0.0114 cov=0.95
+ADB base -> rain stress          stop_loss        B=4096 transfer=True rel=0.0046 cov=0.97
+ring 16: rates +20% overnight    exceedance       B=2048 transfer=False rel=0.7976 cov=0.60
+ring 16: rates +20% overnight    exceedance       B=2048 transfer=True rel=0.0563 cov=0.93
+ring 16: rates +20% overnight    exceedance       B=4096 transfer=False rel=0.3915 cov=0.70
+ring 16: rates +20% overnight    exceedance       B=4096 transfer=True rel=0.0375 cov=0.90

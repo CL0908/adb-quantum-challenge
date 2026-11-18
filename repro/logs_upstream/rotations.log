@@ -1,0 +1,9 @@
+selftest ok: rs model reproduces all 8 declared T-counts and s*
+ring     n= 2 rot share 86%  fallback T/2.03 s*/2.21  qrom_fallback T/2.84 s*/2.84  mixed T/2.94 s*/3.20  qrom_mixed T/3.35 s*/3.64
+ring     n= 8 rot share 92%  fallback T/2.20 s*/2.20  qrom_fallback T/3.65 s*/3.65  mixed T/3.41 s*/3.41  qrom_mixed T/4.21 s*/4.21
+ring     n=16 rot share 92%  fallback T/2.22 s*/2.22  qrom_fallback T/3.71 s*/3.99  mixed T/3.44 s*/3.70  qrom_mixed T/4.28 s*/4.60
+ring     n=20 rot share 92%  fallback T/2.23 s*/2.23  qrom_fallback T/3.75 s*/3.75  mixed T/3.47 s*/3.47  qrom_mixed T/4.33 s*/4.33
+ring     n=28 rot share 92%  fallback T/2.26 s*/2.26  qrom_fallback T/3.85 s*/3.85  mixed T/3.55 s*/3.55  qrom_mixed T/4.48 s*/4.48
+complete n= 4 rot share 92%  fallback T/2.22 s*/2.22  qrom_fallback T/3.81 s*/4.11  mixed T/3.49 s*/3.76  qrom_mixed T/4.36 s*/4.71
+complete n= 6 rot share 94%  fallback T/2.30 s*/2.47  qrom_fallback T/4.23 s*/4.54  mixed T/3.72 s*/3.99  qrom_mixed T/4.84 s*/5.20
+complete n= 7 rot share 95%  fallback T/2.32 s*/2.32  qrom_fallback T/4.41 s*/4.74  mixed T/3.80 s*/4.08  qrom_mixed T/5.01 s*/5.38

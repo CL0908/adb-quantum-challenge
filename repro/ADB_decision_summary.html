@@ -1,0 +1,137 @@
+<title>Disaster Relief Bond Model Risk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single policy-memo column; decisions first, evidence tables second, limits last. */
+:root {
+  --paper: #f7f8f9; --sheet: #ffffff; --ink: #18212b; --muted: #5a6573; --rule: #d9dee4;
+  --accent: #1f5f73; --quake: #8a5a16; --rain: #2a5d9c; --soft: #eef2f5; --flag: #9b2c2c;
+  --display: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #11161c; --sheet: #171e26; --ink: #e4e9ee; --muted: #9aa6b3; --rule: #2c3640;
+  --accent: #7cc0d4; --quake: #d9a45a; --rain: #8db5ec; --soft: #1e2731; --flag: #f08a8a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #11161c; --sheet: #171e26; --ink: #e4e9ee; --muted: #9aa6b3; --rule: #2c3640;
+  --accent: #7cc0d4; --quake: #d9a45a; --rain: #8db5ec; --soft: #1e2731; --flag: #f08a8a; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--paper); color: var(--ink); font: 15px/1.6 var(--body); margin: 0 }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+header { display: grid; gap: 10px; padding-bottom: 22px; border-bottom: 2px solid var(--ink) }
+.eyebrow { font: 500 12px/1.4 var(--data); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+h1 { font: 700 clamp(26px, 4.4vw, 36px)/1.15 var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em }
+.lede { font-size: 17px; max-width: 64ch; margin: 0 }
+.prov { font-size: 13px; color: var(--muted); max-width: 70ch; margin: 0 }
+section { display: grid; gap: 14px; padding-top: 30px }
+h2 { font: 650 19px/1.3 var(--display); margin: 0; text-wrap: balance }
+h2 .n { font: 500 13px var(--data); color: var(--accent); margin-right: 8px; letter-spacing: .04em }
+p { margin: 0; max-width: 68ch }
+.decisions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+.decisions li { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; display: grid; gap: 4px }
+.decisions b { font-weight: 650 }
+.decisions .why { color: var(--muted); font-size: 14px }
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--sheet) }
+table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 14px }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top }
+th { font: 600 12px/1.35 var(--body); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; background: var(--soft) }
+tr:last-child td { border-bottom: 0 }
+td.num { font-family: var(--data); font-variant-numeric: tabular-nums; white-space: nowrap }
+td.hi { color: var(--flag); font-weight: 600 }
+.peril { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap }
+.peril::before { content: ""; width: 8px; height: 8px; border-radius: 50% }
+.quake::before { background: var(--quake) } .rain::before { background: var(--rain) } .dep::before { background: var(--accent) }
+.note { font-size: 13px; color: var(--muted) }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted) }
+ol.data { margin: 0; padding-left: 22px; display: grid; gap: 10px }
+ol.data li::marker { font: 500 13px var(--data); color: var(--accent) }
+ol.data .what { color: var(--muted); font-size: 14px }
+.limits { margin: 0; padding-left: 20px; display: grid; gap: 8px }
+.method { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 8px; display: grid; gap: 6px }
+sup { font-size: .7em }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Decision summary · Kyrgyz Republic &amp; Tajikistan bonds · CAREC pool · November 2026</div>
+  <h1>Disaster Relief Bond Model Risk</h1>
+  <p class="lede">The risk figures behind the bonds are uncertain mainly because of a few marginal inputs: the 1-in-50 rain level and the earthquake trigger rates. Cross-border dependence matters only in the far tail of a pool, and faster computation would not narrow any of these ranges. Better data would.</p>
+  <p class="prov">Built on Tan Chun Loong's RDPO model and its exact references (github.com/CL0908/adb-quantum-challenge), with parameter uncertainty taken from public data. Indicative: public proxies, not a re-pricing of the bonds. All probabilities are per three-year term.</p>
+</header>
+
+<section>
+  <h2>What to decide</h2>
+  <ul class="decisions">
+    <li><b>Price and report the tail metrics as ranges.</b>
+      <span class="why">Both bonds exhausted: 95% range 3.1 × 10<sup>−7</sup> to 1.3 × 10<sup>−4</sup> (central 2.2 × 10<sup>−5</sup>; brief 3.2 × 10<sup>−5</sup>). Expected loss of the two bonds: US$5.5m to US$19.2m (central US$10.1m).</span></li>
+    <li><b>Collect rain-extreme data for the two countries first.</b>
+      <span class="why">It carries 81% of the uncertainty in the chance that both bonds are exhausted. Expect it to narrow, not disappear: with about 46 years of index data, even an ideal addition narrows the 2% trigger interval only to about 0.65 of its width.</span></li>
+    <li><b>Then improve the earthquake catalogue and its magnitude–frequency slope.</b>
+      <span class="why">It carries 97% of the uncertainty in the two bonds' expected loss and 78% of the uncertainty in the CAREC pool's chance of losing more than US$240m.</span></li>
+    <li><b>Confirm the contract's event definition for aftershocks.</b>
+      <span class="why">If aftershocks pay as separate events, the chance of both bonds being exhausted rises 2.7-fold and expected loss 1.2-fold. Reading the contract settles this at no cost.</span></li>
+    <li><b>For a pool, watch shared earthquakes in the far tail.</b>
+      <span class="why">Their share of the uncertainty grows from 14% at a US$240m pool loss to 41% at US$500m. The strongest links in the catalogue are Afghanistan–Pakistan, Afghanistan–Tajikistan and Tajikistan–Kyrgyz Republic.</span></li>
+    <li><b>Stop spending on the shared-rain assumption.</b>
+      <span class="why">Station data put it near 2.7% (the brief assumes 25%), and at that level it carries under 2% of the uncertainty in every metric tested.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">A</span>The two bonds</h2>
+  <p>Exact two-country model; uncertainty in both shared shares and both countries' earthquake and rain trigger rates, propagated jointly.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Metric</th><th>Brief value</th><th>Data-based central</th><th>95% range</th><th>Main driver (share of variance)</th><th>30 more years of that data removes</th></tr></thead>
+    <tbody>
+      <tr><td>Both bonds exhausted</td><td class="num">3.2 × 10<sup>−5</sup></td><td class="num">2.2 × 10<sup>−5</sup></td><td class="num">3.1 × 10<sup>−7</sup> – 1.3 × 10<sup>−4</sup></td><td><span class="peril rain">Rain 1-in-50 levels, 81%</span></td><td class="num">32%</td></tr>
+      <tr><td>Expected loss, both bonds</td><td class="num">US$10.06m</td><td class="num">US$10.1m</td><td class="num">US$5.5m – 19.2m</td><td><span class="peril quake">Earthquake trigger rates, 97%</span></td><td class="num">35%</td></tr>
+      <tr><td>Both countries pay</td><td class="num">4.4%</td><td class="num">7.5%</td><td class="num">3.3% – 15.9%</td><td><span class="peril quake">Earthquake rates 75%</span>, <span class="peril dep">shared earthquakes 21%</span></td><td class="num">27%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">"Removes" is the expected reduction in the variance of the log of the metric. The data-based central for "both countries pay" is above the brief because the earthquake record (NOAA 1900–2020) shows far more shared events than the brief's 7.5%.</p>
+</section>
+
+<section>
+  <h2><span class="n">B</span>The CAREC pool (10 countries)</h2>
+  <p>Exact pool model as calibrated in the RDPO repository; each draw re-runs that calibration on resampled catalogue, loss and station data, so the Kyrgyz and Tajik marginals stay tied to the brief.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Metric</th><th>Calibrated figure</th><th>Expected under uncertainty</th><th>95% range</th><th>Chance the true value is higher</th><th>Main drivers</th></tr></thead>
+    <tbody>
+      <tr><td>Pool loss above US$240m</td><td class="num">1.33 × 10<sup>−3</sup></td><td class="num">1.47 × 10<sup>−3</sup></td><td class="num">0.85 – 2.37 × 10<sup>−3</sup></td><td class="num hi">60%</td><td><span class="peril quake">Earthquake rates 78%</span>, <span class="peril dep">shared 14%</span></td></tr>
+      <tr><td>Pool loss above US$500m</td><td class="num">4.4 × 10<sup>−9</sup></td><td class="num">6.3 × 10<sup>−9</sup></td><td class="num">1.3 × 10<sup>−9</sup> – 1.8 × 10<sup>−8</sup></td><td class="num hi">59%</td><td><span class="peril quake">Earthquake rates 57%</span>, <span class="peril dep">shared 41%</span></td></tr>
+      <tr><td>Expected pool loss</td><td class="num">US$35.3m</td><td class="num">US$35.9m</td><td class="num">US$31.2m – 41.2m</td><td class="num">58%</td><td><span class="peril quake">Earthquake rates 86%</span>, <span class="peril rain">rain rates 7%</span></td></tr>
+      <tr><td>Kyrgyz–Tajik bonds both exhausted</td><td class="num">1.59 × 10<sup>−5</sup></td><td class="num">1.08 × 10<sup>−5</sup></td><td class="num">0.57 – 1.71 × 10<sup>−5</sup></td><td class="num">5%</td><td><span class="peril rain">Rain rates 56%</span>, <span class="peril dep">shared 35%</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="legend"><span class="peril quake">Earthquake</span><span class="peril rain">Rain</span><span class="peril dep">Cross-border dependence</span></div>
+  <p class="note">The calibrated pool model keeps the brief's 25% shared-rain assumption; with the station estimate the Kyrgyz–Tajik exhaustion figure falls by about a third, which is why the calibrated value sits at the top of the range.</p>
+</section>
+
+<section>
+  <h2><span class="n">C</span>Data to collect, in order</h2>
+  <ol class="data">
+    <li><b>Rain extremes, Kyrgyz Republic and Tajikistan.</b> <span class="what">Longer daily series and more gauges for the trigger index. Narrows the joint-exhaustion range (81% of its uncertainty for the two bonds, 56% inside the pool); knowing it exactly would cut the 95% interval by 56%.</span></li>
+    <li><b>Earthquake catalogue and magnitude–frequency slope for the region.</b> <span class="what">Narrows expected loss and the pool's exceedance figures; knowing it exactly would cut the expected-loss interval of the two bonds by 82%.</span></li>
+    <li><b>Records of single earthquakes that reach two countries.</b> <span class="what">Matters for the pool's far tail (41% at US$500m) and for joint exhaustion inside the pool (35%).</span></li>
+    <li><b>The contract's event definition.</b> <span class="what">Free to obtain; moves joint exhaustion by up to 2.7-fold.</span></li>
+  </ol>
+  <p class="note">Not worth further spending on current evidence: the shared-rain share (under 2% of uncertainty), and climate-state, trend or earthquake-cascade effects, none of which were statistically significant in the available records.</p>
+</section>
+
+<section>
+  <h2>What these numbers cannot tell you</h2>
+  <ul class="limits">
+    <li>They use public proxies: USGS earthquakes 1965–2016, NOAA significant earthquakes 1900–2020, GHCN-Daily rain stations and EM-DAT losses 1990–2020. The bonds' actual trigger data would replace them.</li>
+    <li>Payout triggers depend on shaking at the exposure. Checked against USGS ShakeMaps (21 country–event cases), neither a 50 km magnitude rule nor peak shaking intensity matched the payout tier well (24% and 33% exact agreement), so footprint assumptions remain open until the trigger definition is known.</li>
+    <li>Warming is a scenario, not a forecast: at +1 °C the chance of both bonds being exhausted rises 1.6- to 2.1-fold. A 33-model climate ensemble disagreed with the station tails and could not narrow them.</li>
+    <li>Computation is not the constraint. The exact pool model evaluates in about one second; none of the faster algorithms tested, classical or quantum, would change the ranges above.</li>
+  </ul>
+</section>
+
+<div class="method">
+  <div><b>Method.</b> Uncertain inputs are drawn from posterior distributions fitted to the public data above and passed through the RDPO repository's exact models. Variance shares are first-order Sobol indices of the log of each metric (4,096 joint draws for the two bonds, 512 for the pool, with bootstrap intervals); "removes" uses the standard value-of-information reduction for posteriors that shrink with record length. Every figure is reproducible from the add-on scripts voi.py and model_risk.py.</div>
+</div>
+</div>

@@ -1,0 +1,21 @@
+selftest ok: GPD / regional fits recover planted shape; clusters follow the 3-day rule
+rep 0/400
+rep 50/400
+rep 100/400
+rep 150/400
+rep 200/400
+rep 250/400
+rep 300/400
+rep 350/400
+rep 400/400
+AM     KG: p 0.0200 [0.0000, 0.0547] width x1.00  TJ: p 0.0200 [0.0027, 0.0468] width x1.00
+POT2   KG: p 0.0194 [0.0010, 0.0450] width x0.80  TJ: p 0.0183 [0.0025, 0.0387] width x0.82
+POT3   KG: p 0.0194 [0.0009, 0.0451] width x0.81  TJ: p 0.0160 [0.0010, 0.0387] width x0.86
+POT5   KG: p 0.0157 [0.0001, 0.0441] width x0.81  TJ: p 0.0145 [0.0008, 0.0379] width x0.84
+REG3   KG: p 0.0241 [0.0102, 0.0419] width x0.58  TJ: p 0.0516 [0.0274, 0.0816] width x1.23
+AM     joint exhaustion all: [5.884096859735172e-09, 0.00013658422639186305] width x1.00 | rain only width x1.00
+POT2   joint exhaustion all: [9.38792913919334e-07, 0.0001056401722732902] width x0.77 | rain only width x0.84
+POT3   joint exhaustion all: [3.145775577489858e-07, 0.00010369666361926987] width x0.76 | rain only width x0.87
+POT5   joint exhaustion all: [2.5296102538479018e-08, 8.866580826068265e-05] width x0.65 | rain only width x0.74
+REG3   joint exhaustion all: [1.7626647465643125e-05, 0.00026176188654384414] width x1.79 | rain only width x1.07
+verdict: not strong (best width x0.65 of AM)

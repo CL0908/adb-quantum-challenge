@@ -1,0 +1,13 @@
+{
+  "shared_rate_c": 0.0029666683301194244,
+  "eq_no_payout": 0.9261876974923822,
+  "rain_neither": 0.9652629402592542,
+  "rain_one_only": 0.014737059740745795,
+  "rain_both": 0.005262940259254223,
+  "annual_no_payout": 0.8940146601134454
+}
+adb-base {'expected_principal_loss_usd': '1.00635e+07 (ref 1.006e+07)', 'joint_attachment_probability': '0.0441378 (ref 0.04414)', 'portfolio_loss_exceedance_probability': '0.0120467 (ref 0.01205)', 'portfolio_stop_loss_usd': '282355 (ref 282355)', 'both_bonds_exhausted_probability': '3.1633e-05 (ref 3.2e-05)'}
+adb-independent {'expected_principal_loss_usd': '1.00635e+07 (ref 1.006e+07)', 'joint_attachment_probability': '0.0271564 (ref 0.02716)', 'portfolio_loss_exceedance_probability': '0.00718593 (ref 0.00719)', 'portfolio_stop_loss_usd': '171266 (ref 171266)', 'both_bonds_exhausted_probability': '3.92392e-06 (ref 4e-06)'}
+adb-common-shock {'expected_principal_loss_usd': '1.00635e+07 (ref 1.006e+07)', 'joint_attachment_probability': '0.0505257 (ref 0.05053)', 'portfolio_loss_exceedance_probability': '0.0160664 (ref 0.01607)', 'portfolio_stop_loss_usd': '385043 (ref 385043)', 'both_bonds_exhausted_probability': '4.40015e-05 (ref 4.4e-05)'}
+adb-rain-stress {'expected_principal_loss_usd': '1.11705e+07 (ref 1.117e+07)', 'joint_attachment_probability': '0.0704639 (ref 0.07046)', 'portfolio_loss_exceedance_probability': '0.013215 (ref 0.01322)', 'portfolio_stop_loss_usd': '306286 (ref 306286)', 'both_bonds_exhausted_probability': '6.92457e-05 (ref 6.9e-05)'}
+adb-rain-cover {'expected_principal_loss_usd': '9.97005e+06 (ref 9.97e+06)', 'joint_attachment_probability': '0.0441378 (ref 0.04414)', 'portfolio_loss_exceedance_probability': '0.00699709 (ref 0.007)', 'portfolio_stop_loss_usd': '170927 (ref 170927)', 'both_bonds_exhausted_probability': '3.1633e-05 (ref 3.2e-05)'}

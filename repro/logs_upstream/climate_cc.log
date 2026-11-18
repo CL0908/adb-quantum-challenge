@@ -1,0 +1,11 @@
+selftest ok: ΔT = 0 equals the friend's term law; CC multiplier is 1 at ΔT = 0 and grows with ΔT
+brief (adb-base): friend joint-attach 0.04414 exhaust 3.16e-05
+  CC dT=0.5: mults [1.226, 1.278]  joint-attach x1.140  exhaust x1.263
+  CC dT=1.0: mults [1.499, 1.622]  joint-attach x1.315  exhaust x1.598
+  CC dT=1.5: mults [1.825, 2.046]  joint-attach x1.531  exhaust x2.025
+  CC dT=2.0: mults [2.214, 2.563]  joint-attach x1.799  exhaust x2.568
+rain share from data: friend joint-attach 0.03434 exhaust 8.67e-06
+  CC dT=0.5: mults [1.226, 1.278]  joint-attach x1.126  exhaust x1.453
+  CC dT=1.0: mults [1.499, 1.622]  joint-attach x1.289  exhaust x2.107
+  CC dT=1.5: mults [1.825, 2.046]  joint-attach x1.500  exhaust x3.043
+  CC dT=2.0: mults [2.214, 2.563]  joint-attach x1.773  exhaust x4.365

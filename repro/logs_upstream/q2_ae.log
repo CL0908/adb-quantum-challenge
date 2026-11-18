@@ -1,0 +1,8 @@
+ring     n= 2 a=0.072  iqae: c=98.2 cover=0.990 kmax=24 k0=0  chebae_odd: c=22.8 cover=0.980 kmax=27 k0=0  miqae_chernoff: c=47.2 cover=1.000 kmax=24 k0=0  -> /4.30
+ring     n= 8 a=0.0249  iqae: c=106.8 cover=1.000 kmax=42 k0=0  chebae_odd: c=24.6 cover=0.980 kmax=46 k0=0  miqae_chernoff: c=55.8 cover=1.000 kmax=27 k0=0  -> /4.35
+ring     n=16 a=0.00599  iqae: c=67.1 cover=1.000 kmax=87 k0=0  chebae_odd: c=24.2 cover=1.000 kmax=88 k0=0  miqae_chernoff: c=53.6 cover=1.000 kmax=58 k0=0  -> /2.77
+ring     n=20 a=0.00302  iqae: c=57.6 cover=1.000 kmax=123 k0=0  chebae_odd: c=23.2 cover=0.980 kmax=135 k0=0  miqae_chernoff: c=62.7 cover=1.000 kmax=82 k0=0  -> /2.48
+ring     n=28 a=0.000882  iqae: c=138.0 cover=0.995 kmax=235 k0=0  chebae_odd: c=23.8 cover=1.000 kmax=253 k0=0  miqae_chernoff: c=64.2 cover=1.000 kmax=202 k0=0  -> /5.81
+complete n= 4 a=0.0416  iqae: c=120.7 cover=1.000 kmax=32 k0=0  chebae_odd: c=23.0 cover=0.980 kmax=44 k0=0  miqae_chernoff: c=50.2 cover=0.990 kmax=21 k0=0  -> /5.26
+complete n= 6 a=0.0354  iqae: c=97.2 cover=1.000 kmax=35 k0=0  chebae_odd: c=23.3 cover=0.970 kmax=39 k0=0  miqae_chernoff: c=53.4 cover=1.000 kmax=23 k0=0  -> /4.18
+complete n= 7 a=0.0252  iqae: c=105.0 cover=1.000 kmax=42 k0=0  chebae_odd: c=24.6 cover=0.980 kmax=47 k0=0  miqae_chernoff: c=55.2 cover=0.995 kmax=27 k0=0  -> /4.27

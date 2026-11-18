@@ -1,0 +1,11 @@
+selftest ok: variant model equals src.model.annual.annual_distribution for all 5 scenarios at defaults
+M>=5.5: raw 122, declustered 76, aftershock share 38%, ν=0.61 [0.45,0.80]  dispersion raw 1.69 (p=0.002) vs decl 1.03  lag1 decl r=0.02 (p=0.33)
+M>=6.0: raw 44, declustered 30, aftershock share 32%, ν=0.47 [0.27,0.76]  dispersion raw 1.41 (p=0.029) vs decl 0.98  lag1 decl r=-0.20 (p=0.92)
+M>=6.5: raw 12, declustered 8, aftershock share 33%, ν=0.50 [0.17,1.19]  dispersion raw 1.29 (p=0.077) vs decl 1.12  lag1 decl r=0.03 (p=0.24)
+M>=6.9: raw 4, declustered 4, aftershock share 0%, ν=0.00 [0.00,0.63]  dispersion raw 0.94 (p=0.594) vs decl 0.94  lag1 decl r=-0.09 (p=1.00)
+Hawkes raw M>=5.5: {'n_hat': 0.107, 'mu_per_year': 2.096, 'decay_days': 0.0, 'n_ci95': [np.float64(0.075), np.float64(0.175)], 'events': 122}
+reading_A_aftershocks_merged       ν=0.00  joint exhaustion 3.16e-05 (x1.00)  joint attachment 0.0441  EL 10.06m
+reading_B_nu_M6.5_point            ν=0.50  joint exhaustion 8.12e-05 (x2.57)  joint attachment 0.0441  EL 12.08m
+reading_B_nu_M6.5_ci_high          ν=1.19  joint exhaustion 0.000149 (x4.70)  joint attachment 0.0441  EL 13.96m
+reading_B_nu_M6.0_point            ν=0.47  joint exhaustion 7.78e-05 (x2.46)  joint attachment 0.0441  EL 11.96m
+reading_B_nu_M6.0_ci_high          ν=0.76  joint exhaustion 0.000108 (x3.40)  joint attachment 0.0441  EL 12.90m

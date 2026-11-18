@@ -1,0 +1,36 @@
+E3 ADB base, joint exhaustion         full RDPO                relRMSE=0.0185 cov=0.90
+E3 ADB base, joint exhaustion         no edge features         relRMSE=0.0234 cov=0.82
+E3 ADB base, joint exhaustion         no target-relevance freezing relRMSE=0.0185 cov=0.90
+E3 ADB base, joint exhaustion         no twist warm start      relRMSE=0.0185 cov=0.90
+E3 ADB base, joint exhaustion         no cross-entropy stage   relRMSE=1.4859 cov=0.53
+E3 ADB base, joint exhaustion         no Rényi-2 (χ²) stage    relRMSE=0.0179 cov=0.93
+E3 ADB base, joint exhaustion         no sample recycling      relRMSE=0.0158 cov=0.85
+E3 ADB base, joint exhaustion         no RQMC final stage      relRMSE=0.0215 cov=0.95
+E3 ADB base, joint exhaustion         CE only (v1-style)       relRMSE=0.0245 cov=0.93
+E3 ADB base, Pr(L>80m)                full RDPO                relRMSE=0.0033 cov=0.95
+E3 ADB base, Pr(L>80m)                no edge features         relRMSE=0.0034 cov=0.93
+E3 ADB base, Pr(L>80m)                no target-relevance freezing relRMSE=0.0033 cov=0.95
+E3 ADB base, Pr(L>80m)                no twist warm start      relRMSE=0.0029 cov=0.95
+E3 ADB base, Pr(L>80m)                no cross-entropy stage   relRMSE=0.0125 cov=0.95
+E3 ADB base, Pr(L>80m)                no Rényi-2 (χ²) stage    relRMSE=0.0035 cov=0.95
+E3 ADB base, Pr(L>80m)                no sample recycling      relRMSE=0.0024 cov=0.90
+E3 ADB base, Pr(L>80m)                no RQMC final stage      relRMSE=0.0042 cov=0.97
+E3 ADB base, Pr(L>80m)                CE only (v1-style)       relRMSE=0.0043 cov=0.97
+E3 ring n=16, Pr(L>T)                 full RDPO                relRMSE=0.0360 cov=0.88
+E3 ring n=16, Pr(L>T)                 no edge features         relRMSE=0.0235 cov=0.93
+E3 ring n=16, Pr(L>T)                 no target-relevance freezing relRMSE=0.0360 cov=0.88
+E3 ring n=16, Pr(L>T)                 no twist warm start      relRMSE=0.9043 cov=0.12
+E3 ring n=16, Pr(L>T)                 no cross-entropy stage   relRMSE=0.0236 cov=0.97
+E3 ring n=16, Pr(L>T)                 no Rényi-2 (χ²) stage    relRMSE=0.0506 cov=0.93
+E3 ring n=16, Pr(L>T)                 no sample recycling      relRMSE=0.0494 cov=0.90
+E3 ring n=16, Pr(L>T)                 no RQMC final stage      relRMSE=0.0399 cov=0.93
+E3 ring n=16, Pr(L>T)                 CE only (v1-style)       relRMSE=0.0226 cov=0.95
+E3 ring n=8, joint exhaustion (0,1)   full RDPO                relRMSE=0.1025 cov=0.80
+E3 ring n=8, joint exhaustion (0,1)   no edge features         relRMSE=0.0937 cov=0.75
+E3 ring n=8, joint exhaustion (0,1)   no target-relevance freezing relRMSE=0.2675 cov=0.72
+E3 ring n=8, joint exhaustion (0,1)   no twist warm start      relRMSE=0.1025 cov=0.80
+E3 ring n=8, joint exhaustion (0,1)   no cross-entropy stage   relRMSE=1.4398 cov=0.28
+E3 ring n=8, joint exhaustion (0,1)   no Rényi-2 (χ²) stage    relRMSE=0.0600 cov=0.85
+E3 ring n=8, joint exhaustion (0,1)   no sample recycling      relRMSE=0.0907 cov=0.72
+E3 ring n=8, joint exhaustion (0,1)   no RQMC final stage      relRMSE=0.0821 cov=0.93
+E3 ring n=8, joint exhaustion (0,1)   CE only (v1-style)       relRMSE=0.3048 cov=0.68

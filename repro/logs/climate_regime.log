@@ -1,0 +1,28 @@
+selftest ok: no-effect regime equals the friend's term law; calibration keeps the 2% trigger probability
+q=0.5: ratio La/Neu/El  KG [1.13 1.22 0.57] p=0.28  TJ [1.09 0.76 1.2 ] p=0.50  all9 [1.07 0.99 0.94] p=0.672
+q=0.2: ratio La/Neu/El  KG [1.28 1.54 0.  ] p=0.02  TJ [1.54 0.59 1.  ] p=0.52  all9 [1.18 0.98 0.85] p=0.416
+q=0.1: ratio La/Neu/El  KG [1.13 1.69 0.  ] p=0.16  TJ [1.38 0.53 1.2 ] p=0.68  all9 [1.05 1.08 0.87] p=0.825
+q0.5_year_all: KG-TJ obs 10 E0 10.5 p 0.737 | pooled obs 96 E0 98.6 excess -2.6% p 0.716
+q0.5_year_nostorm: KG-TJ obs 9 E0 10.0 p 0.813 | pooled obs 86 E0 92.1 excess -6.6% p 0.903
+q0.5_quarter_all: KG-TJ obs 4 E0 3.9 p 0.577 | pooled obs 54 E0 51.3 excess +5.3% p 0.357
+q0.5_quarter_nostorm: KG-TJ obs 3 E0 3.6 p 0.747 | pooled obs 35 E0 44.9 excess -22.1% p 0.975
+q0.2_year_all: KG-TJ obs 2 E0 1.7 p 0.558 | pooled obs 15 E0 16.1 excess -7.0% p 0.694
+q0.2_year_nostorm: KG-TJ obs 2 E0 1.7 p 0.554 | pooled obs 12 E0 15.4 excess -22.1% p 0.896
+q0.2_quarter_all: KG-TJ obs 1 E0 0.7 p 0.514 | pooled obs 12 E0 7.4 excess +62.5% p 0.052
+q0.2_quarter_nostorm: KG-TJ obs 1 E0 0.7 p 0.514 | pooled obs 9 E0 6.9 excess +31.3% p 0.247
+q0.1_year_all: KG-TJ obs 0 E0 0.6 p 1.000 | pooled obs 2 E0 4.3 excess -53.7% p 0.954
+q0.1_year_nostorm: KG-TJ obs 0 E0 0.6 p 1.000 | pooled obs 2 E0 4.3 excess -53.7% p 0.947
+q0.1_quarter_all: KG-TJ obs 0 E0 0.2 p 1.000 | pooled obs 2 E0 2.0 excess +2.3% p 0.586
+q0.1_quarter_nostorm: KG-TJ obs 0 E0 0.2 p 1.000 | pooled obs 2 E0 2.0 excess +2.3% p 0.605
+brief (adb-base): friend joint-attach 0.04414 exhaust 3.16e-05
+  ENSO data, per country: joint-attach x0.912 (El start x0.817)  exhaust x0.712 (El start x0.517)
+  ENSO data, KG+TJ pooled: joint-attach x1.002 (El start x0.918)  exhaust x1.006 (El start x0.846)
+  stress El/La = 1.5: joint-attach x1.000 (El start x1.035)  exhaust x1.001 (El start x1.066)
+  stress El/La = 2.0: joint-attach x1.001 (El start x1.060)  exhaust x1.003 (El start x1.116)
+  stress El/La = 3.0: joint-attach x1.002 (El start x1.096)  exhaust x1.007 (El start x1.187)
+rain share from data: friend joint-attach 0.03434 exhaust 8.67e-06
+  ENSO data, per country: joint-attach x0.990 (El start x0.916)  exhaust x0.904 (El start x0.650)
+  ENSO data, KG+TJ pooled: joint-attach x1.003 (El start x0.933)  exhaust x1.029 (El start x0.791)
+  stress El/La = 1.5: joint-attach x1.001 (El start x1.030)  exhaust x1.006 (El start x1.105)
+  stress El/La = 2.0: joint-attach x1.002 (El start x1.052)  exhaust x1.016 (El start x1.188)
+  stress El/La = 3.0: joint-attach x1.004 (El start x1.084)  exhaust x1.038 (El start x1.313)

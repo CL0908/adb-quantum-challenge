@@ -1,0 +1,12 @@
+{
+  "python": "3.13.1",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "matplotlib": "3.11.2",
+  "pytest": "9.2.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+  "cores": 16,
+  "commit": "d29bd433f059d17976095598e607de850cbc7f2b",
+  "recorded": "2026-11-06T18:17:56"
+}

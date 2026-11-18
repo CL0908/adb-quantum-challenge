@@ -1,0 +1,14 @@
+selftest ok: full-R tail is exact; prefix law x exact tail = exact answer; prefix rollout unbiased
+complete4_exceedance: mu 0.00207, R [0, 1, 2], suffix 12/20 sources
+  B=4096: plain RMSE 0.025 cov 0.93 cpu 0.79s | exact-tail RMSE 0.011 cov 0.92 cpu 0.78s z -0.1 | work-MSE x5.7, same-policy var x4.6, zeros 0.20 -> 0.00
+  B=16384: plain RMSE 0.007 cov 0.97 cpu 1.98s | exact-tail RMSE 0.003 cov 0.97 cpu 1.77s z -1.8 | work-MSE x5.4, same-policy var x9.8, zeros 0.18 -> 0.00
+ring16_exceedance: mu 1.46e-08, R [0, 1, 2], suffix 10/64 sources
+  B=4096: plain RMSE 0.215 cov 0.78 cpu 2.96s | exact-tail RMSE 0.222 cov 0.88 cpu 3.04s z +0.1 | work-MSE x0.9, same-policy var x11.9, zeros 0.51 -> 0.17
+  B=16384: plain RMSE 0.030 cov 0.95 cpu 7.59s | exact-tail RMSE 0.034 cov 0.93 cpu 7.74s z +1.1 | work-MSE x0.8, same-policy var x1.8, zeros 0.49 -> 0.17
+ring28_joint_exhaustion: mu 1.9e-05, R [0, 1], suffix 6/112 sources
+  B=4096: plain RMSE 0.279 cov 0.78 cpu 0.58s | exact-tail RMSE 0.838 cov 0.75 cpu 0.58s z +1.2 | work-MSE x0.1, same-policy var x0.2, zeros 0.39 -> 0.00
+  B=16384: plain RMSE 0.060 cov 0.82 cpu 1.35s | exact-tail RMSE 0.042 cov 0.77 cpu 1.33s z -1.1 | work-MSE x2.1, same-policy var x2.7, zeros 0.19 -> 0.00
+e1: mu 5.97e-07, R [3, 7, 15], suffix 5/61 sources
+  B=4096: plain RMSE 0.443 cov 0.55 cpu 1.69s | exact-tail RMSE 0.321 cov 0.40 cpu 1.69s z -5.1 | work-MSE x1.9, same-policy var x1.3, zeros 0.56 -> 0.20
+  B=16384: plain RMSE 0.088 cov 0.65 cpu 3.06s | exact-tail RMSE 0.244 cov 0.73 cpu 3.10s z +0.0 | work-MSE x0.1, same-policy var x3.0, zeros 0.50 -> 0.21
+unbiased: False | passes at 4096: {'complete4_exceedance': True, 'ring16_exceedance': False, 'ring28_joint_exhaustion': False, 'e1': False} | verdict: not strong

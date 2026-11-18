@@ -1,0 +1,184 @@
+A chain    n=2 tilt=0 tol=1e-12 chi=   9 maxrelerr=1.54e-11
+A chain    n=2 tilt=0 tol=1e-09 chi=   7 maxrelerr=3.59e-07
+A chain    n=2 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.12e-03
+A chain    n=2 tilt=1 tol=1e-12 chi=  10 maxrelerr=4.28e-16
+A chain    n=2 tilt=1 tol=1e-09 chi=   9 maxrelerr=2.80e-10
+A chain    n=2 tilt=1 tol=1e-06 chi=   7 maxrelerr=5.58e-07
+A chain    n=3 tilt=0 tol=1e-12 chi=   9 maxrelerr=3.13e-10
+A chain    n=3 tilt=0 tol=1e-09 chi=   7 maxrelerr=2.57e-07
+A chain    n=3 tilt=0 tol=1e-06 chi=   5 maxrelerr=2.40e-03
+A chain    n=3 tilt=1 tol=1e-12 chi=  10 maxrelerr=3.27e-15
+A chain    n=3 tilt=1 tol=1e-09 chi=   9 maxrelerr=2.43e-10
+A chain    n=3 tilt=1 tol=1e-06 chi=   7 maxrelerr=7.15e-07
+A chain    n=4 tilt=0 tol=1e-12 chi=   9 maxrelerr=5.52e-10
+A chain    n=4 tilt=0 tol=1e-09 chi=   7 maxrelerr=4.03e-07
+A chain    n=4 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.92e-03
+A chain    n=4 tilt=1 tol=1e-12 chi=  10 maxrelerr=1.02e-14
+A chain    n=4 tilt=1 tol=1e-09 chi=   9 maxrelerr=6.36e-11
+A chain    n=4 tilt=1 tol=1e-06 chi=   7 maxrelerr=6.32e-07
+A chain    n=5 tilt=0 tol=1e-12 chi=   9 maxrelerr=5.82e-10
+A chain    n=5 tilt=0 tol=1e-09 chi=   7 maxrelerr=4.56e-07
+A chain    n=5 tilt=0 tol=1e-06 chi=   5 maxrelerr=4.38e-03
+A chain    n=5 tilt=1 tol=1e-12 chi=  10 maxrelerr=1.82e-14
+A chain    n=5 tilt=1 tol=1e-09 chi=   9 maxrelerr=6.60e-11
+A chain    n=5 tilt=1 tol=1e-06 chi=   7 maxrelerr=9.24e-07
+A chain    n=6 tilt=0 tol=1e-12 chi=   9 maxrelerr=7.33e-10
+A chain    n=6 tilt=0 tol=1e-09 chi=   7 maxrelerr=5.33e-07
+A chain    n=6 tilt=0 tol=1e-06 chi=   5 maxrelerr=5.39e-03
+A chain    n=6 tilt=1 tol=1e-12 chi=  10 maxrelerr=3.33e-15
+A chain    n=6 tilt=1 tol=1e-09 chi=   9 maxrelerr=6.00e-11
+A chain    n=6 tilt=1 tol=1e-06 chi=   7 maxrelerr=1.03e-06
+A ring     n=2 tilt=0 tol=1e-12 chi=   9 maxrelerr=1.54e-11
+A ring     n=2 tilt=0 tol=1e-09 chi=   7 maxrelerr=3.59e-07
+A ring     n=2 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.12e-03
+A ring     n=2 tilt=1 tol=1e-12 chi=  10 maxrelerr=4.28e-16
+A ring     n=2 tilt=1 tol=1e-09 chi=   9 maxrelerr=2.80e-10
+A ring     n=2 tilt=1 tol=1e-06 chi=   7 maxrelerr=5.58e-07
+A ring     n=3 tilt=0 tol=1e-12 chi=   9 maxrelerr=1.38e-08
+A ring     n=3 tilt=0 tol=1e-09 chi=   7 maxrelerr=4.76e-05
+A ring     n=3 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.88e-02
+A ring     n=3 tilt=1 tol=1e-12 chi=  10 maxrelerr=2.54e-15
+A ring     n=3 tilt=1 tol=1e-09 chi=  10 maxrelerr=1.59e-10
+A ring     n=3 tilt=1 tol=1e-06 chi=   8 maxrelerr=4.86e-07
+A ring     n=4 tilt=0 tol=1e-12 chi=  46 maxrelerr=2.53e-06
+A ring     n=4 tilt=0 tol=1e-09 chi=  28 maxrelerr=4.35e-02
+A ring     n=4 tilt=0 tol=1e-06 chi=  13 maxrelerr=2.08e-01
+A ring     n=4 tilt=1 tol=1e-12 chi=  82 maxrelerr=8.68e-14
+A ring     n=4 tilt=1 tol=1e-09 chi=  58 maxrelerr=1.12e-10
+A ring     n=4 tilt=1 tol=1e-06 chi=  35 maxrelerr=9.19e-07
+A ring     n=5 tilt=0 tol=1e-12 chi=  45 maxrelerr=1.64e-06
+A ring     n=5 tilt=0 tol=1e-09 chi=  28 maxrelerr=4.21e-02
+A ring     n=5 tilt=0 tol=1e-06 chi=  13 maxrelerr=2.55e-01
+A ring     n=5 tilt=1 tol=1e-12 chi=  79 maxrelerr=3.18e-13
+A ring     n=5 tilt=1 tol=1e-09 chi=  56 maxrelerr=4.46e-10
+A ring     n=5 tilt=1 tol=1e-06 chi=  35 maxrelerr=2.54e-06
+A ring     n=6 tilt=0 tol=1e-12 chi=  46 maxrelerr=3.66e-06
+A ring     n=6 tilt=0 tol=1e-09 chi=  28 maxrelerr=6.01e-02
+A ring     n=6 tilt=0 tol=1e-06 chi=  13 maxrelerr=3.10e-01
+A ring     n=6 tilt=1 tol=1e-12 chi=  82 maxrelerr=2.66e-13
+A ring     n=6 tilt=1 tol=1e-09 chi=  58 maxrelerr=2.48e-10
+A ring     n=6 tilt=1 tol=1e-06 chi=  35 maxrelerr=1.94e-06
+A complete n=2 tilt=0 tol=1e-12 chi=   9 maxrelerr=1.54e-11
+A complete n=2 tilt=0 tol=1e-09 chi=   7 maxrelerr=3.59e-07
+A complete n=2 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.12e-03
+A complete n=2 tilt=1 tol=1e-12 chi=  10 maxrelerr=4.28e-16
+A complete n=2 tilt=1 tol=1e-09 chi=   9 maxrelerr=2.80e-10
+A complete n=2 tilt=1 tol=1e-06 chi=   7 maxrelerr=5.58e-07
+A complete n=3 tilt=0 tol=1e-12 chi=   9 maxrelerr=1.38e-08
+A complete n=3 tilt=0 tol=1e-09 chi=   7 maxrelerr=4.76e-05
+A complete n=3 tilt=0 tol=1e-06 chi=   5 maxrelerr=3.88e-02
+A complete n=3 tilt=1 tol=1e-12 chi=  10 maxrelerr=2.42e-15
+A complete n=3 tilt=1 tol=1e-09 chi=  10 maxrelerr=1.59e-10
+A complete n=3 tilt=1 tol=1e-06 chi=   8 maxrelerr=4.86e-07
+A complete n=4 tilt=0 tol=1e-12 chi=  45 maxrelerr=2.10e-05
+A complete n=4 tilt=0 tol=1e-09 chi=  27 maxrelerr=4.92e-04
+A complete n=4 tilt=0 tol=1e-06 chi=  13 maxrelerr=3.60e-01
+A complete n=4 tilt=1 tol=1e-12 chi=  82 maxrelerr=6.85e-13
+A complete n=4 tilt=1 tol=1e-09 chi=  58 maxrelerr=1.39e-09
+A complete n=4 tilt=1 tol=1e-06 chi=  35 maxrelerr=2.13e-06
+A complete n=5 tilt=0 tol=1e-12 chi=  50 maxrelerr=6.68e-04
+A complete n=5 tilt=0 tol=1e-09 chi=  31 maxrelerr=2.63e-02
+A complete n=5 tilt=0 tol=1e-06 chi=  13 maxrelerr=6.17e-01
+A complete n=5 tilt=1 tol=1e-12 chi=  92 maxrelerr=7.75e-13
+A complete n=5 tilt=1 tol=1e-09 chi=  69 maxrelerr=1.28e-09
+A complete n=5 tilt=1 tol=1e-06 chi=  43 maxrelerr=6.29e-07
+B chain    tol=1e-06 n= 2 chi=   7 t=   0.00s Pall=3.163e-05 mass=1.000000001891
+B chain    tol=1e-06 n= 3 chi=   7 t=   0.00s Pall=8.871e-08 mass=1.000000002782
+B chain    tol=1e-06 n= 4 chi=   7 t=   0.01s Pall=5.268e-10 mass=1.000000003534
+B chain    tol=1e-06 n= 5 chi=   7 t=   0.01s Pall=2.935e-12 mass=1.000000005290
+B chain    tol=1e-06 n= 6 chi=   7 t=   0.01s Pall=1.588e-14 mass=1.000000005997
+B chain    tol=1e-06 n= 7 chi=   7 t=   0.01s Pall=9.271e-17 mass=1.000000007771
+B chain    tol=1e-06 n= 8 chi=   7 t=   0.02s Pall=4.890e-19 mass=1.000000008474
+B chain    tol=1e-06 n= 9 chi=   7 t=   0.02s Pall=2.894e-21 mass=1.000000010252
+B chain    tol=1e-06 n=10 chi=   7 t=   0.02s Pall=1.515e-23 mass=1.000000010954
+B chain    tol=1e-06 n=12 chi=   7 t=   0.03s Pall=4.705e-28 mass=1.000000013434
+B chain    tol=1e-06 n=16 chi=   7 t=   0.05s Pall=4.540e-37 mass=1.000000018396
+B chain    tol=1e-06 n=20 chi=   7 t=   0.06s Pall=4.382e-46 mass=1.000000023358
+B chain    tol=1e-06 n=24 chi=   7 t=   0.08s Pall=4.230e-55 mass=1.000000028320
+B chain    tol=1e-06 n=28 chi=   7 t=   0.11s Pall=4.083e-64 mass=1.000000033281
+B chain    tol=1e-09 n= 2 chi=   9 t=   0.00s Pall=3.163e-05 mass=0.999999999997
+B chain    tol=1e-09 n= 3 chi=   9 t=   0.00s Pall=8.871e-08 mass=0.999999999997
+B chain    tol=1e-09 n= 4 chi=   9 t=   0.01s Pall=5.268e-10 mass=0.999999999995
+B chain    tol=1e-09 n= 5 chi=   9 t=   0.01s Pall=2.935e-12 mass=0.999999999994
+B chain    tol=1e-09 n= 6 chi=   9 t=   0.01s Pall=1.588e-14 mass=0.999999999993
+B chain    tol=1e-09 n= 7 chi=   9 t=   0.01s Pall=9.271e-17 mass=0.999999999991
+B chain    tol=1e-09 n= 8 chi=   9 t=   0.02s Pall=4.890e-19 mass=0.999999999990
+B chain    tol=1e-09 n= 9 chi=   9 t=   0.02s Pall=2.894e-21 mass=0.999999999988
+B chain    tol=1e-09 n=10 chi=   9 t=   0.02s Pall=1.515e-23 mass=0.999999999987
+B chain    tol=1e-09 n=12 chi=   9 t=   0.03s Pall=4.705e-28 mass=0.999999999984
+B chain    tol=1e-09 n=16 chi=   9 t=   0.05s Pall=4.540e-37 mass=0.999999999979
+B chain    tol=1e-09 n=20 chi=   9 t=   0.08s Pall=4.382e-46 mass=0.999999999974
+B chain    tol=1e-09 n=24 chi=   9 t=   0.10s Pall=4.230e-55 mass=0.999999999968
+B chain    tol=1e-09 n=28 chi=   9 t=   0.12s Pall=4.083e-64 mass=0.999999999963
+B ring     tol=1e-06 n= 2 chi=   7 t=   0.00s Pall=3.163e-05 mass=1.000000001891
+B ring     tol=1e-06 n= 3 chi=   8 t=   0.01s Pall=1.514e-07 mass=1.000000001142
+B ring     tol=1e-06 n= 4 chi=  35 t=   0.01s Pall=1.061e-09 mass=1.000000005002
+B ring     tol=1e-06 n= 5 chi=  35 t=   0.02s Pall=5.487e-12 mass=1.000000008835
+B ring     tol=1e-06 n= 6 chi=  35 t=   0.03s Pall=3.082e-14 mass=0.999998915605
+B ring     tol=1e-06 n= 7 chi=  35 t=   0.04s Pall=1.771e-16 mass=0.999995989288
+B ring     tol=1e-06 n= 8 chi=  35 t=   0.05s Pall=9.394e-19 mass=0.999990826882
+B ring     tol=1e-06 n= 9 chi=  35 t=   0.06s Pall=5.560e-21 mass=0.999986236803
+B ring     tol=1e-06 n=10 chi=  35 t=   0.08s Pall=2.902e-23 mass=0.999983704368
+B ring     tol=1e-06 n=12 chi=  35 t=   0.12s Pall=9.001e-28 mass=0.999976707285
+B ring     tol=1e-06 n=16 chi=  35 t=   0.20s Pall=8.683e-37 mass=0.999962982966
+B ring     tol=1e-06 n=20 chi=  35 t=   0.33s Pall=8.381e-46 mass=0.999949585851
+B ring     tol=1e-06 n=24 chi=  35 t=   0.48s Pall=8.090e-55 mass=0.999936471494
+B ring     tol=1e-06 n=28 chi=  35 t=   0.66s Pall=7.809e-64 mass=0.999923600452
+B ring     tol=1e-09 n= 2 chi=   9 t=   0.00s Pall=3.163e-05 mass=0.999999999997
+B ring     tol=1e-09 n= 3 chi=  10 t=   0.01s Pall=1.514e-07 mass=0.999999999997
+B ring     tol=1e-09 n= 4 chi=  58 t=   0.02s Pall=1.061e-09 mass=0.999999999992
+B ring     tol=1e-09 n= 5 chi=  56 t=   0.03s Pall=5.487e-12 mass=0.999999999991
+B ring     tol=1e-09 n= 6 chi=  58 t=   0.06s Pall=3.083e-14 mass=0.999999999987
+B ring     tol=1e-09 n= 7 chi=  56 t=   0.08s Pall=1.771e-16 mass=0.999999999943
+B ring     tol=1e-09 n= 8 chi=  58 t=   0.12s Pall=9.394e-19 mass=0.999999999982
+B ring     tol=1e-09 n= 9 chi=  56 t=   0.13s Pall=5.560e-21 mass=0.999999999882
+B ring     tol=1e-09 n=10 chi=  58 t=   0.18s Pall=2.902e-23 mass=1.000000000132
+B ring     tol=1e-09 n=12 chi=  58 t=   0.26s Pall=9.001e-28 mass=1.000000000272
+B ring     tol=1e-09 n=16 chi=  58 t=   0.49s Pall=8.683e-37 mass=1.000000000536
+B ring     tol=1e-09 n=20 chi=  58 t=   0.79s Pall=8.381e-46 mass=1.000000000779
+B ring     tol=1e-09 n=24 chi=  58 t=   1.19s Pall=8.090e-55 mass=1.000000001005
+B ring     tol=1e-09 n=28 chi=  58 t=   1.65s Pall=7.809e-64 mass=1.000000001216
+B star     tol=1e-06 n= 2 chi=   7 t=   0.00s Pall=3.163e-05 mass=1.000000001891
+B star     tol=1e-06 n= 3 chi=   8 t=   0.00s Pall=8.943e-08 mass=1.000000000733
+B star     tol=1e-06 n= 4 chi=   8 t=   0.01s Pall=2.099e-10 mass=0.999999873610
+B star     tol=1e-06 n= 5 chi=   8 t=   0.01s Pall=5.431e-13 mass=0.999999297255
+B star     tol=1e-06 n= 6 chi=   9 t=   0.03s Pall=1.186e-15 mass=0.999998335617
+B star     tol=1e-06 n= 7 chi=   9 t=   0.04s Pall=2.906e-18 mass=0.999995375761
+B star     tol=1e-06 n= 8 chi=   9 t=   0.06s Pall=6.095e-21 mass=0.999989068572
+B star     tol=1e-06 n= 9 chi=   9 t=   0.09s Pall=1.445e-23 mass=0.999979634839
+B star     tol=1e-06 n=10 chi=   9 t=   0.12s Pall=2.954e-26 mass=0.999960569814
+B star     tol=1e-06 n=12 chi=   9 t=   0.20s Pall=1.376e-31 mass=0.999877548094
+B star     tol=1e-06 n=14 chi=   9 t=   0.27s Pall=6.229e-37 mass=0.999648655070
+B star     tol=1e-09 n= 2 chi=   9 t=   0.00s Pall=3.163e-05 mass=0.999999999997
+B star     tol=1e-09 n= 3 chi=  10 t=   0.00s Pall=8.943e-08 mass=0.999999999997
+B star     tol=1e-09 n= 4 chi=  10 t=   0.01s Pall=2.099e-10 mass=0.999999999998
+B star     tol=1e-09 n= 5 chi=  10 t=   0.02s Pall=5.431e-13 mass=0.999999999998
+B star     tol=1e-09 n= 6 chi=  10 t=   0.03s Pall=1.186e-15 mass=0.999999999998
+B star     tol=1e-09 n= 7 chi=  10 t=   0.06s Pall=2.906e-18 mass=0.999999999998
+B star     tol=1e-09 n= 8 chi=  10 t=   0.09s Pall=6.095e-21 mass=0.999999999998
+B star     tol=1e-09 n= 9 chi=  10 t=   0.13s Pall=1.445e-23 mass=0.999999999998
+B star     tol=1e-09 n=10 chi=  10 t=   0.18s Pall=2.954e-26 mass=0.999999999998
+B star     tol=1e-09 n=12 chi=  10 t=   0.29s Pall=1.376e-31 mass=0.999999999995
+B star     tol=1e-09 n=14 chi=  10 t=   0.39s Pall=6.229e-37 mass=0.999999999988
+B complete tol=1e-06 n= 2 chi=   7 t=   0.00s Pall=3.163e-05 mass=1.000000001891
+B complete tol=1e-06 n= 3 chi=   8 t=   0.01s Pall=1.514e-07 mass=1.000000001142
+B complete tol=1e-06 n= 4 chi=  35 t=   0.02s Pall=1.212e-09 mass=1.000000778676
+B complete tol=1e-06 n= 5 chi=  43 t=   0.13s Pall=1.000e-11 mass=1.000000065636
+B complete tol=1e-06 n= 6 chi=  68 t=   1.17s Pall=8.431e-14 mass=0.999136090690
+B complete tol=1e-06 n= 7 chi=  80 t=   5.32s Pall=8.504e-16 mass=0.948498656472
+B complete tol=1e-09 n= 2 chi=   9 t=   0.00s Pall=3.163e-05 mass=0.999999999997
+B complete tol=1e-09 n= 3 chi=  10 t=   0.01s Pall=1.514e-07 mass=0.999999999997
+B complete tol=1e-09 n= 4 chi=  58 t=   0.03s Pall=1.212e-09 mass=0.999999999967
+B complete tol=1e-09 n= 5 chi=  69 t=   0.40s Pall=1.000e-11 mass=0.999999999588
+B complete tol=1e-09 n= 6 chi= 135 t=   4.86s Pall=8.431e-14 mass=0.999999999393
+B complete tol=1e-09 n= 7 chi= 162 t=  25.69s Pall=8.504e-16 mass=0.999999956976
+C ring     n=8 m=0.0 chi=4
+C ring     n=8 m=0.5 chi=52
+C ring     n=8 m=1.0 chi=58
+C ring     n=8 m=2.0 chi=70
+C ring     n=8 m=4.0 chi=83
+C ring     n=8 m=6.0 chi=88
+C complete n=6 m=0.0 chi=6
+C complete n=6 m=0.5 chi=108
+C complete n=6 m=1.0 chi=135
+C complete n=6 m=2.0 chi=169

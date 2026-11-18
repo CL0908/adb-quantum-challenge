@@ -1,0 +1,30 @@
+selftest ok: k̂ recovers ξ ∈ {0.3, 0.6, 0.9} within 0.06 (mean of 10); flat tail unchanged
+seed 1100003: friend -1.43%  raw -2.41%  psis -2.13%  k̂=0.41  max share 1.1%  459s
+seed 1100004: friend -0.25%  raw +0.98%  psis +1.11%  k̂=0.26  max share 0.7%  466s
+seed 1100012: friend +0.11%  raw -2.23%  psis -2.33%  k̂=0.47  max share 0.5%  478s
+seed 1100013: friend +1.49%  raw -1.44%  psis -1.55%  k̂=0.38  max share 0.6%  479s
+seed 1100001: friend +0.45%  raw +0.31%  psis +0.27%  k̂=0.26  max share 0.4%  480s
+seed 1100002: friend -1.81%  raw -1.53%  psis -2.06%  k̂=0.54  max share 1.2%  491s
+seed 1100010: friend +0.71%  raw -1.36%  psis -1.65%  k̂=0.31  max share 0.9%  496s
+seed 1100007: friend -0.34%  raw +7.84%  psis +6.63%  k̂=0.53  max share 1.6%  500s
+seed 1100006: friend -3.67%  raw -4.82%  psis -5.39%  k̂=0.49  max share 0.9%  503s
+seed 1100000: friend +2.87%  raw -2.28%  psis -2.25%  k̂=0.39  max share 1.2%  503s
+seed 1100011: friend +0.83%  raw -2.01%  psis -2.01%  k̂=0.27  max share 0.3%  508s
+seed 1100005: friend -3.01%  raw -0.15%  psis -0.12%  k̂=0.27  max share 0.3%  514s
+seed 1100008: friend -0.64%  raw +0.59%  psis -0.72%  k̂=0.41  max share 2.2%  517s
+seed 1100009: friend +1.32%  raw +0.58%  psis +0.70%  k̂=0.21  max share 0.5%  517s
+seed 1100017: friend +3.51%  raw -3.11%  psis -3.03%  k̂=0.39  max share 0.7%  451s
+seed 1100014: friend -1.68%  raw +0.75%  psis +0.82%  k̂=0.32  max share 0.5%  489s
+seed 1100020: friend -1.19%  raw +2.95%  psis +3.02%  k̂=0.34  max share 0.5%  459s
+seed 1100018: friend -1.09%  raw +1.77%  psis +1.80%  k̂=0.29  max share 0.5%  477s
+seed 1100016: friend -5.74%  raw +0.74%  psis +0.40%  k̂=0.52  max share 2.6%  485s
+seed 1100023: friend +0.10%  raw +0.21%  psis +0.33%  k̂=0.41  max share 0.6%  460s
+seed 1100021: friend -2.21%  raw -0.91%  psis -1.03%  k̂=0.40  max share 0.5%  465s
+seed 1100022: friend +0.40%  raw -2.57%  psis -2.60%  k̂=0.18  max share 0.3%  464s
+seed 1100019: friend -0.71%  raw -0.42%  psis -1.09%  k̂=0.38  max share 2.2%  479s
+seed 1100015: friend -1.01%  raw +3.41%  psis +3.39%  k̂=0.33  max share 0.7%  506s
+seed 1100026: friend -0.23%  raw +0.11%  psis +0.09%  k̂=0.27  max share 0.8%  459s
+seed 1100024: friend -1.42%  raw +4.68%  psis +1.99%  k̂=0.42  max share 4.2%  474s
+seed 1100025: friend +0.02%  raw -6.56%  psis -6.58%  k̂=0.37  max share 0.7%  468s
+seed 1100027: friend -0.82%  raw -2.50%  psis -2.52%  k̂=0.30  max share 0.6%  470s
+{'friend_est': {'rel_rmse': 0.019093590185360144, 'rel_bias': -0.005521991421654632, 'max_abs': 0.05740123697327071}, 'raw': {'rel_rmse': 0.028403701875913605, 'rel_bias': -0.0033489644212571223, 'max_abs': 0.07840939972325378}, 'psis': {'rel_rmse': 0.026736133616197085, 'rel_bias': -0.005899900492496617, 'max_abs': 0.06627363889811999}, 'khat_ge_0.7': 0, 'corr_khat_abs_raw_err': 0.362887008991478}

@@ -1,0 +1,7 @@
+counts chain 2 3220
+counts ring 8 14600
+counts ring 28 50896
+counts complete 6 18276
+counts complete 12 69024
+mlae exceedance_adb
+mlae both_exhausted_adb

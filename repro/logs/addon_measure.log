@@ -1,0 +1,9 @@
+selftest ok: sampled a=0.07208 vs exact simulate_twisted_A 0.07201; E[g²] <= a
+ring     n= 2 a=0.0719 (decl 0.072, -0.2%)  E[g²]/a=0.490  ρ²_tw=5.82 vs 1/a−1=12.9  ρ²_RDPO=0.133  b0 calls ×0.70  b1 calls ×0.098, Tof/A ×324 → net ≥×31.8
+ring     n= 8 a=0.0249 (decl 0.0249, +0.0%)  E[g²]/a=0.416  ρ²_tw=15.7 vs 1/a−1=39.1  ρ²_RDPO=0.634  b0 calls ×0.65  b1 calls ×0.126, Tof/A ×505 → net ≥×63.5
+ring     n=16 a=0.00595 (decl 0.00599, -0.6%)  E[g²]/a=0.349  ρ²_tw=57.6 vs 1/a−1=166  ρ²_RDPO=2.12  b0 calls ×0.59  b1 calls ×0.113, Tof/A ×494 → net ≥×55.6
+ring     n=20 a=0.00299 (decl 0.00302, -0.7%)  E[g²]/a=0.309  ρ²_tw=102 vs 1/a−1=331  ρ²_RDPO=6.31  b0 calls ×0.56  b1 calls ×0.138, Tof/A ×497 → net ≥×68.5
+ring     n=28 a=0.000894 (decl 0.000882, +1.4%)  E[g²]/a=0.268  ρ²_tw=298 vs 1/a−1=1.13e+03  ρ²_RDPO=6.44  b0 calls ×0.52  b1 calls ×0.075, Tof/A ×488 → net ≥×36.8
+complete n= 4 a=0.0416 (decl 0.0416, -0.1%)  E[g²]/a=0.400  ρ²_tw=8.62 vs 1/a−1=23  ρ²_RDPO=0.553  b0 calls ×0.63  b1 calls ×0.152, Tof/A ×561 → net ≥×85.2
+complete n= 6 a=0.0353 (decl 0.0354, -0.2%)  E[g²]/a=0.447  ρ²_tw=11.7 vs 1/a−1=27.3  ρ²_RDPO=2.59  b0 calls ×0.67  b1 calls ×0.303, Tof/A ×745 → net ≥×225.6
+complete n= 7 a=0.0252 (decl 0.0252, +0.2%)  E[g²]/a=0.400  ρ²_tw=14.9 vs 1/a−1=38.8  ρ²_RDPO=1.5  b0 calls ×0.63  b1 calls ×0.194, Tof/A ×820 → net ≥×159.3

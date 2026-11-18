@@ -1,0 +1,11 @@
+selftest ok: friend's CAREC calibration reproduced; exact targets equal his MPS references (rel < 1e-6)
+CAREC pool ['GE', 'AZ', 'TM', 'KZ', 'UZ', 'AF', 'PK', 'TJ', 'KG', 'MN']; thresholds US$240m / US$500m; b 0.785 (N 220)
+exc_moderate             friend 0.001329 | data center 0.001319 | posterior predictive 0.001465 95% [0.000852, 0.00237] | P(above friend) 0.60
+    eq_rates S 0.78 T 0.80 [0.73,0.89]  eq_shared S 0.14 T 0.13 [0.11,0.15]  rain_rates S 0.00 T 0.01 [0.00,0.01]  rain_share S 0.00 T 0.00 [0.00,0.00] | grid S rain_share 0.000
+exc_rare                 friend 4.35e-09 | data center 4.213e-09 | posterior predictive 6.265e-09 95% [1.32e-09, 1.75e-08] | P(above friend) 0.59
+    eq_rates S 0.57 T 0.58 [0.51,0.65]  eq_shared S 0.41 T 0.39 [0.34,0.44]  rain_rates S 0.01 T 0.01 [0.01,0.01]  rain_share S 0.00 T 0.00 [0.00,0.00] | grid S rain_share 0.000
+expected_loss            friend 3.527e+07 | data center 3.527e+07 | posterior predictive 3.591e+07 95% [3.12e+07, 4.12e+07] | P(above friend) 0.58
+    eq_rates S 0.86 T 0.89 [0.80,0.98]  eq_shared S 0.00 T 0.00 [0.00,0.00]  rain_rates S 0.07 T 0.07 [0.06,0.09]  rain_share S 0.00 T 0.00 [0.00,0.00] | grid S rain_share 0.000
+joint_exhaustion_KG_TJ   friend 1.592e-05 | data center 1.043e-05 | posterior predictive 1.08e-05 95% [5.74e-06, 1.71e-05] | P(above friend) 0.05
+    eq_rates S 0.03 T 0.05 [0.04,0.06]  eq_shared S 0.35 T 0.34 [0.30,0.38]  rain_rates S 0.56 T 0.60 [0.53,0.67]  rain_share S 0.02 T 0.02 [0.02,0.02] | grid S rain_share 0.017
+checks: {'grid_vs_saltelli': True, 'sum_S': True, 'T_ge_S': True} | ranking: ['eq_rates', 'eq_shared', 'rain_rates', 'rain_share'] | separated: True | top S 0.78 | verdict: strong

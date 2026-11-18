@@ -1,0 +1,30 @@
+selftest ok: semigroup derivative = finite difference; Bernoulli case closed form; exact elasticity = FD
+adb_joint_exhaustion: mu 3.16e-05, K=6, big sources 6, median rel RMSE 0.016 (max 0.105)
+   rain2:0-1      exact +0.877  rdpo +0.875 ± 0.013
+   eq1:0          exact +0.587  rdpo +0.589 ± 0.006
+   eq1:1          exact +0.574  rdpo +0.575 ± 0.009
+   eq2:0-1        exact +0.484  rdpo +0.483 ± 0.008
+   rain1:1        exact +0.112  rdpo +0.114 ± 0.012
+   rain1:0        exact +0.112  rdpo +0.110 ± 0.011
+adb_exceedance: mu 0.012, K=6, big sources 4, median rel RMSE 0.009 (max 0.027)
+   eq1:0          exact +0.544  rdpo +0.545 ± 0.005
+   eq1:1          exact +0.532  rdpo +0.534 ± 0.005
+   eq2:0-1        exact +0.421  rdpo +0.420 ± 0.004
+   rain2:0-1      exact +0.072  rdpo +0.071 ± 0.002
+   rain1:1        exact +0.009  rdpo +0.008 ± 0.002
+   rain1:0        exact +0.009  rdpo +0.009 ± 0.002
+complete4_exceedance: mu 0.00207, K=20, big sources 10, median rel RMSE 0.019 (max 0.029)
+   eq1:0          exact +0.329  rdpo +0.329 ± 0.004
+   eq1:2          exact +0.329  rdpo +0.329 ± 0.004
+   eq1:3          exact +0.314  rdpo +0.313 ± 0.006
+   eq1:1          exact +0.314  rdpo +0.314 ± 0.005
+   eq2:0-2        exact +0.175  rdpo +0.176 ± 0.003
+   eq2:0-3        exact +0.165  rdpo +0.166 ± 0.005
+ring28_joint_exhaustion: mu 1.9e-05, K=112, big sources 6, median rel RMSE 0.043 (max 0.143)
+   rain2:0-1      exact +0.736  rdpo +0.749 ± 0.030
+   eq1:0          exact +0.540  rdpo +0.537 ± 0.021
+   eq1:1          exact +0.528  rdpo +0.532 ± 0.016
+   eq2:0-1        exact +0.484  rdpo +0.488 ± 0.022
+   rain1:1        exact +0.217  rdpo +0.214 ± 0.024
+   rain1:0        exact +0.217  rdpo +0.201 ± 0.031
+verdict: strong

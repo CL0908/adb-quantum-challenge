@@ -1,0 +1,7 @@
+selftest ok: MPS moment sweep == dense enumeration (5 countries); Euler contributions add up; marginal ok
+central_asia_5 α=0.99: VaR 140.0m  ES 155.9m  EVaR 183.6m  pooled/standalone ES 0.44 EVaR 0.50  ES shares KG:36% TJ:27% UZ:17% KZ:15% TM:6%
+central_asia_5 α=0.995: VaR 150.0m  ES 170.2m  EVaR 198.7m  pooled/standalone ES 0.47 EVaR 0.52  ES shares KG:33% TJ:26% UZ:17% KZ:17% TM:7%
+central_asia_5 α=0.999: VaR 192.5m  ES 207.8m  EVaR 230.5m  pooled/standalone ES 0.53 EVaR 0.58  ES shares KG:30% TJ:25% UZ:19% KZ:18% TM:8%
+carec_10 α=0.99: VaR 180.0m  ES 213.1m  EVaR 248.7m  pooled/standalone ES 0.31 EVaR 0.34  ES shares GE:3% AZ:2% TM:3% KZ:8% UZ:8% AF:20% PK:17% TJ:18% KG:17% MN:4%
+carec_10 α=0.995: VaR 210.0m  ES 232.9m  EVaR 268.2m  pooled/standalone ES 0.32 EVaR 0.35  ES shares GE:3% AZ:3% TM:3% KZ:8% UZ:8% AF:20% PK:17% TJ:17% KG:17% MN:4%
+carec_10 α=0.999: VaR 247.5m  ES 275.8m  EVaR 309.9m  pooled/standalone ES 0.36 EVaR 0.39  ES shares GE:4% AZ:3% TM:4% KZ:9% UZ:9% AF:19% PK:16% TJ:16% KG:17% MN:4%
