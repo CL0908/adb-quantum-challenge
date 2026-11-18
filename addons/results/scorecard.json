@@ -1,0 +1,498 @@
+{
+ "rows": {
+  "rotations": {
+   "1 reproducible": [
+    "pass",
+    "336 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "deterministic"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "1/3 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "0 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "reproduces the author's 8 T-counts and s* exactly"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "no interval",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "q2_ae": {
+   "1 reproducible": [
+    "pass",
+    "211 numbers identical"
+   ],
+   "2 seed-stable": [
+    "pass",
+    "verdict same; headline 7870..8000 (own half-width 2e+03)"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "1/3 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "9 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "simulated coverage >= 0.97"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "tested (simulation)",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "combine": {
+   "1 reproducible": [
+    "pass",
+    "95 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "deterministic"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "1/3 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "0 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "as rotations and q2_ae"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "no interval",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "eq_cluster": {
+   "1 reproducible": [
+    "pass",
+    "182 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "headline is deterministic"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "7/9 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "7 s"
+   ],
+   "5 predictive": [
+    "none",
+    "none: no observed aftershock at pay size"
+   ],
+   "6 decision": [
+    "pass",
+    "3.2 price points"
+   ],
+   "7 honest": [
+    "not tested",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "rates_unc": {
+   "1 reproducible": [
+    "pass",
+    "271 numbers identical"
+   ],
+   "2 seed-stable": [
+    "pass",
+    "verdict same; headline 2.105e-05..2.265e-05 (own half-width 6.13e-05)"
+   ],
+   "3 input-robust": [
+    "pass",
+    "9/9 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "117 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "count part: twin backtest; rain GEV part: none"
+   ],
+   "6 decision": [
+    "pass",
+    "15.1 price points"
+   ],
+   "7 honest": [
+    "not tested",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "climate_cc": {
+   "1 reproducible": [
+    "pass",
+    "80 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "deterministic"
+   ],
+   "3 input-robust": [
+    "pass",
+    "5/6 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "3 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "scenario, by design not a forecast"
+   ],
+   "6 decision": [
+    "pass",
+    "2.4 price points"
+   ],
+   "7 honest": [
+    "no interval",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "sensitivity": {
+   "1 reproducible": [
+    "pass",
+    "122 of 472 numbers differ (not bit-reproducible); headline moved 0.0%"
+   ],
+   "2 seed-stable": [
+    "pass",
+    "verdict same; headline 0.04108..0.04314"
+   ],
+   "3 input-robust": [
+    "not tested",
+    "seed runs only (heavy engine)"
+   ],
+   "4 timely": [
+    "n/a",
+    "29 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "errors against exact elasticities"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "tested (exact)",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "nested_uq": {
+   "1 reproducible": [
+    "pass",
+    "140 numbers identical"
+   ],
+   "2 seed-stable": [
+    "pass",
+    "verdict same; headline 0.02669..0.04925"
+   ],
+   "3 input-robust": [
+    "not tested",
+    "seed runs only (heavy engine)"
+   ],
+   "4 timely": [
+    "n/a",
+    "418 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "coverage 0.94 against exact MPS"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "tested (exact)",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "voi": {
+   "1 reproducible": [
+    "pass",
+    "230 numbers identical"
+   ],
+   "2 seed-stable": [
+    "not run",
+    "1 of 2 seed runs finished"
+   ],
+   "3 input-robust": [
+    "not tested",
+    "seed runs only (heavy engine)"
+   ],
+   "4 timely": [
+    "n/a",
+    "188 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "grid check against exact preposterior"
+   ],
+   "6 decision": [
+    "pass",
+    "ranks which data to collect"
+   ],
+   "7 honest": [
+    "bootstrap only",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "model_risk": {
+   "1 reproducible": [
+    "pass",
+    "267 numbers identical"
+   ],
+   "2 seed-stable": [
+    "not run",
+    "0 of 2 seed runs finished"
+   ],
+   "3 input-robust": [
+    "not tested",
+    "seed runs only (heavy engine)"
+   ],
+   "4 timely": [
+    "n/a",
+    "2296 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "engine exact to 1e-6; posterior not checked against later data"
+   ],
+   "6 decision": [
+    "n/a",
+    "pool-level or resource estimate: no price model"
+   ],
+   "7 honest": [
+    "not tested",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "twin": {
+   "1 reproducible": [
+    "FAIL",
+    "clean rerun exit 1"
+   ],
+   "2 seed-stable": [
+    "not run",
+    "0 of 2 seed runs finished"
+   ],
+   "3 input-robust": [
+    "pass",
+    "5/5 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "953 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "30 MPS points; one-step-ahead backtest, coverage 91-92%"
+   ],
+   "6 decision": [
+    "pass",
+    "updates the pool view; decision output not built yet"
+   ],
+   "7 honest": [
+    "tested (backtest)",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "fetches public data itself"
+   ]
+  },
+  "event_response": {
+   "1 reproducible": [
+    "pass",
+    "100 numbers identical"
+   ],
+   "2 seed-stable": [
+    "not run",
+    "0 of 2 seed runs finished"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "4/6 perturbations"
+   ],
+   "4 timely": [
+    "pass",
+    "5 s (budget 300 s)"
+   ],
+   "5 predictive": [
+    "pass",
+    "out of sample 2000-2024"
+   ],
+   "6 decision": [
+    "below 0.5 pt",
+    "0.1 price points"
+   ],
+   "7 honest": [
+    "tested (weak in low-probability bins)",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "fetches public data itself"
+   ]
+  },
+  "spread_band": {
+   "1 reproducible": [
+    "pass",
+    "47 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "deterministic"
+   ],
+   "3 input-robust": [
+    "FAIL",
+    "3/5 perturbations"
+   ],
+   "4 timely": [
+    "n/a",
+    "0 s"
+   ],
+   "5 predictive": [
+    "pass",
+    "three published curves; no out-of-sample test"
+   ],
+   "6 decision": [
+    "pass",
+    "maps EL to spread"
+   ],
+   "7 honest": [
+    "not tested",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  },
+  "live_mark": {
+   "1 reproducible": [
+    "pass",
+    "218 numbers identical"
+   ],
+   "2 seed-stable": [
+    "n/a",
+    "deterministic"
+   ],
+   "3 input-robust": [
+    "pass",
+    "8/8 perturbations"
+   ],
+   "4 timely": [
+    "pass",
+    "2 s (budget 10 s)"
+   ],
+   "5 predictive": [
+    "pass",
+    "3 years = the author's term loss; price is first order"
+   ],
+   "6 decision": [
+    "pass",
+    "is the price unit"
+   ],
+   "7 honest": [
+    "not tested",
+    ""
+   ],
+   "8 portable": [
+    "pass",
+    "needs only the repository"
+   ]
+  }
+ },
+ "consistency_all_ok": true,
+ "clean_rerun_total_seconds": 3073.4978381,
+ "clean_rerun_within_2h": true,
+ "known_issue": "sensitivity.py ran out of memory once at 14 processes with about 3 GB free",
+ "magnitude_agency_offset_price_points": {
+  "-0.2": {
+   "KG": 4.4364933725870515,
+   "TJ": 4.376794759586417
+  },
+  "+0.2": {
+   "KG": -6.638142682471226,
+   "TJ": -6.571428903592832
+  }
+ },
+ "event_magnitude_reading": {
+  "event_M5.2_added_pay_probability_KG": 0.0007364304037581482,
+  "event_M5.5_added_pay_probability_KG": 0.0011115486353643345
+ }
+}

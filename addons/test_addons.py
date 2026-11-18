@@ -71,3 +71,18 @@ def test_event_response_fit_recovers_simulated_model():
 def test_live_mark_matches_friend_term_and_markov():
     import live_mark
     live_mark.selftest()
+
+
+def test_desk_default_state_and_attribution():
+    import desk
+    desk.selftest()
+
+
+def test_crisis_chain_gradient_and_second_moment():
+    import crisis
+    crisis.selftest()
+
+
+def test_learner_one_world_and_belief_direction():
+    import learner
+    learner.selftest()

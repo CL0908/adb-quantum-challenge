@@ -396,8 +396,136 @@ def perturb():
     return res
 
 
+# ------------------------------------------------------------------------------------------- dimensions 1, 2, 4 and the table
+FILES = {"rotations": "q1_rotations.json", "q2_ae": "q2_ae.json", "combine": "combined.json", "eq_cluster": "quality_eq_cluster.json", "rates_unc": "quality_rates_unc.json",
+         "climate_cc": "climate_cc.json", "sensitivity": "sensitivity.json", "nested_uq": "nested_uq.json", "voi": "voi.json", "model_risk": "model_risk.json",
+         "twin": "twin.json", "event_response": "event_response.json", "spread_band": "spread_band.json", "live_mark": "live_mark.json"}
+NOT_NUMBERS = ("second", "cpu", "sec", "tau", "setup")
+# headline number, its own reported half-width (None: only the verdict is compared), and where the verdict is
+HEAD = {"q2_ae": (lambda d: d["rows"][4]["chebae_odd"]["calls_mean"], lambda d: 0.25 * d["rows"][4]["chebae_odd"]["calls_mean"], lambda d: min(r["chebae_odd"]["coverage"] for r in d["rows"]) >= 0.95),
+        "rates_unc": (lambda d: d["sweeps"]["all"]["summary"]["joint_exhaustion"]["median"], lambda d: 0.5 * (d["sweeps"]["all"]["summary"]["joint_exhaustion"]["ci95"][1] - d["sweeps"]["all"]["summary"]["joint_exhaustion"]["ci95"][0]), lambda d: True),
+        "sensitivity": (lambda d: max(b["median_rel_rmse_big"] for b in d["beds"].values()), None, lambda d: d["verdict"]),
+        "nested_uq": (lambda d: d["methods"]["transfer"]["summary_rel_rmse"]["q975"], None, lambda d: d["verdict"]),
+        "voi": (lambda d: d["outputs"]["joint_exhaustion"]["sobol"]["S"]["rain_rates"], lambda d: 0.5 * (d["outputs"]["joint_exhaustion"]["sobol"]["S_ci"]["rain_rates"][1] - d["outputs"]["joint_exhaustion"]["sobol"]["S_ci"]["rain_rates"][0]), lambda d: (d["verdict"], d["ranking_T"][0])),
+        "model_risk": (lambda d: d["targets"]["exc_moderate"]["posterior_predictive"], lambda d: 0.5 * (d["targets"]["exc_moderate"]["range95"][1] - d["targets"]["exc_moderate"]["range95"][0]), lambda d: (d["ranking_T"][0], d["top_separated"])),
+        "twin": (lambda d: d["yearly"]["2025"]["exc_450"]["posterior_predictive"], lambda d: 0.5 * (d["yearly"]["2025"]["exc_450"]["range95"][1] - d["yearly"]["2025"]["exc_450"]["range95"][0]), lambda d: (d["verdict"], d["verdict_twisting_twin"])),
+        "event_response": (lambda d: d["test"]["30"]["log_score_gain"], lambda d: 0.5 * (d["test"]["30"]["gain_ci95"][1] - d["test"]["30"]["gain_ci95"][0]), lambda d: d["verdict"])}
+BUDGET_S = {"live_mark": 10, "event_response": 300, "twin": 3600}
+STATIC = {  # dimensions 5 (predictive / exact check) and 7 (is the reported interval tested)
+    "rotations": ("reproduces the author's 8 T-counts and s* exactly", "no interval"), "q2_ae": ("simulated coverage >= 0.97", "tested (simulation)"),
+    "combine": ("as rotations and q2_ae", "no interval"), "eq_cluster": ("none: no observed aftershock at pay size", "not tested"),
+    "rates_unc": ("count part: twin backtest; rain GEV part: none", "not tested"), "climate_cc": ("scenario, by design not a forecast", "no interval"),
+    "sensitivity": ("errors against exact elasticities", "tested (exact)"), "nested_uq": ("coverage 0.94 against exact MPS", "tested (exact)"),
+    "voi": ("grid check against exact preposterior", "bootstrap only"), "model_risk": ("engine exact to 1e-6; posterior not checked against later data", "not tested"),
+    "twin": ("30 MPS points; one-step-ahead backtest, coverage 91-92%", "tested (backtest)"), "event_response": ("out of sample 2000-2024", "tested (weak in low-probability bins)"),
+    "spread_band": ("three published curves; no out-of-sample test", "not tested"), "live_mark": ("3 years = the author's term loss; price is first order", "not tested")}
+PRICE = {"rates_unc": "rate", "eq_cluster": "clause", "climate_cc": "warming", "event_response": "event"}
+
+
+def _leaves(o, p=""):
+    if isinstance(o, dict):
+        for k, v in o.items():
+            yield from _leaves(v, f"{p}/{k}")
+    elif isinstance(o, list):
+        for i, v in enumerate(o):
+            yield from _leaves(v, f"{p}[{i}]")
+    elif isinstance(o, (int, float)) and not isinstance(o, bool):
+        yield p, float(o)
+
+
+def _load(folder, m):
+    f = folder / FILES[m]
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
+
+
+def table():
+    pert = json.loads((RES / "scorecard_perturb.json").read_text(encoding="utf-8"))
+    timing = {l: json.loads((RUNS / l / "_timing.json").read_text()) if (RUNS / l / "_timing.json").exists() else {} for l in ("clean", "seed1", "seed2")}
+    pmap = {"eq_cluster": "eq_cluster", "rates_unc": "rates_unc", "climate_cc": "climate_cc", "event_response": "event_response", "twin": "twin backtest", "live_mark": "live_mark",
+            "spread_band": "spread_band", "rotations": "rotations + ChebAE", "q2_ae": "rotations + ChebAE", "combine": "rotations + ChebAE"}
+    lm = json.loads((RES / "live_mark.json").read_text())["cases"]
+    base = lm["base (no event, no payout)"]
+    pts = lambda name: max(abs(lm[name][c]["price"] - base[c]["price"]) for c in base)
+    price = {"rate": max(pts("earthquake rate at 2.5% of data interval"), pts("earthquake rate at 97.5% of data interval")), "clause": pts("aftershocks paid separately (nu = 0.5)"),
+             "warming": pts("rain +2C"), "event": pts("3 Nov 2026 border earthquake")}
+    rows = {}
+    for m in PIPELINE:
+        r = {}
+        ref, new = _load(RES, m), _load(RUNS / "clean", m)
+        # 1 reproducible
+        if timing["clean"].get(m, {}).get("exit") != 0 or new is None:
+            r["1 reproducible"] = ("FAIL" if timing["clean"].get(m) else "not run", f"clean rerun exit {timing['clean'].get(m, {}).get('exit')}")
+        else:
+            a, b = dict(_leaves(ref)), dict(_leaves(new))
+            keys = [k for k in a if k in b and not any(t in k.lower() for t in NOT_NUMBERS)]
+            rel = [abs(b[k] - a[k]) / max(abs(a[k]), 1e-300) for k in keys if a[k] != b[k]]
+            if not rel:
+                r["1 reproducible"] = ("pass", f"{len(keys)} numbers identical")
+            elif m in HEAD:
+                h, hw, _ = HEAD[m]
+                d, w = abs(h(new) - h(ref)), (hw(ref) if hw else None)
+                ok = w is None or d <= w
+                r["1 reproducible"] = ("pass" if ok else "FAIL", f"{len(rel)} of {len(keys)} numbers differ (not bit-reproducible); headline moved {d / max(abs(h(ref)), 1e-300):.1%}")
+            else:
+                r["1 reproducible"] = ("FAIL", f"{len(rel)} of {len(keys)} numbers differ, max {max(rel):.1e}")
+        # 2 seed-stable
+        if m in HEAD:
+            h, hw, verdict = HEAD[m]
+            runs = [x for x in (_load(RUNS / l, m) if timing[l].get(m, {}).get("exit") == 0 else None for l in ("seed1", "seed2")) if x is not None]
+            if len(runs) < 2:
+                r["2 seed-stable"] = ("not run", f"{len(runs)} of 2 seed runs finished")
+            else:
+                vals = [h(ref)] + [h(x) for x in runs]
+                same = all(verdict(x) == verdict(ref) for x in runs)
+                w = hw(ref) if hw else None
+                spread = max(vals) - min(vals)
+                ok = same and (w is None or spread <= w)
+                r["2 seed-stable"] = ("pass" if ok else "FAIL", f"verdict {'same' if same else 'CHANGES'}; headline {min(vals):.4g}..{max(vals):.4g}" + (f" (own half-width {w:.3g})" if w else ""))
+        else:
+            r["2 seed-stable"] = ("n/a", "deterministic" if m not in ("eq_cluster",) else "headline is deterministic")
+        # 3 input-robust
+        if m in pmap:
+            p = pert[pmap[m]]
+            r["3 input-robust"] = ("pass" if p["survival"] >= 0.8 and p["base"]["holds"] else "FAIL", f"{round(p['survival'] * p['n'])}/{p['n']} perturbations")
+        else:
+            r["3 input-robust"] = ("not tested", "seed runs only (heavy engine)")
+        # 4 timely
+        s = timing["clean"].get(m, {}).get("seconds")
+        if m in BUDGET_S and s is not None and timing["clean"][m]["exit"] == 0:
+            r["4 timely"] = ("pass" if s <= BUDGET_S[m] else "FAIL", f"{s:.0f} s (budget {BUDGET_S[m]} s)")
+        else:
+            r["4 timely"] = ("n/a" if s is not None else "not run", f"{s:.0f} s" if s is not None else "")
+        r["5 predictive"] = ("pass" if not STATIC[m][0].startswith("none") else "none", STATIC[m][0])
+        # 6 decision
+        if m in PRICE:
+            v = price[PRICE[m]]
+            r["6 decision"] = ("pass" if v >= 0.5 else "below 0.5 pt", f"{v:.1f} price points")
+        elif m in ("voi", "twin", "live_mark", "spread_band"):
+            r["6 decision"] = ("pass", {"voi": "ranks which data to collect", "twin": "updates the pool view; decision output not built yet", "live_mark": "is the price unit", "spread_band": "maps EL to spread"}[m])
+        else:
+            r["6 decision"] = ("n/a", "pool-level or resource estimate: no price model")
+        r["7 honest"] = (STATIC[m][1], "")
+        r["8 portable"] = (("pass", "fetches public data itself") if m in ("twin", "event_response") and pert["_portability"][m]["fetched_without_data_drive"] else ("pass", "needs only the repository"))
+        rows[m] = r
+    total = sum(v.get("seconds", 0) for v in timing["clean"].values() if v.get("exit") == 0)
+    res = {"rows": rows, "consistency_all_ok": pert["_consistency"]["all_ok"], "clean_rerun_total_seconds": total, "clean_rerun_within_2h": total <= 7200,
+           "known_issue": "sensitivity.py ran out of memory once at 14 processes with about 3 GB free",
+           "magnitude_agency_offset_price_points": pert["live_mark"]["magnitude_agency_offset_price_points"], "event_magnitude_reading": pert["event_response"]["event_magnitude_reading"]}
+    (RES / "scorecard.json").write_text(json.dumps(res, indent=1, default=float), encoding="utf-8")
+    for m, r in rows.items():
+        print(f"{m:15s} " + " | ".join(f"{k.split()[0]}:{v[0]}" for k, v in r.items()))
+        for k, v in r.items():
+            if v[0] in ("FAIL", "not run") or k.startswith(("1", "2")):
+                print(f"      {k}: {v[0]} - {v[1]}")
+    print(f"clean rerun total {total / 60:.0f} min (within 2 h: {total <= 7200}); consistency all ok: {res['consistency_all_ok']}")
+    print("magnitude agency offset (price points):", res["magnitude_agency_offset_price_points"], "| 3 Nov event read as M5.2 / M5.5:", res["event_magnitude_reading"])
+    return res
+
+
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "rerun":
         rerun(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "0")
     elif len(sys.argv) >= 2 and sys.argv[1] == "perturb":
         perturb()
+    else:
+        table()
