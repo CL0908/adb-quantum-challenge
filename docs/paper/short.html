@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Tan Chun Loong" />
+  <meta name="author" content="Tan Chun Loong, Xu Zi Yu" />
   <title>Exact and Learned Joint-Tail Estimation for Pooled Disaster Risk Financing</title>
   <style>
     code{white-space: pre-wrap;}
@@ -52,7 +52,7 @@
 <header id="title-block-header">
 <h1 class="title">Exact and Learned Joint-Tail Estimation for Pooled
 Disaster Risk Financing</h1>
-<p class="author">Tan Chun Loong</p>
+<p class="author">Tan Chun Loong, Xu Zi Yu</p>
 <p class="date">November 2026</p>
 </header>
 <style>body{font-size:9.7pt;line-height:1.45} h1{font-size:17pt;margin:14pt 0 8pt;padding-top:14pt} h2{font-size:11.5pt;margin:10pt 0 4pt} figure{margin:6pt 0 8pt} #refs{font-size:7.9pt;line-height:1.3} #refs .csl-entry{margin-bottom:2pt}</style>
@@ -61,9 +61,10 @@ Disaster Risk Financing</h1>
 Disaster Risk Financing</span> <span class="sub">How often several
 countries’ disaster covers pay out together: computed with zero sampling
 error where possible, estimated with a learned sampler where not, and
-costed on quantum hardware.</span> <span class="byline">Tan Chun Loong ·
-Nanyang Technological University, Singapore · ADB Quantum Innovation
-Challenge, Phase 1 proposal · November 2026</span></p>
+costed on quantum hardware.</span> <span class="byline">Tan Chun Loong,
+Xu Zi Yu · Nanyang Technological University, Singapore; Universiti
+Malaya, Malaysia · ADB Quantum Innovation Challenge, Phase 1 proposal ·
+November 2026</span></p>
 </div>
 <div class="pitch">
 <p>ADB’s US$160m Disaster Relief Bond pays the Kyrgyz Republic and
@@ -803,10 +804,10 @@ of action (30 Nov 2026 – 22 Jan 2027)</h1>
 to 28 countries; RDPO with unbiased estimator; all benchmarks at equal
 paths and equal time; data-calibrated pools; ELT/YLT converter; quantum
 resource model and costed hardware emulation.</p>
-<p><strong>Three work packages, one person.</strong> Planned effort: 20
-h/week for all eight weeks (about 160 hours); over the holiday weeks 4–5
-these hours go to long compute jobs and writing, and GPU sweeps run
-unattended outside them.</p>
+<p><strong>Three work packages, two people.</strong> Planned effort: 20
+h/week per person for all eight weeks (about 160 hours each); over the
+holiday weeks 4–5 these hours go to long compute jobs and writing, and
+GPU sweeps run unattended outside them.</p>
 <div class="compact">
 <table>
 <colgroup>
@@ -821,29 +822,31 @@ unattended outside them.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>WP1 Wall-clock (W1–W3).</strong> Port rollouts and training
-to GPU in the sandbox (array code, batched over replications and
-scenarios); replace learned features by tensor-network value functions
-or cutset conditioning on graphs too wide for exact contraction.</td>
+<td><strong>WP1 Wall-clock (W1–W3), Tan.</strong> Port rollouts and
+training to GPU in the sandbox (array code, batched over replications
+and scenarios); replace learned features by tensor-network value
+functions or cutset conditioning on graphs too wide for exact
+contraction.</td>
 <td><strong>M1 (W3):</strong> at equal wall-clock, RDPO beats the
 brief’s four methods in ≥ 10 of 25 benchmark cells (now 5 of 25) and is
 within 2× of twisting on the dense threshold cells (now ×53–×103
 behind).</td>
 </tr>
 <tr class="even">
-<td><strong>WP2 Dependence at trigger level (W2–W5).</strong> Rain
-sharing from gridded data (ERA5 or GPCP open mirrors) at the
-1-in-50-year trigger level; earthquake sharing at trigger magnitudes
-with a cat-in-a-box proxy; coupling bounds with data constraints.</td>
+<td><strong>WP2 Dependence at trigger level (W2–W5), Xu with
+Tan.</strong> Rain sharing from gridded data (ERA5 or GPCP open mirrors)
+at the 1-in-50-year trigger level; earthquake sharing at trigger
+magnitudes with a cat-in-a-box proxy; coupling bounds with data
+constraints.</td>
 <td><strong>M2 (W5):</strong> both shared shares estimated at trigger
 level with intervals, and a data-constrained range for Pr(L &gt; 80m)
 narrower than [0, 9.0%].</td>
 </tr>
 <tr class="odd">
-<td><strong>WP3 Quantum run and decision package (W5–W8).</strong>
-Source-wise twisted loader on the emulator, then a guarded run on IBM
-hardware; pooling calculator; documentation, classical bottleneck
-analysis, business case, pitch.</td>
+<td><strong>WP3 Quantum run and decision package (W5–W8), Tan (quantum
+run), Xu (decision tools).</strong> Source-wise twisted loader on the
+emulator, then a guarded run on IBM hardware; pooling calculator;
+documentation, classical bottleneck analysis, business case, pitch.</td>
 <td><strong>M3 (W7):</strong> measured fidelity against depth on
 hardware within the emulator’s predicted band, and the guard’s verdict.
 <strong>M4 (22 Jan):</strong> three ADB questions (pooled limit,
@@ -867,7 +870,7 @@ station data with the level mismatch stated.</li>
 <li><strong>Hardware access or noise</strong> → the emulator with the
 device noise model produces the same report; the run is the first item
 descoped.</li>
-<li><strong>Holiday weeks and a one-person team</strong> → weeks 4–5 run
+<li><strong>Holiday weeks and a two-person team</strong> → weeks 4–5 run
 long compute jobs only; descoping order: hardware run, then cutset
 conditioning, then the cat-in-a-box proxy. M4 is protected.</li>
 </ul>
@@ -882,27 +885,39 @@ about US$30m a year (annex, Appendix B). The same source model fits
 correlated credit defaults, multi-site infrastructure outages and
 compound climate extremes.</p>
 <h1 id="team">6 Team</h1>
-<p><strong>Tan Chun Loong</strong> (sole member). BAppSc Physics with a
-Second Major in Quantum Technology, NTU Singapore (2024–2028, CGPA
-4.8/5.0). Incoming Phortify Student Research Fellow at ICFO Barcelona,
-in Prof. Antonio Acín’s Quantum Information Theory group. URECA Research
-Fellow with Prof. Mile Gu on relative entropy and belief revision in
-model-based reinforcement learning, the mathematics of RDPO; earlier
-URECA work on stochastic climate models (Prof. François Gay-Balmaz).
-Quantum security intern, Fraunhofer Singapore (QKD under device
-imperfections). Hands-on quantum software: Clifford+T compilation with
-the Qiskit transpiler, gridsynth and rmsynth (MIT iQuHACK 2026, sole
-Singapore representative); warm-start QAOA for wildfire response on
-satellite data (SEA Quantathon 2025 finalist); quantum reservoir
-computing for systemic risk (QAI Ventures GenQ Hackathon 2025).
-Disaster-response domain: Track Lead for Wildfire &amp; Emergency
-Response, SEA Quantum Leaders Summit 2026. A short CV is attached.</p>
-<p><strong>One-person team, mitigated.</strong> Every result is
-regenerated by one command from fixed seeds, and 101 tests check each
-exactness claim, so the work can be audited and handed over. The plan is
-front-loaded and has a stated descoping order. A domain contact at ADB
-or QAI Ventures for the pooling questions would strengthen WP2 and
-WP3.</p>
+<p><strong>Tan Chun Loong.</strong> BAppSc Physics with a Second Major
+in Quantum Technology, NTU Singapore (2024–2028, CGPA 4.8/5.0). Incoming
+Phortify Student Research Fellow at ICFO Barcelona, in Prof. Antonio
+Acín’s Quantum Information Theory group. URECA Research Fellow with
+Prof. Mile Gu on relative entropy and belief revision in model-based
+reinforcement learning, the mathematics of RDPO; earlier URECA work on
+stochastic climate models (Prof. François Gay-Balmaz). Quantum security
+intern, Fraunhofer Singapore (QKD under device imperfections). Hands-on
+quantum software: Clifford+T compilation with the Qiskit transpiler,
+gridsynth and rmsynth (MIT iQuHACK 2026, sole Singapore representative);
+warm-start QAOA for wildfire response on satellite data (SEA Quantathon
+2025 finalist); quantum reservoir computing for systemic risk (QAI
+Ventures GenQ Hackathon 2025). Disaster-response domain: Track Lead for
+Wildfire &amp; Emergency Response, SEA Quantum Leaders Summit 2026.</p>
+<p><strong>Xu Zi Yu.</strong> BEng Mechanical Engineering, Universiti
+Malaya (2023–2027, CGPA 3.88/4.00, Dean’s List). SEA Quantathon 2026
+(QC4SG), Top 8 honourable mention: a quantum financial contagion model
+for ASEAN markets; he benchmarked the first quantum design against
+classical correlation, found that it underperformed, and rebuilt the
+model around a classical Hawkes core, the same evidence-first habit as
+this proposal. ADIA Lab Structural Break Challenge, peak #37 of 1,220.
+Reinforcement-learning trading system (SAC and PPO agents). AI engineer
+building agent and RAG pipelines; Chief AI Officer of BunkerGuard AI,
+winner of SuperAI NEXT Hackathon 2026. Co-author of the add-on resource
+reductions and data-uncertainty layers in this repository
+(<code>addons/</code>). Both CVs are attached.</p>
+<p><strong>Who does what.</strong> Tan Chun Loong: method, exact engine,
+RDPO, quantum resource model. Xu Zi Yu: quantum resource reductions,
+data-uncertainty and model-risk layers, decision tools and agents in
+Phase 2. Every result is regenerated by one command from fixed seeds and
+101 tests check each exactness claim, so the work can be audited. A
+domain contact at ADB or QAI Ventures for the pooling questions would
+strengthen WP2 and WP3.</p>
 <h1 id="prototype-package-environment-and-ai-use">7 Prototype package,
 environment and AI use</h1>
 <ul>

@@ -1,7 +1,7 @@
 ---
 title: "Exact and Learned Joint-Tail Estimation for Pooled Disaster Risk Financing"
 subtitle: "Quantum-Inspired Tensor Networks, Rényi-Doob Policy Optimization and a Costed Quantum Stage: Technical Annex"
-author: "Tan Chun Loong"
+author: "Tan Chun Loong, Xu Zi Yu"
 affiliation: "Nanyang Technological University, Singapore"
 date: "November 2026"
 lang: en
@@ -1342,14 +1342,14 @@ stated assumptions, which differ from the baseline of §8.2.
 ::: {.opener}
 ![](../art/cat_calendar.svg){.mascot}
 
-Eight weeks, 30 November 2026 to 22 January 2027, three work packages, one person, each milestone measurable and
+Eight weeks, 30 November 2026 to 22 January 2027, three work packages, two people, each milestone measurable and
 not yet met.
 :::
 
 **Already done, not repeated.** Exact engine to 28 countries; RDPO with unbiased estimator; benchmarks at equal
 paths and equal time; data-calibrated pools; ELT/YLT converter; quantum resource model and costed hardware emulation.
 
-**Planned effort.** 20 h/week for all eight weeks (about 160 hours); over the holiday weeks 4–5 these hours go to long
+**Planned effort.** 20 h/week per person for all eight weeks (about 160 hours each); Tan leads WP1 and the quantum run, Xu leads WP2 with Tan and the decision tools; over the holiday weeks 4–5 these hours go to long
 compute jobs and writing, and GPU sweeps run unattended outside them.
 
 ![**Figure [fig:gantt].** Work plan for Deep Development (30 Nov 2026 – 22 Jan 2027; pitch 25 Jan). The
@@ -1368,7 +1368,7 @@ holiday weeks carry long compute jobs and writing rather than new development.](
 | Data access (ERA5 needs an account; some hosts are blocked in our sandbox) | GPCP and CHIRPS open mirrors, then the cached station data with the level mismatch stated. |
 | Hardware access or noise | The emulator with the device noise model gives the same report; the run is the first item descoped. |
 | Public proxies mislead on dependence | Coupling bounds hold for any dependence; posterior results are reported as a stress range, never as a price. |
-| Holiday weeks and a one-person team | Weeks 4–5 run long compute jobs only; descoping order: hardware run, cutset conditioning, cat-in-a-box proxy. M4 is protected. |
+| Holiday weeks and a two-person team | Weeks 4–5 run long compute jobs only; descoping order: hardware run, cutset conditioning, cat-in-a-box proxy. M4 is protected. |
 
 # 10 Use for Disaster Risk Financing
 
@@ -1394,12 +1394,12 @@ What a disaster-risk-financing team gets from this, during the challenge and aft
 ::: {.opener}
 ![](../art/cat_team.svg){.mascot}
 
-One researcher, with a background that spans quantum information, reinforcement learning and stochastic climate models.
+Two members: one with a background in quantum information, reinforcement learning and stochastic climate models, one in quantitative finance, applied AI and quantum contagion models.
 :::
 
 
 ::: {.profile}
-**Tan Chun Loong**, sole member: research, implementation, quantum resource estimation and decision tools.
+**Tan Chun Loong**: method, exact engine, RDPO, quantum resource model.
 
 Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang Technological University
 (2024–2028; CGPA 4.8/5.0, First Class Honours).
@@ -1432,16 +1432,36 @@ Bachelor of Applied Physics with a Second Major in Quantum Technology, Nanyang T
   Fest Singapore 2025.
 * *Community:* founder of Quantum Wings (quantum outreach to more than 500 students); Country Lead
   (Singapore), Qiskit Fall Fest 2026.
+::: {.profile}
+**Xu Zi Yu**: quantum resource reductions, data-uncertainty and model-risk layers, decision tools and agents in Phase 2.
+
+Bachelor of Mechanical Engineering, Universiti Malaya (2023–2027; CGPA 3.88/4.00, Dean's List).
+:::
+
+* *SEA Quantathon 2026 (QC4SG), Vietnam, Honourable Mention (Top 8).* A quantum financial contagion model for ASEAN
+  markets with a multivariate Hawkes process as classical core. He benchmarked the first quantum design against
+  classical correlation, found that it underperformed, and rebuilt the model around the Hawkes core: the
+  evidence-first habit of this proposal.
+* *ADIA Lab Structural Break Challenge: Real-Time Edition, peak #37 of 1,220.* XGBoost and patch-network ensemble
+  over streaming features with per-series null calibration, 55+ controlled experiments validated by paired bootstrap.
+* *Reinforcement-learning trading system:* SAC and PPO agent hierarchy with a regime detector.
+* *AI engineer (Huntier AI, 2026):* conversational tools and RAG pipelines, agent context and memory engineering, a privacy layer
+  that masks customer data before it reaches model APIs. Chief AI Officer, BunkerGuard AI (winner, SuperAI NEXT
+  Hackathon 2026): a six-stage agent pipeline on the Claude API.
+* *In this repository:* co-author of the add-on resource reductions and data-uncertainty layers (`addons/`, §8).
+* *Speaking:* Quantum Fall Fest Malaysia (Monash University Malaysia, 2026), quantum finance session; QML tutor, IBM Qiskit Fall Fest, NUS.
+
 * **Why this profile fits.** Quantum information theory (ICFO, QKD security) underpins the quantum stage.
   Relative entropy and dynamic programming (NTU) underpin RDPO. Stochastic climate models and the
   disaster-response track connect to the hazard side; hands-on Qiskit compilation and QAOA work connect to the
   hardware plan; hackathon delivery under deadlines connects to the eight-week Deep Development plan.
 
-* **One-person team, mitigated.** Every result is regenerated by one command from fixed seeds, and {{N_TESTS}}
+* **Two-person team.** Tan Chun Loong: method, exact engine, RDPO, quantum resource model. Xu Zi Yu: quantum resource
+  reductions, data-uncertainty and model-risk layers, decision tools and agents in Phase 2. Every result is regenerated by one command from fixed seeds, and {{N_TESTS}}
   tests check each exactness claim, so the work can be audited and handed over. The plan is front-loaded with a
   stated descoping order. A domain contact at ADB or QAI Ventures for the pooling questions would strengthen it.
 
-A short CV is attached as an annex.
+Both CVs are attached as an annex.
 
 # 12 Platform Requirement, Prototype Package and AI Use
 

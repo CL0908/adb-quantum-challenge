@@ -2,7 +2,7 @@
 
 **New team member: start with `TEAMMATE.md`** (to-do list before the 22 Nov deadline).
 
-**Status 17 Nov 2026.** Main proposal rewritten around the brief's five Phase 1 deliverables (`docs/paper/short.md`, ~12 pages) and the annex aligned (`proposal.md`, ~58 pages). New since 10 Nov: equal wall-clock audit (`results/equal_time.json`: at equal CPU time RDPO keeps 5/25 benchmark cells and 4/9 pool cells, the joint-exhaustion ones), method v3 negative result (`results/rdpo_v3_equal_time.json`: a learned product-form tilt and an automatic selector only tie twisting), exploratory cutset conditioning (`src/tensor/cutset.py`, unfinished). Portal package: `python -m src.viz.package_submission --cv ...` (organisers want a PDF proposal, a GitHub URL and a CV PDF). The repository is currently private (the visibility change was blocked); it must be made public before submitting.
+**Status 18 Nov 2026: two-person team (Tan Chun Loong, Xu Zi Yu); team text, cover and slides updated; final pass done; remaining items are in `TEAMMATE.md` (final checklist for Ziyu).** Earlier status 17 Nov 2026: Main proposal rewritten around the brief's five Phase 1 deliverables (`docs/paper/short.md`, ~12 pages) and the annex aligned (`proposal.md`, ~58 pages). New since 10 Nov: equal wall-clock audit (`results/equal_time.json`: at equal CPU time RDPO keeps 5/25 benchmark cells and 4/9 pool cells, the joint-exhaustion ones), method v3 negative result (`results/rdpo_v3_equal_time.json`: a learned product-form tilt and an automatic selector only tie twisting), exploratory cutset conditioning (`src/tensor/cutset.py`, unfinished). Portal package: `python -m src.viz.package_submission --cv ...` (organisers want a PDF proposal, a GitHub URL and a CV PDF). The repository is currently private (the visibility change was blocked); it must be made public before submitting.
 
 Teammate add-ons (merged): see `addons/` and `repro/`, and `addons/NOTES_FOR_AUTHOR.md`.
 
@@ -12,7 +12,7 @@ CV (see "Not in git"). To continue: clone, read this file and `README.md`, run `
 
 ## 1. What this is
 Phase 1 submission to the **ADB Quantum Challenge** (joint-loss modelling for the ADB Kyrgyz–Tajik disaster
-bond). Author/sole team member: Tan Chun Loong (NTU; incoming Phortify fellow at ICFO, Barcelona, host group
+bond). Authors: Tan Chun Loong and Xu Zi Yu; Tan Chun Loong (NTU; incoming Phortify fellow at ICFO, Barcelona, host group
 of Prof. Antonio Acín; the "one of three worldwide" claim is the user's, not verifiable from the email).
 Method name: **Rényi-Doob Policy Optimization (RDPO)**; quantum extension **Q-RDPO** (future feature, no QPU in Phase 1).
 The user's working language is Chinese/English mixed; reply in the language they use.

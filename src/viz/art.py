@@ -146,9 +146,10 @@ def cover():
     b.append(text(60, 306, "Tensor networks, Rényi-Doob Policy Optimization and a costed quantum stage", 20, INK2, 400, family=SERIF, italic=True))
     b.append(f'<rect x="60" y="336" width="90" height="4" fill="{TERRA}"/>')
     b.append(text(60, 380, "Joint-loss modelling for natural catastrophe risk", 13, INK2))
-    b.append(text(60, 1010, "Tan Chun Loong", 15, INK, 700))
-    b.append(text(60, 1032, "Nanyang Technological University, Singapore", 12, INK2))
-    b.append(text(60, 1052, "November 2026", 12, INK2))
+    b.append(text(60, 990, "Tan Chun Loong", 15, INK, 700))
+    b.append(text(60, 1010, "Nanyang Technological University, Singapore", 12, INK2))
+    b.append(text(60, 1032, "Xu Zi Yu", 15, INK, 700))
+    b.append(text(60, 1052, "Universiti Malaya, Malaysia · November 2026", 12, INK2))
     b.append(text(734, 1052, "github.com/CL0908/adb-quantum-challenge", 11, MUTED, anchor="end"))
     return svg(W, H, "".join(b))
 

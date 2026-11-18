@@ -209,7 +209,7 @@ No license has been chosen yet; all rights reserved until one is added.
 
 ## Contact
 
-Tan Chun Loong · [https://github.com/CL0908/adb-quantum-challenge](https://github.com/CL0908/adb-quantum-challenge)
+Tan Chun Loong, Xu Zi Yu · [https://github.com/CL0908/adb-quantum-challenge](https://github.com/CL0908/adb-quantum-challenge)
 
 ## Acknowledgments
 

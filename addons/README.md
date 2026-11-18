@@ -35,8 +35,9 @@ python -m pytest -q test_addons.py
 表中数字读的是作者提交的 `results/quantum_advantage.json`（e6572b4，2026-11-18 重跑）。用我们复现克隆的基线时绝对值不同（例如 ring-28 原 s* 为 5.8e5），缩小倍数相同。
 
 ring-28 若改用 I25 的合并 ρ²，s* 如下：
-- E2 配置（ρ² ≈ 38）：原 9.7e4，保守档 3.9e3，mixed 档 3.4e3；
-- v2-final（ρ² ≈ 13）：原 2.8e5，保守档 1.1e4，mixed 档 9.9e3。
+- E2 配置（ρ² ≈ 38）：原 2.5e5，保守档 1.0e4，mixed 档 8.7e3；
+- v2-final（ρ² ≈ 13）：原 7.3e5，保守档 2.9e4，mixed 档 2.5e4。
+  （以上为复现值，取自 `addons/results/combined.json` 的 `s_star_*_rho2_i25_*` 字段。）
 
 **各项说明**
 - **Q1 旋转合成**：ring-28 的 T-count 里约 92% 来自旋转。按 Kliuchnikov 等，Quantum 7, 1208（2023）表 1，取 Clifford+T 下的均值：
