@@ -1,0 +1,65 @@
+{
+  "exceedance": {
+    "p": 0.012046720907534043,
+    "p_chain": 0.012046720907534036,
+    "rho2_plain": 82.01014090685857,
+    "rho2_twist_exact": 5.811766546946239,
+    "rho2_twist_measured": 5.801587533239056,
+    "rho2_best_product": 3.183573357548749,
+    "rho2_rdpo_measured": 0.149900145708322,
+    "rdpo_estimate_z": -1.1856291569568547,
+    "variance_gain_rdpo": 21.237960393603583,
+    "cost_ratio_rdpo": 31.73828125,
+    "equal_cpu_gain_rdpo": 0.6691591213246175,
+    "cpu": {
+      "cpu_per_path_product": 1.953125e-07,
+      "cpu_per_path_rdpo": 6.198883056640625e-06,
+      "cpu_rdpo_training": 0.375
+    },
+    "path_space": {
+      "rho2_rich_static": 5.577169077415221,
+      "rho2_projected_doob": 0.11613979118294848
+    }
+  },
+  "joint_exhaustion": {
+    "p": 3.1633046309179134e-05,
+    "p_chain": 3.1633046309179026e-05,
+    "rho2_plain": 31611.510228261657,
+    "rho2_best_product": 9.761747979136363,
+    "rho2_rdpo_measured": 0.2947687268835955,
+    "rdpo_estimate_z": 0.18426856566092928,
+    "variance_gain_rdpo": 33.11663378385214,
+    "cost_ratio_rdpo": 31.153361002604164,
+    "equal_cpu_gain_rdpo": 1.0630196138735677,
+    "cpu": {
+      "cpu_per_path_product": 1.875e-07,
+      "cpu_per_path_rdpo": 5.841255187988281e-06,
+      "cpu_rdpo_training": 0.453125
+    },
+    "path_space": {
+      "rho2_rich_static": 28.00655965029598,
+      "rho2_projected_doob": 0.07460826838220225
+    }
+  },
+  "joint_attachment": {
+    "p": 0.044137768730843595,
+    "p_chain": 0.044137768730843546,
+    "rho2_plain": 21.656333311683635,
+    "rho2_best_product": 2.5567291645844064,
+    "rho2_rdpo_measured": 0.23554031705212583,
+    "rdpo_estimate_z": 0.14743536570387986,
+    "variance_gain_rdpo": 10.854741118560156,
+    "cost_ratio_rdpo": 31.181003736413043,
+    "equal_cpu_gain_rdpo": 0.34812032384589453,
+    "cpu": {
+      "cpu_per_path_product": 1.796875e-07,
+      "cpu_per_path_rdpo": 5.602836608886719e-06,
+      "cpu_rdpo_training": 0.40625
+    },
+    "path_space": {
+      "rho2_rich_static": 3.241837945463959,
+      "rho2_projected_doob": 3.425344601424296
+    }
+  },
+  "verdict": "not worth it: cost per path"
+}

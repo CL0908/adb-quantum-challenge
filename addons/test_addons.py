@@ -91,3 +91,23 @@ def test_learner_one_world_and_belief_direction():
 def test_twinstar_alarm_levels_and_gamma_tilt():
     import twinstar
     twinstar.selftest()
+
+
+def test_ceiling_split_rates_and_twist_family():
+    import ceiling
+    ceiling.selftest()
+
+
+def test_rdpo_gap_enumeration_matches_chain_and_sampler():
+    import rdpo_gap
+    rdpo_gap.selftest()
+
+
+def test_rdpo_engine_same_paths_as_friend_rollout():
+    import rdpo_engine
+    rdpo_engine.selftest()
+
+
+def test_dreamwake_untrained_policy_and_scores():
+    import dreamwake
+    dreamwake.selftest()

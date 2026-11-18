@@ -95,6 +95,13 @@ JOBS = [
     ("event_response", 22, [PY, str(HERE.parent / "addons" / "event_response.py")], [], 1, False),
     # phase 23: live mark of the two notes (remaining-term loss, indicative price, what each add-on is worth in points)
     ("live_mark", 23, [PY, str(HERE.parent / "addons" / "live_mark.py")], ["quality_rates_unc", "event_response"], 1, False),
+    # phases 24-27: why RDPO ties twisting at equal CPU and what changes it (two-country model, exact references).
+    # 24 exact ceiling of a state-dependent sampler; 25 measured variance and cost per path; 26 a faster rollout for the
+    # same policy (same paths); 27 the six exchanges between RDPO and the twin
+    ("ceiling", 24, [PY, str(HERE.parent / "addons" / "ceiling.py")], [], 1, False),
+    ("rdpo_gap", 25, [PY, str(HERE.parent / "addons" / "rdpo_gap.py")], ["ceiling"], 1, False),
+    ("rdpo_engine", 26, [PY, str(HERE.parent / "addons" / "rdpo_engine.py")], ["rdpo_gap"], 1, False),
+    ("dreamwake", 27, [PY, str(HERE.parent / "addons" / "dreamwake.py")], ["rdpo_engine", "quality_rates_unc"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
 

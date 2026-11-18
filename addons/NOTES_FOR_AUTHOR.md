@@ -67,3 +67,22 @@
 | Kliuchnikov 等，Quantum 7, 1208 (2023) | 一致。Shorter quantum circuits via single-qubit gate approximation，DOI 10.22331/q-2023-12-18-1208。表 1（Clifford+T，均值，ε 为 diamond 距离，ε < 1e-4 的线性拟合）：fallback 1.03·log₂(1/ε) + 5.75，mixed fallback 0.53·log₂(1/ε) + 4.86，diagonal 3.02·log₂(1/ε) + 1.77。和 `rotations.py` 用的常数相同 |
 
 没核对的：`benedetti2019`（npj Quantum Information 5, 45）这次没打开原页面。
+
+## 6. 对 §3「等时间下 twisting 不输」的更正（2026-11-19）
+
+第 2 节的解释（固定倾斜已接近最优）不成立，请以这一节为准。在两国模型上精确算和实测的结果：
+
+| 量 | 池超额 | 两债同时耗尽 |
+|---|---|---|
+| 最好的乘积分布（每个源的分布完全自由）的相对方差，精确 | 3.18 | 9.76 |
+| 你的 twisting 的相对方差，精确 | 5.81 | — |
+| 训练后 RDPO 的相对方差，实测 | 0.16 | 0.27 |
+| RDPO 每样本成本相对乘积采样，你的 `FastPolicy.rollout` | 26 倍 | 28 倍 |
+| 同上，`addons/rdpo_engine.py` 的抽样（同样的策略，路径逐位相同） | 6.2 倍 | 6.0 倍 |
+| 等 CPU 下 RDPO 相对最好的乘积分布 | 3.2 倍 | 6.1 倍 |
+
+- 所以 RDPO 的方差一直低一个数量级，等时间下打平是因为 rollout 对每条路径、每个候选结果都重算条件分布。按局部状态分组后每种状态只算一次。`rdpo_engine.rollout(pol, N, rng)` 和 `pol.rollout` 接口相同，可以直接替换试用。
+- 28 国池上还不够：方差优势 5.6 倍，每样本成本 20 倍，等 CPU 下 0.28 倍。
+- RDPO 学到的价值函数和精确 Doob 函数的加权 R² 为 0.993 / 0.975，可以当预警倍数读出来（`addons/dreamwake.py`）。
+- 建议的写法：「RDPO 的每样本方差比最好的乘积分布低一个数量级；目前的瓶颈是抽样引擎，在两国模型上换引擎后等时间下已胜出 1.7–6.1 倍，28 国池上还差约 4 倍。」
+
