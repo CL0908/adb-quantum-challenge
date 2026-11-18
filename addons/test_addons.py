@@ -61,3 +61,13 @@ def test_twin_estimator_checks():
 def test_spread_band_curves():
     import spread_band
     spread_band.selftest()
+
+
+def test_event_response_fit_recovers_simulated_model():
+    import event_response
+    event_response.selftest()
+
+
+def test_live_mark_matches_friend_term_and_markov():
+    import live_mark
+    live_mark.selftest()

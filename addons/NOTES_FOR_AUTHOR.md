@@ -13,6 +13,9 @@
 | CAREC 池超额 > US$240m | 点值 1.33e-3，后验预测 1.47e-3，95% [0.85e-3, 2.37e-3] | `results/model_risk.json` |
 | 亚太池逐年更新 2017–2025 | 见 `README.md` 的风险孪生一节 | `results/twin.json` |
 | 期望损失区间对应的利差带 | 见 `README.md` 的市场换算一节 | `results/spread_band.json` |
+| 孪生的逐年回测 | 下一年主震数的 90% 预测区间覆盖率 91.0%（各国，252 个预测）/ 92.1%（国家对，198 个） | `results/twin_backtest.json` |
+| 一次地震之后的再震预报 | 样本外对数得分增益 +0.38（30 天）/ +0.18（一年）；2026-11-03 边境 M 5.2 使到期前赔付级地震概率多 0.07 个百分点 | `results/event_response.json` |
+| 各项 add-on 折成价格点 | 地震触发率数据区间 +7 / −15 点；余震读法 −3 点；+2°C −2 点；11 月地震 −0.1 点 | `results/live_mark.json` |
 
 全部在你的 e6572b4 上重跑过，日志在 `repro/logs_upstream/`。
 

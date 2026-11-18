@@ -318,15 +318,82 @@ def core_checks(P):
     assert abs(khat(np.random.default_rng(0).pareto(2.0, 200000)) - 0.5) < 0.1 and khat(np.random.default_rng(0).pareto(1.0, 200000)) > 0.8
 
 
+# ------------------------------------------------------------------------------------------- backtest
+def predictive(k, n):
+    """Next-year count when the annual rate has the Gamma(k + 1/2, n years) posterior: negative binomial."""
+    from scipy.stats import nbinom
+    return nbinom(k + 0.5, n / (n + 1.0))
+
+
+def forecast_scores(k0, n0, Y, update=True):
+    """One-step-ahead forecasts of the yearly counts Y (years x series), starting from k0 events in n0 years.
+    Returns log scores, the expected coverage of the randomised 90% interval (randomised PIT, Czado, Gneiting & Held
+    2009: the standard for counts) and the raw coverage of the integer interval [q05, q95]."""
+    logs, cov, raw, z2 = [], [], [], []
+    k, n = np.asarray(k0, float).copy(), float(n0)
+    for t in range(Y.shape[0]):
+        d = predictive(k, n)
+        obs = Y[t]
+        logs.append(d.logpmf(obs))
+        lo, hi = d.cdf(obs - 1), d.cdf(obs)
+        cov.append(np.clip(np.minimum(hi, 0.95) - np.maximum(lo, 0.05), 0, None) / np.maximum(hi - lo, 1e-300))
+        raw.append((d.ppf(0.05) <= obs) & (obs <= d.ppf(0.95)))
+        z2.append((obs - d.mean()) ** 2 / d.var())
+        if update:
+            k, n = k + obs, n + 1
+    f = lambda a: np.concatenate([np.ravel(x) for x in a])
+    return {"log_score": float(f(logs).sum()), "coverage_randomised": float(f(cov).mean()), "coverage_raw": float(f(raw).mean()),
+            "dispersion": float(f(z2).mean()), "n": int(f(logs).size)}
+
+
+def backtest():
+    """Does the twin predict next year's counts? Rules (set before running): (1) the randomised 90% interval covers
+    85-95% of the 2017-2025 forecasts, for country counts and for pair counts; (2) the yearly-updated twin's mean log
+    score is not worse than the twin frozen in 2016 (difference per forecast >= -0.005 nats)."""
+    c = json.loads((OUT / "twin_counts.json").read_text())
+    K, Kp = np.asarray(c["K_yearly"]), np.asarray(c["Kp_yearly"])
+    r0 = Y_CAL - Y0 + 1
+    fk = np.array([x["friend"] for x in c["check_1965_2016"]["countries"]]); fp = np.array([x["friend"] for x in c["check_1965_2016"]["pairs"]])
+    res = {"forecast_years": [Y_CAL + 1, Y1], "series": {}}
+    ok1, ok2 = True, True
+    for name, k0, Y in (("country_counts", fk, K[r0:]), ("pair_counts", fp, Kp[r0:])):
+        up, fz = forecast_scores(k0, r0, Y, True), forecast_scores(k0, r0, Y, False)
+        diff = (up["log_score"] - fz["log_score"]) / up["n"]
+        res["series"][name] = {"updated": up, "frozen_2016": fz, "log_score_gain_per_forecast": diff}
+        ok1 &= 0.85 <= up["coverage_randomised"] <= 0.95
+        ok2 &= diff >= -0.005
+    # supplementary, more forecasts: ComCat alone, trained on 1965-1999, forecasting 2000-2025
+    cut = 2000 - Y0
+    res["supplement_comcat_2000_2025"] = {"country_counts": forecast_scores(K[:cut].sum(0), cut, K[cut:]), "pair_counts": forecast_scores(Kp[:cut].sum(0), cut, Kp[cut:])}
+    res["checks"] = {"coverage_85_95": bool(ok1), "updating_not_worse": bool(ok2)}
+    res["verdict"] = "strong" if ok1 and ok2 else "not strong"
+    save("twin_backtest.json", res)
+    for name, r in res["series"].items():
+        u = r["updated"]
+        print(f"{name}: {u['n']} forecasts 2017-2025 | randomised 90% coverage {u['coverage_randomised']:.3f} (raw integer interval {u['coverage_raw']:.3f}) | dispersion {u['dispersion']:.2f}"
+              f" | log score updated {u['log_score']:.1f} vs frozen {r['frozen_2016']['log_score']:.1f} (gain {r['log_score_gain_per_forecast']:+.4f} per forecast)")
+    for name, u in res["supplement_comcat_2000_2025"].items():
+        print(f"supplement {name}: {u['n']} forecasts 2000-2025 | randomised coverage {u['coverage_randomised']:.3f} (raw {u['coverage_raw']:.3f}) | dispersion {u['dispersion']:.2f}")
+    print("checks:", res["checks"], "| verdict:", res["verdict"])
+    return res
+
+
 def selftest_fast():
     """The estimator checks on a small synthetic pool (no calibration, no downloads)."""
     from src.tensor.synthetic import SyntheticModel, topology
     core_checks(PortfolioProblem(SyntheticModel(4, topology("ring", 4)), "exceedance"))
-    print("selftest ok (fast): twist log law = sampler weights; one anchor = plain IS; k-hat recovers Pareto shapes")
+    # backtest machinery: forecasts of data simulated from the model itself are calibrated
+    rng = np.random.default_rng(5)
+    lam = rng.gamma(3.0, 1.0, 200)
+    Y = rng.poisson(lam, (60, 200)).astype(float)
+    r = forecast_scores(Y[:30].sum(0), 30, Y[30:])
+    assert abs(r["coverage_randomised"] - 0.90) < 0.02 and abs(r["dispersion"] - 1.0) < 0.1, r
+    print("selftest ok (fast): twist log law = sampler weights; one anchor = plain IS; k-hat recovers Pareto shapes; forecasts of simulated Poisson counts are calibrated")
 
 
 if __name__ == "__main__":
     selftest()
     if not (OUT / "twin_counts.json").exists():
         phase0()
+    backtest()
     run()

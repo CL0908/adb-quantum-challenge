@@ -90,6 +90,11 @@ JOBS = [
     ("twin", 20, [PY, str(HERE.parent / "addons" / "twin.py")], [], ALL, False),
     # phase 21: expected-loss interval -> spread band with three published market curves (a calculation)
     ("spread_band", 21, [PY, str(HERE.parent / "addons" / "spread_band.py")], ["quality_rates_unc"], 1, False),
+    # phase 22: event-response mode of the twin (Omori-type forecast after an event, out-of-sample test, the 3 Nov 2026
+    # border earthquake). Needs carec_m45_1973_2025.csv from fetch_usgs.extended() in DATA.
+    ("event_response", 22, [PY, str(HERE.parent / "addons" / "event_response.py")], [], 1, False),
+    # phase 23: live mark of the two notes (remaining-term loss, indicative price, what each add-on is worth in points)
+    ("live_mark", 23, [PY, str(HERE.parent / "addons" / "live_mark.py")], ["quality_rates_unc", "event_response"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
 
