@@ -24,7 +24,7 @@ from datetime import datetime
 import numpy as np
 from scipy.optimize import minimize
 
-from _src import DATA, save
+from _src import DATA, save, seed
 
 CAT = DATA / "seismology" / "catalogs" / "usgs_comcat"
 R_KM, M_TRIG, M_TARGET, BINS, HORIZONS = 50.0, 5.0, 5.5, (0, 1, 3, 10, 30, 100, 365), (30, 365)
@@ -36,6 +36,9 @@ B_GR, M_PAY = 0.92, {"KG": 6.91, "TJ": 7.02}        # rates_unc.py: Gutenberg-Ri
 
 def load(name="carec_m45_1973_2025.csv"):
     t, la, lo, m = [], [], [], []
+    if not (CAT / name).exists():                       # no data library on this machine: fetch the public catalogue once
+        import fetch_usgs
+        fetch_usgs.extended()
     with open(CAT / name, encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if r["mag"]:
@@ -148,7 +151,7 @@ def event_impact(cat, par):
 
 
 def run():
-    rng = np.random.default_rng(20261118)
+    rng = np.random.default_rng(seed(20261118))
     cat = load()
     d = design(cat)
     tr = (d["year"] >= TRAIN[0]) & (d["year"] < TRAIN[1] + 1)

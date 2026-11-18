@@ -20,7 +20,7 @@ from scipy import stats
 from scipy.optimize import minimize
 
 import variant
-from _src import in_repo, save
+from _src import in_repo, save, seed
 from src.realdata import eq_check as EQ
 
 R_KM, MAGS = 50.0, (5.5, 6.0, 6.5, 6.9)
@@ -93,7 +93,7 @@ def hawkes_fit(t, T):
 
 def run():
     ev, dec, near_r, near_d = catalogue()
-    rng = np.random.default_rng(20261107)
+    rng = np.random.default_rng(seed(20261107))
     mag_r, mag_d = np.array([e[3] for e in ev]), np.array([e[3] for e in dec])
     out = {"radius_km": R_KM, "years": list(EQ.YEARS), "by_magnitude": {}}
     for M in MAGS:

@@ -27,7 +27,7 @@ from scipy.special import logsumexp
 
 import ap_risk
 import voi
-from _src import OUT, in_repo, save
+from _src import OUT, in_repo, save, seed
 from src.realdata import asia_pacific_pool as AP
 from src.rdpo.problem import PortfolioProblem
 from src.rdpo.tilt import TiltSampler, tilt_estimate
@@ -35,7 +35,7 @@ from src.rdpo.train import _best_twist_sources
 
 Y0, Y_CAL, Y1 = 1965, 2016, 2025
 THRESH = ap_risk.THRESH
-N_DRAW, N_SOB, CHECK_YEARS, N_CHK, TW_MULT, PROCS, SEED = 200, 128, (2017, 2021, 2025), 10, 8, 6, 20261118
+N_DRAW, N_SOB, CHECK_YEARS, N_CHK, TW_MULT, PROCS, SEED = 200, 128, (2017, 2021, 2025), 10, 8, 6, seed(20261118)
 GROUPS = ap_risk.GROUPS
 
 

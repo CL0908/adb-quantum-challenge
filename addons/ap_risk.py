@@ -30,7 +30,7 @@ from scipy import sparse
 from scipy.special import logsumexp
 
 import voi
-from _src import OUT, in_repo, load, save
+from _src import OUT, in_repo, load, save, seed
 from src.realdata import asia_pacific_pool as AP
 from src.realdata import param_uncertainty as PU
 from src.realdata.carec_pool import build_mps_data
@@ -42,7 +42,7 @@ from src.rdpo.train import rdpo_estimate
 from src.tensor.mps import targets_from_mps
 
 THRESH = (450, 850)
-N_ANCHOR, B_FIT, N_POST, N_CHECK, N_SOBOL, PROCS, SEED = 32768, 32768, 500, 30, 256, 6, 20261119
+N_ANCHOR, B_FIT, N_POST, N_CHECK, N_SOBOL, PROCS, SEED = 32768, 32768, 500, 30, 256, 6, seed(20261119)
 GROUPS = {"country_counts": ("K",), "pair_counts": ("Kp",), "rain_share": ("rs",)}
 CAL = {}
 

@@ -17,7 +17,7 @@ import time
 import numpy as np
 from scipy.linalg import expm, logm
 
-from _src import save
+from _src import save, seed as _seed
 from src.rdpo.experiments_v2 import final_config
 from src.rdpo.fast import FastPolicy
 from src.rdpo.problem import PortfolioProblem, adb_model
@@ -86,7 +86,7 @@ def job(args):
     bed, rep = args
     P = BEDS[bed]()
     cfg = final_config(P.target)
-    seed = 8_100_000 + 10_000 * list(BEDS).index(bed) + rep
+    seed = _seed(8_100_000) + 10_000 * list(BEDS).index(bed) + rep
     t0 = time.perf_counter()
     r = rdpo_estimate(P, B, np.random.default_rng(seed), cfg)
     pol = FastPolicy(P, cfg.alpha, cfg.edge_features, cfg.relevance, value=cfg.value, stages=cfg.stages)

@@ -22,14 +22,14 @@ from dataclasses import replace
 
 import numpy as np
 
-from _src import in_repo, save
+from _src import in_repo, save, seed
 from src.realdata import param_uncertainty as PU
 from src.rdpo.experiments_v2 import _ring_target_exact, final_config
 from src.rdpo.problem import PortfolioProblem
 from src.rdpo.train import rdpo_estimate
 from src.tensor.synthetic import SyntheticModel, topology
 
-N_SITES, D, REPS, SEED = 16, 100, 5, 20261111
+N_SITES, D, REPS, SEED = 16, 100, 5, seed(20261111)
 BUDGETS = {"refit": 16384, "cold": 2048, "transfer": 2048}
 B_SOURCE = 65536
 

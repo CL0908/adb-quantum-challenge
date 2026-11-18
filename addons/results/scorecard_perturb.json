@@ -1,0 +1,425 @@
+{
+ "eq_cluster": {
+  "claim": "aftershocks paid separately raise joint exhaustion by >= 1.5x",
+  "base": {
+   "value": "x2.57 (nu 0.50)",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "radius 25 km",
+    "value": "x1.51 (nu 0.17)",
+    "holds": true
+   },
+   {
+    "what": "radius 100 km",
+    "value": "x2.46 (nu 0.47)",
+    "holds": true
+   },
+   {
+    "what": "nu measured at M>=6.0",
+    "value": "x2.46 (nu 0.47)",
+    "holds": true
+   },
+   {
+    "what": "nu measured at M>=6.9",
+    "value": "x1.00 (nu 0.00)",
+    "holds": false
+   },
+   {
+    "what": "drop the first 10 years",
+    "value": "x2.34 (nu 0.43)",
+    "holds": true
+   },
+   {
+    "what": "drop the last 10 years",
+    "value": "x2.89 (nu 0.60)",
+    "holds": true
+   },
+   {
+    "what": "aftershock windows x0.5",
+    "value": "x1.27 (nu 0.09)",
+    "holds": false
+   },
+   {
+    "what": "aftershock windows x2",
+    "value": "x4.14 (nu 1.00)",
+    "holds": true
+   },
+   {
+    "what": "nu at the low end of its 95% interval",
+    "value": "x1.51 (nu 0.17)",
+    "holds": true
+   }
+  ],
+  "survival": 0.7777777777777778,
+  "n": 9
+ },
+ "rates_unc": {
+  "claim": "with base-rate data uncertainty the joint-exhaustion 95% interval is >= 2x the shares-only one",
+  "base": {
+   "value": "x2.99",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "radius 25 km",
+    "value": "x3.18",
+    "holds": true
+   },
+   {
+    "what": "radius 100 km",
+    "value": "x3.14",
+    "holds": true
+   },
+   {
+    "what": "b standard error x0.5",
+    "value": "x2.68",
+    "holds": true
+   },
+   {
+    "what": "b standard error x2",
+    "value": "x5.35",
+    "holds": true
+   },
+   {
+    "what": "trigger magnitude +0.2",
+    "value": "x3.20",
+    "holds": true
+   },
+   {
+    "what": "trigger magnitude -0.2",
+    "value": "x2.84",
+    "holds": true
+   },
+   {
+    "what": "rain GEV without the shape prior",
+    "value": "x4.49",
+    "holds": true
+   },
+   {
+    "what": "rain: drop the first 10 years",
+    "value": "x2.29",
+    "holds": true
+   },
+   {
+    "what": "rain: drop the last 10 years",
+    "value": "x2.68",
+    "holds": true
+   }
+  ],
+  "survival": 1.0,
+  "n": 9
+ },
+ "climate_cc": {
+  "claim": "+2 C raises joint exhaustion by >= 2x",
+  "base": {
+   "value": "x2.57",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "5% per degree",
+    "value": "x1.97",
+    "holds": false
+   },
+   {
+    "what": "9% per degree",
+    "value": "x3.33",
+    "holds": true
+   },
+   {
+    "what": "GEV without the shape prior",
+    "value": "x2.70",
+    "holds": true
+   },
+   {
+    "what": "drop the first 10 years",
+    "value": "x2.41",
+    "holds": true
+   },
+   {
+    "what": "drop the last 10 years",
+    "value": "x2.15",
+    "holds": true
+   },
+   {
+    "what": "rain share from data",
+    "value": "x4.37",
+    "holds": true
+   }
+  ],
+  "survival": 0.8333333333333334,
+  "n": 6
+ },
+ "event_response": {
+  "claim": "the after-event forecast beats the stationary Poisson baseline out of sample and is calibrated (both rules)",
+  "base": {
+   "value": "gain +0.38/+0.18, bins 5/4",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "radius 25 km",
+    "value": "gain +0.34/+0.15, bins 4/4",
+    "holds": true
+   },
+   {
+    "what": "radius 100 km",
+    "value": "gain +0.35/+0.14, bins 5/2",
+    "holds": false
+   },
+   {
+    "what": "target M>=6.0",
+    "value": "gain +0.13/+0.04, bins 4/4",
+    "holds": true
+   },
+   {
+    "what": "triggers M>=5.5 only",
+    "value": "gain +0.70/+0.37, bins 3/3",
+    "holds": false
+   },
+   {
+    "what": "train 1973-1994, test 1995-2024",
+    "value": "gain +0.34/+0.16, bins 5/5",
+    "holds": true
+   },
+   {
+    "what": "train 1973-2004, test 2005-2024",
+    "value": "gain +0.40/+0.19, bins 5/4",
+    "holds": true
+   }
+  ],
+  "survival": 0.6666666666666666,
+  "n": 6,
+  "event_magnitude_reading": {
+   "event_M5.2_added_pay_probability_KG": 0.0007364304037581482,
+   "event_M5.5_added_pay_probability_KG": 0.0011115486353643345
+  }
+ },
+ "twin backtest": {
+  "claim": "next-year count forecasts are calibrated: coverage within 5 points of the nominal level, countries and pairs",
+  "base": {
+   "value": "0.910 / 0.921",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "prior weight 1 (uniform-like)",
+    "value": "0.912 / 0.924",
+    "holds": true
+   },
+   {
+    "what": "prior weight 0.05",
+    "value": "0.909 / 0.917",
+    "holds": true
+   },
+   {
+    "what": "80% interval",
+    "value": "0.818 / 0.819",
+    "holds": true
+   },
+   {
+    "what": "95% interval",
+    "value": "0.952 / 0.964",
+    "holds": true
+   },
+   {
+    "what": "ComCat counts to 2016 as the start",
+    "value": "0.912 / 0.923",
+    "holds": true
+   }
+  ],
+  "survival": 1.0,
+  "n": 5
+ },
+ "live_mark": {
+  "claim": "in price points: rate uncertainty > aftershock clause > one M5 event; +2 C > the event; the three big ones >= 0.5 point, the event < 0.5",
+  "base": {
+   "value": "rate 15.1, clause 3.2, +2C 2.4, event 0.10 points",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "maturity 90 days earlier",
+    "value": "rate 13.6, clause 2.9, +2C 2.2, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "maturity 90 days later",
+    "value": "rate 16.5, clause 3.6, +2C 2.6, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "one month after issue",
+    "value": "rate 17.9, clause 3.9, +2C 2.8, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "one year before maturity",
+    "value": "rate 6.4, clause 1.4, +2C 1.0, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "nu at the low end (0.17)",
+    "value": "rate 15.1, clause 1.2, +2C 2.4, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "nu at the high end (1.19)",
+    "value": "rate 15.1, clause 6.4, +2C 2.4, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "warming factors at the low end",
+    "value": "rate 15.1, clause 3.2, +2C 2.1, event 0.10 points",
+    "holds": true
+   },
+   {
+    "what": "warming factors at the high end",
+    "value": "rate 15.1, clause 3.2, +2C 2.7, event 0.10 points",
+    "holds": true
+   }
+  ],
+  "survival": 1.0,
+  "n": 8,
+  "magnitude_agency_offset_price_points": {
+   "-0.2": {
+    "KG": 4.4364933725870515,
+    "TJ": 4.376794759586417
+   },
+   "+0.2": {
+    "KG": -6.638142682471226,
+    "TJ": -6.571428903592832
+   }
+  }
+ },
+ "spread_band": {
+  "claim": "the 6.00% paid lies inside the range of the market curves at the issued expected loss, both notes",
+  "base": {
+   "value": "KG 5.51-6.89%, TJ 4.83-6.03%",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "Bodoff-Gan multiplier 1.41 (low end)",
+    "value": "KG 5.51-6.89%, TJ 4.83-6.03%",
+    "holds": true
+   },
+   {
+    "what": "Bodoff-Gan multiplier 1.85 (high end)",
+    "value": "KG 5.51-6.89%, TJ 4.83-6.03%",
+    "holds": true
+   },
+   {
+    "what": "AM Best 2026 only (2.4-2.5)",
+    "value": "KG 5.51-6.05%, TJ 4.83-5.59%",
+    "holds": false
+   },
+   {
+    "what": "without AM Best",
+    "value": "KG 5.63-6.05%, TJ 5.30-5.59%",
+    "holds": false
+   },
+   {
+    "what": "without Bodoff-Gan",
+    "value": "KG 5.51-6.89%, TJ 4.83-6.03%",
+    "holds": true
+   }
+  ],
+  "survival": 0.6,
+  "n": 5
+ },
+ "rotations + ChebAE": {
+  "claim": "the required hardware speed-up shrinks >= 10x on every setting",
+  "base": {
+   "value": "min x10.7",
+   "holds": true
+  },
+  "perturbations": [
+   {
+    "what": "ChebAE needs 50% more calls",
+    "value": "min x6.6",
+    "holds": false
+   },
+   {
+    "what": "no QROM state-preparation layer",
+    "value": "min x6.0",
+    "holds": false
+   },
+   {
+    "what": "our reproduction's baseline instead of the author's",
+    "value": "min x10.7",
+    "holds": true
+   }
+  ],
+  "survival": 0.3333333333333333,
+  "n": 3,
+  "ablation_min_factor": {
+   "rotation synthesis only": 2.837444797447239,
+   "ChebAE only": 2.710632590914594
+  }
+ },
+ "_consistency": {
+  "checks": [
+   {
+    "what": "live mark over 3 years = the friend's term expected loss",
+    "value": "equal",
+    "ok": true
+   },
+   {
+    "what": "CAREC engine at the observed data = the friend's MPS references",
+    "value": "< 1e-6",
+    "ok": true
+   },
+   {
+    "what": "twin at the 2016 state vs the friend's exact Asia-Pacific references",
+    "value": "max rel diff 0.0018",
+    "ok": true
+   },
+   {
+    "what": "rates_unc with shares only vs the friend's own posterior (different draws)",
+    "value": "median rel diff 0.003",
+    "ok": true
+   },
+   {
+    "what": "voi and rates_unc use the same share posteriors",
+    "value": "identical",
+    "ok": true
+   },
+   {
+    "what": "spread band's expected-loss interval = issued EL x rates_unc multipliers",
+    "value": "max diff 0.0e+00",
+    "ok": true
+   },
+   {
+    "what": "event response's local M>=5.5 rate (one 50 km disc) is below the KG + TJ country rate in the twin",
+    "value": "0.20 vs 1.81 per year",
+    "ok": true
+   }
+  ],
+  "all_ok": true,
+  "known_differences": {
+   "KG-TJ joint exhaustion differs across the three models by design": {
+    "brief two-country model (25% rain share)": 3.163304630917887e-05,
+    "Asia-Pacific model (2.2% rain share, return-period cover)": 1.4125325365389949e-05
+   }
+  }
+ },
+ "_portability": {
+  "event_response": {
+   "fetched_without_data_drive": true,
+   "seconds": 35.69377130000066,
+   "events_fetched_now": 20029,
+   "events_in_library": 20029,
+   "error": null
+  },
+  "twin": {
+   "fetched_without_data_drive": true,
+   "seconds": 48.70709270000043,
+   "events_fetched_now": 19346,
+   "events_in_library": 19346,
+   "error": null
+  }
+ }
+}
