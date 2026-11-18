@@ -110,10 +110,10 @@ def tilted_carec(n=256, procs=6):
     bump = []
     for c in order:
         for s in (h, -h):
-            bump.append(dict(obs, counts=dict(obs["counts"], **{c: obs["counts"][c] * math.exp(s)})))
+            bump.append(dict(obs, counts={**obs["counts"], c: obs["counts"][c] * math.exp(s)}))
     for e in edges:
         for s in (h, -h):
-            bump.append(dict(obs, pairs=dict(obs["pairs"], **{e: obs["pairs"][e] * math.exp(s)})))
+            bump.append(dict(obs, pairs={**obs["pairs"], e: obs["pairs"][e] * math.exp(s)}))
     bump += [dict(obs, b=obs["b"] + 0.5 * b_se), dict(obs, b=obs["b"] - 0.5 * b_se)]
     plain = MR.draw(inp, rng, n, rnp)
     out = {"worlds": n, "targets": {}}
@@ -235,7 +235,7 @@ def paid_probability(P, rng, n=400000):
     return ((a + r) > 0).mean(0)
 
 
-def how():
+def how(n_tw=1_000_000, n_rd=65536, b_fit=32768):
     rng = np.random.default_rng(seed(20261124))
     out = {}
     # exact check on the two-country model (crisis.py's chain gives the terminal law)
@@ -246,18 +246,19 @@ def how():
     ex_share = np.array([law[A] @ ((CR.SC.eq_limit * CR.A_[A] / 4 + CR.SC.rain_limit * CR.R1_[A]) / 80e6), law[A] @ ((CR.SC.eq_limit * CR.B_[A] / 4 + CR.SC.rain_limit * CR.R2_[A]) / 80e6)]) / pa
     paid2 = np.array([law @ ((CR.A_ + CR.R1_) > 0), law @ ((CR.B_ + CR.R2_) > 0)])
     ex_lift = np.array([law @ (A & ((CR.A_ + CR.R1_) > 0)), law @ (A & ((CR.B_ + CR.R2_) > 0))]) / paid2 / pa
-    acts, w, f, _ = twist_paths(P2, 1_000_000, rng)
+    acts, w, f, _ = twist_paths(P2, n_tw, rng)
     an = anatomy(P2, acts, w, f, paid2)
-    z = np.r_[(an["share"] - ex_share) / an["share_se"], (an["lift"] - ex_lift) / an["lift_se"]]
+    # in the two-country model a pool loss above US$80m needs both countries to pay, so the lift is exactly 1 / P(paid): no sampling error there
+    z = np.r_[(an["share"] - ex_share) / an["share_se"], (an["lift"] - ex_lift) / np.maximum(an["lift_se"], 1e-9 * ex_lift)]
     out["two_country_check"] = {"share_exact": ex_share.tolist(), "share_paths": an["share"].tolist(), "lift_exact": ex_lift.tolist(), "lift_paths": an["lift"].tolist(), "max_abs_z": float(np.abs(z).max())}
     # the 28-country pool at the friend's point
     inp = ap_risk.inputs()
     P = PortfolioProblem(inp["model"], "exceedance", threshold=ap_risk.THRESH[0] * 1e6)
     order = inp["order"]
     p_paid = paid_probability(P, rng)
-    tw = [twist_paths(P, 1_000_000, np.random.default_rng(seed(20261124) + 10 + k)) for k in range(3)]
+    tw = [twist_paths(P, n_tw, np.random.default_rng(seed(20261124) + 10 + k)) for k in range(3)]
     an_tw = [anatomy(P, a, w_, f_, p_paid) for a, w_, f_, _ in tw]
-    rd = rdpo_paths(P, 65536, np.random.default_rng(seed(20261124) + 50))
+    rd = rdpo_paths(P, n_rd, np.random.default_rng(seed(20261124) + 50), b_fit)
     an_rd = anatomy(P, rd[0], rd[1], rd[2], p_paid)
     cpu_tw, cpu_rd = float(np.mean([t[3] for t in tw])), rd[3]
     eff_share = (an_tw[0]["share_se"] ** 2 * cpu_tw) / np.maximum(an_rd["share_se"] ** 2 * cpu_rd, 1e-300)

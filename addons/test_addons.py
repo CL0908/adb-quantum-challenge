@@ -86,3 +86,8 @@ def test_crisis_chain_gradient_and_second_moment():
 def test_learner_one_world_and_belief_direction():
     import learner
     learner.selftest()
+
+
+def test_twinstar_alarm_levels_and_gamma_tilt():
+    import twinstar
+    twinstar.selftest()
