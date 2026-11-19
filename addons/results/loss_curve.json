@@ -1,0 +1,209 @@
+{
+  "ring 28": {
+    "thresholds": [
+      {
+        "threshold_musd": 420.0,
+        "p_exact": 0.0033859534109920214,
+        "curve_over_exact": 0.9597306937416966,
+        "borrowed_answer_over_exact": 0.9597306937416961,
+        "z_borrowed": 1.6919282505541886,
+        "rho2_borrowed": 0.0894423555553779,
+        "rho2_fresh": 0.03325277063948716,
+        "cpu_borrowed": 0.921875,
+        "cpu_fresh": 2.609375
+      },
+      {
+        "threshold_musd": 560.0,
+        "p_exact": 8.93501991819036e-05,
+        "curve_over_exact": 0.986110642557941,
+        "borrowed_answer_over_exact": 0.9861106425579408,
+        "z_borrowed": 0.26821901390429603,
+        "rho2_borrowed": 0.6098253432664649,
+        "rho2_fresh": 0.07539463856512184,
+        "cpu_borrowed": 1.0,
+        "cpu_fresh": 3.375
+      },
+      {
+        "threshold_musd": 700.0,
+        "p_exact": 1.2668839063922404e-06,
+        "curve_over_exact": 1.0165102473722716,
+        "borrowed_answer_over_exact": 1.0165102473722711,
+        "z_borrowed": 1.2484351281030448,
+        "rho2_borrowed": 0.7029741639752705,
+        "rho2_fresh": 0.15456128633851815,
+        "cpu_borrowed": 0.953125,
+        "cpu_fresh": 2.46875
+      },
+      {
+        "threshold_musd": 840.0,
+        "p_exact": 1.0220570337875937e-08,
+        "curve_over_exact": 1.014826875633925,
+        "borrowed_answer_over_exact": 1.0148268756339247,
+        "z_borrowed": 0.06400020100469235,
+        "rho2_borrowed": 0.38035679005753703,
+        "rho2_fresh": 0.29547712385596225,
+        "cpu_borrowed": 0.828125,
+        "cpu_fresh": 2.125
+      },
+      {
+        "threshold_musd": 980.0,
+        "p_exact": 4.811076421266584e-11,
+        "curve_over_exact": 1.018345947806488,
+        "borrowed_answer_over_exact": 1.0183459478064887,
+        "z_borrowed": 0.06794938284462733,
+        "rho2_borrowed": 0.5819509929795368,
+        "rho2_fresh": 0.545473719805425,
+        "cpu_borrowed": 0.671875,
+        "cpu_fresh": 2.234375
+      },
+      {
+        "threshold_musd": 1120.0,
+        "p_exact": 1.3220244150337375e-13,
+        "curve_over_exact": 1.0069471975059392,
+        "borrowed_answer_over_exact": 1.0069471975059388,
+        "z_borrowed": 1.4846386304674228,
+        "rho2_borrowed": 1.0287474733929984,
+        "rho2_fresh": 1.0470865210877338,
+        "cpu_borrowed": 0.640625,
+        "cpu_fresh": 2.171875
+      }
+    ],
+    "stop_loss": [
+      {
+        "threshold_musd": 840.0,
+        "stop_loss_exact_usd": 0.28051306208920873,
+        "own_answer_over_exact": 1.0091921419436345,
+        "z": 0.5480740588819372,
+        "rho2": 0.40669144602960644
+      },
+      {
+        "threshold_musd": 1120.0,
+        "stop_loss_exact_usd": 3.0178392859395046e-06,
+        "own_answer_over_exact": 1.0107815222818168,
+        "z": 0.7150708858287672,
+        "rho2": 1.0365473270394572
+      }
+    ],
+    "cpu_one_pilot_sheet": 8.546875,
+    "cpu_pilot_per_threshold": 14.984375,
+    "cpu_forward_pass": 0.5
+  },
+  "ap_risk 28": {
+    "thresholds": [
+      {
+        "threshold_musd": 250.0,
+        "p_exact": 0.10479782575148235,
+        "curve_over_exact": 0.9815939877798439,
+        "borrowed_answer_over_exact": 0.9815939877798432,
+        "z_borrowed": 1.7471820537248228,
+        "rho2_borrowed": 0.019737582635641092,
+        "rho2_fresh": 0.011929328417178135,
+        "cpu_borrowed": 0.8125,
+        "cpu_fresh": 2.28125
+      },
+      {
+        "threshold_musd": 350.0,
+        "p_exact": 0.017428877324829135,
+        "curve_over_exact": 0.9762959184377237,
+        "borrowed_answer_over_exact": 0.9762959184377225,
+        "z_borrowed": 1.7832038121442526,
+        "rho2_borrowed": 0.05480486272889401,
+        "rho2_fresh": 0.03249525359605131,
+        "cpu_borrowed": 0.546875,
+        "cpu_fresh": 1.515625
+      },
+      {
+        "threshold_musd": 450.0,
+        "p_exact": 0.001795839596268465,
+        "curve_over_exact": 0.9705239636320601,
+        "borrowed_answer_over_exact": 0.970523963632059,
+        "z_borrowed": 2.1168731598662385,
+        "rho2_borrowed": 0.13787288103193365,
+        "rho2_fresh": 0.07639742911181946,
+        "cpu_borrowed": 0.5,
+        "cpu_fresh": 1.71875
+      },
+      {
+        "threshold_musd": 550.0,
+        "p_exact": 0.00014711455936902286,
+        "curve_over_exact": 0.9441610077415024,
+        "borrowed_answer_over_exact": 0.9441610077415021,
+        "z_borrowed": 0.08612377473488861,
+        "rho2_borrowed": 9.387931941906636,
+        "rho2_fresh": 0.15174948376958272,
+        "cpu_borrowed": 0.5625,
+        "cpu_fresh": 1.6875
+      },
+      {
+        "threshold_musd": 650.0,
+        "p_exact": 7.450353997584981e-06,
+        "curve_over_exact": 0.9689180333502024,
+        "borrowed_answer_over_exact": 0.968918033350202,
+        "z_borrowed": 3.732839773069066,
+        "rho2_borrowed": 1.5628481146025457,
+        "rho2_fresh": 0.29158525875545066,
+        "cpu_borrowed": 0.53125,
+        "cpu_fresh": 1.71875
+      },
+      {
+        "threshold_musd": 750.0,
+        "p_exact": 3.182997815275511e-07,
+        "curve_over_exact": 0.9800199691901083,
+        "borrowed_answer_over_exact": 0.9800199691901087,
+        "z_borrowed": 2.1935746155972744,
+        "rho2_borrowed": 0.6512779072282309,
+        "rho2_fresh": 0.517634301877617,
+        "cpu_borrowed": 0.578125,
+        "cpu_fresh": 1.921875
+      },
+      {
+        "threshold_musd": 850.0,
+        "p_exact": 9.507045708936194e-09,
+        "curve_over_exact": 1.0069430335524265,
+        "borrowed_answer_over_exact": 1.0069430335524263,
+        "z_borrowed": 0.8248114490210062,
+        "rho2_borrowed": 0.9355528279166002,
+        "rho2_fresh": 0.9436542227891874,
+        "cpu_borrowed": 0.546875,
+        "cpu_fresh": 1.984375
+      }
+    ],
+    "stop_loss": [
+      {
+        "threshold_musd": 550.0,
+        "stop_loss_exact_usd": 5123.861682535902,
+        "own_answer_over_exact": 0.9595408551259442,
+        "z": 3.3194195612655997,
+        "rho2": 0.6799942687469863
+      },
+      {
+        "threshold_musd": 850.0,
+        "stop_loss_exact_usd": 0.26656075047610356,
+        "own_answer_over_exact": 1.0113851138780625,
+        "z": 0.11250643497459621,
+        "rho2": 0.9598452471900483
+      }
+    ],
+    "cpu_one_pilot_sheet": 7.09375,
+    "cpu_pilot_per_threshold": 12.828125,
+    "cpu_forward_pass": 0.40625
+  },
+  "checks": {
+    "K1_curve_within_10pct": {
+      "ring 28": true,
+      "ap_risk 28": true
+    },
+    "K2_borrowed_unbiased_and_within_1.5x": {
+      "ring 28": false,
+      "ap_risk 28": false
+    },
+    "K3_stop_loss": {
+      "ring 28": true,
+      "ap_risk 28": false
+    },
+    "K4_sheet_cpu_halved": {
+      "ring 28": false,
+      "ap_risk 28": false
+    }
+  }
+}

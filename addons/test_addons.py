@@ -151,3 +151,23 @@ def test_policy_library_borrowed_modules_unbiased():
 def test_dense_pools_modules_exact_on_complete_graph_of_four():
     import dense_pools
     dense_pools.selftest()
+
+
+def test_exact_check_junction_solver_enumeration_and_modules_agree():
+    import exact_check
+    exact_check.selftest()
+
+
+def test_loss_curve_forward_pass_matches_exact_at_lower_threshold():
+    import loss_curve
+    loss_curve.selftest()
+
+
+def test_reliability_coverage_machinery_on_a_fair_coin():
+    import reliability
+    reliability.selftest()
+
+
+def test_quantum_side_reproduces_the_authors_required_speedup():
+    import quantum_side
+    quantum_side.selftest()

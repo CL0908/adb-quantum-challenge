@@ -11,6 +11,7 @@ import os
 import platform
 import subprocess
 import sys
+import threading
 import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime
@@ -109,8 +110,13 @@ JOBS = [
     ("cap_modules", 32, [PY, str(HERE.parent / "addons" / "cap_modules.py")], ["multi_country"], 1, False),
     ("policy_library", 33, [PY, str(HERE.parent / "addons" / "policy_library.py")], ["cap_modules"], 1, False),
     ("dense_pools", 34, [PY, str(HERE.parent / "addons" / "dense_pools.py")], ["policy_library"], 1, False),
+    ("exact_check", 35, [PY, str(HERE.parent / "addons" / "exact_check.py")], ["dense_pools"], 1, False),
+    ("loss_curve", 36, [PY, str(HERE.parent / "addons" / "loss_curve.py")], ["exact_check"], 1, False),
+    ("reliability", 37, [PY, str(HERE.parent / "addons" / "reliability.py")], ["loss_curve"], 1, False),
+    ("quantum_side", 38, [PY, str(HERE.parent / "addons" / "quantum_side.py")], ["reliability"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
+RUNS_LOCK = threading.Lock()
 
 
 def done_ok():
@@ -135,7 +141,7 @@ def run_one(job):
            "end": datetime.now().isoformat(timespec="seconds"), "seconds": round(time.perf_counter() - t0, 1),
            "exit": code, "soft": soft, "cpu_cost": cpu, "log": str(log.relative_to(HERE)), "commit": git("rev-parse", "HEAD"),
            "data_changed": git("status", "--porcelain", "--", "data", "src", "tests")}
-    with open(RUNS, "a", encoding="utf-8") as fh:
+    with RUNS_LOCK, open(RUNS, "a", encoding="utf-8") as fh:   # jobs finish in threads; unlocked appends lost or garbled records
         fh.write(json.dumps(rec) + "\n")
     print(f"[{rec['end']}] {name}: exit {code} in {rec['seconds']}s", flush=True)
     return rec
