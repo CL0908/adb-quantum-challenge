@@ -102,6 +102,13 @@ JOBS = [
     ("rdpo_gap", 25, [PY, str(HERE.parent / "addons" / "rdpo_gap.py")], ["ceiling"], 1, False),
     ("rdpo_engine", 26, [PY, str(HERE.parent / "addons" / "rdpo_engine.py")], ["rdpo_gap"], 1, False),
     ("dreamwake", 27, [PY, str(HERE.parent / "addons" / "dreamwake.py")], ["rdpo_engine", "quality_rates_unc"], 1, False),
+    ("rdpo_hybrid", 28, [PY, str(HERE.parent / "addons" / "rdpo_hybrid.py")], ["rdpo_engine"], 1, False),
+    ("small_world", 29, [PY, str(HERE.parent / "addons" / "small_world.py")], ["rdpo_hybrid"], 1, False),
+    ("small_world_loop", 30, [PY, str(HERE.parent / "addons" / "small_world_loop.py")], ["small_world", "dreamwake"], 1, False),
+    ("multi_country", 31, [PY, str(HERE.parent / "addons" / "multi_country.py")], ["small_world_loop"], 1, False),
+    ("cap_modules", 32, [PY, str(HERE.parent / "addons" / "cap_modules.py")], ["multi_country"], 1, False),
+    ("policy_library", 33, [PY, str(HERE.parent / "addons" / "policy_library.py")], ["cap_modules"], 1, False),
+    ("dense_pools", 34, [PY, str(HERE.parent / "addons" / "dense_pools.py")], ["policy_library"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
 

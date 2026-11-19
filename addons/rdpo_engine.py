@@ -54,8 +54,11 @@ def law(pol, k, tabs, S, Lt, Li, Lj):
     return (1 - pol.alpha) * qt + pol.alpha * src["p"][None, :]
 
 
-def rollout(pol, N, rng, record=False, U=None):
-    """Same contract and same random stream as FastPolicy.rollout (without the grad option)."""
+def rollout(pol, N, rng, record=False, U=None, fixed=None, stats=None, trace=None):
+    """Same contract and same random stream as FastPolicy.rollout (without the grad option).
+    fixed: {source: law} draws those sources from a fixed law instead of the state-dependent one (rdpo_hybrid.py).
+    stats: a dict that receives, per state-dependent source, its path-averaged law, the mean KL from it, and the number of states.
+    trace: called as trace(k, S, Lt, logw) before each source is drawn (cap_modules.py)."""
     P = pol.P
     S, Lt, Li, Lj = pol._init_state(N)
     logw = np.zeros(N)
@@ -66,8 +69,13 @@ def rollout(pol, N, rng, record=False, U=None):
         plan, src = pol.plan[k], P.src[k]
         V = len(src["p"])
         u = rng.random((N, 1))[:, 0] if U is None else U[:, k]
+        if trace is not None:
+            trace(k, S, Lt, logw)
         if plan["frozen"]:
             v = np.minimum(np.searchsorted(np.cumsum(src["p"]), u), V - 1)
+        elif fixed is not None and k in fixed:
+            v = np.minimum(np.searchsorted(np.cumsum(fixed[k]), u), V - 1)
+            logw += src["logp"][v] - np.log(fixed[k][v])
         else:
             ends = sorted({i for e in plan["edges"] for i in P.edges[e]} | set(plan["sites"]))
             key = np.zeros(N, dtype=np.int64)
@@ -81,6 +89,10 @@ def rollout(pol, N, rng, record=False, U=None):
             cdf[:, -1] = np.maximum(cdf[:, -1], 1.0)                       # the friend clips at the last outcome instead
             v = np.minimum(np.searchsorted((cdf + np.arange(len(rep))[:, None]).ravel(), inv + u) - inv * V, V - 1)
             logw += src["logp"][v] - np.log(q[inv, v])
+            if stats is not None:
+                c = np.bincount(inv, minlength=len(rep)) / N
+                qb = c @ q
+                stats[k] = {"law": qb, "kl": float(c @ (q * np.log(np.where(q > 0, q / np.maximum(qb, 1e-300), 1.0))).sum(1)), "states": len(rep)}
         for i in plan["sites"]:
             new = pol.next[k][i][S[:, i], v]
             Lt += pol.loss_tab[new] - pol.loss_tab[S[:, i]]

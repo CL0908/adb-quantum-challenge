@@ -111,3 +111,43 @@ def test_rdpo_engine_same_paths_as_friend_rollout():
 def test_dreamwake_untrained_policy_and_scores():
     import dreamwake
     dreamwake.selftest()
+
+
+def test_rdpo_hybrid_unbiased_for_any_fixed_subset():
+    import rdpo_hybrid
+    rdpo_hybrid.selftest()
+
+
+def test_small_world_teacher_unbiased_and_bounds_exact():
+    import small_world
+    small_world.selftest()
+
+
+def test_small_world_loop_training_runs_on_taught_policy():
+    import small_world_loop
+    small_world_loop.selftest()
+
+
+def test_llm_gate_number_check_without_calling_a_model():
+    import llm_gate
+    llm_gate.selftest()
+
+
+def test_multi_country_teacher_matches_exact_three_country_ring():
+    import multi_country
+    multi_country.selftest()
+
+
+def test_cap_modules_own_answer_exact_on_two_countries():
+    import cap_modules
+    cap_modules.selftest()
+
+
+def test_policy_library_borrowed_modules_unbiased():
+    import policy_library
+    policy_library.selftest()
+
+
+def test_dense_pools_modules_exact_on_complete_graph_of_four():
+    import dense_pools
+    dense_pools.selftest()
