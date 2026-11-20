@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDPO · Exact and learned joint-tail estimation</title>
+<meta name="description" content="ADB Quantum Innovation Challenge, Phase 1: exact where possible, learned where not, quantum where it can be shown to pay. Joint-tail estimation for pooled disaster risk financing.">
+<link rel="icon" href="assets/cat_sitting.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top">RDPO</a>
+    <nav aria-label="Sections">
+      <a href="#approach">Approach</a><a href="#rdpo">Results</a><a href="#try">Try it</a><a href="#risk">Model risk</a><a href="#quantum">Quantum</a><a href="#plan">Phase 2</a><a href="#team">Team</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<!-- ===================================================== HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="tri" aria-hidden="true"><i style="background:var(--navy)"></i><i style="background:var(--terra)"></i><i style="background:var(--teal)"></i></div>
+    <p class="kicker">ADB Quantum Innovation Challenge · Phase 1</p>
+    <h1>Exact and learned joint-tail estimation for pooled disaster risk financing</h1>
+    <p class="lead">How often several countries’ disaster covers pay out together: computed exactly where possible, learned where not, and costed on quantum hardware.</p>
+    <p class="motto">Exact where possible, learned where not, quantum where it can be shown to pay.</p>
+    <div class="cta">
+      <a class="btn primary" href="#try">Try the estimator</a>
+      <a class="btn" href="RDPO_Proposal_Short.pdf">Read the proposal (PDF)</a>
+      <a class="btn" href="https://github.com/CL0908/adb-quantum-challenge">GitHub</a>
+    </div>
+    <p class="byline"><span class="who">Tan Chun Loong · Xu Zi Yu</span>
+      Nanyang Technological University, Singapore · Universiti Malaya, Malaysia · November 2026</p>
+    <img class="mascot" src="assets/cat_sitting.svg" alt="">
+  </div>
+</section>
+
+<!-- ===================================================== PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <p class="kicker">The problem</p>
+    <h2>A pool’s shared capital depends on joint tails, and they are too rare to simulate.</h2>
+    <div class="grid3 stats">
+      <div><span class="num big terra" data-v="BASE_JE_MU"></span><p>chance that both countries exhaust their US$80m cover in the same three-year term</p></div>
+      <div><span class="num big terra" data-v="MC_ZERO"></span><p>of plain Monte Carlo runs with the benchmark’s 16,384 paths return exactly zero</p></div>
+      <div><span class="num big navy">10<sup>n</sup></span><p>joint states a year for n countries; regional pools have 10–30, with tails near <span data-v="Q_MU_28"></span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== APPROACH -->
+<section id="approach" class="alt">
+  <div class="wrap">
+    <p class="kicker">Our answer</p>
+    <h2>Three stages, one exact model underneath.</h2>
+    <div class="pipe">
+      <article class="stage" style="--c:var(--navy)"><div class="tag">1 · Exact</div><h3>Tensor networks</h3>
+        <p>Quantum-inspired. The full joint law with zero sampling error, for pools of up to 28 countries.</p></article>
+      <div class="arrow" aria-hidden="true">→</div>
+      <article class="stage" style="--c:var(--terra)"><div class="tag">2 · Learned</div><h3>RDPO sampler</h3>
+        <p>Rényi-Doob Policy Optimization learns the zero-variance importance sampler where exact contraction fails. Unbiased, with 95% intervals.</p></article>
+      <div class="arrow" aria-hidden="true">→</div>
+      <article class="stage" style="--c:var(--teal)"><div class="tag">3 · Quantum</div><h3>Amplitude estimation</h3>
+        <p>Exact state loading, resources linear in pool size, and a measured break-even bar.</p></article>
+    </div>
+    <p class="base">One exact model feeds all three: <b>payouts as a product of independent Poisson sources.</b></p>
+  </div>
+</section>
+
+<!-- ===================================================== EXACT -->
+<section id="exact">
+  <div class="wrap">
+    <p class="kicker">1 · Exact, quantum-inspired</p>
+    <h2>A tensor network gives the pool’s joint law with zero sampling error, up to 28 countries.</h2>
+    <div class="split">
+      <figure><img src="assets/exact.svg" alt="Exact computation time against pool size" loading="lazy">
+        <figcaption>Time for the full joint law, one CPU core. Stars: data-calibrated pools.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num navy" data-v="EQT_EXACT_MS"></span><p>every value of the brief’s benchmark table, reproduced exactly</p></div>
+        <div class="stat"><span class="num navy" data-v="AP_MPS_SEC"></span><p>28-country Asia–Pacific pool, calibrated to public data</p></div>
+        <div class="stat"><span class="num navy" data-v="DENSE_BIG_SEC"></span><p>dense pool of 28, each country linked to its next four</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== RDPO -->
+<section id="rdpo" class="alt">
+  <div class="wrap">
+    <p class="kicker">2 · Learned: Rényi-Doob Policy Optimization</p>
+    <h2>Per simulated scenario, RDPO beats the best of the brief’s four methods in <span data-v="EQT_A_PATH_BRIEF"></span> cells.</h2>
+    <div class="split">
+      <figure><img src="assets/heat.svg" alt="Improvement of RDPO over the best reference method, by scenario and target" loading="lazy">
+        <figcaption>Best reference method’s error ÷ RDPO’s; 16,384 paths, training included. Blue: Sobol is better.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num terra" data-v="E1_EXH_RANGE_SHORT"></span><p>lower error on joint exhaustion, the rarest target</p></div>
+        <div class="stat"><span class="num terra" data-v="E1_COV16_MEAN"></span><p>of nominal 95% intervals cover the exact value</p></div>
+        <div class="stat"><span class="num navy" data-v="STR_RANGE"></span><p>more accurate on rare targets than splitting, SMC and flow-based sampling</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== TRY IT -->
+<section id="try">
+  <div class="wrap">
+    <p class="kicker">Try it</p>
+    <h2>Pick a scenario from the brief and compare three estimators on the same budget.</h2>
+    <p class="lead">The two-country benchmark, solved live: the exact answer, a plain Monte Carlo run, and RDPO with the same number of simulated paths. Pools above US$80m use the brief’s threshold.</p>
+
+    <div class="panel" id="panel">
+      <form class="controls" id="form" autocomplete="off">
+        <label>Scenario
+          <select id="scenario">
+            <option value="adb-base">Base</option>
+            <option value="adb-independent">Independent (no shared shocks)</option>
+            <option value="adb-common-shock">Common shock (shared earthquakes ×2)</option>
+            <option value="adb-rain-stress">Rain stress (rain rates ×2)</option>
+            <option value="adb-rain-cover">Rain cover (US$60m / US$20m limits)</option>
+          </select></label>
+        <label>Target
+          <select id="target">
+            <option value="joint_exhaustion">Both bonds exhausted</option>
+            <option value="joint_attachment">Both bonds pay</option>
+            <option value="exceedance">Pool loss above US$80m</option>
+            <option value="stop_loss">Pool stop-loss above US$80m</option>
+            <option value="expected_loss">Expected principal loss</option>
+          </select></label>
+        <label>Budget: <span><b id="budgetLab"></b> paths</span>
+          <input id="budget" type="range" min="0" max="5" step="1" value="3" aria-describedby="budgetLab"></label>
+        <button class="btn primary" type="submit" id="run">Run again</button>
+      </form>
+
+      <div class="result" id="result" aria-live="polite">
+        <div class="status" id="status">Loading…</div>
+        <div id="rows"></div>
+        <div class="plot" id="plot" role="img" aria-label="Estimates and 95% intervals"></div>
+        <p class="note" id="verdict"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== WALL CLOCK -->
+<section id="clock" class="alt">
+  <div class="wrap">
+    <p class="kicker">Honest accounting</p>
+    <h2>Per CPU second, cheap methods win most cells; RDPO keeps the joint ones.</h2>
+    <div class="tablewrap">
+    <table class="eqt">
+      <thead><tr><th>Setting</th><th class="r">Cells</th><th class="r">RDPO better,<br>same paths</th><th class="r">RDPO better,<br>same CPU time</th></tr></thead>
+      <tbody>
+        <tr><td><span data-v="EQ0_LAB"></span><span class="sub" data-v="EQ0_VS"></span></td><td class="n r"><small data-v="EQ0_N"></small></td><td class="n r win" data-v="EQ0_PATH"></td><td class="n r" data-v="EQ0_TIME"></td></tr>
+        <tr><td><span data-v="EQ1_LAB"></span><span class="sub" data-v="EQ1_VS"></span></td><td class="n r"><small data-v="EQ1_N"></small></td><td class="n r win" data-v="EQ1_PATH"></td><td class="n r" data-v="EQ1_TIME"></td></tr>
+        <tr><td><span data-v="EQ2_LAB"></span><span class="sub" data-v="EQ2_VS"></span></td><td class="n r"><small data-v="EQ2_N"></small></td><td class="n r win" data-v="EQ2_PATH"></td><td class="n r" data-v="EQ2_TIME"></td></tr>
+        <tr><td><span data-v="EQ3_LAB"></span><span class="sub" data-v="EQ3_VS"></span></td><td class="n r"><small data-v="EQ3_N"></small></td><td class="n r win" data-v="EQ3_PATH"></td><td class="n r" data-v="EQ3_TIME"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="lead">At equal CPU time RDPO keeps joint exhaustion (<span data-v="EQT_A_TIME_JE"></span> benchmark cells). Phase 2 targets the gap: a GPU engine and tensor-network value functions.</p>
+  </div>
+</section>
+
+<!-- ===================================================== MODEL RISK -->
+<section id="risk">
+  <div class="wrap">
+    <p class="kicker">Model risk</p>
+    <h2>The bigger uncertainty is dependence itself: it moves the pool’s tail from 0 to <span data-v="FIN_EXC_MAX"></span>.</h2>
+    <div class="range">
+      <p class="lab"><b>Pr(pool pays more than US$80m in a term)</b>, over every dependence consistent with each country’s own risk</p>
+      <div class="bar" id="riskbar">
+        <div class="band" id="rb-band"></div>
+        <div class="mk" id="rb-brief" style="background:var(--ink2)"></div>
+        <div class="mk" id="rb-med" style="background:var(--terra)"></div>
+        <div class="call up" id="rc-brief"><span class="num" style="color:var(--ink2)" data-v="PU_EXC_BRIEF"></span>brief</div>
+        <div class="call up" id="rc-med"><span class="num" style="color:var(--terra)" data-v="PU_EXC_MED"></span>public data</div>
+        <div class="call down" id="rc-ci">95%: <span data-v="PU_EXC_LO"></span>–<span data-v="PU_EXC_HI"></span></div>
+        <div class="end l">0</div><div class="end r" data-v="FIN_EXC_MAX"></div>
+      </div>
+    </div>
+    <div class="grid3 stats risk3">
+      <div><span class="num terra"><span data-v="BRIEF_EQ_SHARE"></span> <span class="arr">→</span> <span data-v="DATA_EQ_SHARE"></span></span>
+        <p>earthquake events shared by both countries: brief → loss records 1900–2020 <span class="nw">(95%: <span data-v="DATA_EQ_CI"></span>)</span></p></div>
+      <div><span class="num teal"><span data-v="BRIEF_RAIN_SHARE"></span> <span class="arr">→</span> <span data-v="DATA_RAIN_SHARE"></span></span>
+        <p>extreme rain shared by neighbours: brief → <span data-v="RAIN_NST"></span> weather stations <span class="nw">(95%: <span data-v="DATA_RAIN_CI"></span>)</span></p></div>
+      <div><span class="num navy"><span data-v="FIN_POOL_BRIEF"></span> <span class="arr">→</span> <span data-v="FIN_POOL_MED"></span></span>
+        <p>of expected payouts kept by one shared US$80m limit: brief → public data</p></div>
+    </div>
+    <p class="note">Public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.</p>
+  </div>
+</section>
+
+<!-- ===================================================== QUANTUM -->
+<section id="quantum" class="alt">
+  <div class="wrap">
+    <p class="kicker">3 · Quantum stage</p>
+    <h2>A falsifiable bar: at 28 countries, quantum breaks even only on hardware <span data-v="Q_SSTAR_28"></span>× faster than projected.</h2>
+    <div class="split">
+      <figure><img src="assets/phase.svg" alt="Wall-clock phase diagram, amplitude estimation against RDPO" loading="lazy">
+        <figcaption>Amplitude estimation with exact loading against our best classical sampler, in wall-clock.</figcaption></figure>
+      <div class="aside">
+        <div class="stat"><span class="num teal" data-v="HW_SV_ERR"></span><p>emulated error of the exact loading circuits</p></div>
+        <div class="stat"><span class="num teal"><span data-v="Q_SSTAR_2"></span> <span class="arr">→</span> <span data-v="Q_SSTAR_28"></span></span><p>speed-up needed, 2 → 28 countries: the gap closes with size</p></div>
+        <div class="stat"><span class="num teal" data-v="HW_BEST_RANGE"></span><p>error on an IBM Heron-class noise model; the trust guard falls back to classical</p></div>
+      </div>
+    </div>
+
+    <h3 class="sub3">Resource estimate</h3>
+    <div class="res">
+      <div class="tablewrap" style="--c:var(--navy)">
+        <h4>Classical · one CPU core</h4>
+        <table>
+          <tr><td>Brief’s benchmark, exact</td><td class="n r sm" data-v="EQT_EXACT_MS"></td></tr>
+          <tr><td>RDPO estimate, training included</td><td class="n r sm" data-v="EQT_RDPO_MS"></td></tr>
+          <tr><td>28-country pool, exact</td><td class="n r sm" data-v="AP_MPS_SEC"></td></tr>
+          <tr><td>28-country pool, rarest tail, RDPO</td><td class="n r sm" data-v="AP_RARE_SEC"></td></tr>
+        </table>
+        <p class="note">No GPU; memory under 1 GB throughout.</p>
+      </div>
+      <div class="tablewrap" style="--c:var(--teal)">
+        <h4>Quantum · amplitude estimation</h4>
+        <table>
+          <thead><tr><th></th><th class="r">Near-term<br>2 countries</th><th class="r">Fault-tolerant<br>2 countries</th><th class="r">Fault-tolerant<br>28 countries</th></tr></thead>
+          <tr><td>Physical qubits</td><td class="n r sm" data-v="HW_QUBITS"></td><td class="n r sm" data-v="Q_PHYS_2"></td><td class="n r sm" data-v="Q_PHYS_28"></td></tr>
+          <tr><td>Logical qubits</td><td class="n r sm">–</td><td class="n r sm" data-v="Q_LQ_2"></td><td class="n r sm" data-v="Q_LQ_28"></td></tr>
+          <tr><td>Run time</td><td class="n r sm"><span data-v="HW_QPU_MIN"></span> min</td><td class="n r sm" data-v="Q_TIME_2"></td><td class="n r sm" data-v="Q_TIME_28"></td></tr>
+        </table>
+        <p class="note">Surface code at physical error 10<sup>−3</sup>; 10% relative error. RDPO on the 28-country task: <span data-v="Q_CLS_28"></span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== PHASE 2 -->
+<section id="plan">
+  <div class="wrap">
+    <p class="kicker">Phase 2 · 30 Nov 2026 – 22 Jan 2027</p>
+    <h2>Eight weeks, three work packages, four measurable milestones.</h2>
+    <div class="gantt-scroll"><div class="gantt">
+      <div></div>
+      <div class="wk"><b>W1</b><span data-v="W1_DATE"></span></div><div class="wk"><b>W2</b><span data-v="W2_DATE"></span></div><div class="wk"><b>W3</b><span data-v="W3_DATE"></span></div>
+      <div class="wk"><b>W4</b><span data-v="W4_DATE"></span></div><div class="wk"><b>W5</b><span data-v="W5_DATE"></span></div><div class="wk"><b>W6</b><span data-v="W6_DATE"></span></div>
+      <div class="wk"><b>W7</b><span data-v="W7_DATE"></span></div><div class="wk"><b>W8</b><span data-v="W8_DATE"></span></div>
+      <div class="hol" style="grid-column:5 / 7; grid-row:2 / 5;"></div>
+      <div class="wp" style="grid-row:2">WP1 Wall-clock<small>GPU engine, value functions</small></div>
+      <div class="bar2" style="--c:var(--terra); grid-column:2 / 5; grid-row:2">M1<span class="ms"></span></div>
+      <div class="wp" style="grid-row:3">WP2 Dependence<small>trigger-level data</small></div>
+      <div class="bar2" style="--c:var(--navy); grid-column:3 / 7; grid-row:3">M2<span class="ms"></span></div>
+      <div class="wp" style="grid-row:4">WP3 Quantum + package<small>hardware run, calculator, pitch</small></div>
+      <div class="bar2" style="--c:var(--teal); grid-column:6 / 10; grid-row:4">M3 · M4<span class="ms"></span></div>
+      <div class="holtxt" style="grid-column:5 / 7; grid-row:5">holiday weeks: long compute jobs</div>
+    </div></div>
+    <div class="mstones">
+      <div style="--c:var(--terra)"><b>M1 · week 3</b>At equal wall-clock, RDPO wins ≥ 10 of 25 benchmark cells (now <span data-v="EQT_A_TIME_BRIEF"></span>).</div>
+      <div style="--c:var(--navy)"><b>M2 · week 5</b>Both dependence shares at trigger level; a range narrower than <span class="nw">[0, <span data-v="FIN_EXC_MAX"></span>]</span>.</div>
+      <div style="--c:var(--teal)"><b>M3 · week 7</b>Guarded IBM hardware run, fidelity within the emulator’s predicted band.</div>
+      <div style="--c:var(--teal)"><b>M4 · <span data-v="P2_END"></span></b>Three ADB questions answered end to end from one command.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== TEAM -->
+<section id="team" class="alt">
+  <div class="wrap">
+    <p class="kicker">Team</p>
+    <h2>Quantum information, reinforcement learning and applied AI, in one reproducible codebase.</h2>
+    <div class="grid2">
+      <article class="member">
+        <h3>Tan Chun Loong</h3>
+        <div class="role">Physics and Quantum Technology, NTU Singapore</div>
+        <ul>
+          <li>Incoming Phortify Student Research Fellow, ICFO Barcelona (Prof. Antonio Acín’s group)</li>
+          <li>URECA Fellow with Prof. Mile Gu: relative entropy in model-based reinforcement learning, the mathematics of RDPO</li>
+          <li>Quantum security intern, Fraunhofer Singapore</li>
+          <li>MIT iQuHACK 2026; SEA Quantathon 2025 finalist; Track Lead, Wildfire &amp; Emergency Response, SEA Quantum Leaders Summit 2026</li>
+        </ul>
+      </article>
+      <article class="member">
+        <h3>Xu Zi Yu</h3>
+        <div class="role">Mechanical Engineering, Universiti Malaya</div>
+        <ul>
+          <li>SEA Quantathon 2026 Top 8: rebuilt a quantum contagion model around a classical core after benchmarking it</li>
+          <li>ADIA Lab Structural Break Challenge, peak #37 of 1,220</li>
+          <li>AI engineer (agents, RAG); SuperAI NEXT 2026 winner, BunkerGuard</li>
+          <li>Co-author of the resource-reduction and data-uncertainty add-ons</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== CLAIMS -->
+<section id="claims">
+  <div class="wrap">
+    <p class="kicker">In one slide</p>
+    <h2>What we claim, and what we do not.</h2>
+    <div class="grid2 claims">
+      <div class="yes" style="--c:var(--teal)"><h4>We claim</h4>
+        <ul>
+          <li>Exact joint tails, zero sampling error, for every benchmark target and pools of up to 28 countries</li>
+          <li>Higher accuracy per query than the brief’s baselines in <span data-v="EQT_A_PATH_BRIEF"></span> cells, with unbiased 95% intervals</li>
+          <li>A falsifiable resource estimate for the quantum stage, and the classical bar it must beat</li>
+        </ul></div>
+      <div class="no" style="--c:var(--terra)"><h4>We do not claim</h4>
+        <ul>
+          <li>A quantum advantage today, on any hardware</li>
+          <li>Faster wall-clock than simple methods: at equal CPU time RDPO wins <span data-v="EQT_A_TIME_BRIEF"></span> cells</li>
+          <li>A re-pricing of the bond: dependence uses public proxies, not its triggers</li>
+        </ul></div>
+    </div>
+
+    <div class="links">
+      <a class="card" href="RDPO_Proposal_Short.pdf"><b>Main proposal</b><span>Short version for judges, PDF</span></a>
+      <a class="card" href="RDPO_Proposal.pdf"><b>Technical annex</b><span>Full proof and experiments, PDF</span></a>
+      <a class="card" href="RDPO_Presentation.pdf"><b>Presentation</b><span>The 12-slide deck, PDF</span></a>
+      <a class="card" href="https://github.com/CL0908/adb-quantum-challenge"><b>GitHub</b><span>Code, data, results and tests</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>AI use: developed with Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the author’s research plan; all numbers on this page are produced by the repository’s scripts (<code>src/viz/export_web_data.py</code>).</p>
+    <p>Tan Chun Loong · Xu Zi Yu · ADB Quantum Innovation Challenge, Phase 1</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

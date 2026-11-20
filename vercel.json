@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "web",
+  "functions": {
+    "api/estimate.py": { "maxDuration": 30, "memory": 1024, "includeFiles": "src/**" }
+  },
+  "headers": [
+    { "source": "/(.*)\\.pdf", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }] }
+  ]
+}

@@ -225,3 +225,14 @@ plan; all numbers come from the scripts in this repository.
 [scipy-shield]: https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white
 [tests-shield]: https://img.shields.io/badge/tests-59%20passing-2ea44f?style=for-the-badge
 [status-shield]: https://img.shields.io/badge/status-Phase%201%20proposal-C8553A?style=for-the-badge
+
+## Deploy (public demo site on Vercel)
+
+`web/` is a static single-page site (committed, no build step) and `api/estimate.py` is the live "try it" function
+(numpy + scipy, about 1 s per request, falls back to precomputed answers in the page if unreachable).
+
+1. vercel.com -> Add New Project -> Import `CL0908/adb-quantum-challenge` (the repo can stay private for Vercel).
+2. Framework preset: **Other**. Leave build command, install command and output directory as they are (`vercel.json` sets `web/` as the output).
+3. Deploy. The function is installed from `api/requirements.txt`.
+
+To refresh the numbers and copied figures/PDFs after results change: `PYTHONPATH=. python -m src.viz.export_web_data`, then commit `web/`.
