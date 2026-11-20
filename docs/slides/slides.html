@@ -178,9 +178,11 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
 <!-- ============================================================ 1 TITLE -->
 <section class="title">
   <div class="kicker">ADB Quantum Innovation Challenge · Phase 1</div>
-  <h1>Exact and learned joint-tail estimation for pooled disaster risk financing</h1>
-  <p class="lead">How often several countries’ disaster covers pay out together: computed exactly where possible,
-    learned where not, and costed on quantum hardware.</p>
+  <h1>When disaster cover is pooled, the risk is everyone losing at once.</h1>
+  <p class="lead">ADB’s US$160m Disaster Relief Bond covers the Kyrgyz Republic and Tajikistan. The dangerous case is both
+    countries using up their cover in the same three years: too rare to see in history or in ordinary simulation.
+    We compute it exactly, and show how much money a regional pool needs because of it.</p>
+  <p class="lead" style="font-size:24px; margin-top:26px; color:var(--ink2,#5a6b80)">Exact and learned joint-tail estimation for pooled disaster risk financing</p>
   <div class="byline">
     <span class="who">Tan Chun Loong · Xu Zi Yu</span>
     Nanyang Technological University, Singapore · Universiti Malaya, Malaysia · November 2026
@@ -192,7 +194,7 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
 <!-- ============================================================ 2 PROBLEM -->
 <section>
   <div class="kicker">The problem</div>
-  <h2 class="claim">A pool’s shared capital depends on joint tails, and they are too rare to simulate.</h2>
+  <h2 class="claim">The dangerous case is both countries using up their cover in the same three years: too rare to see in history or in ordinary simulation.</h2>
   <div class="body">
     <div class="stats3">
       <div><span class="num">{{BASE_JE_MU}}</span>
@@ -209,7 +211,7 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
 <!-- ============================================================ 3 APPROACH -->
 <section>
   <div class="kicker">Our answer</div>
-  <h2 class="claim">Exact where possible, learned where not, quantum where it can be shown to pay.</h2>
+  <h2 class="claim">We compute it exactly, and show how much money a regional pool needs because of it.</h2>
   <div class="body" style="flex-direction:column; justify-content:center;">
     <div class="pipe">
       <div class="stage" style="--c:var(--navy)"><div class="tag">1 · Exact</div><h3>Tensor networks</h3>
@@ -221,7 +223,7 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
       <div class="stage" style="--c:var(--teal)"><div class="tag">3 · Quantum</div><h3>Amplitude estimation</h3>
         <p>Exact state loading, resources linear in pool size, and a measured break-even bar.</p></div>
     </div>
-    <p class="base">One exact model feeds all three: <span>payouts as a product of independent Poisson sources.</span></p>
+    <p class="base">Exact where possible, learned where not, quantum where it can be shown to pay. One exact model feeds all three: <span>payouts as a product of independent Poisson sources.</span></p>
   </div>
   <footer><span>Exact and learned joint-tail estimation · ADB Quantum Innovation Challenge</span><span class="pg"></span></footer>
 </section>
@@ -325,7 +327,7 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
         <figcaption>Amplitude estimation with exact loading against our best classical sampler, in wall-clock.</figcaption></figure>
       <div class="aside">
         <div class="stat"><span class="num teal">{{HW_SV_ERR}}</span><p>emulated error of the exact loading circuits</p></div>
-        <div class="stat"><span class="num teal">{{Q_SSTAR_2}} <span class="arr">→</span> {{Q_SSTAR_28}}</span><p>speed-up needed, 2 → 28 countries: the gap closes with size</p></div>
+        <div class="stat"><span class="num teal">{{Q_SSTAR_2}} <span class="arr">→</span> {{Q_SSTAR_28}}</span><p>speed-up needed, 2 → 28 countries: the gap closes with size (28 countries: 95% interval {{Q_SSTAR_28_CI}})</p></div>
         <div class="stat"><span class="num teal">{{HW_BEST_RANGE}}</span><p>error on an IBM Heron-class noise model; the trust guard falls back to classical</p></div>
       </div>
     </div>

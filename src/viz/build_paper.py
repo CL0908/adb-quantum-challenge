@@ -225,6 +225,13 @@ def q_values():
     r28 = next(r for r in adv if r["topology"] == "ring" and r["n"] == 28)
     v["Q_SSTAR_28"] = sci(r28["required_speedup"]).replace("1.0×", "")
     v["Q_PL_28"] = sci(r28["pL_required"])
+    lo, hi = r28["s_star_ci95"]
+    v["Q_SSTAR_28_CI"] = f"{sci(lo).replace('1.0×', '')} to {sci(hi).replace('1.0×', '')}"
+    fac = r28["s_star_within_factor"]
+    v["Q_SSTAR_28_FAC"] = f"{fac:.1f}" if fac < 10 else f"{fac:.0f}"
+    v["Q_RHO2_28"] = f"{r28['classical_rho2']:.0f}"
+    v["Q_RHO2_28_CI"] = f"{r28['rho2_ci95'][0]:.0f} to {r28['rho2_ci95'][1]:.0f}"
+    v["Q_REPS_28"] = str(r28["reps"])
     def dur(s):
         return f"{s * 1e3:.1f} ms" if s < 1 else (f"{s:.1f} s" if s < 600 else (f"{s / 3600:.1f} h" if s < 2 * 86400 else f"{s / 86400:.0f} d"))
     lines = ["**Table [tab:qadv].** Falsifiable wall-clock comparison at 10% relative error on Pr(L > Tₙ). Classical: measured "

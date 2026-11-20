@@ -106,7 +106,7 @@ All numbers come from `results/*.json` (fixed seeds), with **training included i
 |---|---|
 | Loading | exact twisted loader + bitwise weight oracle; amplitude-estimation calls at 28 countries cut from 2.8×10⁹ to 3.4×10⁴ |
 | Algorithm and scalability | Algorithm 2 (guarded Q-RDPO); resources linear in n and \|E\| (logical qubits ≈ 38 + 13n + 8\|E\|, within 7%); wall-clock phase diagram: break-even needs classical ρ² ≈ 6×10⁴–10⁶ at 1% error vs measured 0.13–117 |
-| Falsifiable wall-clock criterion | needs **8.2×10⁴ – 4.4×10⁶×** faster hardware to beat classical RDPO |
+| Falsifiable wall-clock criterion | needs **1.4×10⁶ – 1.7×10⁸×** (results/quantum_advantage_v3.json) faster hardware to beat classical RDPO |
 | Error-mitigation trust boundary | mitigation worse than none in 21–38% of instances; pilot-disagreement guard caps p99 error at ≤ 0.17 |
 
 <p align="center">

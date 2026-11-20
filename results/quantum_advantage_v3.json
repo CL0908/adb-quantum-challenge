@@ -17,36 +17,46 @@
       "old": "RDPOConfig() default, engine v1 (the engine of results/rdpo_e2.json and the paper)",
       "new": "RDPOConfig(engine='fast') = FastPolicy (same policy) with addons/rdpo_engine.rollout for every draw without gradient (Xu Zi Yu, PR #3-#4)"
     },
-    "repo_commit": "996bbc5eab72a248db26c7fd2bd130a4f19c7851",
+    "repo_commit": "0c724ecd0627ceba4bc66428a7584d57afac83c9",
     "git_blobs": {
       "addons/rdpo_engine.py": "dc4111f1aca6271d0ffe4f29071e2766b0556e19",
       "src/rdpo/fast.py": "b906e4a713c28609f1ef1735d280d4a152fab93f",
       "src/rdpo/train.py": "a01b55ff511632eff9b044bbbe1700363b4cd158",
       "src/quantum/advantage.py": "113e7cec4eb92cd9d29d26cae9107cd8215376f9"
     },
-    "seeds": "2000 + 1000*n + 300*case_index + replication (same seed for old and new); reps 20 (n<=4) / 10 (n<=16) / 6 (else)",
+    "seeds": "2000 + 1000*n + 300*case_index + replication (same seed for old and new); reps 20 (n<=4) / 10 (n<=16) / 6 (else), later extended for ring-16/20/28 with the same seed formula",
     "eps_rel": 0.1,
     "budget": 65536,
     "quantum_side": "src/quantum/advantage.py unchanged (resource model, IQAE, surface code)",
     "caveat": "classical times are this machine's; quantum seconds are the surface-code model's and do not depend on the machine"
   },
   "summary": {
-    "speed_ratio_total_time": 5.641137303729645,
+    "speed_ratio_total_time": 4.769301009023828,
     "speed_ratio_range": [
-      3.763373023273238,
+      3.7646505921926243,
       13.980287470069088
     ],
-    "rho2_ratio_geomean": 0.7935117741934297,
-    "rho2_ratio_max": 1.0983088494544915,
+    "rho2_ratio_geomean": 0.9774244327060813,
+    "rho2_ratio_max": 1.1682015115617137,
     "s_star_ratio_range": [
       0.07245504277656416,
-      0.2616924547258387
+      0.3103080838323762
     ],
     "s_star_28_old_paper": 81871.24854823409,
-    "s_star_28_old_same_machine": 92391.13249262728,
-    "s_star_28_speed_only": 364299.447659015,
-    "note": "rho2 of ring-20 and ring-28 rests on 6 replications (as in the paper's E2) and is outlier-dominated (repro/i25); s_star_engine_speed_only keeps the old engine's rho2 and changes only the time per path",
-    "s_star_28_new": 645126.4481840144
+    "s_star_28_old_same_machine": 266531.5230692258,
+    "s_star_28_speed_only": 1155101.403270433,
+    "note": "rho2 of the large rings is outlier-dominated (repro/i25); replications per setting are in advantage[].reps and the 95% intervals in rho2_ci95 / s_star_ci95; s_star_engine_speed_only keeps the old engine's rho2 and changes only the time per path",
+    "s_star_28_new": 1355059.0562631437,
+    "s_star_28_ci95": [
+      795600.774815969,
+      2685152.039631184
+    ],
+    "s_star_28_within_factor": 1.9815756569577474,
+    "rho2_28_ci95": [
+      16.720650107100823,
+      56.25585380725251
+    ],
+    "bootstrap": "percentile, 4000 resamples of whole replications (estimate and wall time paired) per setting, seed 7; the interval is conditional on the measured replications and this machine"
   },
   "advantage": [
     {
@@ -77,6 +87,15 @@
       "cnot_Q": 4212,
       "depth_A": 372,
       "lookup_toffoli_avoided": 272,
+      "rho2_ci95": [
+        0.0640855812237562,
+        0.22155229632357862
+      ],
+      "s_star_ci95": [
+        100717570.98238139,
+        348379845.82124394
+      ],
+      "s_star_within_factor": 2.0784506016376723,
       "reps": 20,
       "rel_rmse": 0.0014250768722500315,
       "ci_coverage": 0.95,
@@ -130,6 +149,15 @@
       "cnot_Q": 18720,
       "depth_A": 496,
       "lookup_toffoli_avoided": 1556,
+      "rho2_ci95": [
+        0.2619359998125078,
+        1.2136658587851465
+      ],
+      "s_star_ci95": [
+        7253726.253477214,
+        32489878.590373006
+      ],
+      "s_star_within_factor": 2.456161583940546,
       "reps": 10,
       "rel_rmse": 0.003167172448368214,
       "ci_coverage": 1.0,
@@ -161,15 +189,15 @@
       "mu": 1.4564028479010561e-08,
       "a_twisted": 0.005985257636251191,
       "eps_rel": 0.1,
-      "classical_rho2": 2.0727506242408253,
-      "classical_paths": 207.2750624240825,
-      "classical_seconds": 0.020758990744022838,
+      "classical_rho2": 3.410029219853526,
+      "classical_paths": 341.0029219853525,
+      "classical_seconds": 0.03565981894751262,
       "quantum_calls": 8650.0,
       "quantum_kmax": 32.3,
       "quantum_shots": 400.0,
       "quantum_T_count": 1094883761.0558286,
       "quantum_seconds": 87316.97994420232,
-      "required_speedup": 4206224.715878522,
+      "required_speedup": 2448609.7383927675,
       "pL_required": 5.474904202095483e-07,
       "physical_qubits": 664842,
       "code_distance": 29,
@@ -183,18 +211,27 @@
       "cnot_Q": 38148,
       "depth_A": 612,
       "lookup_toffoli_avoided": 3094,
-      "reps": 10,
-      "rel_rmse": 0.005623847842399006,
-      "ci_coverage": 1.0,
-      "seconds_per_fit": 6.563554734900004,
-      "t_path": 0.00010015189720001227,
+      "rho2_ci95": [
+        1.7357603890197262,
+        5.831350274516507
+      ],
+      "s_star_ci95": [
+        1432593.1451388681,
+        4765297.206604999
+      ],
+      "s_star_within_factor": 1.946123603074809,
+      "reps": 20,
+      "rel_rmse": 0.007213384542827756,
+      "ci_coverage": 0.95,
+      "seconds_per_fit": 6.853319264650088,
+      "t_path": 0.0001045733530372633,
       "old_engine_same_machine": {
-        "rel_rmse": 0.005666949307546374,
-        "ci_coverage": 1.0,
-        "seconds_per_fit": 24.701104826100003,
-        "classical_rho2": 2.104643712077026,
-        "classical_seconds": 0.07932590477540107,
-        "required_speedup": 1100737.2710267438
+        "rel_rmse": 0.006673907805768946,
+        "ci_coverage": 0.95,
+        "seconds_per_fit": 25.800352428150074,
+        "classical_rho2": 2.919041951328087,
+        "classical_seconds": 0.11491746688357471,
+        "required_speedup": 759823.3959739556
       },
       "paper_old": {
         "rel_rmse": 0.005666949307546374,
@@ -203,10 +240,10 @@
         "classical_seconds": 0.09266146231785123,
         "required_speedup": 942322.490494311
       },
-      "time_ratio_same_machine": 3.763373023273238,
-      "rho2_ratio_new_over_old_same_machine": 0.9848463245093745,
-      "s_star_engine_speed_only": 4142484.95149345,
-      "s_star_ratio_old_over_new": 0.2616924547258387
+      "time_ratio_same_machine": 3.7646505921926243,
+      "rho2_ratio_new_over_old_same_machine": 1.1682015115617137,
+      "s_star_engine_speed_only": 2860469.5976151633,
+      "s_star_ratio_old_over_new": 0.3103080838323762
     },
     {
       "topology": "ring",
@@ -214,15 +251,15 @@
       "mu": 2.898829225098419e-10,
       "a_twisted": 0.003016298328830648,
       "eps_rel": 0.1,
-      "classical_rho2": 1.7697313668145294,
-      "classical_paths": 176.9731366814529,
-      "classical_seconds": 0.024620799738095896,
+      "classical_rho2": 4.991715834992464,
+      "classical_paths": 499.17158349924625,
+      "classical_seconds": 0.06360354420124849,
       "quantum_calls": 11015.0,
       "quantum_kmax": 41.9,
       "quantum_shots": 405.0,
       "quantum_T_count": 1770864020.0055265,
       "quantum_seconds": 141226.40559544074,
-      "required_speedup": 5736060.8549575405,
+      "required_speedup": 2220417.2325458014,
       "pL_required": 3.4155794843045083e-07,
       "physical_qubits": 806130,
       "code_distance": 29,
@@ -236,18 +273,27 @@
       "cnot_Q": 47428,
       "depth_A": 672,
       "lookup_toffoli_avoided": 3862,
-      "reps": 6,
-      "rel_rmse": 0.005196533231252612,
-      "ci_coverage": 1.0,
-      "seconds_per_fit": 9.11747829016671,
-      "t_path": 0.000139121678011577,
+      "rho2_ci95": [
+        2.8758845834235953,
+        7.519385944537327
+      ],
+      "s_star_ci95": [
+        1468548.6146045297,
+        3827123.5952190775
+      ],
+      "s_star_within_factor": 1.7236056084968858,
+      "reps": 36,
+      "rel_rmse": 0.008727401617096068,
+      "ci_coverage": 0.9444444444444444,
+      "seconds_per_fit": 8.350479094888852,
+      "t_path": 0.00012741819907972492,
       "old_engine_same_machine": {
-        "rel_rmse": 0.00890877588194756,
-        "ci_coverage": 1.0,
-        "seconds_per_fit": 35.04769316166668,
-        "classical_rho2": 5.2013490316752025,
-        "classical_seconds": 0.27816052992078333,
-        "required_speedup": 507715.4750735493
+        "rel_rmse": 0.00869698623584254,
+        "ci_coverage": 0.9444444444444444,
+        "seconds_per_fit": 32.88358397569443,
+        "classical_rho2": 4.956983760416578,
+        "classical_seconds": 0.24872343712129524,
+        "required_speedup": 567804.9774077731
       },
       "paper_old": {
         "rel_rmse": 0.00890877588194756,
@@ -256,10 +302,10 @@
         "classical_seconds": 0.32024987901311003,
         "required_speedup": 440988.1622146042
       },
-      "time_ratio_same_machine": 3.8440116933939903,
-      "rho2_ratio_new_over_old_same_machine": 0.3402446857607921,
-      "s_star_engine_speed_only": 1951664.2230998084,
-      "s_star_ratio_old_over_new": 0.0885129164267396
+      "time_ratio_same_machine": 3.9379278245031184,
+      "rho2_ratio_new_over_old_same_machine": 1.0070066952515024,
+      "s_star_engine_speed_only": 2235975.019425434,
+      "s_star_ratio_old_over_new": 0.25571994717261354
     },
     {
       "topology": "ring",
@@ -267,15 +313,15 @@
       "mu": 1.3220243960861647e-13,
       "a_twisted": 0.000881844066020961,
       "eps_rel": 0.1,
-      "classical_rho2": 66.1668877046505,
-      "classical_paths": 6616.688770465049,
-      "classical_seconds": 1.484750868570025,
+      "classical_rho2": 33.04679031940951,
+      "classical_paths": 3304.67903194095,
+      "classical_seconds": 0.706871076837187,
       "quantum_calls": 46685.0,
       "quantum_kmax": 182.75,
       "quantum_shots": 485.0,
       "quantum_T_count": 11235801223.210682,
       "quantum_seconds": 957852.0542787106,
-      "required_speedup": 645126.4481840144,
+      "required_speedup": 1355059.0562631437,
       "pL_required": 5.6034116848924426e-08,
       "physical_qubits": 1244470,
       "code_distance": 31,
@@ -289,18 +335,27 @@
       "cnot_Q": 67360,
       "depth_A": 806,
       "lookup_toffoli_avoided": 5400,
-      "reps": 6,
-      "rel_rmse": 0.03177462167213619,
-      "ci_coverage": 1.0,
-      "seconds_per_fit": 14.705940735333419,
-      "t_path": 0.00022439484764607878,
+      "rho2_ci95": [
+        16.720650107100823,
+        56.25585380725251
+      ],
+      "s_star_ci95": [
+        795600.774815969,
+        2685152.039631184
+      ],
+      "s_star_within_factor": 1.9815756569577474,
+      "reps": 36,
+      "rel_rmse": 0.02245560069729903,
+      "ci_coverage": 0.8888888888888888,
+      "seconds_per_fit": 14.018154998972275,
+      "t_path": 0.00021390007017474784,
       "old_engine_same_machine": {
-        "rel_rmse": 0.0422837557409533,
-        "ci_coverage": 1.0,
-        "seconds_per_fit": 57.98571727233332,
-        "classical_rho2": 117.17286294720354,
-        "classical_seconds": 10.36735916572022,
-        "required_speedup": 92391.13249262728
+        "rel_rmse": 0.02432168911510496,
+        "ci_coverage": 0.9166666666666666,
+        "seconds_per_fit": 60.752252957222204,
+        "classical_rho2": 38.767464376684714,
+        "classical_seconds": 3.593766483035965,
+        "required_speedup": 266531.5230692258
       },
       "paper_old": {
         "rel_rmse": 0.0422837557409533,
@@ -309,10 +364,10 @@
         "classical_seconds": 11.699492450202422,
         "required_speedup": 81871.24854823409
       },
-      "time_ratio_same_machine": 3.9430131207460386,
-      "rho2_ratio_new_over_old_same_machine": 0.5646946403832804,
-      "s_star_engine_speed_only": 364299.447659015,
-      "s_star_ratio_old_over_new": 0.14321398968016552
+      "time_ratio_same_machine": 4.33382659570223,
+      "rho2_ratio_new_over_old_same_machine": 0.8524362078032708,
+      "s_star_engine_speed_only": 1155101.403270433,
+      "s_star_ratio_old_over_new": 0.19669365835924651
     },
     {
       "topology": "complete",
@@ -342,6 +397,15 @@
       "cnot_Q": 11872,
       "depth_A": 496,
       "lookup_toffoli_avoided": 1044,
+      "rho2_ci95": [
+        0.3062035908867673,
+        0.9120875177632891
+      ],
+      "s_star_ci95": [
+        14119630.579040637,
+        42932292.10719846
+      ],
+      "s_star_within_factor": 1.8294448487406139,
       "reps": 20,
       "rel_rmse": 0.002915867117742232,
       "ci_coverage": 1.0,
@@ -395,6 +459,15 @@
       "cnot_Q": 21752,
       "depth_A": 618,
       "lookup_toffoli_avoided": 2326,
+      "rho2_ci95": [
+        1.3227001435342345,
+        4.2540447727054955
+      ],
+      "s_star_ci95": [
+        1065629.1083201412,
+        3995124.10340933
+      ],
+      "s_star_within_factor": 2.2463389527485704,
       "reps": 10,
       "rel_rmse": 0.006454647307356643,
       "ci_coverage": 0.6,
@@ -448,6 +521,15 @@
       "cnot_Q": 27596,
       "depth_A": 672,
       "lookup_toffoli_avoided": 3158,
+      "rho2_ci95": [
+        0.7530141119741716,
+        1.6831673632133421
+      ],
+      "s_star_ci95": [
+        2303906.4911600314,
+        5002612.503110023
+      ],
+      "s_star_within_factor": 1.5644700980019302,
       "reps": 10,
       "rel_rmse": 0.004267062493157718,
       "ci_coverage": 1.0,
@@ -550,58 +632,58 @@
         "topology": "ring",
         "n": 16,
         "E": 16,
-        "rho2": 2.0727506242408253,
+        "rho2": 3.410029219853526,
         "a": 0.005985257636251191,
-        "tau_C": 0.00010015189720001228,
+        "tau_C": 0.0001045733530372633,
         "tau_A": 10.094448548462696,
         "c_Q": 66.9202465243819,
-        "overhead": 100791.38619114904,
-        "s_star_10pct": 4206224.715878522,
+        "overhead": 96529.83532875412,
+        "s_star_10pct": 2448609.7383927675,
         "logical_qubits": 381,
         "toffoli_A": 2280,
         "rotations_A": 1163,
         "cnot_Q": 38148,
         "depth_A": 612,
-        "rho2_breakeven_at_1pct": 871845.490553439,
-        "rho2_breakeven_at_10pct": 8718454.90553439
+        "rho2_breakeven_at_1pct": 834983.0755937231,
+        "rho2_breakeven_at_10pct": 8349830.755937232
       },
       {
         "topology": "ring",
         "n": 20,
         "E": 20,
-        "rho2": 1.7697313668145294,
+        "rho2": 4.991715834992464,
         "a": 0.003016298328830648,
-        "tau_C": 0.000139121678011577,
+        "tau_C": 0.00012741819907972492,
         "tau_A": 12.82128058061196,
         "c_Q": 60.495301875777635,
-        "overhead": 92158.754579894,
-        "s_star_10pct": 5736060.8549575405,
+        "overhead": 100623.62106208823,
+        "s_star_10pct": 2220417.2325458014,
         "logical_qubits": 465,
         "toffoli_A": 2840,
         "rotations_A": 1451,
         "cnot_Q": 47428,
         "depth_A": 672,
-        "rho2_breakeven_at_1pct": 1015128.6816975324,
-        "rho2_breakeven_at_10pct": 10151286.816975325
+        "rho2_breakeven_at_1pct": 1108369.185998902,
+        "rho2_breakeven_at_10pct": 11083691.859989017
       },
       {
         "topology": "ring",
         "n": 28,
         "E": 28,
-        "rho2": 66.1668877046505,
+        "rho2": 33.04679031940951,
         "a": 0.000881844066020961,
-        "tau_C": 0.00022439484764607878,
+        "tau_C": 0.00021390007017474784,
         "tau_A": 20.51734077923767,
         "c_Q": 138.63511964949117,
-        "overhead": 91434.09928733364,
-        "s_star_10pct": 645126.4481840144,
+        "overhead": 95920.21527845137,
+        "s_star_10pct": 1355059.0562631437,
         "logical_qubits": 635,
         "toffoli_A": 4074,
         "rotations_A": 2028,
         "cnot_Q": 67360,
         "depth_A": 806,
-        "rho2_breakeven_at_1pct": 4268600.925229171,
-        "rho2_breakeven_at_10pct": 42686009.25229172
+        "rho2_breakeven_at_1pct": 4478035.250274503,
+        "rho2_breakeven_at_10pct": 44780352.50274503
       },
       {
         "topology": "complete",

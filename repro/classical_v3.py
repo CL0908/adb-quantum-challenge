@@ -40,6 +40,27 @@ def rows_for(raw, eng):
     return out
 
 
+def bootstrap(raw, eng, n_boot=4000, seed=7):
+    """Percentile bootstrap (95%) over replications, per setting: rho2 = rel_rmse^2 * B and s* = T_Q / T_C, where
+    T_C = rho2 / eps^2 * mean(wall)/B, so s* scales as 1/(rho2 * mean wall) with T_Q fixed. Whole replications (estimate and wall time) are resampled."""
+    by = defaultdict(list)
+    for r in raw:
+        by[(r["topology"], r["n"])].append(r)
+    rng = np.random.default_rng(seed)
+    out = {}
+    for k, rs in by.items():
+        mu = rs[0]["mu"]
+        e2 = np.array([(r[eng]["est"] - mu) ** 2 for r in rs]) / mu ** 2
+        w = np.array([r[eng]["wall"] for r in rs])
+        idx = rng.integers(0, len(rs), size=(n_boot, len(rs)))
+        rho2 = B * e2[idx].mean(1)
+        prod = rho2 * w[idx].mean(1)
+        base = B * e2.mean() * w.mean()
+        out[k] = {"reps": len(rs), "rho2_ci95": [float(x) for x in np.percentile(rho2, [2.5, 97.5])],
+                  "s_star_factor_ci95": [float(base / np.percentile(prod, 97.5)), float(base / np.percentile(prod, 2.5))]}
+    return out
+
+
 def sh(*a):
     return subprocess.run(a, capture_output=True, text=True).stdout.strip()
 
@@ -52,12 +73,15 @@ def main():
     paper_e2 = {(r["topology"], r["n"]): r for r in json.loads((R / "rdpo_e2.json").read_text())["rows"] if r["target"] == "exceedance"}
     key = lambda r: (r["topology"], r["n"])
     old = {key(r): r for r in adv_old}
+    boot = bootstrap(raw, "new")
     rows = []
     for r in adv_new:
         k = key(r)
         o, p = old[k], paper[k]
         e_o = next(x for x in e_old if key(x) == k); e_n = next(x for x in e_new if key(x) == k)
-        rows.append({**r, "reps": e_n["rdpo"]["reps"], "rel_rmse": e_n["rdpo"]["rel_rmse"], "ci_coverage": e_n["rdpo"]["ci_coverage"],
+        bs = boot[k]
+        rows.append({**r, "rho2_ci95": bs["rho2_ci95"], "s_star_ci95": [r["required_speedup"] * f for f in bs["s_star_factor_ci95"]],
+                     "s_star_within_factor": max(bs["s_star_factor_ci95"][1], 1 / bs["s_star_factor_ci95"][0]), "reps": e_n["rdpo"]["reps"], "rel_rmse": e_n["rdpo"]["rel_rmse"], "ci_coverage": e_n["rdpo"]["ci_coverage"],
                      "seconds_per_fit": e_n["seconds_per_fit"], "t_path": e_n["seconds_per_fit"] / B,
                      "old_engine_same_machine": {"rel_rmse": e_o["rdpo"]["rel_rmse"], "ci_coverage": e_o["rdpo"]["ci_coverage"],
                                                  "seconds_per_fit": e_o["seconds_per_fit"], "classical_rho2": o["classical_rho2"],
@@ -78,8 +102,12 @@ def main():
             "s_star_ratio_range": [min(x["s_star_ratio_old_over_new"] for x in rows), max(x["s_star_ratio_old_over_new"] for x in rows)],
             "s_star_28_old_paper": paper[("ring", 28)]["required_speedup"], "s_star_28_old_same_machine": old[("ring", 28)]["required_speedup"],
             "s_star_28_speed_only": next(r for r in rows if key(r) == ("ring", 28))["s_star_engine_speed_only"],
-            "note": "rho2 of ring-20 and ring-28 rests on 6 replications (as in the paper's E2) and is outlier-dominated (repro/i25); s_star_engine_speed_only keeps the old engine's rho2 and changes only the time per path",
-            "s_star_28_new": next(r for r in rows if key(r) == ("ring", 28))["required_speedup"]}
+            "note": "rho2 of the large rings is outlier-dominated (repro/i25); replications per setting are in advantage[].reps and the 95% intervals in rho2_ci95 / s_star_ci95; s_star_engine_speed_only keeps the old engine's rho2 and changes only the time per path",
+            "s_star_28_new": next(r for r in rows if key(r) == ("ring", 28))["required_speedup"],
+            "s_star_28_ci95": next(r for r in rows if key(r) == ("ring", 28))["s_star_ci95"],
+            "s_star_28_within_factor": next(r for r in rows if key(r) == ("ring", 28))["s_star_within_factor"],
+            "rho2_28_ci95": next(r for r in rows if key(r) == ("ring", 28))["rho2_ci95"],
+            "bootstrap": "percentile, 4000 resamples of whole replications (estimate and wall time paired) per setting, seed 7; the interval is conditional on the measured replications and this machine"}
     meta = {"machine": {"cpu": sh("bash", "-c", "lscpu | grep 'Model name' | sed 's/.*: *//'"), "logical_cpus": os.cpu_count(),
                         "platform": platform.platform(), "python": platform.python_version(), "numpy": np.__version__},
             "threads": {k: os.environ.get(k) for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS")},
@@ -87,7 +115,7 @@ def main():
             "engines": {"old": "RDPOConfig() default, engine v1 (the engine of results/rdpo_e2.json and the paper)",
                         "new": "RDPOConfig(engine='fast') = FastPolicy (same policy) with addons/rdpo_engine.rollout for every draw without gradient (Xu Zi Yu, PR #3-#4)"},
             "repo_commit": sh("git", "rev-parse", "HEAD"), "git_blobs": {f: sh("git", "hash-object", f) for f in ("addons/rdpo_engine.py", "src/rdpo/fast.py", "src/rdpo/train.py", "src/quantum/advantage.py")},
-            "seeds": "2000 + 1000*n + 300*case_index + replication (same seed for old and new); reps 20 (n<=4) / 10 (n<=16) / 6 (else)",
+            "seeds": "2000 + 1000*n + 300*case_index + replication (same seed for old and new); reps 20 (n<=4) / 10 (n<=16) / 6 (else), later extended for ring-16/20/28 with the same seed formula",
             "eps_rel": 0.1, "budget": B, "quantum_side": "src/quantum/advantage.py unchanged (resource model, IQAE, surface code)",
             "caveat": "classical times are this machine's; quantum seconds are the surface-code model's and do not depend on the machine"}
     out = {"meta": meta, "summary": summ, "advantage": rows, "scaling": scaling}

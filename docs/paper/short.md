@@ -15,8 +15,15 @@ estimated with a learned sampler where not, and costed on quantum hardware.]{.su
 November 2026]{.byline}
 :::
 
+::: {.plain}
+**When disaster cover is pooled, the risk is everyone losing at once.** ADB's US$160m Disaster Relief Bond covers the
+Kyrgyz Republic and Tajikistan. The dangerous case is both countries using up their cover in the same three years: too
+rare to see in history or in ordinary simulation. We compute it exactly, and show how much money a regional pool needs
+because of it.
+:::
+
 ::: {.pitch}
-ADB's US$160m Disaster Relief Bond pays the Kyrgyz Republic and Tajikistan separately; whether such cover can be
+The bond pays the two countries separately; whether such cover can be
 pooled, and how much shared capital a pool needs, depends on how often several countries need a payout in the same
 three-year term. We compute these joint probabilities exactly, with no sampling error, for pools of up to 28
 countries, and estimate the cases exact methods cannot reach with a learned sampler that is more accurate per
@@ -39,7 +46,7 @@ Exact where possible, learned where not, quantum where it can be shown to pay.
    no bias.
 3. **A quantum stage with a measured bar (quantum).** Amplitude estimation with exact loading needs resources
    linear in countries and dependence links. Against our best classical method it breaks even only on hardware
-   {{Q_SSTAR_28}} times faster than a projected fault-tolerant baseline at 28 countries; near-term circuits are
+   {{Q_SSTAR_28}} times faster (95% interval {{Q_SSTAR_28_CI}}) than a projected fault-tolerant baseline at 28 countries; near-term circuits are
    costed for an IBM device.
 :::
 

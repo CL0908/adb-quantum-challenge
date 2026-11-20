@@ -159,3 +159,5 @@ h3 { page-break-after: avoid; break-after: avoid; }
 .keep { page-break-inside: avoid; break-inside: avoid; }
 
 .abstract { page-break-inside: avoid; break-inside: avoid; }
+.plain { border-left: 4pt solid var(--navy); background: #f3f6fb; padding: 4pt 8pt; margin: 4pt 0 6pt; font-size: 10.2pt; line-height: 1.38; }
+.plain p { margin: 0; text-align: left; }
