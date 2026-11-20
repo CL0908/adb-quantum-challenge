@@ -1,6 +1,5 @@
 import { Fragment } from 'react'
 import { useJSON, V, useValues } from '../lib/data'
-import { Landscape } from './Hero'
 import Reveal from './Reveal'
 
 export const PDFS = {
@@ -12,7 +11,7 @@ export const REPO = 'https://github.com/CL0908/adb-quantum-challenge'
 
 export function Method() {
   return (
-    <section className="sec sec-blue" id="method">
+    <section className="sec" id="method">
       <div className="wrap">
         <Reveal>
           <p className="eyebrow">Method</p>
@@ -53,7 +52,7 @@ export function Pools() {
   const py = (la: number) => (Y1 - la) * sx
   const cs = map?.carec.countries
   return (
-    <section className="sec sec-white" id="pools">
+    <section className="sec" id="pools">
       <div className="wrap split">
         <Reveal>
           <p className="eyebrow">Regional pools</p>
@@ -79,6 +78,7 @@ export function Pools() {
               ))}
             </svg>
           ) : <div className="map-loading">Loading map…</div>}
+          <p className="figcap"><b>Figure 3.</b> The ten CAREC countries; the Kyrgyz Republic and Tajikistan in terracotta. A line joins two countries that share earthquakes in the catalogue.</p>
         </Reveal>
       </div>
     </section>
@@ -87,7 +87,7 @@ export function Pools() {
 
 export function Honest() {
   return (
-    <section className="sec sec-blue slim" id="accounting">
+    <section className="sec slim" id="accounting">
       <div className="wrap">
         <Reveal>
           <p className="eyebrow">Honest accounting</p>
@@ -103,10 +103,9 @@ export function Honest() {
 
 export function Quantum() {
   return (
-    <section className="sec sec-dark" id="quantum">
-      <div className="night" aria-hidden="true"><Landscape id="night" night /></div>
+    <section className="sec" id="quantum">
       <div className="wrap">
-        <Reveal>
+        <Reveal className="qpanel">
           <p className="eyebrow">Quantum stage</p>
           <h2 className="h2">A bar we can be held to.</h2>
           <div className="bignum"><V k="Q_SSTAR_28" /><span>×</span></div>
@@ -121,7 +120,7 @@ export function Quantum() {
 
 export function Team() {
   return (
-    <section className="sec sec-blue" id="team">
+    <section className="sec" id="team">
       <div className="wrap">
         <Reveal>
           <p className="eyebrow">Team</p>
@@ -157,7 +156,7 @@ export function Documents() {
     [REPO, 'GitHub repository', `Code, data, results and ${v.N_TESTS ?? ''} tests`],
   ]
   return (
-    <section className="sec sec-white" id="documents">
+    <section className="sec" id="documents">
       <div className="wrap">
         <Reveal>
           <p className="eyebrow">Documents</p>
@@ -176,23 +175,26 @@ export function Documents() {
 }
 
 export function Footer() {
+  const dem = useJSON<{ source: string; licence: string }>('dem.json')
   return (
     <footer className="footer">
       <div className="wrap">
-        <div className="fcols">
-          <div className="fbrand">
-            <a className="logo dark" href="#top"><span className="logo-mark"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1F3557" /><path d="M5 23 12 11l4 6 3-4 8 10z" fill="#F4C9A8" /></svg></span>Joint-Tail</a>
-            <p>Exact joint-tail risk for pooled disaster cover.</p>
-          </div>
-          <div><h4>Documents</h4><a href={PDFS.proposal}>Main proposal</a><a href={PDFS.annex}>Technical annex</a><a href={PDFS.deck}>Presentation</a></div>
-          <div><h4>Code</h4><a href={REPO}>GitHub repository</a><a href={`${REPO}#readme`}>Reproduce everything</a><a href="#try">Live estimator</a></div>
-          <div><h4>Team</h4><a href="#team">Tan Chun Loong</a><a href="#team">Xu Zi Yu</a></div>
-          <div><h4>Challenge</h4><a href="https://www.adb.org/" rel="noopener">Asian Development Bank</a><span>Quantum Innovation Challenge, Phase 1</span></div>
+        <div className="frow">
+          <b className="fbrand">Joint-Tail</b>
+          <nav aria-label="Footer">
+            <a href={PDFS.proposal}>Proposal</a>
+            <a href={PDFS.annex}>Technical annex</a>
+            <a href={PDFS.deck}>Presentation</a>
+            <a href={REPO}>GitHub</a>
+            <a href="#try">Estimator</a>
+            <a href="#team">Team</a>
+          </nav>
         </div>
-        <p className="ai">AI use: developed with Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the authors’ research plan. All numbers on this page are produced by the repository’s scripts (<code>src/viz/export_web_data.py</code>, <code>src/viz/web_precompute.py</code>).</p>
-        <p className="ai">Tan Chun Loong · Xu Zi Yu · ADB Quantum Innovation Challenge, Phase 1. Independent entry; not affiliated with or endorsed by the organisations whose public data we use.</p>
+        <p>Tan Chun Loong · Xu Zi Yu · ADB Quantum Innovation Challenge, Phase 1. Independent entry; not affiliated with or endorsed by the organisations whose public data we use.</p>
+        <p><b>AI use:</b> developed with Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the authors’ research plan. All numbers on this page are produced by the repository’s scripts (<code>src/viz/export_web_data.py</code>, <code>src/viz/web_precompute.py</code>).</p>
+        <p><b>Data:</b> earthquakes, USGS catalogue; loss records, NOAA; rainfall, GHCN-Daily stations; boundaries, public GeoJSON. <b>Terrain:</b>{' '}
+          {dem ? <>{dem.source}. {dem.licence}.</> : 'elevation data unavailable; the page shows the flat map instead.'}</p>
       </div>
-      <div className="wordmark" aria-hidden="true">Joint-Tail</div>
     </footer>
   )
 }

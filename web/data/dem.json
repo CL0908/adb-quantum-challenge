@@ -1,0 +1,1 @@
+{"extent":[66.4,35.9,81.2,44.0],"width":741,"height":406,"step_deg":0.02,"offset_m":500,"min_m":145.0,"max_m":7438.0,"source":"AWS Open Data Terrain Tiles (Terrarium), zoom 7, resampled bilinearly","licence":"Mapzen Terrain Tiles on AWS Open Data: composite of SRTM, ETOPO1, GMTED2010 and other public DEMs; see https://github.com/tilezen/joerd/blob/master/docs/attribution.md"}

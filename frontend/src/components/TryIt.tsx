@@ -83,7 +83,7 @@ function Plot({ r }: { r: Result }) {
           <span key={i}><div className="tick" style={{ left: `${100 * t.p}%` }} /><div className="tl" style={{ left: `${100 * t.p}%` }}>{t.label}</div></span>
         ))}
         {bar(52, 'Plain Monte Carlo', '#4F5563', r.mc.ci, r.mc.estimate)}
-        {bar(104, 'RDPO', '#B5472E', r.ci, r.estimate)}
+        {bar(104, 'RDPO', '#C8553A', r.ci, r.estimate)}
         <div className="ex" style={{ left: `${100 * tx(r.exact)}%` }} />
         <div className="exl" style={{ left: `${100 * tx(r.exact)}%` }}>exact</div>
       </div>
@@ -142,7 +142,7 @@ export default function TryIt() {
   const ratio = wR > 0 ? wMC / wR : Infinity
 
   return (
-    <section className="sec sec-white" id="try">
+    <section className="sec" id="try">
       <div className="wrap">
         <p className="eyebrow">Try the estimator</p>
         <h2 className="h2">Pick a scenario from the brief and compare three estimators.</h2>
@@ -164,7 +164,7 @@ export default function TryIt() {
                 <Row name="Exact" sub="dense enumeration" color="#1F3557" est={r.exact} ci={[r.exact, r.exact]} money={money} extra="no sampling error" />
                 <Row name="Plain Monte Carlo" sub={`${r.paths_used.toLocaleString('en-US')} paths`} color="#4F5563" est={r.mc.estimate} ci={r.mc.ci} money={money}
                   extra={money ? null : r.mc.hits === 0 ? 'No path hit the event.' : `${r.mc.hits} of ${r.paths_used.toLocaleString('en-US')} paths hit the event.`} />
-                <Row name="RDPO" sub={`${r.paths_used.toLocaleString('en-US')} paths, training included`} color="#B5472E" est={r.estimate} ci={r.ci} money={money} />
+                <Row name="RDPO" sub={`${r.paths_used.toLocaleString('en-US')} paths, training included`} color="#C8553A" est={r.estimate} ci={r.ci} money={money} />
                 <Plot r={r} />
                 <p className="note">
                   RDPO’s interval is {Number.isFinite(ratio) ? ratio.toFixed(ratio >= 10 ? 0 : 1) : '∞'}× narrower than plain Monte Carlo’s on the same budget

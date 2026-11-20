@@ -66,12 +66,12 @@ export default function SimPanel() {
     const X = (m: number) => PAD.l + ((SIZE - PAD.l - PAD.r) * m) / MAX
     const Y = (m: number) => SIZE - PAD.b - ((SIZE - PAD.t - PAD.b) * m) / MAX
     g.clearRect(0, 0, SIZE, SIZE)
-    g.fillStyle = '#fbf9f4'
+    g.fillStyle = '#FFFEFA'
     g.fillRect(X(0), Y(MAX), X(MAX) - X(0), Y(0) - Y(MAX))
     // corner: both wiped out
     g.fillStyle = 'rgba(181,71,46,0.12)'
     g.fillRect(X(MAX - 10), Y(MAX), X(MAX) - X(MAX - 10), Y(MAX - 10) - Y(MAX))
-    g.strokeStyle = '#B5472E'
+    g.strokeStyle = '#C8553A'
     g.lineWidth = 1.5
     g.strokeRect(X(MAX - 10), Y(MAX), X(MAX) - X(MAX - 10), Y(MAX - 10) - Y(MAX))
     // pool pays more than US$80m: above the diagonal
@@ -82,7 +82,7 @@ export default function SimPanel() {
     g.setLineDash([])
     // axes
     g.fillStyle = '#5b6678'
-    g.font = '12px "Plus Jakarta Sans", system-ui, sans-serif'
+    g.font = '12px Inter, system-ui, sans-serif'
     g.textAlign = 'center'
     for (const t of [0, 20, 40, 60, 80]) {
       g.fillText(String(t), X(t), SIZE - PAD.b + 16)
@@ -96,11 +96,11 @@ export default function SimPanel() {
     const d = dots.current
     for (let i = 0; i < Math.min(upto, d.length); i++) {
       const p = d[i]
-      g.fillStyle = p.hit ? '#B5472E' : p.x + p.y > MAX + 1e-6 ? 'rgba(181,71,46,0.75)' : 'rgba(31,53,87,0.22)'
+      g.fillStyle = p.hit ? '#C8553A' : p.x + p.y > MAX + 1e-6 ? 'rgba(181,71,46,0.75)' : 'rgba(31,53,87,0.22)'
       g.beginPath(); g.arc(X(p.x), Y(p.y), p.hit ? 5 : 1.7, 0, 6.2832); g.fill()
     }
-    g.fillStyle = '#B5472E'
-    g.font = '600 12px "Plus Jakarta Sans", system-ui, sans-serif'
+    g.fillStyle = '#C8553A'
+    g.font = '600 12px Inter, system-ui, sans-serif'
     g.textAlign = 'right'
     g.fillText('both wiped out', X(MAX - 10) - 6, Y(MAX) + 14)
     g.fillStyle = '#1F3557'
@@ -149,7 +149,7 @@ export default function SimPanel() {
   }
 
   return (
-    <section className="sec sec-white" id="problem">
+    <section className="sec" id="problem">
       <div className="wrap">
         <Reveal>
           <p className="eyebrow">The problem</p>
@@ -159,10 +159,11 @@ export default function SimPanel() {
           </p>
         </Reveal>
         <Reveal className="sim" delay={80}>
-          <div className="sim-plot">
+          <figure className="sim-plot">
             <canvas ref={canvas} style={{ width: '100%', maxWidth: SIZE, aspectRatio: '1' }} role="img"
               aria-label={`Scatter of ${total.toLocaleString('en-US')} simulated terms. ${hitsNow} landed in the corner where both bonds are wiped out.`} />
-          </div>
+            <figcaption><b>Figure 2.</b> Simulated three-year terms for the two bonds; terracotta marks terms where the pool pays more than US$80m, and the corner box where both are wiped out.</figcaption>
+          </figure>
           <div className="sim-side">
             <div className="sim-stat">
               <div className="k">Simulated terms</div>

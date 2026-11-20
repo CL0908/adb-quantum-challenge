@@ -14,6 +14,10 @@ Writes
   map.json       Kyrgyz Republic and Tajikistan boundaries (simplified), earthquake main shocks of the cached USGS
                  catalogue (M >= 5.5, 1965-2016, declustered), the shared border zone (within 50 km of both
                  countries, the radius used by src/realdata/eq_check.py), and the 10-country CAREC pool map.
+  dem.png        Real terrain: AWS Open Data "Terrain Tiles" (Terrarium encoding, zoom 7), resampled to a regular
+                 lon/lat grid over the map area and stored as a 16-bit height in metres (R = high byte, G = low byte,
+                 offset 500 m, B unused) plus dem.json (extent, size, min/max, source, licence). If the tiles cannot be
+                 fetched nothing is written and the site falls back to the flat SVG map; terrain is never invented.
 """
 import json
 import time
@@ -195,6 +199,69 @@ def maps():
             "catalogue": "USGS significant earthquakes M>=5.5, 1965-2016, Gardner-Knopoff declustered main shocks"}
 
 
+# ------------------------------------------------------------------ terrain
+DEM_BOX = (66.4, 35.9, 81.2, 44.0)           # lon0, lat0, lon1, lat1
+DEM_Z = 7
+DEM_STEP = 0.02                              # degrees per output pixel (about 2 km)
+DEM_OFFSET = 500
+DEM_URLS = ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+            "https://elevation-tiles-prod.s3.amazonaws.com/terrarium/{z}/{x}/{y}.png"]
+
+
+def _tile(z, x, y):
+    import io
+    import urllib.request
+    from PIL import Image
+    err = None
+    for u in DEM_URLS:
+        try:
+            with urllib.request.urlopen(u.format(z=z, x=x, y=y), timeout=30) as r:
+                im = np.asarray(Image.open(io.BytesIO(r.read())).convert("RGB"), dtype=np.float64)
+            return im[..., 0] * 256 + im[..., 1] + im[..., 2] / 256 - 32768
+        except Exception as e:  # noqa: BLE001
+            err = e
+    raise RuntimeError(f"terrain tile {z}/{x}/{y} unavailable: {err}")
+
+
+def dem():
+    from PIL import Image
+    lon0, lat0, lon1, lat1 = DEM_BOX
+    n = 2 ** DEM_Z
+
+    def tx(lon):
+        return (lon + 180) / 360 * n
+
+    def ty(lat):
+        r = np.radians(lat)
+        return (1 - np.log(np.tan(r) + 1 / np.cos(r)) / np.pi) / 2 * n
+
+    xa, xb = int(np.floor(tx(lon0))), int(np.floor(tx(lon1)))
+    ya, yb = int(np.floor(ty(lat1))), int(np.floor(ty(lat0)))
+    mosaic = np.zeros(((yb - ya + 1) * 256, (xb - xa + 1) * 256))
+    for yy in range(ya, yb + 1):
+        for xx in range(xa, xb + 1):
+            mosaic[(yy - ya) * 256:(yy - ya + 1) * 256, (xx - xa) * 256:(xx - xa + 1) * 256] = _tile(DEM_Z, xx, yy)
+    lons = np.arange(lon0, lon1 + 1e-9, DEM_STEP)
+    lats = np.arange(lat1, lat0 - 1e-9, -DEM_STEP)
+    fx = (tx(lons) - xa) * 256 - 0.5
+    fy = (ty(lats) - ya) * 256 - 0.5
+    x0, y0 = np.floor(fx).astype(int), np.floor(fy).astype(int)
+    ux, uy = (fx - x0)[None, :], (fy - y0)[:, None]
+    x1, y1 = np.minimum(x0 + 1, mosaic.shape[1] - 1), np.minimum(y0 + 1, mosaic.shape[0] - 1)
+    g = (mosaic[np.ix_(y0, x0)] * (1 - ux) * (1 - uy) + mosaic[np.ix_(y0, x1)] * ux * (1 - uy)
+         + mosaic[np.ix_(y1, x0)] * (1 - ux) * uy + mosaic[np.ix_(y1, x1)] * ux * uy)
+    g = np.clip(np.round(g + DEM_OFFSET), 0, 65535).astype(np.uint16)
+    rgb = np.dstack([(g >> 8).astype(np.uint8), (g & 255).astype(np.uint8), np.zeros_like(g, dtype=np.uint8)])
+    OUT.mkdir(parents=True, exist_ok=True)
+    Image.fromarray(rgb, "RGB").save(OUT / "dem.png", optimize=True)
+    print(f"{(OUT / 'dem.png').relative_to(ROOT)}: {(OUT / 'dem.png').stat().st_size / 1024:.0f} kB, {g.shape[1]} x {g.shape[0]}")
+    return {"extent": [lon0, lat0, lon1, lat1], "width": int(g.shape[1]), "height": int(g.shape[0]), "step_deg": DEM_STEP,
+            "offset_m": DEM_OFFSET, "min_m": float(g.min()) - DEM_OFFSET, "max_m": float(g.max()) - DEM_OFFSET,
+            "source": "AWS Open Data Terrain Tiles (Terrarium), zoom 7, resampled bilinearly",
+            "licence": "Mapzen Terrain Tiles on AWS Open Data: composite of SRTM, ETOPO1, GMTED2010 and other public DEMs; "
+                       "see https://github.com/tilezen/joerd/blob/master/docs/attribution.md"}
+
+
 def write(name, obj):
     OUT.mkdir(parents=True, exist_ok=True)
     p = OUT / name
@@ -205,7 +272,7 @@ def write(name, obj):
 def main():
     import sys
     sys.path.insert(0, str(ROOT))
-    parts = sys.argv[1:] or ["grid", "mc", "map"]
+    parts = sys.argv[1:] or ["grid", "mc", "map", "dem"]
     t0 = time.time()
     if "grid" in parts:
         g = grid()
@@ -217,6 +284,11 @@ def main():
         print(f"  MC: {m['hits_joint_exhaustion']} joint-exhaustion hits of {m['n']}, zero in {m['zero_runs']}/{m['repeats']} runs")
     if "map" in parts:
         write("map.json", maps())
+    if "dem" in parts:
+        try:
+            write("dem.json", dem())
+        except Exception as e:  # noqa: BLE001  (keep any earlier dem.png/dem.json; the site has a 2D fallback)
+            print(f"  terrain not updated: {e}")
 
 
 if __name__ == "__main__":

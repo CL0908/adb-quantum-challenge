@@ -1,14 +1,8 @@
-import { Fragment, useMemo, useState } from 'react'
+import { Component, Fragment, Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { useJSON, useValues } from '../lib/data'
 import { answers, oneIn, pct, type Grid } from '../lib/model'
-import Reveal from './Reveal'
-
-interface MapData {
-  bbox: number[]
-  countries: Record<string, number[][][]>
-  zone: number[][][]
-  quakes: number[][]
-}
+import { loadDemInfo, type DemInfo } from '../lib/dem'
+import type { MapData } from '../lib/map'
 
 const W = 1000
 const COS = Math.cos((40 * Math.PI) / 180)
@@ -38,8 +32,8 @@ function MapView({ map, eq }: { map: MapData; eq: number }) {
       aria-label={`Map of the Kyrgyz Republic and Tajikistan with ${map.quakes.length} earthquake main shocks, ${shared} of which reached both countries, and the shared border zone highlighted.`}>
       <defs>
         <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="7" height="7" fill="#B5472E" fillOpacity={zoneOpacity} />
-          <line x1="0" y1="0" x2="0" y2="7" stroke="#B5472E" strokeOpacity="0.55" strokeWidth="1.6" />
+          <rect width="7" height="7" fill="#C8553A" fillOpacity={zoneOpacity} />
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#C8553A" strokeOpacity="0.55" strokeWidth="1.6" />
         </pattern>
       </defs>
       {(['TJ', 'KG'] as const).map((c) => (
@@ -106,79 +100,113 @@ function Readout({ label, big, small, tone }: { label: string; big: string; smal
   )
 }
 
-export default function Stage() {
+const Terrain3D = lazy(() => import('./Terrain3D'))
+
+class ErrorCatch extends Component<{ onError: () => void; children: ReactNode }, { bad: boolean }> {
+  state = { bad: false }
+  static getDerivedStateFromError() { return { bad: true } }
+  componentDidCatch() { this.props.onError() }
+  render() { return this.state.bad ? null : this.props.children }
+}
+
+/** The 3D terrain model; the flat map when WebGL is missing, the elevation file is unavailable or the 3D chunk fails. Never fake terrain. */
+function Model({ map, eq, children }: { map: MapData | null; eq: number; children: ReactNode }) {
+  const [mode, setMode] = useState<'wait' | '3d' | '2d'>('wait')
+  const [dem, setDem] = useState<DemInfo | null>(null)
+  useEffect(() => {
+    let live = true
+    loadDemInfo().then((info) => live && (setDem(info), setMode('3d'))).catch(() => live && setMode('2d'))
+    return () => { live = false }
+  }, [])
+  return (
+    <figure className="model">
+      <div className="model-stage">
+        {!map || mode === 'wait' ? <div className="map-loading" role="status">Loading terrain…</div>
+          : mode === '2d' ? <MapView map={map} eq={eq} />
+          : (
+            <Suspense fallback={<div className="map-loading" role="status">Loading terrain…</div>}>
+              <ErrorCatch onError={() => setMode('2d')}><Terrain3D map={map} eq={eq} onFail={() => setMode('2d')} /></ErrorCatch>
+            </Suspense>
+          )}
+        <ul className="legend" aria-label="Legend">
+          <li><i className="lg quake" /> earthquake main shock</li>
+          <li><i className="lg quake shared" /> reached both countries</li>
+          <li><i className="lg zone" /> shared border zone</li>
+        </ul>
+        {children}
+        {mode === '3d' && <p className="hint"><span className="hint-fine">Drag to rotate · scroll to zoom</span><span className="hint-touch">Two fingers to rotate</span></p>}
+      </div>
+      <figcaption>
+        <b>Figure 1.</b>{' '}
+        {mode === '2d' ? 'Map of the Kyrgyz Republic and Tajikistan' : `Relief of the Kyrgyz Republic and Tajikistan (vertical scale ×9${dem ? `, ${Math.round(dem.min_m)} to ${Math.round(dem.max_m).toLocaleString('en-US')} m` : ''})`}
+        {' '}with the {map ? map.quakes.filter((x) => x[1] >= 66.4 && x[1] <= 81.2 && x[0] >= 35.9 && x[0] <= 44).length : ''} earthquake main shocks of the USGS catalogue (M5.5+, 1965–2016) at their true positions; {mode === '2d' ? 'dots' : 'columns'} grow with magnitude. The shared border zone lies within 50 km of both countries.
+      </figcaption>
+    </figure>
+  )
+}
+
+export default function Stage({ proposalHref }: { proposalHref: string }) {
   const grid = useJSON<Grid>('grid.json')
   const map = useJSON<MapData>('map.json')
   const v = useValues()
   const [eq, setEq] = useState<number | null>(null)
   const [rain, setRain] = useState<number | null>(null)
-  const ready = grid && map
   const cur = { eq: eq ?? grid?.brief.eq ?? 0.0745, rain: rain ?? grid?.brief.rain ?? 0.25 }
   const a = useMemo(() => (grid ? answers(grid, cur.eq, cur.rain) : null), [grid, cur.eq, cur.rain])
   const b = grid ? { jointExhaustion: grid.brief.joint_exhaustion, exceed: grid.brief.exceed, delivered: grid.brief.delivered } : null
   const at = (p: { eq: number; rain: number } | undefined) => !!p && Math.abs(cur.eq - p.eq) < 1e-9 && Math.abs(cur.rain - p.rain) < 1e-9
   const mult = (x: number, y: number) => (Math.abs(x / y - 1) < 0.005 ? 'same as brief' : `×${(x / y).toFixed(x / y >= 10 ? 0 : 1)} the brief’s`)
-  const eqDisplay = at(grid?.brief) || (grid && Math.abs(cur.eq - grid.brief.eq) < 1e-9) ? v.BRIEF_EQ_SHARE ?? '7.5%'
+  const eqDisplay = grid && Math.abs(cur.eq - grid.brief.eq) < 1e-9 ? v.BRIEF_EQ_SHARE ?? '7.5%'
     : grid && Math.abs(cur.eq - grid.data.eq) < 1e-9 ? v.DATA_EQ_SHARE ?? '48%' : pct(cur.eq)
   const rainDisplay = grid && Math.abs(cur.rain - grid.brief.rain) < 1e-9 ? v.BRIEF_RAIN_SHARE ?? '25%'
     : grid && Math.abs(cur.rain - grid.data.rain) < 1e-9 ? v.DATA_RAIN_SHARE ?? '2.2%' : pct(cur.rain)
 
   return (
-    <section className="sec sec-blue" id="explore">
-      <div className="wrap">
-        <Reveal>
-          <p className="eyebrow">Explore</p>
-          <h2 className="h2">Drag the dependence. Watch the pool’s risk move.</h2>
-          <p className="lede">
-            Two things decide whether the two countries’ covers fail together: how often one earthquake hits both, and how often extreme rain does. The brief assumes one answer; public records suggest another. The answers are exact, not simulated.
-          </p>
-        </Reveal>
-        <Reveal className="stage" delay={80}>
-          <div className="stage-map">
-            {ready ? <MapView map={map} eq={cur.eq} /> : <div className="map-loading" role="status">Loading map…</div>}
-            {a && <p className="story" aria-live="polite">
-              In <b>{oneIn(a.exceed).replace('1 in ', '1 of every ')}</b> three-year terms the pool would need more than US$80m; in <b>{oneIn(a.jointExhaustion).replace('1 in ', '1 of every ')}</b> both countries’ bonds are wiped out together.
-            </p>}
-            <ul className="legend">
-              <li><i className="lg quake" /> earthquake main shock</li>
-              <li><i className="lg quake shared" /> reached both countries</li>
-              <li><i className="lg zone" /> shared border zone (within 50 km of both)</li>
-            </ul>
+    <section className="first" id="top">
+      <div className="first-copy">
+        <p className="eyebrow">ADB Quantum Innovation Challenge · Phase 1</p>
+        <h1>When disaster cover is pooled, the risk is everyone losing at once.</h1>
+        <p className="first-lede">
+          ADB’s US$160m Disaster Relief Bond covers the Kyrgyz Republic and Tajikistan. The dangerous case is both countries using up their cover in the same three years, too rare to see in history or in ordinary simulation: we compute it exactly, and show how much money a regional pool needs because of it.
+        </p>
+        <p className="authors"><b>Tan Chun Loong</b> · <b>Xu Zi Yu</b></p>
+        <p className="first-links"><a href={proposalHref}>Read the proposal (PDF)</a><a href="#problem">Why simulation fails</a></p>
+        <p className="first-note">Move the two sliders: the model and the three numbers change together. The numbers are exact, not simulated.</p>
+        <p className="first-fine">Exact two-country model, solved at {grid ? grid.eq_axis.length * grid.rain_axis.length : '…'} combinations of the two sliders and interpolated between them. Dependence evidence uses public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.</p>
+      </div>
+      <div className="first-model">
+        <Model map={map} eq={cur.eq}>
+        <aside className="card ctl" aria-label="Controls and exact answers">
+          <div className="presets" role="group" aria-label="Presets">
+            <button type="button" className={at(grid?.brief) ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.brief.eq), setRain(grid.brief.rain))}>The brief’s assumptions</button>
+            <button type="button" className={at(grid?.data) ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.data.eq), setRain(grid.data.rain))}>What public records show</button>
           </div>
-          <aside className="card" aria-label="Controls and exact answers">
-            <div className="presets" role="group" aria-label="Presets">
-              <button type="button" className={at(grid?.brief) ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.brief.eq), setRain(grid.brief.rain))}>The brief’s assumptions</button>
-              <button type="button" className={at(grid?.data) ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.data.eq), setRain(grid.data.rain))}>What public records show</button>
-            </div>
-            {grid && a && b ? (
-              <>
-                <Slider id="eq" label="How often does one earthquake hit both countries?" min={0} max={0.6} step={0.001} value={cur.eq}
+          {grid && a && b ? (
+            <>
+              <div className="sliders">
+                <Slider id="eq" label="One earthquake hits both countries" min={0} max={0.6} step={0.001} value={cur.eq}
                   onChange={setEq} display={eqDisplay} snap={0.006} hint="Share of one country's earthquakes that also hit the other, 0 to 60 percent."
-                  markers={[{ at: grid.brief.eq, label: `Brief’s assumption ${v.BRIEF_EQ_SHARE ?? ''}`, sub: 'taken as given' },
-                            { at: grid.data.eq, label: `Loss records ~${v.DATA_EQ_SHARE ?? ''}`, sub: `range ${(v.DATA_EQ_CI ?? '').replace('%–', '–')}` }]} />
-                <Slider id="rain" label="How often does extreme rain hit both?" min={0} max={0.3} step={0.001} value={cur.rain}
+                  markers={[{ at: grid.brief.eq, label: `Brief ${v.BRIEF_EQ_SHARE ?? ''}`, sub: 'taken as given' },
+                            { at: grid.data.eq, label: `Records ~${v.DATA_EQ_SHARE ?? ''}`, sub: `range ${(v.DATA_EQ_CI ?? '').replace('%–', '–')}` }]} />
+                <Slider id="rain" label="Extreme rain hits both" min={0} max={0.3} step={0.001} value={cur.rain}
                   onChange={setRain} display={rainDisplay} snap={0.004} hint="Share of extreme-rain events that hit both countries, 0 to 30 percent."
-                  markers={[{ at: grid.data.rain, label: `Station data ~${(v.DATA_RAIN_SHARE ? Math.round(parseFloat(v.DATA_RAIN_SHARE)) + '%' : '')}`, sub: `range ${(v.DATA_RAIN_CI ?? '').replace('%–', '–')}` },
-                            { at: grid.brief.rain, label: `Brief’s ${v.BRIEF_RAIN_SHARE ?? ''}`, sub: 'taken as given' }]} />
-                <div className="readouts">
-                  <Readout tone="terra" label="Chance both bonds are wiped out in one 3-year term" big={oneIn(a.jointExhaustion)}
-                    small={`${pct(a.jointExhaustion, 4)} · ${mult(a.jointExhaustion, b.jointExhaustion)}`} />
-                  <Readout tone="navy" label="Chance the pool pays more than US$80m" big={pct(a.exceed)}
-                    small={`${oneIn(a.exceed)} · ${mult(a.exceed, b.exceed)}`} />
-                  <Readout tone="teal" label="A shared US$80m pool still pays" big={pct(a.delivered)}
-                    small="of expected claims, on half the capital of two separate covers" />
-                </div>
-              </>
-            ) : (
-              <p className="muted" role="status">Loading exact values…</p>
-            )}
-          </aside>
-        </Reveal>
-        <Reveal>
-          <p className="fineprint">
-            Exact two-country model, solved for {grid ? grid.eq_axis.length * grid.rain_axis.length : '…'} combinations of the two sliders and interpolated between them. Dependence evidence uses public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.
-          </p>
-        </Reveal>
+                  markers={[{ at: grid.data.rain, label: `Stations ~${(v.DATA_RAIN_SHARE ? Math.round(parseFloat(v.DATA_RAIN_SHARE)) + '%' : '')}`, sub: `range ${(v.DATA_RAIN_CI ?? '').replace('%–', '–')}` },
+                            { at: grid.brief.rain, label: `Brief ${v.BRIEF_RAIN_SHARE ?? ''}`, sub: 'taken as given' }]} />
+              </div>
+              <div className="readouts">
+                <Readout tone="terra" label="Both bonds wiped out in one 3-year term" big={oneIn(a.jointExhaustion)}
+                  small={`${pct(a.jointExhaustion, 4)} · ${mult(a.jointExhaustion, b.jointExhaustion)}`} />
+                <Readout tone="navy" label="Pool pays more than US$80m" big={pct(a.exceed)}
+                  small={`${oneIn(a.exceed)} · ${mult(a.exceed, b.exceed)}`} />
+                <Readout tone="teal" label="A shared US$80m pool still pays" big={pct(a.delivered)}
+                  small="of expected claims, on half the capital" />
+              </div>
+            </>
+          ) : (
+            <p className="muted" role="status">Loading exact values…</p>
+          )}
+        </aside>
+        </Model>
       </div>
     </section>
   )
