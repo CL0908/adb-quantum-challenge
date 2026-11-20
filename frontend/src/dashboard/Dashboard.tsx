@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Donut, LineChart, VBars, type Bar, type Mark, type Series } from './charts'
-import { delta, moduleCmd, pct, prob, probText, relErr, sci, TARGET_HINT, TARGET_LABEL, usd } from './fmt'
+import { delta, moduleCmd, pct, prob, probText, relErr, sci, sciSvg, TARGET_HINT, TARGET_LABEL, usd } from './fmt'
 import type { DashData, Grid, Pool, Scenario, TargetName } from './types'
 
 type PoolId = 'kgtj' | 'carec' | 'ap'
@@ -298,7 +298,7 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
   }
   const dual = {
     l: { max: nice(maxOf('exceed')), fmt: (v: number) => `${+(v * 100).toPrecision(2)}%`, color: COL.teal },
-    r: { max: nice(maxOf('joint_exhaustion')), fmt: (v: number) => (v === 0 ? '0' : sci(v, 1)), color: COL.terra },
+    r: { max: nice(maxOf('joint_exhaustion')), fmt: (v: number) => sciSvg(v, 2), color: COL.terra },
   }
   const yDomain: [number, number] = [0, 1]
   const show = (which: 'brief' | 'data') => mode === 'both' || mode === which
@@ -505,6 +505,7 @@ function ScenarioBars({ d, pool, isKG, metric, scen, setScen }: { d: DashData; p
 function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId: PoolId; scen: string; scLabel?: string; scDesc?: string }) {
   const rows = useMemo(() => rowsFor(pool, poolId, scen), [pool, poolId, scen])
   const kg = poolId === 'kgtj'
+  const budget = rows.find((r) => r.budget)?.budget ?? null
   return (
     <section className="panel reg" aria-labelledby="reg-h">
       <div className="ph">
@@ -520,8 +521,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
           <span role="columnheader">Target</span>
           <span role="columnheader">Exact value</span>
           <span role="columnheader">Method</span>
-          <span role="columnheader">Error of RDPO</span>
-          <span role="columnheader">Coverage</span>
+          <span role="columnheader">{`RDPO check (${budget === null ? 'sampler' : budget.toLocaleString('en-US') + ' paths'})`}</span>
           <span role="columnheader">Status</span>
         </div>
         {rows.map((r) => {
@@ -537,20 +537,18 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
                 {r.brief !== null && <small>brief {r.money ? usd(r.brief) : sci(r.brief, 2)}</small>}
               </span>
               <span role="cell" data-l="Method">
-                <span className="chip">exact</span>
-                <small>{pool.exact_label.replace('exact, ', '')}</small>
+                <span>{`exact · ${pool.exact_label.replace('exact, ', '').replace(/ \(.*\)/, '')}`}</span>
               </span>
-              <span role="cell" data-l="Error of RDPO">
+              <span role="cell" data-l={`RDPO check (${budget === null ? 'sampler' : budget.toLocaleString('en-US') + ' paths'})`}>
                 {r.rel === null ? <small>no run</small> : (
                   <>
                     <b>{relErr(r.rel)}</b>
-                    <small>{r.budget?.toLocaleString('en-US')} paths, {r.reps} reps</small>
+                    <small style={r.cov !== null && !ok ? { color: 'var(--warn, #e6b450)' } : undefined}>{r.cov === null ? 'coverage n/a' : `coverage ${pct(r.cov, 0)}`}, {r.reps} reps</small>
                   </>
                 )}
               </span>
-              <span role="cell" data-l="Coverage">{r.cov === null ? <small>n/a</small> : <b>{pct(r.cov, 0)}</b>}</span>
               <span role="cell" data-l="Status">
-                {r.rel === null ? <Pill tone="flat">exact only</Pill> : ok ? <Pill tone="teal">{`estimated ${relErr(r.rel)}`}</Pill> : <Pill tone="warn">{`${relErr(r.rel)}, coverage ${pct(r.cov ?? 0, 0)}`}</Pill>}
+                <Pill tone="teal">exact</Pill>
               </span>
             </div>
           )

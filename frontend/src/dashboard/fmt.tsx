@@ -11,6 +11,17 @@ export function sci(x: number, digits = 2): ReactNode {
     </>
   )
 }
+/** Same as sci() but for use inside <svg><text>, where <sup> is not allowed. */
+export function sciSvg(x: number, digits = 2): ReactNode {
+  if (!Number.isFinite(x)) return 'n/a'
+  if (x === 0) return '0'
+  const [m, e] = x.toExponential(digits - 1).split('e')
+  return (
+    <>
+      {m}×10<tspan dy={-4} fontSize="8">{e.replace('+', '').replace('-', '−')}</tspan>
+    </>
+  )
+}
 export function sciText(x: number, digits = 2): string {
   const [m, e] = x.toExponential(digits - 1).split('e')
   return `${m}×10^${e.replace('+', '').replace('-', '−')}`

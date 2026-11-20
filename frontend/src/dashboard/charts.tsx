@@ -21,7 +21,7 @@ const exps = (lo: number, hi: number) => {
 }
 const tickLabel = (e: number) => (
   <>
-    10<tspan baselineShift="super" fontSize="8">{String(e).replace('-', '−')}</tspan>
+    10<tspan dy={-4} fontSize="8">{String(e).replace('-', '−')}</tspan>
   </>
 )
 
