@@ -36,8 +36,14 @@ from src.tensor.junction import junction_solve
 SIZES = (8, 16, 20, 28)
 
 
+def reference():
+    """The main author's current classical reference: quantum_advantage_v3.json (faster engine) where it exists, else the first file."""
+    v3 = REPO / "results" / "quantum_advantage_v3.json"
+    return v3 if v3.exists() else REPO / "results" / "quantum_advantage.json"
+
+
 def his_rows():
-    adv = json.loads((REPO / "results" / "quantum_advantage.json").read_text())["advantage"]
+    adv = json.loads(reference().read_text(encoding="utf-8"))["advantage"]
     tw = json.loads((REPO / "results" / "twisted.json").read_text())
     return {r["n"]: r for r in adv if r["topology"] == "ring"}, tw["iqae_C"]
 
@@ -52,7 +58,7 @@ def classical(P, p, n=100_000):
 
 def run():
     his, iqae_c = his_rows()
-    res = {"iqae_C": iqae_c, "rows": {}}
+    res = {"iqae_C": iqae_c, "his_reference": reference().name, "rows": {}}
     for n in SIZES:
         P = M.pool(n, 40e6)
         h = his[n]
