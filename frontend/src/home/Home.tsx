@@ -240,7 +240,7 @@ function Results() {
 
 const PEOPLE = [
   {
-    name: 'Tan Chun Loong', initials: 'TCL', role: 'Physics and Quantum Technology, NTU Singapore',
+    name: 'Tan Chun Loong', photo: '/team/tan-chun-loong.webp', role: 'Physics and Quantum Technology, NTU Singapore',
     lines: [
       'Incoming Phortify Student Research Fellow at ICFO Barcelona, in Prof. Antonio Acín’s Quantum Information Theory group.',
       'URECA Research Fellow with Prof. Mile Gu on relative entropy and belief revision in model-based reinforcement learning, the mathematics of RDPO.',
@@ -249,7 +249,7 @@ const PEOPLE = [
     does: ['Method', 'Exact engine', 'RDPO', 'Quantum resource model'],
   },
   {
-    name: 'Xu Zi Yu', initials: 'XZY', role: 'Mechanical Engineering, Universiti Malaya',
+    name: 'Xu Zi Yu', photo: '/team/xu-zi-yu.webp', role: 'Mechanical Engineering, Universiti Malaya',
     lines: [
       'SEA Quantathon 2026 Top 8: he benchmarked a first quantum design against a classical one, found it underperformed, and rebuilt the model around a classical core, the same evidence-first habit as this proposal.',
       'ADIA Lab Structural Break Challenge, peak #37 of 1,220.',
@@ -271,7 +271,7 @@ function Team() {
           {PEOPLE.map((p, i) => (
             <Reveal key={p.name} className="person" delay={i * 90}>
               <div className="pid">
-                <div className="avatar" aria-hidden="true">{p.initials}</div>
+                <img className="avatar" src={p.photo} alt={p.name} width={480} height={600} loading="lazy" decoding="async" />
                 <div><h3>{p.name}</h3><div className="role">{p.role}</div></div>
               </div>
               {p.lines.map((l) => <p key={l}>{l}</p>)}
