@@ -20,11 +20,11 @@ import numpy as np
 from scipy import stats
 
 import variant
-from _src import in_repo, load, save
+from _src import in_repo, load, save, seed
 from src.realdata import param_uncertainty as PU
 from src.realdata import rain_check as PU_RC
 
-N, NB, SEED = 2000, 400, 4243
+N, NB, SEED = 2000, 400, seed(4243)
 KEYS = {"joint_exhaustion": "term_both_bonds_exhausted_probability", "exceedance": "term_portfolio_loss_exceedance_probability",
         "joint_attachment": "term_joint_attachment_probability", "expected_loss": "term_expected_principal_loss_usd"}
 

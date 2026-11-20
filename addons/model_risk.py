@@ -27,7 +27,7 @@ import math
 import numpy as np
 
 import voi
-from _src import in_repo, load, save
+from _src import in_repo, load, save, seed
 from src.model.poisson_fit import TAILS, compound_poisson_rates
 from src.rdpo.problem import PortfolioProblem
 from src.realdata import carec_pool as CP
@@ -35,7 +35,7 @@ from src.realdata import eq_check as EQ
 from src.realdata import param_uncertainty as PU
 from src.realdata.central_asia_pool import DataModel, _load
 
-N, GRID, INNER, PROCS, SEED = 512, 16, 64, 8, 20261116
+N, GRID, INNER, PROCS, SEED = 512, 16, 64, 8, seed(20261116)
 YEARS_EQ, YEARS_HY = EQ.YEARS[1] - EQ.YEARS[0] + 1, 31
 RECORD_YEARS = {"eq_rates": YEARS_EQ, "eq_shared": YEARS_EQ, "rain_rates": YEARS_HY, "rain_share": 45}
 UNIT = 2.5e6

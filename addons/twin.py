@@ -27,7 +27,7 @@ from scipy.special import logsumexp
 
 import ap_risk
 import voi
-from _src import OUT, in_repo, save
+from _src import OUT, in_repo, save, seed
 from src.realdata import asia_pacific_pool as AP
 from src.rdpo.problem import PortfolioProblem
 from src.rdpo.tilt import TiltSampler, tilt_estimate
@@ -35,7 +35,7 @@ from src.rdpo.train import _best_twist_sources
 
 Y0, Y_CAL, Y1 = 1965, 2016, 2025
 THRESH = ap_risk.THRESH
-N_DRAW, N_SOB, CHECK_YEARS, N_CHK, TW_MULT, PROCS, SEED = 200, 128, (2017, 2021, 2025), 10, 8, 6, 20261118
+N_DRAW, N_SOB, CHECK_YEARS, N_CHK, TW_MULT, PROCS, SEED = 200, 128, (2017, 2021, 2025), 10, 8, 6, seed(20261118)
 GROUPS = ap_risk.GROUPS
 
 
@@ -73,6 +73,36 @@ def yearly(ev, polys, order, edges, y0=Y0, y1=Y_CAL):
                 key = f"{order[pr[0]]}-{order[pr[1]]}"
                 new.setdefault(key, []).append(int(yr[e]) + y0)
     return {"years": [y0, y1], "main_shocks": len(ev), "K": K, "Kp": Kp, "new_pairs": new}
+
+
+def phase0():
+    """Yearly counts 1965-2025 from ComCat, checked against the friend's catalogue on 1965-2016."""
+    from fetch_usgs import asia_pacific
+    inp = ap_risk.inputs()
+    order, edges = inp["order"], inp["edges"]
+    _, polys = friend_events()
+    ev = comcat_events(asia_pacific())
+    full = yearly(ev, polys, order, edges, Y0, Y1)
+    k16, p16 = full["K"][:Y_CAL - Y0 + 1].sum(0), full["Kp"][:Y_CAL - Y0 + 1].sum(0)
+    dropped = [c for c in AP.ISO if c in polys and c not in order]
+    extra = yearly(ev, polys, dropped, [], Y0, Y1)["K"].sum(0) if dropped else []
+    names = [f"{order[i]}-{order[j]}" for i, j in edges]
+    flag = lambda a, b: bool(abs(a - b) >= 3 and abs(a - b) > 0.1 * max(b, 1))
+    res = {"catalogue": "USGS ComCat M>=5.5, friend's Asia-Pacific window", "events": len(ev), "main_shocks": full["main_shocks"], "years": [Y0, Y1],
+           "order": order, "edges": names, "K_yearly": full["K"].tolist(), "Kp_yearly": full["Kp"].tolist(),
+           "check_1965_2016": {"countries": [{"iso": c, "friend": float(a), "comcat": float(b), "flag": flag(b, a)} for c, a, b in zip(order, inp["K"], k16)],
+                               "pairs": [{"pair": c, "friend": float(a), "comcat": float(b), "flag": flag(b, a)} for c, a, b in zip(names, inp["Kp"], p16)],
+                               "totals": {"friend_country_hits": float(inp["K"].sum()), "comcat_country_hits": float(k16.sum()),
+                                          "friend_shared": float(inp["Kp"].sum()), "comcat_shared": float(p16.sum())}},
+           "new_2017_2025": {"country_hits": dict(zip(order, full["K"][Y_CAL - Y0 + 1:].sum(0).tolist())), "shared": dict(zip(names, full["Kp"][Y_CAL - Y0 + 1:].sum(0).tolist()))},
+           "pairs_outside_graph": full["new_pairs"], "countries_without_events_in_calibration": dict(zip(dropped, [float(x) for x in extra]))}
+    save("twin_counts.json", res)
+    c = res["check_1965_2016"]
+    print(f"ComCat: {len(ev)} events, {full['main_shocks']} main shocks 1965-2025")
+    print("1965-2016 totals:", c["totals"])
+    print("flagged countries:", [(x["iso"], x["friend"], x["comcat"]) for x in c["countries"] if x["flag"]])
+    print("pairs outside the 2016 graph (all years):", res["pairs_outside_graph"])
+    return res
 
 
 # ------------------------------------------------------------------------------------------- twin core
@@ -318,15 +348,82 @@ def core_checks(P):
     assert abs(khat(np.random.default_rng(0).pareto(2.0, 200000)) - 0.5) < 0.1 and khat(np.random.default_rng(0).pareto(1.0, 200000)) > 0.8
 
 
+# ------------------------------------------------------------------------------------------- backtest
+def predictive(k, n):
+    """Next-year count when the annual rate has the Gamma(k + 1/2, n years) posterior: negative binomial."""
+    from scipy.stats import nbinom
+    return nbinom(k + 0.5, n / (n + 1.0))
+
+
+def forecast_scores(k0, n0, Y, update=True):
+    """One-step-ahead forecasts of the yearly counts Y (years x series), starting from k0 events in n0 years.
+    Returns log scores, the expected coverage of the randomised 90% interval (randomised PIT, Czado, Gneiting & Held
+    2009: the standard for counts) and the raw coverage of the integer interval [q05, q95]."""
+    logs, cov, raw, z2 = [], [], [], []
+    k, n = np.asarray(k0, float).copy(), float(n0)
+    for t in range(Y.shape[0]):
+        d = predictive(k, n)
+        obs = Y[t]
+        logs.append(d.logpmf(obs))
+        lo, hi = d.cdf(obs - 1), d.cdf(obs)
+        cov.append(np.clip(np.minimum(hi, 0.95) - np.maximum(lo, 0.05), 0, None) / np.maximum(hi - lo, 1e-300))
+        raw.append((d.ppf(0.05) <= obs) & (obs <= d.ppf(0.95)))
+        z2.append((obs - d.mean()) ** 2 / d.var())
+        if update:
+            k, n = k + obs, n + 1
+    f = lambda a: np.concatenate([np.ravel(x) for x in a])
+    return {"log_score": float(f(logs).sum()), "coverage_randomised": float(f(cov).mean()), "coverage_raw": float(f(raw).mean()),
+            "dispersion": float(f(z2).mean()), "n": int(f(logs).size)}
+
+
+def backtest():
+    """Does the twin predict next year's counts? Rules (set before running): (1) the randomised 90% interval covers
+    85-95% of the 2017-2025 forecasts, for country counts and for pair counts; (2) the yearly-updated twin's mean log
+    score is not worse than the twin frozen in 2016 (difference per forecast >= -0.005 nats)."""
+    c = json.loads((OUT / "twin_counts.json").read_text())
+    K, Kp = np.asarray(c["K_yearly"]), np.asarray(c["Kp_yearly"])
+    r0 = Y_CAL - Y0 + 1
+    fk = np.array([x["friend"] for x in c["check_1965_2016"]["countries"]]); fp = np.array([x["friend"] for x in c["check_1965_2016"]["pairs"]])
+    res = {"forecast_years": [Y_CAL + 1, Y1], "series": {}}
+    ok1, ok2 = True, True
+    for name, k0, Y in (("country_counts", fk, K[r0:]), ("pair_counts", fp, Kp[r0:])):
+        up, fz = forecast_scores(k0, r0, Y, True), forecast_scores(k0, r0, Y, False)
+        diff = (up["log_score"] - fz["log_score"]) / up["n"]
+        res["series"][name] = {"updated": up, "frozen_2016": fz, "log_score_gain_per_forecast": diff}
+        ok1 &= 0.85 <= up["coverage_randomised"] <= 0.95
+        ok2 &= diff >= -0.005
+    # supplementary, more forecasts: ComCat alone, trained on 1965-1999, forecasting 2000-2025
+    cut = 2000 - Y0
+    res["supplement_comcat_2000_2025"] = {"country_counts": forecast_scores(K[:cut].sum(0), cut, K[cut:]), "pair_counts": forecast_scores(Kp[:cut].sum(0), cut, Kp[cut:])}
+    res["checks"] = {"coverage_85_95": bool(ok1), "updating_not_worse": bool(ok2)}
+    res["verdict"] = "strong" if ok1 and ok2 else "not strong"
+    save("twin_backtest.json", res)
+    for name, r in res["series"].items():
+        u = r["updated"]
+        print(f"{name}: {u['n']} forecasts 2017-2025 | randomised 90% coverage {u['coverage_randomised']:.3f} (raw integer interval {u['coverage_raw']:.3f}) | dispersion {u['dispersion']:.2f}"
+              f" | log score updated {u['log_score']:.1f} vs frozen {r['frozen_2016']['log_score']:.1f} (gain {r['log_score_gain_per_forecast']:+.4f} per forecast)")
+    for name, u in res["supplement_comcat_2000_2025"].items():
+        print(f"supplement {name}: {u['n']} forecasts 2000-2025 | randomised coverage {u['coverage_randomised']:.3f} (raw {u['coverage_raw']:.3f}) | dispersion {u['dispersion']:.2f}")
+    print("checks:", res["checks"], "| verdict:", res["verdict"])
+    return res
+
+
 def selftest_fast():
     """The estimator checks on a small synthetic pool (no calibration, no downloads)."""
     from src.tensor.synthetic import SyntheticModel, topology
     core_checks(PortfolioProblem(SyntheticModel(4, topology("ring", 4)), "exceedance"))
-    print("selftest ok (fast): twist log law = sampler weights; one anchor = plain IS; k-hat recovers Pareto shapes")
+    # backtest machinery: forecasts of data simulated from the model itself are calibrated
+    rng = np.random.default_rng(5)
+    lam = rng.gamma(3.0, 1.0, 200)
+    Y = rng.poisson(lam, (60, 200)).astype(float)
+    r = forecast_scores(Y[:30].sum(0), 30, Y[30:])
+    assert abs(r["coverage_randomised"] - 0.90) < 0.02 and abs(r["dispersion"] - 1.0) < 0.1, r
+    print("selftest ok (fast): twist log law = sampler weights; one anchor = plain IS; k-hat recovers Pareto shapes; forecasts of simulated Poisson counts are calibrated")
 
 
 if __name__ == "__main__":
     selftest()
     if not (OUT / "twin_counts.json").exists():
         phase0()
+    backtest()
     run()

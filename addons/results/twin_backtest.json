@@ -1,0 +1,63 @@
+{
+  "forecast_years": [
+    2017,
+    2025
+  ],
+  "series": {
+    "country_counts": {
+      "updated": {
+        "log_score": -272.53791827335135,
+        "coverage_randomised": 0.9101281496670662,
+        "coverage_raw": 0.9722222222222222,
+        "dispersion": 0.9618399896384707,
+        "n": 252
+      },
+      "frozen_2016": {
+        "log_score": -272.46432721046074,
+        "coverage_randomised": 0.9105743501570412,
+        "coverage_raw": 0.9722222222222222,
+        "dispersion": 0.9466093516966714,
+        "n": 252
+      },
+      "log_score_gain_per_forecast": -0.0002920280273437064
+    },
+    "pair_counts": {
+      "updated": {
+        "log_score": -69.76445874298444,
+        "coverage_randomised": 0.9205044077616167,
+        "coverage_raw": 0.98989898989899,
+        "dispersion": 0.5442571918700257,
+        "n": 198
+      },
+      "frozen_2016": {
+        "log_score": -70.0025617206863,
+        "coverage_randomised": 0.9212026178650466,
+        "coverage_raw": 0.98989898989899,
+        "dispersion": 0.5318251300531696,
+        "n": 198
+      },
+      "log_score_gain_per_forecast": 0.0012025402914235194
+    }
+  },
+  "supplement_comcat_2000_2025": {
+    "country_counts": {
+      "log_score": -819.8310978680543,
+      "coverage_randomised": 0.9016349461363631,
+      "coverage_raw": 0.967032967032967,
+      "dispersion": 0.9255713788609751,
+      "n": 728
+    },
+    "pair_counts": {
+      "log_score": -222.92051996212365,
+      "coverage_randomised": 0.9124895510035367,
+      "coverage_raw": 0.986013986013986,
+      "dispersion": 0.8350515381654056,
+      "n": 572
+    }
+  },
+  "checks": {
+    "coverage_85_95": true,
+    "updating_not_worse": true
+  },
+  "verdict": "strong"
+}

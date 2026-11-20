@@ -1,0 +1,138 @@
+{
+  "worlds": 800,
+  "now_years_after_issue": 0.5694729637234771,
+  "events": {
+    "a 25% earthquake payout in KG": {
+      "exceedance": {
+        "multiplier_learning": 3.974549474613172,
+        "multiplier_fixed": 3.676364787629917,
+        "ratio": 1.0811085689827558
+      },
+      "joint_exhaustion": {
+        "multiplier_learning": 1.4632095344305653,
+        "multiplier_fixed": 1.4716594822665212,
+        "ratio": 0.9942582180607826
+      },
+      "price_change_KG": {
+        "learning": -5.027052325285965,
+        "fixed": -1.9015365287278172,
+        "taught_by_the_event": -3.1255157965581475
+      },
+      "price_change_TJ": {
+        "learning": -2.405670612243526,
+        "fixed": 1.4210854715202004e-14,
+        "taught_by_the_event": -2.40567061224354
+      }
+    },
+    "a 100% earthquake payout in KG": {
+      "exceedance": {
+        "multiplier_learning": 10.33626983810528,
+        "multiplier_fixed": 12.120013664056938,
+        "ratio": 0.8528265829236216
+      },
+      "joint_exhaustion": {
+        "multiplier_learning": 14.836243242727003,
+        "multiplier_fixed": 19.223257174659718,
+        "ratio": 0.7717861290585177
+      },
+      "price_change_KG": {
+        "learning": 1.7717582179768527,
+        "fixed": 1.6936420694397896,
+        "taught_by_the_event": 0.07811614853706317
+      },
+      "price_change_TJ": {
+        "learning": -4.173046697943192,
+        "fixed": 1.4210854715202004e-14,
+        "taught_by_the_event": -4.173046697943207
+      }
+    },
+    "a rain payout in KG": {
+      "exceedance": {
+        "multiplier_learning": 1.2371041184878522,
+        "multiplier_fixed": 1.1892294212068346,
+        "ratio": 1.0402569062178382
+      },
+      "joint_exhaustion": {
+        "multiplier_learning": 4.801469253337367,
+        "multiplier_fixed": 3.5514753613939782,
+        "ratio": 1.351964680800364
+      },
+      "price_change_KG": {
+        "learning": -0.14792327611498024,
+        "fixed": -0.24194886706283114,
+        "taught_by_the_event": 0.0940255909478509
+      },
+      "price_change_TJ": {
+        "learning": 0.10610228551337286,
+        "fixed": 1.4210854715202004e-14,
+        "taught_by_the_event": 0.10610228551335865
+      }
+    },
+    "a 25% earthquake payout in both": {
+      "exceedance": {
+        "multiplier_learning": 8.781647162412849,
+        "multiplier_fixed": 8.711841003276772,
+        "ratio": 1.0080127907648706
+      },
+      "joint_exhaustion": {
+        "multiplier_learning": 1.7952219841297041,
+        "multiplier_fixed": 1.8683060191675476,
+        "ratio": 0.9608821925915503
+      },
+      "price_change_KG": {
+        "learning": -4.8165693902004705,
+        "fixed": -1.9015365287278172,
+        "taught_by_the_event": -2.9150328614726533
+      },
+      "price_change_TJ": {
+        "learning": -4.987202822638196,
+        "fixed": -1.9381068869948734,
+        "taught_by_the_event": -3.0490959356433223
+      }
+    }
+  },
+  "quiet_drift_points": {
+    "KG": 0.17789392103041735,
+    "TJ": 0.17878306827459767
+  },
+  "now": {
+    "crisis_learning": 0.012782670585651806,
+    "crisis_fixed": 0.008661386534178394,
+    "price_learning": {
+      "KG": 96.84418397497807,
+      "TJ": 96.3279154914017
+    },
+    "price_fixed": {
+      "KG": 99.91945249573654,
+      "TJ": 99.9310188269234
+    }
+  },
+  "calibration": {
+    "all paths": {
+      "n": 20000,
+      "mean_forecast": 0.017712585969501954,
+      "realised": 0.01795,
+      "z": -0.2528845822804445
+    },
+    "paths with a payout before 1.5 years": {
+      "n": 3628,
+      "mean_forecast": 0.07080158352530895,
+      "realised": 0.07056229327453142,
+      "z": 0.05628104554133481
+    },
+    "quiet paths": {
+      "n": 16372,
+      "mean_forecast": 0.0059481782531284055,
+      "realised": 0.0062912289274370875,
+      "z": -0.5551519112901334
+    }
+  },
+  "sequential_vs_batch_max_diff": 1.3877787807814457e-17,
+  "checks": {
+    "one_world_equals_fixed": true,
+    "sequential_equals_batch": true,
+    "calibrated": true,
+    "effect_is_large": false
+  },
+  "verdict": "not strong"
+}

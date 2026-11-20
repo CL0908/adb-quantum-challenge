@@ -61,7 +61,8 @@ def shared_cluster_law(w1, w2, nu, nmax=40):
     return out / out.sum()
 
 
-def eq_annual(sc, eq_mult=(1.0, 1.0), nu=0.0):
+def eq_generator(sc, eq_mult=(1.0, 1.0), nu=0.0):
+    """Yearly generator of the earthquake payout state (a, b), index 5 a + b; expm(t G) is the law after t years."""
     lam1, L1 = compound_poisson_rates(TAILS["KG"]); lam2, L2 = compound_poisson_rates(TAILS["TJ"])
     w1, w2 = lam1 / L1, lam2 / L2
     L1, L2 = L1 * eq_mult[0], L2 * eq_mult[1]
@@ -77,7 +78,11 @@ def eq_annual(sc, eq_mult=(1.0, 1.0), nu=0.0):
                 for j in range(1, 5):
                     G[i, min(a + k, 4) * 5 + min(b + j, 4)] += c * JS[k, j]
             G[i, i] -= G[i].sum()
-    return expm(G)[0].reshape(5, 5)
+    return G
+
+
+def eq_annual(sc, eq_mult=(1.0, 1.0), nu=0.0):
+    return expm(eq_generator(sc, eq_mult, nu))[0].reshape(5, 5)
 
 
 def rain_annual(sc, rain_mult=(1.0, 1.0), rain_share=None):

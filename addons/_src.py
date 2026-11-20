@@ -9,9 +9,11 @@ HERE = Path(__file__).resolve().parent
 # inside the the main author's repo (addons/ next to src/) use it; otherwise the sibling reproduction clone ../adb-repro
 _DEFAULT = HERE.parent if (HERE.parent / "src").is_dir() else HERE.parent / "adb-repro"
 REPO = Path(os.environ.get("ADB_REPO", _DEFAULT)).resolve()
-OUT = HERE / "results"
+# ADDON_OUT: write results somewhere else (scorecard.py reruns without touching the committed results)
+OUT = Path(os.environ.get("ADDON_OUT", HERE / "results"))
 # shared data library, organised by field (not by project); see DATA/README.md
-# set ADB_DATA_DIR (legacy name DATA_ROOT also accepted); default is a repo-relative addons/data (may not exist)
+# set ADB_DATA_DIR (legacy name DATA_ROOT also accepted); default is a repo-relative addons/data. Public data is
+# downloaded into it on first use (fetch_usgs.py), so the folder may start empty.
 DATA = Path(os.environ.get("ADB_DATA_DIR") or os.environ.get("DATA_ROOT") or HERE / "data")
 sys.path.insert(0, str(REPO))
 
@@ -25,6 +27,11 @@ def in_repo():
         yield
     finally:
         os.chdir(old)
+
+
+def seed(default):
+    """A module's seed; ADDON_SEED_OFFSET shifts every seed at once (also in worker processes) for seed-stability runs."""
+    return default + int(os.environ.get("ADDON_SEED_OFFSET", "0"))
 
 
 def load(name):

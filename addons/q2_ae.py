@@ -11,10 +11,10 @@ import math
 import numpy as np
 
 import ae
-from _src import load, save
+from _src import load, save, seed
 from src.quantum.iqae import iqae
 
-REPS, SEED = 200, 7
+REPS, SEED = 200, seed(7)
 ALGOS = {"iqae": lambda a, e, g: iqae(a, e, 0.05, 100, g),
          "chebae_odd": lambda a, e, g: ae.chebae(a, e, 0.05, 100, g, odd_only=True),
          "miqae_chernoff": lambda a, e, g: ae.miqae(a, e, 0.05, 1, g, "chernoff")}

@@ -11,6 +11,7 @@ import os
 import platform
 import subprocess
 import sys
+import threading
 import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime
@@ -90,8 +91,32 @@ JOBS = [
     ("twin", 20, [PY, str(HERE.parent / "addons" / "twin.py")], [], ALL, False),
     # phase 21: expected-loss interval -> spread band with three published market curves (a calculation)
     ("spread_band", 21, [PY, str(HERE.parent / "addons" / "spread_band.py")], ["quality_rates_unc"], 1, False),
+    # phase 22: event-response mode of the twin (Omori-type forecast after an event, out-of-sample test, the 3 Nov 2026
+    # border earthquake). Needs carec_m45_1973_2025.csv from fetch_usgs.extended() in DATA.
+    ("event_response", 22, [PY, str(HERE.parent / "addons" / "event_response.py")], [], 1, False),
+    # phase 23: live mark of the two notes (remaining-term loss, indicative price, what each add-on is worth in points)
+    ("live_mark", 23, [PY, str(HERE.parent / "addons" / "live_mark.py")], ["quality_rates_unc", "event_response"], 1, False),
+    # phases 24-27: why RDPO ties twisting at equal CPU and what changes it (two-country model, exact references).
+    # 24 exact ceiling of a state-dependent sampler; 25 measured variance and cost per path; 26 a faster rollout for the
+    # same policy (same paths); 27 the six exchanges between RDPO and the twin
+    ("ceiling", 24, [PY, str(HERE.parent / "addons" / "ceiling.py")], [], 1, False),
+    ("rdpo_gap", 25, [PY, str(HERE.parent / "addons" / "rdpo_gap.py")], ["ceiling"], 1, False),
+    ("rdpo_engine", 26, [PY, str(HERE.parent / "addons" / "rdpo_engine.py")], ["rdpo_gap"], 1, False),
+    ("dreamwake", 27, [PY, str(HERE.parent / "addons" / "dreamwake.py")], ["rdpo_engine", "quality_rates_unc"], 1, False),
+    ("rdpo_hybrid", 28, [PY, str(HERE.parent / "addons" / "rdpo_hybrid.py")], ["rdpo_engine"], 1, False),
+    ("small_world", 29, [PY, str(HERE.parent / "addons" / "small_world.py")], ["rdpo_hybrid"], 1, False),
+    ("small_world_loop", 30, [PY, str(HERE.parent / "addons" / "small_world_loop.py")], ["small_world", "dreamwake"], 1, False),
+    ("multi_country", 31, [PY, str(HERE.parent / "addons" / "multi_country.py")], ["small_world_loop"], 1, False),
+    ("cap_modules", 32, [PY, str(HERE.parent / "addons" / "cap_modules.py")], ["multi_country"], 1, False),
+    ("policy_library", 33, [PY, str(HERE.parent / "addons" / "policy_library.py")], ["cap_modules"], 1, False),
+    ("dense_pools", 34, [PY, str(HERE.parent / "addons" / "dense_pools.py")], ["policy_library"], 1, False),
+    ("exact_check", 35, [PY, str(HERE.parent / "addons" / "exact_check.py")], ["dense_pools"], 1, False),
+    ("loss_curve", 36, [PY, str(HERE.parent / "addons" / "loss_curve.py")], ["exact_check"], 1, False),
+    ("reliability", 37, [PY, str(HERE.parent / "addons" / "reliability.py")], ["loss_curve"], 1, False),
+    ("quantum_side", 38, [PY, str(HERE.parent / "addons" / "quantum_side.py")], ["reliability"], 1, False),
 ]
 BY = {j[0]: j for j in JOBS}
+RUNS_LOCK = threading.Lock()
 
 
 def done_ok():
@@ -116,7 +141,7 @@ def run_one(job):
            "end": datetime.now().isoformat(timespec="seconds"), "seconds": round(time.perf_counter() - t0, 1),
            "exit": code, "soft": soft, "cpu_cost": cpu, "log": str(log.relative_to(HERE)), "commit": git("rev-parse", "HEAD"),
            "data_changed": git("status", "--porcelain", "--", "data", "src", "tests")}
-    with open(RUNS, "a", encoding="utf-8") as fh:
+    with RUNS_LOCK, open(RUNS, "a", encoding="utf-8") as fh:   # jobs finish in threads; unlocked appends lost or garbled records
         fh.write(json.dumps(rec) + "\n")
     print(f"[{rec['end']}] {name}: exit {code} in {rec['seconds']}s", flush=True)
     return rec

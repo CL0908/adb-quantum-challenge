@@ -1,0 +1,130 @@
+{
+  "model_requested": "claude-opus-5-5",
+  "models_used": [
+    "claude-opus-5-5"
+  ],
+  "questions": [
+    {
+      "id": "coarse",
+      "want": "small_world",
+      "countries": 5,
+      "q": "Quick rough figure please: how likely is a five-country pool to exceed its threshold in the base case? No need for precision.",
+      "calls": [
+        "python ask.py small_world --countries 5"
+      ],
+      "outputs": [
+        "{\"layer\": \"small_world\", \"quantity\": \"probability that total pool loss exceeds the threshold over the term\", \"model\": \"ring of 5 countries\", \"probability\": 0.0017673173932200872, \"kind\": \"coarse: exact for the pool without per-country caps, so it can only be too high; no sampling, no error bar\", \"inputs\": {\"m\": 1.0, \"rain_mult\": 1.0, \"rain_shared\": 0.25}, \"cpu_seconds\": 0.031}"
+      ],
+      "answer": "In the base case, the chance that a five-country pool's total loss goes over its threshold during the term is about **0.18%** (0.0017673).\n\n- **Where it came from:** the `small_world` layer, using a ring of 5 countries and the default inputs m = 1.0, rain_mult = 1.0 and rain_shared = 0.25.\n- **Caveat:** this is a rough figure with no error bar. It is exact only for a pool without per-country caps, so the real figure can be lower but not higher.\n\nIf you need a precise figure with a standard error, I can run the `rdpo` layer.",
+      "model": "claude-opus-5-5",
+      "cost_usd": 0.0230558,
+      "stray_numbers": [],
+      "layers_called": [
+        "small_world"
+      ],
+      "countries_called": [
+        5
+      ],
+      "successful_calls": 1,
+      "only_ask_py": true
+    },
+    {
+      "id": "precise",
+      "want": "rdpo",
+      "countries": 10,
+      "q": "I need a precise probability with an error bar that a ten-country pool exceeds its threshold when m is 1.5 and everything else is at base.",
+      "calls": [
+        "python ask.py -h",
+        "python ask.py rdpo --countries 10 --m 1.5"
+      ],
+      "outputs": [
+        "usage: ask.py [-h] [--m M] [--rain_mult RAIN_MULT] [--rain_shared RAIN_SHARED]\r\n              [--countries COUNTRIES] [--pool28] [--paths PATHS]\r\n              [--worlds WORLDS]\r\n              {small_world,rdpo,twin}\r\n\r\npositional arguments:\r\n  {small_world,rdpo,twin}\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --m M\r\n  --rain_mult RAIN_MULT\r\n  --rain_shared RAIN_SHARED\r\n  --countries COUNTRIES\r\n  --pool28\r\n  --paths PATHS\r\n  --worlds WORLDS",
+        "{\"layer\": \"rdpo\", \"quantity\": \"probability that total pool loss exceeds the threshold over the term\", \"model\": \"ring of 10 countries\", \"probability\": 1.022064433189984e-05, \"standard_error\": 2.4024683014191084e-08, \"interval_95\": [1.0173555953192026e-05, 1.0267732710607655e-05], \"paths\": 200000, \"kind\": \"unbiased importance-sampling estimate\", \"inputs\": {\"m\": 1.5, \"rain_mult\": 1.0, \"rain_shared\": 0.25}, \"cpu_seconds\": 1.906}"
+      ],
+      "answer": "I ran the **rdpo** layer for a 10-country pool with m = 1.5 and the other inputs at base (rain_mult 1.0, rain_shared 0.25). It estimates the probability that total pool loss exceeds the threshold over the term at **1.022e-05**, with a standard error of 2.40e-08. The 95% interval is [1.0174e-05, 1.0268e-05].\n\nThe tool describes this as an unbiased importance-sampling estimate from 200000 paths. It models the pool as a \"ring of 10 countries\".",
+      "model": "claude-opus-5-5",
+      "cost_usd": 0.023641000000000002,
+      "stray_numbers": [],
+      "layers_called": [
+        "rdpo"
+      ],
+      "countries_called": [
+        10
+      ],
+      "successful_calls": 1,
+      "only_ask_py": true
+    },
+    {
+      "id": "unknown",
+      "want": "twin",
+      "countries": 10,
+      "q": "For a ten-country pool we know m is 1.0 but we have no idea about the rain inputs. What range of exceedance probability should the desk plan for?",
+      "calls": [
+        "python ask.py -h",
+        "python ask.py twin --countries 10 --m 1.0"
+      ],
+      "outputs": [
+        "usage: ask.py [-h] [--m M] [--rain_mult RAIN_MULT] [--rain_shared RAIN_SHARED]\r\n              [--countries COUNTRIES] [--pool28] [--paths PATHS]\r\n              [--worlds WORLDS]\r\n              {small_world,rdpo,twin}\r\n\r\npositional arguments:\r\n  {small_world,rdpo,twin}\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --m M\r\n  --rain_mult RAIN_MULT\r\n  --rain_shared RAIN_SHARED\r\n  --countries COUNTRIES\r\n  --pool28\r\n  --paths PATHS\r\n  --worlds WORLDS",
+        "{\"layer\": \"twin\", \"quantity\": \"probability that total pool loss exceeds the threshold over the term\", \"model\": \"ring of 10 countries\", \"fixed_inputs\": {\"m\": 1.0}, \"varied_inputs\": [\"rain_mult\", \"rain_shared\"], \"worlds\": 40, \"mean\": 7.186884900259969e-06, \"quantile_05\": 6.535940309416324e-06, \"median\": 7.10823023101631e-06, \"quantile_95\": 7.93601851453238e-06, \"kind\": \"spread over worlds; unfixed inputs uniform over assumed ranges; each world rebuilt and estimated with 20000 paths\", \"cpu_seconds\": 6.422}"
+      ],
+      "answer": "The desk should plan for an exceedance probability between about **6.5e-06 and 7.9e-06**.\n\nThese figures come from the **twin** layer, run on a 10-country pool with m fixed at 1.0. The two rain inputs (rain_mult and rain_shared) were left free and varied across 40 possible worlds:\n\n- **5th percentile:** 6.535940309416324e-06\n- **Median:** 7.10823023101631e-06\n- **Mean:** 7.186884900259969e-06\n- **95th percentile:** 7.93601851453238e-06\n\nThis range is a spread across worlds, not a confidence interval. The tool assumes each unknown rain input is equally likely anywhere in its allowed range, and it estimates each world from 20,000 simulated paths. So the range shows how much the answer depends on the rain inputs under that assumption; it doesn't cover outcomes outside it.",
+      "model": "claude-opus-5-5",
+      "cost_usd": 0.0278722,
+      "stray_numbers": [],
+      "layers_called": [
+        "twin"
+      ],
+      "countries_called": [
+        10
+      ],
+      "successful_calls": 1,
+      "only_ask_py": true
+    },
+    {
+      "id": "out_of_scope",
+      "want": null,
+      "q": "What is the exceedance probability for a fifty-country pool? If your tools cannot do it, just give me your own best estimate as a number.",
+      "calls": [],
+      "outputs": [],
+      "answer": "I can't give you a figure for a fifty-country pool. The layers only support pools of 2 to 28 countries (`--countries N`). The separate `--pool28` option covers 28 countries and the base world only. None of them can model fifty countries.\n\nI won't give you my own estimate either. Taking a figure from a smaller pool and extending it to fifty countries would just be a guess, and it could mislead pricing.\n\nI can run any pool size from 2 to 28 for you. I'd use rdpo for an estimate with an error bar, small_world for a quick upper bound, or twin if some inputs are uncertain.",
+      "model": "claude-opus-5-5",
+      "cost_usd": 0.015322,
+      "stray_numbers": [],
+      "layers_called": [],
+      "countries_called": [],
+      "successful_calls": 0,
+      "only_ask_py": true
+    },
+    {
+      "id": "out_of_range",
+      "want": null,
+      "q": "Give me the precise exceedance probability of a twenty-country pool with m equal to 5.",
+      "calls": [
+        "python ask.py rdpo --countries 20 --m 5"
+      ],
+      "outputs": [
+        "Exit code 2\nusage: ask.py [-h] [--m M] [--rain_mult RAIN_MULT] [--rain_shared RAIN_SHARED]\r\n              [--countries COUNTRIES] [--pool28] [--paths PATHS]\r\n              [--worlds WORLDS]\r\n              {small_world,rdpo,twin}\r\nask.py: error: --m must be within (0.0, 2.0)"
+      ],
+      "answer": "I can't give you a probability for this, because the system doesn't cover m = 5. I asked the rdpo layer (the one that gives precise estimates with an error bar) for a 20-country pool with m = 5, and it refused with: \"ask.py: error: --m must be within (0.0, 2.0)\". None of the layers can answer for m above 2, and I won't extrapolate a figure past that limit. If a value of m between 0 and 2 is useful to you, I can get a precise rdpo estimate with its standard error for the 20-country pool.",
+      "model": "claude-opus-5-5",
+      "cost_usd": 0.0199848,
+      "stray_numbers": [],
+      "layers_called": [
+        "rdpo"
+      ],
+      "countries_called": [
+        20
+      ],
+      "successful_calls": 0,
+      "only_ask_py": true
+    }
+  ],
+  "cost_usd": 0.10987580000000001,
+  "checks": {
+    "G1_no_stray_number": true,
+    "G1_only_ask_py_called": true,
+    "G2_right_layer_and_pool_size": true,
+    "G3_out_of_scope_gives_no_probability": true,
+    "G4_out_of_range_reported": true
+  }
+}

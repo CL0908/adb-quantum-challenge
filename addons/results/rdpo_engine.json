@@ -1,0 +1,73 @@
+{
+  "two_country": {
+    "exceedance": {
+      "check": {
+        "paths_equal": 1.0,
+        "max_weight_rel_diff": 0.0,
+        "payoffs_equal": true
+      },
+      "estimate_z": 0.7249409098699546,
+      "rho2_rdpo": 0.15975656035113836,
+      "rho2_best_product": 3.183573357548749,
+      "cost_ratio_friend_engine": 25.77777777777778,
+      "cost_ratio_this_engine": 6.222222222222222,
+      "equal_cpu_gain": 3.2026585766049367,
+      "cpu_training": 0.265625
+    },
+    "joint_exhaustion": {
+      "check": {
+        "paths_equal": 1.0,
+        "max_weight_rel_diff": 0.0,
+        "payoffs_equal": true
+      },
+      "estimate_z": -0.6828329843303588,
+      "rho2_rdpo": 0.2653789670041456,
+      "rho2_best_product": 9.761747979136363,
+      "cost_ratio_friend_engine": 27.555555555555557,
+      "cost_ratio_this_engine": 6.0,
+      "equal_cpu_gain": 6.13069684794316,
+      "cpu_training": 0.390625
+    },
+    "joint_attachment": {
+      "check": {
+        "paths_equal": 1.0,
+        "max_weight_rel_diff": 0.0,
+        "payoffs_equal": true
+      },
+      "estimate_z": 1.7597377234455753,
+      "rho2_rdpo": 0.23122729921773094,
+      "rho2_best_product": 2.5567291645844064,
+      "cost_ratio_friend_engine": 24.88888888888889,
+      "cost_ratio_this_engine": 6.444444444444445,
+      "equal_cpu_gain": 1.715774206704763,
+      "cpu_training": 0.28125
+    }
+  },
+  "pool_28": {
+    "check": {
+      "paths_equal": 1.0,
+      "max_weight_rel_diff": 0.0,
+      "payoffs_equal": true
+    },
+    "sources": 100,
+    "p_twist": 0.0017982759893722723,
+    "p_twist_se": 2.9222349118748972e-06,
+    "p_rdpo": 0.001795638766952919,
+    "p_rdpo_se": 2.480145054205881e-06,
+    "rho2_twist": 5.281381676627813,
+    "rho2_rdpo": 0.9510677968324563,
+    "variance_gain": 5.553107459023976,
+    "cost_ratio_friend_engine": 36.53979238754326,
+    "cost_ratio_this_engine": 20.1522491349481,
+    "equal_cpu_gain": 0.2755577018643422,
+    "cpu_training": 13.203125,
+    "equal_cpu_gain_training_charged": 0.17436419552997925
+  },
+  "checks": {
+    "same_paths": true,
+    "cost_ratio_le_15": true,
+    "joint_exhaustion_gain_ge_2": true,
+    "pool_28_gain_ge_1": false
+  },
+  "verdict": "not strong"
+}

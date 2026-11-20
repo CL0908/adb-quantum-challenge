@@ -29,10 +29,10 @@ from scipy import stats
 
 import rates_unc as RU
 import variant
-from _src import in_repo, save
+from _src import in_repo, save, seed
 from src.realdata import param_uncertainty as PU
 
-N, NB, SEED = 4096, 1000, 20261113
+N, NB, SEED = 4096, 1000, seed(20261113)
 GRID, INNER = 64, 1000
 OUT = {"joint_exhaustion": RU.KEYS["joint_exhaustion"], "expected_loss": RU.KEYS["expected_loss"],
        "joint_attachment": RU.KEYS["joint_attachment"]}

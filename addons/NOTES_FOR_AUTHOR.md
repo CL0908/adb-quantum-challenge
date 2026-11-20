@@ -13,6 +13,9 @@
 | CAREC 池超额 > US$240m | 点值 1.33e-3，后验预测 1.47e-3，95% [0.85e-3, 2.37e-3] | `results/model_risk.json` |
 | 亚太池逐年更新 2017–2025 | 见 `README.md` 的风险孪生一节 | `results/twin.json` |
 | 期望损失区间对应的利差带 | 见 `README.md` 的市场换算一节 | `results/spread_band.json` |
+| 孪生的逐年回测 | 下一年主震数的 90% 预测区间覆盖率 91.0%（各国，252 个预测）/ 92.1%（国家对，198 个） | `results/twin_backtest.json` |
+| 一次地震之后的再震预报 | 样本外对数得分增益 +0.38（30 天）/ +0.18（一年）；2026-11-03 边境 M 5.2 使到期前赔付级地震概率多 0.07 个百分点 | `results/event_response.json` |
+| 各项 add-on 折成价格点 | 地震触发率数据区间 +7 / −15 点；余震读法 −3 点；+2°C −2 点；11 月地震 −0.1 点 | `results/live_mark.json` |
 
 全部在你的 e6572b4 上重跑过，日志在 `repro/logs_upstream/`。
 
@@ -50,3 +53,36 @@
 
 - `HANDOFF.md` 写着仓库是公开的，同时写着比赛规则要求提交内容在结果公布前保密。
 - 合同对「一次事件」的定义（余震是否单独赔付）公开资料里没有，`eq_cluster` 的 2.5 倍取决于它。
+
+## 5. 参考文献核对（2026-11-18，逐条打开原页面核对；对应 TEAMMATE.md 第 3 节 a、b）
+
+| 条目 | 结果 |
+|---|---|
+| `kastoryano2022` | 一致。Kastoryano & Pancotti，A highly efficient tensor network algorithm for multi-asset Fourier options pricing，arXiv:2203.02804（2022-03-05），无期刊号 |
+| `benedetti2016` | 一致。Benedetti, Realpe-Gómez, Biswas, Perdomo-Ortiz，Phys. Rev. A 94, 022308 (2016)，DOI 10.1103/PhysRevA.94.022308 |
+| `herbert2021` | 一致。发表版标题就是 bib 里的这个（arXiv 版标题不同：The Problem with Grover-Rudolph State Preparation for Quantum Monte-Carlo），Phys. Rev. E 103, 063302 (2021) |
+| `errmit2026` | **要改两处**。作者：Guilin Zhang, Kai Zhao, Xiquan Cui, Henry Heng, Xu Chu, Aletta Johanna Blanken（Workday AI Research），arXiv:2609.38713（2026-09-30）。发表处不是 NeurIPS 正会论文集，而是 **NeurIPS 2026 Workshop on Secure and Trustworthy Quantum Machine Learning (SaTQuML)** 的短口头报告；bib 里的 `booktitle={Advances in Neural Information Processing Systems}` 应改成该 workshop。论文里的用法（校准失配下误差缓解可能使误差变大）和摘要一致：ZNE 在 38–63% 的模拟实例上不如不做缓解 |
+| arXiv:2603.15664 | 存在。Alexis Kirke，Quantum Amplitude Estimation for Catastrophe Insurance Tail-Risk Pricing: Empirical Convergence and NISQ Noise Analysis（2026-03-10）。正文：3–8 个索引量子比特加 1 个辅助；预算 8192 下 RMSE：振幅估计 484，重要性采样 45，条件尾采样 32，QMC 37；oracle 模型下优势 2.2–3.7 倍；「Discretisation, not estimation, is the current bottleneck」 |
+| arXiv:2608.26840 | 存在。Hernández Vera, Jamialahmadi, Mete, Schneider, De Pascale（Munich Quantum Valley；SAP Labs Munich），Quantum Rare-Event Estimation for Ising Graphical Models with Belief-Propagation State Preparation（2026-08-27）。正文：20 量子比特、38 个 CX；按查询计 RMSE 优势 1.2–2.1 倍；拟合斜率 −0.50（理想为 −1）；作者自己写明该基准树宽为 2、经典精确推断可行 |
+| Kliuchnikov 等，Quantum 7, 1208 (2023) | 一致。Shorter quantum circuits via single-qubit gate approximation，DOI 10.22331/q-2023-12-18-1208。表 1（Clifford+T，均值，ε 为 diamond 距离，ε < 1e-4 的线性拟合）：fallback 1.03·log₂(1/ε) + 5.75，mixed fallback 0.53·log₂(1/ε) + 4.86，diagonal 3.02·log₂(1/ε) + 1.77。和 `rotations.py` 用的常数相同 |
+
+没核对的：`benedetti2019`（npj Quantum Information 5, 45）这次没打开原页面。
+
+## 6. 对 §3「等时间下 twisting 不输」的更正（2026-11-19）
+
+第 2 节的解释（固定倾斜已接近最优）不成立，请以这一节为准。在两国模型上精确算和实测的结果：
+
+| 量 | 池超额 | 两债同时耗尽 |
+|---|---|---|
+| 最好的乘积分布（每个源的分布完全自由）的相对方差，精确 | 3.18 | 9.76 |
+| 你的 twisting 的相对方差，精确 | 5.81 | — |
+| 训练后 RDPO 的相对方差，实测 | 0.16 | 0.27 |
+| RDPO 每样本成本相对乘积采样，你的 `FastPolicy.rollout` | 26 倍 | 28 倍 |
+| 同上，`addons/rdpo_engine.py` 的抽样（同样的策略，路径逐位相同） | 6.2 倍 | 6.0 倍 |
+| 等 CPU 下 RDPO 相对最好的乘积分布 | 3.2 倍 | 6.1 倍 |
+
+- 所以 RDPO 的方差一直低一个数量级，等时间下打平是因为 rollout 对每条路径、每个候选结果都重算条件分布。按局部状态分组后每种状态只算一次。`rdpo_engine.rollout(pol, N, rng)` 和 `pol.rollout` 接口相同，可以直接替换试用。
+- 28 国池上还不够：方差优势 5.6 倍，每样本成本 20 倍，等 CPU 下 0.28 倍。
+- RDPO 学到的价值函数和精确 Doob 函数的加权 R² 为 0.993 / 0.975，可以当预警倍数读出来（`addons/dreamwake.py`）。
+- 建议的写法：「RDPO 的每样本方差比最好的乘积分布低一个数量级；目前的瓶颈是抽样引擎，在两国模型上换引擎后等时间下已胜出 1.7–6.1 倍，28 国池上还差约 4 倍。」
+

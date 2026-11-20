@@ -61,3 +61,113 @@ def test_twin_estimator_checks():
 def test_spread_band_curves():
     import spread_band
     spread_band.selftest()
+
+
+def test_event_response_fit_recovers_simulated_model():
+    import event_response
+    event_response.selftest()
+
+
+def test_live_mark_matches_friend_term_and_markov():
+    import live_mark
+    live_mark.selftest()
+
+
+def test_desk_default_state_and_attribution():
+    import desk
+    desk.selftest()
+
+
+def test_crisis_chain_gradient_and_second_moment():
+    import crisis
+    crisis.selftest()
+
+
+def test_learner_one_world_and_belief_direction():
+    import learner
+    learner.selftest()
+
+
+def test_twinstar_alarm_levels_and_gamma_tilt():
+    import twinstar
+    twinstar.selftest()
+
+
+def test_ceiling_split_rates_and_twist_family():
+    import ceiling
+    ceiling.selftest()
+
+
+def test_rdpo_gap_enumeration_matches_chain_and_sampler():
+    import rdpo_gap
+    rdpo_gap.selftest()
+
+
+def test_rdpo_engine_same_paths_as_friend_rollout():
+    import rdpo_engine
+    rdpo_engine.selftest()
+
+
+def test_dreamwake_untrained_policy_and_scores():
+    import dreamwake
+    dreamwake.selftest()
+
+
+def test_rdpo_hybrid_unbiased_for_any_fixed_subset():
+    import rdpo_hybrid
+    rdpo_hybrid.selftest()
+
+
+def test_small_world_teacher_unbiased_and_bounds_exact():
+    import small_world
+    small_world.selftest()
+
+
+def test_small_world_loop_training_runs_on_taught_policy():
+    import small_world_loop
+    small_world_loop.selftest()
+
+
+def test_llm_gate_number_check_without_calling_a_model():
+    import llm_gate
+    llm_gate.selftest()
+
+
+def test_multi_country_teacher_matches_exact_three_country_ring():
+    import multi_country
+    multi_country.selftest()
+
+
+def test_cap_modules_own_answer_exact_on_two_countries():
+    import cap_modules
+    cap_modules.selftest()
+
+
+def test_policy_library_borrowed_modules_unbiased():
+    import policy_library
+    policy_library.selftest()
+
+
+def test_dense_pools_modules_exact_on_complete_graph_of_four():
+    import dense_pools
+    dense_pools.selftest()
+
+
+def test_exact_check_junction_solver_enumeration_and_modules_agree():
+    import exact_check
+    exact_check.selftest()
+
+
+def test_loss_curve_forward_pass_matches_exact_at_lower_threshold():
+    import loss_curve
+    loss_curve.selftest()
+
+
+def test_reliability_coverage_machinery_on_a_fair_coin():
+    import reliability
+    reliability.selftest()
+
+
+def test_quantum_side_reproduces_the_authors_required_speedup():
+    import quantum_side
+    quantum_side.selftest()

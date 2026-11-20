@@ -1,0 +1,68 @@
+{
+  "ring 28 @ 40m": {
+    "p_exact": 1.3220244150337375e-13,
+    "twist": {
+      "coverage_95": 0.925,
+      "mean_over_exact": 1.0057050854794396,
+      "z_of_mean": 0.6105313233699691,
+      "khat": 0.40819250436784915,
+      "max_path_share": 0.005350747688780334,
+      "ess_fraction": 0.003352974629264104,
+      "relative_variance": 282.05650944540747
+    },
+    "uncapped": {
+      "coverage_95": 0.955,
+      "mean_over_exact": 1.0008751277719334,
+      "z_of_mean": 0.5416564794847111,
+      "khat": -0.04330904012956647,
+      "max_path_share": 0.00039668515035146416,
+      "ess_fraction": 0.08827573938053745,
+      "relative_variance": 10.507288133698486
+    },
+    "modules": {
+      "coverage_95": 0.94,
+      "mean_over_exact": 1.000339892920795,
+      "z_of_mean": 0.6833392426455984,
+      "khat": 0.2646297387697422,
+      "max_path_share": 0.0001732269337193698,
+      "ess_fraction": 0.49242186186823395,
+      "relative_variance": 1.0331219284931379
+    }
+  },
+  "ap_risk 28 @ 450m": {
+    "p_exact": 0.001795839596268465,
+    "twist": {
+      "coverage_95": 0.95,
+      "mean_over_exact": 1.0011860491982683,
+      "z_of_mean": 1.0605931040628824,
+      "khat": -1.8463973750230236,
+      "max_path_share": 6.298605374405503e-05,
+      "ess_fraction": 0.15915537352692108,
+      "relative_variance": 5.340767449683654
+    },
+    "uncapped": {
+      "coverage_95": 0.95,
+      "mean_over_exact": 1.000183205904157,
+      "z_of_mean": 0.8839845635345832,
+      "khat": -0.2529436381450648,
+      "max_path_share": 8.004461610804978e-06,
+      "ess_fraction": 0.8638235081508389,
+      "relative_variance": 0.15787914274848278
+    },
+    "modules": {
+      "coverage_95": 0.955,
+      "mean_over_exact": 1.0001050872632065,
+      "z_of_mean": 0.7762106019207198,
+      "khat": 0.3083738701885838,
+      "max_path_share": 2.889178310875772e-05,
+      "ess_fraction": 0.9286298550047788,
+      "relative_variance": 0.07691343405827067
+    }
+  },
+  "checks": {
+    "R1_coverage_92_to_98": true,
+    "R2_mean_unbiased": true,
+    "R3_khat_below_0.7": true,
+    "R4_no_path_above_1pct": true
+  }
+}
