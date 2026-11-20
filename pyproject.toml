@@ -1,0 +1,9 @@
+[project]
+name = "adb-quantum-challenge-web"
+version = "0.1.0"
+description = "Dependencies for the Vercel function api/estimate.py"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy==2.5.3",
+  "scipy==1.18.1",
+]
