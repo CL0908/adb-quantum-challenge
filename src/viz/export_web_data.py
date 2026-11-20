@@ -9,6 +9,7 @@ values of build_slides.slide_values()), frontend/public/data/fallback.json (the 
 by the same function api/estimate.py runs, used when the live function is unreachable), and copies the three PDFs into frontend/public/. No result number is typed by hand anywhere on the page.
 """
 import json
+import re
 import shutil
 import sys
 import time
@@ -51,18 +52,40 @@ def fallback():
     return out
 
 
+FRONTEND_KEY = re.compile(r"""\bk=["']([A-Z][A-Z0-9_]+)["']|\bv\.([A-Z][A-Z0-9_]+)\b|\bv\[["']([A-Z][A-Z0-9_]+)["']\]""")
+
+
+def check_frontend_keys(v):
+    """Fail (before anything is written) if the site's source reads a value key that this export did not produce.
+    Same rule as frontend/scripts/check-values.mjs, which guards `npm run build`."""
+    used = {}
+    for f in (ROOT / "frontend" / "src").rglob("*.ts*"):
+        for m in FRONTEND_KEY.finditer(f.read_text()):
+            used.setdefault(m.group(1) or m.group(2) or m.group(3), set()).add(f.name)
+    missing = {k: sorted(fs) for k, fs in used.items() if not str(v.get(k, "")).strip()}
+    if missing:
+        lines = "\n".join(f"  {k}  ({', '.join(fs)})" for k, fs in sorted(missing.items()))
+        raise SystemExit(f"export_web_data: {len(missing)} value key(s) read by frontend/src are missing from the export "
+                         f"(a values group probably failed, see 'placeholder group failed' above):\n{lines}")
+
+
 def main():
     (WEB / "data").mkdir(parents=True, exist_ok=True)
     v = values()
-    # A value group can fail while its result files are being regenerated; keep the last good value instead of
-    # dropping the number from the page (and say so).
+    check_frontend_keys(v)
+    from src.viz import export_story
+    export_story.write(WEB)
+    from src.viz import export_dashboard_data
+    export_dashboard_data.main()
+    # No merging with the previous file: every value on the page is recomputed from results/*.json, so a stale number cannot survive.
     old = WEB / "data" / "values.json"
     if old.exists():
         prev = json.loads(old.read_text())
-        kept = sorted(set(prev) - set(v))
-        if kept:
-            print(f"kept {len(kept)} previous values that could not be recomputed, e.g. {kept[:3]}")
-        v = {**prev, **v}
+        gone = sorted(set(prev) - set(v))
+        if gone:
+            print(f"dropped {len(gone)} previous values no longer produced, e.g. {gone[:3]}")
+        changed = [k for k in v if k in prev and prev[k] != v[k]]
+        print(f"{len(changed)} values changed since the previous export")
     (WEB / "data" / "values.json").write_text(json.dumps(v, ensure_ascii=False, indent=1, sort_keys=True))
     t0 = time.time()
     fb = WEB / "data" / "fallback.json"

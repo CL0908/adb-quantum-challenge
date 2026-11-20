@@ -121,10 +121,10 @@ function Model({ map, eq, children }: { map: MapData | null; eq: number; childre
   return (
     <figure className="model">
       <div className="model-stage">
-        {!map || mode === 'wait' ? <div className="map-loading" role="status">Loading terrain…</div>
+        {!map || mode === 'wait' ? <div className="map-loading" role="status">Loading terrain</div>
           : mode === '2d' ? <MapView map={map} eq={eq} />
           : (
-            <Suspense fallback={<div className="map-loading" role="status">Loading terrain…</div>}>
+            <Suspense fallback={<div className="map-loading" role="status">Loading terrain</div>}>
               <ErrorCatch onError={() => setMode('2d')}><Terrain3D map={map} eq={eq} onFail={() => setMode('2d')} /></ErrorCatch>
             </Suspense>
           )}
@@ -156,10 +156,10 @@ export default function Stage({ proposalHref }: { proposalHref: string }) {
   const b = grid ? { jointExhaustion: grid.brief.joint_exhaustion, exceed: grid.brief.exceed, delivered: grid.brief.delivered } : null
   const at = (p: { eq: number; rain: number } | undefined) => !!p && Math.abs(cur.eq - p.eq) < 1e-9 && Math.abs(cur.rain - p.rain) < 1e-9
   const mult = (x: number, y: number) => (Math.abs(x / y - 1) < 0.005 ? 'same as brief' : `×${(x / y).toFixed(x / y >= 10 ? 0 : 1)} the brief’s`)
-  const eqDisplay = grid && Math.abs(cur.eq - grid.brief.eq) < 1e-9 ? v.BRIEF_EQ_SHARE ?? '7.5%'
-    : grid && Math.abs(cur.eq - grid.data.eq) < 1e-9 ? v.DATA_EQ_SHARE ?? '48%' : pct(cur.eq)
-  const rainDisplay = grid && Math.abs(cur.rain - grid.brief.rain) < 1e-9 ? v.BRIEF_RAIN_SHARE ?? '25%'
-    : grid && Math.abs(cur.rain - grid.data.rain) < 1e-9 ? v.DATA_RAIN_SHARE ?? '2.2%' : pct(cur.rain)
+  const eqDisplay = grid && Math.abs(cur.eq - grid.brief.eq) < 1e-9 ? v.BRIEF_EQ_SHARE
+    : grid && Math.abs(cur.eq - grid.data.eq) < 1e-9 ? v.DATA_EQ_SHARE : pct(cur.eq)
+  const rainDisplay = grid && Math.abs(cur.rain - grid.brief.rain) < 1e-9 ? v.BRIEF_RAIN_SHARE
+    : grid && Math.abs(cur.rain - grid.data.rain) < 1e-9 ? v.DATA_RAIN_SHARE : pct(cur.rain)
 
   return (
     <section className="first" id="top">
@@ -172,7 +172,7 @@ export default function Stage({ proposalHref }: { proposalHref: string }) {
         <p className="authors"><b>Tan Chun Loong</b> · <b>Xu Zi Yu</b></p>
         <p className="first-links"><a href={proposalHref}>Read the proposal (PDF)</a><a href="#problem">Why simulation fails</a></p>
         <p className="first-note">Move the two sliders: the model and the three numbers change together. The numbers are exact, not simulated.</p>
-        <p className="first-fine">Exact two-country model, solved at {grid ? grid.eq_axis.length * grid.rain_axis.length : '…'} combinations of the two sliders and interpolated between them. Dependence evidence uses public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.</p>
+        <p className="first-fine">Exact two-country model, solved at {grid ? grid.eq_axis.length * grid.rain_axis.length : 'many'} combinations of the two sliders and interpolated between them. Dependence evidence uses public proxies (loss years, station rain), not the bond’s triggers: a stress range, not a re-pricing.</p>
       </div>
       <div className="first-model">
         <Model map={map} eq={cur.eq}>
@@ -203,7 +203,7 @@ export default function Stage({ proposalHref }: { proposalHref: string }) {
               </div>
             </>
           ) : (
-            <p className="muted" role="status">Loading exact values…</p>
+            <p className="muted" role="status">Loading exact values</p>
           )}
         </aside>
         </Model>

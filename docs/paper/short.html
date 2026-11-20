@@ -66,16 +66,23 @@ Xu Zi Yu · Nanyang Technological University, Singapore; Universiti
 Malaya, Malaysia · ADB Quantum Innovation Challenge, Phase 1 proposal ·
 November 2026</span></p>
 </div>
+<div class="plain">
+<p><strong>When disaster cover is pooled, the risk is everyone losing at
+once.</strong> ADB’s US$160m Disaster Relief Bond covers the Kyrgyz
+Republic and Tajikistan. The dangerous case is both countries using up
+their cover in the same three years: too rare to see in history or in
+ordinary simulation. We compute it exactly, and show how much money a
+regional pool needs because of it.</p>
+</div>
 <div class="pitch">
-<p>ADB’s US$160m Disaster Relief Bond pays the Kyrgyz Republic and
-Tajikistan separately; whether such cover can be pooled, and how much
-shared capital a pool needs, depends on how often several countries need
-a payout in the same three-year term. We compute these joint
-probabilities exactly, with no sampling error, for pools of up to 28
-countries, and estimate the cases exact methods cannot reach with a
-learned sampler that is more accurate per simulated scenario than the
-challenge’s reference methods. We then cost the quantum version of the
-same calculation end to end and state the hardware it would need to
+<p>The bond pays the two countries separately; whether such cover can be
+pooled, and how much shared capital a pool needs, depends on how often
+several countries need a payout in the same three-year term. We compute
+these joint probabilities exactly, with no sampling error, for pools of
+up to 28 countries, and estimate the cases exact methods cannot reach
+with a learned sampler that is more accurate per simulated scenario than
+the challenge’s reference methods. We then cost the quantum version of
+the same calculation end to end and state the hardware it would need to
 pay.</p>
 </div>
 <div class="motto">
@@ -98,9 +105,9 @@ target, with training charged and no bias.</li>
 <li><strong>A quantum stage with a measured bar (quantum).</strong>
 Amplitude estimation with exact loading needs resources linear in
 countries and dependence links. Against our best classical method it
-breaks even only on hardware 6.5×10⁵ times faster than a projected
-fault-tolerant baseline at 28 countries; near-term circuits are costed
-for an IBM device.</li>
+breaks even only on hardware 1.4×10⁶ times faster (95% interval 8.0×10⁵
+to 2.7×10⁶) than a projected fault-tolerant baseline at 28 countries;
+near-term circuits are costed for an IBM device.</li>
 </ol>
 </div>
 <p>For ADB the larger uncertainty is dependence itself: under any
@@ -290,7 +297,7 @@ class="math inline">\(\kappa = c_Q\tau_A/(\tau_C\sqrt a)\)</span>; <span
 class="math inline">\(\tau_A\)</span> is the fault-tolerant time per
 state preparation, <span class="math inline">\(\tau_C\)</span> RDPO’s
 time per path. Comparing with plain Monte Carlo instead would overstate
-the quantum gain by up to 1.1×10¹¹ here.</li>
+the quantum gain by up to 2.3×10¹¹ here.</li>
 <li><strong>Error correction (projected fault-tolerant
 baseline).</strong> Surface code at physical error 10⁻³, 1 µs code
 cycles, four magic-state factories, Toffoli = 4 T, Ross–Selinger
@@ -328,7 +335,7 @@ data-cites="woerner2019 egger2021">(Woerner and Egger 2019; Egger et al.
 2021)</span></td>
 <td>exact loading, payout oracle, deep circuits</td>
 <td>exact source-wise loading, linear resources; break-even needs
-hardware 6.5×10⁵× faster at 28 countries; near-term circuits off by
+hardware 1.4×10⁶× faster at 28 countries; near-term circuits off by
 19%–25%</td>
 <td>right primitive; needs fault tolerance</td>
 </tr>
@@ -641,9 +648,9 @@ counts follow logical qubits ≈ 38 + 13.2n + 8.2|E|; Toffolis per A ≈ -26
 + 106.0n + 39.0|E|; depth of A ≈ 378 + 0.3n + 14.7|E|, each within 7% of
 the compiled circuits.</li>
 <li><strong>Where it could pay.</strong> RDPO’s measured per-path
-relative variances are ρ² = 0.13–66; break-even at 1% error needs ρ² ≈
-3.8×10⁵–4.3×10⁶ at the projected baseline (Figure 4). The gap closes
-with portfolio size (s* falls from 1.7×10⁸ at 2 countries to 6.5×10⁵ at
+relative variances are ρ² = 0.13–33; break-even at 1% error needs ρ² ≈
+3.8×10⁵–4.5×10⁶ at the projected baseline (Figure 4). The gap closes
+with portfolio size (s* falls from 1.7×10⁸ at 2 countries to 1.4×10⁶ at
 28), so the test is re-run first where ρ² grows fastest: dense graphs
 and events touching many countries.</li>
 <li><strong>Near-term run, costed.</strong> The two-country law on 7–8
@@ -773,7 +780,7 @@ surface code at physical error 10⁻³.</p>
 <td>Run time</td>
 <td>emulator fallback 18 CPU minutes</td>
 <td>0.7 h</td>
-<td>11 days (RDPO: 1 s)</td>
+<td>11 days (RDPO: 706.9 ms)</td>
 </tr>
 <tr class="even">
 <td>Error handling</td>
@@ -788,7 +795,7 @@ surface code at physical error 10⁻³.</p>
 rotation synthesis (deterministic or randomised) and a Chebyshev
 amplitude estimator with an empirical constant lower the required
 hardware speed-up s* by 10.7–29.3× over the eight settings (ring-28:
-6.5×10⁵ to 2.6×10⁴–2.2×10⁴); s* remains far above 1, and we claim no
+1.4×10⁶ to 5.4×10⁴–4.7×10⁴); s* remains far above 1, and we claim no
 quantum advantage (annex §8.3).</p>
 <p><strong>Hardware modality and fit with Phase 2.</strong> Each shared
 source couples two country registers. On 2D superconducting lattices

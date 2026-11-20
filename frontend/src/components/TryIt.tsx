@@ -52,12 +52,12 @@ function layout(r: Result, money: boolean) {
   return { tx, ticks }
 }
 
-function Row({ name, sub, color, est, ci, money, extra }: { name: string; sub: string; color: string; est: number; ci: [number, number]; money: boolean; extra?: ReactNode }) {
+function Row({ name, sub, color, est, ci, money, extra, noci }: { name: string; sub: string; color: string; est: number; ci: [number, number]; money: boolean; extra?: ReactNode; noci?: boolean }) {
   return (
     <div className="mrow" style={{ ['--c' as string]: color }}>
       <div className="nm">{name}<small>{sub}</small></div>
       <div className="val">{fmt(est, money)}</div>
-      <div className="ci">{rangeOf(ci, money)}{extra ? <><br />{extra}</> : null}</div>
+      <div className="ci">{noci ? null : rangeOf(ci, money)}{extra ? <>{noci ? null : <br />}{extra}</> : null}</div>
     </div>
   )
 }
@@ -69,7 +69,7 @@ function Plot({ r }: { r: Result }) {
     const a = tx(ci[0]), b = tx(ci[1]), clipped = !money && ci[0] <= 0
     return (
       <>
-        <div className="rl" style={{ top: y - 22, color }}>{name}</div>
+        <div className="rl" style={{ top: y - 32, color }}>{name}</div>
         <div className="iv" style={{ ['--c' as string]: color, left: `${100 * a}%`, width: `max(${100 * (b - a)}%, 8px)`, top: y - 6 }} />
         {clipped && <div className="arrowl" style={{ ['--c' as string]: color, left: `${100 * a}%`, top: y }}>◀ 0</div>}
         {(est > 0 || money) && <div className="pt" style={{ ['--c' as string]: color, left: `${100 * tx(est)}%`, top: y }} />}
@@ -99,14 +99,14 @@ export default function TryIt() {
   const [target, setTarget] = useState('joint_exhaustion')
   const [bi, setBi] = useState(3)
   const [res, setRes] = useState<{ r: Result; live: boolean; seed: boolean } | null>(null)
-  const [status, setStatus] = useState('Loading…')
+  const [status, setStatus] = useState('Loading')
   const [warn, setWarn] = useState(false)
   const seq = useRef(0)
 
   const run = useCallback(async (randomSeed: boolean) => {
     const my = ++seq.current
     const budget = BUDGETS[bi]
-    setStatus('Running…'); setWarn(false)
+    setStatus('Running'); setWarn(false)
     const body = { scenario, target, budget, threshold_musd: 80, seed: randomSeed ? Math.floor(Math.random() * 1e6) : 0 }
     const ctl = new AbortController()
     const timer = setTimeout(() => ctl.abort(), 20000)
@@ -143,11 +143,10 @@ export default function TryIt() {
 
   return (
     <section className="sec" id="try">
-      <div className="wrap">
-        <p className="eyebrow">Try the estimator</p>
+      <div className="wrap wide">
         <h2 className="h2">Pick a scenario from the brief and compare three estimators.</h2>
         <p className="lede">The two-country benchmark, solved live: the exact answer, a plain Monte Carlo run, and our learned sampler (RDPO) with the same number of simulated paths. Pool questions use the brief’s US$80m threshold.</p>
-        <div className="try-panel">
+        <div className="panel"><div className="try-panel">
           <form className="try-controls" onSubmit={(e) => { e.preventDefault(); void run(true) }} autoComplete="off">
             <label>Scenario
               <select value={scenario} onChange={(e) => setScenario(e.target.value)}>{SCEN.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
@@ -161,7 +160,7 @@ export default function TryIt() {
             <div className={`status ${warn ? 'warn' : ''}`}>{status}</div>
             {r && (
               <>
-                <Row name="Exact" sub="dense enumeration" color="#1F3557" est={r.exact} ci={[r.exact, r.exact]} money={money} extra="no sampling error" />
+                <Row name="Exact" sub="dense enumeration" color="#1F3557" est={r.exact} ci={[r.exact, r.exact]} money={money} extra="no sampling error" noci />
                 <Row name="Plain Monte Carlo" sub={`${r.paths_used.toLocaleString('en-US')} paths`} color="#4F5563" est={r.mc.estimate} ci={r.mc.ci} money={money}
                   extra={money ? null : r.mc.hits === 0 ? 'No path hit the event.' : `${r.mc.hits} of ${r.paths_used.toLocaleString('en-US')} paths hit the event.`} />
                 <Row name="RDPO" sub={`${r.paths_used.toLocaleString('en-US')} paths, training included`} color="#C8553A" est={r.estimate} ci={r.ci} money={money} />
@@ -173,7 +172,7 @@ export default function TryIt() {
               </>
             )}
           </div>
-        </div>
+        </div></div>
       </div>
     </section>
   )

@@ -26,7 +26,7 @@ lang: en
    NumPy engine cheap methods win most cells (RDPO keeps {{EQT_A_TIME_BRIEF}}; §6.5, Table [tab:eqtA]).
 3. **A quantum stage with a measured bar.** Amplitude estimation with exact twisted loading needs resources linear
    in countries and dependence edges. Against our best classical method it breaks even only on hardware
-   {{Q_SSTAR_28}} times faster than a projected fault-tolerant baseline (28 countries); a costed near-term run on
+   {{Q_SSTAR_28}} times faster (95% interval {{Q_SSTAR_28_CI}}) than a projected fault-tolerant baseline (28 countries); a costed near-term run on
    an IBM Heron-class model is off by {{HW_BEST_RANGE}} at today's noise, and the trust guard falls back.
 
 **Model risk is the larger number.** With both countries' laws fixed, any dependence puts Pr(L > 80m) in
@@ -1196,6 +1196,7 @@ faster than the stated baseline** (physical error $10^{-3}$, 1 µs code cycles, 
 The classical reference is now the faster RDPO engine written by Xu Zi Yu (the same policy and the same paths, drawn
 {{Q_ENGINE_X28}} times faster at 28 countries on one core, training included; the quantum model is unchanged); timed back to
 back on the same machine, the earlier engine gives s* = {{Q_SSTAR_28_OLD}} at 28 countries.
+**How firm is the 28-country value.** It rests on {{Q_REPS_28}} replications of RDPO at that size; ρ² ({{Q_RHO2_28}}) varies strongly between replications (heavy-tailed), and a bootstrap over replications gives a 95% interval of {{Q_SSTAR_28_CI}} for s* (ρ² {{Q_RHO2_28_CI}}), i.e. within a factor of {{Q_SSTAR_28_FAC}} of the point value. Every conclusion drawn here needs only that s* is far above 1.
 
 ![**Figure [fig:qadv].** (a) Hardware speed-up $s^*$ required for the quantum stage to match classical RDPO
 in wall-clock time at 10% relative error. (b) Logical two-qubit error rate required for the deepest

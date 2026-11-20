@@ -1,0 +1,211 @@
+{
+ "decomp": {
+  "kg_solo": 0.03663731826304394,
+  "shared": 0.0029666683301194244,
+  "tj_solo": 0.03707438120706432,
+  "rain_kg_or_tj_only": 0.014737059740745795,
+  "rain_both": 0.005262940259254223,
+  "no_payout": 0.8940146601134454
+ },
+ "scaling": {
+  "ring": [
+   [
+    2,
+    0.4202533959996799
+   ],
+   [
+    3,
+    1.2279848589996618
+   ],
+   [
+    4,
+    1.4653339980004603
+   ],
+   [
+    6,
+    3.882956832000673
+   ],
+   [
+    8,
+    6.501119451000704
+   ],
+   [
+    10,
+    10.00264943899947
+   ],
+   [
+    12,
+    14.508297247999508
+   ],
+   [
+    16,
+    25.203713023999626
+   ],
+   [
+    20,
+    38.59579362199929
+   ],
+   [
+    24,
+    47.866596902999845
+   ],
+   [
+    28,
+    67.97625565899943
+   ]
+  ],
+  "max_bond": 58
+ },
+ "heat": {
+  "targets": [
+   "expected_loss",
+   "joint_attachment",
+   "exceedance",
+   "stop_loss",
+   "joint_exhaustion"
+  ],
+  "paths": {
+   "adb-base": {
+    "expected_loss": 0.5544687596018844,
+    "joint_attachment": 3.9110090417035286,
+    "exceedance": 7.955932117590085,
+    "stop_loss": 9.760194746925269,
+    "joint_exhaustion": 19.316607754868677
+   },
+   "adb-independent": {
+    "expected_loss": 0.5190874831478683,
+    "joint_attachment": 5.260197755917434,
+    "exceedance": 10.847722587617612,
+    "stop_loss": 10.435879317905592,
+    "joint_exhaustion": 170.54884616095174
+   },
+   "adb-common-shock": {
+    "expected_loss": 0.530305991619375,
+    "joint_attachment": 3.1737518980855977,
+    "exceedance": 5.847366153926837,
+    "stop_loss": 5.398439718536849,
+    "joint_exhaustion": 15.22625585315928
+   },
+   "adb-rain-stress": {
+    "expected_loss": 0.4991937127839083,
+    "joint_attachment": 2.969842191862224,
+    "exceedance": 5.920992490332017,
+    "stop_loss": 7.975006065289979,
+    "joint_exhaustion": 6.255555141497426
+   },
+   "adb-rain-cover": {
+    "expected_loss": 0.5499111713578327,
+    "joint_attachment": 3.4336194552393224,
+    "exceedance": 7.892253609143197,
+    "stop_loss": 10.449934398697144,
+    "joint_exhaustion": 72.61372517962455
+   }
+  },
+  "time": {
+   "adb-base": {
+    "expected_loss": 0.022648433649700275,
+    "joint_attachment": 0.1542639022378024,
+    "exceedance": 0.5436251858687869,
+    "stop_loss": 0.6163487805811754,
+    "joint_exhaustion": 2.1006942512287954
+   },
+   "adb-independent": {
+    "expected_loss": 0.03795364533374996,
+    "joint_attachment": 0.21271035822381024,
+    "exceedance": 0.7972920258914442,
+    "stop_loss": 0.9893799274241722,
+    "joint_exhaustion": 38.23551102123764
+   },
+   "adb-common-shock": {
+    "expected_loss": 0.0393689484685422,
+    "joint_attachment": 0.13275145887792156,
+    "exceedance": 0.4321604108043368,
+    "stop_loss": 0.35562334194066825,
+    "joint_exhaustion": 1.0957489432745682
+   },
+   "adb-rain-stress": {
+    "expected_loss": 0.034133444452942696,
+    "joint_attachment": 0.11037043755018697,
+    "exceedance": 0.612254236817646,
+    "stop_loss": 0.692496729645774,
+    "joint_exhaustion": 0.847758810556069
+   },
+   "adb-rain-cover": {
+    "expected_loss": 0.021646649705673704,
+    "joint_attachment": 0.14230004851161873,
+    "exceedance": 1.2344273184816046,
+    "stop_loss": 0.9270997507794398,
+    "joint_exhaustion": 17.04803368407898
+   }
+  }
+ },
+ "quantum": [
+  {
+   "n": 2,
+   "s_star": 167615167.54198787,
+   "ci": [
+    100717570.98238139,
+    348379845.82124394
+   ],
+   "classical_s": 1.5375273932553776e-05,
+   "quantum_s": 2577.1291162089597
+  },
+  {
+   "n": 8,
+   "s_star": 13227907.643701449,
+   "ci": [
+    7253726.253477214,
+    32489878.590373006
+   ],
+   "classical_s": 0.0024371989535998738,
+   "quantum_s": 32239.04266754494
+  },
+  {
+   "n": 16,
+   "s_star": 2448609.7383927675,
+   "ci": [
+    1432593.1451388681,
+    4765297.206604999
+   ],
+   "classical_s": 0.03565981894751262,
+   "quantum_s": 87316.97994420232
+  },
+  {
+   "n": 20,
+   "s_star": 2220417.2325458014,
+   "ci": [
+    1468548.6146045297,
+    3827123.5952190775
+   ],
+   "classical_s": 0.06360354420124849,
+   "quantum_s": 141226.40559544074
+  },
+  {
+   "n": 28,
+   "s_star": 1355059.0562631437,
+   "ci": [
+    795600.774815969,
+    2685152.039631184
+   ],
+   "classical_s": 0.706871076837187,
+   "quantum_s": 957852.0542787106
+  }
+ ],
+ "documents": {
+  "proposal": {
+   "pages": 12,
+   "file": "RDPO_Proposal_Short.pdf",
+   "thumb": "data/thumb_proposal.jpg"
+  },
+  "annex": {
+   "pages": 60,
+   "file": "RDPO_Proposal.pdf",
+   "thumb": "data/thumb_annex.jpg"
+  },
+  "deck": {
+   "pages": 12,
+   "file": "RDPO_Presentation.pdf",
+   "thumb": "data/thumb_deck.jpg"
+  }
+ }
+}

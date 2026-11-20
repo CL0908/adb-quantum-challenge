@@ -2,7 +2,7 @@
 
 Same settings, budget and protocol as src/rdpo/experiments.py:e2 (B = 65,536, 20/10/6 replications, training charged inside the
 timed fit). Old engine = RDPOConfig() default (v1 policy). New engine = the table-driven FastPolicy of the same policy with
-addons/rdpo_engine.py's rollout for every draw that needs no gradient (Xu Zi Yu, PR #3-#4). Each replication runs old then new
+addons/rdpo_engine.py's rollout for every draw that needs no gradient (Xu Zi Yu, PR #3-#4). The ring-16/20/28 sequences were later extended (arguments, see main) to stabilise rho2. Each replication runs old then new
 with the same seed. Output: results/classical_v3_raw.jsonl (resumable). Run with OMP/MKL/OPENBLAS_NUM_THREADS=1.
 
     OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONPATH=.:addons python repro/classical_v3_bench.py
@@ -52,7 +52,8 @@ def fit(P, engine, seed):
         F.FastPolicy = orig
 
 
-def main(only=None):
+def main(only=None, extra=None):
+    """extra: {(kind, n): total replications}; extends the sequence with the same seed formula (seed = SEED + 1000 n + 300 case + rep)."""
     tens = {(r["topology"], r["n"]): r for r in json.loads((R / "tensor.json").read_text())["B_scaling_n"]
             if "targets" in r and r["tol"] == (1e-6 if (r["topology"] == "complete" and r["n"] == 7) else 1e-9)}
     done = {json.loads(l)["id"] for l in RAW.read_text().splitlines()} if RAW.exists() else set()
@@ -62,7 +63,7 @@ def main(only=None):
         model = SyntheticModel(n, topology(kind, n))
         mu = tens[(kind, n)]["targets"]["exceedance_prob"]
         P = PortfolioProblem(model, "exceedance")
-        reps = 20 if n <= 4 else (10 if n <= 16 else 6)
+        reps = (extra or {}).get((kind, n)) or (20 if n <= 4 else (10 if n <= 16 else 6))
         for r in range(reps):
             seed = SEED + 1000 * n + 100 * (3 * ci) + r
             rid = f"{kind}-{n}-{r}"
@@ -78,4 +79,6 @@ def main(only=None):
 
 
 if __name__ == "__main__":
-    main()
+    # optional: python repro/classical_v3_bench.py ring-28=36 ring-20=36 ring-16=20   (total replications; only these cases run)
+    ex = {(a.split("=")[0].split("-")[0], int(a.split("=")[0].split("-")[1])): int(a.split("=")[1]) for a in sys.argv[1:]}
+    main(only=set(ex) or None, extra=ex or None)
