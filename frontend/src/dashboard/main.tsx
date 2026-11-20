@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import '../shared/theme.css'
 import './dashboard.css'
 import Dashboard from './Dashboard'
 

@@ -5,7 +5,7 @@ import { resolve } from 'node:path'
 
 // Multi-page build: the home page plus one folder per extra page (solution/, dashboard/), each built to web/<name>/index.html.
 // A page is included only once its index.html exists, so pages can land independently.
-const here = (p: string) => resolve(__dirname, p)
+const here = (p: string) => resolve(import.meta.dirname, p)
 const input: Record<string, string> = { main: here('index.html') }
 for (const page of ['solution', 'dashboard']) {
   if (existsSync(here(`${page}/index.html`))) input[page] = here(`${page}/index.html`)

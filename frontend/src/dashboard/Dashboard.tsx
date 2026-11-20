@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Donut, LineChart, VBars, type Bar, type Mark, type Series } from './charts'
 import { delta, moduleCmd, pct, prob, probText, relErr, sci, sciSvg, TARGET_HINT, TARGET_LABEL, usd } from './fmt'
+import { SiteNav } from '../shared/SiteNav'
+import { Segmented } from '../shared/Controls'
 import type { DashData, Grid, Pool, Scenario, TargetName } from './types'
 
 type PoolId = 'kgtj' | 'carec' | 'ap'
@@ -8,7 +10,7 @@ type RainMode = 'both' | 'brief' | 'data'
 type Metric = 'joint_exhaustion' | 'exceedance' | 'stop_loss'
 
 const POOL_IDS: PoolId[] = ['kgtj', 'carec', 'ap']
-const COL = { teal: '#34D1BC', terra: '#F0846A', lime: '#D4F26B', mute: '#8B9A98' }
+const COL = { teal: 'var(--c1)', terra: 'var(--c2)', sand: 'var(--hi)', blue: 'var(--c3)', mute: 'var(--c-neutral)' }
 const COVERAGE_OK = 0.9
 
 interface Row {
@@ -70,19 +72,6 @@ function rowsFor(pool: Pool, poolId: PoolId, scen: string): Row[] {
   }))
 }
 
-const Icon = ({ d }: { d: ReactNode }) => (
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    {d}
-  </svg>
-)
-const NAV = [
-  { id: 'overview', label: 'Overview', href: '#overview', d: <path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z" /> },
-  { id: 'scenarios', label: 'Scenarios', href: '#scenarios', d: <><path d="M5 20V10M12 20V4M19 20v-7" /></> },
-  { id: 'pools', label: 'Pools', href: '#pools', d: <><circle cx="8" cy="9" r="3.2" /><circle cx="16.5" cy="10" r="2.6" /><path d="M2.8 19c.4-3 2.5-4.6 5.2-4.6s4.8 1.6 5.2 4.6M14 15.2c2.8-.5 5.6.6 6.4 3.8" /></> },
-  { id: 'methods', label: 'Methods', href: '/solution/', d: <><path d="M9 3h6M10 3v6L5 18.5A1.5 1.5 0 0 0 6.3 21h11.4a1.5 1.5 0 0 0 1.3-2.5L14 9V3" /><path d="M7.5 15h9" /></> },
-  { id: 'documents', label: 'Documents', href: '/#documents', d: <><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></> },
-]
-
 function BigNumber({ text }: { text: string }) {
   const m = text.match(/^(.*?)(\.\d.*)$/)
   return (
@@ -92,25 +81,17 @@ function BigNumber({ text }: { text: string }) {
     </span>
   )
 }
-const Pill = ({ tone, children }: { tone: 'up' | 'down' | 'flat' | 'teal' | 'warn' | 'lime'; children: ReactNode }) => <span className={`pill ${tone}`}>{children}</span>
+const Pill = ({ tone, children }: { tone: 'up' | 'down' | 'flat' | 'teal' | 'warn' | 'sand'; children: ReactNode }) => <span className={`pill ${tone}`}>{children}</span>
 
 function Seg<T extends string>({ value, onChange, options, label }: { value: T; onChange: (v: T) => void; options: { v: T; label: string }[]; label: string }) {
-  return (
-    <div className="seg" role="group" aria-label={label}>
-      {options.map((o) => (
-        <button key={o.v} type="button" className={o.v === value ? 'on' : ''} aria-pressed={o.v === value} onClick={() => onChange(o.v)}>
-          {o.label}
-        </button>
-      ))}
-    </div>
-  )
+  return <Segmented label={label} value={value} onChange={onChange} options={options.map((o) => ({ id: o.v, label: o.label }))} />
 }
 
 function Select({ id, label, value, onChange, children, disabled }: { id: string; label: string; value: string; onChange: (v: string) => void; children: ReactNode; disabled?: boolean }) {
   return (
     <label className={`sel${disabled ? ' off' : ''}`} htmlFor={id}>
       <span className="sel-l">{label}</span>
-      <select id={id} value={value} onChange={(e) => onChange(e.target.value)} disabled={disabled}>
+      <select className="sel-s" id={id} value={value} onChange={(e) => onChange(e.target.value)} disabled={disabled}>
         {children}
       </select>
     </label>
@@ -128,16 +109,8 @@ export default function Dashboard() {
   const [scen, setScen] = useState('adb-base')
   const [rainMode, setRainMode] = useState<RainMode>('both')
   const [metric, setMetric] = useState<Metric>('joint_exhaustion')
-  const [active, setActive] = useState('overview')
-
-  useEffect(() => {
-    const onHash = () => setActive(location.hash.slice(1) || 'overview')
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
-
-  if (err) return <div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div>
-  if (!d || !g) return <div className="shell state" aria-busy="true">Loading the pool data</div>
+  if (err) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div></>
+  if (!d || !g) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state" aria-busy="true">Loading the pool data</div></>
 
   const pool = d.pools[poolId]
   const isKG = poolId === 'kgtj'
@@ -145,26 +118,14 @@ export default function Dashboard() {
   const sc = isKG ? pool.scenarios![scen] : null
 
   return (
-    <div className="page">
+    <>
+      <SiteNav theme="dark" current="dashboard" />
+      <div className="page">
       <div className="shell">
-        <nav className="rail" aria-label="Sections">
-          <a className="mark" href="/" aria-label="Back to the Joint-Tail site" title="Joint-Tail home">
-            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#1b2a2b" stroke="#34D1BC" strokeWidth="1.5" /><path d="M7 21 13 11l4 6 3-4 5 8z" fill="#D4F26B" /></svg>
-          </a>
-          <div className="rail-nav">
-            {NAV.map((n) => (
-              <a key={n.id} href={n.href} className={active === n.id && n.href.startsWith('#') ? 'on' : ''} aria-label={n.label} title={n.label} onClick={() => n.href.startsWith('#') && setActive(n.id)}>
-                <Icon d={n.d} />
-                <span className="rail-t">{n.label}</span>
-              </a>
-            ))}
-          </div>
-        </nav>
-
         <div className="body">
           <header className="topbar" id="pools">
             <div className="tb-l">
-              <h1>Banker view</h1>
+              <h1>Banker <em>view</em></h1>
               <Select id="pool" label="Pool" value={poolId} onChange={(v) => setPoolId(v as PoolId)}>
                 {POOL_IDS.map((id) => (
                   <option key={id} value={id}>
@@ -275,7 +236,7 @@ export default function Dashboard() {
                 <p>
                   Every probability marked exact comes from a full calculation, not a simulation. RDPO is the fast estimator whose error is tracked in the register.
                 </p>
-                <a className="btn" href="/solution/">How the solution works</a>
+                <a className="jt-btn solid" href="/solution/">How the solution works</a>
                 <a className="lnk" href="/#method">Method on the home page</a>
               </section>
             </aside>
@@ -283,6 +244,7 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
@@ -311,7 +273,7 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
   if (show('data')) {
     const dash = mode === 'both' ? '5 4' : undefined
     series.push({ id: 'ed', color: COL.teal, dash, pts: pick('exceed', rData) }, { id: 'jd', color: COL.terra, dash, axis: 'r', pts: pick('joint_exhaustion', rData) })
-    marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.lime, label: 'data-e' }, { x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: 'r', color: COL.lime, label: 'data-j' })
+    marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.sand, label: 'data-e' }, { x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: 'r', color: COL.sand, label: 'data-j' })
   }
   const at = (x: number) => Math.min(g.eq_axis.length - 1, Math.max(0, Math.round(x)))
   const tipRows = (x: number) => {
@@ -329,12 +291,12 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
     <>
       <LineChart series={series} marks={marks} xDomain={[0, 60]} xTicks={[0, 10, 20, 30, 40, 50, 60]} xFmt={(x) => `${x}%`} yDomain={yDomain} dual={dual} height={290}
         tipX={(x) => `${at(x)}% of quakes hit both countries`} tipRows={tipRows} />
-      <div className="legend">
+      <div className="jt-legend">
         <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m), left axis</span>
         <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted), right axis</span>
         {mode === 'both' && <span><i className="ln dash" />dashed: station-data rain share</span>}
         {show('brief') && <span><i className="dot" style={{ borderColor: COL.teal }} />brief: {pct(g.brief.eq, 1)} quake share, {pct(g.brief.rain, 0)} rain</span>}
-        {show('data') && <span><i className="dot" style={{ borderColor: COL.lime }} />public records: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 1)} rain</span>}
+        {show('data') && <span><i className="dot" style={{ borderColor: COL.sand }} />public records: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 1)} rain</span>}
       </div>
     </>
   )
@@ -347,7 +309,7 @@ function TrendCurve({ pool }: { pool: Pool }) {
   const yDomain: [number, number] = [-12, Math.ceil(Math.log10(Math.max(...c.y)))]
   const marks: Mark[] = [pool.T_moderate!, pool.T_rare!].map((t) => {
     const row = pool.targets!.find((r) => r.target === 'exceedance' && r.threshold_musd === t)!
-    return { x: t, y: row.value, color: t === pool.T_moderate ? COL.teal : COL.lime, label: `T${t}` }
+    return { x: t, y: row.value, color: t === pool.T_moderate ? COL.teal : COL.sand, label: `T${t}` }
   })
   const nearest = (x: number) => c.x.reduce((b, v) => (Math.abs(v - x) < Math.abs(b - x) ? v : b), c.x[0])
   const xmin = Math.min(...c.x)
@@ -357,7 +319,7 @@ function TrendCurve({ pool }: { pool: Pool }) {
     <>
       <LineChart series={[{ id: 'c', color: COL.teal, pts }]} marks={marks} xDomain={[xmin, xmax]} xTicks={ticks} xFmt={(x) => `${x}`} yDomain={yDomain} height={270}
         tipX={(x) => `Loss above US$${nearest(x)}m`} tipRows={(x) => [{ label: 'Probability in one term', value: prob(c.y[c.x.indexOf(nearest(x))]), color: COL.teal }]} />
-      <div className="legend">
+      <div className="jt-legend">
         <span><i className="ln" style={{ background: COL.teal }} />Pr(pooled loss &gt; threshold), threshold in US$m</span>
         {marks.map((m) => (
           <span key={m.label}><i className="dot" style={{ borderColor: m.color }} />US${m.x}m: {prob(m.y)}</span>
@@ -374,7 +336,7 @@ function MethodError({ pool }: { pool: Pool }) {
   const w = (v: number) => `${Math.max(2, ((Math.log10(Math.max(v, 1e-3)) - lo) / (hi - lo)) * 100)}%`
   const meth: { k: 'mc_rel_rmse' | 'twist_rel_rmse' | 'rdpo_rel_rmse'; label: string; color: string }[] = [
     { k: 'mc_rel_rmse', label: 'Monte Carlo', color: COL.mute },
-    { k: 'twist_rel_rmse', label: 'Exponential twisting', color: COL.terra },
+    { k: 'twist_rel_rmse', label: 'Exponential twisting', color: COL.blue },
     { k: 'rdpo_rel_rmse', label: 'RDPO', color: COL.teal },
   ]
   return (
@@ -403,7 +365,7 @@ function MethodError({ pool }: { pool: Pool }) {
           </div>
         ))}
       </div>
-      <div className="legend">
+      <div className="jt-legend">
         <span>Bars on a log scale; shorter is better. &ldquo;No hits&rdquo; means plain Monte Carlo saw no loss above the threshold in any replication.</span>
       </div>
     </>
@@ -424,15 +386,15 @@ function Kpi({ d, g, pool, poolId, scen }: { d: DashData; g: Grid; pool: Pool; p
     const rec = delta(g.data.shortfall, base.targets.stop_loss.value)
     b = {
       label: `Stop-loss above US$${scen.threshold_musd}m`, text: usd(scen.targets.stop_loss.value), pill: pillOf(dSL),
-      extra: rec && <Pill tone="lime">{`Public records: ${usd(g.data.shortfall)} (${rec.text})`}</Pill>,
+      extra: rec && <Pill tone="sand">{`Public records: ${usd(g.data.shortfall)} (${rec.text})`}</Pill>,
     }
     donut = (
       <>
-        <Donut caption="Share of expected claims a shared limit still pays" arcs={[{ frac: scen.delivered, color: COL.teal, r: 0 }, { frac: g.data.delivered, color: COL.lime, r: 15 }]}
+        <Donut caption="Share of expected claims a shared limit still pays" arcs={[{ frac: scen.delivered, color: COL.teal, r: 0 }, { frac: g.data.delivered, color: COL.sand, r: 15 }]}
           center={<><b>{pct(scen.delivered)}</b><small>paid</small></>} />
         <ul className="dl">
           <li><i style={{ background: COL.teal }} />{scen.label} scenario <b>{pct(scen.delivered)}</b></li>
-          <li><i style={{ background: COL.lime }} />Public records <b>{pct(g.data.delivered)}</b></li>
+          <li><i style={{ background: COL.sand }} />Public records <b>{pct(g.data.delivered)}</b></li>
           <li className="dim">Brief base <b>{pct(base.delivered)}</b></li>
         </ul>
       </>
@@ -543,7 +505,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
                 {r.rel === null ? <small>no run</small> : (
                   <>
                     <b>{relErr(r.rel)}</b>
-                    <small style={r.cov !== null && !ok ? { color: 'var(--warn, #e6b450)' } : undefined}>{r.cov === null ? 'coverage n/a' : `coverage ${pct(r.cov, 0)}`}, {r.reps} reps</small>
+                    <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'coverage n/a' : `coverage ${pct(r.cov, 0)}`}, {r.reps} reps</small>
                   </>
                 )}
               </span>

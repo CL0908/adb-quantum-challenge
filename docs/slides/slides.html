@@ -150,6 +150,9 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
 .team { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; width: 100%; align-self: center; }
 .member, .howto { background: var(--card); border: 1.5px solid var(--rule); border-radius: 18px; padding: 40px 40px; }
 .member { border-left: 8px solid var(--navy); }
+.member .head { display: flex; align-items: center; gap: 28px; margin-bottom: 26px; }
+.member .head img { flex: none; width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; box-shadow: 0 0 0 1.5px var(--rule); }
+.member .head .role { margin-bottom: 0; }
 .member h3 { font-size: 40px; font-weight: 650; color: var(--navy); margin: 0 0 6px; }
 .member .role { font-size: 23px; color: var(--terra); font-weight: 600; margin-bottom: 26px; }
 .member ul, .howto ul { margin: 0; padding: 0; list-style: none; }
@@ -408,8 +411,8 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
     <div class="team">
       <!-- ===== MEMBER 1 ===== -->
       <div class="member">
-        <h3>Tan Chun Loong</h3>
-        <div class="role">Physics and Quantum Technology, NTU Singapore</div>
+        <div class="head"><img src="team/tan-chun-loong.webp" alt="Tan Chun Loong"><div><h3>Tan Chun Loong</h3>
+        <div class="role">Physics and Quantum Technology, NTU Singapore</div></div></div>
         <ul>
           <li>Incoming Phortify Student Research Fellow, ICFO Barcelona (Prof. Antonio Acín’s group)</li>
           <li>URECA Fellow with Prof. Mile Gu: relative entropy in model-based reinforcement learning, the mathematics of RDPO</li>
@@ -419,8 +422,8 @@ th.r, td.r { text-align: right; padding-right: 0; padding-left: 22px; }
       </div>
       <!-- ===== MEMBER 2 ===== -->
       <div class="member">
-        <h3>Xu Zi Yu</h3>
-        <div class="role">Mechanical Engineering, Universiti Malaya</div>
+        <div class="head"><img src="team/xu-zi-yu.webp" alt="Xu Zi Yu"><div><h3>Xu Zi Yu</h3>
+        <div class="role">Mechanical Engineering, Universiti Malaya</div></div></div>
         <ul>
           <li>SEA Quantathon 2026 Top 8: rebuilt a quantum contagion model around a classical core after benchmarking it</li>
           <li>ADIA Lab Structural Break Challenge, peak #37 of 1,220</li>

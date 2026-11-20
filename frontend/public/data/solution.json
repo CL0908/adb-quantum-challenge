@@ -1,0 +1,338 @@
+{
+ "budget": 16384,
+ "scenarios": [
+  "adb-base",
+  "adb-independent",
+  "adb-common-shock",
+  "adb-rain-stress",
+  "adb-rain-cover"
+ ],
+ "sources": [
+  {
+   "id": "kg_eq",
+   "label": "Earthquake, Kyrgyz Republic only",
+   "kind": "eq",
+   "scope": "KG",
+   "rate": 0.03663731826304394
+  },
+  {
+   "id": "tj_eq",
+   "label": "Earthquake, Tajikistan only",
+   "kind": "eq",
+   "scope": "TJ",
+   "rate": 0.03707438120706432
+  },
+  {
+   "id": "sh_eq",
+   "label": "Earthquake, both countries",
+   "kind": "eq",
+   "scope": "both",
+   "rate": 0.0029666683301194244
+  },
+  {
+   "id": "kg_rain",
+   "label": "Extreme rain, Kyrgyz Republic only",
+   "kind": "rain",
+   "scope": "KG",
+   "rate": 0.015152030488139599
+  },
+  {
+   "id": "tj_rain",
+   "label": "Extreme rain, Tajikistan only",
+   "kind": "rain",
+   "scope": "TJ",
+   "rate": 0.015152030488139599
+  },
+  {
+   "id": "sh_rain",
+   "label": "Extreme rain, both countries",
+   "kind": "rain",
+   "scope": "both",
+   "rate": 0.0050506768293798665
+  }
+ ],
+ "term_years": 3.0,
+ "margins": {
+  "KG": {
+   "attach": 0.16424525965416004,
+   "exhaust": 0.00211936846539181
+  },
+  "TJ": {
+   "attach": 0.16534037382830002,
+   "exhaust": 0.001851456221427
+  }
+ },
+ "pools": [
+  {
+   "id": "pair",
+   "label": "2 countries",
+   "sub": "Kyrgyz Republic, Tajikistan",
+   "n": 2,
+   "edges": 1,
+   "bond": null,
+   "seconds": 0.0006443300000000818,
+   "method": "dense enumeration"
+  },
+  {
+   "id": "carec",
+   "label": "10 CAREC",
+   "sub": "Central Asia and neighbours",
+   "n": 10,
+   "edges": 10,
+   "bond": 588,
+   "seconds": 271.8194949429999,
+   "method": "tensor network"
+  },
+  {
+   "id": "ap",
+   "label": "28 Asia-Pacific",
+   "sub": "Asia-Pacific pool",
+   "n": 28,
+   "edges": 22,
+   "bond": 367,
+   "seconds": 41.79924708500039,
+   "method": "tensor network"
+  }
+ ],
+ "e1": {
+  "adb-base": {
+   "expected_loss": {
+    "rdpo": 0.003767575516292805,
+    "mc": 0.01647336187666486,
+    "best": 0.0020890029232253004,
+    "coverage": 0.975,
+    "seconds": 0.5340199348249997
+   },
+   "joint_attachment": {
+    "rdpo": 0.004579230748372102,
+    "mc": 0.03537844871978374,
+    "best": 0.017909412860930108,
+    "coverage": 0.95,
+    "seconds": 0.6912434065750006
+   },
+   "exceedance": {
+    "rdpo": 0.003288842186444928,
+    "mc": 0.0712714226442161,
+    "best": 0.0261658051808224,
+    "coverage": 0.95,
+    "seconds": 1.5460330130750009
+   },
+   "stop_loss": {
+    "rdpo": 0.0030609529938057873,
+    "mc": 0.09732346098398208,
+    "best": 0.02987549733072842,
+    "coverage": 0.975,
+    "seconds": 0.32631987897499926
+   },
+   "joint_exhaustion": {
+    "rdpo": 0.013881784648291269,
+    "mc": 1.4163866615194138,
+    "best": 0.26814898898860007,
+    "coverage": 0.95,
+    "seconds": 0.40379269682500196
+   }
+  },
+  "adb-independent": {
+   "expected_loss": {
+    "rdpo": 0.003755572320364449,
+    "mc": 0.015284523235219054,
+    "best": 0.0019494705835577818,
+    "coverage": 0.95,
+    "seconds": 0.22350917347499716
+   },
+   "joint_attachment": {
+    "rdpo": 0.0046268463133882646,
+    "mc": 0.04287546863787176,
+    "best": 0.024338126594659802,
+    "coverage": 0.95,
+    "seconds": 0.21175330609999604
+   },
+   "exceedance": {
+    "rdpo": 0.002738454801124377,
+    "mc": 0.08835891638653828,
+    "best": 0.0297059980013268,
+    "coverage": 0.975,
+    "seconds": 0.27059733662500207
+   },
+   "stop_loss": {
+    "rdpo": 0.0031362646640297,
+    "mc": 0.11988834077662436,
+    "best": 0.03272967954282567,
+    "coverage": 0.925,
+    "seconds": 0.2822049571249977
+   },
+   "joint_exhaustion": {
+    "rdpo": 0.0035371095319127388,
+    "mc": 4.385464667068848,
+    "best": 0.6032499494126217,
+    "coverage": 0.95,
+    "seconds": 0.387617422400001
+   }
+  },
+  "adb-common-shock": {
+   "expected_loss": {
+    "rdpo": 0.004160478475829074,
+    "mc": 0.01800684813449931,
+    "best": 0.0022063266637356027,
+    "coverage": 0.95,
+    "seconds": 0.2022743365249994
+   },
+   "joint_attachment": {
+    "rdpo": 0.004775075120285064,
+    "mc": 0.0323293183349412,
+    "best": 0.015154903726506035,
+    "coverage": 0.925,
+    "seconds": 0.22328298179999706
+   },
+   "exceedance": {
+    "rdpo": 0.004161404923940617,
+    "mc": 0.05282818367510602,
+    "best": 0.024333258305034848,
+    "coverage": 0.9,
+    "seconds": 0.2640256944499981
+   },
+   "stop_loss": {
+    "rdpo": 0.005049502652058478,
+    "mc": 0.07060822695138541,
+    "best": 0.027259435675729644,
+    "coverage": 0.875,
+    "seconds": 0.2762522808500023
+   },
+   "joint_exhaustion": {
+    "rdpo": 0.017651834667564127,
+    "mc": 1.2132080293681808,
+    "best": 0.2687713509259982,
+    "coverage": 0.85,
+    "seconds": 0.4109545944749982
+   }
+  },
+  "adb-rain-stress": {
+   "expected_loss": {
+    "rdpo": 0.0040944536150943605,
+    "mc": 0.01640047695549288,
+    "best": 0.002043925501940449,
+    "coverage": 0.95,
+    "seconds": 0.2209731389500007
+   },
+   "joint_attachment": {
+    "rdpo": 0.00457054440301429,
+    "mc": 0.027481930418423263,
+    "best": 0.01357379560785158,
+    "coverage": 0.925,
+    "seconds": 0.21802030855000112
+   },
+   "exceedance": {
+    "rdpo": 0.004170730399159031,
+    "mc": 0.06806487266605317,
+    "best": 0.024694863372620075,
+    "coverage": 0.95,
+    "seconds": 0.25741806407500006
+   },
+   "stop_loss": {
+    "rdpo": 0.0036751549878799574,
+    "mc": 0.08863936083459564,
+    "best": 0.02930938331922338,
+    "coverage": 0.95,
+    "seconds": 0.2593919296500019
+   },
+   "joint_exhaustion": {
+    "rdpo": 0.03211174442281847,
+    "mc": 0.9875360656565938,
+    "best": 0.2008767879266134,
+    "coverage": 0.925,
+    "seconds": 0.4751346169749979
+   }
+  },
+  "adb-rain-cover": {
+   "expected_loss": {
+    "rdpo": 0.004492110864844056,
+    "mc": 0.014912783907294808,
+    "best": 0.002470261947555642,
+    "coverage": 0.925,
+    "seconds": 0.21287154069999586
+   },
+   "joint_attachment": {
+    "rdpo": 0.005286449414058367,
+    "mc": 0.0350038783064348,
+    "best": 0.018151655557249326,
+    "coverage": 0.95,
+    "seconds": 0.20030504865000012
+   },
+   "exceedance": {
+    "rdpo": 0.004232776313093293,
+    "mc": 0.08787674893371689,
+    "best": 0.03340614413370638,
+    "coverage": 0.975,
+    "seconds": 0.3692726363749898
+   },
+   "stop_loss": {
+    "rdpo": 0.0035098646595295327,
+    "mc": 0.10195075057183396,
+    "best": 0.0366778554403891,
+    "coverage": 0.95,
+    "seconds": 0.37873482415000126
+   },
+   "joint_exhaustion": {
+    "rdpo": 0.0037195934237552594,
+    "mc": 1.266269769403885,
+    "best": 0.2700935346525032,
+    "coverage": 0.975,
+    "seconds": 0.5853889470750004
+   }
+  }
+ },
+ "carec_edges": [
+  [
+   "GE",
+   "AZ"
+  ],
+  [
+   "TM",
+   "UZ"
+  ],
+  [
+   "TM",
+   "AF"
+  ],
+  [
+   "KZ",
+   "KG"
+  ],
+  [
+   "UZ",
+   "AF"
+  ],
+  [
+   "UZ",
+   "TJ"
+  ],
+  [
+   "UZ",
+   "KG"
+  ],
+  [
+   "AF",
+   "PK"
+  ],
+  [
+   "AF",
+   "TJ"
+  ],
+  [
+   "TJ",
+   "KG"
+  ]
+ ],
+ "carec_order": [
+  "GE",
+  "AZ",
+  "TM",
+  "KZ",
+  "UZ",
+  "AF",
+  "PK",
+  "TJ",
+  "KG",
+  "MN"
+ ]
+}
