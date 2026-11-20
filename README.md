@@ -236,3 +236,20 @@ plan; all numbers come from the scripts in this repository.
 3. Deploy. The function is installed from `api/requirements.txt`.
 
 To refresh the numbers and copied figures/PDFs after results change: `PYTHONPATH=. python -m src.viz.export_web_data`, then commit `web/`.
+
+## Public website (`frontend/` -> `web/`)
+
+The site at https://adb-quantum-challenge.vercel.app is a React 19 + Vite + TypeScript app in `frontend/` (no
+three.js; the map and plots are SVG/canvas). Vercel serves the **committed, built** `web/` folder statically and runs
+`api/estimate.py` as a Python function, so no Node build runs on Vercel.
+
+```bash
+# 1. regenerate the site's data (numbers are never typed by hand)
+PYTHONPATH=. python -m src.viz.web_precompute      # grid.json (exact 61 x 31 grid), mc_sample.json, map.json
+PYTHONPATH=. python -m src.viz.export_web_data     # values.json, PDFs (add --fallback to rerun the try-it answers)
+# 2. build the site into web/ and commit it
+cd frontend && npm install && npm run build        # tsc + vite build, output ../web
+# or all at once: npm run build:all   (data + build);  npm run dev for a live-reloading dev server
+```
+
+`frontend/public/` holds the inputs (`data/*.json`, PDFs); `npm run build` empties and rewrites `web/`.

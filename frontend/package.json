@@ -1,0 +1,24 @@
+{
+  "name": "adb-quantum-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "data": "cd .. && PYTHONPATH=. python -m src.viz.web_precompute && PYTHONPATH=. python -m src.viz.export_web_data",
+    "build": "tsc -b && vite build",
+    "build:all": "npm run data && npm run build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  }
+}
