@@ -1,0 +1,2310 @@
+{
+  "his_reference": "quantum_advantage_v3.json",
+  "bias_budget": 0.002,
+  "exact_ring_2": {
+    "mu_exact": 0.012046720907534048,
+    "states": 5000,
+    "twisted_amplitude_ratio": 0.9999999999999994,
+    "cases": [
+      {
+        "etas": [
+          0.0,
+          0.0625,
+          0.125,
+          0.1875
+        ],
+        "progress": "U",
+        "law_sum": 1.0,
+        "estimate_over_mu": 0.9999999999999996,
+        "amplitude": 0.12657706334446822,
+        "bias": 0.09584476850126834,
+        "sampled_amplitude": 0.127418102962078,
+        "sampled_estimate_z": 2.0815245465362153
+      },
+      {
+        "etas": [
+          0.0,
+          0.0625,
+          0.125,
+          0.1875
+        ],
+        "progress": "capped",
+        "law_sum": 1.0,
+        "estimate_over_mu": 0.9999999999999996,
+        "amplitude": 0.1265773852484088,
+        "bias": 0.095842469102592,
+        "sampled_amplitude": 0.1274166372266296,
+        "sampled_estimate_z": 2.0766921562983827
+      },
+      {
+        "etas": [
+          0.09375
+        ],
+        "capaware": true,
+        "law_sum": 1.0,
+        "estimate_over_mu": 0.9999999999999996,
+        "amplitude": 0.15161749233333605,
+        "bias": 0.2052647906509074,
+        "sampled_amplitude": 0.15129896835509413,
+        "sampled_estimate_z": -0.490882821076288
+      },
+      {
+        "etas": [
+          0.0625,
+          0.09375,
+          0.125
+        ],
+        "kappa": 0.85,
+        "progress": "capped",
+        "capaware": true,
+        "law_sum": 1.0,
+        "estimate_over_mu": 0.9999999999999998,
+        "amplitude": 0.16549448503404598,
+        "bias": 0.14093390624924582,
+        "sampled_amplitude": 0.16533843583888175,
+        "sampled_estimate_z": -0.0722972967478887
+      }
+    ],
+    "ok": true
+  },
+  "rows": {
+    "8": {
+      "a_twisted": 0.02492872200199187,
+      "a_u_loader": 0.37831513702749847,
+      "pilot": [
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.02631513349281852,
+          "cap": 38.16787843627933,
+          "z": 0.7092716437200615,
+          "rho2": 11.32309878301746,
+          "eligible": true,
+          "runtime_tree": 48324.40669739071,
+          "runtime_alias": 29776.081683763838
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.026155110883217668,
+          "cap": 38.37463766812574,
+          "z": 0.635964398125334,
+          "rho2": 10.466861301720623,
+          "eligible": true,
+          "runtime_tree": 52254.47975012209,
+          "runtime_alias": 33649.50010218907
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.015434772957942206,
+          "cap": 65.24713077968839,
+          "z": 0.8216621571349416,
+          "rho2": 22.330194654360763,
+          "eligible": true,
+          "runtime_tree": 63103.4297161395,
+          "runtime_alias": 39077.47150624145
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.01537460472334817,
+          "cap": 65.54849880109695,
+          "z": 0.9178326604794992,
+          "rho2": 20.048093072347132,
+          "eligible": true,
+          "runtime_tree": 68160.22669684896,
+          "runtime_alias": 47127.80550833328
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.015202283135606901,
+          "cap": 66.293708154692,
+          "z": 0.9128505772277663,
+          "rho2": 22.393863375677117,
+          "eligible": true,
+          "runtime_tree": 97340.46599786259,
+          "runtime_alias": 64032.52331131695
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.015382152658700004,
+          "cap": 66.29370815469194,
+          "z": 2.086639230899306,
+          "rho2": 20.486117342903515,
+          "eligible": true,
+          "runtime_tree": 101314.91921024868,
+          "runtime_alias": 68515.75551867267
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.078125
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.04709874961824743,
+          "cap": 20.86267206969727,
+          "z": -2.1938844788042458,
+          "rho2": 9.853159230316997,
+          "eligible": true,
+          "runtime_tree": 42018.2021117214,
+          "runtime_alias": 27628.689042757585
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.0859375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.061890538130282315,
+          "cap": 16.049860685231337,
+          "z": -0.8069617328903336,
+          "rho2": 6.71917745553757,
+          "eligible": true,
+          "runtime_tree": 36653.478152999836,
+          "runtime_alias": 24100.72786349276
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.06791178228467487,
+          "cap": 14.620854313622827,
+          "z": -0.9949168682389538,
+          "rho2": 5.276937246817999,
+          "eligible": true,
+          "runtime_tree": 34990.46531338756,
+          "runtime_alias": 23007.10712039745
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.1015625
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.06092905061305239,
+          "cap": 16.409665775854105,
+          "z": 0.35476646653089117,
+          "rho2": 5.210686788599326,
+          "eligible": true,
+          "runtime_tree": 36941.622524430655,
+          "runtime_alias": 24290.21634253187
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.109375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.043500600081782206,
+          "cap": 22.966314637844654,
+          "z": 0.1770922780970659,
+          "rho2": 6.563164812253257,
+          "eligible": true,
+          "runtime_tree": 43721.88205107405,
+          "runtime_alias": 28749.079388882008
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.08459271355635255,
+          "cap": 11.740549807216212,
+          "z": -1.3192238053975582,
+          "rho2": 2.691051859189993,
+          "eligible": true,
+          "runtime_tree": 71682.56418361553,
+          "runtime_alias": 50490.9036246595
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.08361090588165696,
+          "cap": 11.941390373270536,
+          "z": 0.10783817293014225,
+          "rho2": 3.1688495388305222,
+          "eligible": true,
+          "runtime_tree": 72102.25093132284,
+          "runtime_alias": 50786.53462552399
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.0855382234546997,
+          "cap": 11.682413346393327,
+          "z": 0.3509908963027718,
+          "rho2": 2.5550841286902233,
+          "eligible": true,
+          "runtime_tree": 89165.9588429854,
+          "runtime_alias": 62091.43639824078
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.08932512126061935,
+          "cap": 11.181121075140409,
+          "z": 0.19333179175109758,
+          "rho2": 2.944481697654533,
+          "eligible": true,
+          "runtime_tree": 87255.25025965719,
+          "runtime_alias": 60760.83633610375
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.08669170910874978,
+          "cap": 11.505322253679854,
+          "z": -0.1796089532223833,
+          "rho2": 2.117715190690983,
+          "eligible": true,
+          "runtime_tree": 160227.2159389517,
+          "runtime_alias": 109534.53934190511
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.08887532140339294,
+          "cap": 11.283731696213227,
+          "z": 1.3396019335588747,
+          "rho2": 2.6136062406572425,
+          "eligible": true,
+          "runtime_tree": 158246.537480784,
+          "runtime_alias": 108180.47050835082
+        }
+      ],
+      "loaders": {
+        "tree": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.06791178228467487,
+          "cap": 14.620854313622827,
+          "amplitude": 0.0683109175791111,
+          "bias": 0.001998574156893843,
+          "estimate_over_mu": 1.0007625481109736,
+          "rho2": 5.316991756742802,
+          "hit_rate": 0.4280460000000001,
+          "z": 0.46768049091733355
+        },
+        "alias": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.06791178228467487,
+          "cap": 14.620854313622827,
+          "amplitude": 0.0683109175791111,
+          "bias": 0.001998574156893843,
+          "estimate_over_mu": 1.0007625481109736,
+          "rho2": 5.316991756742802,
+          "hit_rate": 0.4280460000000001,
+          "z": 0.46768049091733355
+        },
+        "amplitude": {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.08932512126061935,
+          "cap": 11.181121075140409,
+          "amplitude": 0.08910810735882892,
+          "bias": 0.0019147341781670909,
+          "estimate_over_mu": 0.9982432713338435,
+          "rho2": 2.9463064802446945,
+          "hit_rate": 0.4302880000000001,
+          "z": -1.4473738620304197
+        }
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds_small_world": 0.00047479034634106607,
+          "levels": {
+            "twisting_tree": {
+              "calls": 1555.935,
+              "T_count": 22013263.393061653,
+              "T_per_call": 14147.932524855893,
+              "toffoli_per_call": 2533,
+              "logical_qubits": 271,
+              "runtime_s": 1513.4118582729884,
+              "physical_qubits": 362750,
+              "code_distance": 25,
+              "s_star_vs_small_world": 3187537.130727228
+            },
+            "twisting_alias": {
+              "calls": 1555.935,
+              "T_count": 17680437.58562925,
+              "T_per_call": 11363.223775819202,
+              "toffoli_per_call": 2797,
+              "logical_qubits": 1961,
+              "runtime_s": 1312.7724907329716,
+              "physical_qubits": 2883138,
+              "code_distance": 27,
+              "s_star_vs_small_world": 2764951.9432097725
+            },
+            "loader_tree": {
+              "calls": 845.06,
+              "T_count": 40199680.7379985,
+              "T_per_call": 47570.20890587474,
+              "toffoli_per_call": 11817,
+              "logical_qubits": 301,
+              "runtime_s": 2763.728050737397,
+              "physical_qubits": 400250,
+              "code_distance": 25,
+              "s_star_vs_small_world": 5820944.069389462
+            },
+            "loader_alias": {
+              "calls": 845.06,
+              "T_count": 26469510.26594033,
+              "T_per_call": 31322.64012725763,
+              "toffoli_per_call": 7761,
+              "logical_qubits": 2329,
+              "runtime_s": 1965.3611372460693,
+              "physical_qubits": 3419682,
+              "code_distance": 27,
+              "s_star_vs_small_world": 4139429.4395241356
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1528363588941386,
+            "loader_tree": 0.5475979656787111,
+            "loader_alias": 0.7700426296174923
+          }
+        },
+        "0.01": {
+          "classical_seconds_small_world": 0.04747903463410662,
+          "levels": {
+            "twisting_tree": {
+              "calls": 14644.515,
+              "T_count": 216004756.3100695,
+              "T_per_call": 14749.874359790645,
+              "toffoli_per_call": 2597,
+              "logical_qubits": 279,
+              "runtime_s": 16038.353156022658,
+              "physical_qubits": 430782,
+              "code_distance": 27,
+              "s_star_vs_small_world": 337798.6363796346
+            },
+            "twisting_alias": {
+              "calls": 14644.515,
+              "T_count": 172283444.03866953,
+              "T_per_call": 11764.366661420301,
+              "toffoli_per_call": 2893,
+              "logical_qubits": 2153,
+              "runtime_s": 13739.604662083893,
+              "physical_qubits": 3645346,
+              "code_distance": 29,
+              "s_star_vs_small_world": 289382.56154462823
+            },
+            "loader_tree": {
+              "calls": 8719.3,
+              "T_count": 424230311.73775256,
+              "T_per_call": 48654.17083226321,
+              "toffoli_per_call": 12081,
+              "logical_qubits": 307,
+              "runtime_s": 31499.100646528128,
+              "physical_qubits": 471606,
+              "code_distance": 27,
+              "s_star_vs_small_world": 663431.7839289157
+            },
+            "loader_alias": {
+              "calls": 8719.3,
+              "T_count": 278940809.31604254,
+              "T_per_call": 31991.19302192178,
+              "toffoli_per_call": 7921,
+              "logical_qubits": 2649,
+              "runtime_s": 22245.529542954395,
+              "physical_qubits": 4479618,
+              "code_distance": 29,
+              "s_star_vs_small_world": 468533.73735139705
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.167308197759317,
+            "loader_tree": 0.5091686056690773,
+            "loader_alias": 0.7209697177607681
+          }
+        },
+        "0.001": {
+          "classical_seconds_small_world": 2.0014207608980623,
+          "levels": {
+            "twisting_tree": {
+              "calls": 143796.11,
+              "T_count": 2199311897.856488,
+              "T_per_call": 15294.655035219579,
+              "toffoli_per_call": 2645,
+              "logical_qubits": 285,
+              "runtime_s": 175395.12385405492,
+              "physical_qubits": 503370,
+              "code_distance": 29,
+              "s_star_vs_small_world": 87635.3075179219
+            },
+            "twisting_alias": {
+              "calls": 143796.11,
+              "T_count": 1767805405.6380079,
+              "T_per_call": 12293.833300761808,
+              "toffoli_per_call": 3021,
+              "logical_qubits": 2409,
+              "runtime_s": 150705.41083064015,
+              "physical_qubits": 4654098,
+              "code_distance": 31,
+              "s_star_vs_small_world": 75299.21432563574
+            },
+            "loader_tree": {
+              "calls": 87233.695,
+              "T_count": 4338853742.371751,
+              "T_per_call": 49738.277650301876,
+              "toffoli_per_call": 12345,
+              "logical_qubits": 313,
+              "runtime_s": 369887.2815371917,
+              "physical_qubits": 625586,
+              "code_distance": 31,
+              "s_star_vs_small_world": 184812.35368579804
+            },
+            "loader_alias": {
+              "calls": 87233.695,
+              "T_count": 2835040015.189249,
+              "T_per_call": 32499.36868075173,
+              "toffoli_per_call": 8041,
+              "logical_qubits": 2889,
+              "runtime_s": 241687.16129488344,
+              "physical_qubits": 5576658,
+              "code_distance": 31,
+              "s_star_vs_small_world": 120757.79666961954
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1638276481735657,
+            "loader_tree": 0.4741853332321705,
+            "loader_alias": 0.7257113820789788
+          }
+        }
+      },
+      "best_pilot_amplitude_by_family": {
+        "progress": 0.02631513349281852,
+        "cap-aware": 0.06791178228467487,
+        "both": 0.08932512126061935
+      }
+    },
+    "16": {
+      "a_twisted": 0.005985257636251191,
+      "a_u_loader": 0.12052868164621895,
+      "pilot": [
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.005668349772052147,
+          "cap": 178.60023962597847,
+          "z": 0.9213561295088959,
+          "rho2": 46.40425143302754,
+          "eligible": true,
+          "runtime_tree": 227491.72804079452,
+          "runtime_alias": 139706.4170119878
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.005570395828442109,
+          "cap": 180.38164427396296,
+          "z": 0.47494573475802687,
+          "rho2": 38.295455290786855,
+          "eligible": true,
+          "runtime_tree": 248380.44527057477,
+          "runtime_alias": 159826.65767112141
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.001806656552965955,
+          "cap": 553.7199691410087,
+          "z": 0.05110025386584074,
+          "rho2": 186.647254157298,
+          "eligible": true,
+          "runtime_tree": 402987.52650835883,
+          "runtime_alias": 264745.834876844
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.001975435902828782,
+          "cap": 527.6832749503926,
+          "z": 1.6078632791292498,
+          "rho2": 150.20442307493283,
+          "eligible": true,
+          "runtime_tree": 417117.7520488674,
+          "runtime_alias": 286960.60899546964
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.0018019043401916938,
+          "cap": 527.6832749503916,
+          "z": -1.5698845507989445,
+          "rho2": 181.20294831682443,
+          "eligible": true,
+          "runtime_tree": 616160.642522063,
+          "runtime_alias": 403998.02877190564
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.0020570431321854355,
+          "cap": 488.656157666178,
+          "z": 0.2748033978923336,
+          "rho2": 135.4893079528567,
+          "eligible": true,
+          "runtime_tree": 605515.7656732539,
+          "runtime_alias": 408806.13618029346
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.078125
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.018667252916175818,
+          "cap": 53.500109014679786,
+          "z": 0.06291298921745854,
+          "rho2": 24.442358167837565,
+          "eligible": true,
+          "runtime_tree": 134950.2737258197,
+          "runtime_alias": 94288.05696989196
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.0859375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03163606289819171,
+          "cap": 31.486896393579723,
+          "z": -0.24522507316396577,
+          "rho2": 12.284784260199597,
+          "eligible": true,
+          "runtime_tree": 102917.5815589596,
+          "runtime_alias": 72063.7992329123
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.040605337151925054,
+          "cap": 24.520285933583352,
+          "z": -0.36148983192515205,
+          "rho2": 8.424541575235084,
+          "eligible": true,
+          "runtime_tree": 90841.11778841961,
+          "runtime_alias": 63607.224449245834
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.1015625
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03460964415532808,
+          "cap": 29.286144648127355,
+          "z": 2.334525793555149,
+          "rho2": 8.898933815784298,
+          "eligible": true,
+          "runtime_tree": 98396.53108215053,
+          "runtime_alias": 68897.91391511534
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.109375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.018022558273315503,
+          "cap": 55.33956962588216,
+          "z": -0.0848338391021125,
+          "rho2": 14.1615059548929,
+          "eligible": true,
+          "runtime_tree": 137343.05460703745,
+          "runtime_alias": 95959.97469591755
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.05075698644837671,
+          "cap": 19.610181259041,
+          "z": -0.5956342833682553,
+          "rho2": 4.013796779146778,
+          "eligible": true,
+          "runtime_tree": 186236.8670645077,
+          "runtime_alias": 131557.5447924987
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.0561566652217751,
+          "cap": 17.793849795716635,
+          "z": 0.2569283485457216,
+          "rho2": 4.632664055586107,
+          "eligible": true,
+          "runtime_tree": 177056.43840624817,
+          "runtime_alias": 125072.31951565147
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.053478177606824676,
+          "cap": 18.54024140482228,
+          "z": -1.5214717286472486,
+          "rho2": 3.659461102751141,
+          "eligible": true,
+          "runtime_tree": 242407.34607999615,
+          "runtime_alias": 158327.96634143562
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.05678874105390211,
+          "cap": 17.467066985057805,
+          "z": -1.3186092167713672,
+          "rho2": 4.2798085459105595,
+          "eligible": true,
+          "runtime_tree": 235235.24332795103,
+          "runtime_alias": 153643.410739515
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.05716762999523816,
+          "cap": 17.46531963012803,
+          "z": 0.10296078552869102,
+          "rho2": 3.054255184833722,
+          "eligible": true,
+          "runtime_tree": 423643.30483310274,
+          "runtime_alias": 289055.87009912933
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.05607168729678312,
+          "cap": 17.76218312221326,
+          "z": -0.4741304959313202,
+          "rho2": 3.855841347925238,
+          "eligible": true,
+          "runtime_tree": 427763.5052999369,
+          "runtime_alias": 291867.1608814431
+        }
+      ],
+      "loaders": {
+        "tree": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.040605337151925054,
+          "cap": 24.520285933583352,
+          "amplitude": 0.04061229041780809,
+          "bias": 0.002113275721915892,
+          "estimate_over_mu": 0.9979382491842975,
+          "rho2": 8.442119441440527,
+          "hit_rate": 0.39970950000000005,
+          "z": -1.0035186005711934
+        },
+        "alias": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.040605337151925054,
+          "cap": 24.520285933583352,
+          "amplitude": 0.04061229041780809,
+          "bias": 0.002113275721915892,
+          "estimate_over_mu": 0.9979382491842975,
+          "rho2": 8.442119441440527,
+          "hit_rate": 0.39970950000000005,
+          "z": -1.0035186005711934
+        },
+        "amplitude": {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.05716762999523816,
+          "cap": 17.46531963012803,
+          "amplitude": 0.05717606614151508,
+          "bias": 0.0017336697931598327,
+          "estimate_over_mu": 1.0003319401480617,
+          "rho2": 3.0730644767063087,
+          "hit_rate": 0.5555945000000001,
+          "z": 0.2677866640153234
+        }
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds_small_world": 0.019759797228321403,
+          "levels": {
+            "twisting_tree": {
+              "calls": 3126.755,
+              "T_count": 90745387.81803823,
+              "T_per_call": 29022.22522008863,
+              "toffoli_per_call": 5189,
+              "logical_qubits": 447,
+              "runtime_s": 6737.845045489337,
+              "physical_qubits": 675726,
+              "code_distance": 27,
+              "s_star_vs_small_world": 340987.5601269881
+            },
+            "twisting_alias": {
+              "calls": 3126.755,
+              "T_count": 72926613.64511502,
+              "T_per_call": 23323.41793492455,
+              "toffoli_per_call": 5781,
+              "logical_qubits": 4141,
+              "runtime_s": 5815.897438197922,
+              "physical_qubits": 6989162,
+              "code_distance": 29,
+              "s_star_vs_small_world": 294329.81376256683
+            },
+            "loader_tree": {
+              "calls": 1152.09,
+              "T_count": 110063026.82227242,
+              "T_per_call": 95533.35835071256,
+              "toffoli_per_call": 23805,
+              "logical_qubits": 475,
+              "runtime_s": 8172.179741553726,
+              "physical_qubits": 716550,
+              "code_distance": 27,
+              "s_star_vs_small_world": 413576.09327289404
+            },
+            "loader_alias": {
+              "calls": 1152.09,
+              "T_count": 72570646.53846878,
+              "T_per_call": 62990.4317704943,
+              "toffoli_per_call": 15677,
+              "logical_qubits": 4909,
+              "runtime_s": 5787.509061442885,
+              "physical_qubits": 8280938,
+              "code_distance": 29,
+              "s_star_vs_small_world": 292893.14027715527
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.158521985143033,
+            "loader_tree": 0.8244856646053544,
+            "loader_alias": 1.164204664555553
+          }
+        },
+        "0.01": {
+          "classical_seconds_small_world": 0.42910472283214046,
+          "levels": {
+            "twisting_tree": {
+              "calls": 29941.215,
+              "T_count": 904715328.63409,
+              "T_per_call": 30216.386630739264,
+              "toffoli_per_call": 5317,
+              "logical_qubits": 455,
+              "runtime_s": 72151.04745856866,
+              "physical_qubits": 789310,
+              "code_distance": 29,
+              "s_star_vs_small_world": 168143.2145103495
+            },
+            "twisting_alias": {
+              "calls": 29941.215,
+              "T_count": 721895275.1257175,
+              "T_per_call": 24110.420205917413,
+              "toffoli_per_call": 5973,
+              "logical_qubits": 4525,
+              "runtime_s": 61541.57220446741,
+              "physical_qubits": 8721050,
+              "code_distance": 31,
+              "s_star_vs_small_world": 143418.53848236852
+            },
+            "loader_tree": {
+              "calls": 10809.91,
+              "T_count": 1055828662.0223607,
+              "T_per_call": 97672.28978061433,
+              "toffoli_per_call": 24333,
+              "logical_qubits": 481,
+              "runtime_s": 84202.33579628327,
+              "physical_qubits": 833042,
+              "code_distance": 29,
+              "s_star_vs_small_world": 196227.93997823697
+            },
+            "loader_alias": {
+              "calls": 10809.91,
+              "T_count": 691594502.3342555,
+              "T_per_call": 63977.822417971605,
+              "toffoli_per_call": 15917,
+              "logical_qubits": 5389,
+              "runtime_s": 58958.431323995275,
+              "physical_qubits": 10381658,
+              "code_distance": 31,
+              "s_star_vs_small_world": 137398.70056629265
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1723952585880002,
+            "loader_tree": 0.8568770305033918,
+            "loader_alias": 1.2237613151896083
+          }
+        },
+        "0.001": {
+          "classical_seconds_small_world": 9.935529921816697,
+          "levels": {
+            "twisting_tree": {
+              "calls": 293580.09,
+              "T_count": 9186081834.782913,
+              "T_per_call": 31289.866539597126,
+              "toffoli_per_call": 5413,
+              "logical_qubits": 461,
+              "runtime_s": 783113.4764152433,
+              "physical_qubits": 910042,
+              "code_distance": 31,
+              "s_star_vs_small_world": 78819.49755852099
+            },
+            "twisting_alias": {
+              "calls": 293580.09,
+              "T_count": 7384602492.938228,
+              "T_per_call": 25153.621599265218,
+              "toffoli_per_call": 6229,
+              "logical_qubits": 5037,
+              "runtime_s": 670152.676234144,
+              "physical_qubits": 10994586,
+              "code_distance": 33,
+              "s_star_vs_small_world": 67450.11906839567
+            },
+            "loader_tree": {
+              "calls": 112147.955,
+              "T_count": 11193807044.945808,
+              "T_per_call": 99812.8503096272,
+              "toffoli_per_call": 24861,
+              "logical_qubits": 487,
+              "runtime_s": 954272.0505816301,
+              "physical_qubits": 960014,
+              "code_distance": 31,
+              "s_star_vs_small_world": 96046.41705987061
+            },
+            "loader_alias": {
+              "calls": 112147.955,
+              "T_count": 7285853638.829054,
+              "T_per_call": 64966.44222205437,
+              "toffoli_per_call": 16157,
+              "logical_qubits": 5869,
+              "runtime_s": 661191.2177237365,
+              "physical_qubits": 12806682,
+              "code_distance": 33,
+              "s_star_vs_small_world": 66548.15826902958
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1685597986653895,
+            "loader_tree": 0.8206396445729859,
+            "loader_alias": 1.1843978798013153
+          }
+        }
+      },
+      "best_pilot_amplitude_by_family": {
+        "progress": 0.005668349772052147,
+        "cap-aware": 0.040605337151925054,
+        "both": 0.05716762999523816
+      }
+    },
+    "20": {
+      "a_twisted": 0.003016298328830648,
+      "a_u_loader": 0.0670676419344604,
+      "pilot": [
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.0025597797421269973,
+          "cap": 380.84912905185246,
+          "z": -1.1253174865099693,
+          "rho2": 87.03841317069772,
+          "eligible": true,
+          "runtime_tree": 425858.88806174736,
+          "runtime_alias": 277170.06618282414
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.002486479251953669,
+          "cap": 391.4317287073915,
+          "z": -1.3581655353089386,
+          "rho2": 69.4760147358163,
+          "eligible": true,
+          "runtime_tree": 467446.2257126532,
+          "runtime_alias": 318862.70003110275
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.0005855720168222441,
+          "cap": 1684.9855447566827,
+          "z": -0.24659919931316043,
+          "rho2": 541.2312882520802,
+          "eligible": true,
+          "runtime_tree": 897743.0464908457,
+          "runtime_alias": 582405.058020098
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.0007604716261963925,
+          "cap": 1361.0904589253237,
+          "z": 0.8039193754783729,
+          "rho2": 408.06186855174667,
+          "eligible": true,
+          "runtime_tree": 845297.5110245326,
+          "runtime_alias": 579104.1833736858
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.0007015610949134918,
+          "cap": 1495.6693096811525,
+          "z": 0.9811940071064434,
+          "rho2": 544.0988125234146,
+          "eligible": true,
+          "runtime_tree": 1239499.0784147994,
+          "runtime_alias": 810340.9864261876
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.0006937321982143778,
+          "cap": 1448.8732516119733,
+          "z": 0.13184821740929437,
+          "rho2": 365.7356587967851,
+          "eligible": true,
+          "runtime_tree": 1308540.356776214,
+          "runtime_alias": 880971.8113484782
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.078125
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.013163278118206306,
+          "cap": 75.63144577181994,
+          "z": -0.18814910267819737,
+          "rho2": 34.71564112301241,
+          "eligible": true,
+          "runtime_tree": 214319.3578593855,
+          "runtime_alias": 139945.8840742954
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.0859375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.025851384552514133,
+          "cap": 38.586137089800395,
+          "z": -0.060695378051150724,
+          "rho2": 15.215697754149245,
+          "eligible": true,
+          "runtime_tree": 143061.66340226898,
+          "runtime_alias": 99856.8545956526
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.035646062766101695,
+          "cap": 28.31144282249276,
+          "z": 1.5921698796170665,
+          "rho2": 9.816437101670894,
+          "eligible": true,
+          "runtime_tree": 121829.50154879526,
+          "runtime_alias": 84611.66344906224
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.1015625
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.0283167407092769,
+          "cap": 35.81020764589405,
+          "z": 2.22006932763852,
+          "rho2": 10.362973171293724,
+          "eligible": true,
+          "runtime_tree": 136691.52191925724,
+          "runtime_alias": 95410.27212574327
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.109375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.01425338388755207,
+          "cap": 70.17888117105527,
+          "z": 0.23476879523566938,
+          "rho2": 18.56598344238015,
+          "eligible": true,
+          "runtime_tree": 205959.9226386913,
+          "runtime_alias": 134487.06948972528
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.04709836235434693,
+          "cap": 21.258670147742723,
+          "z": 0.6847705778611097,
+          "rho2": 4.429010888690214,
+          "eligible": true,
+          "runtime_tree": 258115.0594338147,
+          "runtime_alias": 181498.6574996303
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.048016361138556125,
+          "cap": 20.668890765280686,
+          "z": -1.0928614439387987,
+          "rho2": 5.2119349199925065,
+          "eligible": true,
+          "runtime_tree": 255635.6638619529,
+          "runtime_alias": 179755.18254707757
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.04132878710867963,
+          "cap": 24.262821458370496,
+          "z": 1.0220017049392052,
+          "rho2": 4.23491078070252,
+          "eligible": true,
+          "runtime_tree": 344446.9971828165,
+          "runtime_alias": 239408.34481624948
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.04850635681071113,
+          "cap": 20.534541309945784,
+          "z": -0.3995253954354504,
+          "rho2": 4.852264946877557,
+          "eligible": true,
+          "runtime_tree": 317942.2136843047,
+          "runtime_alias": 220985.82728481444
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.04927323771815304,
+          "cap": 20.244598183686104,
+          "z": -0.11681079992144168,
+          "rho2": 3.48016088773934,
+          "eligible": true,
+          "runtime_tree": 570185.3892264053,
+          "runtime_alias": 388965.6113672793
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.049833649502729595,
+          "cap": 19.927486195152472,
+          "z": -1.0565059145839257,
+          "rho2": 4.386033590956255,
+          "eligible": true,
+          "runtime_tree": 566970.2102182076,
+          "runtime_alias": 386772.27608004765
+        }
+      ],
+      "loaders": {
+        "tree": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.035646062766101695,
+          "cap": 28.31144282249276,
+          "amplitude": 0.03521715414159207,
+          "bias": 0.0020441458800059937,
+          "estimate_over_mu": 0.9990925917306038,
+          "rho2": 9.66459735897306,
+          "hit_rate": 0.3882015,
+          "z": -0.4127868444976048
+        },
+        "alias": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.035646062766101695,
+          "cap": 28.31144282249276,
+          "amplitude": 0.03521715414159207,
+          "bias": 0.0020441458800059937,
+          "estimate_over_mu": 0.9990925917306038,
+          "rho2": 9.66459735897306,
+          "hit_rate": 0.3882015,
+          "z": -0.4127868444976048
+        },
+        "amplitude": {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.049833649502729595,
+          "cap": 19.927486195152472,
+          "amplitude": 0.05008823283342822,
+          "bias": 0.0021639794521869844,
+          "estimate_over_mu": 1.0002965477799104,
+          "rho2": 4.403905323014955,
+          "hit_rate": 0.39956850000000005,
+          "z": 0.19984380407634755
+        }
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds_small_world": 0.008802775641749127,
+          "levels": {
+            "twisting_tree": {
+              "calls": 4221.78,
+              "T_count": 154051455.5467553,
+              "T_per_call": 36489.692865747464,
+              "toffoli_per_call": 6505,
+              "logical_qubits": 533,
+              "runtime_s": 11438.320574346582,
+              "physical_qubits": 801114,
+              "code_distance": 27,
+              "s_star_vs_small_world": 1299399.3076567573
+            },
+            "twisting_alias": {
+              "calls": 4221.78,
+              "T_count": 123875229.82735726,
+              "T_per_call": 29341.943404762274,
+              "toffoli_per_call": 7285,
+              "logical_qubits": 5325,
+              "runtime_s": 9879.049578731741,
+              "physical_qubits": 8980650,
+              "code_distance": 29,
+              "s_star_vs_small_world": 1122265.2923105464
+            },
+            "loader_tree": {
+              "calls": 1239.39,
+              "T_count": 147716380.56395248,
+              "T_per_call": 119184.74456301282,
+              "toffoli_per_call": 29717,
+              "logical_qubits": 559,
+              "runtime_s": 10967.94125687347,
+              "physical_qubits": 839022,
+              "code_distance": 27,
+              "s_star_vs_small_world": 1245963.9667351695
+            },
+            "loader_alias": {
+              "calls": 1239.39,
+              "T_count": 97306151.54517414,
+              "T_per_call": 78511.32536584459,
+              "toffoli_per_call": 19557,
+              "logical_qubits": 6117,
+              "runtime_s": 7760.165585727637,
+              "physical_qubits": 10312794,
+              "code_distance": 29,
+              "s_star_vs_small_world": 881558.9424911981
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1578361342544268,
+            "loader_tree": 1.0428867466060079,
+            "loader_alias": 1.4739789309887594
+          }
+        },
+        "0.01": {
+          "classical_seconds_small_world": 0.8802775641749128,
+          "levels": {
+            "twisting_tree": {
+              "calls": 42532.545,
+              "T_count": 1616100422.4366436,
+              "T_per_call": 37996.79568755276,
+              "toffoli_per_call": 6665,
+              "logical_qubits": 541,
+              "runtime_s": 128884.0086893223,
+              "physical_qubits": 933962,
+              "code_distance": 29,
+              "s_star_vs_small_world": 146412.9201226726
+            },
+            "twisting_alias": {
+              "calls": 42532.545,
+              "T_count": 1289645149.6142793,
+              "T_per_call": 30321.372718568316,
+              "toffoli_per_call": 7525,
+              "logical_qubits": 5805,
+              "runtime_s": 109942.2490046173,
+              "physical_qubits": 11181210,
+              "code_distance": 31,
+              "s_star_vs_small_world": 124894.98026416992
+            },
+            "loader_tree": {
+              "calls": 11881.585,
+              "T_count": 1458250297.9836426,
+              "T_per_call": 122731.966987876,
+              "toffoli_per_call": 30597,
+              "logical_qubits": 567,
+              "runtime_s": 116295.46126419549,
+              "physical_qubits": 977694,
+              "code_distance": 29,
+              "s_star_vs_small_world": 132112.2632191582
+            },
+            "loader_alias": {
+              "calls": 11881.585,
+              "T_count": 947425455.1293948,
+              "T_per_call": 79738.97885925109,
+              "toffoli_per_call": 19857,
+              "logical_qubits": 6717,
+              "runtime_s": 80768.0200497809,
+              "physical_qubits": 12934074,
+              "code_distance": 31,
+              "s_star_vs_small_world": 91752.90083132478
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1722882682153382,
+            "loader_tree": 1.1082462487209939,
+            "loader_alias": 1.595730694028223
+          }
+        },
+        "0.001": {
+          "classical_seconds_small_world": 15.45605330358669,
+          "levels": {
+            "twisting_tree": {
+              "calls": 407930.83,
+              "T_count": 16042110762.151281,
+              "T_per_call": 39325.56595967821,
+              "toffoli_per_call": 6785,
+              "logical_qubits": 547,
+              "runtime_s": 1367589.9424733967,
+              "physical_qubits": 1075334,
+              "code_distance": 31,
+              "s_star_vs_small_world": 88482.48098083599
+            },
+            "twisting_alias": {
+              "calls": 407930.83,
+              "T_count": 12768393396.808601,
+              "T_per_call": 31300.388344780415,
+              "toffoli_per_call": 7765,
+              "logical_qubits": 6285,
+              "runtime_s": 1158731.7007603806,
+              "physical_qubits": 13712730,
+              "code_distance": 33,
+              "s_star_vs_small_world": 74969.44258671056
+            },
+            "loader_tree": {
+              "calls": 120153.715,
+              "T_count": 15067302050.341251,
+              "T_per_call": 125400.21796530596,
+              "toffoli_per_call": 31257,
+              "logical_qubits": 573,
+              "runtime_s": 1284487.4997915914,
+              "physical_qubits": 1125306,
+              "code_distance": 31,
+              "s_star_vs_small_world": 83105.78868756338
+            },
+            "loader_alias": {
+              "calls": 120153.715,
+              "T_count": 9776581667.736387,
+              "T_per_call": 81367.28579500341,
+              "toffoli_per_call": 20257,
+              "logical_qubits": 7517,
+              "runtime_s": 887224.786347077,
+              "physical_qubits": 16396026,
+              "code_distance": 33,
+              "s_star_vs_small_world": 57403.06201850313
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1802472837982767,
+            "loader_tree": 1.0646969648947837,
+            "loader_alias": 1.541424409595342
+          }
+        }
+      },
+      "best_pilot_amplitude_by_family": {
+        "progress": 0.0025597797421269973,
+        "cap-aware": 0.035646062766101695,
+        "both": 0.049833649502729595
+      }
+    },
+    "28": {
+      "a_twisted": 0.000881844066020961,
+      "a_u_loader": 0.021895693911302857,
+      "pilot": [
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 0.0009897114220991233,
+          "cap": 1023.6102813192726,
+          "z": 0.38373591566516657,
+          "rho2": 300.4214832309355,
+          "eligible": true,
+          "runtime_tree": 974711.6342870408,
+          "runtime_alias": 635709.5278155586
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.0006216918728162863,
+          "cap": 1601.2117905855478,
+          "z": -0.10734263311146755,
+          "rho2": 244.4491858118443,
+          "eligible": true,
+          "runtime_tree": 1408818.712776161,
+          "runtime_alias": 905577.6984780057
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 9.130741230871248e-05,
+          "cap": 10577.549136142523,
+          "z": -0.25736234148615544,
+          "rho2": 3529.9840574824557,
+          "eligible": true,
+          "runtime_tree": 3443914.2236083224,
+          "runtime_alias": 2241355.527451799
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.00014810927430890247,
+          "cap": 7374.815659036198,
+          "z": 0.7968615252768192,
+          "rho2": 2775.186936413231,
+          "eligible": true,
+          "runtime_tree": 2908109.9561276753,
+          "runtime_alias": 1976268.3142313773
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "U",
+          "capaware": false,
+          "amplitude": 8.90872568840083e-05,
+          "cap": 11194.436664370447,
+          "z": -0.019880950577811654,
+          "rho2": 3739.0814041854746,
+          "eligible": true,
+          "runtime_tree": 5293420.149950092,
+          "runtime_alias": 3455433.7712267875
+        },
+        {
+          "family": "progress",
+          "etas": [
+            0.0,
+            0.0625,
+            0.125,
+            0.1875,
+            0.25,
+            0.3125,
+            0.375,
+            0.4375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": false,
+          "amplitude": 0.0001334342172811449,
+          "cap": 7072.231482397671,
+          "z": -0.6641052598737905,
+          "rho2": 1438.5247758332341,
+          "eligible": true,
+          "runtime_tree": 4507160.173156821,
+          "runtime_alias": 3016370.284350729
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.078125
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.006434152028363872,
+          "cap": 156.7998522856782,
+          "z": 0.5824646155796412,
+          "rho2": 68.14688579832936,
+          "eligible": true,
+          "runtime_tree": 432445.30310203094,
+          "runtime_alias": 300044.6384181226
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.0859375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.01702310458338776,
+          "cap": 59.00479915268925,
+          "z": 0.6049957294153249,
+          "rho2": 22.32478562718111,
+          "eligible": true,
+          "runtime_tree": 265853.6169070032,
+          "runtime_alias": 183539.15316452086
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.027215762841627963,
+          "cap": 37.198739985863334,
+          "z": 1.8275137952317935,
+          "rho2": 12.399889852765686,
+          "eligible": true,
+          "runtime_tree": 208758.01810113795,
+          "runtime_alias": 145153.24522583286
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.1015625
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.020665603167460765,
+          "cap": 47.761013898902334,
+          "z": -1.3602330371287867,
+          "rho2": 13.073447558489695,
+          "eligible": true,
+          "runtime_tree": 239570.6527309655,
+          "runtime_alias": 166578.70327216672
+        },
+        {
+          "family": "cap-aware",
+          "etas": [
+            0.109375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.00784973100301525,
+          "cap": 123.89373550281451,
+          "z": -2.1063480177516394,
+          "rho2": 29.438760190672706,
+          "eligible": true,
+          "runtime_tree": 391513.20294184564,
+          "runtime_alias": 271643.5899981485
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03329039983741009,
+          "cap": 29.961699562812683,
+          "z": -0.1092972959204394,
+          "rho2": 5.530191601626378,
+          "eligible": true,
+          "runtime_tree": 431752.47776169144,
+          "runtime_alias": 303519.6032185838
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.035898426884249136,
+          "cap": 27.844074830990124,
+          "z": 0.26542907185568326,
+          "rho2": 6.604557730335831,
+          "eligible": true,
+          "runtime_tree": 415772.8517522497,
+          "runtime_alias": 292285.8365441704
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03519765519645581,
+          "cap": 28.440991678368537,
+          "z": 0.6078236729901452,
+          "rho2": 5.045753202311644,
+          "eligible": true,
+          "runtime_tree": 524420.0486126172,
+          "runtime_alias": 364440.01699091546
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.038137744606091255,
+          "cap": 26.158203423380712,
+          "z": -0.07251211074251128,
+          "rho2": 5.9985016097148565,
+          "eligible": true,
+          "runtime_tree": 503800.06338651245,
+          "runtime_alias": 350110.1944481556
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.7,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03803189355150592,
+          "cap": 26.157551947291243,
+          "z": -0.696741388610564,
+          "rho2": 4.291648336749258,
+          "eligible": true,
+          "runtime_tree": 910645.5858353545,
+          "runtime_alias": 621273.7566472165
+        },
+        {
+          "family": "both",
+          "etas": [
+            0.0,
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125,
+            0.15625,
+            0.1875,
+            0.21875
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "amplitude": 0.03769819458293328,
+          "cap": 26.58165880027138,
+          "z": 0.7795160304140024,
+          "rho2": 5.3651313310131155,
+          "eligible": true,
+          "runtime_tree": 914667.212736789,
+          "runtime_alias": 624017.4703680201
+        }
+      ],
+      "loaders": {
+        "tree": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.027215762841627963,
+          "cap": 37.198739985863334,
+          "amplitude": 0.026756670554630737,
+          "bias": 0.0025153442754156253,
+          "estimate_over_mu": 0.9978297751245301,
+          "rho2": 12.182189181400215,
+          "hit_rate": 0.37279050000000014,
+          "z": -0.8793404780739147
+        },
+        "alias": {
+          "family": "cap-aware",
+          "etas": [
+            0.09375
+          ],
+          "kappa": 1.0,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.027215762841627963,
+          "cap": 37.198739985863334,
+          "amplitude": 0.026756670554630737,
+          "bias": 0.0025153442754156253,
+          "estimate_over_mu": 0.9978297751245301,
+          "rho2": 12.182189181400215,
+          "hit_rate": 0.37279050000000014,
+          "z": -0.8793404780739147
+        },
+        "amplitude": {
+          "family": "both",
+          "etas": [
+            0.03125,
+            0.0625,
+            0.09375,
+            0.125
+          ],
+          "kappa": 0.85,
+          "progress": "capped",
+          "capaware": true,
+          "pilot_amplitude": 0.038137744606091255,
+          "cap": 26.158203423380712,
+          "amplitude": 0.03817355740012523,
+          "bias": 0.0020110042279959635,
+          "estimate_over_mu": 1.0005626840945718,
+          "rho2": 5.984444735017129,
+          "hit_rate": 0.3428875,
+          "z": 0.3252877485455991
+        }
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds_small_world": 0.04382800944193914,
+          "levels": {
+            "twisting_tree": {
+              "calls": 8000.32,
+              "T_count": 418391365.8247013,
+              "T_per_call": 52296.82885493347,
+              "toffoli_per_call": 9301,
+              "logical_qubits": 707,
+              "runtime_s": 33366.71142451993,
+              "physical_qubits": 1213174,
+              "code_distance": 29,
+              "s_star_vs_small_world": 761310.2180404121
+            },
+            "twisting_alias": {
+              "calls": 8000.32,
+              "T_count": 334405099.70591956,
+              "T_per_call": 41798.96550461976,
+              "toffoli_per_call": 10393,
+              "logical_qubits": 7663,
+              "runtime_s": 28508.03474992964,
+              "physical_qubits": 14752286,
+              "code_distance": 31,
+              "s_star_vs_small_world": 650452.4187368233
+            },
+            "loader_tree": {
+              "calls": 1479.81,
+              "T_count": 248878488.5141694,
+              "T_per_call": 168182.73191434672,
+              "toffoli_per_call": 41965,
+              "logical_qubits": 731,
+              "runtime_s": 19848.05945900501,
+              "physical_qubits": 1253542,
+              "code_distance": 29,
+              "s_star_vs_small_world": 452862.4437141868
+            },
+            "loader_alias": {
+              "calls": 1479.81,
+              "T_count": 163633681.9804138,
+              "T_per_call": 110577.49439483028,
+              "toffoli_per_call": 27573,
+              "logical_qubits": 8815,
+              "runtime_s": 13949.771388830273,
+              "physical_qubits": 16966430,
+              "code_distance": 31,
+              "s_star_vs_small_world": 318284.39316437906
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.170431834997054,
+            "loader_tree": 1.6811069864757757,
+            "loader_alias": 2.391918153672181
+          }
+        },
+        "0.01": {
+          "classical_seconds_small_world": 2.835925944193914,
+          "levels": {
+            "twisting_tree": {
+              "calls": 77805.57,
+              "T_count": 4213828237.6500587,
+              "T_per_call": 54158.43926919446,
+              "toffoli_per_call": 9469,
+              "logical_qubits": 713,
+              "runtime_s": 359228.8572596675,
+              "physical_qubits": 1394386,
+              "code_distance": 31,
+              "s_star_vs_small_world": 126670.7468137977
+            },
+            "twisting_alias": {
+              "calls": 77805.57,
+              "T_count": 3393243867.2936654,
+              "T_per_call": 43611.83739536469,
+              "toffoli_per_call": 10841,
+              "logical_qubits": 8559,
+              "runtime_s": 307936.8809569001,
+              "physical_qubits": 18665502,
+              "code_distance": 33,
+              "s_star_vs_small_world": 108584.24620972545
+            },
+            "loader_tree": {
+              "calls": 13703.935,
+              "T_count": 2355782925.951079,
+              "T_per_call": 171905.5822981559,
+              "toffoli_per_call": 42889,
+              "logical_qubits": 737,
+              "runtime_s": 200830.49443732947,
+              "physical_qubits": 1440514,
+              "code_distance": 31,
+              "s_star_vs_small_world": 70816.55106280065
+            },
+            "loader_alias": {
+              "calls": 13703.935,
+              "T_count": 1538742567.0923274,
+              "T_per_call": 112284.72457672394,
+              "toffoli_per_call": 27993,
+              "logical_qubits": 9655,
+              "runtime_s": 139640.8879636287,
+              "physical_qubits": 21052590,
+              "code_distance": 33,
+              "s_star_vs_small_world": 49239.96278870403
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.1665665253976072,
+            "loader_tree": 1.788716689993348,
+            "loader_alias": 2.572519141766224
+          }
+        },
+        "0.001": {
+          "classical_seconds_small_world": 30.76464132501212,
+          "levels": {
+            "twisting_tree": {
+              "calls": 817068.04,
+              "T_count": 45805064487.35837,
+              "T_per_call": 56060.28169619554,
+              "toffoli_per_call": 9637,
+              "logical_qubits": 719,
+              "runtime_s": 4156809.602227771,
+              "physical_qubits": 1589982,
+              "code_distance": 33,
+              "s_star_vs_small_world": 135116.46563056862
+            },
+            "twisting_alias": {
+              "calls": 817068.04,
+              "T_count": 36749607308.86236,
+              "T_per_call": 44977.41376454078,
+              "toffoli_per_call": 11177,
+              "logical_qubits": 9231,
+              "runtime_s": 3537149.7034780015,
+              "physical_qubits": 22639950,
+              "code_distance": 35,
+              "s_star_vs_small_world": 114974.51460947946
+            },
+            "loader_tree": {
+              "calls": 136360.52,
+              "T_count": 24116945532.932426,
+              "T_per_call": 176861.64245290667,
+              "toffoli_per_call": 44121,
+              "logical_qubits": 745,
+              "runtime_s": 2188612.8071136177,
+              "physical_qubits": 1646610,
+              "code_distance": 33,
+              "s_star_vs_small_world": 71140.52733435387
+            },
+            "loader_alias": {
+              "calls": 136360.52,
+              "T_count": 15544122089.762987,
+              "T_per_call": 113992.83377448977,
+              "toffoli_per_call": 28413,
+              "logical_qubits": 10495,
+              "runtime_s": 1496121.7511396874,
+              "physical_qubits": 25736750,
+              "code_distance": 35,
+              "s_star_vs_small_world": 48631.210594459866
+            }
+          },
+          "factor_vs_twisting_tree": {
+            "twisting_tree": 1.0,
+            "twisting_alias": 1.175186223568788,
+            "loader_tree": 1.899289627071975,
+            "loader_alias": 2.7783899265292247
+          }
+        }
+      },
+      "best_pilot_amplitude_by_family": {
+        "progress": 0.0009897114220991233,
+        "cap-aware": 0.027215762841627963,
+        "both": 0.038137744606091255
+      }
+    }
+  },
+  "checks": {
+    "L1_exact_on_ring_2": true,
+    "L2_amplitude_reaches_u_loader_at_28": true,
+    "L3_tree_halves_s_star_at_28": false,
+    "L4_alias_halves_s_star_at_28": true
+  }
+}

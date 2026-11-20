@@ -1,0 +1,296 @@
+{
+  "eps_rel": 0.01,
+  "pools": {
+    "ring 28": {
+      "countries": 28,
+      "edges": 28,
+      "sources": 112,
+      "mu": 1.3220244150337375e-13,
+      "reference": "exact",
+      "a_twisted": 0.0008818440786597568,
+      "classical": {
+        "kind": "modules",
+        "seconds": 2.538279856897832,
+        "rho2": 1.0164415027277134,
+        "rho2_uncapped": 10.939349116873364,
+        "rho2_modules": 1.0164415027277134
+      },
+      "loader": {
+        "tilt": 0.09375,
+        "amplitude": 0.025788523655380674,
+        "pilot_amplitude": 0.025919605080146884,
+        "bias": 0.0019420481510208478,
+        "estimate_over_mu": 0.9973471619448381,
+        "z": -0.7610559540939535,
+        "rho2": 12.150336389692297
+      },
+      "twisting": {
+        "calls": 77805.57,
+        "T_per_call": 54158.43926919446,
+        "quantum_seconds": 359228.8572596675,
+        "physical_qubits": 1394386,
+        "s_star": 141524.52744068194
+      },
+      "loader_tree": {
+        "calls": 14120.695,
+        "T_per_call": 171905.94722133735,
+        "quantum_seconds": 206938.5310612308,
+        "physical_qubits": 1440514,
+        "s_star": 81527.07452603019
+      },
+      "loader_gain": 1.7359205915759384,
+      "best_s_star": 81527.07452603019,
+      "gap_vs_ring_28": 1.0
+    },
+    "ring 40": {
+      "countries": 40,
+      "edges": 40,
+      "sources": 160,
+      "mu": 1.2012959324302508e-18,
+      "reference": "exact",
+      "a_twisted": 0.00013006286949632508,
+      "classical": {
+        "kind": "modules",
+        "seconds": 4.202339582147987,
+        "rho2": 1.4613712706289088,
+        "rho2_uncapped": 35.35831068505086,
+        "rho2_modules": 1.4613712706289088
+      },
+      "loader": {
+        "tilt": 0.09375,
+        "amplitude": 0.01824374114049745,
+        "pilot_amplitude": 0.018317593968802236,
+        "bias": 0.0018256408616841911,
+        "estimate_over_mu": 1.0063335585588193,
+        "z": 1.5830544495248229,
+        "rho2": 16.006776280698855
+      },
+      "twisting": {
+        "calls": 213611.965,
+        "T_per_call": 79402.26640927079,
+        "quantum_seconds": 1539235.6293972575,
+        "physical_qubits": 2138838,
+        "s_star": 366280.63946476486
+      },
+      "loader_tree": {
+        "calls": 16859.03,
+        "T_per_call": 247592.28996560661,
+        "quantum_seconds": 355847.6382264779,
+        "physical_qubits": 1932546,
+        "s_star": 84678.45857535141
+      },
+      "loader_gain": 4.325546846590609,
+      "best_s_star": 84678.45857535141,
+      "gap_vs_ring_28": 0.9627841117759961
+    },
+    "ring 56": {
+      "countries": 56,
+      "edges": 56,
+      "sources": 224,
+      "mu": 2.511367332629509e-25,
+      "reference": "exact",
+      "a_twisted": 1.1174160252478581e-05,
+      "classical": {
+        "kind": "modules",
+        "seconds": 7.310316245610655,
+        "rho2": 2.2381890823964214,
+        "rho2_uncapped": 213.48648131557044,
+        "rho2_modules": 2.2381890823964214
+      },
+      "loader": {
+        "tilt": 0.09375,
+        "amplitude": 0.012539760273532187,
+        "pilot_amplitude": 0.012644931724391063,
+        "bias": 0.0022983285294536416,
+        "estimate_over_mu": 0.9943223205621001,
+        "z": -1.2337963931129068,
+        "rho2": 21.176527404747926
+      },
+      "twisting": {
+        "calls": 711378.5,
+        "T_per_call": 114322.67529556308,
+        "quantum_seconds": 7380397.414047833,
+        "physical_qubits": 2883714,
+        "s_star": 1009586.6124094503
+      },
+      "loader_tree": {
+        "calls": 20203.705,
+        "T_per_call": 349598.49117475806,
+        "quantum_seconds": 602136.5028479279,
+        "physical_qubits": 2586026,
+        "s_star": 82368.0512056465
+      },
+      "loader_gain": 12.257017103498512,
+      "best_s_star": 82368.0512056465,
+      "gap_vs_ring_28": 0.9897900136362744
+    },
+    "complete 6": {
+      "countries": 6,
+      "edges": 15,
+      "sources": 42,
+      "mu": 0.0006252641169768845,
+      "reference": "exact",
+      "a_twisted": 0.03538059158675549,
+      "classical": {
+        "kind": "uncapped",
+        "seconds": 0.035257005870301825,
+        "rho2": 0.5641120939248292,
+        "rho2_uncapped": 0.5641120939248292,
+        "rho2_modules": 0.21712501523581884
+      },
+      "loader": {
+        "tilt": 0.078125,
+        "amplitude": 0.07500560079060822,
+        "pilot_amplitude": 0.0745243658905264,
+        "bias": 0.002291699246935117,
+        "estimate_over_mu": 0.9984228002427988,
+        "z": -0.7248914758366821,
+        "rho2": 4.733990885785326
+      },
+      "twisting": {
+        "calls": 11818.07,
+        "T_per_call": 22037.4936326224,
+        "quantum_seconds": 19337.71769633527,
+        "physical_qubits": 478896,
+        "s_star": 548478.7269648466
+      },
+      "loader_tree": {
+        "calls": 8077.94,
+        "T_per_call": 76665.30902436208,
+        "quantum_seconds": 49388.99686882537,
+        "physical_qubits": 595880,
+        "s_star": 1400827.8822799132
+      },
+      "loader_gain": 0.3915389848410011,
+      "best_s_star": 548478.7269648466,
+      "gap_vs_ring_28": 0.1486421815795519
+    },
+    "complete 10": {
+      "countries": 10,
+      "edges": 45,
+      "sources": 110,
+      "mu": 4.894976740040946e-05,
+      "reference": "twist, 2,000,000 paths",
+      "a_twisted": 0.01617910477909792,
+      "classical": {
+        "kind": "uncapped",
+        "seconds": 0.21499311161455362,
+        "rho2": 1.1096418663976961,
+        "rho2_uncapped": 1.1096418663976961,
+        "rho2_modules": 0.428115687393406
+      },
+      "loader": {
+        "tilt": 0.0703125,
+        "amplitude": 0.048509880535421504,
+        "pilot_amplitude": 0.04818476930869881,
+        "bias": 0.0018303064634693962,
+        "estimate_over_mu": 1.0095441053169776,
+        "z": 3.848456511164161,
+        "rho2": 6.150313866985948
+      },
+      "twisting": {
+        "calls": 17907.79,
+        "T_per_call": 63220.33422513768,
+        "quantum_seconds": 90287.88340542787,
+        "physical_qubits": 1056748,
+        "s_star": 419957.098752535
+      },
+      "loader_tree": {
+        "calls": 9847.72,
+        "T_per_call": 220079.21816503347,
+        "quantum_seconds": 184760.4936857709,
+        "physical_qubits": 1257924,
+        "s_star": 859378.6670570883
+      },
+      "loader_gain": 0.48867526603919914,
+      "best_s_star": 419957.098752535,
+      "gap_vs_ring_28": 0.1941319119695868
+    },
+    "circulant 28, degree 8": {
+      "countries": 28,
+      "edges": 112,
+      "sources": 280,
+      "mu": 2.3654200266330116e-07,
+      "reference": "twist, 2,000,000 paths",
+      "a_twisted": 0.00610339284013825,
+      "classical": {
+        "kind": "uncapped",
+        "seconds": 1.0132697399271715,
+        "rho2": 1.5217739311220093,
+        "rho2_uncapped": 1.5217739311220093,
+        "rho2_modules": 0.5530373670958063
+      },
+      "loader": {
+        "tilt": 0.0625,
+        "amplitude": 0.04636808940187695,
+        "pilot_amplitude": 0.04680170842840816,
+        "bias": 0.002000436455084908,
+        "estimate_over_mu": 0.988978893987464,
+        "z": -4.061027520873671,
+        "rho2": 7.365097399719595
+      },
+      "twisting": {
+        "calls": 29801.6,
+        "T_per_call": 163822.28582267746,
+        "quantum_seconds": 416204.6713780071,
+        "physical_qubits": 2743630,
+        "s_star": 410754.0716728812
+      },
+      "loader_tree": {
+        "calls": 10136.885,
+        "T_per_call": 556314.5784620703,
+        "quantum_seconds": 480750.0612103694,
+        "physical_qubits": 2793602,
+        "s_star": 474454.17766538967
+      },
+      "loader_gain": 0.8657402358517472,
+      "best_s_star": 410754.0716728812,
+      "gap_vs_ring_28": 0.19848147626143853
+    },
+    "circulant 28, degree 12": {
+      "countries": 28,
+      "edges": 168,
+      "sources": 392,
+      "mu": 7.825242310734744e-07,
+      "reference": "twist, 2,000,000 paths",
+      "a_twisted": 0.006615908053617593,
+      "classical": {
+        "kind": "uncapped",
+        "seconds": 1.7644337967457493,
+        "rho2": 1.347104938624117,
+        "rho2_uncapped": 1.347104938624117,
+        "rho2_modules": 0.6273603540590186
+      },
+      "loader": {
+        "tilt": 0.0625,
+        "amplitude": 0.033393940729735,
+        "pilot_amplitude": 0.03344338302002834,
+        "bias": 0.002095666513601141,
+        "estimate_over_mu": 0.9929428746626398,
+        "z": -2.516732655349404,
+        "rho2": 7.862877199027848
+      },
+      "twisting": {
+        "calls": 28164.355,
+        "T_per_call": 236398.1087172359,
+        "quantum_seconds": 604213.5231631049,
+        "physical_qubits": 3968358,
+        "s_star": 342440.46122755756
+      },
+      "loader_tree": {
+        "calls": 12107.85,
+        "T_per_call": 814385.1165815736,
+        "quantum_seconds": 894836.0946675502,
+        "physical_qubits": 4024986,
+        "s_star": 507151.98060587473
+      },
+      "loader_gain": 0.6752225650749845,
+      "best_s_star": 342440.46122755756,
+      "gap_vs_ring_28": 0.2380766403414404
+    }
+  },
+  "checks": {
+    "R1_some_pool_10x_below_ring_28": false,
+    "R2_loader_gain_grows_and_passes_2_at_56": true
+  }
+}

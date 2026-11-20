@@ -86,3 +86,30 @@
 - RDPO 学到的价值函数和精确 Doob 函数的加权 R² 为 0.993 / 0.975，可以当预警倍数读出来（`addons/dreamwake.py`）。
 - 建议的写法：「RDPO 的每样本方差比最好的乘积分布低一个数量级；目前的瓶颈是抽样引擎，在两国模型上换引擎后等时间下已胜出 1.7–6.1 倍，28 国池上还差约 4 倍。」
 
+
+## 7. 小世界和量子判据：现在最好的经典方法是哪个（2026-11-20）
+
+§7.6 现在写的是「对我们自己最好的经典方法」比较，参照是你换了引擎之后的 RDPO。但在环形池上，不训练的小世界比它更快（28 国：相对方差 10.9，加小模块 1.02，你的是 33，而且没有训练时间）。如果评委自己发现这一点会比较被动，建议我们自己先写出来。数字都在 `addons/README.md` 的「对量子一侧的影响」和「差距账本」两节，结果文件是 `results/quantum_side.json` 和 `results/q_link.json`。
+
+| 28 国环形池，ε = 1% | s* |
+|---|---|
+| 你的文件（按调用次数重新计价到 1%） | 1.6e5 |
+| 经典一侧换成小世界 | 3.9e6（高 25 倍） |
+| 再加已在论文里的重新计价（旋转合成 + ChebAE） | 1.3e5 |
+| 再让量子加载器抽「未封顶世界里 U > T」的条件分布 | 2.3e4 |
+| 加载器带上小模块，上限 | 3.3e3 |
+| 真的造出来、数了门的加载器（看各国封顶状态，树制备） | 7.1e4 |
+
+- 前三行是算出来的。第四行的振幅是精确的（真值 / 小世界答案 = 0.022），但它假设加载器每次调用的门数和 twisting 一样，所以是上限。
+- 第五行只是上限，和第四行一样假设加载器不比 twisting 贵。
+- 最后一行是做出来的（`q_link_gates.py`）：让每个源按它所触国家的封顶状态倾斜，实测振幅 0.027（twisting 是 0.00088），调用次数少 5.7 倍，但每次调用的 T 门是 3.2 倍，净 1.8 倍。我事先定的门槛是 2 倍，没过。8 国上是亏的，20 国打平，收益随规模变大。
+- 换成别名抽样制备是 4.9e4（2.6 倍），但物理比特从 140 万变成 2110 万，不算干净的改进。
+- 同一个加载器在更大的环上（`q_gap_map.py`）：40 国 4.3 倍，56 国 12 倍。环从 28 到 56 国，twisting 的振幅掉 80 倍（0.00088 → 0.000011），加载器只掉一半（0.026 → 0.0125），所以 twisting 的 s* 从 1.4e5 涨到 1.0e6，加载器的 s* 停在 8e4 左右不动。这可能是这批实验里对你的可扩展性一节最有用的一条。稠密池上加载器是亏的（0.4–0.9 倍），因为那几个池子上事件不够罕见。
+- 提高精度在这里不帮量子：从 1% 到 0.1%，经典一侧换成带小模块的抽样器，s* 基本不变。
+- 你的运行时间模型里只有 4 个 T 工厂，占物理比特的 2%。加到 32 个，s* 再低约 8 倍，之后碰到反应时间下限。这是你的模型假设，用不用你定。
+
+可以直接用的一段（放 §7.6 或 §8.3，数字你可以按自己的口径改）：
+
+> On ring pools our strongest classical method is not the trained policy but the exact solution of the uncapped pool used as an untrained steering table ("small world"). Taking it as the classical reference raises the required hardware speed-up at 28 countries by a factor of about 25 at 1% relative error. The same table can be given to the quantum loader: loading the uncapped pool conditioned on exceedance has amplitude exactly μ/μ_uncapped = 0.022 instead of 0.00088 and cuts the amplitude-estimation calls by 5.6. That figure is a ceiling: it assumes the conditioned loader costs no more per call than the twisted one. A concrete loader that tilts every source on the capped state of the countries it touches reaches a measured amplitude of 0.027 and needs 5.7 times fewer calls, but 3.2 times more T gates per call. With the cheaper rotation synthesis and amplitude-estimation algorithm of Section X, s* against the stronger reference is 7.1×10⁴, a net factor of 1.8 over twisting (1.3×10⁵). The gain grows with pool size: the loader loses at 8 countries, breaks even at 20, and gains 4.3 at 40 and 12 at 56 countries, where the twisted amplitude has fallen by a factor of 80 and the conditioned one by a factor of 2. With it s* stays near 8×10⁴ from 28 to 56 countries, while with twisting it rises from 1.4×10⁵ to 1.0×10⁶.
+
+和这个问题直接相关的两篇 2026 年预印本就是第 3 节那两篇（arXiv:2603.15664、arXiv:2608.26840）。前一篇没有把重要性采样放进量子电路，后一篇用经典的置信传播给加载电路算角度但没有倾斜；你的 twisting 加有界权重比两篇都走得远，可以在相关工作里各写一句。
