@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import '../shared/theme.css'
 import './home.css'
 
 const still = new URLSearchParams(location.search).get('still')

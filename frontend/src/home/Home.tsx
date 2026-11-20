@@ -5,6 +5,8 @@ import type { MapData } from './lib/map'
 import Reveal, { useInView } from './Reveal'
 import { Bar, Checks, Heat, Ring, Sources, TimeLine } from './Visuals'
 import { HERO_ASPECT, PROBLEM_ASPECT } from './Hero3D.config'
+import { SiteNav } from '../shared/SiteNav'
+import '../shared/theme.css'
 import './home.css'
 import './visuals.css'
 
@@ -43,40 +45,6 @@ function Arrow() {
 }
 
 /* ---------- navigation ---------- */
-
-const LINKS: [string, string][] = [
-  ['Problem', '#problem'], ['How it works', '#how'], ['Results', '#results'], ['Team', '#team'], ['Documents', '#documents'], ['Dashboard', DASHBOARD],
-]
-
-function Nav() {
-  const [open, setOpen] = useState(false)
-  return (
-    <header className="nav-wrap">
-      <nav className="nav" aria-label="Main">
-        <a className="brand" href="#top" aria-label="Joint-Tail, home">
-          <svg viewBox="0 0 28 20" width="28" height="20" aria-hidden="true"><circle cx="9" cy="10" r="8" fill="#1F3557" opacity="0.92" /><circle cx="19" cy="10" r="8" fill="#C8553A" opacity="0.9" /><path d="M14 3.6a8 8 0 0 1 0 12.8 8 8 0 0 1 0-12.8z" fill="#111413" /></svg>
-          Joint-Tail
-        </a>
-        <div className="navpill">
-          {LINKS.map(([l, h]) => <a key={l} href={h}>{l}</a>)}
-        </div>
-        <div className="navright">
-          <a className="btn ghost hide-s" href={PDFS.proposal}>Proposal (PDF)</a>
-          <a className="btn dark" href={SOLUTION}><span className="full">Explore the solution</span><span className="short">Solution</span> <Arrow /></a>
-          <button type="button" className="menu-btn" aria-expanded={open} aria-controls="mnav" onClick={() => setOpen(!open)}>
-            <span className="sr-only">Menu</span><i /><i />
-          </button>
-        </div>
-      </nav>
-      {open && (
-        <div className="mnav" id="mnav">
-          {LINKS.map(([l, h]) => <a key={l} href={h} onClick={() => setOpen(false)}>{l}</a>)}
-          <a href={PDFS.proposal}>Proposal (PDF)</a>
-        </div>
-      )}
-    </header>
-  )
-}
 
 /* ---------- hero ---------- */
 
@@ -388,7 +356,7 @@ function Footer() {
 export default function Home() {
   return (
     <ValuesProvider>
-      <Nav />
+      <SiteNav theme="light" current="home" />
       <main>
         <Hero />
         <Problem />
