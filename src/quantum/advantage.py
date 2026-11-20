@@ -67,8 +67,11 @@ def iqae_stats(a, eps_rel, reps=20, seed=0):
     return float(np.mean(calls)), float(np.mean(kmax)), float(np.mean(shots))
 
 
-def advantage_map(eps_rel=0.1):
-    e2 = {(r["topology"], r["n"]): r for r in json.loads((R / "rdpo_e2.json").read_text())["rows"] if r["target"] == "exceedance"}
+def advantage_map(eps_rel=0.1, e2_rows=None):
+    """e2_rows: rows shaped like results/rdpo_e2.json (default: the file); the quantum side is untouched."""
+    if e2_rows is None:
+        e2_rows = json.loads((R / "rdpo_e2.json").read_text())["rows"]
+    e2 = {(r["topology"], r["n"]): r for r in e2_rows if r["target"] == "exceedance"}
     tw = {(r["topology"], r["n"]): r for r in json.loads((R / "twisted.json").read_text())["rows"]}
     rows = []
     for key in sorted(e2, key=lambda k: (k[0] != "ring", k[1])):
@@ -201,7 +204,7 @@ if __name__ == "__main__":
     run()
 
 
-def scaling_laws():
+def scaling_laws(adv=None, out_file=None):
     """Resource scaling of the Q-RDPO circuits and the quantum/classical crossover ('phase diagram').
 
     1. Least-squares fits of logical qubits, Toffolis per A, CNOTs per Grover iterate and A-depth against the
@@ -212,7 +215,8 @@ def scaling_laws():
        and quantum wins in wall-clock iff the hardware speed-up over the stated fault-tolerant baseline
        exceeds s*. c_Q, τ_A, τ_C and a are measured per setting from results/quantum_advantage.json (ε = 10%).
     """
-    adv = json.loads((R / "quantum_advantage.json").read_text())["advantage"]
+    if adv is None:
+        adv = json.loads((R / "quantum_advantage.json").read_text())["advantage"]
     rows = []
     for r in adv:
         n = r["n"]
@@ -237,5 +241,6 @@ def scaling_laws():
         r["rho2_breakeven_at_1pct"] = r["c_Q"] * r["overhead"] * 0.01 / math.sqrt(r["a"])
         r["rho2_breakeven_at_10pct"] = r["c_Q"] * r["overhead"] * 0.10 / math.sqrt(r["a"])
     out = {"fits": fits, "rows": rows}
-    (R / "quantum_scaling.json").write_text(json.dumps(out, indent=2))
+    if out_file is not False:
+        (R / (out_file or "quantum_scaling.json")).write_text(json.dumps(out, indent=2))
     return out

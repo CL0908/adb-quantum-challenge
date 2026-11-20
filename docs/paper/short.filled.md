@@ -39,7 +39,7 @@ Exact where possible, learned where not, quantum where it can be shown to pay.
    no bias.
 3. **A quantum stage with a measured bar (quantum).** Amplitude estimation with exact loading needs resources
    linear in countries and dependence links. Against our best classical method it breaks even only on hardware
-   8.2×10⁴ times faster than a projected fault-tolerant baseline at 28 countries; near-term circuits are
+   6.5×10⁵ times faster than a projected fault-tolerant baseline at 28 countries; near-term circuits are
    costed for an IBM device.
 :::
 
@@ -163,7 +163,7 @@ quantum state preparation.
 * **Crossover law.** The quantum stage beats RDPO in wall-clock only on hardware $s^*$ times faster than the stated
   baseline, $s^* = \kappa\,\varepsilon/\rho^2$ with $\kappa = c_Q\tau_A/(\tau_C\sqrt a)$; $\tau_A$ is the
   fault-tolerant time per state preparation, $\tau_C$ RDPO's time per path. Comparing with plain Monte Carlo instead
-  would overstate the quantum gain by up to 6.5×10¹⁰ here.
+  would overstate the quantum gain by up to 1.1×10¹¹ here.
 * **Error correction (projected fault-tolerant baseline).** Surface code at physical error 10⁻³, 1 µs code cycles,
   four magic-state factories, Toffoli = 4 T, Ross–Selinger rotation synthesis [@fowler2012; @litinski2019;
   @rossselinger2016].
@@ -176,7 +176,7 @@ quantum state preparation.
 ::: {.compact}
 | Approach | What it needs on this problem | What we measured or cite | Verdict |
 |---|---|---|---|
-| Amplitude estimation [@woerner2019; @egger2021] | exact loading, payout oracle, deep circuits | exact source-wise loading, linear resources; break-even needs hardware 8.2×10⁴× faster at 28 countries; near-term circuits off by 19%–25% | right primitive; needs fault tolerance |
+| Amplitude estimation [@woerner2019; @egger2021] | exact loading, payout oracle, deep circuits | exact source-wise loading, linear resources; break-even needs hardware 6.5×10⁵× faster at 28 countries; near-term circuits off by 19%–25% | right primitive; needs fault tolerance |
 | QCBM, QGAN, QBM, quantum copula as loaders [@benedetti2019; @zoufal2019; @amin2018; @zhu2022] | learn p from data | p is known exactly here; a learned loader errs in the tail it never sees. As a proposal, an 8-qubit Born machine's noise biased weights by 9%–60%, 0.6% after calibration | only as a reweighted proposal |
 | Quantum kernels [@havlicek2019] | a surrogate or proposal | payouts are exact and cheap; the optimal proposal is a value function | no role found; not tested |
 | Annealing, annealer QBM [@amin2018; @benedetti2016] | samples at unknown effective temperature | unbiased weights need known proposal probabilities | not used |
@@ -300,9 +300,9 @@ table was available.
 * **Exactness.** State-vector emulation of every loading circuit reproduces μ to a relative error of
   1.2×10⁻¹²; compiled resource counts
   follow logical qubits ≈ 38 + 13.2n + 8.2|E|; Toffolis per A ≈ -26 + 106.0n + 39.0|E|; depth of A ≈ 378 + 0.3n + 14.7|E|, each within 7% of the compiled circuits.
-* **Where it could pay.** RDPO's measured per-path relative variances are ρ² = 0.13–117; break-even at 1% error
-  needs ρ² ≈ 5.8×10⁴–9.6×10⁵ at the projected baseline (Figure 4). The gap closes with portfolio
-  size (s* falls from 4.4×10⁶ at 2 countries to 8.2×10⁴ at 28), so the test is re-run first where ρ²
+* **Where it could pay.** RDPO's measured per-path relative variances are ρ² = 0.13–66; break-even at 1% error
+  needs ρ² ≈ 3.8×10⁵–4.3×10⁶ at the projected baseline (Figure 4). The gap closes with portfolio
+  size (s* falls from 1.7×10⁸ at 2 countries to 6.5×10⁵ at 28), so the test is re-run first where ρ²
   grows fastest: dense graphs and events touching many countries.
 * **Near-term run, costed.** The two-country law on 7–8 qubits, transpiled for an IBM Heron-class device
   model (FakeFez): one Grover iterate costs 744–1,232 two-qubit gates. With the device's noise the best
@@ -344,11 +344,11 @@ twisted loader with the bitwise weight oracle, 10% relative error on Pr(L > T), 
 | Circuit depth | 734–6,171 (Grover power 0–2) | 372 CNOT layers per state preparation | 806 |
 | Two-qubit gates | 211–2,312 per circuit | 4,212 CNOTs per Grover iterate; 236 Toffolis per preparation | 67,360; 4,074 |
 | Shots / queries | 9×10⁵ shots, 3–15 QPU minutes | 4,290 state preparations, Grover depth ≤ 16 | 46,685, depth ≤ 183 |
-| Run time | emulator fallback 18 CPU minutes | 0.7 h | 11 days (RDPO: 12 s) |
+| Run time | emulator fallback 18 CPU minutes | 0.7 h | 11 days (RDPO: 1 s) |
 | Error handling | noise-aware likelihood, readout calibration, trust guard | surface code; guard against an RDPO pilot | same |
 :::
 
-**Add-on re-pricing (Xu Zi Yu; conditional).** Cheaper rotation synthesis (deterministic or randomised) and a Chebyshev amplitude estimator with an empirical constant lower the required hardware speed-up s* by 10.7–29.3× over the eight settings (ring-28: 8.2×10⁴ to 3.3×10³–2.9×10³); s* remains far above 1, and we claim no quantum advantage (annex §8.3).
+**Add-on re-pricing (Xu Zi Yu; conditional).** Cheaper rotation synthesis (deterministic or randomised) and a Chebyshev amplitude estimator with an empirical constant lower the required hardware speed-up s* by 10.7–29.3× over the eight settings (ring-28: 6.5×10⁵ to 2.6×10⁴–2.2×10⁴); s* remains far above 1, and we claim no quantum advantage (annex §8.3).
 
 **Hardware modality and fit with Phase 2.** Each shared source couples two country registers. On 2D
 superconducting lattices SWAP routing inflates two-qubit counts by 12–41× in our compilations, so dense

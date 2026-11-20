@@ -506,7 +506,7 @@ twisting 的相对方差在这四个池子上是 11.7 / 22.6 / 41.7 / 36.1。四
 
 ### 最外层：语言模型当入口（`ask.py`、`llm_gate.py`，结果 `results/llm_gate.json`）
 
-`ask.py` 把三层做成三条命令（`small_world` 粗答案、`rdpo` 带标准误的估计、`twin` 多个世界上的分布），各输出一行 JSON，参数越界直接报错。池子用 `--countries N` 选（2 到 28 国的环形合成池，主作者默认阈值）。`llm_gate.py` 用 Claude Code CLI 的非交互模式调 Claude Opus 5.5（`claude -p --model claude-opus-5-5`），只给它一个工具：只能执行 `python ask.py ...` 的 Bash。它负责把问题翻译成调用、把 JSON 翻译成话，不许自己算数。
+`ask.py` 把三层做成三条命令（`small_world` 粗答案、`rdpo` 带标准误的估计、`twin` 多个世界上的分布），各输出一行 JSON，参数越界直接报错。池子用 `--countries N` 选（2 到 28 国的环形合成池，主作者默认阈值）。`llm_gate.py` 用 Claude Code CLI 的非交互模式调 Claude Opus 5.5（`claude -p --model claude-opus-5-5`），只给它一个工具：只能执行 `python ask.py ...` 的 Bash。它负责把问题翻译成调用、把 JSON 翻译成话，不许自己算数。模型名由环境变量 `ADB_LLM_MODEL` 指定（如 `ADB_LLM_MODEL=claude-opus-5-5 python llm_gate.py`）；未设置时用 `claude-opus-5-5`（即已记录那一轮所用的模型）。`ask.py` 本身不调用任何模型，不需要这个变量。
 
 五个固定问题，事先定的四条规则全过：
 

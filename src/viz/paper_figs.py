@@ -248,7 +248,7 @@ def gantt():
 
 
 def quantum_advantage_fig():
-    d = _load("quantum_advantage.json")["advantage"]
+    d = _load("quantum_advantage_v3.json")["advantage"]
     fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.7), gridspec_kw={"wspace": 0.32})
     for kind, m, c in (("ring", "o", S.TERRA), ("complete", "s", S.PLUM)):
         rr = sorted([r for r in d if r["topology"] == kind], key=lambda r: r["n"])
@@ -326,8 +326,8 @@ def v2_fig():
 
 def quantum_phase_fig():
     """Phase diagram: where amplitude estimation on the loaded measure beats classical RDPO in wall-clock."""
-    d = _load("quantum_scaling.json")["rows"]
-    adv = {(r["topology"], r["n"]): r for r in _load("quantum_advantage.json")["advantage"]}
+    d = _load("quantum_advantage_v3.json")["scaling"]["rows"]
+    adv = {(r["topology"], r["n"]): r for r in _load("quantum_advantage_v3.json")["advantage"]}
     fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.1), gridspec_kw={"wspace": 0.3, "width_ratios": [1.35, 1]})
     ax = axes[0]
     eps = np.logspace(-4, -0.7, 50)

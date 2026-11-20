@@ -109,8 +109,8 @@ def fig_heat(B=16384):
 
 def fig_phase():
     """Wall-clock phase diagram for amplitude estimation against RDPO (single panel)."""
-    d = _load("quantum_scaling.json")["rows"]
-    adv = {(r["topology"], r["n"]): r for r in _load("quantum_advantage.json")["advantage"]}
+    d = _load("quantum_advantage_v3.json")["scaling"]["rows"]
+    adv = {(r["topology"], r["n"]): r for r in _load("quantum_advantage_v3.json")["advantage"]}
     fig, ax = plt.subplots(figsize=(10.8, 5.5))
     eps = np.logspace(-4, -0.7, 50)
     K = [r["c_Q"] * r["overhead"] / np.sqrt(r["a"]) for r in d]

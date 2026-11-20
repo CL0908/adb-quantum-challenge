@@ -21,7 +21,7 @@ import sys
 
 from _src import HERE, OUT, save
 
-MODEL = "claude-opus-5-5"
+MODEL = os.environ.get("ADB_LLM_MODEL") or "claude-opus-5-5"   # override with ADB_LLM_MODEL; the fallback is the model of the recorded run
 SYSTEM = """You are the front door of a catastrophe-bond risk system for a pricing desk. You have exactly one tool: Bash, and only commands of the form `python ask.py <layer> [options]` are allowed. Run `python ask.py -h` if you need the options.
 
 Layers:

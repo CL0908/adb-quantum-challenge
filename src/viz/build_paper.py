@@ -5,6 +5,7 @@ experiment scripts; nothing is typed by hand.
 Usage: python -m src.viz.build_paper [--cv path/to/cv.pdf]
 """
 import json
+import math
 import re
 import subprocess
 import sys
@@ -211,8 +212,14 @@ def e3_values():
     return {"E3_TEXT": txt}
 
 
+def qa_file():
+    """Crossover inputs: the faster classical engine (results/quantum_advantage_v3.json, same quantum model); the earlier
+    results/quantum_advantage.json is kept for the record and still supplies the mitigation study."""
+    return json.loads((R / "quantum_advantage_v3.json").read_text())
+
+
 def q_values():
-    d = json.loads((R / "quantum_advantage.json").read_text())
+    d = qa_file()
     adv = sorted(d["advantage"], key=lambda r: (r["topology"] != "ring", r["n"]))
     v = {}
     r28 = next(r for r in adv if r["topology"] == "ring" and r["n"] == 28)
@@ -250,7 +257,7 @@ def q_values():
         "* **What the comparison already includes.** The classical side is our *best* method, timed with training; the quantum "
         "side includes state preparation, the weight oracle and all IQAE rounds. Comparing against plain Monte Carlo instead would "
         "show a misleading quantum advantage of several orders of magnitude."])
-    ms = d["mitigation_summary"]
+    ms = json.loads((R / "quantum_advantage.json").read_text())["mitigation_summary"]   # classical-independent: kept in the earlier file
     lines = ["**Table [tab:mit].** Error mitigation under control-offset miscalibration (250 random instances per level; relative error "
              "of the estimated amplitude). Guard 2 combines the goodness-of-fit and pilot-disagreement guards with fallback to RDPO.", "",
              "| offset δ_max | mitigation worse than none | p99 error: none | mitigated | guard 2 | max error: none | mitigated | guard 2 | fallback rate |",
@@ -689,7 +696,7 @@ def elt_values():
 
 
 def qs_values():
-    d = json.loads((R / "quantum_scaling.json").read_text())
+    d = qa_file()["scaling"]
     f = d["fits"]; v = {}
     lab = {"logical_qubits": "logical qubits", "toffoli_A": "Toffoli gates per A", "rotations_A": "single-qubit rotations per A",
            "cnot_Q": "CNOTs per Grover iterate Q", "depth_A": "CNOT depth of A"}
@@ -769,7 +776,7 @@ def stronger_values():
 def qs_inline_values():
     """Inline summary of the fitted quantum resource laws for the short proposal."""
     try:
-        d = json.loads((R / "quantum_scaling.json").read_text())["fits"]
+        d = qa_file()["scaling"]["fits"]
     except FileNotFoundError:
         return {"QS_FITS_INLINE": "linear laws (not computed in this build)"}
     def line(name, label):
@@ -1261,7 +1268,7 @@ def extra_values():
     im = rain["implied"]
     v["RAIN_BOTH_EXH"] = sci(im["both from data"]["joint_exhaustion"])
     # quantum resources (fault-tolerant projection)
-    qa = json.loads((R / "quantum_advantage.json").read_text())["advantage"]
+    qa = qa_file()["advantage"]
     q2 = next(r for r in qa if r["topology"] == "ring" and r["n"] == 2)
     q28 = next(r for r in qa if r["topology"] == "ring" and r["n"] == 28)
     for tag, r in (("2", q2), ("28", q28)):
@@ -1397,8 +1404,18 @@ def addon_values():
     v["ADD_RED_M"] = f"{min(fm):.1f}–{max(fm):.1f}"
     v["ADD_RED_ALL"] = f"{min(fc + fm):.1f}–{max(fc + fm):.1f}"
     r28 = next(r for r in comb if r["topology"] == "ring" and r["n"] == 28)
-    v["ADD_S28_DECL"] = sci(r28["s_star"]["declared"]); v["ADD_S28_C"] = sci(r28["s_star"]["Q1cQ2"])
-    v["ADD_S28_M"] = sci(r28["s_star"]["Q1Q2"])
+    # the reductions come from the quantum side only (same classical time cancels), so they apply to the s* of §7.6 as it now
+    # stands: the faster classical engine (results/quantum_advantage_v3.json)
+    s28 = next(r for r in qa_file()["advantage"] if r["topology"] == "ring" and r["n"] == 28)["required_speedup"]
+    v["ADD_S28_DECL"] = sci(s28); v["ADD_S28_C"] = sci(s28 / r28["factor_Q1cQ2"]); v["ADD_S28_M"] = sci(s28 / r28["factor_Q1Q2"])
+    sl = L("small_world_loop.json")["A"]
+    v["ADD_SW_TRAIN"] = pct(float(np.mean([1 - math.sqrt(1 - c["variance_reduction_by_training"]) for c in sl.values()])), 0)
+    q = qa_file()["advantage"]
+    old28 = next(r for r in q if r["topology"] == "ring" and r["n"] == 28)
+    v["Q_SSTAR_28_OLD"] = sci(old28["old_engine_same_machine"]["required_speedup"]).replace("1.0×", "")
+    v["Q_ENGINE_X28"] = f"{old28['time_ratio_same_machine']:.1f}"
+    tr = [r["time_ratio_same_machine"] for r in q]
+    v["Q_ENGINE_XRANGE"] = f"{min(tr):.1f}–{max(tr):.1f}"
     rot = L("q1_rotations.json")["rows"]
     tc = [r["T_reduction_qrom_fallback"] for r in rot]; tm = [r["T_reduction_qrom_mixed"] for r in rot]
     v["ADD_T_C"] = f"{min(tc):.1f}–{max(tc):.1f}"; v["ADD_T_M"] = f"{min(tm):.1f}–{max(tm):.1f}"

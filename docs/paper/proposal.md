@@ -1193,6 +1193,9 @@ $$T_{\text{RDPO}}(n) = \frac{\rho^2(n)}{\varepsilon^2}\, t_{\text{path}}(n), \qq
 Here $\rho^2$ is RDPO's measured per-path relative variance and $t_{\text{path}}$ its measured time per path, both
 with training included. **Q-RDPO beats RDPO in wall-clock if and only if the quantum machine is $s^*$ times
 faster than the stated baseline** (physical error $10^{-3}$, 1 µs code cycles, 4 magic-state factories).
+The classical reference is now the faster RDPO engine written by Xu Zi Yu (the same policy and the same paths, drawn
+{{Q_ENGINE_X28}} times faster at 28 countries on one core, training included; the quantum model is unchanged); timed back to
+back on the same machine, the earlier engine gives s* = {{Q_SSTAR_28_OLD}} at 28 countries.
 
 ![**Figure [fig:qadv].** (a) Hardware speed-up $s^*$ required for the quantum stage to match classical RDPO
 in wall-clock time at 10% relative error. (b) Logical two-qubit error rate required for the deepest
@@ -1319,11 +1322,12 @@ stated assumptions, which differ from the baseline of §8.2.
   (IQAE: {{ADD_IQAE_C}}), coverage ≥ {{ADD_CHEB_COV}} and {{ADD_CALLS_RED}}× fewer state preparations than our IQAE counts; this
   constant is empirical, not proved. Together the required speed-up s* of §7.6 falls by {{ADD_RED_C}}× (deterministic) or
   {{ADD_RED_M}}× (mixed) over the eight settings; at 28 countries from {{ADD_S28_DECL}} to {{ADD_S28_C}} / {{ADD_S28_M}}.
-  The baseline classical side (RDPO with training, unchanged), state preparation, weight oracle and all rounds stay in the
+  The classical side (the faster RDPO engine of §7.6, with training), state preparation, weight oracle and all rounds stay in the
   count. Caveats: the synthesis constants are quoted from the cited paper and not re-derived here; the deepest ChebAE
   circuit is deeper (the logical error rate required at 28 countries goes from {{ADD_PL28}}); our own IQAE call counts
   differ from the add-on's re-simulation by up to {{ADD_IQAE_DEV}}; the T-factory throughput model is unchanged and no reaction-time
   floor is modelled. **s\* stays far above 1: no quantum advantage is claimed.**
+* **Small-world guide for RDPO.** Training RDPO with the exact small-world table as its starting policy lowers its error by only about {{ADD_SW_TRAIN}} on average (two-country model and 28-country pool, `addons/small_world_loop.py`).
 * **Model risk, CAREC pool (conditional; not re-run by us).** Re-drawing the five data inputs of our calibration
   (event counts, Gutenberg–Richter slope, shared events, hydrological years, rain share) and recomputing the exact
   pool distribution by component convolution (which matches our MPS reference to 10⁻⁶) gives for Pr(loss > US$240m)
