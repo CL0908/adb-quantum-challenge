@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 R = ROOT / "results"
 BRIEF_METHODS = ("mc", "sobol", "stratified", "importance")
+E1_BUDGET = 16384
 TARGETS = ["expected_loss", "joint_attachment", "exceedance", "stop_loss", "joint_exhaustion"]
 
 
@@ -32,10 +33,13 @@ def story() -> dict:
 
     eq = json.loads((R / "equal_time.json").read_text())
     heat = {"targets": TARGETS, "paths": {}, "time": {}}
+    # equal paths: the paper's e1_heatmap / e1_values source (results/rdpo_e1.json, B = 16,384, RDPO vs best of four)
+    for r in json.loads((R / "rdpo_e1.json").read_text())["rows"]:
+        if r["budget"] == E1_BUDGET:
+            heat["paths"].setdefault(r["scenario"], {})[r["target"]] = r["improvement_vs_best"]
     for cell in eq["A_cells"]:
-        for key, out in (("rmse_paths", "paths"), ("rmse_time", "time")):
-            best = min(cell[key][m] for m in BRIEF_METHODS)
-            heat[out].setdefault(cell["scenario"], {})[cell["target"]] = best / cell[key]["rdpo"]
+        best = min(cell["rmse_time"][m] for m in BRIEF_METHODS)
+        heat["time"].setdefault(cell["scenario"], {})[cell["target"]] = best / cell["rmse_time"]["rdpo"]
 
     qa = json.loads((R / "quantum_advantage_v3.json").read_text())["advantage"]
     quantum = [

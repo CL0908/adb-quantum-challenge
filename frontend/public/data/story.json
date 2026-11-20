@@ -66,39 +66,39 @@
   ],
   "paths": {
    "adb-base": {
-    "expected_loss": 0.4891460280006761,
-    "joint_attachment": 4.610441550332545,
-    "exceedance": 8.29686666896166,
-    "stop_loss": 9.531727865785724,
-    "joint_exhaustion": 13.00275876604566
+    "expected_loss": 0.5544687596018844,
+    "joint_attachment": 3.9110090417035286,
+    "exceedance": 7.955932117590085,
+    "stop_loss": 9.760194746925269,
+    "joint_exhaustion": 19.316607754868677
    },
    "adb-independent": {
-    "expected_loss": 0.9471029407386868,
-    "joint_attachment": 4.678288071968329,
-    "exceedance": 8.729636802055934,
-    "stop_loss": 8.61739522051738,
-    "joint_exhaustion": 242.92913776042911
+    "expected_loss": 0.5190874831478683,
+    "joint_attachment": 5.260197755917434,
+    "exceedance": 10.847722587617612,
+    "stop_loss": 10.435879317905592,
+    "joint_exhaustion": 170.54884616095174
    },
    "adb-common-shock": {
-    "expected_loss": 0.9428870199412441,
-    "joint_attachment": 2.976948335299187,
-    "exceedance": 11.936717787962143,
-    "stop_loss": 6.8491955498082255,
-    "joint_exhaustion": 5.67872662737642
+    "expected_loss": 0.530305991619375,
+    "joint_attachment": 3.1737518980855977,
+    "exceedance": 5.847366153926837,
+    "stop_loss": 5.398439718536849,
+    "joint_exhaustion": 15.22625585315928
    },
    "adb-rain-stress": {
-    "expected_loss": 0.686871831993528,
-    "joint_attachment": 3.305354747512092,
-    "exceedance": 8.927805475270505,
-    "stop_loss": 8.390254825119936,
-    "joint_exhaustion": 3.6943926582305977
+    "expected_loss": 0.4991937127839083,
+    "joint_attachment": 2.969842191862224,
+    "exceedance": 5.920992490332017,
+    "stop_loss": 7.975006065289979,
+    "joint_exhaustion": 6.255555141497426
    },
    "adb-rain-cover": {
-    "expected_loss": 0.48857294855883276,
-    "joint_attachment": 3.5847658507789277,
-    "exceedance": 9.286890792610087,
-    "stop_loss": 7.604619877412822,
-    "joint_exhaustion": 81.32174499994974
+    "expected_loss": 0.5499111713578327,
+    "joint_attachment": 3.4336194552393224,
+    "exceedance": 7.892253609143197,
+    "stop_loss": 10.449934398697144,
+    "joint_exhaustion": 72.61372517962455
    }
   },
   "time": {

@@ -171,6 +171,7 @@ const fx = (f: number) => `${f >= 10 ? f.toFixed(0) : f.toFixed(1)}×`
 function Heat({ s }: { s: Story }) {
   const [sel, setSel] = useState<[number, number] | null>(null)
   const P = s.heat.paths, Tm = s.heat.time
+  const wins = SCEN.reduce((n, [sk]) => n + TGT.filter(([tk]) => P[sk][tk] > 1).length, 0)
   const info = (() => {
     if (!sel) return null
     const [r, c] = sel
@@ -204,7 +205,7 @@ function Heat({ s }: { s: Story }) {
       </div>
       <p className="hm-note" aria-live="polite">
         {info ? <><b>{info.text}.</b> {fx(info.a)} on equal paths{`, ${fx(info.b)} on equal CPU time`}</>
-          : <>RDPO beats the best of four methods in <b><V k="EQT_A_PATH_BRIEF" /></b> cells</>}
+          : <>RDPO beats the best of four methods in <b>{wins} of 25</b> cells</>}
       </p>
     </div>
   )
@@ -350,7 +351,7 @@ export default function Bento() {
             <Card id="pools" title="Regional pools" sub="Ten CAREC countries, linked by shared quakes.">
               <PoolMap />
             </Card>
-            <Card id="quantum" span={3} title="A bar for quantum" sub="Hardware speed-up needed over today’s projections to break even.">
+            <Card id="quantum" span={3} title="A bar for quantum" sub="Hardware speed-up needed over the projected fault-tolerant baseline to break even.">
               {s ? <Bar s={s} /> : <div className="bskel" />}
             </Card>
           </div>
