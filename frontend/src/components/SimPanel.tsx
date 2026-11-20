@@ -103,9 +103,6 @@ export default function SimPanel() {
     g.font = '600 12px Inter, system-ui, sans-serif'
     g.textAlign = 'right'
     g.fillText('both wiped out', X(MAX - 10) - 6, Y(MAX) + 14)
-    g.fillStyle = '#1F3557'
-    g.textAlign = 'left'
-    g.fillText('dashed line: pool pays US$80m', X(6), Y(MAX) + 14)
   }, [])
 
   // Expand cell counts into jittered dots (the loss states are discrete, so jitter keeps overlapping terms visible).
@@ -150,35 +147,34 @@ export default function SimPanel() {
 
   return (
     <section className="sec" id="problem">
-      <div className="wrap">
+      <div className="wrap wide">
         <Reveal>
-          <p className="eyebrow">The problem</p>
           <h2 className="h2">The case that matters is too rare for simulation to see.</h2>
           <p className="lede">
             Each dot is one simulated three-year term for the two bonds. Almost all land near the bottom left. The corner where both countries use up their cover is the one a pool must be able to survive, and simulation hardly ever reaches it.
           </p>
         </Reveal>
-        <Reveal className="sim" delay={80}>
+        <Reveal className="panel" delay={80}><div className="sim">
           <figure className="sim-plot">
             <canvas ref={canvas} style={{ width: '100%', maxWidth: SIZE, aspectRatio: '1' }} role="img"
               aria-label={`Scatter of ${total.toLocaleString('en-US')} simulated terms. ${hitsNow} landed in the corner where both bonds are wiped out.`} />
-            <figcaption><b>Figure 2.</b> Simulated three-year terms for the two bonds; terracotta marks terms where the pool pays more than US$80m, and the corner box where both are wiped out.</figcaption>
+            <figcaption>Simulated three-year terms for the two bonds; the dashed line is where the pool pays US$80m; terracotta marks terms where the pool pays more, and the corner box where both are wiped out.</figcaption>
           </figure>
           <div className="sim-side">
             <div className="sim-stat">
               <div className="k">Simulated terms</div>
-              <div className="n">{shown.toLocaleString('en-US')}<span> of {total ? total.toLocaleString('en-US') : '…'}</span></div>
+              <div className="n">{shown.toLocaleString('en-US')}<span> of {total ? total.toLocaleString('en-US') : ''}</span></div>
             </div>
             <div className="sim-stat">
               <div className="k">Landed where both are wiped out</div>
-              <div className={`n ${done && hitsNow === 0 ? 'terra' : ''}`}>{done ? hitsNow : '…'}</div>
+              <div className={`n ${done && hitsNow === 0 ? 'terra' : ''}`}>{done ? hitsNow : '\u2013'}</div>
             </div>
             <div className="sim-exact">
               <div className="k">The exact answer, computed directly</div>
-              <div className="n">{mc ? oneIn(mc.exact_joint_exhaustion) : '…'}</div>
-              <p>in {v.EQT_EXACT_MS ? <Fancy s={v.EQT_EXACT_MS} /> : '…'} on one CPU core, no sampling error.</p>
+              <div className="n">{mc ? oneIn(mc.exact_joint_exhaustion) : '\u2013'}</div>
+              <p>in {v.EQT_EXACT_MS ? <Fancy s={v.EQT_EXACT_MS} /> : null} on one CPU core, no sampling error.</p>
             </div>
-            <p className="sim-claim">Plain Monte Carlo returns zero in about <b>{v.MC_ZERO ?? '…'}</b> of runs at this budget.</p>
+            <p className="sim-claim">Plain Monte Carlo returns zero in about <b>{v.MC_ZERO}</b> of runs at this budget.</p>
             <div className="sim-actions">
               <button type="button" className="btn-dark" onClick={again} disabled={!mc}>Simulate another {mc ? mc.n.toLocaleString('en-US') : ''}</button>
               {runs.total > 0 && <span className="tally" role="status">{runs.zero} of {runs.total} new runs saw nothing in the corner.</span>}
@@ -189,7 +185,7 @@ export default function SimPanel() {
                 : <>New runs draw terms in your browser from the same exact model.</>}
             </p>
           </div>
-        </Reveal>
+        </div></Reveal>
       </div>
     </section>
   )
