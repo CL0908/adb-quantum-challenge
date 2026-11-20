@@ -75,6 +75,8 @@ def main():
     check_frontend_keys(v)
     from src.viz import export_story
     export_story.write(WEB)
+    from src.viz import export_dashboard_data
+    export_dashboard_data.main()
     # No merging with the previous file: every value on the page is recomputed from results/*.json, so a stale number cannot survive.
     old = WEB / "data" / "values.json"
     if old.exists():

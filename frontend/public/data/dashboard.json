@@ -1,0 +1,640 @@
+{
+ "asof": {
+  "date": "2026-11-10",
+  "commit": "31c09c7",
+  "file": "results/exact.json"
+ },
+ "pools": {
+  "kgtj": {
+   "label": "Kyrgyz Republic + Tajikistan bond",
+   "short": "KG + TJ",
+   "n_countries": 2,
+   "scenarios": {
+    "adb-base": {
+     "label": "Base",
+     "desc": "brief calibration, no change",
+     "targets": {
+      "expected_loss": {
+       "value": 10063513.348954108,
+       "brief_rounded": 10060000.0,
+       "rdpo_rel_rmse": 0.003767575516292805,
+       "rdpo_coverage": 0.975,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.0020890029232253004,
+       "mc_rel_rmse": 0.01647336187666486
+      },
+      "joint_attachment": {
+       "value": 0.044137768730843456,
+       "brief_rounded": 0.04414,
+       "rdpo_rel_rmse": 0.004579230748372102,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "stratified",
+       "best_baseline_rel_rmse": 0.017909412860930108,
+       "mc_rel_rmse": 0.03537844871978374
+      },
+      "exceedance": {
+       "value": 0.012046720907534033,
+       "brief_rounded": 0.01205,
+       "rdpo_rel_rmse": 0.003288842186444928,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.0261658051808224,
+       "mc_rel_rmse": 0.0712714226442161
+      },
+      "stop_loss": {
+       "value": 282354.698566141,
+       "brief_rounded": 282355,
+       "rdpo_rel_rmse": 0.0030609529938057873,
+       "rdpo_coverage": 0.975,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.02987549733072842,
+       "mc_rel_rmse": 0.09732346098398208
+      },
+      "joint_exhaustion": {
+       "value": 3.163304630917887e-05,
+       "brief_rounded": 3.2e-05,
+       "rdpo_rel_rmse": 0.013881784648291269,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.26814898898860007,
+       "mc_rel_rmse": 1.4163866615194138
+      }
+     },
+     "delivered": 0.9719427312534459,
+     "threshold_musd": 80.0
+    },
+    "adb-independent": {
+     "label": "Independent",
+     "desc": "shared-quake multiplier m = 0; rain shared share 0%",
+     "targets": {
+      "expected_loss": {
+       "value": 10063513.348954108,
+       "brief_rounded": 10060000.0,
+       "rdpo_rel_rmse": 0.003755572320364449,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.0019494705835577818,
+       "mc_rel_rmse": 0.015284523235219054
+      },
+      "joint_attachment": {
+       "value": 0.027156372630856664,
+       "brief_rounded": 0.02716,
+       "rdpo_rel_rmse": 0.0046268463133882646,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.024338126594659802,
+       "mc_rel_rmse": 0.04287546863787176
+      },
+      "exceedance": {
+       "value": 0.007185934925690383,
+       "brief_rounded": 0.00719,
+       "rdpo_rel_rmse": 0.002738454801124377,
+       "rdpo_coverage": 0.975,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.0297059980013268,
+       "mc_rel_rmse": 0.08835891638653828
+      },
+      "stop_loss": {
+       "value": 171266.4454338065,
+       "brief_rounded": 171266,
+       "rdpo_rel_rmse": 0.0031362646640297,
+       "rdpo_coverage": 0.925,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.03272967954282567,
+       "mc_rel_rmse": 0.11988834077662436
+      },
+      "joint_exhaustion": {
+       "value": 3.923917930752888e-06,
+       "brief_rounded": 4e-06,
+       "rdpo_rel_rmse": 0.0035371095319127388,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.6032499494126217,
+       "mc_rel_rmse": 4.385464667068848
+      }
+     },
+     "delivered": 0.9829814459925562,
+     "threshold_musd": 80.0
+    },
+    "adb-common-shock": {
+     "label": "Common shock",
+     "desc": "shared-quake multiplier m = 2",
+     "targets": {
+      "expected_loss": {
+       "value": 10063513.348954106,
+       "brief_rounded": 10060000.0,
+       "rdpo_rel_rmse": 0.004160478475829074,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.0022063266637356027,
+       "mc_rel_rmse": 0.01800684813449931
+      },
+      "joint_attachment": {
+       "value": 0.050525670312933146,
+       "brief_rounded": 0.05053,
+       "rdpo_rel_rmse": 0.004775075120285064,
+       "rdpo_coverage": 0.925,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.015154903726506035,
+       "mc_rel_rmse": 0.0323293183349412
+      },
+      "exceedance": {
+       "value": 0.016066409986690615,
+       "brief_rounded": 0.01607,
+       "rdpo_rel_rmse": 0.004161404923940617,
+       "rdpo_coverage": 0.9,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.024333258305034848,
+       "mc_rel_rmse": 0.05282818367510602
+      },
+      "stop_loss": {
+       "value": 385043.37022346794,
+       "brief_rounded": 385043,
+       "rdpo_rel_rmse": 0.005049502652058478,
+       "rdpo_coverage": 0.875,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.027259435675729644,
+       "mc_rel_rmse": 0.07060822695138541
+      },
+      "joint_exhaustion": {
+       "value": 4.400154217606904e-05,
+       "brief_rounded": 4.4e-05,
+       "rdpo_rel_rmse": 0.017651834667564127,
+       "rdpo_coverage": 0.85,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.2687713509259982,
+       "mc_rel_rmse": 1.2132080293681808
+      }
+     },
+     "delivered": 0.9617386734759501,
+     "threshold_musd": 80.0
+    },
+    "adb-rain-stress": {
+     "label": "Rain stress",
+     "desc": "rain rate x2",
+     "targets": {
+      "expected_loss": {
+       "value": 11170505.731674109,
+       "brief_rounded": 11170000.0,
+       "rdpo_rel_rmse": 0.0040944536150943605,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.002043925501940449,
+       "mc_rel_rmse": 0.01640047695549288
+      },
+      "joint_attachment": {
+       "value": 0.07046389659987555,
+       "brief_rounded": 0.07046,
+       "rdpo_rel_rmse": 0.00457054440301429,
+       "rdpo_coverage": 0.925,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.01357379560785158,
+       "mc_rel_rmse": 0.027481930418423263
+      },
+      "exceedance": {
+       "value": 0.013215038883593162,
+       "brief_rounded": 0.01322,
+       "rdpo_rel_rmse": 0.004170730399159031,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.024694863372620075,
+       "mc_rel_rmse": 0.06806487266605317
+      },
+      "stop_loss": {
+       "value": 306285.7963275198,
+       "brief_rounded": 306286,
+       "rdpo_rel_rmse": 0.0036751549878799574,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.02930938331922338,
+       "mc_rel_rmse": 0.08863936083459564
+      },
+      "joint_exhaustion": {
+       "value": 6.924565668457718e-05,
+       "brief_rounded": 6.9e-05,
+       "rdpo_rel_rmse": 0.03211174442281847,
+       "rdpo_coverage": 0.925,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.2008767879266134,
+       "mc_rel_rmse": 0.9875360656565938
+      }
+     },
+     "delivered": 0.9725808478429904,
+     "threshold_musd": 80.0
+    },
+    "adb-rain-cover": {
+     "label": "Rain cover",
+     "desc": "limits US$60m quake + US$20m rain",
+     "targets": {
+      "expected_loss": {
+       "value": 9970051.441960664,
+       "brief_rounded": 9970000.0,
+       "rdpo_rel_rmse": 0.004492110864844056,
+       "rdpo_coverage": 0.925,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.002470261947555642,
+       "mc_rel_rmse": 0.014912783907294808
+      },
+      "joint_attachment": {
+       "value": 0.044137768730843456,
+       "brief_rounded": 0.04414,
+       "rdpo_rel_rmse": 0.005286449414058367,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "sobol",
+       "best_baseline_rel_rmse": 0.018151655557249326,
+       "mc_rel_rmse": 0.0350038783064348
+      },
+      "exceedance": {
+       "value": 0.006997089316821915,
+       "brief_rounded": 0.007,
+       "rdpo_rel_rmse": 0.004232776313093293,
+       "rdpo_coverage": 0.975,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.03340614413370638,
+       "mc_rel_rmse": 0.08787674893371689
+      },
+      "stop_loss": {
+       "value": 170927.46112726908,
+       "brief_rounded": 170927,
+       "rdpo_rel_rmse": 0.0035098646595295327,
+       "rdpo_coverage": 0.95,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.0366778554403891,
+       "mc_rel_rmse": 0.10195075057183396
+      },
+      "joint_exhaustion": {
+       "value": 3.163304630917887e-05,
+       "brief_rounded": 3.2e-05,
+       "rdpo_rel_rmse": 0.0037195934237552594,
+       "rdpo_coverage": 0.975,
+       "reps": 40,
+       "budget": 16384,
+       "best_baseline": "importance",
+       "best_baseline_rel_rmse": 0.2700935346525032,
+       "mc_rel_rmse": 1.266269769403885
+      }
+     },
+     "delivered": 0.9828559098092623,
+     "threshold_musd": 80.0
+    }
+   },
+   "exact_label": "exact, dense enumeration",
+   "budget": 16384,
+   "runs": [
+    {
+     "file": "results/exact.json",
+     "script": "src/model/exact.py",
+     "use": "Brief Table 5: exact values of the five scenarios",
+     "commit": "31c09c7",
+     "date": "2026-11-10"
+    },
+    {
+     "file": "results/finance.json",
+     "script": "src/finance/analysis.py",
+     "use": "Pooling analysis: exact grid, shared-limit payout",
+     "commit": "b4e9939",
+     "date": "2026-11-10",
+     "seed": 4242
+    },
+    {
+     "file": "results/rdpo_e1.json",
+     "script": "src/rdpo/experiments.py",
+     "use": "RDPO error and coverage per scenario and target",
+     "commit": "31c09c7",
+     "date": "2026-11-10",
+     "reps": 40
+    },
+    {
+     "file": "results/realdata_rain.json",
+     "script": "src/realdata/rain_check.py",
+     "use": "Station-data rain shared share",
+     "commit": "31c09c7",
+     "date": "2026-11-10"
+    }
+   ]
+  },
+  "carec": {
+   "label": "CAREC 10-country pool",
+   "short": "CAREC 10",
+   "n_countries": 10,
+   "delivered": 0.9989358199276402,
+   "targets": [
+    {
+     "target": "expected_loss",
+     "threshold_musd": null,
+     "value": 35271647.09489402,
+     "rdpo_rel_rmse": 0.0012757013515812983,
+     "rdpo_coverage": 1.0,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 0.0056624187698322784,
+     "twist_rel_rmse": null
+    },
+    {
+     "target": "joint_attachment",
+     "threshold_musd": null,
+     "value": 0.052003256995068976,
+     "rdpo_rel_rmse": null,
+     "rdpo_coverage": null,
+     "reps": null,
+     "budget": null,
+     "mc_rel_rmse": null,
+     "twist_rel_rmse": null
+    },
+    {
+     "target": "exceedance",
+     "threshold_musd": 240,
+     "value": 0.0013290763346049403,
+     "rdpo_rel_rmse": 0.003580131489052111,
+     "rdpo_coverage": 1.0,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 0.0985043771086583,
+     "twist_rel_rmse": 0.009510553328990527
+    },
+    {
+     "target": "exceedance",
+     "threshold_musd": 500,
+     "value": 4.349786095142258e-09,
+     "rdpo_rel_rmse": 0.01245678857862102,
+     "rdpo_coverage": 1.0,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 1.0,
+     "twist_rel_rmse": 0.06973925651182003
+    },
+    {
+     "target": "stop_loss",
+     "threshold_musd": 240,
+     "value": 37535.38395769435,
+     "rdpo_rel_rmse": 0.0040889243951264375,
+     "rdpo_coverage": 0.9583333333333334,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 0.12166159968092626,
+     "twist_rel_rmse": 0.0076188050327921225
+    },
+    {
+     "target": "stop_loss",
+     "threshold_musd": 500,
+     "value": 0.08437398290628664,
+     "rdpo_rel_rmse": 0.00711123128970479,
+     "rdpo_coverage": 1.0,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 1.0,
+     "twist_rel_rmse": 0.07618782563932368
+    },
+    {
+     "target": "joint_exhaustion",
+     "threshold_musd": null,
+     "value": 1.592192547587931e-05,
+     "rdpo_rel_rmse": 0.05163482452592502,
+     "rdpo_coverage": 0.75,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 1.1508647256413693,
+     "twist_rel_rmse": null
+    }
+   ],
+   "exact_label": "exact, tensor network (bond 588)",
+   "T_moderate": 240,
+   "T_rare": 500,
+   "curve": {
+    "x": [
+     100,
+     120,
+     140,
+     160,
+     180,
+     200,
+     220,
+     240,
+     260,
+     280,
+     300,
+     320,
+     340,
+     360,
+     380,
+     400,
+     420,
+     440,
+     460,
+     480,
+     500,
+     520,
+     540,
+     560,
+     580,
+     600,
+     620,
+     640,
+     660,
+     680,
+     700,
+     720,
+     740,
+     760,
+     780,
+     800
+    ],
+    "y": [
+     0.09422023230208959,
+     0.06529311246694045,
+     0.03309668374380764,
+     0.01667979455572418,
+     0.00998860240453622,
+     0.006264230467730398,
+     0.0026570688763344684,
+     0.0013290763346049403,
+     0.0007429670183051985,
+     0.0002834716233674169,
+     0.00011053834510281024,
+     5.319228815021682e-05,
+     2.6667479237595175e-05,
+     7.79653087072693e-06,
+     3.0906169487026593e-06,
+     1.4349312453714898e-06,
+     4.189551133601793e-07,
+     1.2062692628330556e-07,
+     4.843833724785347e-08,
+     2.0190236923045585e-08,
+     4.349786095142258e-09,
+     1.3760410693157386e-09,
+     5.362782082777441e-10,
+     1.2145103573809844e-10,
+     2.366733188945265e-11,
+     7.614783745453394e-12,
+     2.5543802275621108e-12,
+     3.1948308091491625e-13,
+     6.099174519008273e-14,
+     1.869224151426079e-14,
+     2.8122936814014555e-15,
+     8.568731337764073e-17,
+     6.600450054083241e-19,
+     1.4393545244420415e-21,
+     7.0541162788122065e-25,
+     0.0
+    ]
+   },
+   "reps": 24,
+   "runs": [
+    {
+     "file": "results/wp2_carec.json",
+     "script": "src/realdata/carec_pool.py",
+     "use": "CAREC 10-country pool: exact references and RDPO",
+     "commit": "31c09c7",
+     "date": "2026-11-10",
+     "reps": 24
+    },
+    {
+     "file": "results/realdata_rain.json",
+     "script": "src/realdata/rain_check.py",
+     "use": "Station-data rain shared share",
+     "commit": "31c09c7",
+     "date": "2026-11-10"
+    }
+   ]
+  },
+  "ap": {
+   "label": "Asia\u2013Pacific 28-country pool",
+   "short": "Asia\u2013Pacific 28",
+   "n_countries": 28,
+   "delivered": null,
+   "targets": [
+    {
+     "target": "exceedance",
+     "threshold_musd": 450,
+     "value": 0.001795839594804731,
+     "rdpo_rel_rmse": 0.003422775657256279,
+     "rdpo_coverage": 0.9583333333333334,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 0.08535083208338375,
+     "twist_rel_rmse": 0.008107290625110838
+    },
+    {
+     "target": "exceedance",
+     "threshold_musd": 850,
+     "value": 9.507045703536346e-09,
+     "rdpo_rel_rmse": 0.007553004655183021,
+     "rdpo_coverage": 0.9583333333333334,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 1.0,
+     "twist_rel_rmse": 0.022812000812649058
+    },
+    {
+     "target": "stop_loss",
+     "threshold_musd": 450,
+     "value": 75247.89619490893,
+     "rdpo_rel_rmse": null,
+     "rdpo_coverage": null,
+     "reps": null,
+     "budget": null,
+     "mc_rel_rmse": null,
+     "twist_rel_rmse": null
+    },
+    {
+     "target": "stop_loss",
+     "threshold_musd": 850,
+     "value": 0.2665607503258491,
+     "rdpo_rel_rmse": 0.005504076063372889,
+     "rdpo_coverage": 1.0,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": 1.0,
+     "twist_rel_rmse": 0.018389912924744293
+    },
+    {
+     "target": "joint_exhaustion",
+     "threshold_musd": null,
+     "value": 1.4125325365389949e-05,
+     "rdpo_rel_rmse": 0.05925118634669738,
+     "rdpo_coverage": 0.7083333333333334,
+     "reps": 24,
+     "budget": 65536,
+     "mc_rel_rmse": null,
+     "twist_rel_rmse": null
+    }
+   ],
+   "exact_label": "exact, tensor network (bond 367)",
+   "T_moderate": 450,
+   "T_rare": 850,
+   "reps": 24,
+   "runs": [
+    {
+     "file": "results/wp2_asia_pacific.json",
+     "script": "src/realdata/asia_pacific_pool.py",
+     "use": "Asia-Pacific 28-country pool: exact references and RDPO",
+     "commit": "31c09c7",
+     "date": "2026-11-10",
+     "reps": 24
+    },
+    {
+     "file": "results/realdata_rain.json",
+     "script": "src/realdata/rain_check.py",
+     "use": "Station-data rain shared share",
+     "commit": "31c09c7",
+     "date": "2026-11-10"
+    }
+   ]
+  }
+ },
+ "scenario_order": [
+  "adb-base",
+  "adb-independent",
+  "adb-common-shock",
+  "adb-rain-stress",
+  "adb-rain-cover"
+ ]
+}

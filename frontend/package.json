@@ -7,7 +7,7 @@
     "dev": "vite",
     "data": "cd .. && PYTHONPATH=. python -m src.viz.web_precompute && PYTHONPATH=. python -m src.viz.export_web_data",
     "check": "node scripts/check-values.mjs",
-    "prebuild": "node scripts/check-values.mjs",
+    "prebuild": "node scripts/check-values.mjs && node scripts/check-dashboard.mjs",
     "build": "tsc -b && vite build",
     "build:all": "npm run data && npm run build",
     "preview": "vite preview"
