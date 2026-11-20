@@ -77,33 +77,33 @@ export function LineChart({
   const rows = hx === null ? [] : tipRows(hx)
   const left = hx === null ? 0 : X(hx)
   return (
-    <div className="chart" ref={ref} style={{ height }}>
+    <div className="chart jt-chart" ref={ref} style={{ height }}>
       {w > 0 && (
         <svg width={W} height={height} role="img" aria-label="Line chart on a logarithmic probability axis">
           {dual && [0, 1, 2, 3, 4].map((i) => (
             <g key={i}>
-              <line x1={m.l} x2={W - m.r} y1={Y((dual.l.max * i) / 4)} y2={Y((dual.l.max * i) / 4)} className="grid" />
-              <text x={m.l - 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="end" className="tick" style={{ fill: dual.l.color }}>{dual.l.fmt((dual.l.max * i) / 4)}</text>
-              <text x={W - m.r + 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="start" className="tick" style={{ fill: dual.r.color }}>{dual.r.fmt((dual.r.max * i) / 4)}</text>
+              <line x1={m.l} x2={W - m.r} y1={Y((dual.l.max * i) / 4)} y2={Y((dual.l.max * i) / 4)} className="jt-grid" />
+              <text x={m.l - 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="end" className="jt-tick" style={{ fill: dual.l.color }}>{dual.l.fmt((dual.l.max * i) / 4)}</text>
+              <text x={W - m.r + 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="start" className="jt-tick" style={{ fill: dual.r.color }}>{dual.r.fmt((dual.r.max * i) / 4)}</text>
             </g>
           ))}
           {!dual && exps(yDomain[0], yDomain[1]).map((e) => (
             <g key={e}>
-              <line x1={m.l} x2={W - m.r} y1={Y(10 ** e)} y2={Y(10 ** e)} className="grid" />
-              <text x={m.l - 8} y={Y(10 ** e) + 3} textAnchor="end" className="tick">
+              <line x1={m.l} x2={W - m.r} y1={Y(10 ** e)} y2={Y(10 ** e)} className="jt-grid" />
+              <text x={m.l - 8} y={Y(10 ** e) + 3} textAnchor="end" className="jt-tick">
                 {tickLabel(e)}
               </text>
             </g>
           ))}
           {xTicks.map((x) => (
-            <text key={x} x={X(x)} y={height - 9} textAnchor="middle" className="tick">
+            <text key={x} x={X(x)} y={height - 9} textAnchor="middle" className="jt-tick">
               {xFmt(x)}
             </text>
           ))}
           {series.map((s) => (
             <path key={s.id} d={path(s.pts, s.axis)} fill="none" stroke={s.color} strokeWidth={2.2} strokeDasharray={s.dash} strokeLinejoin="round" strokeLinecap="round" />
           ))}
-          {hx !== null && <line x1={left} x2={left} y1={m.t} y2={m.t + ih} className="cross" />}
+          {hx !== null && <line x1={left} x2={left} y1={m.t} y2={m.t + ih} className="jt-cross" />}
           {marks.map((k) => (
             <g key={k.label} transform={`translate(${X(k.x)},${Y(k.y, k.axis)})`}>
               <circle r={8} fill={k.color} opacity={0.2} />
@@ -114,7 +114,7 @@ export function LineChart({
         </svg>
       )}
       {hx !== null && (
-        <div className="tip" style={{ left: Math.min(Math.max(left, 90), W - 100), top: 6 }}>
+        <div className="jt-tip" style={{ left: Math.min(Math.max(left, 90), W - 100), top: 6 }}>
           <b>{tipX(hx)}</b>
           {rows.map((r) => (
             <div key={r.label} className="tip-row">

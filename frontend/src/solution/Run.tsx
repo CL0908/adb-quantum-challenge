@@ -77,11 +77,11 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
     <div className="run">
       <div className="run-head"><span className="lbl">Run estimate</span><span className="run-sub">one query, exact against sampling</span></div>
       <div className="run-sel">
-        <label>Scenario<select value={scenario} onChange={(e) => setScenario(e.target.value)}>{SCEN.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
-        <label>Target<select value={target} onChange={(e) => setTarget(e.target.value)}>{TARGETS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
-        <label>Budget<select value={bi} onChange={(e) => setBi(Number(e.target.value))}>{BUDGETS.map((b, i) => <option key={b} value={i}>{b.toLocaleString('en-US')} paths</option>)}</select></label>
+        <label>Scenario<select className="jt-select" value={scenario} onChange={(e) => setScenario(e.target.value)}>{SCEN.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
+        <label>Target<select className="jt-select" value={target} onChange={(e) => setTarget(e.target.value)}>{TARGETS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
+        <label>Budget<select className="jt-select" value={bi} onChange={(e) => setBi(Number(e.target.value))}>{BUDGETS.map((b, i) => <option key={b} value={i}>{b.toLocaleString('en-US')} paths</option>)}</select></label>
       </div>
-      <button type="button" className="go" onClick={run} disabled={status === 'running'}>{status === 'running' ? 'Running on the server' : 'Run estimate'}</button>
+      <button type="button" className="jt-btn solid go" onClick={run} disabled={status === 'running'}>{status === 'running' ? 'Running on the server' : 'Run estimate'}</button>
       {r ? (
         <div className="run-out">
           <div className={shown!.live ? 'src live' : 'src pre'}>{shown!.live ? 'Live result from /api/estimate' : status === 'failed' ? 'Live API unavailable, showing the precomputed run for these settings' : 'Precomputed run for these settings, press Run for a live one'}</div>

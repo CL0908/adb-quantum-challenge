@@ -7,6 +7,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { dataUrl } from './data'
 import type { MapData } from '../lib/map'
+import { DARK, rgb } from '../shared/palette'
 
 const COS = Math.cos((40 * Math.PI) / 180)
 const EXAG = 7
@@ -43,7 +44,7 @@ async function loadDem(): Promise<Dem> {
 
 type RGB = [number, number, number]
 const RAMP: [number, RGB][] = [
-  [0, [5, 18, 21]], [1200, [9, 36, 37]], [2500, [15, 62, 56]], [3600, [42, 102, 91]], [4800, [112, 172, 157]], [6200, [222, 246, 238]],
+  [0, [10, 17, 27]], [1200, [18, 30, 46]], [2500, [30, 50, 78]], [3600, [74, 88, 108]], [4800, [168, 164, 148]], [6200, [236, 228, 208]],
 ]
 function ramp(m: number): RGB {
   if (m <= 0) return RAMP[0][1]
@@ -70,10 +71,10 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number) {
   m.width = W
   m.height = H
   const mg = m.getContext('2d', { willReadFrequently: true })!
-  mg.fillStyle = '#000'
+  mg.fillStyle = 'rgb(0,0,0)'
   mg.fillRect(0, 0, W, H)
   mg.globalCompositeOperation = 'lighter'
-  for (const [iso, col] of [['KG', '#ff0000'], ['TJ', '#00ff00']] as const) {
+  for (const [iso, col] of [['KG', 'rgb(255,0,0)'], ['TJ', 'rgb(0,255,0)']] as const) {
     mg.fillStyle = col
     mg.beginPath()
     for (const r of map.countries[iso] ?? []) {
@@ -112,9 +113,9 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number) {
       const i = 4 * (y * W + x)
       const kg = mask[i] > 127, tj = mask[i + 1] > 127
       const inside = kg || tj
-      if (edge && h0 > 200) { const a = inside ? 0.16 : 0.06; r += (150 - r) * a; gg += (235 - gg) * a; b += (215 - b) * a }
+      if (edge && h0 > 200) { const a = inside ? 0.16 : 0.06; r += (190 - r) * a; gg += (210 - gg) * a; b += (236 - b) * a }
       if (inside) {
-        if (kg) { r += 2; gg += 12; b += 12 } else { r += 8; gg += 14; b += 0 }
+        if (kg) { r += 0; gg += 12; b += 12 } else { r += 4; gg += 9; b += 20 }
       } else {
         const l = (r + gg + b) / 3
         r = r * 0.35 + l * 0.12; gg = gg * 0.4 + l * 0.12; b = b * 0.42 + l * 0.14
@@ -144,7 +145,7 @@ function paintOverlay(map: MapData, f: Frame, W: number, H: number) {
       g.closePath()
     }
   }
-  for (const [iso, col] of [['KG', '70,217,196'], ['TJ', '155,227,127']] as const) {
+  for (const [iso, col] of [['KG', rgb(DARK.teal)], ['TJ', rgb(DARK.navyLight)]] as const) {
     path(map.countries[iso] ?? [])
     g.shadowColor = `rgba(${col},0.9)`
     g.shadowBlur = W * 0.006
@@ -154,12 +155,12 @@ function paintOverlay(map: MapData, f: Frame, W: number, H: number) {
     g.shadowBlur = 0
   }
   path(map.zone)
-  g.shadowColor = 'rgba(255,110,60,1)'
+  g.shadowColor = `rgba(${rgb(DARK.terra)},1)`
   g.shadowBlur = W * 0.02
-  g.fillStyle = 'rgba(240,100,60,0.55)'
+  g.fillStyle = `rgba(${rgb(DARK.terra)},0.55)`
   g.fill('evenodd')
   g.shadowBlur = 0
-  g.strokeStyle = 'rgba(255,170,130,0.95)'
+  g.strokeStyle = `rgba(${rgb(DARK.sand)},0.95)`
   g.lineWidth = Math.max(1.5, W * 0.0012)
   g.stroke()
   return c
@@ -170,11 +171,11 @@ function label(text: string, color: string, size: number) {
   c.width = 900
   c.height = 130
   const g = c.getContext('2d')!
-  g.font = `300 ${size}px "Barlow Condensed", "Inter", sans-serif`
+  g.font = `600 ${size}px Inter, sans-serif`
   g.textAlign = 'center'
   g.textBaseline = 'middle'
-  try { (g as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(size * 0.22)}px` } catch { /* older engines */ }
-  g.shadowColor = 'rgba(2,8,10,0.9)'
+  try { (g as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(size * 0.14)}px` } catch { /* older engines */ }
+  g.shadowColor = `rgba(${rgb(DARK.bg)},0.9)`
   g.shadowBlur = 14
   g.fillStyle = color
   g.fillText(text.toUpperCase(), 450, 65)
@@ -286,7 +287,7 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
 
         // crisp outline lines lifted above the relief
         const lineMats: LineBasicMaterial[] = []
-        for (const [iso, color] of [['KG', '#7ff0dd'], ['TJ', '#b9f09f']] as const) {
+        for (const [iso, color] of [['KG', DARK.teal], ['TJ', DARK.navyLight]] as const) {
           const lm = new LineBasicMaterial({ color, transparent: true, opacity: 0.9 })
           lineMats.push(lm)
           for (const r of map.countries[iso] ?? []) {
@@ -320,8 +321,8 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
           disposers.push(() => { cm.dispose(); bm.dispose() })
           return { list, cols, balls, cm, bm, o: opacity }
         }
-        const gS = mk(shown.filter((x) => !x[4]), '#7fe8d8', 0.55)
-        const gB = mk(shown.filter((x) => x[4]), '#ff7a4d', 1)
+        const gS = mk(shown.filter((x) => !x[4]), DARK.teal, 0.55)
+        const gB = mk(shown.filter((x) => x[4]), DARK.terra, 1)
         disposers.push(() => { col.dispose(); ball.dispose() })
         const M4 = new Matrix4(), Q = new Quaternion(), P = new Vector3(), S = new Vector3()
         const place = (g: ReturnType<typeof mk>, w: number, isShared: boolean, boost: number) => {
@@ -343,8 +344,8 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
           g.cols.instanceMatrix.needsUpdate = g.balls.instanceMatrix.needsUpdate = true
         }
 
-        const kgL = label('Kyrgyz Republic', 'rgba(160,245,230,0.92)', 62)
-        const tjL = label('Tajikistan', 'rgba(205,245,180,0.92)', 62)
+        const kgL = label('Kyrgyz Republic', DARK.teal, 52)
+        const tjL = label('Tajikistan', DARK.navyLight, 52)
         kgL.position.set(wx(f, 73.4), 0.5, wz(f, 41.7))
         tjL.position.set(wx(f, 70.6), 0.55, wz(f, 38.25))
         scene.add(kgL, tjL)

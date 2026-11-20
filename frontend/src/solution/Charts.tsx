@@ -3,7 +3,7 @@ import { answers, type Grid } from '../lib/model'
 import type { MapData, Pool, Solution, Story } from './data'
 import { pctText } from './format'
 
-export const C = { teal: '#46d9c4', green: '#9be37f', terra: '#ff7a4d', grey: '#7d8f93', ink: '#e8f3f1' }
+export const C = { teal: 'var(--c1)', green: 'var(--c3)', terra: 'var(--c2)', grey: 'var(--c-neutral)', ink: 'var(--ink)' }
 
 /** Both-bonds-wiped-out probability against the earthquake shared share, at the current rain share. */
 export function Spark({ grid, eq, rain, brief, data }: { grid: Grid; eq: number; rain: number; brief: number; data: number }) {
@@ -130,13 +130,13 @@ export function QChart({ story, sel }: { story: Story; sel: number | null }) {
   for (let e = lo; e <= hi; e += 2) ticks.push(e)
   return (
     <svg className="qchart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Quantum speed-up needed to break even, by number of countries">
-      {ticks.map((e) => <g key={e}><line x1="26" x2={W - 6} y1={Y(Math.pow(10, e))} y2={Y(Math.pow(10, e))} className="q-grid" /><text x="22" y={Y(Math.pow(10, e)) + 3} textAnchor="end" className="q-t">10<tspan dy="-3" fontSize="7">{e}</tspan></text></g>)}
+      {ticks.map((e) => <g key={e}><line x1="26" x2={W - 6} y1={Y(Math.pow(10, e))} y2={Y(Math.pow(10, e))} className="jt-grid" /><text x="22" y={Y(Math.pow(10, e)) + 3} textAnchor="end" className="jt-tick">10<tspan dy="-3" fontSize="7">{e}</tspan></text></g>)}
       <path d={q.map((r, i) => `${i ? 'L' : 'M'}${X(i)},${Y(r.s_star)}`).join('')} className="q-line" />
       {q.map((r, i) => (
         <g key={r.n} className={sel === r.n ? 'q-pt on' : 'q-pt'}>
           {r.ci && <line x1={X(i)} x2={X(i)} y1={Y(r.ci[0])} y2={Y(r.ci[1])} className="q-ci" />}
           <circle cx={X(i)} cy={Y(r.s_star)} r={sel === r.n ? 4.5 : 3} />
-          <text x={X(i)} y={H - 6} textAnchor="middle" className="q-t">{r.n}</text>
+          <text x={X(i)} y={H - 6} textAnchor="middle" className="jt-tick">{r.n}</text>
         </g>
       ))}
     </svg>

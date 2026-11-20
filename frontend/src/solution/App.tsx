@@ -6,6 +6,9 @@ import type { AnchorDef, Insets } from './Terrain'
 import { ErrBars, Gauge, NodeRing, PoolBars, QChart, Spark, Timeline } from './Charts'
 import Run from './Run'
 import { prob, seconds, sci } from './format'
+import { SiteNav } from '../shared/SiteNav'
+import { Segmented, Slider } from '../shared/Controls'
+import '../shared/theme.css'
 
 const Terrain = lazy(() => import('./Terrain'))
 
@@ -27,21 +30,6 @@ const STAGES = [
   { n: 3, name: 'Learned sampler', line: 'RDPO for the rarest events' },
   { n: 4, name: 'Quantum stage', line: 'Where a quantum computer could help' },
 ]
-
-function Slider({ id, label, min, max, value, onChange, marks, text }: {
-  id: string; label: string; min: number; max: number; value: number; onChange: (v: number) => void; marks: { at: number; t: string }[]; text: string
-}) {
-  const f = (v: number) => `${(100 * (v - min)) / (max - min)}%`
-  return (
-    <div className="sl">
-      <div className="sl-h"><label htmlFor={id}>{label}</label><b>{text}</b></div>
-      <div className="sl-box" style={{ ['--p' as string]: f(value) }}>
-        <input id={id} type="range" min={min} max={max} step={0.001} value={value} onChange={(e) => onChange(Number(e.target.value))} />
-        {marks.map((m) => <span key={m.t} className="sl-mark" style={{ left: f(m.at) }}><i />{m.t}</span>)}
-      </div>
-    </div>
-  )
-}
 
 export default function App() {
   const map = useData<MapData>('map.json')
@@ -108,20 +96,17 @@ export default function App() {
         <div className="vignette" />
       </div>
 
+      <SiteNav theme="dark" current="solution" />
       <header className="top" data-inset="t">
-        <a className="back" href="/">{'←'} Joint-Tail</a>
-        <h1>Kyrgyz Republic <i>{'·'}</i> Tajikistan</h1>
+        <h1>Kyrgyz Republic <i>{'·'}</i> <em>Tajikistan</em></h1>
         <p>How the Disaster Relief Bonds are priced exactly, from sources to tail</p>
       </header>
-      <nav className="nav" aria-label="Pages">
-        <a href="/">Home</a><a href="/solution/" aria-current="page">Solution</a><a href="/dashboard/">Dashboard</a>
-      </nav>
 
-      <aside className="glass rail" data-inset="l" aria-label="Dependence controls">
+      <aside className="jt-panel rail" data-inset="l" aria-label="Dependence controls">
         <div className="lbl">Dependence</div>
-        <div className="chips" role="group" aria-label="Presets">
-          <button type="button" className={preset === 'brief' ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.brief.eq), setRain(grid.brief.rain))}>Brief</button>
-          <button type="button" className={preset === 'data' ? 'on' : ''} disabled={!grid} onClick={() => grid && (setEq(grid.data.eq), setRain(grid.data.rain))}>Public records</button>
+        <div style={{ margin: '12px 0 14px' }}>
+          <Segmented block label="Presets" value={preset as 'brief' | 'data' | ''} disabled={!grid} onChange={(v) => { if (grid) { const g = v === 'brief' ? grid.brief : grid.data; setEq(g.eq); setRain(g.rain) } }}
+            options={[{ id: 'brief', label: 'Brief' }, { id: 'data', label: 'Public records' }]} />
         </div>
         {grid && (
           <>
@@ -139,7 +124,7 @@ export default function App() {
 
       <div className="anchor a-tl" ref={setAnchor('kg')}>
         <i className="dot" /><i className="lead" />
-        <section className={`glass card c-kg${stage === 1 ? ' hi' : ''}`} aria-label="Kyrgyz Republic">
+        <section className={`jt-panel card c-kg${stage === 1 ? ' hi' : ''}`} aria-label="Kyrgyz Republic">
           <div className="lbl teal">Kyrgyz Republic</div>
           <div className="pair"><div><span>Attachment</span><b>{m ? prob(m.KG.attach, 3) : '–'}</b></div><div><span>Exhaustion</span><b>{m ? prob(m.KG.exhaust, 3) : '–'}</b></div></div>
           {stage === 1 && sol && <div className="mini">{sol.sources.filter((s) => s.scope !== 'TJ').map((s) => <div key={s.id}><span>{s.kind === 'eq' ? 'Earthquake' : 'Rain'}{s.scope === 'both' ? ', shared' : ''}</span><b>{(s.rate * 100).toFixed(2)}% a year</b></div>)}</div>}
@@ -148,7 +133,7 @@ export default function App() {
       </div>
       <div className="anchor a-bl" ref={setAnchor('tj')}>
         <i className="dot" /><i className="lead" />
-        <section className={`glass card c-tj${stage === 1 ? ' hi' : ''}`} aria-label="Tajikistan">
+        <section className={`jt-panel card c-tj${stage === 1 ? ' hi' : ''}`} aria-label="Tajikistan">
           <div className="lbl green">Tajikistan</div>
           <div className="pair"><div><span>Attachment</span><b>{m ? prob(m.TJ.attach, 3) : '–'}</b></div><div><span>Exhaustion</span><b>{m ? prob(m.TJ.exhaust, 3) : '–'}</b></div></div>
           {stage === 1 && sol && <div className="mini">{sol.sources.filter((s) => s.scope !== 'KG').map((s) => <div key={s.id}><span>{s.kind === 'eq' ? 'Earthquake' : 'Rain'}{s.scope === 'both' ? ', shared' : ''}</span><b>{(s.rate * 100).toFixed(2)}% a year</b></div>)}</div>}
@@ -157,7 +142,7 @@ export default function App() {
       </div>
       <div className="anchor a-br" ref={setAnchor('both')}>
         <i className="dot hot" /><i className="lead" />
-        <section className={`glass card c-both${stage >= 2 ? ' hi' : ''}`} aria-label="Both bonds wiped out">
+        <section className={`jt-panel card c-both${stage >= 2 ? ' hi' : ''}`} aria-label="Both bonds wiped out">
           <div className="lbl terra">Both bonds wiped out</div>
           <div className="big">{ans ? prob(ans.jointExhaustion, 3) : '–'}</div>
           <div className="one">{ans ? oneIn(ans.jointExhaustion) : ''} three-year terms</div>
@@ -166,7 +151,7 @@ export default function App() {
         </section>
       </div>
 
-      <aside className="glass arch" data-inset="r" aria-label="Architecture">
+      <aside className="jt-panel arch" data-inset="r" aria-label="Architecture">
         <div className="lbl">Architecture</div>
         <ol className="stages">
           {STAGES.map((s) => (
@@ -192,9 +177,7 @@ export default function App() {
                   )}
                   {s.n === 2 && pool && (
                     <>
-                      <div className="seg" role="group" aria-label="Pool">
-                        {sol.pools.map((p) => <button type="button" key={p.id} className={p.id === poolId ? 'on' : ''} onClick={() => setPoolId(p.id)}>{p.label}</button>)}
-                      </div>
+                      <Segmented block label="Pool" value={poolId} onChange={setPoolId} options={sol.pools.map((p) => ({ id: p.id, label: p.label }))} />
                       <div className="pool-row">
                         <NodeRing pool={pool} sol={sol} />
                         <div className="facts">
@@ -229,7 +212,7 @@ export default function App() {
         {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} /> : <div className="run" />}
       </aside>
 
-      <section className="glass bar" data-inset="b" aria-label="Events and pooling">
+      <section className="jt-panel bar" data-inset="b" aria-label="Events and pooling">
         <div className="gauge-box">
           <Gauge value={ans ? ans.delivered : 0} />
           <div className="g-txt"><div className="lbl">Pooling</div><p>A shared US$80m pool pays <b>{ans ? (ans.delivered * 100).toFixed(1) : '–'}%</b> of expected claims</p></div>
