@@ -84,7 +84,7 @@ state-preparation circuit. **μ**: the exact value of a target. **Relative RMSE*
 in it, not in the number of countries n.
 :::
 
-# 1 Problem and classical bottleneck
+# 1 Problem & approach: the classical bottleneck
 
 **The model.** Each country holds US$80m of cover over a three-year term: US$70m against earthquakes, paid in
 quarter steps, and US$10m against extreme rain, paid once. Earthquakes and rain arrive as Poisson processes; some
@@ -105,7 +105,7 @@ offers a quadratic query speed-up for risk measures [@montanaro2015; @woerner201
 studies find that state preparation and fault-tolerance overheads decide the outcome [@chakrabarti2021;
 @herbert2021; @herman2023]. Section 2.5 positions our method against each approach the brief suggests.
 
-# 2 Scientific approach
+# 2 Technical rationale: the scientific approach
 
 ## 2.1 One exact representation
 
@@ -363,7 +363,7 @@ dependence suits all-to-all trapped-ion or neutral-atom machines; sparse, geogra
 line. Classical Phase 2 work uses the sandbox's GPU credits (batched rollouts and contractions); the hardware run
 needs 3–15 QPU minutes, and the emulator gives the same report if access fails.
 
-# 5 Phase 2 plan of action (30 Nov 2026 – 22 Jan 2027)
+# 5 Work plan: Phase 2 plan of action (30 Nov 2026 – 22 Jan 2027)
 
 **Already done, not repeated in Phase 2.** Exact engine to 28 countries; RDPO with unbiased estimator; all
 benchmarks at equal paths and equal time; data-calibrated pools; ELT/YLT converter; quantum resource model and
@@ -395,12 +395,7 @@ hours go to long compute jobs and writing, and GPU sweeps run unattended outside
 * **Holiday weeks and a two-person team** → weeks 4–5 run long compute jobs only; descoping order: hardware run,
   then cutset conditioning, then the cat-in-a-box proxy. M4 is protected.
 
-**Business case.** An open-source joint-tail engine with exact references and a validation pack, plus paid
-integration and support, placed after a catastrophe model: loss tables in, joint-tail answers with intervals out.
-First users: ADB's disaster-risk-financing team (trigger design, CAREC pooling studies) and sovereign risk pools;
-then reinsurers and model vendors, replacing the plain Monte Carlo aggregation step. A bottom-up estimate gives a serviceable market of about US$30m a year (annex,
-Appendix B). The same source model fits correlated credit defaults, multi-site infrastructure outages and
-compound climate extremes.
+The business case is in section 8.
 
 # 6 Team
 
@@ -443,6 +438,23 @@ domain: Track Lead for Wildfire & Emergency Response, SEA Quantum Leaders Summit
 * Scrambled Sobol remains better on expected loss.
 * No vendor event set and no quantum hardware run in Phase 1.
 :::
+
+# 8 Commercialization & impact
+
+**Users and use.** ADB's disaster-risk-financing team first (trigger design, CAREC pooling studies, the next
+issuance); then sovereign risk pools, reinsurers and catastrophe-model vendors, for whom the engine replaces the
+plain Monte Carlo aggregation step: loss tables in, joint-tail answers with intervals out.
+
+**Business model.** An open-source joint-tail engine with exact references and a validation pack, plus paid
+integration, support and advisory work. A bottom-up estimate gives a serviceable market of about US$30m a
+year (annex, Appendix B). The same source model fits correlated credit defaults, multi-site infrastructure outages
+and compound climate extremes.
+
+**Impact.** Dependence is the largest uncertainty in pooled cover: over all dependence structures the pool's
+US$80m exceedance lies anywhere in 0 to 9.0%, and a shared limit keeps 97.2% or
+90.6% of expected claims depending on the assumption. When such ranges are cheap to compute, pricing can
+carry smaller uncertainty loadings (the issued notes paid 2.6× and 3.0× their expected
+loss) and pooling can be tested before issuance, which may make cover cheaper for vulnerable countries (UN SDG 13).
 
 # References
 

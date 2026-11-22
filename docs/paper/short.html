@@ -153,8 +153,8 @@ root-mean-square error divided by μ, over independent repetitions.
 <strong>Treewidth</strong>: how tangled the dependence graph is; exact
 cost grows exponentially in it, not in the number of countries n.</p>
 </div>
-<h1 id="problem-and-classical-bottleneck">1 Problem and classical
-bottleneck</h1>
+<h1 id="problem-approach-the-classical-bottleneck">1 Problem &amp;
+approach: the classical bottleneck</h1>
 <p><strong>The model.</strong> Each country holds US$80m of cover over a
 three-year term: US$70m against earthquakes, paid in quarter steps, and
 US$10m against extreme rain, paid once. Earthquakes and rain arrive as
@@ -188,7 +188,8 @@ the outcome <span class="citation"
 data-cites="chakrabarti2021 herbert2021 herman2023">(Chakrabarti et al.
 2021; Herbert 2021; Herman et al. 2023)</span>. Section 2.5 positions
 our method against each approach the brief suggests.</p>
-<h1 id="scientific-approach">2 Scientific approach</h1>
+<h1 id="technical-rationale-the-scientific-approach">2 Technical
+rationale: the scientific approach</h1>
 <h2 id="one-exact-representation">2.1 One exact representation</h2>
 <p>The capped multi-year payout process is an exact product of
 independent Poisson <strong>sources</strong>: for each country a solo
@@ -805,8 +806,8 @@ sparse, geographically ordered pools map onto a line. Classical Phase 2
 work uses the sandbox’s GPU credits (batched rollouts and contractions);
 the hardware run needs 3–15 QPU minutes, and the emulator gives the same
 report if access fails.</p>
-<h1 id="phase-2-plan-of-action-30-nov-2026-22-jan-2027">5 Phase 2 plan
-of action (30 Nov 2026 – 22 Jan 2027)</h1>
+<h1 id="work-plan-phase-2-plan-of-action-30-nov-2026-22-jan-2027">5 Work
+plan: Phase 2 plan of action (30 Nov 2026 – 22 Jan 2027)</h1>
 <p><strong>Already done, not repeated in Phase 2.</strong> Exact engine
 to 28 countries; RDPO with unbiased estimator; all benchmarks at equal
 paths and equal time; data-calibrated pools; ELT/YLT converter; quantum
@@ -881,16 +882,7 @@ descoped.</li>
 long compute jobs only; descoping order: hardware run, then cutset
 conditioning, then the cat-in-a-box proxy. M4 is protected.</li>
 </ul>
-<p><strong>Business case.</strong> An open-source joint-tail engine with
-exact references and a validation pack, plus paid integration and
-support, placed after a catastrophe model: loss tables in, joint-tail
-answers with intervals out. First users: ADB’s disaster-risk-financing
-team (trigger design, CAREC pooling studies) and sovereign risk pools;
-then reinsurers and model vendors, replacing the plain Monte Carlo
-aggregation step. A bottom-up estimate gives a serviceable market of
-about US$30m a year (annex, Appendix B). The same source model fits
-correlated credit defaults, multi-site infrastructure outages and
-compound climate extremes.</p>
+<p>The business case is in section 8.</p>
 <h1 id="team">6 Team</h1>
 <p><strong>Tan Chun Loong.</strong> BAppSc Physics with a Second Major
 in Quantum Technology, NTU Singapore (2024–2028, CGPA 4.8/5.0). Incoming
@@ -960,6 +952,26 @@ high-treewidth pools have no exact check.</li>
 <li>No vendor event set and no quantum hardware run in Phase 1.</li>
 </ul>
 </div>
+<h1 id="commercialization-impact">8 Commercialization &amp; impact</h1>
+<p><strong>Users and use.</strong> ADB’s disaster-risk-financing team
+first (trigger design, CAREC pooling studies, the next issuance); then
+sovereign risk pools, reinsurers and catastrophe-model vendors, for whom
+the engine replaces the plain Monte Carlo aggregation step: loss tables
+in, joint-tail answers with intervals out.</p>
+<p><strong>Business model.</strong> An open-source joint-tail engine
+with exact references and a validation pack, plus paid integration,
+support and advisory work. A bottom-up estimate gives a serviceable
+market of about US$30m a year (annex, Appendix B). The same source model
+fits correlated credit defaults, multi-site infrastructure outages and
+compound climate extremes.</p>
+<p><strong>Impact.</strong> Dependence is the largest uncertainty in
+pooled cover: over all dependence structures the pool’s US$80m
+exceedance lies anywhere in 0 to 9.0%, and a shared limit keeps 97.2% or
+90.6% of expected claims depending on the assumption. When such ranges
+are cheap to compute, pricing can carry smaller uncertainty loadings
+(the issued notes paid 2.6× and 3.0× their expected loss) and pooling
+can be tested before issuance, which may make cover cheaper for
+vulnerable countries (UN SDG 13).</p>
 <h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent"
 role="list">
