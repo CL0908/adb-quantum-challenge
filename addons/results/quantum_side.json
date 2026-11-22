@@ -1,5 +1,6 @@
 {
   "iqae_C": 101.90936833400963,
+  "his_reference": "quantum_advantage_v3.json",
   "rows": {
     "8": {
       "mu_exact": 3.8886544201740434e-05,
@@ -7,8 +8,8 @@
       "a_twisted": 0.02492872200199187,
       "mu_uncapped": 0.00010278876099772318,
       "a_ceiling_U_loader": 0.37831513702749847,
-      "his_classical_rho2": 0.5985478419512668,
-      "his_t_path": 0.00027062121629333467,
+      "his_classical_rho2": 0.6573903916369646,
+      "his_t_path": 3.707384507904074e-05,
       "small_world": {
         "uncapped": {
           "rho2": 0.8681880618808068,
@@ -19,7 +20,7 @@
         "modules": {
           "rho2": 0.29740265342136,
           "t_path": 5.46875e-06,
-          "cpu_build": 0.359375,
+          "cpu_build": 0.375,
           "z": 0.6423430553066704
         }
       },
@@ -28,42 +29,42 @@
           "quantum_seconds": 32239.04266754494,
           "quantum_calls": 6454.522253251123,
           "classical_paths": {
-            "his_rdpo": 59.85478419512666,
+            "his_rdpo": 65.73903916369645,
             "uncapped": 86.81880618808066,
             "modules": 29.740265342135995
           },
           "classical_seconds": {
-            "his_rdpo": 0.01619797449986024,
+            "his_rdpo": 0.0024371989535998738,
             "uncapped": 0.00047479034634106607,
-            "modules": 0.3595376420760898
+            "modules": 0.3751626420760898
           },
           "best_small_world": "uncapped",
-          "s_star_his": 1990313.212792322,
+          "s_star_his": 13227907.643701449,
           "s_star_new": 67901638.93599048,
-          "s_star_factor": 34.11605696006382
+          "s_star_factor": 5.133210842178981
         },
         "0.01": {
           "quantum_seconds": 322390.4266754494,
           "quantum_calls": 64545.22253251124,
           "classical_paths": {
-            "his_rdpo": 5985.478419512668,
+            "his_rdpo": 6573.903916369645,
             "uncapped": 8681.880618808067,
             "modules": 2974.0265342136
           },
           "classical_seconds": {
-            "his_rdpo": 1.6197974499860246,
+            "his_rdpo": 0.2437198953599874,
             "uncapped": 0.04747903463410662,
-            "modules": 0.3756392076089806
+            "modules": 0.3912642076089806
           },
           "best_small_world": "uncapped",
-          "s_star_his": 199031.32127923213,
+          "s_star_his": 1322790.7643701448,
           "s_star_new": 6790163.893599047,
-          "s_star_factor": 34.11605696006383
+          "s_star_factor": 5.13321084217898
         }
       },
       "calls_reduction_ceiling": 3.895622378640249,
       "crossover_eps": {
-        "vs_his_rdpo": 0.0009273309758127799,
+        "vs_his_rdpo": 0.001018495817108445,
         "vs_uncapped": 0.0013450849308692104,
         "vs_modules": 0.00046076633057010405,
         "ceiling_loader_vs_modules": 0.001794971628692848
@@ -75,19 +76,19 @@
       "a_twisted": 0.005985257636251191,
       "mu_uncapped": 1.2083454633639337e-07,
       "a_ceiling_U_loader": 0.12052868164621895,
-      "his_classical_rho2": 2.104643712077026,
-      "his_t_path": 0.00044027149006805395,
+      "his_classical_rho2": 3.410029219853526,
+      "his_t_path": 0.0001045733530372633,
       "small_world": {
         "uncapped": {
           "rho2": 2.815181091623084,
-          "t_path": 1.34375e-05,
-          "cpu_build": 0.0,
+          "t_path": 1.46875e-05,
+          "cpu_build": 0.015625,
           "z": 0.6647188674449134
         },
         "modules": {
           "rho2": 0.6116923817164178,
-          "t_path": 1.328125e-05,
-          "cpu_build": 0.984375,
+          "t_path": 1.453125e-05,
+          "cpu_build": 1.046875,
           "z": 1.457270793040462
         }
       },
@@ -96,42 +97,42 @@
           "quantum_seconds": 87316.97994420232,
           "quantum_calls": 13172.63581460372,
           "classical_paths": {
-            "his_rdpo": 210.46437120770256,
+            "his_rdpo": 341.0029219853525,
             "uncapped": 281.51810916230835,
             "modules": 61.16923817164177
           },
           "classical_seconds": {
-            "his_rdpo": 0.09266146231785123,
-            "uncapped": 0.0037828995918685183,
-            "modules": 0.9851874039444671
+            "his_rdpo": 0.03565981894751262,
+            "uncapped": 0.019759797228321403,
+            "modules": 1.0477638654921817
           },
           "best_small_world": "uncapped",
-          "s_star_his": 942322.490494311,
-          "s_star_new": 23082024.204896525,
-          "s_star_factor": 24.49482468872038
+          "s_star_his": 2448609.7383927675,
+          "s_star_new": 4418920.848997999,
+          "s_star_factor": 1.8046652268476708
         },
         "0.01": {
           "quantum_seconds": 873169.7994420233,
           "quantum_calls": 131726.3581460372,
           "classical_paths": {
-            "his_rdpo": 21046.43712077026,
+            "his_rdpo": 34100.29219853526,
             "uncapped": 28151.81091623084,
             "modules": 6116.923817164178
           },
           "classical_seconds": {
-            "his_rdpo": 9.266146231785125,
-            "uncapped": 0.3782899591868519,
-            "modules": 1.0656153944467117
+            "his_rdpo": 3.565981894751263,
+            "uncapped": 0.42910472283214046,
+            "modules": 1.135761549218167
           },
           "best_small_world": "uncapped",
-          "s_star_his": 94232.24904943108,
-          "s_star_new": 2308202.420489652,
-          "s_star_factor": 24.49482468872038
+          "s_star_his": 244860.97383927667,
+          "s_star_new": 2034864.108880001,
+          "s_star_factor": 8.310283492606125
         }
       },
       "calls_reduction_ceiling": 4.487492940861521,
       "crossover_eps": {
-        "vs_his_rdpo": 0.0015977392389029173,
+        "vs_his_rdpo": 0.0025887220051077618,
         "vs_uncapped": 0.0021371433411239227,
         "vs_modules": 0.0004643659707332611,
         "ceiling_loader_vs_modules": 0.0020838390156418165
@@ -143,19 +144,19 @@
       "a_twisted": 0.003016298328830648,
       "mu_uncapped": 4.322247164930751e-09,
       "a_ceiling_U_loader": 0.0670676419344604,
-      "his_classical_rho2": 5.2013490316752025,
-      "his_t_path": 0.0006157054200032543,
+      "his_classical_rho2": 4.991715834992464,
+      "his_t_path": 0.00012741819907972492,
       "small_world": {
         "uncapped": {
           "rho2": 4.54336807316084,
-          "t_path": 1.625e-05,
+          "t_path": 1.9375e-05,
           "cpu_build": 0.0,
           "z": 0.3626502998431058
         },
         "modules": {
           "rho2": 0.7472163121256706,
-          "t_path": 1.703125e-05,
-          "cpu_build": 1.25,
+          "t_path": 1.859375e-05,
+          "cpu_build": 1.5625,
           "z": 1.0974447076084648
         }
       },
@@ -164,42 +165,42 @@
           "quantum_seconds": 141226.40559544074,
           "quantum_calls": 18555.68378688558,
           "classical_paths": {
-            "his_rdpo": 520.1349031675202,
+            "his_rdpo": 499.17158349924625,
             "uncapped": 454.33680731608393,
             "modules": 74.72163121256705
           },
           "classical_seconds": {
-            "his_rdpo": 0.32024987901311003,
-            "uncapped": 0.007382973118886364,
-            "modules": 1.251272602781589
+            "his_rdpo": 0.06360354420124849,
+            "uncapped": 0.008802775641749127,
+            "modules": 1.5638893553303588
           },
           "best_small_world": "uncapped",
-          "s_star_his": 440988.1622146042,
-          "s_star_new": 19128663.117324624,
-          "s_star_factor": 43.37681769338692
+          "s_star_his": 2220417.2325458014,
+          "s_star_new": 16043394.872594845,
+          "s_star_factor": 7.22539648739819
         },
         "0.01": {
           "quantum_seconds": 1412264.0559544074,
           "quantum_calls": 185556.83786885583,
           "classical_paths": {
-            "his_rdpo": 52013.490316752024,
+            "his_rdpo": 49917.15834992463,
             "uncapped": 45433.6807316084,
             "modules": 7472.163121256706
           },
           "classical_seconds": {
-            "his_rdpo": 32.02498790131101,
-            "uncapped": 0.7382973118886365,
-            "modules": 1.3772602781589032
+            "his_rdpo": 6.36035442012485,
+            "uncapped": 0.8802775641749128,
+            "modules": 1.7014355330358668
           },
           "best_small_world": "uncapped",
-          "s_star_his": 44098.816221460416,
-          "s_star_new": 1912866.3117324624,
-          "s_star_factor": 43.37681769338692
+          "s_star_his": 222041.72325458014,
+          "s_star_new": 1604339.4872594844,
+          "s_star_factor": 7.22539648739819
         }
       },
       "calls_reduction_ceiling": 4.7154090402162305,
       "crossover_eps": {
-        "vs_his_rdpo": 0.0028031028613191332,
+        "vs_his_rdpo": 0.00269012766779331,
         "vs_uncapped": 0.002448504795264894,
         "vs_modules": 0.00040268864284795223,
         "ceiling_loader_vs_modules": 0.001898841666877639
@@ -211,19 +212,19 @@
       "a_twisted": 0.000881844066020961,
       "mu_uncapped": 6.037828352867549e-12,
       "a_ceiling_U_loader": 0.021895693911302857,
-      "his_classical_rho2": 117.17286294720354,
-      "his_t_path": 0.000998481402257283,
+      "his_classical_rho2": 33.04679031940951,
+      "his_t_path": 0.00021390007017474784,
       "small_world": {
         "uncapped": {
           "rho2": 10.939349116873364,
-          "t_path": 2.4375e-05,
-          "cpu_build": 0.0,
+          "t_path": 2.578125e-05,
+          "cpu_build": 0.015625,
           "z": 0.9431360419104378
         },
         "modules": {
           "rho2": 1.0164415027277134,
-          "t_path": 2.46875e-05,
-          "cpu_build": 2.234375,
+          "t_path": 2.75e-05,
+          "cpu_build": 2.8125,
           "z": 1.1400623964418575
         }
       },
@@ -232,42 +233,42 @@
           "quantum_seconds": 957852.0542787106,
           "quantum_calls": 34317.70299403136,
           "classical_paths": {
-            "his_rdpo": 11717.286294720352,
+            "his_rdpo": 3304.67903194095,
             "uncapped": 1093.9349116873361,
             "modules": 101.64415027277131
           },
           "classical_seconds": {
-            "his_rdpo": 11.699492450202422,
-            "uncapped": 0.026664663472378818,
-            "modules": 2.2368843399598592
+            "his_rdpo": 0.706871076837187,
+            "uncapped": 0.04382800944193914,
+            "modules": 2.8152952141325014
           },
           "best_small_world": "uncapped",
-          "s_star_his": 81871.24854823409,
-          "s_star_new": 35922150.49970245,
-          "s_star_factor": 438.7639267347814
+          "s_star_his": 1355059.0562631437,
+          "s_star_new": 21854792.55104247,
+          "s_star_factor": 16.12829525770751
         },
         "0.01": {
           "quantum_seconds": 9578520.542787107,
           "quantum_calls": 343177.02994031366,
           "classical_paths": {
-            "his_rdpo": 1171728.6294720354,
+            "his_rdpo": 330467.90319409507,
             "uncapped": 109393.49116873364,
             "modules": 10164.415027277133
           },
           "classical_seconds": {
-            "his_rdpo": 1169.9492450202424,
-            "uncapped": 2.6664663472378827,
-            "modules": 2.4853089959859043
+            "his_rdpo": 70.68710768371871,
+            "uncapped": 2.835925944193914,
+            "modules": 3.092021413250121
           },
-          "best_small_world": "modules",
-          "s_star_his": 8187.124854823407,
-          "s_star_new": 3854056.199151758,
-          "s_star_factor": 470.74599050253386
+          "best_small_world": "uncapped",
+          "s_star_his": 135505.90562631434,
+          "s_star_new": 3377563.7062729127,
+          "s_star_factor": 24.925583063421943
         }
       },
       "calls_reduction_ceiling": 4.982914762368674,
       "crossover_eps": {
-        "vs_his_rdpo": 0.03414356227967314,
+        "vs_his_rdpo": 0.009629662662782852,
         "vs_uncapped": 0.003187669384158948,
         "vs_modules": 0.0002961857624633257,
         "ceiling_loader_vs_modules": 0.001475868408181927

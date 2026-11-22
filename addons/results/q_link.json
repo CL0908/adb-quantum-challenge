@@ -1,0 +1,1335 @@
+{
+  "his_reference": "quantum_advantage_v3.json",
+  "pricing": "qrom_mixed",
+  "rows": {
+    "8": {
+      "amplitude": {
+        "twisted": 0.02492872200199187,
+        "u_loader": 0.37831513702749847,
+        "table": 0.5352780163862334,
+        "modules": 0.770770737490721
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds": {
+            "his_rdpo": 0.0024371989535998738,
+            "small_world": 0.00047479034634106607,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 7075.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 32239.04266754494,
+              "T_count": 434195860.8423562,
+              "s_star_vs_his_rdpo": 13227907.643701449,
+              "s_star_vs_small_world": 67901638.93599048
+            },
+            "repriced": {
+              "calls": 1555.935,
+              "coverage": 0.98,
+              "kmax": 46.0,
+              "quantum_seconds": 1513.4118582729884,
+              "T_count": 22013263.393061653,
+              "s_star_vs_his_rdpo": 620963.6090798405,
+              "s_star_vs_small_world": 3187537.130727228
+            },
+            "u_loader": {
+              "calls": 315.535,
+              "coverage": 0.975,
+              "kmax": 9.0,
+              "quantum_seconds": 274.91197082951254,
+              "T_count": 4346434.321415218,
+              "s_star_vs_his_rdpo": 112798.32958382524,
+              "s_star_vs_small_world": 579017.6083993698
+            },
+            "table": {
+              "calls": 178.025,
+              "coverage": 0.94,
+              "kmax": 4.0,
+              "quantum_seconds": 153.4023728483276,
+              "T_count": 2425333.958076326,
+              "s_star_vs_his_rdpo": 62942.08054773044,
+              "s_star_vs_small_world": 323094.9702969126
+            },
+            "modules": {
+              "calls": 138.21,
+              "coverage": 0.965,
+              "kmax": 4.0,
+              "quantum_seconds": 118.75925177459472,
+              "T_count": 1877616.6288473476,
+              "s_star_vs_his_rdpo": 48727.762499315424,
+              "s_star_vs_small_world": 250129.87877660827
+            }
+          },
+          "factor": {
+            "small_world_raises": 5.133210842178981,
+            "repricing_lowers": 21.30222681374661,
+            "u_loader_lowers": 5.505078057192115,
+            "table_lowers": 9.865635258258575,
+            "modules_lowers": 12.743528067568555
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 1513.4118582729884,
+                "physical_qubits": 362750,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 756.7059291364942,
+                "physical_qubits": 386750,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 348.0847274027874,
+                "physical_qubits": 382718,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 220.13263393061655,
+                "physical_qubits": 478718,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 274.91197082951254,
+                "physical_qubits": 306486,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 137.45598541475627,
+                "physical_qubits": 330486,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 68.72799270737814,
+                "physical_qubits": 378486,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 43.46434321415218,
+                "physical_qubits": 427494,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.01": {
+          "classical_seconds": {
+            "his_rdpo": 0.2437198953599874,
+            "small_world": 0.04747903463410662,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 70750.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 379222.01959738735,
+              "T_count": 4755135041.97351,
+              "s_star_vs_his_rdpo": 1555974.8170630718,
+              "s_star_vs_small_world": 7987146.801105615
+            },
+            "repriced": {
+              "calls": 14644.515,
+              "coverage": 0.985,
+              "kmax": 482.0,
+              "quantum_seconds": 16038.353156022658,
+              "T_count": 216004756.3100695,
+              "s_star_vs_his_rdpo": 65806.49943384042,
+              "s_star_vs_small_world": 337798.6363796346
+            },
+            "u_loader": {
+              "calls": 2887.21,
+              "coverage": 0.975,
+              "kmax": 99.0,
+              "quantum_seconds": 2839.9270729339655,
+              "T_count": 41308030.15176678,
+              "s_star_vs_his_rdpo": 11652.422009861937,
+              "s_star_vs_small_world": 59814.33899866828
+            },
+            "table": {
+              "calls": 2317.1,
+              "coverage": 0.975,
+              "kmax": 71.0,
+              "quantum_seconds": 2273.7496406728824,
+              "T_count": 33072722.04615102,
+              "s_star_vs_his_rdpo": 9329.355887480715,
+              "s_star_vs_small_world": 47889.550792162314
+            },
+            "modules": {
+              "calls": 1212.285,
+              "coverage": 0.98,
+              "kmax": 41.0,
+              "quantum_seconds": 1175.949933417708,
+              "T_count": 17104726.304257575,
+              "s_star_vs_his_rdpo": 4825.005901470484,
+              "s_star_vs_small_world": 24767.772607005852
+            }
+          },
+          "factor": {
+            "small_world_raises": 5.13321084217898,
+            "repricing_lowers": 23.64469817494843,
+            "u_loader_lowers": 5.647452467662569,
+            "table_lowers": 7.053702337816025,
+            "modules_lowers": 13.638636050949705
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 16038.353156022658,
+                "physical_qubits": 430782,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 8019.176578011329,
+                "physical_qubits": 454782,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 4009.5882890056646,
+                "physical_qubits": 502782,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 2160.0475631006952,
+                "physical_qubits": 540750,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 2839.9270729339655,
+                "physical_qubits": 365250,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 1419.9635364669828,
+                "physical_qubits": 389250,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 709.9817682334914,
+                "physical_qubits": 437250,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 413.0803015176678,
+                "physical_qubits": 480834,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.001": {
+          "classical_seconds": {
+            "his_rdpo": 24.371989535998743,
+            "small_world": 2.0014207608980623,
+            "small_world_kind": "modules"
+          },
+          "levels": {
+            "declared": {
+              "calls": 707500.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 4405985.532883746,
+              "T_count": 51683114755.234566,
+              "s_star_vs_his_rdpo": 180780.7083773718,
+              "s_star_vs_small_world": 2201428.9143811646
+            },
+            "repriced": {
+              "calls": 143796.11,
+              "coverage": 0.995,
+              "kmax": 4814.0,
+              "quantum_seconds": 175395.12385405492,
+              "T_count": 2199311897.856488,
+              "s_star_vs_his_rdpo": 7196.586212011411,
+              "s_star_vs_small_world": 87635.3075179219
+            },
+            "u_loader": {
+              "calls": 28986.79,
+              "coverage": 0.995,
+              "kmax": 989.0,
+              "quantum_seconds": 32110.36663869708,
+              "T_count": 432462850.35282266,
+              "s_star_vs_his_rdpo": 1317.5110957301347,
+              "s_star_vs_small_world": 16043.78612735523
+            },
+            "table": {
+              "calls": 21467.39,
+              "coverage": 0.985,
+              "kmax": 698.0,
+              "quantum_seconds": 23604.753157226256,
+              "T_count": 317909133.4306567,
+              "s_star_vs_his_rdpo": 968.519747735849,
+              "s_star_vs_small_world": 11793.998352767416
+            },
+            "modules": {
+              "calls": 12351.93,
+              "coverage": 0.985,
+              "kmax": 417.0,
+              "quantum_seconds": 13444.757261335171,
+              "T_count": 181074171.86983398,
+              "s_star_vs_his_rdpo": 551.6479170269025,
+              "s_star_vs_small_world": 6717.606574292925
+            }
+          },
+          "factor": {
+            "small_world_raises": 12.177344220743832,
+            "repricing_lowers": 25.120342208315527,
+            "u_loader_lowers": 5.462258523161223,
+            "table_lowers": 7.430500233820926,
+            "modules_lowers": 13.045614766021949
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 175395.12385405492,
+                "physical_qubits": 503370,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 87697.56192702746,
+                "physical_qubits": 527370,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 43848.78096351373,
+                "physical_qubits": 575370,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 21993.118978564886,
+                "physical_qubits": 607530,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 32110.36663869708,
+                "physical_qubits": 433698,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 16055.18331934854,
+                "physical_qubits": 457698,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 8027.59165967427,
+                "physical_qubits": 505698,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 4324.628503528227,
+                "physical_qubits": 601698,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "16": {
+      "amplitude": {
+        "twisted": 0.005985257636251191,
+        "u_loader": 0.12052868164621895,
+        "table": 0.26211075594699285,
+        "modules": 0.6204657981537528
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds": {
+            "his_rdpo": 0.03565981894751262,
+            "small_world": 0.019759797228321403,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 8650.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 87316.97994420232,
+              "T_count": 1094883761.0558286,
+              "s_star_vs_his_rdpo": 2448609.7383927675,
+              "s_star_vs_small_world": 4418920.848997999
+            },
+            "repriced": {
+              "calls": 3126.755,
+              "coverage": 1.0,
+              "kmax": 88.0,
+              "quantum_seconds": 6737.845045489337,
+              "T_count": 90745387.81803823,
+              "s_star_vs_his_rdpo": 188947.81982507295,
+              "s_star_vs_small_world": 340987.5601269881
+            },
+            "u_loader": {
+              "calls": 647.11,
+              "coverage": 0.995,
+              "kmax": 20.0,
+              "quantum_seconds": 1258.6411732225845,
+              "T_count": 18307507.974146683,
+              "s_star_vs_his_rdpo": 35295.781368805256,
+              "s_star_vs_small_world": 63697.069290700725
+            },
+            "table": {
+              "calls": 382.4,
+              "coverage": 0.985,
+              "kmax": 12.0,
+              "quantum_seconds": 736.2481126433495,
+              "T_count": 10709063.45663054,
+              "s_star_vs_his_rdpo": 20646.43440077547,
+              "s_star_vs_small_world": 37259.90222147102
+            },
+            "modules": {
+              "calls": 186.25,
+              "coverage": 0.98,
+              "kmax": 5.0,
+              "quantum_seconds": 354.19055931053,
+              "T_count": 5151862.680880437,
+              "s_star_vs_his_rdpo": 9932.483387867449,
+              "s_star_vs_small_world": 17924.80738632653
+            }
+          },
+          "factor": {
+            "small_world_raises": 1.8046652268476708,
+            "repricing_lowers": 12.959184925550764,
+            "u_loader_lowers": 5.353269215115517,
+            "table_lowers": 9.151595677846252,
+            "modules_lowers": 19.023220321301835
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 6737.845045489337,
+                "physical_qubits": 675726,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 3368.9225227446686,
+                "physical_qubits": 699726,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 1559.6863531225317,
+                "physical_qubits": 654750,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 907.4538781803823,
+                "physical_qubits": 750750,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 1258.6411732225845,
+                "physical_qubits": 577750,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 629.3205866112922,
+                "physical_qubits": 601750,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 314.6602933056461,
+                "physical_qubits": 649750,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 183.07507974146685,
+                "physical_qubits": 660694,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.01": {
+          "classical_seconds": {
+            "his_rdpo": 3.565981894751263,
+            "small_world": 0.42910472283214046,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 86500.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 1018856.0424014434,
+              "T_count": 11951390526.703148,
+              "s_star_vs_his_rdpo": 285715.42774827,
+              "s_star_vs_small_world": 2374376.202799346
+            },
+            "repriced": {
+              "calls": 29941.215,
+              "coverage": 0.98,
+              "kmax": 989.0,
+              "quantum_seconds": 72151.04745856866,
+              "T_count": 904715328.63409,
+              "s_star_vs_his_rdpo": 20233.150248117396,
+              "s_star_vs_small_world": 168143.2145103495
+            },
+            "u_loader": {
+              "calls": 6193.705,
+              "coverage": 0.945,
+              "kmax": 205.0,
+              "quantum_seconds": 13500.575526527267,
+              "T_count": 181825933.01720226,
+              "s_star_vs_his_rdpo": 3785.9349612511055,
+              "s_star_vs_small_world": 31462.19281256547
+            },
+            "table": {
+              "calls": 3854.125,
+              "coverage": 0.97,
+              "kmax": 129.0,
+              "quantum_seconds": 8359.951357801943,
+              "T_count": 112591937.47881404,
+              "s_star_vs_his_rdpo": 2344.361694630834,
+              "s_star_vs_small_world": 19482.31029158874
+            },
+            "modules": {
+              "calls": 1836.71,
+              "coverage": 1.0,
+              "kmax": 58.0,
+              "quantum_seconds": 3936.0334162232944,
+              "T_count": 53010551.06024639,
+              "s_star_vs_his_rdpo": 1103.772686568237,
+              "s_star_vs_small_world": 9172.663936777535
+            }
+          },
+          "factor": {
+            "small_world_raises": 8.310283492606125,
+            "repricing_lowers": 14.121153861092616,
+            "u_loader_lowers": 5.344294198184302,
+            "table_lowers": 8.630558285633269,
+            "modules_lowers": 18.330903178103373
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 72151.04745856866,
+                "physical_qubits": 789310,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 36075.52372928433,
+                "physical_qubits": 813310,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 16793.778287770292,
+                "physical_qubits": 759390,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 9047.153286340901,
+                "physical_qubits": 855390,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 13500.575526527267,
+                "physical_qubits": 678642,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 6750.287763263634,
+                "physical_qubits": 702642,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 3375.143881631817,
+                "physical_qubits": 750642,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 1818.2593301720228,
+                "physical_qubits": 753250,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.001": {
+          "classical_seconds": {
+            "his_rdpo": 356.59818947512633,
+            "small_world": 9.935529921816697,
+            "small_world_kind": "modules"
+          },
+          "levels": {
+            "declared": {
+              "calls": 865000.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 11755703.67438457,
+              "T_count": 129539434428.48012,
+              "s_star_vs_his_rdpo": 32966.24610373845,
+              "s_star_vs_small_world": 1183198.4571422897
+            },
+            "repriced": {
+              "calls": 293580.09,
+              "coverage": 0.99,
+              "kmax": 10046.0,
+              "quantum_seconds": 783113.4764152433,
+              "T_count": 9186081834.782913,
+              "s_star_vs_his_rdpo": 2196.066888527676,
+              "s_star_vs_small_world": 78819.49755852099
+            },
+            "u_loader": {
+              "calls": 59348.97,
+              "coverage": 0.99,
+              "kmax": 2096.0,
+              "quantum_seconds": 144600.43651888764,
+              "T_count": 1813171617.7916946,
+              "s_star_vs_his_rdpo": 405.4996373697907,
+              "s_star_vs_small_world": 14553.872582213276
+            },
+            "table": {
+              "calls": 37122.06,
+              "coverage": 0.98,
+              "kmax": 1292.0,
+              "quantum_seconds": 89647.34246343253,
+              "T_count": 1124104607.6919441,
+              "s_star_vs_his_rdpo": 251.39595519366952,
+              "s_star_vs_small_world": 9022.904985327714
+            },
+            "modules": {
+              "calls": 17181.625,
+              "coverage": 0.98,
+              "kmax": 600.0,
+              "quantum_seconds": 40998.3235605082,
+              "T_count": 514085561.8872502,
+              "s_star_vs_his_rdpo": 114.97064418878084,
+              "s_star_vs_small_world": 4126.435518097833
+            }
+          },
+          "factor": {
+            "small_world_raises": 35.89120985807699,
+            "repricing_lowers": 15.011494538693325,
+            "u_loader_lowers": 5.415706171211685,
+            "table_lowers": 8.735490142774484,
+            "modules_lowers": 19.10110971390012
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 783113.4764152433,
+                "physical_qubits": 910042,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 391556.7382076217,
+                "physical_qubits": 934042,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 183147.50658098434,
+                "physical_qubits": 871402,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 91860.81834782915,
+                "physical_qubits": 967402,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 144600.43651888764,
+                "physical_qubits": 792674,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 72300.21825944382,
+                "physical_qubits": 816674,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 36150.10912972191,
+                "physical_qubits": 864674,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 18131.716177916947,
+                "physical_qubits": 858306,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "20": {
+      "amplitude": {
+        "twisted": 0.003016298328830648,
+        "u_loader": 0.0670676419344604,
+        "table": 0.18039574258863852,
+        "modules": 0.5723389789003263
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds": {
+            "his_rdpo": 0.06360354420124849,
+            "small_world": 0.008802775641749127,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 11015.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 141226.40559544074,
+              "T_count": 1770864020.0055265,
+              "s_star_vs_his_rdpo": 2220417.2325458014,
+              "s_star_vs_small_world": 16043394.872594845
+            },
+            "repriced": {
+              "calls": 4221.78,
+              "coverage": 0.98,
+              "kmax": 135.0,
+              "quantum_seconds": 11438.320574346582,
+              "T_count": 154051455.5467553,
+              "s_star_vs_his_rdpo": 179837.78605409944,
+              "s_star_vs_small_world": 1299399.3076567573
+            },
+            "u_loader": {
+              "calls": 867.435,
+              "coverage": 0.995,
+              "kmax": 25.0,
+              "quantum_seconds": 2291.3549445631756,
+              "T_count": 30859999.253376104,
+              "s_star_vs_his_rdpo": 36025.58589051392,
+              "s_star_vs_small_world": 260299.14174978103
+            },
+            "table": {
+              "calls": 474.575,
+              "coverage": 0.955,
+              "kmax": 15.0,
+              "quantum_seconds": 1148.1537883259373,
+              "T_count": 16700418.739286361,
+              "s_star_vs_his_rdpo": 18051.726562486117,
+              "s_star_vs_small_world": 130430.8816960598
+            },
+            "modules": {
+              "calls": 181.845,
+              "coverage": 0.98,
+              "kmax": 5.0,
+              "quantum_seconds": 433.46343140772035,
+              "T_count": 6304922.6386577515,
+              "s_star_vs_his_rdpo": 6815.0829777063245,
+              "s_star_vs_small_world": 49241.67660844647
+            }
+          },
+          "factor": {
+            "small_world_raises": 7.22539648739819,
+            "repricing_lowers": 12.346778067418201,
+            "u_loader_lowers": 4.991946185154298,
+            "table_lowers": 9.962359302950345,
+            "modules_lowers": 26.38820196942421
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 11438.320574346582,
+                "physical_qubits": 801114,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 5719.160287173291,
+                "physical_qubits": 825114,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 2859.5801435866456,
+                "physical_qubits": 873114,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 1540.5145554675532,
+                "physical_qubits": 858250,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 2291.3549445631756,
+                "physical_qubits": 795282,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 1060.8124743348035,
+                "physical_qubits": 709250,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 530.4062371674017,
+                "physical_qubits": 757250,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 308.59999253376105,
+                "physical_qubits": 853250,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.01": {
+          "classical_seconds": {
+            "his_rdpo": 6.36035442012485,
+            "small_world": 0.8802775641749128,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 110150.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 1645448.4490484474,
+              "T_count": 19301448082.679737,
+              "s_star_vs_his_rdpo": 258703.8929532088,
+              "s_star_vs_small_world": 1869238.1994203522
+            },
+            "repriced": {
+              "calls": 42532.545,
+              "coverage": 0.99,
+              "kmax": 1394.0,
+              "quantum_seconds": 128884.0086893223,
+              "T_count": 1616100422.4366436,
+              "s_star_vs_his_rdpo": 20263.65201937794,
+              "s_star_vs_small_world": 146412.9201226726
+            },
+            "u_loader": {
+              "calls": 9030.76,
+              "coverage": 0.995,
+              "kmax": 271.0,
+              "quantum_seconds": 26600.757543919117,
+              "T_count": 333551818.73252815,
+              "s_star_vs_his_rdpo": 4182.275984456376,
+              "s_star_vs_small_world": 30218.602207420907
+            },
+            "table": {
+              "calls": 4815.055,
+              "coverage": 0.995,
+              "kmax": 158.0,
+              "quantum_seconds": 13063.357811877915,
+              "T_count": 175937478.94785073,
+              "s_star_vs_his_rdpo": 2053.872622340673,
+              "s_star_vs_small_world": 14840.044031023608
+            },
+            "modules": {
+              "calls": 2136.62,
+              "coverage": 0.985,
+              "kmax": 66.0,
+              "quantum_seconds": 5722.950456532752,
+              "T_count": 77076773.82535693,
+              "s_star_vs_his_rdpo": 899.7848356413468,
+              "s_star_vs_small_world": 6501.302190857145
+            }
+          },
+          "factor": {
+            "small_world_raises": 7.22539648739819,
+            "repricing_lowers": 12.76689378132889,
+            "u_loader_lowers": 4.8451254997730295,
+            "table_lowers": 9.866070465599124,
+            "modules_lowers": 22.520552933006982
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 128884.0086893223,
+                "physical_qubits": 933962,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 64442.00434466115,
+                "physical_qubits": 957962,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 32221.002172330576,
+                "physical_qubits": 1005962,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 16161.004224366437,
+                "physical_qubits": 980778,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 26600.757543919117,
+                "physical_qubits": 923870,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 12383.111270445106,
+                "physical_qubits": 828030,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 6191.555635222553,
+                "physical_qubits": 876030,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 3335.518187325282,
+                "physical_qubits": 972030,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.001": {
+          "classical_seconds": {
+            "his_rdpo": 636.0354420124851,
+            "small_world": 15.45605330358669,
+            "small_world_kind": "modules"
+          },
+          "levels": {
+            "declared": {
+              "calls": 1101500.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 18961537.28851357,
+              "T_count": 208942559653.04208,
+              "s_star_vs_his_rdpo": 29812.07655428322,
+              "s_star_vs_small_world": 1226803.3058680904
+            },
+            "repriced": {
+              "calls": 407930.83,
+              "coverage": 0.985,
+              "kmax": 14089.0,
+              "quantum_seconds": 1367589.9424733967,
+              "T_count": 16042110762.151281,
+              "s_star_vs_his_rdpo": 2150.17882988752,
+              "s_star_vs_small_world": 88482.48098083599
+            },
+            "u_loader": {
+              "calls": 93778.9,
+              "coverage": 0.98,
+              "kmax": 2870.0,
+              "quantum_seconds": 307423.3464157525,
+              "T_count": 3606138960.8885922,
+              "s_star_vs_his_rdpo": 483.34310654612534,
+              "s_star_vs_small_world": 19890.15826856735
+            },
+            "table": {
+              "calls": 48333.695,
+              "coverage": 0.965,
+              "kmax": 1642.0,
+              "quantum_seconds": 146647.93337426166,
+              "T_count": 1838845559.5518703,
+              "s_star_vs_his_rdpo": 230.56566299238247,
+              "s_star_vs_small_world": 9488.05820566308
+            },
+            "modules": {
+              "calls": 19431.57,
+              "coverage": 0.98,
+              "kmax": 650.0,
+              "quantum_seconds": 57930.78464580308,
+              "T_count": 726404823.1448662,
+              "s_star_vs_his_rdpo": 91.08106375723938,
+              "s_star_vs_small_world": 3748.0968464543157
+            }
+          },
+          "factor": {
+            "small_world_raises": 41.15121949436396,
+            "repricing_lowers": 13.864928879354071,
+            "u_loader_lowers": 4.448555903180816,
+            "table_lowers": 9.3256680200406,
+            "modules_lowers": 23.607309150653368
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 1367589.9424733967,
+                "physical_qubits": 1075334,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 683794.9712366983,
+                "physical_qubits": 1099334,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 341897.48561834916,
+                "physical_qubits": 1147334,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 160421.1076215128,
+                "physical_qubits": 1112054,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 307423.3464157525,
+                "physical_qubits": 1067646,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 143794.7910654326,
+                "physical_qubits": 961326,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 71897.3955327163,
+                "physical_qubits": 1009326,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 36061.389608885926,
+                "physical_qubits": 1105326,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "28": {
+      "amplitude": {
+        "twisted": 0.000881844066020961,
+        "u_loader": 0.021895693911302857,
+        "table": 0.0837566596144461,
+        "modules": 0.4959231391772407
+      },
+      "by_eps": {
+        "0.1": {
+          "classical_seconds": {
+            "his_rdpo": 0.706871076837187,
+            "small_world": 0.04382800944193914,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 46685.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 957852.0542787106,
+              "T_count": 11235801223.210682,
+              "s_star_vs_his_rdpo": 1355059.0562631437,
+              "s_star_vs_small_world": 21854792.55104247
+            },
+            "repriced": {
+              "calls": 8000.32,
+              "coverage": 1.0,
+              "kmax": 253.0,
+              "quantum_seconds": 33366.71142451993,
+              "T_count": 418391365.8247013,
+              "s_star_vs_his_rdpo": 47203.39043127274,
+              "s_star_vs_small_world": 761310.2180404121
+            },
+            "u_loader": {
+              "calls": 1604.87,
+              "coverage": 0.98,
+              "kmax": 46.0,
+              "quantum_seconds": 6051.619490391919,
+              "T_count": 81503292.79989117,
+              "s_star_vs_his_rdpo": 8561.136094956935,
+              "s_star_vs_small_world": 138076.5306808825
+            },
+            "table": {
+              "calls": 772.455,
+              "coverage": 0.98,
+              "kmax": 25.0,
+              "quantum_seconds": 2878.0032992428796,
+              "T_count": 38760987.1951903,
+              "s_star_vs_his_rdpo": 4071.4684665274085,
+              "s_star_vs_small_world": 65665.84556059967
+            },
+            "modules": {
+              "calls": 180.3,
+              "coverage": 0.92,
+              "kmax": 7.0,
+              "quantum_seconds": 607.0429973870123,
+              "T_count": 8829716.325629272,
+              "s_star_vs_his_rdpo": 858.7747006188966,
+              "s_star_vs_small_world": 13850.571931430935
+            }
+          },
+          "factor": {
+            "small_world_raises": 16.12829525770751,
+            "repricing_lowers": 28.70681626643079,
+            "u_loader_lowers": 5.5136829864296395,
+            "table_lowers": 11.593701589326793,
+            "modules_lowers": 54.96597698704268
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 33366.71142451993,
+                "physical_qubits": 1213174,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 16683.355712259963,
+                "physical_qubits": 1237174,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 7766.389728121018,
+                "physical_qubits": 1126806,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 4183.913658247014,
+                "physical_qubits": 1222806,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 6051.619490391919,
+                "physical_qubits": 1046058,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 3025.8097451959593,
+                "physical_qubits": 1070058,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 1400.8378449981294,
+                "physical_qubits": 972250,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 815.0329279989118,
+                "physical_qubits": 1068250,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.01": {
+          "classical_seconds": {
+            "his_rdpo": 70.68710768371871,
+            "small_world": 2.835925944193914,
+            "small_world_kind": "uncapped"
+          },
+          "levels": {
+            "declared": {
+              "calls": 466850.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 11052745.220012005,
+              "T_count": 121793335757.70805,
+              "s_star_vs_his_rdpo": 156361.54289218108,
+              "s_star_vs_small_world": 3897402.6252838722
+            },
+            "repriced": {
+              "calls": 77805.57,
+              "coverage": 0.99,
+              "kmax": 2577.0,
+              "quantum_seconds": 359228.8572596675,
+              "T_count": 4213828237.6500587,
+              "s_star_vs_his_rdpo": 5081.957220077464,
+              "s_star_vs_small_world": 126670.7468137977
+            },
+            "u_loader": {
+              "calls": 15322.205,
+              "coverage": 0.98,
+              "kmax": 505.0,
+              "quantum_seconds": 64592.84509397074,
+              "T_count": 809941631.2723603,
+              "s_star_vs_his_rdpo": 913.7853734656107,
+              "s_star_vs_small_world": 22776.63322845712
+            },
+            "table": {
+              "calls": 7483.375,
+              "coverage": 0.98,
+              "kmax": 252.0,
+              "quantum_seconds": 31189.857770702452,
+              "T_count": 391095395.2439179,
+              "s_star_vs_his_rdpo": 441.23827940814704,
+              "s_star_vs_small_world": 10998.121384149148
+            },
+            "modules": {
+              "calls": 2442.395,
+              "coverage": 0.96,
+              "kmax": 73.0,
+              "quantum_seconds": 9290.172973410203,
+              "T_count": 125120174.72606337,
+              "s_star_vs_his_rdpo": 131.4266954446348,
+              "s_star_vs_small_world": 3275.8870140563026
+            }
+          },
+          "factor": {
+            "small_world_raises": 24.925583063421943,
+            "repricing_lowers": 30.767977005874453,
+            "u_loader_lowers": 5.56143419193032,
+            "table_lowers": 11.517489432000605,
+            "modules_lowers": 38.66761773842442
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 359228.8572596675,
+                "physical_qubits": 1394386,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 179614.42862983374,
+                "physical_qubits": 1418386,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 84013.20048814804,
+                "physical_qubits": 1295266,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 42138.28237650059,
+                "physical_qubits": 1391266,
+                "at_reaction_floor": true
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 64592.84509397074,
+                "physical_qubits": 1216538,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 32296.42254698537,
+                "physical_qubits": 1240538,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 16148.211273492685,
+                "physical_qubits": 1288538,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 8099.416312723604,
+                "physical_qubits": 1225722,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        },
+        "0.001": {
+          "classical_seconds": {
+            "his_rdpo": 7068.710768371872,
+            "small_world": 30.76464132501212,
+            "small_world_kind": "modules"
+          },
+          "levels": {
+            "declared": {
+              "calls": 4668500.0,
+              "coverage": null,
+              "kmax": null,
+              "quantum_seconds": 126307584.5601852,
+              "T_count": 1312286592833.093,
+              "s_star_vs_his_rdpo": 17868.546146396857,
+              "s_star_vs_small_world": 4105608.878251254
+            },
+            "repriced": {
+              "calls": 817068.04,
+              "coverage": 0.985,
+              "kmax": 26083.0,
+              "quantum_seconds": 4156809.602227771,
+              "T_count": 45805064487.35837,
+              "s_star_vs_his_rdpo": 588.0576725287635,
+              "s_star_vs_small_world": 135116.46563056862
+            },
+            "u_loader": {
+              "calls": 152495.685,
+              "coverage": 0.99,
+              "kmax": 5185.0,
+              "quantum_seconds": 711560.9692096255,
+              "T_count": 8346756237.063057,
+              "s_star_vs_his_rdpo": 100.6634720992437,
+              "s_star_vs_small_world": 23129.181377164816
+            },
+            "table": {
+              "calls": 75121.625,
+              "coverage": 0.99,
+              "kmax": 2580.0,
+              "quantum_seconds": 346719.4882991368,
+              "T_count": 4067090771.8373823,
+              "s_star_vs_his_rdpo": 49.04989037753433,
+              "s_star_vs_small_world": 11270.064378005558
+            },
+            "modules": {
+              "calls": 25230.95,
+              "coverage": 0.975,
+              "kmax": 790.0,
+              "quantum_seconds": 106889.36090965262,
+              "T_count": 1340305465.951757,
+              "s_star_vs_his_rdpo": 15.121478924829784,
+              "s_star_vs_small_world": 3474.4224637766197
+            }
+          },
+          "factor": {
+            "small_world_raises": 229.76737136944624,
+            "repricing_lowers": 30.385703615699118,
+            "u_loader_lowers": 5.841817893475797,
+            "table_lowers": 11.988970168995603,
+            "modules_lowers": 38.88889938954057
+          },
+          "factories": {
+            "repriced": {
+              "4": {
+                "runtime_s": 4156809.602227771,
+                "physical_qubits": 1589982,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 2078404.8011138856,
+                "physical_qubits": 1613982,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 976220.4368868251,
+                "physical_qubits": 1477918,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 488110.21844341257,
+                "physical_qubits": 1573918,
+                "at_reaction_floor": false
+              }
+            },
+            "u_loader": {
+              "4": {
+                "runtime_s": 711560.9692096255,
+                "physical_qubits": 1398230,
+                "at_reaction_floor": false
+              },
+              "8": {
+                "runtime_s": 355780.48460481275,
+                "physical_qubits": 1422230,
+                "at_reaction_floor": false
+              },
+              "16": {
+                "runtime_s": 177890.24230240638,
+                "physical_qubits": 1470230,
+                "at_reaction_floor": false
+              },
+              "32": {
+                "runtime_s": 83467.56237063058,
+                "physical_qubits": 1394630,
+                "at_reaction_floor": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "checks": {
+    "G1_u_loader_cancels_small_world": false,
+    "G2_modules_ceiling_cancels_small_world": true,
+    "G3_u_loader_below_his_declared": true
+  }
+}

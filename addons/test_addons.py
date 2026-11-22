@@ -171,3 +171,18 @@ def test_reliability_coverage_machinery_on_a_fair_coin():
 def test_quantum_side_reproduces_the_authors_required_speedup():
     import quantum_side
     quantum_side.selftest()
+
+
+def test_q_link_reproduces_the_authors_runtime_and_factory_count():
+    import q_link
+    q_link.selftest()
+
+
+def test_q_link_gates_cost_matches_repricing_and_loaders_exact_on_two_countries():
+    import q_link_gates
+    q_link_gates.selftest()
+
+
+def test_q_gap_map_rebuilds_the_authors_ring_28_row():
+    import q_gap_map
+    q_gap_map.selftest()
