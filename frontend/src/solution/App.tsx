@@ -65,6 +65,8 @@ export default function App() {
   }
   const pool = sol?.pools.find((p) => p.id === poolId)
   const preset = grid ? (Math.abs(eq - grid.brief.eq) < 0.0006 && Math.abs(rain - grid.brief.rain) < 0.0006 ? 'brief' : Math.abs(eq - grid.data.eq) < 0.0006 && Math.abs(rain - grid.data.rain) < 0.0006 ? 'data' : '') : ''
+  // between grid nodes the numbers are interpolated from the exact grid, so only nodes and presets are labelled exact
+  const onGrid = !!grid && ([grid.brief, grid.data].some((p) => Math.abs(eq - p.eq) < 1e-9 && Math.abs(rain - p.rain) < 1e-9) || (grid.eq_axis.some((x) => Math.abs(x - eq) < 1e-9) && grid.rain_axis.some((x) => Math.abs(x - rain) < 1e-9)))
   const e1 = sol?.e1[scenario]?.joint_exhaustion
   const qLast = story?.quantum[story.quantum.length - 1]
   const qSel = poolId === 'pair' ? 2 : poolId === 'ap' ? 28 : null
@@ -75,9 +77,9 @@ export default function App() {
   const mode = (() => {
     switch (stage) {
       case 1: return sol ? <>Fed by {sol.sources.length} Poisson sources</> : null
-      case 2: return pool ? <>Exact, {seconds(pool.seconds)}</> : null
-      case 3: return e1 ? <>RDPO {(e1.rdpo * 100).toFixed(2)}% vs Monte Carlo {(e1.mc * 100).toFixed(2)}%</> : null
-      default: return qLast ? <>Quantum break-even {'×'}{sci(qLast.s_star)}</> : null
+      case 2: { const pair = sol?.pools.find((p) => p.id === 'pair'); return pair ? (onGrid ? <>Exact, two countries, {seconds(pair.seconds)}</> : <>Interpolated between exact runs</>) : null }
+      case 3: return e1 ? <>Run scenario, relative RMSE: RDPO {(e1.rdpo * 100).toFixed(2)}% vs Monte Carlo {(e1.mc * 100).toFixed(2)}%</> : null
+      default: return qLast ? <>Quantum break-even at {qLast.n} countries {'×'}{sci(qLast.s_star)}</> : null
     }
   })()
 
@@ -119,7 +121,7 @@ export default function App() {
         <dl className="reads">
           <div><dt>Pool loss above US$80m</dt><dd>{ans ? prob(ans.exceed, 3) : '–'}<small>{ans ? oneIn(ans.exceed) : ''}</small></dd></div>
         </dl>
-        <p className="note">Exact, three-year term.</p>
+        <p className="note">{onGrid ? 'Exact' : 'Interpolated from the exact grid'}, three-year term.</p>
       </aside>
 
       <div className="anchor a-tl" ref={setAnchor('kg')}>
@@ -151,8 +153,9 @@ export default function App() {
         </section>
       </div>
 
-      <aside className="jt-panel arch" data-inset="r" aria-label="Architecture">
-        <div className="lbl">Architecture</div>
+      <aside className="jt-panel arch" data-inset="r" aria-label="Run estimate and architecture">
+        {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} /> : <div className="run" />}
+        <div className="lbl arch-lbl">Architecture</div>
         <ol className="stages">
           {STAGES.map((s) => (
             <li key={s.n} className={stage === s.n ? 'on' : ''}>
@@ -182,7 +185,7 @@ export default function App() {
                         <NodeRing pool={pool} sol={sol} />
                         <div className="facts">
                           <div><span>Exact solve time</span><b className="num-l">{seconds(pool.seconds)}</b></div>
-                          <div><span>Bond dimension</span><b>{pool.bond ?? 'not needed'}</b></div>
+                          <div><span>Tensor width</span><b>{pool.bond ?? 'not needed'}</b></div>
                           <div><span>Countries, links</span><b>{pool.n}, {pool.edges}</b></div>
                         </div>
                       </div>
@@ -198,7 +201,7 @@ export default function App() {
                   )}
                   {s.n === 4 && story && (
                     <>
-                      <p>A quantum amplitude estimator would have to run faster than today's solver by this factor to break even.</p>
+                      <p>Hardware speed-up needed over the projected fault-tolerant quantum baseline to match the measured classical solver.</p>
                       {qLast && <div className="q-head"><b>{'×'}{sci(qLast.s_star)}</b><span>for {qLast.n} countries{qLast.ci ? <>, 95% interval {sci(qLast.ci[0])} to {sci(qLast.ci[1])}</> : null}</span></div>}
                       <QChart story={story} sel={qSel} />
                       <small className="muted">Required speed-up against the number of countries, log scale.</small>
@@ -209,7 +212,6 @@ export default function App() {
             </li>
           ))}
         </ol>
-        {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} /> : <div className="run" />}
       </aside>
 
       <section className="jt-panel bar" data-inset="b" aria-label="Events and pooling">

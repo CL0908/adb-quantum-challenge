@@ -190,7 +190,7 @@ export default function Dashboard() {
                   <div className="ph">
                     <div>
                       <h2 id="bars-h">{isKG ? 'The brief’s five scenarios' : 'Reference probabilities'}</h2>
-                      <p className="sub">{isKG ? 'Exact values; the brief’s Table 5 figure under each bar. Click a bar to select the scenario.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
+                      <p className="sub">{isKG ? metric === 'stop_loss' ? 'Exact values; the brief’s Table 5 figure under each bar. Click a bar to select the scenario.' : 'Exact values on a log scale; the brief’s Table 5 figure under each bar. Click a bar to select the scenario.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
                     </div>
                     {isKG && (
                       <Seg<Metric> label="Metric" value={metric} onChange={setMetric} options={[
@@ -212,9 +212,11 @@ export default function Dashboard() {
                 <div className="ph">
                   <div>
                     <h2 id="runs-h">Model runs</h2>
-                    <p className="sub">The committed runs behind these numbers. Rerun any of them to reproduce.</p>
+                    <p className="sub">Every number here comes from a committed run that anyone can repeat.</p>
                   </div>
                 </div>
+                <details className="runs-d">
+                <summary>For reviewers: files, commits and commands</summary>
                 <ol className="timeline">
                   {pool.runs.map((r) => (
                     <li key={r.file}>
@@ -229,6 +231,7 @@ export default function Dashboard() {
                     </li>
                   ))}
                 </ol>
+                </details>
               </section>
 
               <section className="panel methods" aria-labelledby="meth-h">
@@ -254,13 +257,17 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
   const rData = ri(0.02)
   const pick = (m: 'exceed' | 'joint_exhaustion', r: number) => g.eq_axis.map((e, i) => [e * 100, g.values[m][i][r]] as [number, number])
   const maxOf = (m: 'exceed' | 'joint_exhaustion') => Math.max(...[rBrief, rData].flatMap((r) => pick(m, r).map((p) => p[1])))
-  const nice = (v: number) => {
+  // round tick steps (1, 2, 2.5, 5 x 10^k) on both axes, with the number of gridlines that fits the left axis tightest
+  const step = (v: number, ks = [1, 2, 2.5, 5, 10]) => {
     const e = 10 ** Math.floor(Math.log10(v))
-    return [1, 2, 4, 5, 8, 10].map((k) => k * e).find((x) => x >= v * 1.04)!
+    return ks.map((k) => k * e).find((x) => x >= v * (1 - 1e-9))!
   }
+  const lv = maxOf('exceed') * 1.04, rv = maxOf('joint_exhaustion') * 1.04
+  const n = [4, 5, 6].reduce((b, k) => (step(lv / k) * k < step(lv / b) * b ? k : b), 4)
   const dual = {
-    l: { max: nice(maxOf('exceed')), fmt: (v: number) => `${+(v * 100).toPrecision(2)}%`, color: COL.teal },
-    r: { max: nice(maxOf('joint_exhaustion')), fmt: (v: number) => sciSvg(v, 2), color: COL.terra },
+    n,
+    l: { max: step(lv / n) * n, fmt: (v: number) => `${+(v * 100).toPrecision(3)}%`, color: COL.teal },
+    r: { max: step(rv / n, [1, 2, 5, 10]) * n, fmt: (v: number) => sciSvg(v, 2), color: COL.terra },
   }
   const yDomain: [number, number] = [0, 1]
   const show = (which: 'brief' | 'data') => mode === 'both' || mode === which
@@ -294,9 +301,9 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
       <div className="jt-legend">
         <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m), left axis</span>
         <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted), right axis</span>
-        {mode === 'both' && <span><i className="ln dash" />dashed: station-data rain share</span>}
+        {mode === 'both' && <span><i className="ln dash" />dashed: rain share 2% (grid slice)</span>}
         {show('brief') && <span><i className="dot" style={{ borderColor: COL.teal }} />brief: {pct(g.brief.eq, 1)} quake share, {pct(g.brief.rain, 0)} rain</span>}
-        {show('data') && <span><i className="dot" style={{ borderColor: COL.sand }} />public records: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 1)} rain</span>}
+        {show('data') && <span><i className="dot" style={{ borderColor: COL.sand }} />public records, exact point: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 2)} rain</span>}
       </div>
     </>
   )
@@ -394,7 +401,7 @@ function Kpi({ d, g, pool, poolId, scen }: { d: DashData; g: Grid; pool: Pool; p
           center={<><b>{pct(scen.delivered)}</b><small>paid</small></>} />
         <ul className="dl">
           <li><i style={{ background: COL.teal }} />{scen.label} scenario <b>{pct(scen.delivered)}</b></li>
-          <li><i style={{ background: COL.sand }} />Public records <b>{pct(g.data.delivered)}</b></li>
+          <li><i style={{ background: COL.sand }} />Public records, fixed calibration <b>{pct(g.data.delivered)}</b></li>
           <li className="dim">Brief base <b>{pct(base.delivered)}</b></li>
         </ul>
       </>
@@ -474,7 +481,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
         <div>
           <h2 id="reg-h">Risk register</h2>
           <p className="sub">
-            {kg ? `${scLabel} scenario: ${scDesc}.` : `${pool.label}, calibrated to public records.`} Coverage is the share of replications whose 95% interval holds the exact value.
+            {kg ? `${scLabel} scenario: ${scDesc}.` : `${pool.label}, calibrated to public records.`} The fast estimate is checked against the exact value: its error, and how often its 95% range held the exact value over repeated runs.
           </p>
         </div>
       </div>
@@ -483,7 +490,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
           <span role="columnheader">Target</span>
           <span role="columnheader">Exact value</span>
           <span role="columnheader">Method</span>
-          <span role="columnheader">{`RDPO check (${budget === null ? 'sampler' : budget.toLocaleString('en-US') + ' paths'})`}</span>
+          <span role="columnheader">Fast estimate check</span>
           <span role="columnheader">Status</span>
         </div>
         {rows.map((r) => {
@@ -496,16 +503,16 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
               </span>
               <span role="cell" className="c-v" data-l="Exact value">
                 <b>{fmtValue(r)}</b>
-                {r.brief !== null && <small>brief {r.money ? usd(r.brief) : sci(r.brief, 2)}</small>}
+                {r.brief !== null && <small>brief {r.money ? usd(r.brief) : r.brief >= 0.001 ? `${+(r.brief * 100).toPrecision(2)}%` : sci(r.brief, 2)}</small>}
               </span>
               <span role="cell" data-l="Method">
-                <span>{`exact · ${pool.exact_label.replace('exact, ', '').replace(/ \(.*\)/, '')}`}</span>
+                <span>{`exact, full calculation (${pool.exact_label.replace('exact, ', '').replace(/ \(.*\)/, '')})`}</span>
               </span>
-              <span role="cell" data-l={`RDPO check (${budget === null ? 'sampler' : budget.toLocaleString('en-US') + ' paths'})`}>
+              <span role="cell" data-l="Fast estimate check">
                 {r.rel === null ? <small>no run</small> : (
                   <>
                     <b>{relErr(r.rel)}</b>
-                    <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'coverage n/a' : `coverage ${pct(r.cov, 0)}`}, {r.reps} reps</small>
+                    <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'range check n/a' : `range held the exact value in ${pct(r.cov, 0)}`} of {r.reps} runs{budget === null ? '' : `, ${budget.toLocaleString('en-US')} paths`}</small>
                   </>
                 )}
               </span>

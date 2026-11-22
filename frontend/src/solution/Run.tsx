@@ -30,8 +30,10 @@ function IntervalPlot({ r }: { r: RunResult }) {
       {r.exact !== null && <div className="ip-exact" style={{ left: `${100 * tx(r.exact)}%` }}><span>exact</span></div>}
       {rows.map(([n, col, ci, est]) => (
         <div className="ip-row" key={n}>
-          <i className="ip-bar" style={{ background: col, left: `${100 * tx(ci[0])}%`, width: `max(${100 * (tx(ci[1]) - tx(ci[0]))}%, 5px)` }} />
-          <b className="ip-pt" style={{ borderColor: col, left: `${100 * tx(est)}%` }} />
+          {est > 0 || isMoney ? <>
+            <i className="ip-bar" style={{ background: col, left: `${100 * tx(ci[0])}%`, width: `max(${100 * (tx(ci[1]) - tx(ci[0]))}%, 2px)` }} />
+            <b className="ip-pt" style={{ borderColor: col, left: `${100 * tx(est)}%` }} />
+          </> : <span className="ip-none">{n}: no hits</span>}
         </div>
       ))}
     </div>
@@ -45,9 +47,13 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
   const [live, setLive] = useState<{ key: string; r: RunResult } | null>(null)
   const [status, setStatus] = useState<'idle' | 'running' | 'failed'>('idle')
   const seq = useRef(0)
+  const outRef = useRef<HTMLDivElement>(null)
+  const [done, setDone] = useState(0)
+  // after a run, bring the result into view inside the scrolling panel (it sits below the fold on laptops)
+  useEffect(() => { if (done) outRef.current?.scrollIntoView({ block: 'nearest', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }, [done])
   const key = `${scenario}|${target}|${BUDGETS[bi]}`
   const shown: { r: RunResult; live: boolean } | null = live && live.key === key ? { r: live.r, live: true } : fb && fb[key] ? { r: fb[key], live: false } : null
-  useEffect(() => { setStatus('idle') }, [key])
+  useEffect(() => { seq.current++; setStatus('idle') }, [key]) // a request for old settings can no longer update the new ones
 
   const run = useCallback(async () => {
     const my = ++seq.current
@@ -65,9 +71,10 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
       if (my !== seq.current) return
       setLive({ key, r: j })
       setStatus('idle')
+      setDone((d) => d + 1)
     } catch {
       clearTimeout(timer)
-      if (my === seq.current) setStatus('failed')
+      if (my === seq.current) { setStatus('failed'); setDone((d) => d + 1) }
     }
   }, [scenario, target, bi, key])
 
@@ -75,7 +82,7 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
   const exactMs = sol.pools[0].seconds
   return (
     <div className="run">
-      <div className="run-head"><span className="lbl">Run estimate</span><span className="run-sub">one query, exact against sampling</span></div>
+      <div className="run-head"><span className="lbl">Run estimate</span><span className="run-sub">Two-country bond under the brief&rsquo;s scenarios. The dependence sliders and pool size do not apply here.</span></div>
       <div className="run-sel">
         <label>Scenario<select className="jt-select" value={scenario} onChange={(e) => setScenario(e.target.value)}>{SCEN.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
         <label>Target<select className="jt-select" value={target} onChange={(e) => setTarget(e.target.value)}>{TARGETS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>
@@ -83,7 +90,7 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
       </div>
       <button type="button" className="jt-btn solid go" onClick={run} disabled={status === 'running'}>{status === 'running' ? 'Running on the server' : 'Run estimate'}</button>
       {r ? (
-        <div className="run-out">
+        <div className="run-out" ref={outRef}>
           <div className={shown!.live ? 'src live' : 'src pre'}>{shown!.live ? 'Live result from /api/estimate' : status === 'failed' ? 'Live API unavailable, showing the precomputed run for these settings' : 'Precomputed run for these settings, press Run for a live one'}</div>
           <table className="rt">
             <tbody>
@@ -95,7 +102,7 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
           <IntervalPlot r={r} />
           <div className="run-foot">95% intervals, {r.paths_used.toLocaleString('en-US')} paths{r.seconds !== undefined ? `, RDPO ${seconds(r.seconds)} including training` : ''}</div>
         </div>
-      ) : <div className="run-out"><div className="src pre">{fb ? 'No precomputed run for these settings; press Run' : 'Loading precomputed runs'}</div></div>}
+      ) : <div className="run-out"><div className="src pre">{status === 'failed' ? 'Live API unavailable and no precomputed run for these settings' : fb ? 'No precomputed run for these settings; press Run' : 'Loading precomputed runs'}</div></div>}
     </div>
   )
 }

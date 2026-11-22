@@ -6,7 +6,7 @@ a { text-decoration: none; }
 code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; }
 
 .page { padding: 20px clamp(12px, 2.2vw, 36px) 40px; }
-.shell { max-width: 1500px; margin: 0 auto; background: var(--glass); border: 1px solid var(--glass-edge); border-radius: var(--r-xl); box-shadow: var(--shadow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow: hidden; }
+.shell { max-width: 1500px; margin: 0 auto; background: var(--glass); border: 1px solid var(--glass-edge); border-radius: var(--r-xl); box-shadow: var(--shadow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow: hidden; overflow: clip; }
 .shell.state { display: block; padding: 60px; text-align: center; color: var(--text2); max-width: 600px; margin-top: 60px; }
 
 /* rail */
@@ -19,7 +19,7 @@ h1 { font: 500 28px/1.05 var(--sans); letter-spacing: -0.04em; margin-right: 8px
 h1 em, h2 em { font: italic 400 1.1em/1 var(--serif); letter-spacing: -0.015em; }
 .sel { display: inline-flex; flex-direction: column; background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 3px 12px 4px; min-width: 0; max-width: 100%; }
 .sel:hover { border-color: var(--line2); }
-.sel-l { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+.sel-l { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
 .sel .sel-s { appearance: none; -webkit-appearance: none; background: transparent; border: 0; padding: 0 20px 0 0; font-weight: 550; font-size: 13.5px; color: var(--text); cursor: pointer; max-width: 100%; background-image: linear-gradient(45deg, transparent 50%, var(--mute) 50%), linear-gradient(135deg, var(--mute) 50%, transparent 50%); background-position: calc(100% - 7px) 55%, calc(100% - 3px) 55%; background-size: 4px 4px; background-repeat: no-repeat; }
 .sel .sel-s option { background: var(--panel); color: var(--text); }
 .sel.off { opacity: 0.55; }
@@ -85,7 +85,7 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .vb.on .vb-fill { background: var(--accent); }
 .vb.on .vb-val { color: var(--accent); }
 .vb-lab { font-size: 12px; color: var(--text); font-weight: 500; line-height: 1.2; }
-.vb-sub { font-size: 10.5px; color: var(--mute); line-height: 1.2; }
+.vb-sub { font-size: 11.5px; color: var(--mute); line-height: 1.2; }
 
 /* method error */
 .merr { display: grid; gap: 14px; }
@@ -167,10 +167,19 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
   .tr { grid-template-columns: 1fr 1fr; gap: 10px 14px; padding: 16px 0; }
   .tr > span:first-child { grid-column: 1 / -1; }
   .tr > span:last-child { grid-column: 1 / -1; }
-  .tr > span:not(:first-child)::before { content: attr(data-l); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+  .tr > span:not(:first-child)::before { content: attr(data-l); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 
 .pill.sand { background: color-mix(in srgb, var(--hi) 16%, transparent); color: var(--hi); }
 .lnk { color: var(--accent); }
 .sel .sel-s { color: var(--text); }
+
+/* reviewer details folded (local copy) */
+.runs-d summary { cursor: pointer; font-size: 12.5px; color: var(--tx2, inherit); padding: 6px 0 10px; list-style-position: inside; }
+.runs-d[open] summary { margin-bottom: 4px; }
+
+/* wide screens: the side column stays in view while the main column scrolls (local copy) */
+@media (min-width: 1280px) {
+  .side { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
+}

@@ -18,7 +18,7 @@ export function sciSvg(x: number, digits = 2): ReactNode {
   const [m, e] = x.toExponential(digits - 1).split('e')
   return (
     <>
-      {m}×10<tspan dy={-4} fontSize="8">{e.replace('+', '').replace('-', '−')}</tspan>
+      {m}×10<tspan dy={-4} fontSize="10">{e.replace('+', '').replace('-', '−')}</tspan>
     </>
   )
 }
@@ -52,7 +52,7 @@ export const pct = (x: number, d = 1) => `${(x * 100).toFixed(d)}%`
 export function relErr(x: number | null): string {
   if (x === null || !Number.isFinite(x)) return 'no run'
   const v = x * 100
-  return `±${v < 1 ? v.toFixed(2) : v.toFixed(1)}%`
+  return `${v < 1 ? v.toFixed(2) : v.toFixed(1)}% RMSE` // relative root-mean-square error over repeated runs, not an interval
 }
 export function delta(a: number, b: number): { text: string; sign: number } | null {
   if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return null

@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useState, type ReactNode } from 'react'
 import { useJSON, useStory, useValues, V, ValuesProvider } from './lib/data'
+import NestBlock from './Nest'
 import { webglAvailable } from './lib/dem'
 import type { MapData } from './lib/map'
 import Reveal, { useInView } from './Reveal'
@@ -22,6 +23,10 @@ const SOLUTION = '/solution/'
 const DASHBOARD = '/dashboard/'
 
 /* ---------- small pieces ---------- */
+
+function Term({ name, children }: { name: string; children: ReactNode }) {
+  return <span className="term" tabIndex={0}>{name}<span className="tip" role="tooltip"><b>{name}</b>{children}</span></span>
+}
 
 function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return <span className={`eyebrow ${dark ? 'on-dark' : ''}`}><i aria-hidden="true" />{children}</span>
@@ -138,8 +143,8 @@ function How() {
   const s = useStory()
   const steps = [
     { n: '01', t: 'Source model', d: 'Five causes of loss per year, from public earthquake, flood and rain records, feed one two-country bond.' },
-    { n: '02', t: 'Exact tensor network', d: <>Exact joint answers for pools of up to {s ? s.scaling.ring[s.scaling.ring.length - 1][0] : 28} countries, <V k="TN_RING28_S" /> on one core.</> },
-    { n: '03', t: 'Learned sampler (RDPO)', d: <>A sampler trained on the rare event; it beats the best of four standard methods in <V k="EQT_A_PATH_ALL" /> cells at equal paths.</> },
+    { n: '02', t: <>Exact <Term name="tensor network">Adds up every combination of events exactly, by joining small tables one country at a time instead of listing every outcome.</Term></>, d: <>Exact joint answers for pools of up to {s ? s.scaling.ring[s.scaling.ring.length - 1][0] : 28} countries, <V k="TN_RING28_S" /> on one core.</> },
+    { n: '03', t: <>Learned sampler (<Term name="RDPO">A sampler trained to send more paths into the rare joint loss, so fewer paths reach the same accuracy.</Term>)</>, d: <>A sampler trained on the rare event; it beats the best of four standard methods in <V k="EQT_A_PATH_ALL" /> test cases at equal paths, and in <V k="EQ0_TIME" /> of <V k="EQ0_N" /> at equal CPU time.</> },
     { n: '04', t: 'Quantum stage', d: 'Priced, not assumed: the hardware speed-up a quantum solver needs before it pays off.' },
   ]
   return (
@@ -159,14 +164,15 @@ function How() {
                 <>
                   <div className="exactrow">
                     <Ring n={s.scaling.ring[s.scaling.ring.length - 1][0]} />
-                    <div className="bigstat"><b><V k="TN_RING28_S" /></b><span>bond dimension <V k="TN_RING28_BOND" /></span></div>
+                    <div className="bigstat"><b><V k="TN_RING28_S" /></b><span>28 countries, tensor width <V k="TN_RING28_BOND" /></span></div>
                   </div>
                   <TimeLine data={s.scaling.ring} />
                 </>
               ) : <div className="bskel" />}
             </Card>
-            <Card title="Learned sampler" sub="Gain over the best of four methods" className="c3">
-              {s ? <Heat s={s} /> : <div className="bskel" />}
+            <Card title="Learned sampler" sub="Accuracy against the best of four standard methods, same number of paths" className="c3">
+              <p className="kpi"><b><V k="EQT_A_PATH_ALL" /></b><span>test cases won (5 scenarios &times; 5 questions)</span></p>
+              <p className="kfoot">At equal CPU time: <b><V k="EQ0_TIME" /> of <V k="EQ0_N" /></b>. Largest gain on &ldquo;both bonds exhausted&rdquo;: <b><V k="E1_EXH_RANGE_SHORT" /></b>. <a href="#results">All 25 cases</a></p>
             </Card>
           </div>
           <ol className="steps">
@@ -178,6 +184,7 @@ function How() {
             <Reveal delay={360}><a className="btn light" href={SOLUTION}>See it run <Arrow /></a></Reveal>
           </ol>
         </div>
+        <Reveal><NestBlock /></Reveal>
       </div>
     </section>
   )
@@ -197,7 +204,7 @@ function PoolLimit() {
       </div>
       <div className="prow">
         <div className="pbar data"><i style={{ width: `${b || 0}%` }} />{lo && hi ? <u style={{ left: `${lo}%`, width: `${hi - lo}%` }} /> : null}</div>
-        <div className="pnum"><b><V k="FIN_POOL_MED" /></b><span>under the data, <V k="FIN_POOL_LO" /> to <V k="FIN_POOL_HI" /></span></div>
+        <div className="pnum"><b><V k="FIN_POOL_MED" /></b><span>posterior median under the public records, 95% <V k="FIN_POOL_LO" /> to <V k="FIN_POOL_HI" /></span></div>
       </div>
     </div>
   )
@@ -215,19 +222,19 @@ function Results() {
         </Reveal>
         <div className="res">
           <Card title="Per-query wins" sub="Accuracy gain at equal paths, by question and scenario." className="r1">
-            <p className="kpi"><b><V k="EQT_A_PATH_ALL" /></b><span>cells won against the best of four methods</span></p>
+            <p className="kpi"><b><V k="EQT_A_PATH_ALL" /></b><span>test cases won against the best of four methods (5 scenarios &times; 5 questions)</span></p>
             {s ? <Heat s={s} /> : <div className="bskel" />}
             <p className="kfoot">On &ldquo;both bonds exhausted&rdquo; the gain is <b><V k="E1_EXH_RANGE_SHORT" /></b>.</p>
           </Card>
-          <Card title="Equal-CPU honesty" sub="Cells won with the same paths, against cells won with the same CPU time." className="r2">
-            <p className="kpi"><b>{v.EQ0_TIME} of {v.EQ0_N}</b><span>benchmark cells still won at equal CPU time</span></p>
+          <Card title="Equal-CPU honesty" sub="Test cases won with the same number of paths, and with the same CPU time." className="r2">
+            <p className="kpi"><b>{v.EQ0_TIME} of {v.EQ0_N}</b><span>benchmark test cases still won at equal CPU time</span></p>
             <Checks />
           </Card>
           <Card title="A bar for quantum" sub="Hardware speed-up needed over the projected fault-tolerant baseline to break even." className="r3">
             {s ? <Bar s={s} /> : <div className="bskel" />}
           </Card>
           <Card title="One shared limit" sub="Share of expected payouts a single US$80m pooled limit keeps, against two separate covers." className="r4">
-            <p className="kpi"><b><V k="FIN_POOL_BRIEF" /> <em>to</em> <V k="FIN_POOL_MED" /></b><span>from the brief&rsquo;s dependence to the data</span></p>
+            <p className="kpi"><b><V k="FIN_POOL_BRIEF" /> <em>to</em> <V k="FIN_POOL_MED" /></b><span>from the brief&rsquo;s dependence to the posterior median under the public records</span></p>
             <PoolLimit />
           </Card>
         </div>
@@ -255,7 +262,7 @@ const PEOPLE = [
       'ADIA Lab Structural Break Challenge, peak #37 of 1,220.',
       'AI engineer building agent and RAG pipelines; Chief AI Officer of BunkerGuard AI, winner of SuperAI NEXT Hackathon 2026.',
     ],
-    does: ['Quantum resource reductions', 'Data uncertainty', 'Model-risk layers'],
+    does: ['Faster RDPO engine', 'Small world and saturation modules', 'Quantum resource reductions', 'Data uncertainty'],
   },
 ]
 
@@ -353,7 +360,33 @@ function Footer() {
   )
 }
 
+/** A link such as /#documents from another page lands before the sections above have filled in, so the browser's own
+ *  jump misses. Land again once they settle; stop as soon as the reader scrolls. */
+function useHashLanding() {
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id) return
+    const go = () => document.getElementById(id)?.scrollIntoView()
+    // re-land whenever the page above the target grows, for up to 4 s
+    const ro = new ResizeObserver(go)
+    ro.observe(document.body)
+    const timers = [80, 4000].map((ms, i) => window.setTimeout(i ? () => ro.disconnect() : go, ms))
+    const stop = () => { timers.forEach((t) => window.clearTimeout(t)); ro.disconnect() }
+    const opts = { once: true, passive: true } as const
+    window.addEventListener('wheel', stop, opts)
+    window.addEventListener('touchstart', stop, opts)
+    window.addEventListener('keydown', stop, opts)
+    return () => {
+      stop()
+      window.removeEventListener('wheel', stop)
+      window.removeEventListener('touchstart', stop)
+      window.removeEventListener('keydown', stop)
+    }
+  }, [])
+}
+
 export default function Home() {
+  useHashLanding()
   return (
     <ValuesProvider>
       <SiteNav theme="light" current="home" />

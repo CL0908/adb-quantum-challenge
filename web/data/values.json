@@ -236,7 +236,7 @@
  "MK_SHARE": "11%",
  "MK_SOM": "3.5",
  "N_SLIDES": "12",
- "N_TESTS": "101",
+ "N_TESTS": "137",
  "P2_END": "22 Jan",
  "POOLPAIR_COV": "71%–75%",
  "POOLPAIR_ERR": "5.2%–5.9%",
@@ -404,5 +404,14 @@
  "W5_DATE": "28 Dec",
  "W6_DATE": "4 Jan",
  "W7_DATE": "11 Jan",
- "W8_DATE": "18 Jan"
+ "W8_DATE": "18 Jan",
+ "SW_N": "8",
+ "SW_PATH": "8",
+ "SW_TIME": "8",
+ "Q_LOADER_28": "8.2×10⁴",
+ "Q_LOADER_40": "8.5×10⁴",
+ "Q_LOADER_56": "8.2×10⁴",
+ "Q_TWIST_28": "1.4×10⁵",
+ "Q_TWIST_40": "3.7×10⁵",
+ "Q_TWIST_56": "1.0×10⁶"
 }

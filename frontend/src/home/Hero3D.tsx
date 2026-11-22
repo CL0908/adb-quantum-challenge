@@ -349,11 +349,11 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           raf = requestAnimationFrame(loop)
           if (!visible || document.hidden) return
           const t = (now - t0) / 1000
-          const bob = Math.sin((t * Math.PI * 2) / 7.5)
+          const bob = 0 // no bob or pulse: motion that is not data reads as changing risk
           pivot.rotation.y = Math.sin((t * Math.PI * 2) / 46) * yawMax
           pivot.position.y = bob * 0.07
-          zoneMat.opacity = 0.78 + 0.22 * Math.sin((t * Math.PI * 2) / 5)
-          hm.opacity = 0.65 + 0.2 * Math.sin((t * Math.PI * 2) / 5 + 0.6)
+          zoneMat.opacity = 0.9
+          hm.opacity = 0.75
           frame?.style.setProperty('--bob', bob.toFixed(3))
           renderer.render(scene, camera)
         }

@@ -21,7 +21,7 @@ const exps = (lo: number, hi: number) => {
 }
 const tickLabel = (e: number) => (
   <>
-    10<tspan dy={-4} fontSize="8">{String(e).replace('-', '−')}</tspan>
+    10<tspan dy={-4} fontSize="10">{String(e).replace('-', '−')}</tspan>
   </>
 )
 
@@ -33,6 +33,7 @@ export interface Series {
   axis?: 'r'
 }
 export interface DualAxes {
+  n?: number
   l: { max: number; fmt: (v: number) => ReactNode; color: string }
   r: { max: number; fmt: (v: number) => ReactNode; color: string }
 }
@@ -46,7 +47,7 @@ export interface Mark {
 
 /** Log-y line chart with a hover read-out. x in data units, y > 0. */
 export function LineChart({
-  series, marks, xDomain, xTicks, xFmt, yDomain, dual, height = 280, tipX, tipRows,
+  series, marks, xDomain, xTicks, xFmt, yDomain, dual, height: h0 = 280, tipX, tipRows,
 }: {
   dual?: DualAxes
   series: Series[]
@@ -62,7 +63,9 @@ export function LineChart({
   const [ref, w] = useWidth<HTMLDivElement>()
   const [hx, setHx] = useState<number | null>(null)
   const W = Math.max(w, 260)
-  const m = { l: 48, r: dual ? 52 : 14, t: 14, b: 30 }
+  const narrow = W < 420 // phones: a taller plot and slimmer axis gutters
+  const height = narrow ? h0 + 70 : h0
+  const m = { l: narrow ? 40 : 48, r: dual ? (narrow ? 62 : 52) : 14, t: 14, b: 30 }
   const iw = W - m.l - m.r
   const ih = height - m.t - m.b
   const X = (x: number) => m.l + ((x - xDomain[0]) / (xDomain[1] - xDomain[0])) * iw
@@ -79,12 +82,12 @@ export function LineChart({
   return (
     <div className="chart jt-chart" ref={ref} style={{ height }}>
       {w > 0 && (
-        <svg width={W} height={height} role="img" aria-label="Line chart on a logarithmic probability axis">
-          {dual && [0, 1, 2, 3, 4].map((i) => (
-            <g key={i}>
-              <line x1={m.l} x2={W - m.r} y1={Y((dual.l.max * i) / 4)} y2={Y((dual.l.max * i) / 4)} className="jt-grid" />
-              <text x={m.l - 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="end" className="jt-tick" style={{ fill: dual.l.color }}>{dual.l.fmt((dual.l.max * i) / 4)}</text>
-              <text x={W - m.r + 8} y={Y((dual.l.max * i) / 4) + 3} textAnchor="start" className="jt-tick" style={{ fill: dual.r.color }}>{dual.r.fmt((dual.r.max * i) / 4)}</text>
+        <svg width={W} height={height} role="img" aria-label={dual ? 'Line chart with two linear probability axes: left for the pool exceeding its limit, right for both bonds exhausted' : 'Line chart on a logarithmic probability axis'}>
+          {dual && Array.from({ length: (dual.n ?? 4) + 1 }, (_, i) => i / (dual.n ?? 4)).map((f) => (
+            <g key={f}>
+              <line x1={m.l} x2={W - m.r} y1={Y(dual.l.max * f)} y2={Y(dual.l.max * f)} className="jt-grid" />
+              <text x={m.l - 8} y={Y(dual.l.max * f) + 3} textAnchor="end" className="jt-tick" style={{ fill: dual.l.color }}>{dual.l.fmt(dual.l.max * f)}</text>
+              <text x={W - m.r + 8} y={Y(dual.l.max * f) + 3} textAnchor="start" className="jt-tick" style={{ fill: dual.r.color }}>{dual.r.fmt(dual.r.max * f)}</text>
             </g>
           ))}
           {!dual && exps(yDomain[0], yDomain[1]).map((e) => (

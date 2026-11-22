@@ -72,7 +72,7 @@ export function Sources({ s }: { s: Story }) {
       </g>
       {pills.map((p, i) => (
         <g key={p.label} transform={`translate(0 ${y0 + i * gap})`}><g className="pillg" style={{ transitionDelay: `${i * 70}ms` }}>
-          <title>{`${p.label}: ${pctS(p.rate)} chance in a year`}</title>
+          <title>{`${p.label}: annual rate ${pctS(p.rate)} (expected events per year)`}</title>
           <rect className="pill" width={pw} height={ph} rx={ph / 2} />
           <circle cx={19} cy={ph / 2} r={4.5} fill={colour[p.tone]} />
           <text x={32} y={ph / 2 + 4.5} className="plab">{p.label}</text>
@@ -191,7 +191,7 @@ export function Heat({ s }: { s: Story }) {
       </div>
       <p className="hm-note" aria-live="polite">
         {info ? <><b>{info.text}.</b> {fx(info.a)} on equal paths{`, ${fx(info.b)} on equal CPU time`}</>
-          : <>RDPO beats the best of four methods in <b>{wins} of 25</b> cells</>}
+          : <>RDPO beats the best of four methods in <b>{wins} of 25</b> test cases</>}
       </p>
     </div>
   )
@@ -211,6 +211,7 @@ export function Checks() {
     { label: 'Data pools', n: v.EQ1_N, p: v.EQ1_PATH, t: v.EQ1_TIME },
     { label: 'Scaling', n: v.EQ2_N, p: v.EQ2_PATH, t: v.EQ2_TIME },
     { label: 'Dense graphs', n: v.EQ3_N, p: v.EQ3_PATH, t: v.EQ3_TIME },
+    { label: 'Small world', n: v.SW_N, p: v.SW_PATH, t: v.SW_TIME, sub: `${v.SW_N} pools, vs twisting` },
   ]
   return (
     <div className="checks">
@@ -219,7 +220,7 @@ export function Checks() {
         const p = parse(r.p), t = parse(r.t)
         return (
           <div className="crow" key={r.label} style={{ ['--d' as string]: `${i * 110}ms` }}>
-            <div className="clab">{r.label}<span>{r.n} cells</span></div>
+            <div className="clab">{r.label}<span>{r.sub ?? `${r.n} cases`}</span></div>
             <div className="cbars">
               <div className="cbar paths"><i style={{ ['--w' as string]: p.hi / N }} /><b>{p.text}</b></div>
               <div className="cbar cpu"><i className="range" style={{ ['--w' as string]: t.hi / N }} /><i style={{ ['--w' as string]: t.lo / N }} /><b>{t.text}</b></div>
@@ -259,10 +260,18 @@ export function Bar({ s }: { s: Story }) {
         <div className="qdot start" style={{ left: 0 }}><div className="qlabel left"><small>Projected hardware</small></div></div>
       </div>
       <dl className="qstats">
-        <div><dt>Classical, measured</dt><dd><V k="Q_CLS_28" /></dd></div>
+        <div><dt>Classical, measured on one Xeon thread</dt><dd><V k="Q_CLS_28" /></dd></div>
         <div><dt>Quantum, projected</dt><dd><V k="Q_TIME_28" /></dd></div>
         <p className="qnote">Dots: ring pools of {q.filter((r) => r !== k).map((r) => r.n).join(', ')} and {k.n} countries.</p>
       </dl>
+      <div className="qload">
+        <p>With the cap-aware loader, at 1% error and against the faster classical reference:</p>
+        <dl>
+          {(['28', '40', '56'] as const).map((n) => (
+            <div key={n}><dt>{n} countries</dt><dd><V k={`Q_LOADER_${n}`} />&times;</dd><span>twisting <V k={`Q_TWIST_${n}`} />&times;</span></div>
+          ))}
+        </dl>
+      </div>
     </div>
   )
 }

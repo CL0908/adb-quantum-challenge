@@ -53,7 +53,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--s
 h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; padding: 0; }
 a { color: inherit; }
 button, select, input { font: inherit; color: inherit; }
-sup { font-size: 0.6em; vertical-align: 0; position: relative; top: -0.5em; line-height: 0; margin-left: 0.04em; }
+sup { font-size: max(0.6em, 10px); vertical-align: 0; position: relative; top: -0.5em; line-height: 0; margin-left: 0.04em; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 .jt-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .jt-serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
@@ -104,7 +104,7 @@ sup { font-size: 0.6em; vertical-align: 0; position: relative; top: -0.5em; line
 .jt-slider-box input::-moz-range-progress { height: 3px; background: var(--accent); }
 .jt-slider-box input::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6.5px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .jt-slider-box input::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-.jt-slider-mark { position: absolute; top: 30px; transform: translateX(-50%); font: 500 10px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; pointer-events: none; }
+.jt-slider-mark { position: absolute; top: 30px; transform: translateX(-50%); font: 500 11px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; pointer-events: none; }
 .jt-slider-mark i { position: absolute; left: 50%; top: -12px; width: 1px; height: 7px; background: var(--muted); }
 
 /* select */
@@ -152,3 +152,14 @@ sup { font-size: 0.6em; vertical-align: 0; position: relative; top: -0.5em; line
 }
 @media (max-width: 560px) { :root { --gut: 16px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* nav reads on top of large headings; touch targets on phones (local copy) */
+.jt-nav-wrap .jt-pillbox, .jt-nav-wrap .jt-pdf, .jt-nav-wrap .jt-menu-btn { background: color-mix(in srgb, var(--panel) 96%, transparent); }
+@media (pointer: coarse) {
+  .jt-seg button { min-height: 40px; }
+  .jt-menu-btn { width: 44px; height: 44px; }
+  .jt-mnav a { min-height: 44px; display: flex; align-items: center; }
+}
+
+/* exponents and inline code stay readable (browsers shrink sup to ~0.6 of small labels) (local copy) */
+code { font-size: max(0.92em, 11px); }

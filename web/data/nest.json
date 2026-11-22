@@ -1,0 +1,27 @@
+{
+ "pool": "ring 28",
+ "rho2": {
+  "twisting": 293.22429374880943,
+  "guide": 10.241437316389051,
+  "guide_tables": 1.0428100117964252
+ },
+ "equal_cpu_gain": 16.707630094603914,
+ "answer_over_truth": {
+  "guide": 45.43041664655862,
+  "guide_tables": 1.001641086384929
+ },
+ "rdpo_z_max": 0.5324142939721925,
+ "twin": {
+  "exceedance": {
+   "fixed": 0.012046720907534038,
+   "uncertain": 0.018918346579372275,
+   "rel": 0.570414615278479
+  },
+  "joint_exhaustion": {
+   "fixed": 3.1633046309179026e-05,
+   "uncertain": 7.364705238325264e-05,
+   "rel": 1.328168196746904
+  }
+ },
+ "source": "branch-xzy/addons/results/cap_modules.json, twinstar.json"
+}

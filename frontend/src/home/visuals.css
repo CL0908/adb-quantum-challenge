@@ -34,7 +34,7 @@
 /* heatmap */
 .heat { display: flex; flex-direction: column; gap: 14px; }
 .hm-grid { display: grid; grid-template-columns: auto repeat(5, minmax(0, 1fr)); gap: 4px; align-items: center; }
-.hm-col { font-size: 10.5px; line-height: 1.15; color: var(--muted); text-align: center; padding-bottom: 4px; }
+.hm-col { font-size: 11.5px; line-height: 1.15; color: var(--muted); text-align: center; padding-bottom: 4px; }
 .hm-col.key { color: var(--terra-d); font-weight: 600; }
 .hm-row { font-size: 11.5px; color: var(--ink2); padding-right: 8px; white-space: nowrap; }
 .hm { font: 600 11.5px var(--sans); font-variant-numeric: tabular-nums; height: 34px; border: 0; border-radius: 9px; cursor: default; color: var(--ink); background: rgba(31, 53, 87, calc(var(--t) * 0.78)); padding: 0; }
@@ -57,7 +57,6 @@
 .cbar.cpu i { background: var(--terra); }
 .cbar.cpu i.range { background: rgba(200, 85, 58, 0.3); }
 .cbar b { white-space: nowrap; position: absolute; left: calc(100% + 8px); top: 0; line-height: 16px; font-size: 11px; font-weight: 600; color: var(--ink2); font-variant-numeric: tabular-nums; }
-.cbar i[style*='--w: 0'] { width: 0; }
 .clegend { display: flex; gap: 18px; font-size: 12px; color: var(--ink2); margin-top: 2px; }
 .clegend .d { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
 .clegend .d.paths { background: var(--navy); } .clegend .d.cpu { background: var(--terra); }
@@ -86,7 +85,7 @@
 .qdot.start { background: var(--navy); }
 .qdot.other { background: #8F9BB0; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; }
 .qdot.other.n20 span { display: none; }
-.qdot.other span { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-size: 10.5px; color: var(--muted); }
+.qdot.other span { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-size: 11.5px; color: var(--muted); }
 .qdot.key { width: 16px; height: 16px; margin: -8px 0 0 -8px; background: var(--terra); box-shadow: 0 0 0 6px rgba(200, 85, 58, 0.16); }
 .qlabel { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .qlabel small { font-size: 12px; color: var(--ink2); }
@@ -110,13 +109,26 @@
   .bcard .nodeg { transition-delay: 0.35s; } .bcard .nodeg.last { transition-delay: 0.6s; }
   .bcard .lk { opacity: 0; transition: opacity 0.6s ease 0.2s; }
   .bcard.in .lk { opacity: 1; }
-  .bcard.in .lk.flow { animation: flow 2.4s linear infinite; }
   .bcard.in .lk.flow.soft { opacity: 0.45; }
-  .bcard .tpath { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s ease 0.2s; }
+  .bcard .tpath { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.45s ease-out; }
   .bcard.in .tpath { stroke-dashoffset: 0; }
-  .bcard .tarea, .bcard .tdot, .bcard .tlab { opacity: 0; transition: opacity 0.6s ease 1.1s; }
+  .bcard .tarea, .bcard .tdot, .bcard .tlab { opacity: 0; transition: opacity 0.3s ease-out 0.3s; }
   .bcard.in .tarea, .bcard.in .tdot, .bcard.in .tlab { opacity: 1; }
   .bcard .cbar i { width: 0; transition: width 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--d, 0ms) + 0.15s); }
   .bcard.in .cbar i { width: calc(var(--w) * 100%); }
   .bcard .qgap { transform: scaleX(0); transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s; }
   .bcard.in .qgap { transform: none; }
+}
+
+/* the cap-aware loader under the quantum bar (local copy) */
+.qload { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--hair); }
+.qload p { font-size: 12.5px; color: var(--ink2); margin: 0 0 8px; }
+.qload dl { margin: 0; display: grid; gap: 4px; }
+.qload dl > div { display: grid; grid-template-columns: 7.5em 6.5em 1fr; gap: 10px; align-items: baseline; font-size: 13px; font-variant-numeric: tabular-nums; }
+.qload dt { color: var(--ink2); }
+.qload dd { margin: 0; font-weight: 600; color: var(--ink); white-space: nowrap; }
+.qload span { color: var(--muted); white-space: nowrap; }
+@media (max-width: 560px) {
+  .qload dl > div { grid-template-columns: minmax(0, 1fr) auto; row-gap: 0; }
+  .qload span { grid-column: 1 / -1; font-size: 12px; }
+}
