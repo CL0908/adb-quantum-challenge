@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useJSON } from './lib/data'
 
 /* "Three models, one inside the other": the small world inside RDPO inside the twin. Two views of the same thing,
@@ -77,6 +77,26 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
       </div>
       <p className="nfoot">RDPO answers for one world. Counting how unsure the inputs are raises the pool tail by <b>{Math.round(t.exceedance.rel * 100)}%</b> and the joint exhaustion by <b>{Math.round(t.joint_exhaustion.rel * 100)}%</b>.</p>
     </>
+  )
+}
+
+/* a short loop per model (frontend/animations, Manim); with reduced motion it stays on its poster with controls */
+const ANIM: Record<Id, { src: string; label: string }> = {
+  sw: { src: 'anim/smallworld', label: 'Animation: the 28-country pool with its payout caps removed is solved exactly in one pass; on its own its answer is 45 times the exact value, with cap tables 1.002 times.' },
+  rdpo: { src: 'anim/rdpo', label: 'Animation: plain Monte Carlo puts no paths in the corner where both bonds are exhausted; RDPO sends paths there and reweights them, and its estimate settles on the exact value.' },
+  twin: { src: 'anim/twin', label: 'Animation: with the inputs fixed the pool pays more than US$80m with probability 1.20%; averaged over many possible worlds it is 1.89%.' },
+}
+function Anim({ id }: { id: Id }) {
+  const v = useRef<HTMLVideoElement>(null)
+  // decided before the first render: with reduced motion nothing loads and the poster (the scene's result) stays on screen
+  const [still] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  useEffect(() => { if (!still) v.current?.play().catch(() => undefined) }, [id, still])
+  const a = ANIM[id]
+  return (
+    <video ref={v} className="nvid" key={id} muted loop playsInline autoPlay={!still} controls={still} preload={still ? 'none' : 'metadata'} poster={`${a.src}.webp`} aria-label={a.label}>
+      <source src={`${a.src}.webm`} type="video/webm" />
+      <source src={`${a.src}.mp4`} type="video/mp4" />
+    </video>
   )
 }
 
@@ -177,7 +197,7 @@ export default function NestBlock() {
       </div>
       <div className={`nest-body ${view}`}>
         <div className="nest-fig">{view === 'nested' ? <Nested sel={sel} pick={setSel} /> : <Chain sel={sel} pick={setSel} />}</div>
-        <div className="ncomp" aria-live="polite">{n ? <div key={sel}><Panel id={sel} n={n} /></div> : <div className="bskel" />}</div>
+        <div className="ncomp" aria-live="polite">{n ? <div key={sel}><Anim id={sel} /><Panel id={sel} n={n} /></div> : <div className="bskel" />}</div>
       </div>
       <p className="nest-foot">28-country ring pool and the two-country bond. Every number comes from a committed run.</p>
     </div>
