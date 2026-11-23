@@ -6,6 +6,9 @@
 :root {
   /* brand constants (theme independent) */
   --navy: #1F3557; --terra: #C8553A; --teal: #0E8074; --ochre: #AD7A00; --sand: #D9C79B; --paper: #F3F1EC;
+  /* the dark surface, one set for the dark pages and the dark sections of the light page */
+  --dk-bg: #0D1520; --dk-bg2: #121C2A; --dk-panel: #152133; --dk-panel2: #1B2A40; --dk-text: #EAEFF5;
+  --dk-teal: #4DBBAB; --dk-teal-hi: #8FE0D3; --dk-terra: #E8795C; --dk-blue: #86A9DC; --dk-sand: #E9D7AE;
   --sans: Inter, 'Helvetica Neue', Arial, system-ui, sans-serif;
   --serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -34,16 +37,16 @@
 [data-theme='dark'] {
   color-scheme: dark;
   /* deep navy-charcoal derived from --navy (#1F3557), not black, not green-black */
-  --bg: #0D1520; --bg2: #121C2A; --ink: #EAEFF5; --ink2: rgba(234, 239, 245, 0.72); --muted: rgba(234, 239, 245, 0.5);
+  --bg: var(--dk-bg); --bg2: var(--dk-bg2); --ink: var(--dk-text); --ink2: rgba(234, 239, 245, 0.72); --muted: rgba(234, 239, 245, 0.5);
   --hair: rgba(196, 213, 236, 0.14); --hair2: rgba(196, 213, 236, 0.26);
-  --panel: #152133; --panel2: #1B2A40; --glass: rgba(21, 33, 51, 0.66); --glass-edge: rgba(196, 213, 236, 0.16);
+  --panel: var(--dk-panel); --panel2: var(--dk-panel2); --glass: rgba(21, 33, 51, 0.66); --glass-edge: rgba(196, 213, 236, 0.16);
   --shadow: 0 18px 50px -24px rgba(2, 6, 12, 0.85);
-  --accent: #4DBBAB; --accent-ink: #08121C; --accent-soft: rgba(77, 187, 171, 0.16);
-  --joint: #E8795C; --joint-soft: rgba(232, 121, 92, 0.16);
-  --teal: #4DBBAB; --terra: #E8795C;
-  --c1: #4DBBAB; --c2: #E8795C; --c3: #86A9DC; --c-neutral: #8C9BB2; --hi: #E9D7AE;
+  --accent: var(--dk-teal); --accent-ink: #08121C; --accent-soft: rgba(77, 187, 171, 0.16);
+  --joint: var(--dk-terra); --joint-soft: rgba(232, 121, 92, 0.16);
+  --teal: var(--dk-teal); --terra: var(--dk-terra);
+  --c1: var(--dk-teal); --c2: var(--dk-terra); --c3: var(--dk-blue); --c-neutral: #8C9BB2; --hi: var(--dk-sand);
   --grid: rgba(196, 213, 236, 0.09); --axis: rgba(196, 213, 236, 0.3); --tick: rgba(234, 239, 245, 0.55); --tip-bg: #0A111B;
-  --terrain-a: #16253A; --terrain-b: #0D1520;
+  --terrain-a: #16253A; --terrain-b: var(--dk-bg);
 }
 
 /* ---------- base ---------- */
@@ -133,7 +136,10 @@ sup { font-size: max(0.6em, 10px); vertical-align: 0; position: relative; top: -
 .jt-links { display: flex; gap: 2px; padding: 5px; }
 .jt-links a { padding: 8px 14px; border-radius: var(--r-pill); font: 450 14px var(--sans); color: var(--ink2); text-decoration: none; white-space: nowrap; transition: background 0.2s, color 0.2s; }
 .jt-links a:hover { background: var(--hair); color: var(--ink); }
-.jt-links a[aria-current='page'] { background: var(--accent-soft); color: var(--accent); font-weight: 550; }
+.jt-links a[aria-current='page'] { color: var(--accent); font-weight: 550; }
+/* the highlight is its own element, so on a tab change it slides from the old tab to the new one (view transitions) */
+.jt-links a { position: relative; isolation: isolate; }
+.jt-hl { position: absolute; inset: 0; z-index: -1; border-radius: var(--r-pill); background: var(--accent-soft); view-transition-name: nav-hl; }
 .jt-right { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
 .jt-pdf { height: 40px; padding: 0 18px; display: inline-flex; align-items: center; font: 500 14px var(--sans); color: var(--ink); text-decoration: none; white-space: nowrap; border-radius: var(--r-pill); border: 1px solid var(--hair2); background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: border-color 0.2s; }
 .jt-pdf:hover { border-color: var(--ink); }
@@ -169,3 +175,4 @@ code { font-size: max(0.92em, 11px); }
 .jt-nav-wrap { view-transition-name: site-nav; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.14s; }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+::view-transition-group(nav-hl) { animation-duration: 0.3s; animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1); }

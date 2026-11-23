@@ -28,7 +28,7 @@ export function SiteNav({ theme, current }: { theme: 'light' | 'dark'; current: 
           Joint-Tail
         </a>
         <div className="jt-links jt-pillbox">
-          {LINKS.map((l) => <a key={l.id} href={l.href} {...cur(l.id)}>{l.label}</a>)}
+          {LINKS.map((l) => <a key={l.id} href={l.href} {...cur(l.id)}>{l.id === current && <span className="jt-hl" aria-hidden="true" />}{l.label}</a>)}
         </div>
         <div className="jt-right">
           <a className="jt-pdf" href={PROPOSAL_PDF}>Proposal (PDF)</a>

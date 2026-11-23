@@ -1,4 +1,4 @@
-import { Component, Suspense, lazy, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Component, Suspense, lazy, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { answers, oneIn, pct, type Grid } from '../lib/model'
 import type { MapData } from '../lib/map'
 import { useData, type Solution, type Story } from './data'
@@ -44,6 +44,9 @@ export default function App() {
   const [hover, setHover] = useState<number | null>(null)
   const [noGL, setNoGL] = useState(false)
   const [ready, setReady] = useState(false)
+  // nothing data-driven shows until the data and the first placed frame are in, so the page never flashes a half-built layout
+  const [late, setLate] = useState(false)
+  useEffect(() => { const t = window.setTimeout(() => setLate(true), 4000); return () => window.clearTimeout(t) }, [])
   const anchorEls = useRef<Record<string, HTMLElement | null>>({})
   const root = useRef<HTMLDivElement>(null)
 
@@ -84,12 +87,12 @@ export default function App() {
   })()
 
   return (
-    <div className={`sol st${stage}`} ref={root}>
+    <div className={`sol st${stage}${((ready || noGL) && sol && grid) || late ? ' is-ready' : ''}`} ref={root}>
       <div className="map-host" aria-hidden={noGL}>
         {map && !noGL && (
           <Boundary fallback={null}>
             <Suspense fallback={null}>
-              <Terrain map={map} eq={eq} stage={stage} anchors={ANCHORS} anchorEls={anchorEls} getInsets={getInsets} onFail={() => setNoGL(true)} onReady={() => setReady(true)} />
+              <Terrain map={map} eq={eq} stage={stage} anchors={ANCHORS} anchorEls={anchorEls} getInsets={getInsets} onFail={() => setNoGL(true)} onReady={() => requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)))} />
             </Suspense>
           </Boundary>
         )}
