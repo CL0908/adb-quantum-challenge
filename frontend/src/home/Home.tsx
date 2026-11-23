@@ -354,7 +354,7 @@ function Footer() {
         <p>Tan Chun Loong · Xu Zi Yu · ADB Quantum Innovation Challenge, Phase 1. Independent entry; not affiliated with or endorsed by the organisations whose public data we use.</p>
         <p><b>AI use:</b> developed with Claude Code (Anthropic) as an AI pair-programmer and writing assistant, following the authors&rsquo; research plan. All numbers on this page are produced by the repository&rsquo;s scripts (<code>src/viz/export_web_data.py</code>, <code>src/viz/web_precompute.py</code>).</p>
         <p><b>Data:</b> earthquakes, USGS catalogue; loss records, NOAA; rainfall, GHCN-Daily stations; boundaries, public GeoJSON. <b>Terrain:</b>{' '}
-          {dem ? <>{dem.source}. {dem.licence}.</> : 'elevation data unavailable; the page shows a still image instead.'}</p>
+          {dem ? <>{dem.source}. {dem.licence}. Surface imagery: NASA Blue Marble Next Generation (NASA Earth Observatory), public domain.</> : 'elevation data unavailable; the page shows a still image instead.'}</p>
       </div>
     </footer>
   )

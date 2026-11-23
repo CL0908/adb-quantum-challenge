@@ -64,7 +64,8 @@ const wx = (f: Frame, lon: number) => (lon - f.lonC) * COS
 const wz = (f: Frame, lat: number) => -(lat - f.latC)
 
 /** Dark relief: hypsometric deep teal, baked hillshade from the north-west, thin contour lines, countries lit, the rest dimmed. */
-function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number) {
+function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number, sat: ImageData | null) {
+  const [e0, e1, e2, e3] = dem.info.extent
   const tx = (lon: number) => ((lon - f.lon0) / (f.lon1 - f.lon0)) * W
   const ty = (lat: number) => ((f.lat1 - lat) / (f.lat1 - f.lat0)) * H
   const m = document.createElement('canvas')
@@ -104,7 +105,14 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number) {
       const nl = Math.hypot(dzx, dzy, 1)
       const lam = (-dzx * lx - dzy * ly + lz) / nl
       const shade = Math.min(1.25, Math.max(0, 0.42 + (lam - lz) * 1.7 + 0.35))
-      const base = ramp(h0)
+      // colour: NASA Blue Marble imagery when it loaded (same extent as the DEM), the hypsometric ramp otherwise
+      let base = ramp(h0)
+      if (sat) {
+        const sx = Math.min(sat.width - 1, Math.max(0, Math.round(((lon - e0) / (e2 - e0)) * (sat.width - 1))))
+        const sy = Math.min(sat.height - 1, Math.max(0, Math.round(((e3 - lat) / (e3 - e1)) * (sat.height - 1))))
+        const q = 4 * (sy * sat.width + sx)
+        base = [sat.data[q] * 0.82, sat.data[q + 1] * 0.86, sat.data[q + 2] * 0.92]
+      }
       const k = 0.3 + 0.95 * Math.pow(shade, 1.15)
       let r = base[0] * k, gg = base[1] * k, b = base[2] * k
       // contour lines every BAND metres
@@ -271,7 +279,13 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
         const TW = window.innerWidth > 1100 ? 2048 : 1280
         const TH = Math.round((TW * (lat1 - lat0)) / ((lon1 - lon0) * COS))
         await new Promise((r) => setTimeout(r, 0))
-        const ground = new CanvasTexture(paintGround(dem, map, f, TW, TH))
+        const sat = await new Promise<ImageData | null>((ok) => {
+          const im = new Image()
+          im.onload = () => { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const g = c.getContext('2d')!; g.drawImage(im, 0, 0); ok(g.getImageData(0, 0, c.width, c.height)) }
+          im.onerror = () => ok(null)
+          im.src = '/data/ground.webp'
+        })
+        const ground = new CanvasTexture(paintGround(dem, map, f, TW, TH, sat))
         ground.colorSpace = SRGBColorSpace
         ground.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy())
         ground.minFilter = LinearFilter

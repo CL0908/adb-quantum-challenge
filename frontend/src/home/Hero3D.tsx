@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import {
   AdditiveBlending, AmbientLight, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, DirectionalLight, DoubleSide,
-  Group, HemisphereLight, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
+  ACESFilmicToneMapping, Group, HemisphereLight, PCFSoftShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   PerspectiveCamera, Quaternion, RepeatWrapping, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
 } from 'three'
 import { loadDem } from './lib/dem'
@@ -89,6 +89,10 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
 
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, still ? 2 : 1.75))
         renderer.setClearColor(0x000000, 0)
+        renderer.toneMapping = ACESFilmicToneMapping
+        renderer.toneMappingExposure = 1.08
+        renderer.shadowMap.enabled = !small // ridges cast soft shadows into the valleys; off on phones to keep the frame rate
+        renderer.shadowMap.type = PCFSoftShadowMap
         renderer.domElement.className = 'hero-canvas'
         el.prepend(renderer.domElement)
         disposers.push(() => { renderer.dispose(); renderer.forceContextLoss(); renderer.domElement.remove() })
@@ -133,7 +137,9 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         // colour at the DEM's resolution, enlarged smoothly and given a fine grain so it stays crisp on large screens
         const TW = small ? 1400 : 2048
         const TH = Math.round((TW * (lat1 - lat0)) / ((lon1 - lon0) * COS))
-        const base = colourCanvas(dem, F)
+        // ground: NASA Blue Marble imagery on the DEM's own extent (data/ground.webp); the procedural colours stay as the fallback
+        const gimg = await new Promise<HTMLImageElement | null>((ok) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = 'data/ground.webp' })
+        const base = gimg ?? colourCanvas(dem, F)
         const big = document.createElement('canvas')
         big.width = TW
         big.height = TH
@@ -154,7 +160,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         }
         gg.putImageData(gi, 0, 0)
         bg.globalCompositeOperation = 'soft-light'
-        bg.globalAlpha = 0.55
+        bg.globalAlpha = gimg ? 0.16 : 0.55 // imagery has its own texture; the grain only keeps it crisp when enlarged
         bg.fillStyle = bg.createPattern(gc, 'repeat')!
         bg.fillRect(0, 0, TW, TH)
         const ground = new CanvasTexture(big)
@@ -164,7 +170,9 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         const alphaTex = new CanvasTexture(fieldCanvas(F))
         alphaTex.minFilter = LinearFilter
         const mat = new MeshStandardMaterial({ map: ground, alphaMap: alphaTex, alphaTest: 0.5, roughness: 0.96, metalness: 0 })
-        root.add(new Mesh(geo, mat))
+        const land = new Mesh(geo, mat)
+        land.castShadow = land.receiveShadow = !small
+        root.add(land)
         disposers.push(() => { geo.dispose(); mat.dispose(); ground.dispose(); alphaTex.dispose() })
 
         const zoneTex = new CanvasTexture(paintZone(map, lon0, lat0, lon1, lat1, TW, TH))
@@ -290,10 +298,16 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         root.position.set(-cx, 0.3, -cz)
 
         /* ---- studio light: warm key, cool fill, rim, soft ambient ---- */
-        scene.add(new HemisphereLight(0xfaf7f2, 0xcfc6b4, 1.05))
-        scene.add(new AmbientLight(0xffffff, 0.2))
-        const key = new DirectionalLight(0xfff0dd, 2.5)
-        key.position.set(-7, 9, 6)
+        scene.add(new HemisphereLight(0xf7f4ee, 0xbfb6a4, 0.95))
+        scene.add(new AmbientLight(0xffffff, 0.12))
+        // low warm key from the north-west, as the hillshade convention, so the relief reads at a glance
+        const key = new DirectionalLight(0xffeedd, 3.1)
+        key.position.set(-8, 7, -3)
+        key.castShadow = !small
+        key.shadow.mapSize.set(2048, 2048)
+        key.shadow.bias = -0.0006
+        key.shadow.normalBias = 0.02
+        key.shadow.radius = 4
         scene.add(key)
         const rimL = new DirectionalLight(0xdfe9ff, 0.9)
         rimL.position.set(6, 3, -7)
@@ -302,8 +316,15 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         fill.position.set(5, 2, 7)
         scene.add(fill)
 
+        // brand-coloured overlays (shared zone, columns, halos, borders) keep their exact colours: only the lit terrain is tone-mapped
+        scene.traverse((o) => {
+          const m = (o as Mesh).material as { isMeshBasicMaterial?: boolean; isSpriteMaterial?: boolean; isLineBasicMaterial?: boolean; toneMapped?: boolean } | undefined
+          if (m && (m.isMeshBasicMaterial || m.isSpriteMaterial || m.isLineBasicMaterial)) m.toneMapped = false
+        })
+
         /* ---- camera ---- */
         const bw = maxX - minX, bd = maxZ - minZ
+        { const sc = key.shadow.camera, R = Math.max(bw, bd) * 0.7; sc.left = -R; sc.right = R; sc.top = R; sc.bottom = -R; sc.near = 0.5; sc.far = 40; sc.updateProjectionMatrix() }
         const pol = still?.pol ?? 1.1
         const yawMax = still ? 0 : 0.36
         const yaw = Math.max(yawMax, Math.abs(still?.az ?? 0))
