@@ -247,7 +247,7 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .sol .jt-panel { transition: none; } }
 
 /* no 3D view (WebGL off or failed): the same stacked layout as on phones, so every card stays readable */
-  .sol.flat { --mh: clamp(300px, 54vh, 540px); height: auto; min-height: 0; overflow: visible; background: var(--bg); padding-bottom: 28px; }
+  .sol.flat { --mh: 180px; height: auto; min-height: 0; overflow: visible; background: var(--bg); padding-bottom: 28px; }
   .sol.flat .map-host { position: relative; inset: auto; height: var(--mh); overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, var(--terrain-a) 0%, var(--bg2) 55%, var(--bg) 100%); }
   .sol.flat .top { left: 16px; top: 84px; right: 16px; }
   .sol.flat .top h1 { font-size: 32px; }

@@ -110,7 +110,7 @@ class SmallWorld(Scene):
         axis = Line([bx, by, 0], [bx, by + H, 0], color=HAIR)
         ticks = VGroup(*[VGroup(Line([bx - 0.1, y(r), 0], [bx, y(r), 0], color=MUTED), T(f"{r:g}×", 22, MUTED).move_to([bx - 0.5, y(r), 0])) for r in (1, 10, 100)])
         exact = DashedLine([bx, y(1), 0], [5.0, y(1), 0], color=INK, dash_length=0.1)
-        el = T("2M-path reference", 22, INK).next_to(exact.get_end(), DOWN, buff=0.1).shift(LEFT * 1.2)
+        el = VGroup(T("2M-path", 22, INK), T("reference", 22, INK)).arrange(DOWN, buff=0.05, aligned_edge=LEFT).next_to(exact.get_end(), DOWN, buff=0.12).align_to(exact.get_end(), RIGHT).shift(LEFT * 0.15)
         self.play(Create(axis), FadeIn(ticks), Create(exact), FadeIn(el), run_time=0.6)
         g, gt = NEST["answer_over_truth"]["guide"], NEST["answer_over_truth"]["guide_tables"]
         b1 = Rectangle(width=1.1, height=y(g) - by, stroke_width=0, fill_color=TERRA, fill_opacity=0.9).move_to([bx + 1.1, by + (y(g) - by) / 2, 0])

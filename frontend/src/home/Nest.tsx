@@ -57,7 +57,7 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
           <Row label="Small world on its own" value={x1(top)} pct={100} tone="bad" />
           <Row label="With cap tables (from pilot paths, cost counted)" value={x1(n.answer_over_truth.guide_tables)} pct={(100 * n.answer_over_truth.guide_tables) / top} />
         </div>
-        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool with exact weights: even with the plain table its estimate is within <b>{n.rdpo_z_max.toFixed(1)} standard errors</b> of that reference.</p>
+        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool with exact weights: even with the plain table its estimate is about <b>{n.rdpo_z_max.toFixed(2)} standard errors</b> from that reference.</p>
       </>
     )
   }
