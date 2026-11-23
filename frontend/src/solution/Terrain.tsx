@@ -111,9 +111,9 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number, sat
         const sx = Math.min(sat.width - 1, Math.max(0, Math.round(((lon - e0) / (e2 - e0)) * (sat.width - 1))))
         const sy = Math.min(sat.height - 1, Math.max(0, Math.round(((e3 - lat) / (e3 - e1)) * (sat.height - 1))))
         const q = 4 * (sy * sat.width + sx)
-        base = [sat.data[q] * 1.04, sat.data[q + 1] * 1.04, sat.data[q + 2] * 1.04]
+        base = [sat.data[q] * 1.22, sat.data[q + 1] * 1.22, sat.data[q + 2] * 1.18]
       }
-      const k = sat ? 0.6 + 0.55 * Math.pow(shade, 1.15) : 0.3 + 0.95 * Math.pow(shade, 1.15) // lighter relief shading on the paper page
+      const k = sat ? 0.9 + 0.3 * Math.pow(shade, 1.15) : 0.3 + 0.95 * Math.pow(shade, 1.15) // lighter relief shading on the paper page
       let r = base[0] * k, gg = base[1] * k, b = base[2] * k
       // contour lines every BAND metres
       const band = Math.floor(h0 / BAND)

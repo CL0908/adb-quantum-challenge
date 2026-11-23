@@ -30,7 +30,8 @@ shade = np.sin(alt) * np.cos(slope) + np.cos(alt) * np.sin(slope) * np.cos(az - 
 shade = np.clip(shade / np.sin(alt), 0, 1.4)
 s = np.asarray(sat, np.float64)
 out = s * (0.8 + 0.2 * shade[..., None])  # light baked shading; the real-time key light does the rest
-out = np.clip(out * 1.04, 0, 255).astype(np.uint8)
+out = 255 * np.power(np.clip(out / 255 * 1.08, 0, 1), 0.8)  # lifted mid-tones: the imagery reads light on the paper page
+out = np.clip(out, 0, 255).astype(np.uint8)
 img = Image.fromarray(out)
 img = img.resize((2048, round(2048 * img.height / img.width)), Image.LANCZOS)
 img.save(os.path.join(DATA, "ground.webp"), quality=88, method=6)

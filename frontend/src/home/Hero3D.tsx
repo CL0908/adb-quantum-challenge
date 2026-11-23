@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import {
   AdditiveBlending, AmbientLight, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, DirectionalLight, DoubleSide,
-  ACESFilmicToneMapping, Group, HemisphereLight, PCFShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
+  ACESFilmicToneMapping, Color, Group, HemisphereLight, PCFShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   PerspectiveCamera, Quaternion, RepeatWrapping, TextureLoader, Vector2, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
 } from 'three'
 import { loadDem } from './lib/dem'
@@ -197,7 +197,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           return t
         }
         const [rDiff, rNor, rRough] = await Promise.all([rockTex('rock_diff.webp', true), rockTex('rock_nor.webp', false), rockTex('rock_rough.webp', false)])
-        const rockMat = new MeshStandardMaterial({ map: rDiff, normalMap: rNor, normalScale: new Vector2(1.2, 1.2), roughnessMap: rRough, roughness: 1, vertexColors: true, metalness: 0, side: DoubleSide, alphaMap: alphaTex, alphaTest: 0.5 })
+        const rockMat = new MeshStandardMaterial({ color: new Color(2.0, 1.9, 1.78), map: rDiff, normalMap: rNor, normalScale: new Vector2(1.2, 1.2), roughnessMap: rRough, roughness: 1, vertexColors: true, metalness: 0, side: DoubleSide, alphaMap: alphaTex, alphaTest: 0.5 })
         let cx = 0, cz = 0, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, minY = 0, maxY = 0
         const outline: Vector3[] = [] // points on the rim and the underside, for a tight camera fit
         keep.forEach((loop, li) => {
@@ -240,9 +240,9 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           const y = ytop - d
           upos[3 * k] = x; upos[3 * k + 1] = y; upos[3 * k + 2] = z
           const t = Math.min(1, d / (DEPTH * 1.6))
-          const dk = 1 - 0.55 * Math.pow(t, 1.1)
+          const dk = 1 - 0.28 * Math.pow(t, 1.1) // gentle darkening with depth: the rock stays light against the paper page
           const soil = 1 - smooth(0.0, 0.12, d) // dark topsoil right under the surface edge
-          ucol[3 * k] = dk * (1 - 0.42 * soil); ucol[3 * k + 1] = dk * 0.99 * (1 - 0.48 * soil); ucol[3 * k + 2] = dk * 0.97 * (1 - 0.55 * soil)
+          ucol[3 * k] = dk * (1 - 0.25 * soil); ucol[3 * k + 1] = dk * (1 - 0.28 * soil); ucol[3 * k + 2] = dk * (1 - 0.3 * soil)
           if (y < minY && F.v[k] > F.T) minY = y
           if (q > 0 && k % 97 === 0) outline.push(new Vector3(x, y, z))
         }
