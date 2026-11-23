@@ -103,6 +103,25 @@ function useOneIn() {
   return mc ? Math.round(1 / mc.exact_joint_exhaustion / 100) * 100 : null
 }
 
+/* every repeat run of plain Monte Carlo as one dot (mc_sample.json): hollow = it saw no joint loss at all */
+function RunsGrid() {
+  const mc = useJSON<{ repeats: number; zero_runs: number; n: number }>('mc_sample.json')
+  if (!mc) return null
+  const cols = 40, cell = 7 // ten rows of forty: short enough to sit inside the card
+  const rows = Math.ceil(mc.repeats / cols)
+  return (
+    <figure className="runs">
+      <svg viewBox={`0 0 ${cols * cell} ${rows * cell}`} role="img" aria-label={`${mc.repeats} repeat runs of plain Monte Carlo at ${mc.n.toLocaleString('en-US')} paths; ${mc.zero_runs} of them saw no joint loss.`}>
+        {Array.from({ length: mc.repeats }, (_, i) => {
+          const empty = i < mc.zero_runs
+          return <circle key={i} cx={(i % cols) * cell + cell / 2} cy={Math.floor(i / cols) * cell + cell / 2} r={cell * 0.32} className={empty ? 'e' : 'f'} />
+        })}
+      </svg>
+      <figcaption><b>{mc.zero_runs}</b> of {mc.repeats} repeat runs saw none (hollow)</figcaption>
+    </figure>
+  )
+}
+
 function Problem() {
   const oneIn = useOneIn()
   return (
@@ -123,6 +142,7 @@ function Problem() {
           <Reveal className="stat s2" delay={90}>
             <b className="num">~<V k="MC_ZERO" /></b>
             <p>of plain Monte Carlo runs return zero joint losses at 16,384 paths, so the event is never seen.</p>
+            <RunsGrid />
           </Reveal>
           <Reveal className="stat s3" delay={180}>
             <b className="num">0&ndash;<V k="FIN_EXC_MAX" /></b>

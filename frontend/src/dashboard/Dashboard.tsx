@@ -546,6 +546,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
                 {r.rel === null ? <small>no run</small> : (
                   <>
                     <b>{relErr(r.rel)}</b>
+                    {r.cov !== null && <span className="covbar" aria-hidden="true"><i style={{ width: `${Math.min(100, r.cov * 100)}%` }} className={ok ? '' : 'low'} /><u /></span>}
                     <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'range check n/a' : `range held the exact value in ${pct(r.cov, 0)}`} of {r.reps} runs{budget === null ? '' : `, ${budget.toLocaleString('en-US')} paths`}</small>
                   </>
                 )}

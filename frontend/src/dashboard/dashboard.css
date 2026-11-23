@@ -219,3 +219,9 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 @media (max-width: 900px) { .keyfig { grid-template-columns: repeat(2, minmax(0, 1fr)); } .keyfig > div:nth-child(2) { border-right: 0; } .keyfig > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
 @media (max-width: 560px) { .db-axis span:not(.base) { display: none; } .keyfig > div { padding: 12px 14px; } .keyfig b { font-size: 21px; } .db { grid-template-columns: 38% 1fr 26%; } .db-axis { margin-left: 38%; margin-right: 26%; } .segs { justify-content: flex-start; } }
 @media (prefers-reduced-motion: reduce) { .db-fill { transition: none; } }
+
+/* coverage of the 95% range, with the 95% target marked (local copy) */
+.covbar { position: relative; display: block; width: 100%; max-width: 160px; height: 6px; margin: 4px 0 3px; border-radius: 3px; background: var(--track); }
+.covbar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--accent); }
+.covbar i.low { background: var(--hi); }
+.covbar u { position: absolute; left: 95%; top: -3px; bottom: -3px; width: 1.5px; background: var(--text); text-decoration: none; }

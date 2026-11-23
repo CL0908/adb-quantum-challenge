@@ -300,3 +300,11 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
   .npair { grid-template-columns: 1fr; }
 }
 .nvid { display: block; width: 100%; aspect-ratio: 4 / 3; margin: 0 0 18px; border: 1px solid var(--hair); border-radius: 14px; background: #fff; object-fit: contain; }
+
+/* one dot per repeat run of plain Monte Carlo (local copy) */
+.runs { margin-top: 14px; }
+.runs svg { display: block; width: 100%; height: auto; }
+.runs circle.f { fill: var(--terra-d); }
+.runs circle.e { fill: none; stroke: color-mix(in srgb, var(--terra-d) 55%, transparent); stroke-width: 1; }
+.runs figcaption { margin-top: 6px; font-size: 12.5px; color: var(--ink2); }
+.runs figcaption b { font-weight: 600; color: var(--ink); }
