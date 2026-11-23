@@ -12,7 +12,7 @@ type Metric = 'joint_exhaustion' | 'exceedance' | 'stop_loss'
 
 const POOL_IDS: PoolId[] = ['kgtj', 'carec', 'ap']
 const COL = { teal: 'var(--c1)', terra: 'var(--c2)', sand: 'var(--hi)', blue: 'var(--c3)', mute: 'var(--c-neutral)' }
-const COVERAGE_OK = 0.9
+const COVERAGE_OK = 0.95 // the range is a 95% interval, so 95% is the target it is judged against
 
 interface Row {
   key: string
@@ -167,6 +167,7 @@ export default function Dashboard() {
                           ? `Exact probability that the pooled loss in one term exceeds each threshold (down to 10⁻¹²). Computed by ${pool.exact_label.replace('exact, ', '')}, not simulated.`
                           : `Relative error of each estimator at ${pool.targets![0].budget?.toLocaleString('en-US')} paths, ${pool.reps} replications. Exact references come from ${pool.exact_label}.`}
                     </p>
+                    {isKG && <p className="scope">Base calibration across dependence. The Scenario menu changes the key figures, the shared limit, the scenario rows and the register, not this chart.</p>}
                   </div>
                   {isKG && (
                     <div className="segs">
@@ -471,10 +472,11 @@ function KeyFigures({ sc }: { sc: Scenario }) {
   const j = sc.targets.joint_exhaustion, e = sc.targets.exceedance
   return (
     <section className="keyfig" aria-label={`Key figures, ${sc.label} scenario`}>
+      <p className="kf-sc">{sc.label} scenario</p>
       <div><span>Both bonds exhausted</span><b>{prob(j.value)}</b><small>{oneIn(j.value)} three-year terms, exact</small></div>
       <div><span>Pool pays over US${sc.threshold_musd}m</span><b>{prob(e.value)}</b><small>{oneIn(e.value)} terms, exact</small></div>
       <div><span>Claims one shared limit pays</span><b>{pct(sc.delivered)}</b><small>of expected claims, US${sc.threshold_musd}m limit</small></div>
-      <div><span>RDPO error, both exhausted</span><b>{relErr(j.rdpo_rel_rmse)}</b><small>at {j.budget.toLocaleString('en-US')} paths, {j.reps} runs</small></div>
+      <div><span>RDPO relative error, both exhausted</span><b>{relErr(j.rdpo_rel_rmse)}</b><small>at {j.budget.toLocaleString('en-US')} paths, {j.reps} runs</small></div>
     </section>
   )
 }
@@ -547,7 +549,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
                   <>
                     <b>{relErr(r.rel)}</b>
                     {r.cov !== null && <span className="covbar" aria-hidden="true"><i style={{ width: `${Math.min(100, r.cov * 100)}%` }} className={ok ? '' : 'low'} /><u /></span>}
-                    <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'range check n/a' : `range held the exact value in ${pct(r.cov, 0)}`} of {r.reps} runs{budget === null ? '' : `, ${budget.toLocaleString('en-US')} paths`}</small>
+                    <small style={r.cov !== null && !ok ? { color: 'var(--hi)' } : undefined}>{r.cov === null ? 'range check n/a' : `range held the exact value in ${Math.round(r.cov * (r.reps ?? 0))} of`} {r.reps} runs (target 95%){budget === null ? '' : `, ${budget.toLocaleString('en-US')} paths`}</small>
                   </>
                 )}
               </span>

@@ -52,12 +52,12 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
       <>
         <span className="nk">RDPO &rarr; small world</span>
         <h4>RDPO fixes what the small world cannot see</h4>
-        <p className="nsub">Each answer divided by the exact value, 28-country ring (1&times; is right)</p>
+        <p className="nsub">Each answer divided by a 2-million-path twisting reference for the real, capped 28-country ring (1&times; matches it)</p>
         <div className="nbars">
           <Row label="Small world on its own" value={x1(top)} pct={100} tone="bad" />
-          <Row label="With cap tables, measured from RDPO trial paths" value={x1(n.answer_over_truth.guide_tables)} pct={(100 * n.answer_over_truth.guide_tables) / top} />
+          <Row label="With cap tables (from pilot paths, cost counted)" value={x1(n.answer_over_truth.guide_tables)} pct={(100 * n.answer_over_truth.guide_tables) / top} />
         </div>
-        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool with exact weights: even with the plain table its estimate is within <b>{n.rdpo_z_max.toFixed(1)} standard errors</b> of the exact value.</p>
+        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool with exact weights: even with the plain table its estimate is within <b>{n.rdpo_z_max.toFixed(1)} standard errors</b> of that reference.</p>
       </>
     )
   }
@@ -66,14 +66,14 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
     <>
       <span className="nk">Twin &rarr; RDPO</span>
       <h4>The twin adds what RDPO takes as known</h4>
-      <p className="nsub">Two-country bond, inputs fixed at their calibration against inputs drawn from the data</p>
+      <p className="nsub">Two-country bond, inputs fixed at their calibration against inputs drawn from the data (bars compare within each pair)</p>
       <div className="npair">
         <div><h5>Pool pays more than US$80m</h5>
           <Row label="Inputs fixed" value={pc(t.exceedance.fixed)} pct={(100 * t.exceedance.fixed) / t.exceedance.uncertain} />
-          <Row label="Inputs uncertain" value={pc(t.exceedance.uncertain)} pct={100} tone="good" /></div>
+          <Row label="Inputs uncertain" value={pc(t.exceedance.uncertain)} pct={100} tone="bad" /></div>
         <div><h5>Both bonds exhausted</h5>
           <Row label="Inputs fixed" value={sci(t.joint_exhaustion.fixed)} pct={(100 * t.joint_exhaustion.fixed) / t.joint_exhaustion.uncertain} />
-          <Row label="Inputs uncertain" value={sci(t.joint_exhaustion.uncertain)} pct={100} tone="good" /></div>
+          <Row label="Inputs uncertain" value={sci(t.joint_exhaustion.uncertain)} pct={100} tone="bad" /></div>
       </div>
       <p className="nfoot">RDPO answers for one world. Counting how unsure the inputs are raises the pool tail by <b>{Math.round(t.exceedance.rel * 100)}%</b> and the joint exhaustion by <b>{Math.round(t.joint_exhaustion.rel * 100)}%</b>.</p>
     </>
@@ -82,8 +82,8 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
 
 /* a short loop per model (frontend/animations, Manim); with reduced motion it stays on its poster with controls */
 const ANIM: Record<Id, { src: string; label: string }> = {
-  sw: { src: 'anim/smallworld', label: 'Animation: the 28-country pool with its payout caps removed is solved exactly in one pass; on its own its answer is 45 times the exact value, with cap tables 1.002 times.' },
-  rdpo: { src: 'anim/rdpo', label: 'Animation: plain Monte Carlo puts no paths in the corner where both bonds are exhausted; RDPO sends paths there and reweights them, and its estimate settles on the exact value.' },
+  sw: { src: 'anim/smallworld', label: 'Animation: the 28-country pool with its payout caps removed is solved exactly in one pass; on its own its answer is 45 times a 2-million-path reference for the capped pool, with cap tables 1.002 times.' },
+  rdpo: { src: 'anim/rdpo', label: 'Animation: plain Monte Carlo puts no paths in the corner where both bonds are exhausted; RDPO sends paths there and reweights them, and its estimate lands on the exact two-country value.' },
   twin: { src: 'anim/twin', label: 'Animation: with the inputs fixed the pool pays more than US$80m with probability 1.20%; averaged over many possible worlds it is 1.89%.' },
 }
 function Anim({ id }: { id: Id }) {
@@ -93,7 +93,7 @@ function Anim({ id }: { id: Id }) {
   useEffect(() => { if (!still) v.current?.play().catch(() => undefined) }, [id, still])
   const a = ANIM[id]
   return (
-    <video ref={v} className="nvid" key={id} muted loop playsInline autoPlay={!still} controls={still} preload={still ? 'none' : 'metadata'} poster={`${a.src}.webp`} aria-label={a.label}>
+    <video ref={v} className="nvid" key={id} muted loop playsInline autoPlay={!still} controls preload={still ? 'none' : 'metadata'} poster={`${a.src}.webp`} aria-label={a.label}>
       <source src={`${a.src}.webm`} type="video/webm" />
       <source src={`${a.src}.mp4`} type="video/mp4" />
     </video>

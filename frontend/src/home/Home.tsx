@@ -117,7 +117,7 @@ function RunsGrid() {
           return <circle key={i} cx={(i % cols) * cell + cell / 2} cy={Math.floor(i / cols) * cell + cell / 2} r={cell * 0.32} className={empty ? 'e' : 'f'} />
         })}
       </svg>
-      <figcaption><b>{mc.zero_runs}</b> of {mc.repeats} repeat runs saw none (hollow)</figcaption>
+      <figcaption><b>{mc.zero_runs}</b> of {mc.repeats} repeat runs ({(100 * mc.zero_runs / mc.repeats).toFixed(1)}%) saw no case of both bonds exhausted (hollow); one dot per run, grouped by result</figcaption>
     </figure>
   )
 }
@@ -141,7 +141,7 @@ function Problem() {
           </Reveal>
           <Reveal className="stat s2" delay={90}>
             <b className="num">~<V k="MC_ZERO" /></b>
-            <p>of plain Monte Carlo runs return zero joint losses at 16,384 paths, so the event is never seen.</p>
+            <p>of plain Monte Carlo runs at 16,384 paths never see both bonds exhausted, so the event goes unseen.</p>
             <RunsGrid />
           </Reveal>
           <Reveal className="stat s3" delay={180}>

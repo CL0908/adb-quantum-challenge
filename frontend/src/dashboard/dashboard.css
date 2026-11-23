@@ -225,3 +225,5 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .covbar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--accent); }
 .covbar i.low { background: var(--hi); }
 .covbar u { position: absolute; left: 95%; top: -3px; bottom: -3px; width: 1.5px; background: var(--text); text-decoration: none; }
+.scope { margin-top: 6px; font-size: 12.5px; color: var(--text2); border-left: 2px solid var(--line2); padding-left: 8px; max-width: 46em; }
+.kf-sc { grid-column: 1 / -1; padding: 10px 22px 0; margin: 0; font-size: 12px; font-weight: 600; color: var(--accent); }

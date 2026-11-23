@@ -69,6 +69,7 @@ export default function App() {
   const pool = sol?.pools.find((p) => p.id === poolId)
   const preset = grid ? (Math.abs(eq - grid.brief.eq) < 0.0006 && Math.abs(rain - grid.brief.rain) < 0.0006 ? 'brief' : Math.abs(eq - grid.data.eq) < 0.0006 && Math.abs(rain - grid.data.rain) < 0.0006 ? 'data' : '') : ''
   // between grid nodes the numbers are interpolated from the exact grid, so only nodes and presets are labelled exact
+  const shown = !!(((ready || noGL) && sol && grid) || late) // panels are inert until then: no focus on hidden controls
   const onGrid = !!grid && ([grid.brief, grid.data].some((p) => Math.abs(eq - p.eq) < 1e-9 && Math.abs(rain - p.rain) < 1e-9) || (grid.eq_axis.some((x) => Math.abs(x - eq) < 1e-9) && grid.rain_axis.some((x) => Math.abs(x - rain) < 1e-9)))
   const e1 = sol?.e1[scenario]?.joint_exhaustion
   const qLast = story?.quantum[story.quantum.length - 1]
@@ -87,7 +88,7 @@ export default function App() {
   })()
 
   return (
-    <div className={`sol st${stage}${((ready || noGL) && sol && grid) || late ? ' is-ready' : ''}`} ref={root}>
+    <div className={`sol st${stage}${shown ? ' is-ready' : ''}${noGL ? ' flat' : ''}`} ref={root}>
       <div className="map-host" aria-hidden={noGL}>
         {map && !noGL && (
           <Boundary fallback={null}>
@@ -107,7 +108,7 @@ export default function App() {
         <p>How the Disaster Relief Bonds are priced exactly, from sources to tail</p>
       </header>
 
-      <aside className="jt-panel rail" data-inset="l" aria-label="Dependence controls">
+      <aside className="jt-panel rail" inert={!shown} data-inset="l" aria-label="Dependence controls">
         <div className="lbl">Dependence</div>
         <div style={{ margin: '12px 0 14px' }}>
           <Segmented block label="Presets" value={preset as 'brief' | 'data' | ''} disabled={!grid} onChange={(v) => { if (grid) { const g = v === 'brief' ? grid.brief : grid.data; setEq(g.eq); setRain(g.rain) } }}
@@ -156,7 +157,7 @@ export default function App() {
         </section>
       </div>
 
-      <aside className="jt-panel arch" data-inset="r" aria-label="Run estimate and architecture">
+      <aside className="jt-panel arch" inert={!shown} data-inset="r" aria-label="Run estimate and architecture">
         {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} /> : <div className="run" />}
         <div className="lbl arch-lbl">Architecture</div>
         <ol className="stages">
@@ -217,7 +218,7 @@ export default function App() {
         </ol>
       </aside>
 
-      <section className="jt-panel bar" data-inset="b" aria-label="Events and pooling">
+      <section className="jt-panel bar" inert={!shown} data-inset="b" aria-label="Events and pooling">
         <div className="gauge-box">
           <Gauge value={ans ? ans.delivered : 0} />
           <div className="g-txt"><div className="lbl">Pooling</div><p>A shared US$80m pool pays <b>{ans ? (ans.delivered * 100).toFixed(1) : '–'}%</b> of expected claims</p></div>

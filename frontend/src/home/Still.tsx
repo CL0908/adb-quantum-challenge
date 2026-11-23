@@ -5,7 +5,7 @@ import type { MapData } from './lib/map'
 
 /** Build-time helper: renders the hero scene with a transparent background and no motion, so a PNG can be captured
  *  (frontend/scripts/render-stills.mjs) as the fallback for browsers without WebGL. Opened as /?still=hero or /?still=problem. */
-const POSES: Record<string, Pose> = { hero: { az: 0, pol: 1.12 }, problem: { az: -0.5, pol: 0.86 } }
+const POSES: Record<string, Pose> = { hero: { az: 0, pol: 1.04 }, problem: { az: -0.5, pol: 0.86 } }
 export default function Still({ name }: { name: string }) {
   const [map, setMap] = useState<MapData | null>(null)
   const [done, setDone] = useState(false)

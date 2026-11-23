@@ -184,7 +184,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         /* ---- the floating mountain beneath: an inverted height field on the same grid as the surface ----
            Depth grows from zero at the rim (where it meets the surface, so the island is closed) to a ragged bowl, with a
            few spires hanging lower. Same triangles and alpha cut as the surface, so the two edges coincide exactly. */
-        const DEPTH = 3.2 // at the deepest point
+        const DEPTH = 2.5 // at the deepest point; kept modest so the surface, not the rock, carries the picture
         // fractured rock, not bedding: Poly Haven 'rock_face_03' (CC0) colour, normal and roughness maps
         const texLoader = new TextureLoader()
         // loaded before the first frame, so the still renders and the hero never shows untextured rock
@@ -227,7 +227,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           if (inside(k) < 0.25 || inside(k) > 0.8) continue
           const x = pos[3 * k], z = pos[3 * k + 2]
           if (spires.some((p) => Math.hypot(p.x - x, p.z - z) < 1.6)) continue
-          spires.push({ x, z, a: 0.8 + 1.4 * hash(tries, 7, 53), s: 0.35 + 0.35 * hash(tries, 9, 57) })
+          spires.push({ x, z, a: 0.5 + 0.9 * hash(tries, 7, 53), s: 0.35 + 0.35 * hash(tries, 9, 57) })
         }
         const upos = new Float32Array(nx * ny * 3), uuv = new Float32Array(nx * ny * 2), ucol = new Float32Array(nx * ny * 3)
         for (let k = 0; k < nx * ny; k++) {
@@ -357,7 +357,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         /* ---- camera ---- */
         const bw = maxX - minX, bd = maxZ - minZ
         { const sc = key.shadow.camera, R = Math.max(bw, bd) * 0.7; sc.left = -R; sc.right = R; sc.top = R; sc.bottom = -R; sc.near = 0.5; sc.far = 40; sc.updateProjectionMatrix() }
-        const pol = still?.pol ?? 1.12
+        const pol = still?.pol ?? 1.04
         const yawMax = still ? 0 : 0.36
         const yaw = Math.max(yawMax, Math.abs(still?.az ?? 0))
         // frame the whole floating mountain, hanging spires included: the box corners (at the extremes of the slow yaw)

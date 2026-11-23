@@ -245,3 +245,21 @@ p { margin: 0; }
 .sol:not(.is-ready) .jt-panel { opacity: 0; }
 .sol:not(.is-ready) .anchor, .sol:not(.is-ready) .lead, .sol:not(.is-ready) .dot { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) { .sol .jt-panel { transition: none; } }
+
+/* no 3D view (WebGL off or failed): the same stacked layout as on phones, so every card stays readable */
+  .sol.flat { --mh: clamp(300px, 54vh, 540px); height: auto; min-height: 0; overflow: visible; background: var(--bg); padding-bottom: 28px; }
+  .sol.flat .map-host { position: relative; inset: auto; height: var(--mh); overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, var(--terrain-a) 0%, var(--bg2) 55%, var(--bg) 100%); }
+  .sol.flat .top { left: 16px; top: 84px; right: 16px; }
+  .sol.flat .top h1 { font-size: 32px; }
+  .sol.flat .top p { display: none; }
+  .sol.flat .rail, .sol.flat .arch, .sol.flat .bar, .sol.flat .anchor { position: static; width: calc(100% - 32px); max-width: 760px; margin: 12px auto 0; }
+  .sol.flat .anchor { transform: none !important; opacity: 1 !important; height: auto; }
+  .sol.flat .dot, .sol.flat .lead { display: none; }
+  .sol.flat .card, .sol.flat .a-tr .card, .sol.flat .a-bl .card, .sol.flat .a-br .card, .sol.flat .a-tl .card { position: static; width: auto; }
+  .sol.flat .arch { max-height: none; overflow: visible; }
+  .sol.flat .bar { flex-direction: column; height: auto; }
+  .sol.flat .gauge-box { width: auto; border-right: 0; border-bottom: 1px solid var(--hair); padding: 0 0 12px; }
+  .sol.flat .tl-strip { min-height: 96px; margin-bottom: 18px; }
+  .sol.flat .tl-key { display: flex; margin-left: 0; }
+  .sol.flat .vignette { background: radial-gradient(90% 80% at 50% 48%, transparent 55%, color-mix(in srgb, var(--bg) 60%, transparent) 100%); }
+.sol:not(.is-ready) .jt-panel { pointer-events: none; }

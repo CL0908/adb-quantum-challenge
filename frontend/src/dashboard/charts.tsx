@@ -82,7 +82,7 @@ export function LineChart({
   return (
     <div className="chart jt-chart" ref={ref} style={{ height }}>
       {w > 0 && (
-        <svg width={W} height={height} role="img" aria-label={dual ? 'Line chart with two linear probability axes: left for the pool exceeding its limit, right for both bonds exhausted' : 'Line chart on a logarithmic probability axis'}>
+        <svg width={W} height={height} role="img" aria-label={dual ? (series.some((s) => s.axis === 'r') ? 'Line chart with two linear probability axes: left for the pool exceeding its limit, right for both bonds exhausted' : 'Line chart with one linear probability axis') : 'Line chart on a logarithmic probability axis'}>
           {dual && Array.from({ length: (dual.n ?? 4) + 1 }, (_, i) => i / (dual.n ?? 4)).map((f) => (
             <g key={f}>
               <line x1={m.l} x2={W - m.r} y1={Y(dual.l.max * f)} y2={Y(dual.l.max * f)} className="jt-grid" />
@@ -168,7 +168,6 @@ export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) 
   const span = Math.max(Math.log10(2), ...rows.map((r) => Math.abs(Math.log10(r.ratio)))) * 1.08
   const x = (r: number) => 50 + (Math.log10(r) / span) * 50
   const ticks = [0.1, 0.5, 1, 2, 10].filter((t) => Math.abs(Math.log10(t)) <= span)
-  const times = (r: number) => (r >= 1 ? r : 1 / r).toFixed(r > 9.95 || r < 0.1005 ? 0 : 1)
   return (
     <div className="dbars" role="list">
       <div className="db-axis" aria-hidden="true"><span className="db-axl" />{ticks.map((t) => <span key={t} className={t === 1 ? 'base' : undefined} style={{ left: `${x(t)}%` }}>{t === 1 ? 'base' : `${t}\u00d7`}</span>)}</div>
@@ -179,7 +178,7 @@ export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) 
           <button key={b.id} type="button" role="listitem" className={`db ${tone}${b.active ? ' on' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
             <span className="db-lab"><b>{b.label}</b>{b.sub && <small>{b.sub}</small>}</span>
             <span className="db-track"><i className="db-mid" /><i className="db-fill" style={{ left: `${lo}%`, width: `${Math.max(w, 0.8)}%` }} /></span>
-            <span className="db-val"><b>{b.display}</b><small>{b.ref ? 'reference' : Math.abs(Math.log(b.ratio)) < 0.03 ? 'same as base' : `${times(b.ratio)}× ${b.ratio >= 1 ? 'higher' : 'lower'}`}</small></span>
+            <span className="db-val"><b>{b.display}</b><small>{b.ref ? 'reference' : Math.abs(Math.log(b.ratio)) < 0.03 ? 'same as base' : `${b.ratio < 1 ? b.ratio.toFixed(2) : b.ratio.toFixed(1)}× base`}</small></span>
           </button>
         )
       })}

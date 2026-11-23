@@ -7,7 +7,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { dataUrl } from './data'
 import type { MapData } from '../lib/map'
-import { DARK, rgb } from '../shared/palette'
+import { LIGHT as DARK, rgb } from '../shared/palette' // the page is light now; the name stays to keep the diff small
 
 const COS = Math.cos((40 * Math.PI) / 180)
 const EXAG = 7
