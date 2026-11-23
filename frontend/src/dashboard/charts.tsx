@@ -161,6 +161,32 @@ export function VBars({ bars, log, height = 200, floor, onPick }: { bars: Bar[];
   )
 }
 
+/** Each row as a ratio to a reference row, on a log axis centred at 1x: right and terracotta = higher risk than the
+ *  reference, left and teal = lower. Rows arrive sorted; clicking a row picks it. */
+export interface DBar { id: string; label: string; ratio: number; display: ReactNode; sub?: ReactNode; active?: boolean; ref?: boolean }
+export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) => void }) {
+  const span = Math.max(Math.log10(2), ...rows.map((r) => Math.abs(Math.log10(r.ratio)))) * 1.08
+  const x = (r: number) => 50 + (Math.log10(r) / span) * 50
+  const ticks = [0.1, 0.5, 1, 2, 10].filter((t) => Math.abs(Math.log10(t)) <= span)
+  const times = (r: number) => (r >= 1 ? r : 1 / r).toFixed(r > 9.95 || r < 0.1005 ? 0 : 1)
+  return (
+    <div className="dbars" role="list">
+      <div className="db-axis" aria-hidden="true"><span className="db-axl" />{ticks.map((t) => <span key={t} className={t === 1 ? 'base' : undefined} style={{ left: `${x(t)}%` }}>{t === 1 ? 'base' : `${t}\u00d7`}</span>)}</div>
+      {rows.map((b) => {
+        const a = x(b.ratio), lo = Math.min(a, 50), w = Math.abs(a - 50)
+        const tone = b.ref ? 'ref' : b.ratio >= 1 ? 'up' : 'down'
+        return (
+          <button key={b.id} type="button" role="listitem" className={`db ${tone}${b.active ? ' on' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
+            <span className="db-lab"><b>{b.label}</b>{b.sub && <small>{b.sub}</small>}</span>
+            <span className="db-track"><i className="db-mid" /><i className="db-fill" style={{ left: `${lo}%`, width: `${Math.max(w, 0.8)}%` }} /></span>
+            <span className="db-val"><b>{b.display}</b><small>{b.ref ? 'reference' : Math.abs(Math.log(b.ratio)) < 0.03 ? 'same as base' : `${times(b.ratio)}× ${b.ratio >= 1 ? 'higher' : 'lower'}`}</small></span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 /** Donut with a centre read-out; arcs are fractions of 1, r is the inset of each ring. */
 export function Donut({ size = 150, arcs, center, caption }: { size?: number; arcs: { frac: number; color: string; r: number }[]; center: ReactNode; caption: string }) {
   const c = size / 2

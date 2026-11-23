@@ -183,3 +183,39 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 @media (min-width: 1280px) {
   .side { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
 }
+
+/* key figures for the selected scenario (local copy) */
+.keyfig { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.keyfig > div { display: flex; flex-direction: column; gap: 2px; padding: 16px 22px; border-right: 1px solid var(--line); }
+.keyfig > div:last-child { border-right: 0; }
+.keyfig span { font-size: 12.5px; color: var(--mute); }
+.keyfig b { font: 400 26px/1.15 var(--sans); letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.keyfig > div:first-child b { color: var(--joint); }
+.keyfig small { font-size: 12px; color: var(--text2); }
+.segs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.src { margin-top: 10px; font-size: 12px; color: var(--mute); }
+.reg-run { display: inline-block; margin: 0 0 12px; }
+
+/* scenarios against the base case */
+.dbars { display: flex; flex-direction: column; gap: 4px; }
+.db-axis { position: relative; height: 18px; margin-left: 34%; margin-right: 22%; font-size: 11px; color: var(--mute); }
+.db-axis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.db { display: grid; grid-template-columns: 34% 1fr 22%; align-items: center; gap: 0; padding: 7px 0; border: 0; border-top: 1px solid var(--line); background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: 0; }
+.db:disabled { cursor: default; }
+.db-lab { display: flex; flex-direction: column; padding-right: 10px; }
+.db-lab b { font-size: 13px; font-weight: 500; color: var(--text); }
+.db-lab small, .db-val small { font-size: 11.5px; color: var(--mute); }
+.db-track { position: relative; height: 14px; background: var(--track); border-radius: 7px; overflow: hidden; }
+.db-mid { position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--line2); }
+.db-fill { position: absolute; top: 0; bottom: 0; border-radius: 7px; transition: left 0.3s ease, width 0.3s ease; }
+.db.up .db-fill { background: color-mix(in srgb, var(--joint) 75%, transparent); }
+.db.down .db-fill { background: color-mix(in srgb, var(--accent) 75%, transparent); }
+.db.ref .db-fill { background: var(--line2); }
+.db-val { display: flex; flex-direction: column; align-items: flex-end; padding-left: 10px; }
+.db-val b { font-size: 13px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.db.on { box-shadow: inset 3px 0 0 var(--accent); padding-left: 8px; }
+.db.on .db-lab b { color: var(--accent); }
+.db:hover:not(:disabled) .db-track { background: color-mix(in srgb, var(--track) 80%, var(--text) 6%); }
+@media (max-width: 900px) { .keyfig { grid-template-columns: repeat(2, minmax(0, 1fr)); } .keyfig > div:nth-child(2) { border-right: 0; } .keyfig > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 560px) { .db-axis span:not(.base) { display: none; } .keyfig > div { padding: 12px 14px; } .keyfig b { font-size: 21px; } .db { grid-template-columns: 38% 1fr 26%; } .db-axis { margin-left: 38%; margin-right: 26%; } .segs { justify-content: flex-start; } }
+@media (prefers-reduced-motion: reduce) { .db-fill { transition: none; } }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { Donut, LineChart, VBars, type Bar, type Mark, type Series } from './charts'
+import { DivBars, Donut, LineChart, VBars, type Bar, type DBar, type Mark, type Series } from './charts'
 import { delta, moduleCmd, pct, prob, probText, relErr, sci, sciSvg, TARGET_HINT, TARGET_LABEL, usd } from './fmt'
 import { SiteNav } from '../shared/SiteNav'
 import { Segmented } from '../shared/Controls'
@@ -7,6 +7,7 @@ import type { DashData, Grid, Pool, Scenario, TargetName } from './types'
 
 type PoolId = 'kgtj' | 'carec' | 'ap'
 type RainMode = 'both' | 'brief' | 'data'
+type Show = 'joint' | 'exceed' | 'both'
 type Metric = 'joint_exhaustion' | 'exceedance' | 'stop_loss'
 
 const POOL_IDS: PoolId[] = ['kgtj', 'carec', 'ap']
@@ -109,6 +110,7 @@ export default function Dashboard() {
   const [scen, setScen] = useState('adb-base')
   const [rainMode, setRainMode] = useState<RainMode>('both')
   const [metric, setMetric] = useState<Metric>('joint_exhaustion')
+  const [show, setShow] = useState<Show>('joint')
   if (err) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div></>
   if (!d || !g) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state" aria-busy="true">Loading the pool data</div></>
 
@@ -150,6 +152,8 @@ export default function Dashboard() {
             </div>
           </header>
 
+          {isKG && sc && <KeyFigures sc={sc} />}
+
           <div className="cols">
             <main className="main" id="overview">
               <section className="panel trend" aria-labelledby="trend-h">
@@ -158,21 +162,28 @@ export default function Dashboard() {
                     <h2 id="trend-h">{isKG ? 'Tail risk vs dependence' : poolId === 'carec' ? 'Loss exceedance curve' : 'Estimator error by method'}</h2>
                     <p className="sub">
                       {isKG
-                        ? 'Chance the pool pays more than US$80m, and chance both bonds are exhausted, as the share of quakes that hit both countries rises.'
+                        ? `${show === 'exceed' ? 'Chance the pool pays more than US$80m' : show === 'joint' ? 'Chance both bonds are exhausted' : 'Chance the pool pays more than US$80m, and chance both bonds are exhausted,'} as the share of quakes that hit both countries rises.`
                         : poolId === 'carec'
                           ? `Exact probability that the pooled loss in one term exceeds each threshold (down to 10⁻¹²). Computed by ${pool.exact_label.replace('exact, ', '')}, not simulated.`
                           : `Relative error of each estimator at ${pool.targets![0].budget?.toLocaleString('en-US')} paths, ${pool.reps} replications. Exact references come from ${pool.exact_label}.`}
                     </p>
                   </div>
                   {isKG && (
+                    <div className="segs">
+                    <Seg<Show> label="Probability shown" value={show} onChange={setShow} options={[
+                      { v: 'joint', label: 'Both exhausted' },
+                      { v: 'exceed', label: 'Pool > US$80m' },
+                      { v: 'both', label: 'Both, two axes' },
+                    ]} />
                     <Seg<RainMode> label="Rain shared share" value={rainMode} onChange={setRainMode} options={[
                       { v: 'both', label: 'Compare' },
                       { v: 'brief', label: `Brief ${pct(g.brief.rain, 0)}` },
                       { v: 'data', label: `Station data ${pct(0.02, 0)}` },
                     ]} />
+                    </div>
                   )}
                 </div>
-                {isKG ? <TrendKG g={g} mode={rainMode} /> : poolId === 'carec' ? <TrendCurve pool={pool} /> : <MethodError pool={pool} />}
+                {isKG ? <TrendKG g={g} mode={rainMode} show={show} /> : poolId === 'carec' ? <TrendCurve pool={pool} /> : <MethodError pool={pool} />}
               </section>
 
               <div className="duo">
@@ -190,7 +201,7 @@ export default function Dashboard() {
                   <div className="ph">
                     <div>
                       <h2 id="bars-h">{isKG ? 'The brief’s five scenarios' : 'Reference probabilities'}</h2>
-                      <p className="sub">{isKG ? metric === 'stop_loss' ? 'Exact values; the brief’s Table 5 figure under each bar. Click a bar to select the scenario.' : 'Exact values on a log scale; the brief’s Table 5 figure under each bar. Click a bar to select the scenario.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
+                      <p className="sub">{isKG ? 'Each scenario against the base case, log scale, largest change first. Click a row to select the scenario.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
                     </div>
                     {isKG && (
                       <Seg<Metric> label="Metric" value={metric} onChange={setMetric} options={[
@@ -251,7 +262,7 @@ export default function Dashboard() {
   )
 }
 
-function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
+function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show }) {
   const ri = (r: number) => g.rain_axis.findIndex((x) => Math.abs(x - r) < 1e-9)
   const rBrief = ri(0.25)
   const rData = ri(0.02)
@@ -263,32 +274,34 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
     return ks.map((k) => k * e).find((x) => x >= v * (1 - 1e-9))!
   }
   const lv = maxOf('exceed') * 1.04, rv = maxOf('joint_exhaustion') * 1.04
-  const n = [4, 5, 6].reduce((b, k) => (step(lv / k) * k < step(lv / b) * b ? k : b), 4)
-  const dual = {
-    n,
-    l: { max: step(lv / n) * n, fmt: (v: number) => `${+(v * 100).toPrecision(3)}%`, color: COL.teal },
-    r: { max: step(rv / n, [1, 2, 5, 10]) * n, fmt: (v: number) => sciSvg(v, 2), color: COL.terra },
-  }
+  // one probability on one axis by default; both together keep the two-axis view
+  const fit = (v: number, ks?: number[]) => [4, 5, 6].reduce((b, k) => (step(v / k, ks) * k < step(v / b, ks) * b ? k : b), 4)
+  const n = which === 'joint' ? fit(rv, [1, 2, 5, 10]) : fit(lv)
+  const pctAxis = { max: step(lv / n) * n, fmt: (v: number) => `${+(v * 100).toPrecision(3)}%`, color: COL.teal }
+  const sciAxis = { max: step(rv / n, [1, 2, 5, 10]) * n, fmt: (v: number) => sciSvg(v, 2), color: COL.terra }
+  const dual = which === 'both' ? { n, l: pctAxis, r: sciAxis } : which === 'exceed' ? { n, l: pctAxis, r: { ...pctAxis, fmt: () => '' } } : { n, l: sciAxis, r: { ...sciAxis, fmt: () => '' } }
+  const jAxis = which === 'both' ? ('r' as const) : undefined
+  const wantE = which !== 'joint', wantJ = which !== 'exceed'
   const yDomain: [number, number] = [0, 1]
   const show = (which: 'brief' | 'data') => mode === 'both' || mode === which
   const series: Series[] = []
   const marks: Mark[] = []
   if (show('brief')) {
-    series.push({ id: 'eb', color: COL.teal, pts: pick('exceed', rBrief) }, { id: 'jb', color: COL.terra, axis: 'r', pts: pick('joint_exhaustion', rBrief) })
-    marks.push({ x: g.brief.eq * 100, y: g.brief.exceed, color: COL.teal, label: 'brief-e' }, { x: g.brief.eq * 100, y: g.brief.joint_exhaustion, axis: 'r', color: COL.terra, label: 'brief-j' })
+    if (wantE) { series.push({ id: 'eb', color: COL.teal, pts: pick('exceed', rBrief) }); marks.push({ x: g.brief.eq * 100, y: g.brief.exceed, color: COL.teal, label: 'brief-e' }) }
+    if (wantJ) { series.push({ id: 'jb', color: COL.terra, axis: jAxis, pts: pick('joint_exhaustion', rBrief) }); marks.push({ x: g.brief.eq * 100, y: g.brief.joint_exhaustion, axis: jAxis, color: COL.terra, label: 'brief-j' }) }
   }
   if (show('data')) {
     const dash = mode === 'both' ? '5 4' : undefined
-    series.push({ id: 'ed', color: COL.teal, dash, pts: pick('exceed', rData) }, { id: 'jd', color: COL.terra, dash, axis: 'r', pts: pick('joint_exhaustion', rData) })
-    marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.sand, label: 'data-e' }, { x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: 'r', color: COL.sand, label: 'data-j' })
+    if (wantE) { series.push({ id: 'ed', color: COL.teal, dash, pts: pick('exceed', rData) }); marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.sand, label: 'data-e' }) }
+    if (wantJ) { series.push({ id: 'jd', color: COL.terra, dash, axis: jAxis, pts: pick('joint_exhaustion', rData) }); marks.push({ x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: jAxis, color: COL.sand, label: 'data-j' }) }
   }
   const at = (x: number) => Math.min(g.eq_axis.length - 1, Math.max(0, Math.round(x)))
   const tipRows = (x: number) => {
     const i = at(x)
     const rows: { label: string; value: ReactNode; color: string }[] = []
     const add = (tag: string, r: number) => {
-      rows.push({ label: `Pool > US$80m, ${tag}`, value: prob(g.values.exceed[i][r]), color: COL.teal })
-      rows.push({ label: `Both exhausted, ${tag}`, value: prob(g.values.joint_exhaustion[i][r]), color: COL.terra })
+      if (wantE) rows.push({ label: `Pool > US$80m, ${tag}`, value: prob(g.values.exceed[i][r]), color: COL.teal })
+      if (wantJ) rows.push({ label: `Both exhausted, ${tag}`, value: prob(g.values.joint_exhaustion[i][r]), color: COL.terra })
     }
     if (show('brief')) add(`rain ${pct(g.rain_axis[rBrief], 0)}`, rBrief)
     if (show('data')) add(`rain ${pct(g.rain_axis[rData], 0)}`, rData)
@@ -299,12 +312,13 @@ function TrendKG({ g, mode }: { g: Grid; mode: RainMode }) {
       <LineChart series={series} marks={marks} xDomain={[0, 60]} xTicks={[0, 10, 20, 30, 40, 50, 60]} xFmt={(x) => `${x}%`} yDomain={yDomain} dual={dual} height={290}
         tipX={(x) => `${at(x)}% of quakes hit both countries`} tipRows={tipRows} />
       <div className="jt-legend">
-        <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m), left axis</span>
-        <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted), right axis</span>
+        {wantE && <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m){which === 'both' ? ', left axis' : ''}</span>}
+        {wantJ && <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted){which === 'both' ? ', right axis' : ''}</span>}
         {mode === 'both' && <span><i className="ln dash" />dashed: rain share 2% (grid slice)</span>}
         {show('brief') && <span><i className="dot" style={{ borderColor: COL.teal }} />brief: {pct(g.brief.eq, 1)} quake share, {pct(g.brief.rain, 0)} rain</span>}
         {show('data') && <span><i className="dot" style={{ borderColor: COL.sand }} />public records, exact point: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 2)} rain</span>}
       </div>
+      <p className="src">Exact: every point is a full calculation on the two-country grid, no sampling. Hover for values.</p>
     </>
   )
 }
@@ -448,19 +462,38 @@ function Kpi({ d, g, pool, poolId, scen }: { d: DashData; g: Grid; pool: Pool; p
   )
 }
 
+function oneIn(p: number) {
+  const n = 1 / p, m = n >= 1000 ? 100 : 1
+  return `1 in ${(Math.round(n / m) * m).toLocaleString('en-US')}`
+}
+
+function KeyFigures({ sc }: { sc: Scenario }) {
+  const j = sc.targets.joint_exhaustion, e = sc.targets.exceedance
+  return (
+    <section className="keyfig" aria-label={`Key figures, ${sc.label} scenario`}>
+      <div><span>Both bonds exhausted</span><b>{prob(j.value)}</b><small>{oneIn(j.value)} three-year terms, exact</small></div>
+      <div><span>Pool pays over US${sc.threshold_musd}m</span><b>{prob(e.value)}</b><small>{oneIn(e.value)} terms, exact</small></div>
+      <div><span>Claims one shared limit pays</span><b>{pct(sc.delivered)}</b><small>of expected claims, US${sc.threshold_musd}m limit</small></div>
+      <div><span>RDPO error, both exhausted</span><b>{relErr(j.rdpo_rel_rmse)}</b><small>at {j.budget.toLocaleString('en-US')} paths, {j.reps} runs</small></div>
+    </section>
+  )
+}
+
 function ScenarioBars({ d, pool, isKG, metric, scen, setScen }: { d: DashData; pool: Pool; isKG: boolean; metric: Metric; scen: string; setScen: (s: string) => void }) {
   if (isKG) {
     const ss = pool.scenarios!
-    const bars: Bar[] = d.scenario_order.map((id) => {
+    const ref = d.scenario_order[0]
+    const money = metric === 'stop_loss'
+    const baseV = ss[ref].targets[metric].value
+    const rows: DBar[] = d.scenario_order.map((id) => {
       const c = ss[id].targets[metric]
-      const money = metric === 'stop_loss'
       return {
-        id, label: ss[id].label, value: c.value, active: id === scen,
+        id, label: ss[id].label, ratio: c.value / baseV, active: id === scen, ref: id === ref,
         display: money ? usd(c.value) : prob(c.value),
         sub: <>brief {money ? usd(c.brief_rounded) : sci(c.brief_rounded, 2)}</>,
       }
-    })
-    return <VBars bars={bars} log={metric !== 'stop_loss'} onPick={setScen} height={210} />
+    }).sort((a, b) => (a.ref ? -1 : b.ref ? 1 : Math.abs(Math.log(b.ratio)) - Math.abs(Math.log(a.ratio))))
+    return <><DivBars rows={rows} onPick={setScen} /><p className="src">Exact values for a three-year term; the brief&rsquo;s Table 5 figure under each name.</p></>
   }
   const bars: Bar[] = pool
     .targets!.filter((t) => t.target === 'exceedance' || t.target === 'joint_exhaustion')
@@ -484,6 +517,7 @@ function Register({ pool, poolId, scen, scLabel, scDesc }: { pool: Pool; poolId:
             {kg ? `${scLabel} scenario: ${scDesc}.` : `${pool.label}, calibrated to public records.`} The fast estimate is checked against the exact value: its error, and how often its 95% range held the exact value over repeated runs.
           </p>
         </div>
+        <a className="lnk reg-run" href="/solution/">Run an estimate yourself on the Solution page</a>
       </div>
       <div className="tbl" role="table" aria-label="Risk register">
         <div className="tr th" role="row">
