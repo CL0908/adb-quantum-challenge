@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react'
 import {
   AdditiveBlending, AmbientLight, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, DirectionalLight, DoubleSide,
-  ACESFilmicToneMapping, Group, HemisphereLight, PCFSoftShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
+  ACESFilmicToneMapping, Group, HemisphereLight, PCFShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   PerspectiveCamera, Quaternion, RepeatWrapping, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
 } from 'three'
 import { loadDem } from './lib/dem'
 import type { MapData } from './lib/map'
-import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, resample, smooth, strataCanvas, vnoise } from './island'
+import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, hash, resample, smooth, strataCanvas, vnoise } from './island'
 
 const COS = Math.cos((40 * Math.PI) / 180)
 const EXAG = 5.5 // vertical exaggeration
@@ -92,13 +92,13 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         renderer.toneMapping = ACESFilmicToneMapping
         renderer.toneMappingExposure = 1.08
         renderer.shadowMap.enabled = !small // ridges cast soft shadows into the valleys; off on phones to keep the frame rate
-        renderer.shadowMap.type = PCFSoftShadowMap
+        renderer.shadowMap.type = PCFShadowMap
         renderer.domElement.className = 'hero-canvas'
         el.prepend(renderer.domElement)
         disposers.push(() => { renderer.dispose(); renderer.forceContextLoss(); renderer.domElement.remove() })
 
         const scene = new Scene()
-        const camera = new PerspectiveCamera(17, HERO_ASPECT, 0.5, 200)
+        const camera = new PerspectiveCamera(17, HERO_ASPECT, 0.5, 400)
         const pivot = new Group()
         const root = new Group()
         pivot.add(root)
@@ -181,68 +181,80 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         root.add(new Mesh(geo, zoneMat))
         disposers.push(() => { zoneMat.dispose(); zoneTex.dispose() })
 
-        /* ---- the carved underside: rings that taper inward, with layered rock texture ---- */
-        const N = 720, R = 20, DEPTH = 2.5
+        /* ---- the floating mountain beneath: an inverted height field on the same grid as the surface ----
+           Depth grows from zero at the rim (where it meets the surface, so the island is closed) to a ragged bowl, with a
+           few spires hanging lower. Same triangles and alpha cut as the surface, so the two edges coincide exactly. */
+        const DEPTH = 3.2 // at the deepest point
         const strata = new CanvasTexture(strataCanvas(1024, 1024))
         strata.colorSpace = SRGBColorSpace
         strata.wrapS = strata.wrapT = RepeatWrapping
         strata.anisotropy = 8
+        strata.channel = 1
         // the strata image doubles as a bump map, so bedding planes catch the key light
-        const rockMat = new MeshStandardMaterial({ map: strata, bumpMap: strata, bumpScale: 1.6, vertexColors: true, roughness: 0.9, metalness: 0, side: DoubleSide })
-        let cx = 0, cz = 0, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9
-        const U_REP = 6, V_SCALE = 0.62
+        const rockMat = new MeshStandardMaterial({ map: strata, bumpMap: strata, bumpScale: 1.6, vertexColors: true, roughness: 0.9, metalness: 0, side: DoubleSide, alphaMap: alphaTex, alphaTest: 0.5 })
+        let cx = 0, cz = 0, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, minY = 0, maxY = 0
+        const outline: Vector3[] = [] // points on the rim and the underside, for a tight camera fit
         keep.forEach((loop, li) => {
-          const P = resample(loop, N)
+          const P = resample(loop, 360)
           const xs = P.map(([lo]) => wx(lo)), zs = P.map(([, la]) => wz(la))
-          const mx = xs.reduce((a, b) => a + b, 0) / N, mz = zs.reduce((a, b) => a + b, 0) / N
-          if (li === 0) { cx = mx; cz = mz }
-          xs.forEach((x) => { minX = Math.min(minX, x); maxX = Math.max(maxX, x) })
-          zs.forEach((z) => { minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z) })
-          const top = P.map(([lo, la]) => Math.max(dem.at(lo, la), 0) * K + 0.012)
-          const dl = P.map((_, i) => {
-            const th = (i / N) * Math.PI * 2
-            return 0.7 + 0.6 * fbm(Math.cos(th) * 1.3 + 3 + li * 7, Math.sin(th) * 1.3 + 3, 3)
+          if (li === 0) { cx = xs.reduce((a, b) => a + b, 0) / xs.length; cz = zs.reduce((a, b) => a + b, 0) / zs.length }
+          P.forEach(([lo, la], i) => {
+            const x = xs[i], z = zs[i]
+            minX = Math.min(minX, x); maxX = Math.max(maxX, x); minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z)
+            const y = Math.max(dem.at(lo, la), 0) * K
+            if (y > maxY) maxY = y
+            if (i % 6 === 0) outline.push(new Vector3(x, y, z))
           })
-          const dMean = DEPTH * (li === 0 ? 1 : 0.55)
-          const cols = N + 1
-          const p3 = new Float32Array((R + 1) * cols * 3), uv2 = new Float32Array((R + 1) * cols * 2), vc = new Float32Array((R + 1) * cols * 3)
-          for (let r = 0; r <= R; r++) {
-            const t = Math.pow(r / R, 1.6) // rows packed near the top edge, where the soil band and the brightest light sit
-            const sc = Math.pow(Math.max(0, 1 - Math.pow(t, 2.1)), 0.5)
-            for (let i = 0; i <= cols - 1; i++) {
-              const ii = i % N
-              const th = (ii / N) * Math.PI * 2
-              const j = 1 + 0.07 * (vnoise(Math.cos(th) * 2.4 + r * 0.7, Math.sin(th) * 2.4 + 5, 0, 0, 11 + li) - 0.5) * 2 * Math.sin(Math.PI * Math.min(t * 1.15, 1))
-              const dd = dMean * (1 + (dl[ii] - 1) * 1.1 * (1 - t))
-              const x = mx + (xs[ii] - mx) * sc * j, z = mz + (zs[ii] - mz) * sc * j
-              const y = top[ii] + (-dd - top[ii]) * (t < 0.04 ? t * 0.5 : t)
-              const o = r * cols + i
-              p3[3 * o] = x; p3[3 * o + 1] = y; p3[3 * o + 2] = z
-              uv2[2 * o] = (i / N) * U_REP
-              uv2[2 * o + 1] = y * V_SCALE
-              const dk = 1 - 0.46 * Math.pow(t, 1.2)
-              // dark topsoil just under the surface, fading into the rock within the first few rows
-              const soil = 1 - smooth(0.0, 0.07, t)
-              vc[3 * o] = dk * (1 - 0.42 * soil); vc[3 * o + 1] = dk * 0.99 * (1 - 0.48 * soil); vc[3 * o + 2] = dk * 0.97 * (1 - 0.55 * soil)
-            }
-          }
-          const ix: number[] = []
-          for (let r = 0; r < R; r++) for (let i = 0; i < N; i++) {
-            const a = r * cols + i, b = a + 1, c = a + cols, d = c + 1
-            ix.push(a, c, b, b, c, d)
-          }
-          const wg = new BufferGeometry()
-          wg.setAttribute('position', new BufferAttribute(p3, 3))
-          wg.setAttribute('uv', new BufferAttribute(uv2, 2))
-          wg.setAttribute('color', new BufferAttribute(vc, 3))
-          wg.setIndex(ix)
-          wg.computeVertexNormals()
-          const rock = new Mesh(wg, rockMat)
-          rock.castShadow = rock.receiveShadow = !small
-          root.add(rock)
-          disposers.push(() => wg.dispose())
         })
-        disposers.push(() => { rockMat.dispose(); strata.dispose() })
+        // distance from the rim in grid cells (two-pass chamfer), normalised: 0 at the rim, 1 at the deepest point
+        const dist = new Float32Array(nx * ny)
+        for (let k = 0; k < nx * ny; k++) dist[k] = F.v[k] > F.T ? 1e9 : 0
+        for (let j = 1; j < ny; j++) for (let i = 1; i < nx - 1; i++) { const k = j * nx + i; if (dist[k]) dist[k] = Math.min(dist[k], dist[k - 1] + 1, dist[k - nx] + 1, dist[k - nx - 1] + 1.414, dist[k - nx + 1] + 1.414) }
+        for (let j = ny - 2; j >= 0; j--) for (let i = nx - 2; i > 0; i--) { const k = j * nx + i; if (dist[k]) dist[k] = Math.min(dist[k], dist[k + 1] + 1, dist[k + nx] + 1, dist[k + nx + 1] + 1.414, dist[k + nx - 1] + 1.414) }
+        let dmax = 1
+        for (let k = 0; k < nx * ny; k++) if (dist[k] < 1e8 && dist[k] > dmax) dmax = dist[k]
+        // spires: interior cells picked by a seeded hash, each a gaussian of extra depth
+        const inside = (k: number) => Math.min(1, dist[k] / dmax)
+        const spires: { x: number; z: number; a: number; s: number }[] = []
+        for (let tries = 0; spires.length < 6 && tries < 4000; tries++) {
+          const k = Math.floor(hash(tries, 5, 51) * nx * ny)
+          if (inside(k) < 0.25 || inside(k) > 0.8) continue
+          const x = pos[3 * k], z = pos[3 * k + 2]
+          if (spires.some((p) => Math.hypot(p.x - x, p.z - z) < 1.6)) continue
+          spires.push({ x, z, a: 0.8 + 1.4 * hash(tries, 7, 53), s: 0.35 + 0.35 * hash(tries, 9, 57) })
+        }
+        const upos = new Float32Array(nx * ny * 3), uuv = new Float32Array(nx * ny * 2), ucol = new Float32Array(nx * ny * 3)
+        for (let k = 0; k < nx * ny; k++) {
+          const x = pos[3 * k], ytop = pos[3 * k + 1], z = pos[3 * k + 2]
+          const q = inside(k)
+          // a short cliff at the rim, then an inverted cone to the deepest point; ridged noise breaks it into crags
+          const ridge = 1 - Math.abs(2 * vnoise(x * 1.1, z * 1.1, 0, 0, 61) - 1)
+          let d = (0.22 * smooth(0, 0.04, q) + DEPTH * Math.pow(q, 0.8)) * (0.7 + 0.42 * ridge + 0.3 * (fbm(x * 0.35, z * 0.35, 3, 0, 0, 63) - 0.5))
+          for (const p of spires) d += p.a * q * Math.exp(-((x - p.x) ** 2 + (z - p.z) ** 2) / (p.s * p.s))
+          const y = ytop - d
+          upos[3 * k] = x; upos[3 * k + 1] = y; upos[3 * k + 2] = z
+          uuv[2 * k] = (x + z * 0.6) * 0.32
+          uuv[2 * k + 1] = y * 0.62
+          const t = Math.min(1, d / (DEPTH * 1.6))
+          const dk = 1 - 0.55 * Math.pow(t, 1.1)
+          const soil = 1 - smooth(0.0, 0.12, d) // dark topsoil right under the surface edge
+          ucol[3 * k] = dk * (1 - 0.42 * soil); ucol[3 * k + 1] = dk * 0.99 * (1 - 0.48 * soil); ucol[3 * k + 2] = dk * 0.97 * (1 - 0.55 * soil)
+          if (y < minY && F.v[k] > F.T) minY = y
+          if (q > 0 && k % 97 === 0) outline.push(new Vector3(x, y, z))
+        }
+        const flip: number[] = []
+        for (let i = 0; i < idxs.length; i += 3) flip.push(idxs[i], idxs[i + 2], idxs[i + 1]) // faces point down
+        const ugeo = new BufferGeometry()
+        ugeo.setAttribute('position', new BufferAttribute(upos, 3))
+        ugeo.setAttribute('uv', new BufferAttribute(new Float32Array(uv), 2)) // surface uv: the alpha cut matches the surface exactly
+        ugeo.setAttribute('uv1', new BufferAttribute(uuv, 2)) // planar uv for the rock beds (strata.channel = 1)
+        ugeo.setAttribute('color', new BufferAttribute(ucol, 3))
+        ugeo.setIndex(new BufferAttribute(new Uint32Array(flip), 1))
+        ugeo.computeVertexNormals()
+        const under = new Mesh(ugeo, rockMat)
+        under.castShadow = under.receiveShadow = !small
+        root.add(under)
+        disposers.push(() => { ugeo.dispose(); rockMat.dispose(); strata.dispose() })
 
         /* ---- country outlines draped on the terrain (very light) ---- */
         const lineMat = new LineBasicMaterial({ color: '#3B4350', transparent: true, opacity: 0.5 })
@@ -330,19 +342,33 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         /* ---- camera ---- */
         const bw = maxX - minX, bd = maxZ - minZ
         { const sc = key.shadow.camera, R = Math.max(bw, bd) * 0.7; sc.left = -R; sc.right = R; sc.top = R; sc.bottom = -R; sc.near = 0.5; sc.far = 40; sc.updateProjectionMatrix() }
-        const pol = still?.pol ?? 1.1
+        const pol = still?.pol ?? 1.12
         const yawMax = still ? 0 : 0.36
         const yaw = Math.max(yawMax, Math.abs(still?.az ?? 0))
-        const need = bw * Math.cos(yaw) + bd * Math.sin(yaw) * 0.8
-        const tanH = Math.tan((camera.fov * Math.PI) / 360) * HERO_ASPECT
-        const dist = (need / 2 / tanH) * 1.16
-        const aim = new Vector3(0, -0.3, 0.1)
-        const place = () => {
-          const s = Math.sin(pol) * dist
-          camera.position.set(aim.x, aim.y + Math.cos(pol) * dist, aim.z + s)
-          camera.lookAt(aim)
+        // frame the whole floating mountain, hanging spires included: the box corners (at the extremes of the slow yaw)
+        // must project inside the frame; the distance is found by bisection for the current aspect
+        const box: Vector3[] = []
+        for (const q of outline) {
+          const x = q.x - cx, y = q.y + 0.3 + 0.12, z = q.z - cz // +0.12: room for the earthquake columns above the rim
+          for (const a of [-yaw, 0, yaw]) box.push(new Vector3(x * Math.cos(a) + z * Math.sin(a), y, -x * Math.sin(a) + z * Math.cos(a)))
         }
-        place()
+        const aim = new Vector3(0, (minY + maxY) / 2 + 0.3 + (maxY - minY) * 0.06, 0.1)
+        const put = (d: number) => {
+          camera.position.set(aim.x, aim.y + Math.cos(pol) * d, aim.z + Math.sin(pol) * d)
+          camera.lookAt(aim)
+          camera.updateMatrixWorld()
+          camera.updateProjectionMatrix()
+        }
+        const fitDist = () => {
+          let lo = 2, hi = 150 // the far plane is 400, so every distance tried here is fully inside the frustum
+          for (let i = 0; i < 34; i++) {
+            const mid = (lo + hi) / 2
+            put(mid)
+            const ok = box.every((c) => { const p = c.clone().project(camera); return Math.abs(p.x) < 0.96 && Math.abs(p.y) < 0.93 })
+            if (ok) hi = mid; else lo = mid
+          }
+          put(hi)
+        }
         const fit = () => {
           const w = el.clientWidth, h = el.clientHeight
           if (!w || !h) return
@@ -350,12 +376,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           renderer.domElement.style.width = w + 'px'
           renderer.domElement.style.height = h + 'px'
           camera.aspect = w / h
-          const tH = Math.tan((camera.fov * Math.PI) / 360) * camera.aspect
-          const d = (need / 2 / tH) * 1.16
-          const s = Math.sin(pol) * d
-          camera.position.set(aim.x, aim.y + Math.cos(pol) * d, aim.z + s)
-          camera.lookAt(aim)
-          camera.updateProjectionMatrix()
+          fitDist()
           renderer.render(scene, camera)
         }
         const ro = new ResizeObserver(fit)

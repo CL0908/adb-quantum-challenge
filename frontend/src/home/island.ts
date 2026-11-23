@@ -14,7 +14,7 @@ export const smooth = (a: number, b: number, x: number) => {
 }
 
 /* ---------- value noise (optionally periodic) ---------- */
-function hash(i: number, j: number, s = 0) {
+export function hash(i: number, j: number, s = 0) {
   let h = (Math.imul(i, 374761393) + Math.imul(j, 668265263) + Math.imul(s, 1013904223)) | 0
   h = Math.imul(h ^ (h >>> 13), 1274126177)
   return ((h ^ (h >>> 16)) >>> 0) / 4294967295
