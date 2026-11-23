@@ -417,7 +417,9 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
         disposers.push(() => ro.disconnect())
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         fit()
-        if (!reduce) { intro = true; t0 = performance.now() } else place0()
+        // arriving from another tab of the site: show the settled view at once, the fly-in is for a first visit
+        const fromSite = (() => { try { return new URL(document.referrer).origin === location.origin } catch { return false } })()
+        if (!reduce && !fromSite) { intro = true; t0 = performance.now() } else place0()
         controls.update()
         api.current = {
           setWeight, setFocus,

@@ -163,3 +163,9 @@ sup { font-size: max(0.6em, 10px); vertical-align: 0; position: relative; top: -
 
 /* exponents and inline code stay readable (browsers shrink sup to ~0.6 of small labels) (local copy) */
 code { font-size: max(0.92em, 11px); }
+
+/* tabs switch without a blank flash: the nav stays put and the page content cross-fades (browsers with view transitions) */
+@view-transition { navigation: auto; }
+.jt-nav-wrap { view-transition-name: site-nav; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.14s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

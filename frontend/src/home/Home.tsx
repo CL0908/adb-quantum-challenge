@@ -262,7 +262,7 @@ const PEOPLE = [
       'ADIA Lab Structural Break Challenge, peak #37 of 1,220.',
       'AI engineer building agent and RAG pipelines; Chief AI Officer of BunkerGuard AI, winner of SuperAI NEXT Hackathon 2026.',
     ],
-    does: ['Faster RDPO engine', 'Small world and saturation modules', 'Quantum resource reductions', 'Data uncertainty'],
+    does: ['Small world and saturation modules', 'Quantum resource reductions', 'Data uncertainty'],
   },
 ]
 
