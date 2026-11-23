@@ -101,7 +101,7 @@ export default function App() {
         <div className="vignette" />
       </div>
 
-      <SiteNav theme="dark" current="solution" />
+      <SiteNav theme="light" current="solution" />
       <header className="top" data-inset="t">
         <h1>Kyrgyz Republic <i>{'·'}</i> <em>Tajikistan</em></h1>
         <p>How the Disaster Relief Bonds are priced exactly, from sources to tail</p>

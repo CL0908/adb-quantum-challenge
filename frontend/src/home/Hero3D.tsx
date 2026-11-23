@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import {
   AdditiveBlending, AmbientLight, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, DirectionalLight, DoubleSide,
   ACESFilmicToneMapping, Group, HemisphereLight, PCFShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, Quaternion, RepeatWrapping, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
+  PerspectiveCamera, Quaternion, RepeatWrapping, TextureLoader, Vector2, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
 } from 'three'
 import { loadDem } from './lib/dem'
 import type { MapData } from './lib/map'
-import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, hash, resample, smooth, strataCanvas, vnoise } from './island'
+import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, hash, resample, smooth, vnoise } from './island'
 
 const COS = Math.cos((40 * Math.PI) / 180)
 const EXAG = 5.5 // vertical exaggeration
@@ -185,13 +185,19 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
            Depth grows from zero at the rim (where it meets the surface, so the island is closed) to a ragged bowl, with a
            few spires hanging lower. Same triangles and alpha cut as the surface, so the two edges coincide exactly. */
         const DEPTH = 3.2 // at the deepest point
-        const strata = new CanvasTexture(strataCanvas(1024, 1024))
-        strata.colorSpace = SRGBColorSpace
-        strata.wrapS = strata.wrapT = RepeatWrapping
-        strata.anisotropy = 8
-        strata.channel = 1
-        // the strata image doubles as a bump map, so bedding planes catch the key light
-        const rockMat = new MeshStandardMaterial({ map: strata, bumpMap: strata, bumpScale: 1.6, vertexColors: true, roughness: 0.9, metalness: 0, side: DoubleSide, alphaMap: alphaTex, alphaTest: 0.5 })
+        // fractured rock, not bedding: Poly Haven 'rock_face_03' (CC0) colour, normal and roughness maps
+        const texLoader = new TextureLoader()
+        // loaded before the first frame, so the still renders and the hero never shows untextured rock
+        const rockTex = async (f: string, srgb: boolean) => {
+          const t = await texLoader.loadAsync(`tex/${f}`)
+          if (srgb) t.colorSpace = SRGBColorSpace
+          t.wrapS = t.wrapT = RepeatWrapping
+          t.anisotropy = 8
+          t.channel = 1
+          return t
+        }
+        const [rDiff, rNor, rRough] = await Promise.all([rockTex('rock_diff.webp', true), rockTex('rock_nor.webp', false), rockTex('rock_rough.webp', false)])
+        const rockMat = new MeshStandardMaterial({ map: rDiff, normalMap: rNor, normalScale: new Vector2(1.2, 1.2), roughnessMap: rRough, roughness: 1, vertexColors: true, metalness: 0, side: DoubleSide, alphaMap: alphaTex, alphaTest: 0.5 })
         let cx = 0, cz = 0, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, minY = 0, maxY = 0
         const outline: Vector3[] = [] // points on the rim and the underside, for a tight camera fit
         keep.forEach((loop, li) => {
@@ -233,8 +239,6 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           for (const p of spires) d += p.a * q * Math.exp(-((x - p.x) ** 2 + (z - p.z) ** 2) / (p.s * p.s))
           const y = ytop - d
           upos[3 * k] = x; upos[3 * k + 1] = y; upos[3 * k + 2] = z
-          uuv[2 * k] = (x + z * 0.6) * 0.32
-          uuv[2 * k + 1] = y * 0.62
           const t = Math.min(1, d / (DEPTH * 1.6))
           const dk = 1 - 0.55 * Math.pow(t, 1.1)
           const soil = 1 - smooth(0.0, 0.12, d) // dark topsoil right under the surface edge
@@ -251,10 +255,21 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         ugeo.setAttribute('color', new BufferAttribute(ucol, 3))
         ugeo.setIndex(new BufferAttribute(new Uint32Array(flip), 1))
         ugeo.computeVertexNormals()
+        // rock uv by the direction each point faces (a per-vertex box projection), so no wall stretches the texture
+        const nrm = ugeo.getAttribute('normal').array as Float32Array
+        const RS = 0.55
+        for (let k = 0; k < nx * ny; k++) {
+          const ax = Math.abs(nrm[3 * k]), ay = Math.abs(nrm[3 * k + 1]), az = Math.abs(nrm[3 * k + 2])
+          const x = upos[3 * k], y = upos[3 * k + 1], z = upos[3 * k + 2]
+          if (ay > ax && ay > az) { uuv[2 * k] = x * RS; uuv[2 * k + 1] = z * RS }
+          else if (ax > az) { uuv[2 * k] = z * RS; uuv[2 * k + 1] = y * RS }
+          else { uuv[2 * k] = x * RS; uuv[2 * k + 1] = y * RS }
+        }
+        ;(ugeo.getAttribute('uv1') as BufferAttribute).needsUpdate = true
         const under = new Mesh(ugeo, rockMat)
         under.castShadow = under.receiveShadow = !small
         root.add(under)
-        disposers.push(() => { ugeo.dispose(); rockMat.dispose(); strata.dispose() })
+        disposers.push(() => { ugeo.dispose(); rockMat.dispose(); rDiff.dispose(); rNor.dispose(); rRough.dispose() })
 
         /* ---- country outlines draped on the terrain (very light) ---- */
         const lineMat = new LineBasicMaterial({ color: '#3B4350', transparent: true, opacity: 0.5 })

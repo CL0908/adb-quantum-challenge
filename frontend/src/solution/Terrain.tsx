@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import {
-  AdditiveBlending, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, InstancedMesh, LineBasicMaterial, LineLoop,
+  NormalBlending, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, InstancedMesh, LineBasicMaterial, LineLoop,
   LinearFilter, Matrix4, Mesh, MeshBasicMaterial, PerspectiveCamera, Quaternion, Scene, SphereGeometry, SRGBColorSpace, Sprite,
   SpriteMaterial, TOUCH, Vector3, WebGLRenderer,
 } from 'three'
@@ -111,9 +111,9 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number, sat
         const sx = Math.min(sat.width - 1, Math.max(0, Math.round(((lon - e0) / (e2 - e0)) * (sat.width - 1))))
         const sy = Math.min(sat.height - 1, Math.max(0, Math.round(((e3 - lat) / (e3 - e1)) * (sat.height - 1))))
         const q = 4 * (sy * sat.width + sx)
-        base = [sat.data[q] * 0.82, sat.data[q + 1] * 0.86, sat.data[q + 2] * 0.92]
+        base = [sat.data[q] * 1.04, sat.data[q + 1] * 1.04, sat.data[q + 2] * 1.04]
       }
-      const k = 0.3 + 0.95 * Math.pow(shade, 1.15)
+      const k = sat ? 0.6 + 0.55 * Math.pow(shade, 1.15) : 0.3 + 0.95 * Math.pow(shade, 1.15) // lighter relief shading on the paper page
       let r = base[0] * k, gg = base[1] * k, b = base[2] * k
       // contour lines every BAND metres
       const band = Math.floor(h0 / BAND)
@@ -121,12 +121,10 @@ function paintGround(dem: Dem, map: MapData, f: Frame, W: number, H: number, sat
       const i = 4 * (y * W + x)
       const kg = mask[i] > 127, tj = mask[i + 1] > 127
       const inside = kg || tj
-      if (edge && h0 > 200) { const a = inside ? 0.16 : 0.06; r += (190 - r) * a; gg += (210 - gg) * a; b += (236 - b) * a }
-      if (inside) {
-        if (kg) { r += 0; gg += 12; b += 12 } else { r += 4; gg += 9; b += 20 }
-      } else {
+      if (edge && h0 > 200) { const a = inside ? 0.14 : 0.05; r += (52 - r) * a; gg += (58 - gg) * a; b += (60 - b) * a }
+      if (!inside) {
         const l = (r + gg + b) / 3
-        r = r * 0.35 + l * 0.12; gg = gg * 0.4 + l * 0.12; b = b * 0.42 + l * 0.14
+        r = 243 * 0.7 + (r * 0.5 + l * 0.5) * 0.3; gg = 241 * 0.7 + (gg * 0.5 + l * 0.5) * 0.3; b = 236 * 0.7 + (b * 0.5 + l * 0.5) * 0.3
       }
       const u = (x + 0.5) / W, v = (y + 0.5) / H
       const fade = smooth(0, 0.07, Math.min(u, 1 - u)) * smooth(0, 0.1, Math.min(v, 1 - v))
@@ -165,7 +163,7 @@ function paintOverlay(map: MapData, f: Frame, W: number, H: number) {
   path(map.zone)
   g.shadowColor = `rgba(${rgb(DARK.terra)},1)`
   g.shadowBlur = W * 0.02
-  g.fillStyle = `rgba(${rgb(DARK.terra)},0.55)`
+  g.fillStyle = `rgba(${rgb(DARK.terra)},0.3)`
   g.fill('evenodd')
   g.shadowBlur = 0
   g.strokeStyle = `rgba(${rgb(DARK.sand)},0.95)`
@@ -295,7 +293,7 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
 
         const ovTex = new CanvasTexture(paintOverlay(map, f, TW, TH))
         ovTex.colorSpace = SRGBColorSpace
-        const ovMat = new MeshBasicMaterial({ map: ovTex, transparent: true, depthWrite: false, blending: AdditiveBlending, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 })
+        const ovMat = new MeshBasicMaterial({ map: ovTex, transparent: true, depthWrite: false, blending: NormalBlending, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 })
         scene.add(new Mesh(geo, ovMat))
         disposers.push(() => { ovMat.dispose(); ovTex.dispose() })
 
@@ -327,7 +325,7 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
         const ball = new SphereGeometry(1, 12, 8)
         const shown = map.quakes.filter((x) => x[1] >= lon0 && x[1] <= lon1 && x[0] >= lat0 && x[0] <= lat1)
         const mk = (list: number[][], color: string, opacity: number) => {
-          const cm = new MeshBasicMaterial({ color, transparent: true, opacity: opacity * 0.8, blending: AdditiveBlending, depthWrite: false })
+          const cm = new MeshBasicMaterial({ color, transparent: true, opacity: opacity * 0.8, blending: NormalBlending, depthWrite: false })
           const bm = new MeshBasicMaterial({ color, transparent: true, opacity })
           const cols = new InstancedMesh(col, cm, list.length), balls = new InstancedMesh(ball, bm, list.length)
           cols.frustumCulled = balls.frustumCulled = false

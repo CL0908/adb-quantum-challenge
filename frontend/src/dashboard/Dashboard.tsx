@@ -111,8 +111,8 @@ export default function Dashboard() {
   const [rainMode, setRainMode] = useState<RainMode>('both')
   const [metric, setMetric] = useState<Metric>('joint_exhaustion')
   const [show, setShow] = useState<Show>('joint')
-  if (err) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div></>
-  if (!d || !g) return <><SiteNav theme="dark" current="dashboard" /><div className="shell state" aria-busy="true">Loading the pool data</div></>
+  if (err) return <><SiteNav theme="light" current="dashboard" /><div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div></>
+  if (!d || !g) return <><SiteNav theme="light" current="dashboard" /><div className="shell state" aria-busy="true">Loading the pool data</div></>
 
   const pool = d.pools[poolId]
   const isKG = poolId === 'kgtj'
@@ -121,7 +121,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <SiteNav theme="dark" current="dashboard" />
+      <SiteNav theme="light" current="dashboard" />
       <div className="page">
       <div className="shell">
         <div className="body">
