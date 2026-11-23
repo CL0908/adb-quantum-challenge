@@ -6,7 +6,7 @@ import {
 } from 'three'
 import { loadDem } from './lib/dem'
 import type { MapData } from './lib/map'
-import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, resample, strataCanvas, vnoise } from './island'
+import { blur, buildField, colourCanvas, contours, fbm, fieldCanvas, resample, smooth, strataCanvas, vnoise } from './island'
 
 const COS = Math.cos((40 * Math.PI) / 180)
 const EXAG = 5.5 // vertical exaggeration
@@ -187,7 +187,8 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         strata.colorSpace = SRGBColorSpace
         strata.wrapS = strata.wrapT = RepeatWrapping
         strata.anisotropy = 8
-        const rockMat = new MeshStandardMaterial({ map: strata, vertexColors: true, roughness: 0.92, metalness: 0, side: DoubleSide })
+        // the strata image doubles as a bump map, so bedding planes catch the key light
+        const rockMat = new MeshStandardMaterial({ map: strata, bumpMap: strata, bumpScale: 1.6, vertexColors: true, roughness: 0.9, metalness: 0, side: DoubleSide })
         let cx = 0, cz = 0, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9
         const U_REP = 6, V_SCALE = 0.62
         keep.forEach((loop, li) => {
@@ -206,7 +207,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           const cols = N + 1
           const p3 = new Float32Array((R + 1) * cols * 3), uv2 = new Float32Array((R + 1) * cols * 2), vc = new Float32Array((R + 1) * cols * 3)
           for (let r = 0; r <= R; r++) {
-            const t = r / R
+            const t = Math.pow(r / R, 1.6) // rows packed near the top edge, where the soil band and the brightest light sit
             const sc = Math.pow(Math.max(0, 1 - Math.pow(t, 2.1)), 0.5)
             for (let i = 0; i <= cols - 1; i++) {
               const ii = i % N
@@ -219,8 +220,10 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
               p3[3 * o] = x; p3[3 * o + 1] = y; p3[3 * o + 2] = z
               uv2[2 * o] = (i / N) * U_REP
               uv2[2 * o + 1] = y * V_SCALE
-              const dk = 1 - 0.42 * Math.pow(t, 1.25)
-              vc[3 * o] = dk; vc[3 * o + 1] = dk * 0.99; vc[3 * o + 2] = dk * 0.97
+              const dk = 1 - 0.46 * Math.pow(t, 1.2)
+              // dark topsoil just under the surface, fading into the rock within the first few rows
+              const soil = 1 - smooth(0.0, 0.07, t)
+              vc[3 * o] = dk * (1 - 0.42 * soil); vc[3 * o + 1] = dk * 0.99 * (1 - 0.48 * soil); vc[3 * o + 2] = dk * 0.97 * (1 - 0.55 * soil)
             }
           }
           const ix: number[] = []
@@ -234,7 +237,9 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           wg.setAttribute('color', new BufferAttribute(vc, 3))
           wg.setIndex(ix)
           wg.computeVertexNormals()
-          root.add(new Mesh(wg, rockMat))
+          const rock = new Mesh(wg, rockMat)
+          rock.castShadow = rock.receiveShadow = !small
+          root.add(rock)
           disposers.push(() => wg.dispose())
         })
         disposers.push(() => { rockMat.dispose(); strata.dispose() })

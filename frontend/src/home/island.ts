@@ -8,7 +8,7 @@ export type RGB = [number, number, number]
 export const hex = (s: string): RGB => [parseInt(s.slice(1, 3), 16), parseInt(s.slice(3, 5), 16), parseInt(s.slice(5, 7), 16)]
 export const mix = (a: RGB, b: RGB, t: number): RGB => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]
 const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x))
-const smooth = (a: number, b: number, x: number) => {
+export const smooth = (a: number, b: number, x: number) => {
   const t = clamp((x - a) / (b - a))
   return t * t * (3 - 2 * t)
 }
@@ -265,7 +265,8 @@ export function colourCanvas(dem: Dem, F: Field) {
 }
 
 /* ---------- layered rock for the sides ---------- */
-const STRATA = ['#D6CBB4', '#BDB19B', '#E0D5BC', '#A89D8B', '#C9BC9F', '#938A7A', '#C2B6A3', '#DDD1B6', '#B3A58C'].map(hex)
+// sandstone, ochre and umber with two pale limestone beds, close to the browns of the imagery on top
+const STRATA = ['#CDB894', '#B79E78', '#DCCDAE', '#9E8463', '#C4A982', '#8A7258', '#D2C4A8', '#D4BE96', '#A8906D'].map(hex)
 /** Horizontal rock layers of uneven thickness with wavy contacts, dark seams and grain. Periodic in u so it wraps around the island. */
 export function strataCanvas(W = 1024, Hh = 1024) {
   const c = document.createElement('canvas')
@@ -280,13 +281,13 @@ export function strataCanvas(W = 1024, Hh = 1024) {
       const warp = (fbm(u * PU, y / 90, 3, PU, 0, 5) - 0.5) * 22 + Math.sin(u * Math.PI * 2 * 3 + y * 0.01) * 3
       const yy = y + warp
       // layer index from cumulative uneven thickness
-      const L = yy / 15
+      const L = yy / 28 // thick beds read calmer than fine banding
       const li = Math.floor(L)
       const th = 0.55 + hash(li, 3, 1) * 1.1
       const band = Math.floor(L / th + hash(li, 7, 2) * 0.3)
       const base = STRATA[Math.abs(Math.floor(band * 1.7 + hash(band, 1, 3) * 5)) % STRATA.length]
       const within = L - Math.floor(L)
-      const seam = 1 - 0.2 * smooth(0.82, 1, within) * (hash(li, 5, 4) > 0.45 ? 1 : 0.4)
+      const seam = 1 - 0.12 * smooth(0.86, 1, within) * (hash(li, 5, 4) > 0.45 ? 1 : 0.4)
       const grain = (hash(x, y, 8) - 0.5) * 0.07 + (vnoise(u * 90, y / 3.5, 90, 0, 6) - 0.5) * 0.1
       const f = seam * (1 + grain)
       const k = 4 * (y * W + x)
