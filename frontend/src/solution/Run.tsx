@@ -40,7 +40,7 @@ function IntervalPlot({ r }: { r: RunResult }) {
   )
 }
 
-export default function Run({ sol, scenario, setScenario }: { sol: Solution; scenario: string; setScenario: (s: string) => void }) {
+export default function Run({ sol, scenario, setScenario, onRan }: { sol: Solution; scenario: string; setScenario: (s: string) => void; onRan?: () => void }) {
   const fb = useData<Record<string, RunResult>>('fallback.json')
   const [target, setTarget] = useState('joint_exhaustion')
   const [bi, setBi] = useState(3)
@@ -50,6 +50,7 @@ export default function Run({ sol, scenario, setScenario }: { sol: Solution; sce
   const outRef = useRef<HTMLDivElement>(null)
   const [done, setDone] = useState(0)
   // after a run, bring the result into view inside the scrolling panel (it sits below the fold on laptops)
+  useEffect(() => { if (done) onRan?.() }, [done]) // tell the guide once per finished run
   useEffect(() => { if (done) outRef.current?.scrollIntoView({ block: 'nearest', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }, [done])
   const key = `${scenario}|${target}|${BUDGETS[bi]}`
   const shown: { r: RunResult; live: boolean } | null = live && live.key === key ? { r: live.r, live: true } : fb && fb[key] ? { r: fb[key], live: false } : null

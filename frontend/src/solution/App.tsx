@@ -5,6 +5,8 @@ import { useData, type Solution, type Story } from './data'
 import type { AnchorDef, Insets } from './Terrain'
 import { ErrBars, Gauge, NodeRing, PoolBars, QChart, Spark, Timeline } from './Charts'
 import Run from './Run'
+import Guide, { guideSeen, type GuideStep } from './Guide'
+import { ProbDigits } from './Digits'
 import { prob, seconds, sci } from './format'
 import { SiteNav } from '../shared/SiteNav'
 import { Segmented, Slider } from '../shared/Controls'
@@ -47,6 +49,15 @@ export default function App() {
   // nothing data-driven shows until the data and the first placed frame are in, so the page never flashes a half-built layout
   const [late, setLate] = useState(false)
   useEffect(() => { const t = window.setTimeout(() => setLate(true), 4000); return () => window.clearTimeout(t) }, [])
+  // guide: opens by itself on the first visit, and from the header button after that
+  const [guide, setGuide] = useState(() => !guideSeen())
+  const [gStep, setGStep] = useState(0)
+  const [touched, setTouched] = useState(false)
+  const [seen, setSeen] = useState<number[]>([2])
+  const [ran, setRan] = useState(false)
+  useEffect(() => { setSeen((v) => (v.includes(stage) ? v : [...v, stage])) }, [stage])
+  const dragEq = (v: number) => { setEq(v); setTouched(true) }
+  const dragRain = (v: number) => { setRain(v); setTouched(true) }
   const anchorEls = useRef<Record<string, HTMLElement | null>>({})
   const root = useRef<HTMLDivElement>(null)
 
@@ -87,6 +98,30 @@ export default function App() {
     }
   })()
 
+  const nextStage = [1, 2, 3, 4].find((n) => !seen.includes(n))
+  const steps: GuideStep[] = [
+    {
+      target: '.rail .jt-slider-box',
+      point: (el, r) => ({ x: r.left + (r.width * parseFloat(el.style.getPropertyValue('--p') || '50')) / 100, y: r.top + r.height / 2 }),
+      title: 'Drag the earthquake slider',
+      body: <>It sets how often one earthquake hits both countries at once. Watch the red number on the map: the chance that <b>both bonds are wiped out together</b>.</>,
+      done: touched, doneText: 'The red number moved with your drag',
+    },
+    {
+      target: nextStage ? `.stages > li:nth-child(${nextStage}) > button` : '.stages',
+      title: 'Open the four stages',
+      body: <>Click each numbered stage on the right, from the earthquake sources to the quantum stage. The card on the map changes with the stage you open.</>,
+      done: !nextStage, doneText: 'All four stages seen',
+      action: nextStage ? { label: `Open stage ${nextStage}`, run: () => setStage(nextStage) } : undefined,
+    },
+    {
+      target: '.arch .go',
+      title: 'Run a live estimate',
+      body: <>Press <b>Run estimate</b>. The server prices the bond twice on the same budget, with RDPO and with plain Monte Carlo. The tighter teal interval is RDPO.</>,
+      done: ran, doneText: 'Result below the button: compare the two intervals',
+    },
+  ]
+
   return (
     <div className={`sol st${stage}${shown ? ' is-ready' : ''}${noGL ? ' flat' : ''}`} ref={root}>
       <div className="map-host" aria-hidden={noGL}>
@@ -106,24 +141,26 @@ export default function App() {
       <header className="top" data-inset="t">
         <h1>Kyrgyz Republic <i>{'·'}</i> <em>Tajikistan</em></h1>
         <p>How the Disaster Relief Bonds are priced exactly, from sources to tail</p>
+        {!guide && <button type="button" className="jt-btn ghost gd-open" onClick={() => { setGStep(0); setGuide(true) }}>How to use this page</button>}
       </header>
+      {guide && shown && <Guide steps={steps} step={gStep} setStep={setGStep} onClose={() => setGuide(false)} />}
 
       <aside className="jt-panel rail" inert={!shown} data-inset="l" aria-label="Dependence controls">
         <div className="lbl">Dependence</div>
         <div style={{ margin: '12px 0 14px' }}>
-          <Segmented block label="Presets" value={preset as 'brief' | 'data' | ''} disabled={!grid} onChange={(v) => { if (grid) { const g = v === 'brief' ? grid.brief : grid.data; setEq(g.eq); setRain(g.rain) } }}
+          <Segmented block label="Presets" value={preset as 'brief' | 'data' | ''} disabled={!grid} onChange={(v) => { if (grid) { const g = v === 'brief' ? grid.brief : grid.data; setEq(g.eq); setRain(g.rain); setTouched(true) } }}
             options={[{ id: 'brief', label: 'Brief' }, { id: 'data', label: 'Public records' }]} />
         </div>
         {grid && (
           <>
-            <Slider id="eq" label="Earthquakes that hit both" min={0} max={0.6} value={eq} onChange={setEq} text={pct(eq)}
+            <Slider id="eq" label="Earthquakes that hit both" min={0} max={0.6} value={eq} onChange={dragEq} text={pct(eq)}
               marks={[{ at: grid.brief.eq, t: 'brief' }, { at: grid.data.eq, t: 'records' }]} />
-            <Slider id="rain" label="Extreme rain that hits both" min={0} max={0.3} value={rain} onChange={setRain} text={pct(rain)}
+            <Slider id="rain" label="Extreme rain that hits both" min={0} max={0.3} value={rain} onChange={dragRain} text={pct(rain)}
               marks={[{ at: grid.data.rain, t: 'records' }, { at: grid.brief.rain, t: 'brief' }]} />
           </>
         )}
         <dl className="reads">
-          <div><dt>Pool loss above US$80m</dt><dd>{ans ? prob(ans.exceed, 3) : '–'}<small>{ans ? oneIn(ans.exceed) : ''}</small></dd></div>
+          <div><dt>Pool loss above US$80m</dt><dd><ProbDigits x={ans?.exceed} /><small>{ans ? oneIn(ans.exceed) : ''}</small></dd></div>
         </dl>
         <p className="note">{onGrid ? 'Exact' : 'Interpolated from the exact grid'}, three-year term.</p>
       </aside>
@@ -150,7 +187,7 @@ export default function App() {
         <i className="dot hot" /><i className="lead" />
         <section className={`jt-panel card c-both${stage >= 2 ? ' hi' : ''}`} aria-label="Both bonds wiped out">
           <div className="lbl terra">Both bonds wiped out</div>
-          <div className="big">{ans ? prob(ans.jointExhaustion, 3) : '–'}</div>
+          <div className="big"><ProbDigits x={ans?.jointExhaustion} /></div>
           <div className="one">{ans ? oneIn(ans.jointExhaustion) : ''} three-year terms</div>
           {grid && <Spark grid={grid} eq={eq} rain={rain} brief={grid.brief.eq} data={grid.data.eq} />}
           <div className="mode">{mode}</div>
@@ -158,7 +195,7 @@ export default function App() {
       </div>
 
       <aside className="jt-panel arch" inert={!shown} data-inset="r" aria-label="Run estimate and architecture">
-        {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} /> : <div className="run" />}
+        {sol ? <Run sol={sol} scenario={scenario} setScenario={setScenario} onRan={() => setRan(true)} /> : <div className="run" />}
         <div className="lbl arch-lbl">Architecture</div>
         <ol className="stages">
           {STAGES.map((s) => (

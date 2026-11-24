@@ -263,3 +263,67 @@ p { margin: 0; }
   .sol.flat .tl-key { display: flex; margin-left: 0; }
   .sol.flat .vignette { background: radial-gradient(90% 80% at 50% 48%, transparent 55%, color-mix(in srgb, var(--bg) 60%, transparent) 100%); }
 .sol:not(.is-ready) .jt-panel { pointer-events: none; }
+
+/* ---------- blur-swap digits (unl-digit-blur-swap) ---------- */
+.dg { display: inline-flex; font-variant-numeric: tabular-nums; }
+.dg-c { position: relative; display: inline-block; }
+.dg-in { display: inline-block; animation: dg-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.dg-in.dn { animation-name: dg-in-dn; }
+.dg-out { position: absolute; left: 0; top: 0; animation: dg-out 0.35s ease-out both; pointer-events: none; }
+.dg-out.dn { animation-name: dg-out-dn; }
+@keyframes dg-in { from { opacity: 0; transform: translateY(0.45em) scale(0.7); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes dg-in-dn { from { opacity: 0; transform: translateY(-0.45em) scale(0.7); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes dg-out { to { opacity: 0; transform: translateY(-0.45em) scale(0.7); filter: blur(4px); } }
+@keyframes dg-out-dn { to { opacity: 0; transform: translateY(0.45em) scale(0.7); filter: blur(4px); } }
+
+/* ---------- guide ---------- */
+.gd-open { margin-top: 12px; height: 34px; padding: 0 14px; font-size: 13px; }
+.gd-open::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: gd-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
+/* status-dot-pulse, as a ring: the highlighted control breathes until its task is done */
+.gd-ring { position: fixed; z-index: 40; pointer-events: none; border-radius: 14px; border: 2px solid var(--accent); animation: gd-ring 1.4s cubic-bezier(0, 0, 0.2, 1) infinite; transition: border-color 0.3s; } /* position follows the target per frame, no easing, or it trails a scrolling page */
+.gd-ring.ok { animation: none; border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.gd-hand { position: fixed; z-index: 41; width: 0; height: 0; pointer-events: none; }
+@keyframes gd-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
+@keyframes gd-ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent); } 100% { box-shadow: 0 0 0 9px transparent; } }
+
+.gd-card { position: absolute; z-index: 42; left: calc(var(--railw) + 2 * var(--gap)); bottom: calc(var(--barh) + 2 * var(--gap)); width: 340px; padding: 14px 16px; }
+.gd-head { display: flex; align-items: center; justify-content: space-between; }
+.gd-steps { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+.gd-steps li { display: flex; align-items: center; }
+.gd-steps button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--hair2); background: none; font: 600 12px var(--sans); color: var(--tx3); cursor: pointer; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+.gd-steps li.past button, .gd-steps li.now button { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.gd-steps li.now button { box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 50%, transparent); }
+/* bar-fill: going forward, the link fills first, then the new dot lights after it */
+.gd-steps li.now.adv button { transition-delay: 0.4s; }
+.gd-link { width: 34px; height: 2px; margin: 0 4px; border-radius: 2px; background: linear-gradient(var(--accent), var(--accent)) left / 0% 100% no-repeat, var(--hair2); transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.gd-steps li.past .gd-link, .gd-steps li.now .gd-link { background-size: 100% 100%, auto; }
+.gd-x { background: none; border: 0; font: 500 12px var(--sans); color: var(--tx3); cursor: pointer; padding: 4px; }
+.gd-x:hover { color: var(--ink); }
+.gd-view { overflow: hidden; margin-top: 12px; }
+/* step-slide-wait: Next brings the step in from the right, Back from the left */
+.gd-body { animation: gd-fwd 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.gd-body.back { animation-name: gd-back; }
+@keyframes gd-fwd { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes gd-back { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+.gd-body h2 { margin: 4px 0 6px; font: 600 18px/1.25 var(--sans); letter-spacing: -0.01em; }
+.gd-body p { font-size: 13px; line-height: 1.5; color: var(--tx2); }
+.gd-body p b { color: var(--joint); font-weight: 600; }
+.gd-state { margin-top: 10px; font-size: 12px; padding: 6px 9px; border-radius: 8px; color: var(--tx3); background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.gd-state.ok { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.gd-foot { display: flex; gap: 8px; margin-top: 12px; }
+.gd-foot .jt-btn { height: 34px; padding: 0 14px; font-size: 13px; }
+.gd-foot .jt-btn:last-child { margin-left: auto; }
+.gd-foot .jt-btn.ghost:disabled { opacity: 0.35; cursor: default; }
+.gd-ready { animation: gd-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@media (max-width: 1100px) {
+  .gd-card { position: fixed; left: 10px; right: 10px; bottom: 10px; width: auto; padding: 10px 12px; }
+  .gd-view { margin-top: 8px; }
+  .gd-body h2 { font-size: 15px; margin: 2px 0 4px; }
+  .gd-body p { font-size: 12px; line-height: 1.4; }
+  .gd-body .lbl, .gd-state { display: none; }
+  .gd-foot { margin-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gd-ring, .gd-open::before, .gd-ready, .gd-body, .dg-in, .dg-out { animation: none !important; }
+  .dg-out { opacity: 0; }
+}

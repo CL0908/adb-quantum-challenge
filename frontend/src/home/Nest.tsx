@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useJSON } from './lib/data'
+import { TapHint } from '../shared/TapHint'
 
 /* "Three models, one inside the other": the small world inside RDPO inside the twin. Two views of the same thing,
    nested cards and the relation chain; picking a model shows what it does for its neighbour. Numbers come from
@@ -106,7 +107,7 @@ const LAYERS: { id: Id; n: string; t: string; q: string; go: string }[] = [
   { id: 'sw', n: '01', t: 'Small world', q: 'Where should the paths go? The pool without payout caps, solved exactly in one pass.', go: 'Guides RDPO' },
 ]
 
-function Nested({ sel, pick }: { sel: Id; pick: (i: Id) => void }) {
+function Nested({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id }) {
   const layer = (i: number): ReactNode => {
     const L = LAYERS[i]
     if (!L) return null
@@ -115,7 +116,7 @@ function Nested({ sel, pick }: { sel: Id; pick: (i: Id) => void }) {
         <button type="button" className="nh" aria-pressed={sel === L.id} onClick={() => pick(L.id)}>
           <span className="sn">{L.n}</span>
           <span className="nt"><b>{L.t}</b><span>{L.q}</span></span>
-          <span className="go">{L.go}</span>
+          <span className={hint === L.id ? 'go th-host' : 'go'}>{L.go}{hint === L.id && <TapHint />}</span>
         </button>
         {layer(i + 1)}
       </div>
@@ -185,6 +186,10 @@ export default function NestBlock() {
   const n = useJSON<Nest>('nest.json')
   const [view, setView] = useState<'nested' | 'chain'>('nested')
   const [sel, setSel] = useState<Id>('sw')
+  // a tapping hand walks the reader outward, small world -> RDPO -> twin, and leaves once each model has been opened
+  const [opened, setOpened] = useState<Id[]>(['sw'])
+  const pick = (i: Id) => { setSel(i); setOpened((v) => (v.includes(i) ? v : [...v, i])) }
+  const hint = (['rdpo', 'twin'] as Id[]).find((i) => !opened.includes(i))
   return (
     <div className="nest">
       <div className="nest-head">
@@ -196,7 +201,7 @@ export default function NestBlock() {
         </div>
       </div>
       <div className={`nest-body ${view}`}>
-        <div className="nest-fig">{view === 'nested' ? <Nested sel={sel} pick={setSel} /> : <Chain sel={sel} pick={setSel} />}</div>
+        <div className="nest-fig">{view === 'nested' ? <Nested sel={sel} pick={pick} hint={hint} /> : <Chain sel={sel} pick={pick} />}</div>
         <div className="ncomp" aria-live="polite">{n ? <div key={sel}><Anim id={sel} /><Panel id={sel} n={n} /></div> : <div className="bskel" />}</div>
       </div>
       <p className="nest-foot">28-country ring pool and the two-country bond. Every number comes from a committed run.</p>

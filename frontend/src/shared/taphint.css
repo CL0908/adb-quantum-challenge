@@ -1,0 +1,26 @@
+/* tap hint: the fingertip sits on the wrapper's origin (glyph tip is at 8,2 of a 24 grid, drawn at 34px) */
+.tap-hint { position: absolute; width: 0; height: 0; pointer-events: none; z-index: 30; }
+.th-hand { position: absolute; left: -11px; top: -3px; overflow: visible; transform-origin: 11px 3px; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.28)); animation: th-tap 1.9s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.th-hand path { fill: none; stroke: #111413; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.th-hand path.th-bg { fill: #fff; stroke: #fff; stroke-width: 4; }
+.th-ripple { position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--accent, #0E8074); opacity: 0; animation: th-ripple 1.9s cubic-bezier(0, 0, 0.2, 1) infinite; }
+/* host: put the hand on a pill or button; the host itself is lit so it reads as the thing to press */
+.th-host { position: relative; opacity: 1 !important; }
+.th-host > .tap-hint { left: 50%; top: 62%; }
+@keyframes th-tap {
+  0% { opacity: 0; transform: translate(14px, 16px) scale(1); }
+  18% { opacity: 1; transform: translate(0, 0) scale(1); }
+  30% { transform: translate(0, 0) scale(0.86); }
+  40% { transform: translate(0, 0) scale(1); }
+  80% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(6px, 8px) scale(1); }
+}
+@keyframes th-ripple {
+  0%, 28% { opacity: 0; transform: scale(0.4); }
+  32% { opacity: 0.9; }
+  70%, 100% { opacity: 0; transform: scale(2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .th-hand { animation: none; }
+  .th-ripple { animation: none; opacity: 0.6; }
+}
