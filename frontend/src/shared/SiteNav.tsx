@@ -1,5 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './theme.css'
+
+// Warm the Solution page from every other page: once the current page is idle, its heavy files (terrain textures and
+// data, ~1.2 MB) go into the HTTP cache, so following the Solution link only builds the relief. Chrome also prerenders
+// /solution/ from the speculation rules in each index.html; this is the fallback for other browsers.
+const SOLUTION_FILES = ['map.json', 'grid.json', 'solution.json', 'story.json', 'fallback.json', 'dem.json', 'dem.png', 'ground.webp']
+function prefetchSolution() {
+  for (const f of SOLUTION_FILES) {
+    const l = document.createElement('link')
+    l.rel = 'prefetch'
+    l.href = `/data/${f}`
+    document.head.appendChild(l)
+  }
+}
 
 export type SitePage = 'home' | 'solution' | 'dashboard'
 
@@ -14,6 +27,13 @@ export const PROPOSAL_PDF = '/RDPO_Proposal_Short.pdf'
 /** The one top navigation for every page. Sets data-theme on <html> so tokens in theme.css apply. */
 export function SiteNav({ theme, current }: { theme: 'light' | 'dark'; current: SitePage }) {
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (current === 'solution') return
+    const idle = (cb: () => void) => (typeof requestIdleCallback === 'function' ? requestIdleCallback(cb) : setTimeout(cb, 1500)) // Safari has no requestIdleCallback
+    const start = () => { idle(prefetchSolution) }
+    if (document.readyState === 'complete') start(); else window.addEventListener('load', start, { once: true })
+    return () => window.removeEventListener('load', start)
+  }, [current])
   if (typeof document !== 'undefined') document.documentElement.dataset.theme = theme
   const cur = (id: string) => (id === current ? ({ 'aria-current': 'page' } as const) : {})
   return (
