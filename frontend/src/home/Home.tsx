@@ -63,6 +63,27 @@ function HeroFigure() {
   const hold = useRef(false)
   const oneIn = useOneIn()
   useEffect(() => { setGl(webglAvailable()) }, [])
+  // the island opens enlarged and settles to its place over the first ~60% of a screen of scrolling; the scroll position
+  // is eased toward each frame so wheel steps read as one continuous shrink, not a jump per notch
+  const fig = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = fig.current
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const target = () => Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.6)))
+    const put = (v: number) => el.style.setProperty('--hz', (v * v * (3 - 2 * v)).toFixed(4)) // smoothstep
+    let cur = target(), raf = 0
+    const tick = () => {
+      const t = target()
+      cur += (t - cur) * 0.14
+      if (Math.abs(t - cur) < 0.001) cur = t
+      put(cur)
+      raf = cur === t ? 0 : requestAnimationFrame(tick)
+    }
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick) }
+    put(cur)
+    window.addEventListener('scroll', kick, { passive: true })
+    return () => { window.removeEventListener('scroll', kick); cancelAnimationFrame(raf) }
+  }, [])
   const shared = map?.quakes.filter((q) => q[4] === 1).length
   // three places on the island that lead somewhere: the shared zone (why it matters), a country (try the model), the pool
   const pins = useMemo<Pin[]>(() => {
@@ -76,7 +97,7 @@ function HeroFigure() {
     ]
   }, [map])
   return (
-    <figure className={`hero-fig ${live ? 'live' : ''}`} style={{ ['--ar' as string]: HERO_ASPECT }}>
+    <figure ref={fig} className={`hero-fig ${live ? 'live' : ''}`} style={{ ['--ar' as string]: HERO_ASPECT }}>
       <div className="hero-shadow" aria-hidden="true" />
       <div className="hero-frame">
         <img className="hero-still" src="hero-terrain.webp" alt="The Tian Shan and Pamir cut from real elevation data as a floating terrain block, with the Kyrgyz Republic and Tajikistan, earthquake main shocks as thin columns and the shared border zone glowing." width={2400} height={Math.round(2400 / HERO_ASPECT)} fetchPriority="high" decoding="async" />
