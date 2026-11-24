@@ -5,7 +5,7 @@ import { useData, type Solution, type Story } from './data'
 import type { AnchorDef, Insets } from './Terrain'
 import { ErrBars, Gauge, NodeRing, PoolBars, QChart, Spark, Timeline } from './Charts'
 import Run from './Run'
-import Guide, { guideSeen, type GuideStep } from './Guide'
+import Guide, { type GuideStep } from './Guide'
 import { ProbDigits } from './Digits'
 import { prob, seconds, sci } from './format'
 import { SiteNav } from '../shared/SiteNav'
@@ -49,8 +49,8 @@ export default function App() {
   // nothing data-driven shows until the data and the first placed frame are in, so the page never flashes a half-built layout
   const [late, setLate] = useState(false)
   useEffect(() => { const t = window.setTimeout(() => setLate(true), 4000); return () => window.clearTimeout(t) }, [])
-  // guide: opens by itself on the first visit, and from the header button after that
-  const [guide, setGuide] = useState(() => !guideSeen())
+  // guide: opens by itself on every visit (a first-visit-only guide was too easy to miss), and from the header button after Skip
+  const [guide, setGuide] = useState(true)
   const [gStep, setGStep] = useState(0)
   const [touched, setTouched] = useState(false)
   const [seen, setSeen] = useState<number[]>([2])

@@ -12,10 +12,6 @@ export type GuideStep = {
   action?: { label: string; run: () => void }
 }
 
-const KEY = 'sol-guide-seen'
-export const guideSeen = () => { try { return localStorage.getItem(KEY) === '1' } catch { return true } }
-const markSeen = () => { try { localStorage.setItem(KEY, '1') } catch { /* private mode: the guide just shows again */ } }
-
 type Box = { x: number; y: number; w: number; h: number; px: number; py: number }
 
 export default function Guide({ steps, step, setStep, onClose }: { steps: GuideStep[]; step: number; setStep: (n: number) => void; onClose: () => void }) {
@@ -24,7 +20,7 @@ export default function Guide({ steps, step, setStep, onClose }: { steps: GuideS
   const s = steps[step]
   const last = step === steps.length - 1
   const go = (n: number) => { setDir(n > step ? 1 : -1); setStep(n) }
-  const close = () => { markSeen(); onClose() }
+  const close = onClose // shown on every visit; Skip or Finish closes it for this visit only
 
   // bring the step's control into view when it changes (the right panel scrolls on laptops)
   useEffect(() => {
