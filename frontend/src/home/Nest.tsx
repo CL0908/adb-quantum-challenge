@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useJSON } from './lib/data'
-import { TapHint } from '../shared/TapHint'
+import { SvgTapHint, TapHint } from '../shared/TapHint'
 
 /* "Three models, one inside the other": the small world inside RDPO inside the twin. Two views of the same thing,
    nested cards and the relation chain; picking a model shows what it does for its neighbour. Numbers come from
@@ -113,7 +113,7 @@ function Nested({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id
     if (!L) return null
     return (
       <div className={`nl nl-${L.id} ${sel === L.id ? 'on' : ''}`}>
-        <button type="button" className="nh" aria-pressed={sel === L.id} onClick={() => pick(L.id)}>
+        <button type="button" className={hint === L.id ? 'nh th-glow' : 'nh'} aria-pressed={sel === L.id} onClick={() => pick(L.id)}>
           <span className="sn">{L.n}</span>
           <span className="nt"><b>{L.t}</b><span>{L.q}</span></span>
           <span className={hint === L.id ? 'go th-host' : 'go'}>{L.go}{hint === L.id && <TapHint />}</span>
@@ -129,7 +129,14 @@ function Nested({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id
    RDPO -> twin (crisis anatomy), twin -> RDPO (how precise is enough) */
 const LINKS: Record<Id, string[]> = { sw: ['ts', 'sr'], rdpo: ['sr', 'rt', 'tr'], twin: ['ts', 'rt', 'tr'] }
 
-function Chain({ sel, pick }: { sel: Id; pick: (i: Id) => void }) {
+// node boxes (top-left corners) in the wide and tall drawings, for the tapping hand
+const NODE_AT: Record<'wide' | 'tall', Record<Id, [number, number]>> = {
+  wide: { twin: [20, 152], sw: [430, 152], rdpo: [860, 152] },
+  tall: { twin: [46, 16], sw: [46, 208], rdpo: [46, 404] },
+}
+const hand = (hint: Id | undefined, v: 'wide' | 'tall') => hint && <SvgTapHint x={NODE_AT[v][hint][0] + 170} y={NODE_AT[v][hint][1] + 66} size={v === 'wide' ? 58 : 44} />
+
+function Chain({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id }) {
   const lit = (e: string) => (LINKS[sel].includes(e) ? 'lit' : 'dim')
   const node = (id: Id, x: number, y: number, w: number, t: string, s: string) => (
     <g className={`cn cn-${id} ${sel === id ? 'on' : 'dim'}`} role="button" tabIndex={0} aria-pressed={sel === id} aria-label={t}
@@ -162,6 +169,7 @@ function Chain({ sel, pick }: { sel: Id; pick: (i: Id) => void }) {
         {node('twin', 20, 152, 220, 'Twin', 'Which world are we in?')}
         {node('sw', 430, 152, 220, 'Small world', 'Where should paths go?')}
         {node('rdpo', 860, 152, 220, 'RDPO', 'The probability here')}
+        {hand(hint, 'wide')}
       </svg>
       <svg className="chain tall" viewBox="-24 0 364 520" role="group" aria-label="The same relation chain, top to bottom.">
         {defs}
@@ -172,6 +180,7 @@ function Chain({ sel, pick }: { sel: Id; pick: (i: Id) => void }) {
         {node('twin', 46, 16, 220, 'Twin', 'Which world are we in?')}
         {node('sw', 46, 208, 220, 'Small world', 'Where should paths go?')}
         {node('rdpo', 46, 404, 220, 'RDPO', 'The probability here')}
+        {hand(hint, 'tall')}
       </svg>
       <ul className="ch-dash">
         <li><b>RDPO &rarr; twin</b> crisis anatomy: what a crisis looks like, how close it is, which input matters most</li>
@@ -201,8 +210,8 @@ export default function NestBlock() {
         </div>
       </div>
       <div className={`nest-body ${view}`}>
-        <div className="nest-fig">{view === 'nested' ? <Nested sel={sel} pick={pick} hint={hint} /> : <Chain sel={sel} pick={pick} />}</div>
-        <div className="ncomp" aria-live="polite">{n ? <div key={sel}><Anim id={sel} /><Panel id={sel} n={n} /></div> : <div className="bskel" />}</div>
+        <div className="nest-fig">{view === 'nested' ? <Nested sel={sel} pick={pick} hint={hint} /> : <Chain sel={sel} pick={pick} hint={hint} />}</div>
+        <div className="ncomp" aria-live="polite">{hint && <p className="th-note">Click another model to play its animation ({3 - opened.length} left)</p>}{n ? <div key={sel}><Anim id={sel} /><Panel id={sel} n={n} /></div> : <div className="bskel" />}</div>
       </div>
       <p className="nest-foot">28-country ring pool and the two-country bond. Every number comes from a committed run.</p>
     </div>

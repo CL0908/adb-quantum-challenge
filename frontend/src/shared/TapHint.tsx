@@ -16,3 +16,18 @@ export function TapHint({ className = '' }: { className?: string }) {
     </span>
   )
 }
+
+/** The same hand inside an SVG drawing: (x, y) is the fingertip in the drawing's units, size is the hand's height there. */
+export function SvgTapHint({ x, y, size }: { x: number; y: number; size: number }) {
+  return (
+    <g className="tap-hint-svg" transform={`translate(${x} ${y})`} aria-hidden>
+      <circle className="th-ripple-svg" r={size * 0.4} />
+      <g className="th-hand-g">
+        <svg x={(-size * 8) / 24} y={(-size * 2) / 24} width={size} height={size} viewBox="0 0 24 24" overflow="visible">
+          <path className="th-bg" d={HAND} />
+          <path d={HAND} />
+        </svg>
+      </g>
+    </g>
+  )
+}
