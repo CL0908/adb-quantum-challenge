@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react'
+import { TapHint } from '../shared/TapHint'
 
 export function useWidth<T extends HTMLElement>(): [RefObject<T | null>, number] {
   const ref = useRef<T | null>(null)
@@ -163,7 +164,7 @@ export function VBars({ bars, log, height = 200, floor, onPick }: { bars: Bar[];
 
 /** Each row as a ratio to a reference row, on a log axis centred at 1x: right and terracotta = higher risk than the
  *  reference, left and teal = lower. Rows arrive sorted; clicking a row picks it. */
-export interface DBar { id: string; label: string; ratio: number; display: ReactNode; sub?: ReactNode; active?: boolean; ref?: boolean }
+export interface DBar { id: string; label: string; ratio: number; display: ReactNode; sub?: ReactNode; active?: boolean; ref?: boolean; hint?: boolean }
 export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) => void }) {
   const span = Math.max(Math.log10(2), ...rows.map((r) => Math.abs(Math.log10(r.ratio)))) * 1.08
   const x = (r: number) => 50 + (Math.log10(r) / span) * 50
@@ -175,9 +176,10 @@ export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) 
         const a = x(b.ratio), lo = Math.min(a, 50), w = Math.abs(a - 50)
         const tone = b.ref ? 'ref' : b.ratio >= 1 ? 'up' : 'down'
         return (
-          <button key={b.id} type="button" role="listitem" className={`db ${tone}${b.active ? ' on' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
+          <button key={b.id} type="button" role="listitem" className={`db ${tone}${b.active ? ' on' : ''}${b.hint ? ' th-host th-glow' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
             <span className="db-lab"><b>{b.label}</b>{b.sub && <small>{b.sub}</small>}</span>
             <span className="db-track"><i className="db-mid" /><i className="db-fill" style={{ left: `${lo}%`, width: `${Math.max(w, 0.8)}%` }} /></span>
+            {b.hint && <TapHint />}
             <span className="db-val"><b>{b.display}</b><small>{b.ref ? 'reference' : Math.abs(Math.log(b.ratio)) < 0.03 ? 'same as base' : `${b.ratio < 1 ? b.ratio.toFixed(2) : b.ratio.toFixed(1)}× base`}</small></span>
           </button>
         )

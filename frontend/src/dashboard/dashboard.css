@@ -30,12 +30,24 @@ h1 em, h2 em { font: italic 400 1.1em/1 var(--serif); letter-spacing: -0.015em; 
 .asof code { color: var(--text); }
 .pillbtn { font-size: 12.5px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--text2); }
 
-/* layout */
-.cols { display: grid; grid-template-columns: minmax(0, 1fr) 320px; }
-.main { padding: 0; min-width: 0; border-right: 1px solid var(--line); }
-.side { min-width: 0; display: flex; flex-direction: column; }
+/* layout: four bands, one question each, full width */
 .panel { padding: 22px 24px; border-bottom: 1px solid var(--line); min-width: 0; scroll-margin-top: 12px; }
-.side .panel { padding: 22px; }
+.band { border-bottom: 1px solid var(--line2); scroll-margin-top: 12px; }
+.band:last-child { border-bottom: 0; }
+.band .panel:last-child { border-bottom: 0; }
+.band-h { padding: 26px 24px 18px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent); }
+.band-n { display: block; font: 600 11px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.band-q { margin-top: 4px; font: 500 24px/1.2 var(--sans); letter-spacing: -0.03em; }
+.band-a { margin-top: 6px; max-width: 86ch; font-size: 14px; line-height: 1.5; color: var(--text2); }
+.band-a b { color: var(--joint); font-weight: 600; }
+.band-a b.t { color: var(--teal); }
+.sc-tabs { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; padding: 16px 24px 0; }
+.sc-desc { font-size: 12.5px; color: var(--mute); max-width: 60ch; }
+.prov { display: grid; grid-template-columns: minmax(0, 1fr) 320px; border-top: 1px solid var(--line); }
+.prov .runs { border-right: 1px solid var(--line); border-bottom: 0; }
+.prov .methods { border-bottom: 0; }
+.db.th-glow { outline-color: var(--accent); outline-offset: -1px; border-radius: 8px; }
+.bars .th-note { margin-bottom: 8px; }
 .duo { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
 .duo > .panel + .panel { border-left: 1px solid var(--line); }
 .ph { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px 20px; flex-wrap: wrap; margin-bottom: 16px; }
@@ -131,12 +143,9 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .lnk { color: var(--teal); font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; }
 
 /* narrow */
-@media (max-width: 1279px) {
-  .cols { grid-template-columns: minmax(0, 1fr); }
-  .main { border-right: 0; }
-  .side { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .side .panel { border-bottom: 0; }
-  .side .runs { border-right: 1px solid var(--line); }
+@media (max-width: 960px) {
+  .prov { grid-template-columns: minmax(0, 1fr); }
+  .prov .runs { border-right: 0; border-bottom: 1px solid var(--line); }
 }
 @media (max-width: 960px) {
   .duo { grid-template-columns: minmax(0, 1fr); }
@@ -152,13 +161,15 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
   .note { max-width: none; }
   .tb-r { width: 100%; }
   .asof { white-space: normal; }
-  .panel, .side .panel { padding: 18px 16px; }
+  .panel { padding: 18px 16px; }
+  .band-h { padding: 20px 16px 14px; }
+  .band-q { font-size: 20px; }
+  .sc-tabs { padding: 14px 16px 0; }
+  .sc-tabs .jt-seg { flex-wrap: wrap; }
   .seg { width: 100%; }
   .seg button { flex: 1; padding: 6px 8px; }
   .kpi-body { grid-template-columns: minmax(0, 1fr); justify-items: center; }
   .kpi-n { width: 100%; }
-  .side { grid-template-columns: minmax(0, 1fr); }
-  .side .runs { border-right: 0; border-bottom: 1px solid var(--line); }
   .merr-row { grid-template-columns: minmax(0, 1fr); }
   .mb { grid-template-columns: 104px minmax(0, 1fr) 58px; }
   .vbars { gap: 4px; }
@@ -179,17 +190,12 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .runs-d summary { cursor: pointer; font-size: 12.5px; color: var(--tx2, inherit); padding: 6px 0 10px; list-style-position: inside; }
 .runs-d[open] summary { margin-bottom: 4px; }
 
-/* wide screens: the side column stays in view while the main column scrolls (local copy) */
-@media (min-width: 1280px) {
-  .side { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
-}
-
 /* key figures for the selected scenario (local copy) */
-.keyfig { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.keyfig { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .keyfig > div { display: flex; flex-direction: column; gap: 2px; padding: 16px 22px; border-right: 1px solid var(--line); }
 .keyfig > div:last-child { border-right: 0; }
 .keyfig span { font-size: 12.5px; color: var(--mute); }
-.keyfig b { font: 400 26px/1.15 var(--sans); letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.keyfig b { font: 400 34px/1.15 var(--sans); letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
 .keyfig > div:first-child b { color: var(--joint); }
 .keyfig small { font-size: 12px; color: var(--text2); }
 .segs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
@@ -216,7 +222,7 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .db.on { box-shadow: inset 3px 0 0 var(--accent); padding-left: 8px; }
 .db.on .db-lab b { color: var(--accent); }
 .db:hover:not(:disabled) .db-track { background: color-mix(in srgb, var(--track) 80%, var(--text) 6%); }
-@media (max-width: 900px) { .keyfig { grid-template-columns: repeat(2, minmax(0, 1fr)); } .keyfig > div:nth-child(2) { border-right: 0; } .keyfig > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 760px) { .keyfig { grid-template-columns: minmax(0, 1fr); } .keyfig > div { border-right: 0; border-bottom: 1px solid var(--line); } .keyfig > div:last-child { border-bottom: 0; } }
 @media (max-width: 560px) { .db-axis span:not(.base) { display: none; } .keyfig > div { padding: 12px 14px; } .keyfig b { font-size: 21px; } .db { grid-template-columns: 38% 1fr 26%; } .db-axis { margin-left: 38%; margin-right: 26%; } .segs { justify-content: flex-start; } }
 @media (prefers-reduced-motion: reduce) { .db-fill { transition: none; } }
 

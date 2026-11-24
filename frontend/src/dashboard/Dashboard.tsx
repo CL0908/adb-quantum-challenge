@@ -99,6 +99,17 @@ function Select({ id, label, value, onChange, children, disabled }: { id: string
   )
 }
 
+/** A band is one question a banker asks, in reading order: the question, then the answer in one line. */
+function BandHead({ n, tag, id, q, a }: { n: number; tag: string; id: string; q: string; a: ReactNode }) {
+  return (
+    <div className="band-h">
+      <span className="band-n">{n} · {tag}</span>
+      <h2 id={id} className="band-q">{q}</h2>
+      <p className="band-a">{a}</p>
+    </div>
+  )
+}
+
 const fmtDate = (iso: string) => {
   const [y, m, d] = iso.split('-').map(Number)
   return `${d} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]} ${y}`
@@ -111,6 +122,7 @@ export default function Dashboard() {
   const [rainMode, setRainMode] = useState<RainMode>('both')
   const [metric, setMetric] = useState<Metric>('joint_exhaustion')
   const [show, setShow] = useState<Show>('joint')
+  const [picked, setPicked] = useState(false) // the hand on the scenario rows leaves once a scenario has been picked
   if (err) return <><SiteNav theme="light" current="dashboard" /><div className="shell state">The data files could not be loaded. Reload the page, or open the site home and come back.</div></>
   if (!d || !g) return <><SiteNav theme="light" current="dashboard" /><div className="shell state" aria-busy="true">Loading the pool data</div></>
 
@@ -118,6 +130,18 @@ export default function Dashboard() {
   const isKG = poolId === 'kgtj'
   const base = d.pools.kgtj.scenarios![d.scenario_order[0]]
   const sc = isKG ? pool.scenarios![scen] : null
+  const pickScen = (s: string) => { setScen(s); setPicked(true) }
+
+  // one-line answers under each band's question, computed from the same data the band shows
+  const ss = d.pools.kgtj.scenarios!
+  const top = d.scenario_order.slice(1).map((id) => ({ id, r: ss[id].targets.joint_exhaustion.value / base.targets.joint_exhaustion.value }))
+    .sort((a, b) => Math.abs(Math.log(b.r)) - Math.abs(Math.log(a.r)))[0]
+  const times = (r: number) => { const k = r >= 1 ? r : 1 / r; return `${k.toFixed(k < 10 ? 1 : 0)}× ${r >= 1 ? 'higher' : 'lower'}` }
+  // the quake share alone: brief point against the public-records quake share, rain held at the brief's value
+  // (the public-records point also lowers the shared rain, which would mix two effects into one number)
+  const near = (axis: number[], v: number) => axis.reduce((b, x, i) => (Math.abs(x - v) < Math.abs(axis[b] - v) ? i : b), 0)
+  const quakeOnly = g.values.joint_exhaustion[near(g.eq_axis, g.data.eq)][near(g.rain_axis, g.brief.rain)] / g.brief.joint_exhaustion // exact brief point over the nearest grid node to 48%
+  const jx = sc?.targets.joint_exhaustion
 
   return (
     <>
@@ -135,13 +159,6 @@ export default function Dashboard() {
                   </option>
                 ))}
               </Select>
-              <Select id="scen" label="Scenario" value={isKG ? scen : d.scenario_order[0]} onChange={setScen} disabled={!isKG}>
-                {d.scenario_order.map((s) => (
-                  <option key={s} value={s}>
-                    {d.pools.kgtj.scenarios![s].label}
-                  </option>
-                ))}
-              </Select>
               {!isKG && <span className="note">The five brief scenarios are defined for the two-country bond.</span>}
             </div>
             <div className="tb-r">
@@ -152,10 +169,65 @@ export default function Dashboard() {
             </div>
           </header>
 
-          {isKG && sc && <KeyFigures sc={sc} />}
+          <main id="overview">
+            {/* 1 · now: the size of the risk under the selected scenario */}
+            <section className="band" aria-labelledby="b1-h">
+              <BandHead n={1} tag="Now" id="b1-h" q="How big is the risk?"
+                a={isKG && jx ? <>Under the <b className="t">{sc!.label.toLowerCase()}</b> scenario both bonds are wiped out together in <b>{oneIn(jx.value)}</b> three-year terms.</> : <>{pool.label}: the shared limit and the loss it leaves uncovered, at the US${pool.T_moderate}m threshold.</>} />
+              {isKG && sc ? (
+                <>
+                  <div className="sc-tabs">
+                    <Segmented label="Scenario" value={scen} onChange={pickScen} options={d.scenario_order.map((s) => ({ id: s, label: ss[s].label }))} />
+                    <span className="sc-desc">{sc.desc}</span>
+                  </div>
+                  <KeyFigures sc={sc} />
+                </>
+              ) : (
+                <div className="panel kpi"><Kpi d={d} g={g} pool={pool} poolId={poolId} scen={sc} /></div>
+              )}
+            </section>
 
-          <div className="cols">
-            <main className="main" id="overview">
+            {/* 2 · stress: how the brief's scenarios move it */}
+            <section className="band" id="scenarios" aria-labelledby="b2-h">
+              <BandHead n={2} tag="Stress" id="b2-h" q={isKG ? 'What changes under the brief’s scenarios?' : 'How rare is each event?'}
+                a={isKG ? <><b className="t">{ss[top.id].label}</b> moves the joint risk most: <b>{times(top.r)}</b> than the base case. Pick a scenario to update the whole page.</> : <>Exact probabilities on a log scale, for this pool.</>} />
+              <div className={isKG ? 'duo' : ''}>
+                <section className="panel bars" aria-label={isKG ? 'The brief’s five scenarios' : 'Reference probabilities'}>
+                  <div className="ph">
+                    <div>
+                      <h2>{isKG ? 'Five scenarios against the base' : 'Reference probabilities'}</h2>
+                      <p className="sub">{isKG ? 'Log scale, largest change first.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
+                    </div>
+                    {isKG && (
+                      <Seg<Metric> label="Metric" value={metric} onChange={setMetric} options={[
+                        { v: 'joint_exhaustion', label: 'Both exhausted' },
+                        { v: 'exceedance', label: 'Pool > limit' },
+                        { v: 'stop_loss', label: 'Stop-loss' },
+                      ]} />
+                    )}
+                  </div>
+                  {isKG && !picked && <p className="th-note">Click a scenario row to switch the whole page to it</p>}
+                  <ScenarioBars d={d} pool={pool} isKG={isKG} metric={metric} scen={scen} setScen={pickScen} hint={isKG && !picked ? top.id : undefined} />
+                </section>
+                {isKG && (
+                  <section className="panel kpi" aria-labelledby="kpi-h">
+                    <div className="ph">
+                      <div>
+                        <h2 id="kpi-h">Shared limit and loss</h2>
+                        <p className="sub">One US${base.threshold_musd}m limit shared by both bonds, {sc!.label.toLowerCase()} scenario.</p>
+                      </div>
+                    </div>
+                    <Kpi d={d} g={g} pool={pool} poolId={poolId} scen={sc} />
+                  </section>
+                )}
+              </div>
+            </section>
+
+            {/* 3 · drivers: what pushes the tail up */}
+            {poolId !== 'ap' && (
+            <section className="band" aria-labelledby="b3-h">
+              <BandHead n={3} tag="Drivers" id="b3-h" q={isKG ? 'What pushes the joint risk up?' : 'How fast does the tail thin out?'}
+                a={isKG ? <>How often one earthquake hits both countries. Raising that share from the brief&rsquo;s {pct(g.brief.eq, 1)} to the {pct(g.data.eq, 0)} seen in public records, with shared rain held at {pct(g.brief.rain, 0)}, makes the joint risk <b>{times(quakeOnly)}</b>.</> : <>Exact loss exceedance down to 10⁻¹², with the two thresholds the register reads.</>} />
               <section className="panel trend" aria-labelledby="trend-h">
                 <div className="ph">
                   <div>
@@ -167,7 +239,7 @@ export default function Dashboard() {
                           ? `Exact probability that the pooled loss in one term exceeds each threshold (down to 10⁻¹²). Computed by ${pool.exact_label.replace('exact, ', '')}, not simulated.`
                           : `Relative error of each estimator at ${pool.targets![0].budget?.toLocaleString('en-US')} paths, ${pool.reps} replications. Exact references come from ${pool.exact_label}.`}
                     </p>
-                    {isKG && <p className="scope">Base calibration across dependence. The Scenario menu changes the key figures, the shared limit, the scenario rows and the register, not this chart.</p>}
+                    {isKG && <p className="scope">Base calibration across dependence: the scenario picked above does not change this chart.</p>}
                   </div>
                   {isKG && (
                     <div className="segs">
@@ -184,42 +256,23 @@ export default function Dashboard() {
                     </div>
                   )}
                 </div>
-                {isKG ? <TrendKG g={g} mode={rainMode} show={show} /> : poolId === 'carec' ? <TrendCurve pool={pool} /> : <MethodError pool={pool} />}
+                {isKG ? <TrendKG g={g} mode={rainMode} show={show} /> : <TrendCurve pool={pool} />}
               </section>
+            </section>
+            )}
 
-              <div className="duo">
-                <section className="panel kpi" aria-labelledby="kpi-h">
-                  <div className="ph">
-                    <div>
-                      <h2 id="kpi-h">Shared limit and loss</h2>
-                      <p className="sub">{isKG ? `One US$${base.threshold_musd}m limit shared by both bonds.` : `Pooled cover read at the US$${pool.T_moderate}m threshold.`}</p>
-                    </div>
-                  </div>
-                  <Kpi d={d} g={g} pool={pool} poolId={poolId} scen={sc} />
+            {/* 4 · trust: exact values, and how close the fast estimator gets to them */}
+            <section className="band" aria-labelledby="b4-h">
+              <BandHead n={poolId === 'ap' ? 3 : 4} tag="Trust" id="b4-h" q="Can these numbers be trusted?"
+                a={isKG && jx ? <>Every figure above is an exact calculation. The fast estimator (RDPO) lands within <b className="t">{relErr(jx.rdpo_rel_rmse)}</b> of it on the joint risk, and its 95% range held the exact value in {Math.round(jx.rdpo_coverage * jx.reps)} of {jx.reps} runs.</> : <>Every figure is exact; the fast estimators are checked against it below.</>} />
+              {poolId === 'ap' && (
+                <section className="panel trend" aria-label="Estimator error by method">
+                  <div className="ph"><div><h2>Estimator error by method</h2><p className="sub">{`Relative error of each estimator at ${pool.targets![0].budget?.toLocaleString('en-US')} paths, ${pool.reps} replications. Exact references come from ${pool.exact_label}.`}</p></div></div>
+                  <MethodError pool={pool} />
                 </section>
-
-                <section className="panel bars" id="scenarios" aria-labelledby="bars-h">
-                  <div className="ph">
-                    <div>
-                      <h2 id="bars-h">{isKG ? 'The brief’s five scenarios' : 'Reference probabilities'}</h2>
-                      <p className="sub">{isKG ? 'Each scenario against the base case, log scale, largest change first. Click a row to select the scenario.' : 'Exact, log scale: how rare each event is for this pool.'}</p>
-                    </div>
-                    {isKG && (
-                      <Seg<Metric> label="Metric" value={metric} onChange={setMetric} options={[
-                        { v: 'joint_exhaustion', label: 'Both exhausted' },
-                        { v: 'exceedance', label: 'Pool > limit' },
-                        { v: 'stop_loss', label: 'Stop-loss' },
-                      ]} />
-                    )}
-                  </div>
-                  <ScenarioBars d={d} pool={pool} isKG={isKG} metric={metric} scen={scen} setScen={setScen} />
-                </section>
-              </div>
-
+              )}
               <Register pool={pool} poolId={poolId} scen={scen} scLabel={sc?.label} scDesc={sc?.desc} />
-            </main>
-
-            <aside className="side" aria-label="Provenance">
+              <div className="prov">
               <section className="panel runs" aria-labelledby="runs-h">
                 <div className="ph">
                   <div>
@@ -254,8 +307,9 @@ export default function Dashboard() {
                 <a className="jt-btn solid" href="/solution/">How the solution works</a>
                 <a className="lnk" href="/#method">Method on the home page</a>
               </section>
-            </aside>
-          </div>
+              </div>
+            </section>
+          </main>
         </div>
       </div>
     </div>
@@ -472,16 +526,14 @@ function KeyFigures({ sc }: { sc: Scenario }) {
   const j = sc.targets.joint_exhaustion, e = sc.targets.exceedance
   return (
     <section className="keyfig" aria-label={`Key figures, ${sc.label} scenario`}>
-      <p className="kf-sc">{sc.label} scenario</p>
       <div><span>Both bonds exhausted</span><b>{prob(j.value)}</b><small>{oneIn(j.value)} three-year terms, exact</small></div>
       <div><span>Pool pays over US${sc.threshold_musd}m</span><b>{prob(e.value)}</b><small>{oneIn(e.value)} terms, exact</small></div>
       <div><span>Claims one shared limit pays</span><b>{pct(sc.delivered)}</b><small>of expected claims, US${sc.threshold_musd}m limit</small></div>
-      <div><span>RDPO relative error, both exhausted</span><b>{relErr(j.rdpo_rel_rmse)}</b><small>at {j.budget.toLocaleString('en-US')} paths, {j.reps} runs</small></div>
     </section>
   )
 }
 
-function ScenarioBars({ d, pool, isKG, metric, scen, setScen }: { d: DashData; pool: Pool; isKG: boolean; metric: Metric; scen: string; setScen: (s: string) => void }) {
+function ScenarioBars({ d, pool, isKG, metric, scen, setScen, hint }: { d: DashData; pool: Pool; isKG: boolean; metric: Metric; scen: string; setScen: (s: string) => void; hint?: string }) {
   if (isKG) {
     const ss = pool.scenarios!
     const ref = d.scenario_order[0]
@@ -490,7 +542,7 @@ function ScenarioBars({ d, pool, isKG, metric, scen, setScen }: { d: DashData; p
     const rows: DBar[] = d.scenario_order.map((id) => {
       const c = ss[id].targets[metric]
       return {
-        id, label: ss[id].label, ratio: c.value / baseV, active: id === scen, ref: id === ref,
+        id, label: ss[id].label, ratio: c.value / baseV, active: id === scen, ref: id === ref, hint: id === hint,
         display: money ? usd(c.value) : prob(c.value),
         sub: <>brief {money ? usd(c.brief_rounded) : sci(c.brief_rounded, 2)}</>,
       }
