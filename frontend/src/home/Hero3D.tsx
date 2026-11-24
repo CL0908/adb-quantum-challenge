@@ -58,10 +58,15 @@ function halo() {
 
 /** A floating, sculpted island of real terrain: the Kyrgyz Republic and Tajikistan cut from the DEM with an eroded outline,
  *  layered rock below, thin earthquake columns on top and the shared border zone glowing. */
-export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; still?: Pose; onReady?: () => void; onFail?: () => void }) {
+export type Pin = { id: string; lon: number; lat: number }
+export type Tally = { year: number; all: number; both: number }
+export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinEls, hold }: {
+  map: MapData; still?: Pose; onReady?: () => void; onFail?: () => void
+  onYear?: (t: Tally) => void; pins?: Pin[]; pinEls?: { current: Record<string, HTMLElement | null> }; hold?: { current: boolean }
+}) {
   const host = useRef<HTMLDivElement>(null)
-  const cb = useRef({ onReady, onFail })
-  cb.current = { onReady, onFail }
+  const cb = useRef({ onReady, onFail, onYear, pins, pinEls, hold })
+  cb.current = { onReady, onFail, onYear, pins, pinEls, hold }
 
   useEffect(() => {
     const el = host.current
@@ -298,19 +303,24 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         const shown = map.quakes.filter((q) => F.at(q[1], q[0]) > F.T + 0.05)
         const solo = shown.filter((q) => !q[4]), shared = shown.filter((q) => q[4])
         const M4 = new Matrix4(), Q = new Quaternion(), P = new Vector3(), S = new Vector3()
+        type Item = { x: number; y: number; z: number; h: number; rc: number; rb: number; year: number }
+        const rises: { cols: InstancedMesh; balls: InstancedMesh; items: Item[] }[] = []
         const mk = (list: number[][], color: string, opacity: number, emissive: string, ei: number) => {
           const cm = new MeshStandardMaterial({ color, roughness: 0.55, transparent: opacity < 1, opacity, emissive, emissiveIntensity: ei })
           const bm = new MeshStandardMaterial({ color, roughness: 0.35, transparent: opacity < 1, opacity: Math.min(1, opacity + 0.25), emissive, emissiveIntensity: ei })
           const cols = new InstancedMesh(col, cm, list.length), balls = new InstancedMesh(ball, bm, list.length)
           cols.frustumCulled = balls.frustumCulled = false
-          list.forEach(([la, lo, mag], i) => {
+          const items: Item[] = []
+          list.forEach(([la, lo, mag, year], i) => {
             const m = mag - 5.5
             const h = 0.13 + m * 0.2
             const rc = 0.0055 + m * 0.0024, rb = 0.02 + m * 0.011
             const x = wx(lo), z = wz(la), y = Math.max(dem.at(lo, la), 0) * K
             P.set(x, y, z); S.set(rc, h, rc); M4.compose(P, Q, S); cols.setMatrixAt(i, M4)
             P.set(x, y + h, z); S.set(rb, rb, rb); M4.compose(P, Q, S); balls.setMatrixAt(i, M4)
+            items.push({ x, y, z, h, rc, rb, year })
           })
+          rises.push({ cols, balls, items })
           root.add(cols, balls)
           disposers.push(() => { cm.dispose(); bm.dispose() })
         }
@@ -318,13 +328,45 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         mk(shared, '#C8553A', 1, '#E0603A', 0.55)
         const haloTex = halo()
         const hm = new SpriteMaterial({ map: haloTex, blending: AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.8 })
-        shared.forEach(([la, lo, mag]) => {
+        const sprites: { s: Sprite; year: number; base: number }[] = []
+        shared.forEach(([la, lo, mag, year]) => {
           const m = mag - 5.5, h = 0.13 + m * 0.2
           const s = new Sprite(hm)
           s.position.set(wx(lo), Math.max(dem.at(lo, la), 0) * K + h, wz(la))
           s.scale.setScalar(0.34 + m * 0.12)
           root.add(s)
+          sprites.push({ s, year, base: 0.34 + m * 0.12 })
         })
+        /* ---- replay of the catalogue, 1965 to 2016: each main shock rises in its year; the shared zone brightens only when a
+           shock that reached both countries rises. Every value comes from map.quakes; nothing here is simulated. ---- */
+        const Y0 = 1965, Y1 = 2016, PLAY = 15, HOLD = 3
+        let lastYear = -1
+        const setYear = (yr: number) => {
+          const rise = (y0: number) => Math.min(1, Math.max(0, (yr - y0) / 0.8))
+          for (const g of rises) {
+            g.items.forEach((it, i) => {
+              const p = rise(it.year), e = 1 - (1 - p) ** 3
+              P.set(it.x, it.y, it.z); S.set(it.rc, Math.max(1e-4, it.h * e), it.rc); M4.compose(P, Q, S); g.cols.setMatrixAt(i, M4)
+              const b = p > 0 ? it.rb : 1e-4
+              P.set(it.x, it.y + it.h * e, it.z); S.set(b, b, b); M4.compose(P, Q, S); g.balls.setMatrixAt(i, M4)
+            })
+            g.cols.instanceMatrix.needsUpdate = g.balls.instanceMatrix.needsUpdate = true
+          }
+          let flash = 0
+          for (const sp of sprites) {
+            const p = rise(sp.year)
+            sp.s.visible = p > 0
+            sp.s.scale.setScalar(sp.base * (0.4 + 0.6 * p))
+            if (yr >= sp.year) flash = Math.max(flash, Math.exp(-(yr - sp.year) / 0.6))
+          }
+          zoneMat.opacity = 0.72 + 0.28 * flash
+          const whole = Math.floor(yr)
+          if (whole !== lastYear) {
+            lastYear = whole
+            const upTo = map.quakes.filter((q) => q[3] <= whole)
+            cb.current.onYear?.({ year: Math.min(whole, Y1), all: upTo.length, both: upTo.filter((q) => q[4]).length })
+          }
+        }
         disposers.push(() => { col.dispose(); ball.dispose(); hm.dispose(); haloTex.dispose() })
 
         root.position.set(-cx, 0.3, -cz)
@@ -384,6 +426,25 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           }
           put(hi)
         }
+        const PV = new Vector3()
+        const placePins = () => {
+          const els = cb.current.pinEls?.current, list = cb.current.pins
+          if (!els || !list) return
+          scene.updateMatrixWorld()
+          const w = el.clientWidth, h = el.clientHeight
+          for (const p of list) {
+            const e = els[p.id]
+            if (!e) continue
+            PV.set(wx(p.lon), Math.max(dem.at(p.lon, p.lat), 0) * K + 0.05, wz(p.lat))
+            root.localToWorld(PV)
+            PV.project(camera)
+            const px = ((PV.x + 1) / 2) * w, py = ((1 - PV.y) / 2) * h
+            // near the right edge the label flips to the left of its dot, so it never leaves the frame
+            const left = px + e.offsetWidth > w - 8
+            e.dataset.side = left ? 'l' : 'r'
+            e.style.transform = `translate(${left ? px - e.offsetWidth + 14 : px}px, ${py}px)`
+          }
+        }
         const fit = () => {
           const w = el.clientWidth, h = el.clientHeight
           if (!w || !h) return
@@ -393,6 +454,7 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
           camera.aspect = w / h
           fitDist()
           renderer.render(scene, camera)
+          placePins()
         }
         const ro = new ResizeObserver(fit)
         ro.observe(el)
@@ -406,18 +468,24 @@ export default function Hero3D({ map, still, onReady, onFail }: { map: MapData; 
         io.observe(el)
         disposers.push(() => io.disconnect())
         const t0 = performance.now()
+        let yawT = 0, lastT = 0
         const frame = el.parentElement
         const loop = (now: number) => {
           raf = requestAnimationFrame(loop)
           if (!visible || document.hidden) return
           const t = (now - t0) / 1000
+          // the slow turn stops while a pointer rests on a hotspot, so a moving target is never what someone has to click
+          if (!cb.current.hold?.current) yawT += Math.min(0.1, t - lastT)
+          lastT = t
           const bob = 0 // no bob or pulse: motion that is not data reads as changing risk
-          pivot.rotation.y = Math.sin((t * Math.PI * 2) / 46) * yawMax
+          pivot.rotation.y = Math.sin((yawT * Math.PI * 2) / 46) * yawMax
           pivot.position.y = bob * 0.07
-          zoneMat.opacity = 0.9
           hm.opacity = 0.75
+          const tr = t % (PLAY + HOLD)
+          setYear(Y0 + Math.min(1, tr / PLAY) * (Y1 - Y0 + 1))
           frame?.style.setProperty('--bob', bob.toFixed(3))
           renderer.render(scene, camera)
+          placePins()
         }
         if (!still && !reduce) raf = requestAnimationFrame(loop)
         cb.current.onReady?.()

@@ -1,4 +1,5 @@
-import { Suspense, lazy, useEffect, useState, type ReactNode } from 'react'
+import { Suspense, lazy, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import type { Pin, Tally } from './Hero3D'
 import { useJSON, useStory, useValues, V, ValuesProvider } from './lib/data'
 import NestBlock from './Nest'
 import { webglAvailable } from './lib/dem'
@@ -57,8 +58,22 @@ function HeroFigure() {
   const map = useJSON<MapData>('map.json')
   const [gl, setGl] = useState(false)
   const [live, setLive] = useState(false)
+  const [tally, setTally] = useState<Tally | null>(null)
+  const pinEls = useRef<Record<string, HTMLElement | null>>({})
+  const hold = useRef(false)
+  const oneIn = useOneIn()
   useEffect(() => { setGl(webglAvailable()) }, [])
   const shared = map?.quakes.filter((q) => q[4] === 1).length
+  // three places on the island that lead somewhere: the shared zone (why it matters), a country (try the model), the pool
+  const pins = useMemo<Pin[]>(() => {
+    if (!map) return []
+    const z = map.zone[0]
+    return [
+      { id: 'zone', lon: z.reduce((a, p) => a + p[0], 0) / z.length, lat: z.reduce((a, p) => a + p[1], 0) / z.length },
+      { id: 'model', lon: 74.6, lat: 41.4 },
+      { id: 'pool', lon: 78.6, lat: 42.0 },
+    ]
+  }, [map])
   return (
     <figure className={`hero-fig ${live ? 'live' : ''}`} style={{ ['--ar' as string]: HERO_ASPECT }}>
       <div className="hero-shadow" aria-hidden="true" />
@@ -66,8 +81,21 @@ function HeroFigure() {
         <img className="hero-still" src="hero-terrain.webp" alt="The Tian Shan and Pamir cut from real elevation data as a floating terrain block, with the Kyrgyz Republic and Tajikistan, earthquake main shocks as thin columns and the shared border zone glowing." width={2400} height={Math.round(2400 / HERO_ASPECT)} fetchPriority="high" decoding="async" />
         {gl && map && (
           <Suspense fallback={null}>
-            <Hero3D map={map} onReady={() => setLive(true)} onFail={() => setLive(false)} />
+            <Hero3D map={map} onReady={() => setLive(true)} onFail={() => setLive(false)} onYear={setTally} pins={pins} pinEls={pinEls} hold={hold} />
           </Suspense>
+        )}
+        {live && (
+          <div className="pins" onPointerOver={() => { hold.current = true }} onPointerOut={() => { hold.current = false }} onFocus={() => { hold.current = true }} onBlur={() => { hold.current = false }}>
+            <a className="hpin" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''} &darr;</small></span></a>
+            <a className="hpin" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run &rarr;</small></span></a>
+            <a className="hpin" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures &rarr;</small></span></a>
+          </div>
+        )}
+        {live && map && (
+          <div className="replay" aria-hidden="true">
+            {tally ? <><b>{tally.year}</b><span>{tally.all} main shocks</span><span className="both">{tally.both} reached both</span></>
+              : <><b>1965&ndash;2016</b><span>{map.quakes.length} main shocks</span><span className="both">{shared} reached both</span></>}
+          </div>
         )}
       </div>
       <figcaption>
