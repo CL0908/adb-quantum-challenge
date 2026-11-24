@@ -64,7 +64,7 @@ class Rdpo(Scene):
         self.play(FadeIn(mc), run_time=0.5)
         self.wait(1.0)
 
-        title2 = T("RDPO, a learned sampler", 34, TEAL, "MEDIUM").move_to(title)
+        title2 = T("RDPO: sends paths where it matters", 34, TEAL, "MEDIUM").move_to(title)
         self.play(FadeOut(grey), FadeOut(mc), Transform(title, title2), run_time=0.6)
         u, v = 1 - rng.beta(1.3, 6.0, 150), 1 - rng.beta(1.3, 6.0, 150)
         teal = VGroup(*[Dot(place(a, b), radius=0.04, color=TEAL) for a, b in zip(u, v)])
@@ -99,7 +99,7 @@ class SmallWorld(Scene):
         self.play(Create(ring), LaggedStart(*[FadeIn(d) for d in nodes], lag_ratio=0.03), FadeIn(title), run_time=1.1)
         self.play(LaggedStart(*[FadeIn(k) for k in caps], lag_ratio=0.02), run_time=0.5)
         self.play(FadeOut(caps), Transform(title, T("small world: caps removed", 32, INK, "MEDIUM").move_to(title)), run_time=0.7)
-        self.play(Transform(title, T("solved exactly, one pass", 32, TEAL, "MEDIUM").move_to(title)),
+        self.play(Transform(title, T("a rough map, solved in one pass", 32, TEAL, "MEDIUM").move_to(title)),
                   *[d.animate.move_to(c + (p - c) * 0.5) for d, p in zip(nodes, pos)], ring.animate.scale(0.5), run_time=0.8)
         self.play(*[d.animate.move_to(c) for d in nodes], ring.animate.scale(0.15), run_time=0.6)
         self.play(FadeOut(ring), FadeOut(nodes), run_time=0.3)
@@ -111,14 +111,16 @@ class SmallWorld(Scene):
         ticks = VGroup(*[VGroup(Line([bx - 0.1, y(r), 0], [bx, y(r), 0], color=MUTED), T(f"{r:g}×", 22, MUTED).move_to([bx - 0.5, y(r), 0])) for r in (1, 10, 100)])
         exact = DashedLine([bx, y(1), 0], [5.0, y(1), 0], color=INK, dash_length=0.1)
         el = VGroup(T("2M-path", 22, INK), T("reference", 22, INK)).arrange(DOWN, buff=0.05, aligned_edge=LEFT).next_to(exact.get_end(), DOWN, buff=0.12).align_to(exact.get_end(), RIGHT).shift(LEFT * 0.15)
-        self.play(Create(axis), FadeIn(ticks), Create(exact), FadeIn(el), run_time=0.6)
+        self.play(Create(axis), FadeIn(ticks), Create(exact), FadeIn(el),
+                  Transform(title, T("how close is the map to the real pool?", 30, INK, "MEDIUM").move_to(title)), run_time=0.6)
         g, gt = NEST["answer_over_truth"]["guide"], NEST["answer_over_truth"]["guide_tables"]
-        b1 = Rectangle(width=1.1, height=y(g) - by, stroke_width=0, fill_color=TERRA, fill_opacity=0.9).move_to([bx + 1.1, by + (y(g) - by) / 2, 0])
-        l1 = VGroup(T("alone", 22, TERRA), T(f"{g:.0f}×", 32, TERRA, "MEDIUM")).arrange(DOWN, buff=0.06).next_to(b1, UP, buff=0.1)
+        # each answer as a stem from the 1x line: the length is how far off it is
+        b1 = VGroup(Line([bx + 1.1, y(1), 0], [bx + 1.1, y(g), 0], color=TERRA, stroke_width=8), Dot([bx + 1.1, y(g), 0], radius=0.13, color=TERRA))
+        l1 = VGroup(T("caps ignored", 22, TERRA), T(f"{g:.0f}× too high", 32, TERRA, "MEDIUM")).arrange(DOWN, buff=0.06).next_to(b1, RIGHT, buff=0.2).align_to(b1, UP)
         self.play(FadeIn(b1, shift=UP * 0.3), FadeIn(l1), run_time=0.7)
         self.wait(0.7)
-        b2 = Rectangle(width=1.1, height=y(gt) - by, stroke_width=0, fill_color=TEAL, fill_opacity=0.9).move_to([bx + 3.2, by + (y(gt) - by) / 2, 0])
-        l2 = VGroup(T("+ cap tables", 22, TEAL), T(f"{gt:.3f}×", 32, TEAL, "MEDIUM")).arrange(DOWN, buff=0.06).next_to(b2, UP, buff=0.45)
+        b2 = Dot([bx + 3.6, y(gt), 0], radius=0.13, color=TEAL)
+        l2 = VGroup(T("with cap tables", 22, TEAL), T(f"{gt:.3f}×, on target", 32, TEAL, "MEDIUM")).arrange(DOWN, buff=0.06, aligned_edge=LEFT).next_to(b2, UP, buff=0.3)
         self.play(FadeIn(b2, shift=UP * 0.2), FadeIn(l2), run_time=0.7)
         self.wait(1.6)
         self.play(*[FadeOut(m) for m in (axis, ticks, exact, el, b1, l1, b2, l2, title)], run_time=0.5)
@@ -145,13 +147,13 @@ class Twin(Scene):
         rng = np.random.default_rng(3)
         # many possible worlds as markers above the axis: schematic, not placed on the probability scale
         worlds = VGroup(*[Dot([x0 + 0.4 + (i % 24) * 0.38, 2.1 - (i // 24) * 0.3, 0], radius=0.06, color=TEAL, fill_opacity=0.35 + 0.5 * rng.random()) for i in range(72)])
-        wl = T("possible worlds, weighted by the data", 22, MUTED).next_to(worlds, DOWN, buff=0.14).align_to(worlds, LEFT)
+        wl = T("possible worlds; darker = more likely given the data", 22, MUTED).next_to(worlds, DOWN, buff=0.14).align_to(worlds, LEFT)
         self.play(LaggedStart(*[FadeIn(w) for w in worlds], lag_ratio=0.015), FadeIn(wl), run_time=1.6)
         ux = X(tw["uncertain"])
         m = Line([ux, yb, 0], [ux, yb + 2.0, 0], color=TERRA, stroke_width=5)
         ml = T(f"{tw['uncertain'] * 100:.2f}%", 30, TERRA, "MEDIUM").next_to(m, UP, buff=0.1).shift(RIGHT * 0.45)
         self.play(Create(m), FadeIn(ml), run_time=0.9)
-        gain = T(f"averaged over the worlds  +{tw['rel'] * 100:.0f}%", 28, INK).to_edge(UP, buff=1.25)
+        gain = T(f"+{tw['rel'] * 100:.0f}% vs inputs fixed", 28, INK).to_edge(UP, buff=1.25)
         self.play(FadeIn(gain), run_time=0.4)
         self.wait(1.8)
         self.play(*[FadeOut(o) for o in (worlds, wl, m, ml, fixed, fl, gain, title, axis, ticks, cap)], run_time=0.5)

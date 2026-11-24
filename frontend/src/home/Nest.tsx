@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { useJSON } from './lib/data'
 import { SvgTapHint, TapHint } from '../shared/TapHint'
 
@@ -37,13 +37,13 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
       <>
         <span className="nk">Small world &rarr; RDPO</span>
         <h4>A guide table that keeps RDPO steady</h4>
-        <p className="nsub">How much the estimate moves from run to run (relative variance, 28-country ring, lower is better, log scale)</p>
+        <p className="nsub">How much the answer jumps between runs (28-country ring, lower is better, log scale)</p>
         <div className="nbars">
-          <Row label="Exponential twisting" value={n.rho2.twisting.toFixed(0)} pct={lg(n.rho2.twisting)} tone="bad" />
+          <Row label="Standard method (twisting)" value={n.rho2.twisting.toFixed(0)} pct={lg(n.rho2.twisting)} tone="bad" />
           <Row label="Small world guide" value={n.rho2.guide.toFixed(1)} pct={lg(n.rho2.guide)} />
           <Row label="Small world + cap tables" value={n.rho2.guide_tables.toFixed(2)} pct={lg(n.rho2.guide_tables)} tone="good" />
         </div>
-        <p className="nfoot">No training run. At the same CPU time it is <b>{n.equal_cpu_gain.toFixed(1)}&times;</b> as efficient as twisting.</p>
+        <p className="nfoot">No training needed. At the same CPU time it is <b>{n.equal_cpu_gain.toFixed(1)}&times;</b> as efficient as twisting.</p>
       </>
     )
   }
@@ -53,12 +53,12 @@ function Panel({ id, n }: { id: Id; n: Nest }) {
       <>
         <span className="nk">RDPO &rarr; small world</span>
         <h4>RDPO fixes what the small world cannot see</h4>
-        <p className="nsub">Each answer divided by a 2-million-path twisting reference for the real, capped 28-country ring (1&times; matches it)</p>
+        <p className="nsub">Each answer compared with a very long reference run (2 million paths) on the real, capped 28-country ring. 1&times; means they agree.</p>
         <div className="nbars">
           <Row label="Small world on its own" value={x1(top)} pct={100} tone="bad" />
-          <Row label="With cap tables (from pilot paths, cost counted)" value={x1(n.answer_over_truth.guide_tables)} pct={(100 * n.answer_over_truth.guide_tables) / top} />
+          <Row label="With cap tables (from a short trial run, its cost counted)" value={x1(n.answer_over_truth.guide_tables)} pct={(100 * n.answer_over_truth.guide_tables) / top} />
         </div>
-        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool with exact weights: even with the plain table its estimate is about <b>{n.rdpo_z_max.toFixed(2)} standard errors</b> from that reference.</p>
+        <p className="nfoot">The small world has no payout caps, so it overstates the tail. RDPO samples the real pool and reweights every path, so nothing is biased: even with the plain table it lands within <b>{n.rdpo_z_max.toFixed(2)} standard errors</b> of that reference, well inside normal run-to-run noise.</p>
       </>
     )
   }
@@ -101,10 +101,10 @@ function Anim({ id }: { id: Id }) {
   )
 }
 
-const LAYERS: { id: Id; n: string; t: string; q: string; go: string }[] = [
-  { id: 'twin', n: '03', t: 'Twin', q: 'Which world are we in? Many possible worlds, updated with the data.', go: 'Adds to RDPO' },
-  { id: 'rdpo', n: '02', t: 'RDPO', q: 'What is the probability in this world? Sampling on the real pool.', go: 'Fixes the small world' },
-  { id: 'sw', n: '01', t: 'Small world', q: 'Where should the paths go? The pool without payout caps, solved exactly in one pass.', go: 'Guides RDPO' },
+const LAYERS: { id: Id; n: string; t: string; p: string; q: string; go: string }[] = [
+  { id: 'twin', n: '03', t: 'Twin', p: 'The inputs are uncertain, so count many possible versions of them.', q: 'Which world are we in? Many possible worlds, updated with the data.', go: 'Adds to RDPO' },
+  { id: 'rdpo', n: '02', t: 'RDPO', p: 'Count carefully where the rare loss happens, then correct for the shortcut.', q: 'What is the probability in this world? Sampling on the real pool.', go: 'Fixes the small world' },
+  { id: 'sw', n: '01', t: 'Small world', p: 'A rough map first: where both countries can be hit at once.', q: 'Where should the paths go? The pool without payout caps, solved exactly in one pass.', go: 'Guides RDPO' },
 ]
 
 function Nested({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id }) {
@@ -115,7 +115,7 @@ function Nested({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id
       <div className={`nl nl-${L.id} ${sel === L.id ? 'on' : ''}`}>
         <button type="button" className={hint === L.id ? 'nh th-glow' : 'nh'} aria-pressed={sel === L.id} onClick={() => pick(L.id)}>
           <span className="sn">{L.n}</span>
-          <span className="nt"><b>{L.t}</b><span>{L.q}</span></span>
+          <span className="nt"><b>{L.t}</b><span>{L.p}</span><small>{L.q}</small></span>
           <span className={hint === L.id ? 'go th-host' : 'go'}>{L.go}{hint === L.id && <TapHint />}</span>
         </button>
         {layer(i + 1)}
@@ -134,21 +134,24 @@ const NODE_AT: Record<'wide' | 'tall', Record<Id, [number, number]>> = {
   wide: { twin: [20, 152], sw: [430, 152], rdpo: [860, 152] },
   tall: { twin: [46, 16], sw: [46, 208], rdpo: [46, 404] },
 }
+// the dashed RDPO <-> twin loop gets its own dot going round it (drawn under the nodes, so it enters and leaves them),
+// warm so it is not read as the teal main flow; the stylesheet's reduced-motion rule still stops it
+const loopDot = (d: string) => <circle className="flow" r={6} style={{ offsetPath: `path('${d}')`, fill: 'var(--dk-sand)', filter: 'drop-shadow(0 0 6px var(--dk-sand))', animationDuration: '7s', animationDelay: '4.4s' }} />
 const hand = (hint: Id | undefined, v: 'wide' | 'tall') => hint && <SvgTapHint x={NODE_AT[v][hint][0] + 170} y={NODE_AT[v][hint][1] + 66} size={v === 'wide' ? 58 : 44} />
 
 function Chain({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id }) {
   const lit = (e: string) => (LINKS[sel].includes(e) ? 'lit' : 'dim')
-  const node = (id: Id, x: number, y: number, w: number, t: string, s: string) => (
-    <g className={`cn cn-${id} ${sel === id ? 'on' : 'dim'}`} role="button" tabIndex={0} aria-pressed={sel === id} aria-label={t}
+  const node = (id: Id, x: number, y: number, w: number, t: string, s: string, d: number) => (
+    <g style={{ '--d': `${d}s` } as CSSProperties} className={`cn cn-${id} ${sel === id ? 'on' : 'dim'}`} role="button" tabIndex={0} aria-pressed={sel === id} aria-label={t}
       onClick={() => pick(id)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(id) } }}>
       <rect x={x} y={y} width={w} height={96} rx={18} />
       <text className="ct" x={x + 20} y={y + 38}>{t}</text>
       <text className="cs" x={x + 20} y={y + 62}>{s}</text>
     </g>
   )
-  const edge = (id: string, d: string, dashed: boolean, lines: string[], lx: number, ly: number, anchor: 'middle' | 'start' = 'middle') => (
-    <g className={`ce ${lit(id)}`}>
-      <path d={d} strokeDasharray={dashed ? '6 6' : undefined} markerEnd={`url(#${lit(id) === 'lit' ? 'nah-l' : 'nah'})`} />
+  const edge = (id: string, d: string, dashed: boolean, lines: string[], lx: number, ly: number, anchor: 'middle' | 'start' = 'middle', t = 0) => (
+    <g style={{ '--d': `${t}s` } as CSSProperties} className={`ce ${lit(id)} ${dashed ? 'dsh' : 'sol'}`}>
+      <path d={d} pathLength={dashed ? undefined : 1} strokeDasharray={dashed ? '6 6' : undefined} markerEnd={`url(#${lit(id) === 'lit' ? 'nah-l' : 'nah'})`} />
       {lines.map((s, i) => <text key={s} className={i ? '' : 'b'} x={lx} y={ly + 17 * i} textAnchor={anchor}>{s}</text>)}
     </g>
   )
@@ -160,31 +163,38 @@ function Chain({ sel, pick, hint }: { sel: Id; pick: (i: Id) => void; hint?: Id 
   )
   return (
     <>
-      <svg className="chain wide" viewBox="0 0 1100 400" role="group" aria-label="Relation chain: the twin gives the small world the current world, the small world gives RDPO a guide table; RDPO tells the twin what a crisis looks like, and the twin tells RDPO how precise is enough.">
+      <svg className="chain wide" viewBox="-140 0 1380 400" role="group" aria-label="Relation chain: earthquake data goes into the twin, which gives the small world the current inputs; the small world gives RDPO a guide table and RDPO gives the bond price. the small world gives RDPO a guide table; RDPO tells the twin what a crisis looks like, and the twin tells RDPO how precise is enough.">
         {defs}
-        {edge('ts', 'M240,200 L426,200', false, ['World parameters', 'recomputed in 1–2 s', 'when the world changes'], 333, 236)}
-        {edge('sr', 'M650,200 L856,200', false, ['Guide table', 'where to send paths,', 'no training'], 753, 236)}
-        {edge('rt', 'M970,152 C970,40 130,40 130,148', true, ['Crisis anatomy', 'what a crisis looks like, how close it is, which input matters most'], 550, 26)}
-        {edge('tr', 'M130,248 C130,370 970,370 970,252', true, ['How precise is enough', 'how much the answer moves with the uncertain inputs'], 550, 362)}
-        {node('twin', 20, 152, 220, 'Twin', 'Which world are we in?')}
-        {node('sw', 430, 152, 220, 'Small world', 'Where should paths go?')}
-        {node('rdpo', 860, 152, 220, 'RDPO', 'The probability here')}
+        <g className="io" style={{ '--d': '0s' } as CSSProperties}><path d="M-128,200 L14,200" pathLength={1} markerEnd="url(#nah-l)" /><text x={-57} y={186} textAnchor="middle">Earthquake data</text></g>
+        {edge('ts', 'M240,200 L426,200', false, ['Current inputs', 'updated in 1–2 s'], 333, 236, 'middle', 0.9)}
+        {edge('sr', 'M650,200 L856,200', false, ['Where to look', 'a guide table'], 753, 236, 'middle', 1.9)}
+        <g className="io" style={{ '--d': '2.9s' } as CSSProperties}><path d="M1084,200 L1226,200" pathLength={1} markerEnd="url(#nah-l)" /><text x={1155} y={186} textAnchor="middle">Bond price</text></g>
+        {edge('rt', 'M970,152 C970,40 130,40 130,148', true, ['What a crisis looks like'], 550, 26, 'middle', 3.5)}
+        {edge('tr', 'M130,248 C130,370 970,370 970,252', true, ['How precise is enough'], 550, 362, 'middle', 4)}
+        {loopDot('M970,152 C970,40 130,40 130,148 L130,248 C130,370 970,370 970,252 Z')}
+        {node('twin', 20, 152, 220, 'Twin', 'Which inputs are right?', 0.4)}
+        {node('sw', 430, 152, 220, 'Small world', 'A rough map', 1.4)}
+        {node('rdpo', 860, 152, 220, 'RDPO', 'The careful count', 2.4)}
+        <circle className="flow" r={5} style={{ offsetPath: "path('M240,200 L426,200 M650,200 L856,200')" }} />
         {hand(hint, 'wide')}
       </svg>
-      <svg className="chain tall" viewBox="-24 0 364 520" role="group" aria-label="The same relation chain, top to bottom.">
+      <svg className="chain tall" viewBox="-24 -60 364 640" role="group" aria-label="The same relation chain, top to bottom.">
         {defs}
-        {edge('ts', 'M156,112 L156,208', false, ['World parameters', 'recomputed in 1–2 s'], 168, 152, 'start')}
-        {edge('sr', 'M156,304 L156,400', false, ['Guide table', 'where to send paths'], 168, 344, 'start')}
-        {edge('rt', 'M266,452 C334,400 334,110 270,66', true, [], 0, 0)}
-        {edge('tr', 'M46,64 C-20,120 -20,400 42,452', true, [], 0, 0)}
-        {node('twin', 46, 16, 220, 'Twin', 'Which world are we in?')}
-        {node('sw', 46, 208, 220, 'Small world', 'Where should paths go?')}
-        {node('rdpo', 46, 404, 220, 'RDPO', 'The probability here')}
+        <g className="io" style={{ '--d': '0s' } as CSSProperties}><path d="M156,-46 L156,12" pathLength={1} markerEnd="url(#nah-l)" /><text x={168} y={-20}>Earthquake data</text></g>
+        {edge('ts', 'M156,112 L156,208', false, ['Current inputs', 'updated in 1–2 s'], 168, 152, 'start', 0.9)}
+        {edge('sr', 'M156,304 L156,400', false, ['Where to look', 'a guide table'], 168, 344, 'start', 1.9)}
+        <g className="io" style={{ '--d': '2.9s' } as CSSProperties}><path d="M156,500 L156,560" pathLength={1} markerEnd="url(#nah-l)" /><text x={168} y={536}>Bond price</text></g>
+        {edge('rt', 'M266,452 C334,400 334,110 270,66', true, [], 0, 0, 'middle', 3.5)}
+        {edge('tr', 'M46,64 C-20,120 -20,400 42,452', true, [], 0, 0, 'middle', 4)}
+        {loopDot('M266,452 C334,400 334,110 270,66 L46,64 C-20,120 -20,400 42,452 Z')}
+        {node('twin', 46, 16, 220, 'Twin', 'Which inputs are right?', 0.4)}
+        {node('sw', 46, 208, 220, 'Small world', 'A rough map', 1.4)}
+        {node('rdpo', 46, 404, 220, 'RDPO', 'The careful count', 2.4)}
         {hand(hint, 'tall')}
       </svg>
       <ul className="ch-dash">
-        <li><b>RDPO &rarr; twin</b> crisis anatomy: what a crisis looks like, how close it is, which input matters most</li>
-        <li><b>Twin &rarr; RDPO</b> how precise is enough</li>
+        <li><b>RDPO &rarr; twin</b> what a crisis looks like, how close it is, which input matters most</li>
+        <li><b>Twin &rarr; RDPO</b> how precise is enough, from how much the answer moves with the uncertain inputs</li>
       </ul>
       <div className="ch-key"><span><i />Tested on pools up to 28 countries</span><span><i className="d" />Tested on the two-country bond</span></div>
     </>
