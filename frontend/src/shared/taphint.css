@@ -7,9 +7,6 @@
 /* host: put the hand on a pill or button; the host itself is lit so it reads as the thing to press */
 .th-host { position: relative; opacity: 1 !important; }
 .th-host > .tap-hint { left: 50%; top: 62%; }
-/* dot: the fingertip on the centre of a small marker (map hotspots) */
-.th-dot { position: relative; }
-.th-dot > .tap-hint { left: 50%; top: 50%; }
 /* glow: the whole row or card to press breathes a teal outline while the hand is on it */
 .th-glow { outline: 2px solid var(--dk-teal, #4DBBAB); outline-offset: 2px; animation: th-glow 1.9s ease-in-out infinite; }
 @keyframes th-glow { 50% { outline-color: transparent; } }

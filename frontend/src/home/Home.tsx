@@ -8,7 +8,6 @@ import Reveal, { useInView } from './Reveal'
 import { Bar, Checks, Heat, Ring, Sources, TimeLine } from './Visuals'
 import { HERO_ASPECT, PROBLEM_ASPECT } from './Hero3D.config'
 import { SiteNav } from '../shared/SiteNav'
-import { TapHint } from '../shared/TapHint'
 import '../shared/theme.css'
 import './home.css'
 import './visuals.css'
@@ -62,8 +61,6 @@ function HeroFigure() {
   const [tally, setTally] = useState<Tally | null>(null)
   const pinEls = useRef<Record<string, HTMLElement | null>>({})
   const hold = useRef(false)
-  // a tapping hand on the Solution hotspot says the island is clickable; it leaves once a hotspot has been pointed at
-  const [pinsFound, setPinsFound] = useState(false)
   const oneIn = useOneIn()
   useEffect(() => { setGl(webglAvailable()) }, [])
   const shared = map?.quakes.filter((q) => q[4] === 1).length
@@ -89,9 +86,9 @@ function HeroFigure() {
           </Suspense>
         )}
         {live && (
-          <div className="pins" onPointerOver={() => { hold.current = true; setPinsFound(true) }} onPointerOut={() => { hold.current = false }} onFocus={() => { hold.current = true; setPinsFound(true) }} onBlur={() => { hold.current = false }}>
+          <div className="pins" onPointerOver={() => { hold.current = true }} onPointerOut={() => { hold.current = false }} onFocus={() => { hold.current = true }} onBlur={() => { hold.current = false }}>
             <a className="hpin pin-zone" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><em>Problem &darr;</em><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''}</small></span></a>
-            <a className="hpin pin-model" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" className={pinsFound ? undefined : 'th-dot'}>{!pinsFound && <TapHint />}</i><span><em>Solution &rarr;</em><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run</small></span></a>
+            <a className="hpin pin-model" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><em>Solution &rarr;</em><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run</small></span></a>
             <a className="hpin pin-pool" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><em>Dashboard &rarr;</em><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures</small></span></a>
           </div>
         )}
