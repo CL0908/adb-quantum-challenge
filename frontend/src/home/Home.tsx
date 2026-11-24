@@ -69,7 +69,8 @@ function HeroFigure() {
     if (!map) return []
     const z = map.zone[0]
     return [
-      { id: 'zone', lon: z.reduce((a, p) => a + p[0], 0) / z.length, lat: z.reduce((a, p) => a + p[1], 0) / z.length },
+      // the western tip of the zone, label to its left: the card never covers the zone where joint shocks ripple
+      { id: 'zone', lon: Math.min(...z.map((p) => p[0])) + 0.4, lat: z.reduce((a, p) => a + p[1], 0) / z.length + 0.3, side: 'l' },
       { id: 'model', lon: 74.6, lat: 41.4 },
       { id: 'pool', lon: 78.6, lat: 42.0 },
     ]
@@ -86,15 +87,16 @@ function HeroFigure() {
         )}
         {live && (
           <div className="pins" onPointerOver={() => { hold.current = true }} onPointerOut={() => { hold.current = false }} onFocus={() => { hold.current = true }} onBlur={() => { hold.current = false }}>
-            <a className="hpin" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''} &darr;</small></span></a>
-            <a className="hpin" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run &rarr;</small></span></a>
-            <a className="hpin" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures &rarr;</small></span></a>
+            <a className="hpin pin-zone" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><em>Problem &darr;</em><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''}</small></span></a>
+            <a className="hpin pin-model" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><em>Solution &rarr;</em><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run</small></span></a>
+            <a className="hpin pin-pool" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><em>Dashboard &rarr;</em><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures</small></span></a>
           </div>
         )}
         {live && map && (
           <div className="replay" aria-hidden="true">
-            {tally ? <><b>{tally.year}</b><span>{tally.all} main shocks</span><span className="both">{tally.both} reached both</span></>
-              : <><b>1965&ndash;2016</b><span>{map.quakes.length} main shocks</span><span className="both">{shared} reached both</span></>}
+            <b className="yr">{tally ? tally.year : '1965\u20132016'}</b>
+            <span className="prog"><i style={{ width: `${tally ? (100 * (tally.year - 1965)) / (2016 - 1965) : 100}%` }} /></span>
+            <span className="cnt"><span>{tally ? tally.all : map.quakes.length} main shocks</span><span key={tally ? tally.both : 'all'} className="both">{tally ? tally.both : shared} reached both</span></span>
           </div>
         )}
       </div>

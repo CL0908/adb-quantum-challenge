@@ -337,3 +337,28 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
   .replay { padding: 5px 10px; font-size: 11.5px; gap: 7px; white-space: nowrap; bottom: -2%; }
   .replay b { font-size: 13px; min-width: 0; }
 }
+
+/* hotspot cards told apart by colour and destination; the replay year large on the right (local copy) */
+.hpin span { border-left: 3px solid var(--pin); }
+.hpin i { background: var(--pin); }
+.hpin em { font: 600 11px/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; font-style: normal; color: var(--pin); margin-bottom: 1px; }
+.pin-zone { --pin: var(--terra-d); }
+.pin-model { --pin: var(--teal-d); }
+.pin-pool { --pin: var(--navy); }
+.replay { left: auto; right: 4%; bottom: 10%; flex-direction: column; align-items: flex-end; gap: 6px; padding: 0; border: 0; background: none; border-radius: 0; }
+.replay b.yr { font: 300 clamp(44px, 5vw, 72px)/1 var(--sans); letter-spacing: -0.04em; color: var(--ink); min-width: 0; font-variant-numeric: tabular-nums; }
+.replay .prog { position: relative; display: block; width: clamp(140px, 14vw, 220px); height: 3px; border-radius: 2px; background: var(--hair2); overflow: hidden; }
+.replay .prog i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+.replay .cnt { display: flex; gap: 10px; font-size: 13px; color: var(--ink2); }
+.replay .both { color: var(--terra-d); font-weight: 600; display: inline-block; animation: pop 0.6s ease-out; }
+@keyframes pop { 0% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .replay .both { animation: none; } }
+@media (max-width: 700px) {
+  .replay { left: auto; right: 4%; transform: none; bottom: 0; gap: 4px; padding: 0; white-space: nowrap; }
+  .replay b.yr { font-size: 34px; }
+  .replay .prog { width: 110px; }
+  .replay .cnt { font-size: 11px; gap: 6px; }
+  .hpin em { display: none; }
+}
+.replay .cnt .both { margin-left: 2px; }
+.replay .cnt { column-gap: 12px; }

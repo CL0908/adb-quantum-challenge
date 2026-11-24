@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import {
   AdditiveBlending, AmbientLight, BufferAttribute, BufferGeometry, CanvasTexture, CylinderGeometry, DirectionalLight, DoubleSide,
   ACESFilmicToneMapping, Color, Group, HemisphereLight, PCFShadowMap, InstancedMesh, LineBasicMaterial, LineSegments, LinearFilter, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, Quaternion, RepeatWrapping, TextureLoader, Vector2, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
+  PerspectiveCamera, Quaternion, RepeatWrapping, RingGeometry, TextureLoader, Vector2, Scene, SphereGeometry, SRGBColorSpace, Sprite, SpriteMaterial, Vector3, WebGLRenderer,
 } from 'three'
 import { loadDem } from './lib/dem'
 import type { MapData } from './lib/map'
@@ -58,7 +58,7 @@ function halo() {
 
 /** A floating, sculpted island of real terrain: the Kyrgyz Republic and Tajikistan cut from the DEM with an eroded outline,
  *  layered rock below, thin earthquake columns on top and the shared border zone glowing. */
-export type Pin = { id: string; lon: number; lat: number }
+export type Pin = { id: string; lon: number; lat: number; side?: 'l' | 'r' }
 export type Tally = { year: number; all: number; both: number }
 export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinEls, hold }: {
   map: MapData; still?: Pose; onReady?: () => void; onFail?: () => void
@@ -329,6 +329,9 @@ export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinE
         const haloTex = halo()
         const hm = new SpriteMaterial({ map: haloTex, blending: AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.8 })
         const sprites: { s: Sprite; year: number; base: number }[] = []
+        const ripples: { m: Mesh; mat: MeshBasicMaterial; year: number }[] = []
+        const ringGeo = new RingGeometry(0.68, 1, 64)
+        disposers.push(() => ringGeo.dispose())
         shared.forEach(([la, lo, mag, year]) => {
           const m = mag - 5.5, h = 0.13 + m * 0.2
           const s = new Sprite(hm)
@@ -336,6 +339,15 @@ export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinE
           s.scale.setScalar(0.34 + m * 0.12)
           root.add(s)
           sprites.push({ s, year, base: 0.34 + m * 0.12 })
+          // a ripple on the ground at the epicentre, shown only while this shock rises in the replay
+          const rm = new MeshBasicMaterial({ color: '#C8553A', transparent: true, opacity: 0, depthWrite: false, side: DoubleSide })
+          const rg = new Mesh(ringGeo, rm)
+          rg.rotation.x = -Math.PI / 2
+          rg.position.set(wx(lo), Math.max(dem.at(lo, la), 0) * K + 0.02, wz(la))
+          rg.visible = false
+          root.add(rg)
+          ripples.push({ m: rg, mat: rm, year })
+          disposers.push(() => rm.dispose())
         })
         /* ---- replay of the catalogue, 1965 to 2016: each main shock rises in its year; the shared zone brightens only when a
            shock that reached both countries rises. Every value comes from map.quakes; nothing here is simulated. ---- */
@@ -356,10 +368,23 @@ export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinE
           for (const sp of sprites) {
             const p = rise(sp.year)
             sp.s.visible = p > 0
-            sp.s.scale.setScalar(sp.base * (0.4 + 0.6 * p))
+            const swell = yr >= sp.year && yr - sp.year < 1.6 ? 1 - (yr - sp.year) / 1.6 : 0
+            sp.s.scale.setScalar(sp.base * (0.4 + 0.6 * p) * (1 + 1.6 * swell))
             if (yr >= sp.year) flash = Math.max(flash, Math.exp(-(yr - sp.year) / 0.6))
           }
-          zoneMat.opacity = 0.72 + 0.28 * flash
+          // the shared zone lifts clearly, and only, when a shock that reached both countries rises
+          zoneMat.opacity = 0.62 + 0.38 * flash
+          zoneMat.color.setScalar(1 + 0.55 * flash)
+          for (const rp of ripples) {
+            // two waves, a year apart, each spreading for about a second of the replay
+            const age = yr - rp.year, k1 = age / 4, k2 = (age - 1.1) / 4
+            const k = k1 >= 0 && k1 < 1 ? k1 : k2 >= 0 && k2 < 1 ? k2 : -1
+            rp.m.visible = k >= 0
+            if (k >= 0) {
+              rp.m.scale.setScalar(0.08 + k * 1.7)
+              rp.mat.opacity = (k === k1 ? 1 : 0.7) * (1 - k) ** 1.2
+            }
+          }
           const whole = Math.floor(yr)
           if (whole !== lastYear) {
             lastYear = whole
@@ -440,7 +465,8 @@ export default function Hero3D({ map, still, onReady, onFail, onYear, pins, pinE
             PV.project(camera)
             const px = ((PV.x + 1) / 2) * w, py = ((1 - PV.y) / 2) * h
             // near the right edge the label flips to the left of its dot, so it never leaves the frame
-            const left = px + e.offsetWidth > w - 8
+            const fitsLeft = px - e.offsetWidth + 14 >= 8
+            const left = (p.side === 'l' && fitsLeft) || px + e.offsetWidth > w - 8
             e.dataset.side = left ? 'l' : 'r'
             e.style.transform = `translate(${left ? px - e.offsetWidth + 14 : px}px, ${py}px)`
           }
