@@ -362,3 +362,8 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
 }
 .replay .cnt .both { margin-left: 2px; }
 .replay .cnt { column-gap: 12px; }
+
+/* hero: the island opens enlarged and shrinks to its place as the page scrolls (--hz goes 0 -> 1, set from Home.tsx);
+   it grows from its top edge so it never climbs over the headline, and the hero's overflow clips the sides */
+.hero-frame { transform: scale(calc(1.28 - 0.28 * var(--hz, 1))); transform-origin: 50% 0; will-change: transform; }
+.hero-shadow { opacity: calc((0.9 + var(--bob, 0) * 0.1) * var(--hz, 1)); }
