@@ -81,6 +81,8 @@ export default function App() {
   const preset = grid ? (Math.abs(eq - grid.brief.eq) < 0.0006 && Math.abs(rain - grid.brief.rain) < 0.0006 ? 'brief' : Math.abs(eq - grid.data.eq) < 0.0006 && Math.abs(rain - grid.data.rain) < 0.0006 ? 'data' : '') : ''
   // between grid nodes the numbers are interpolated from the exact grid, so only nodes and presets are labelled exact
   const shown = !!(((ready || noGL) && sol && grid) || late) // panels are inert until then: no focus on hidden controls
+  // the guide card changes the free area on the map, so the floating cards are placed again
+  useEffect(() => { const t = requestAnimationFrame(() => window.dispatchEvent(new Event('jt-relayout'))); return () => cancelAnimationFrame(t) }, [guide, shown])
   const onGrid = !!grid && ([grid.brief, grid.data].some((p) => Math.abs(eq - p.eq) < 1e-9 && Math.abs(rain - p.rain) < 1e-9) || (grid.eq_axis.some((x) => Math.abs(x - eq) < 1e-9) && grid.rain_axis.some((x) => Math.abs(x - rain) < 1e-9)))
   const e1 = sol?.e1[scenario]?.joint_exhaustion
   const qLast = story?.quantum[story.quantum.length - 1]

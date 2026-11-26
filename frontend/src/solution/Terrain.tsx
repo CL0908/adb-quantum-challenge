@@ -440,6 +440,9 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
 
         let visible = true
         const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) dirty = true })
+        const relayout = () => { dirty = true }
+        window.addEventListener('jt-relayout', relayout)
+        disposers.push(() => window.removeEventListener('jt-relayout', relayout))
         io.observe(el)
         disposers.push(() => io.disconnect())
 
@@ -447,13 +450,24 @@ export default function Terrain({ map, eq, stage, anchors, anchorEls, getInsets,
         const project = () => {
           const w = el.clientWidth, h = el.clientHeight
           const off = narrow()
+          // the panels' edges (rail, guide, title, right column, events bar), so a floating card never slides under one
+          const insNow = off ? null : cb.current.getInsets()
           for (const a of cb.current.anchors) {
             const node = anchorEls.current[a.id]
             if (!node) continue
-            if (off) { node.style.transform = ''; continue }
+            if (off) { node.style.transform = ''; const c = node.querySelector<HTMLElement>('.card'); if (c) c.style.translate = ''; continue }
             v3.set(wx(f, a.lon), Math.max(dem.at(a.lon, a.lat), 0) * K, wz(f, a.lat)).project(camera)
-            node.style.transform = `translate3d(${((v3.x + 1) / 2) * w}px, ${((1 - v3.y) / 2) * h}px, 0)`
+            const px = ((v3.x + 1) / 2) * w, py = ((1 - v3.y) / 2) * h
+            node.style.transform = `translate3d(${px}px, ${py}px, 0)`
             node.style.opacity = v3.z < 1 ? '1' : '0'
+            // keep the card inside the free area between the panels; the dot stays on its place, the leader runs under the card
+            const card = node.querySelector<HTMLElement>('.card')
+            if (card && insNow) {
+              const m = 10, x0 = px + card.offsetLeft, y0 = py + card.offsetTop
+              const dx = Math.max(0, insNow.l + m - x0) || Math.min(0, w - insNow.r - m - (x0 + card.offsetWidth))
+              const dy = Math.max(0, insNow.t + m - y0) || Math.min(0, h - insNow.b - m - (y0 + card.offsetHeight))
+              card.style.translate = dx || dy ? `${dx.toFixed(1)}px ${dy.toFixed(1)}px` : ''
+            }
           }
         }
         const ease = (t: number) => 1 - Math.pow(1 - t, 3)

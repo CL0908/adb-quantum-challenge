@@ -58,11 +58,11 @@ export default function Guide({ steps, step, setStep, onClose }: { steps: GuideS
     <>
       {box && (
         <>
-          <div className={`gd-ring${s.done ? ' ok' : ''}`} aria-hidden style={{ left: box.x - 6, top: box.y - 6, width: box.w + 12, height: box.h + 12 }} />
+          <div className={`gd-ring${s.done ? ' ok' : ''}`} aria-hidden style={{ left: box.x - 6, top: box.y - 2, width: box.w + 12, height: box.h + 4 }} />
           {!s.done && <div className="gd-hand" style={{ left: box.px, top: box.py }}><TapHint /></div>}
         </>
       )}
-      <section className="jt-panel solid gd-card" role="dialog" aria-modal="false" aria-label="Guide to this page">
+      <section className="jt-panel solid gd-card" data-inset="l" role="dialog" aria-modal="false" aria-label="Guide to this page">
         <div className="gd-head">
           <ol className="gd-steps" aria-label={`Step ${step + 1} of ${steps.length}`}>
             {steps.map((x, i) => (
@@ -76,7 +76,6 @@ export default function Guide({ steps, step, setStep, onClose }: { steps: GuideS
         </div>
         <div className="gd-view">
           <div key={step} className={`gd-body ${dir > 0 ? 'fwd' : 'back'}`}>
-            <div className="lbl teal">Step {step + 1} of {steps.length}</div>
             <h2>{s.title}</h2>
             <p>{s.body}</p>
             <div className={`gd-state${s.done ? ' ok' : ''}`} aria-live="polite">{s.done ? <>✓ {s.doneText}</> : <>Follow the hand on the page</>}</div>
