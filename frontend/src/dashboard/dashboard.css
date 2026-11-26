@@ -83,7 +83,7 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
 .pill.down { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--teal); }
 .pill.flat { background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--text2); }
 .pill.teal { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--teal); }
-.pill.warn { background: color-mix(in srgb, var(--hi) 16%, transparent); color: var(--hi); }
+.pill.warn { background: color-mix(in srgb, var(--hi) 12%, transparent); color: color-mix(in srgb, var(--hi) 85%, #000); }
 
 /* bars */
 .vbars { display: flex; gap: 10px; align-items: stretch; }
@@ -180,7 +180,7 @@ h2 { font: 500 19px/1.2 var(--sans); letter-spacing: -0.03em; }
   .tr > span:not(:first-child)::before { content: attr(data-l); font-size: var(--t-xs); color: var(--mute); }
 }
 
-.pill.sand { background: color-mix(in srgb, var(--hi) 16%, transparent); color: var(--hi); }
+.pill.sand { background: color-mix(in srgb, var(--hi) 12%, transparent); color: color-mix(in srgb, var(--hi) 85%, #000); }
 .lnk { color: var(--accent); }
 .sel .sel-s { color: var(--text); }
 

@@ -105,8 +105,10 @@ p { margin: 0; }
 .facts b { font: 300 25px/1.05 var(--sans); letter-spacing: -0.035em; color: var(--tx); font-weight: 300; }
 .facts .num-l { font-size: 30px; color: var(--accent); }
 .pbars { display: grid; gap: 5px; }
-.pb { display: flex; align-items: center; gap: 8px; opacity: 0.5; transition: opacity 0.25s; }
-.pb.on { opacity: 1; }
+.pb { display: flex; align-items: center; gap: 8px; }
+.pb .pb-track i { opacity: 0.45; transition: opacity 0.25s; }
+.pb.on .pb-track i { opacity: 1; }
+.pb.on .pb-l { color: var(--ink); }
 .pb-l { width: 18px; font: 600 11px var(--sans); color: var(--tx2); text-align: right; }
 .pb-track { flex: 1; height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--ink) 7%, transparent); overflow: hidden; }
 .pb-track i { display: block; height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s; }

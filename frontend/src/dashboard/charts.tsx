@@ -164,9 +164,9 @@ export function VBars({ bars, log, height = 200, floor, onPick }: { bars: Bar[];
   const lo = floor ?? Math.min(...bars.map((b) => b.value)) / 10
   const frac = (v: number) => (log ? (Math.log10(v) - Math.log10(lo)) / (Math.log10(hi * 1.15) - Math.log10(lo)) : v / (hi * 1.1))
   return (
-    <div className="vbars" style={{ height }} role="list">
+    <div className="vbars" style={{ height }} role="group">
       {bars.map((b) => (
-        <button key={b.id} type="button" role="listitem" className={`vb${b.active ? ' on' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
+        <button key={b.id} type="button" className={`vb${b.active ? ' on' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
           <span className="vb-val">{b.display}</span>
           <span className="vb-track">
             <span className="vb-fill" style={{ height: `${Math.max(3, Math.min(100, frac(b.value) * 100))}%` }} />
@@ -187,13 +187,13 @@ export function DivBars({ rows, onPick }: { rows: DBar[]; onPick?: (id: string) 
   const x = (r: number) => 50 + (Math.log10(r) / span) * 50
   const ticks = [0.1, 0.5, 1, 2, 10].filter((t) => Math.abs(Math.log10(t)) <= span)
   return (
-    <div className="dbars" role="list">
+    <div className="dbars" role="group">
       <div className="db-axis" aria-hidden="true"><span className="db-axl" />{ticks.map((t) => <span key={t} className={t === 1 ? 'base' : undefined} style={{ left: `${x(t)}%` }}>{t === 1 ? 'base' : `${t}\u00d7`}</span>)}</div>
       {rows.map((b) => {
         const a = x(b.ratio), lo = Math.min(a, 50), w = Math.abs(a - 50)
         const tone = b.ref ? 'ref' : b.ratio >= 1 ? 'up' : 'down'
         return (
-          <button key={b.id} type="button" role="listitem" className={`db ${tone}${b.active ? ' on' : ''}${b.hint ? ' th-host th-glow' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
+          <button key={b.id} type="button" className={`db ${tone}${b.active ? ' on' : ''}${b.hint ? ' th-host th-glow' : ''}`} onClick={() => onPick?.(b.id)} disabled={!onPick} aria-pressed={onPick ? b.active : undefined}>
             <span className="db-lab"><b>{b.label}</b>{b.sub && <small>{b.sub}</small>}</span>
             <span className="db-track"><i className="db-mid" /><i className="db-fill" style={{ left: `${lo}%`, width: `${Math.max(w, 0.8)}%` }} /></span>
             {b.hint && <TapHint />}

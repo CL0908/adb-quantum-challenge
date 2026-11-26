@@ -104,14 +104,14 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
 
 /* how it works */
 .how { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
-.how .steps { position: sticky; top: 96px; }
+.how .steps-col { position: sticky; top: 96px; }
 .stack { position: relative; display: flex; flex-direction: column; padding: 8px 0 8px; }
 .stack .c1 { width: 100%; z-index: 1; }
 .stack { gap: 16px; }
 .stack .c2 { width: 100%; }
 .stack .c3 { width: 100%; }
 .steps { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.steps li { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 6px; padding: 20px 22px 20px 18px; border: 1px solid rgba(255, 255, 255, 0.13); border-radius: 20px; background: rgba(255, 255, 255, 0.045); }
+.steps .step { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 6px; padding: 20px 22px 20px 18px; border: 1px solid rgba(255, 255, 255, 0.13); border-radius: 20px; background: rgba(255, 255, 255, 0.045); }
 
 /* term with a one-line explanation on hover, focus or tap */
 .term { position: relative; border-bottom: 1px dashed currentColor; cursor: help; outline: none; }
@@ -131,7 +131,7 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
 .steps h3 { font: 500 clamp(20px, 1.9vw, 25px)/1.2 var(--sans); letter-spacing: -0.025em; color: #fff; }
 .steps p { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--dk-ink); max-width: 30em; }
 .steps p b { color: #fff; font-weight: 500; }
-.steps .btn { margin-top: 34px; }
+.steps-col .btn { margin-top: 34px; }
 @media (max-width: 960px) { .how { grid-template-columns: 1fr; } }
 
 /* cards */

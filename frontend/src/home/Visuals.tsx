@@ -166,7 +166,7 @@ export function Heat({ s }: { s: Story }) {
   })()
   return (
     <div className="heat">
-      <div className="hm-grid" role="grid" aria-label="Improvement factor over the best of four methods at equal paths">
+      <div className="hm-grid" role="group" aria-label="Improvement factor over the best of four methods at equal paths">
         <span />
         {TGT.map(([k, short], c) => <span key={k} className={`hm-col ${c === 4 ? 'key' : ''}`}>{short}</span>)}
         {SCEN.map(([sk, sl], r) => (
@@ -178,7 +178,7 @@ export function Heat({ s }: { s: Story }) {
               const t = win ? Math.min(1, 0.16 + Math.log10(f) / 2) : 0
               const key = c === 4
               return (
-                <button key={tk} type="button" role="gridcell" className={`hm ${win ? '' : 'lose'} ${key ? 'key' : ''} ${sel && sel[0] === r && sel[1] === c ? 'on' : ''}`}
+                <button key={tk} type="button" className={`hm ${win ? '' : 'lose'} ${key ? 'key' : ''} ${sel && sel[0] === r && sel[1] === c ? 'on' : ''}`}
                   style={{ ['--t' as string]: t, transitionDelay: `${(r + c) * 40}ms` }}
                   onMouseEnter={() => setSel([r, c])} onFocus={() => setSel([r, c])} onMouseLeave={() => setSel(null)} onBlur={() => setSel(null)}
                   aria-label={`${sl}, ${TGT[c][2]}: ${fx(f)}`}>
@@ -262,13 +262,13 @@ export function Bar({ s }: { s: Story }) {
       <dl className="qstats">
         <div><dt>Classical, measured on one Xeon thread</dt><dd><V k="Q_CLS_28" /></dd></div>
         <div><dt>Quantum, projected</dt><dd><V k="Q_TIME_28" /></dd></div>
-        <p className="qnote">Dots: ring pools of {q.filter((r) => r !== k).map((r) => r.n).join(', ')} and {k.n} countries.</p>
       </dl>
+      <p className="qnote">Dots: ring pools of {q.filter((r) => r !== k).map((r) => r.n).join(', ')} and {k.n} countries.</p>
       <div className="qload">
         <p>With the cap-aware loader, at 1% error and against the faster classical reference:</p>
         <dl>
           {(['28', '40', '56'] as const).map((n) => (
-            <div key={n}><dt>{n} countries</dt><dd><V k={`Q_LOADER_${n}`} />&times;</dd><span>twisting <V k={`Q_TWIST_${n}`} />&times;</span></div>
+            <div key={n}><dt>{n} countries</dt><dd><V k={`Q_LOADER_${n}`} />&times;</dd><dd className="tw">twisting <V k={`Q_TWIST_${n}`} />&times;</dd></div>
           ))}
         </dl>
       </div>

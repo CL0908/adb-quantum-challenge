@@ -21,7 +21,7 @@ export function Digits({ text }: { text: string }) {
   const [slots, setSlots] = useState<Slot[]>(() => [...text].map((ch) => ({ ch, old: null, dir: 1, v: 0 })))
   if (text !== cur) { setCur(text); setSlots(diff(slots, text)) } // derive from the previous render, StrictMode safe
   return (
-    <span className="dg" aria-label={text}>
+    <span className="dg"><span className="jt-sr">{text}</span>
       {slots.map((s, i) => (
         <span className="dg-c" key={i} aria-hidden>
           {s.v > 0 && s.old !== null && <span key={`o${s.v}`} className={`dg-out ${s.dir > 0 ? 'up' : 'dn'}`}>{s.old}</span>}

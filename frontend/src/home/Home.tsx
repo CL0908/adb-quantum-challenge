@@ -218,14 +218,14 @@ function How() {
               <p className="kfoot">At equal CPU time: <b><V k="EQ0_TIME" /> of <V k="EQ0_N" /></b>. Largest gain on &ldquo;both bonds exhausted&rdquo;: <b><V k="E1_EXH_RANGE_SHORT" /></b>. <a href="#results">All 25 cases</a></p>
             </Card>
           </div>
-          <ol className="steps">
-            {steps.map((x, i) => (
-              <Reveal key={x.n} delay={i * 80}>
-                <li><span className="sn">{x.n}</span><div><h3>{x.t}</h3><p>{x.d}</p></div></li>
-              </Reveal>
-            ))}
+          <div className="steps-col">
+            <ol className="steps">
+              {steps.map((x, i) => (
+                <li key={x.n}><Reveal delay={i * 80} className="step"><span className="sn">{x.n}</span><div><h3>{x.t}</h3><p>{x.d}</p></div></Reveal></li>
+              ))}
+            </ol>
             <Reveal delay={360}><a className="btn light" href={SOLUTION}>See it run <Arrow /></a></Reveal>
-          </ol>
+          </div>
         </div>
         <Reveal><NestBlock /></Reveal>
       </div>
