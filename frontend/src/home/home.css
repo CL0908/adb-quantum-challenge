@@ -336,7 +336,7 @@ h1 { display: flex; flex-direction: column; align-items: center; gap: 0.02em; fo
 .hpin span { text-align: left; }
 .hpin[data-side='l'] span { text-align: right; }
 @media (max-width: 700px) {
-  .pins { display: none; }
+  .pins, .hero-shadow { display: none; }
   .hero-fig figcaption { display: grid; justify-content: center; justify-items: start; gap: 6px; text-align: left; }
   .replay .prog { width: 96px; }
 }

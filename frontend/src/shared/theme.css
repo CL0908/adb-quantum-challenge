@@ -130,7 +130,7 @@ sup { font-size: max(0.6em, 10px); vertical-align: 0; position: relative; top: -
 .jt-cross { stroke: var(--axis); stroke-dasharray: 3 3; }
 .jt-s1 { stroke: var(--c1); color: var(--c1); } .jt-s2 { stroke: var(--c2); color: var(--c2); } .jt-s3 { stroke: var(--c3); color: var(--c3); }
 .jt-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; color: var(--ink2); font-size: 12px; }
-.jt-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.jt-legend span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
 .jt-legend .ln { display: inline-block; width: 18px; height: 3px; border-radius: 2px; background: currentColor; }
 .jt-legend .dot { box-sizing: border-box; display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; background: transparent; }
 .jt-tip { position: absolute; transform: translateX(-50%); background: var(--tip-bg); border: 1px solid var(--hair2); border-radius: var(--r-m); padding: 8px 11px; font-size: 12px; min-width: 180px; pointer-events: none; box-shadow: var(--shadow); color: var(--ink2); z-index: 5; }

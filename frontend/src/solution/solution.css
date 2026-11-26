@@ -23,7 +23,7 @@ p { margin: 0; }
 
 /* ---------- title and navigation ---------- */
 .sol > .jt-nav-wrap { position: absolute; left: 0; right: 0; top: 0; }
-.top { position: absolute; left: var(--gap); top: var(--topy); z-index: 5; max-width: 560px; }
+.top { position: absolute; left: var(--gap); top: var(--topy); z-index: 5; width: max-content; max-width: 560px; }
 .top h1 { margin: 2px 0 0; font: 500 44px/1.04 var(--sans); letter-spacing: -0.04em; }
 .top h1 em { font-style: normal; }
 .top h1 i { font-style: normal; color: var(--joint); margin: 0 0.12em; }
@@ -204,7 +204,7 @@ p { margin: 0; }
   .map-host { position: relative; inset: auto; height: var(--mh); overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, var(--terrain-a) 0%, var(--bg2) 55%, var(--bg) 100%); }
   /* the title sits above the map in the flow, never printed over the terrain */
   .sol { display: flex; flex-direction: column; padding-top: 76px; }
-  .top { position: static; order: -1; margin: 0 16px 4px; max-width: none; }
+  .top { position: static; order: -1; margin: 0 16px 4px; width: auto; max-width: none; }
   .top h1 { font-size: 30px; }
   .top p { display: block; margin-top: 4px; }
   .rail, .arch, .bar, .anchor { position: static; width: calc(100% - 32px); max-width: 760px; margin: 12px auto 0; }
@@ -252,7 +252,7 @@ p { margin: 0; }
   .sol.flat { --mh: 180px; height: auto; min-height: 0; overflow: visible; background: var(--bg); padding-bottom: 28px; }
   .sol.flat .map-host { position: relative; inset: auto; height: var(--mh); overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, var(--terrain-a) 0%, var(--bg2) 55%, var(--bg) 100%); }
   .sol.flat { display: flex; flex-direction: column; padding-top: 76px; }
-  .sol.flat .top { position: static; order: -1; margin: 0 16px 4px; max-width: none; }
+  .sol.flat .top { position: static; order: -1; margin: 0 16px 4px; width: auto; max-width: none; }
   .sol.flat .top h1 { font-size: 32px; }
   .sol.flat .top p { display: none; }
   .sol.flat .rail, .sol.flat .arch, .sol.flat .bar, .sol.flat .anchor { position: static; width: calc(100% - 32px); max-width: 760px; margin: 12px auto 0; }
@@ -280,7 +280,10 @@ p { margin: 0; }
 @keyframes dg-out-dn { to { opacity: 0; transform: translateY(0.45em) scale(0.7); filter: blur(4px); } }
 
 /* ---------- guide ---------- */
-.gd-open { margin-top: 12px; height: 34px; padding: 0 14px; font-size: 13px; }
+/* beside the title, so it never pushes into the rail below */
+.gd-open { position: absolute; left: calc(100% + 16px); top: 12px; height: 34px; padding: 0 14px; font-size: 13px; }
+@media (max-width: 1100px) { .gd-open { position: static; margin-top: 12px; } }
+.sol.flat .gd-open { position: static; margin-top: 12px; }
 .gd-open::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: gd-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
 /* status-dot-pulse, as a ring: the highlighted control breathes until its task is done */
 .gd-ring { position: fixed; z-index: 40; pointer-events: none; border-radius: 14px; border: 2px solid var(--accent); animation: gd-ring 1.4s cubic-bezier(0, 0, 0.2, 1) infinite; transition: border-color 0.3s; } /* position follows the target per frame, no easing, or it trails a scrolling page */
