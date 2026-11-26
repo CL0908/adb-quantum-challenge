@@ -32,6 +32,8 @@ export interface Series {
   dash?: string
   pts: [number, number][]
   axis?: 'r'
+  /** direct label at the line's right end, in place of a legend entry */
+  end?: string
 }
 export interface DualAxes {
   n?: number
@@ -44,6 +46,8 @@ export interface Mark {
   color: string
   label: string
   axis?: 'r'
+  /** direct label above the point */
+  text?: string
 }
 
 /** Log-y line chart with a hover read-out. x in data units, y > 0. */
@@ -66,7 +70,8 @@ export function LineChart({
   const W = Math.max(w, 260)
   const narrow = W < 420 // phones: a taller plot and slimmer axis gutters
   const height = narrow ? h0 + 70 : h0
-  const m = { l: narrow ? 40 : 48, r: dual ? (narrow ? 62 : 52) : 14, t: 14, b: 30 }
+  const ends = series.some((s) => s.end)
+  const m = { l: narrow ? 40 : 48, r: Math.max(dual && dual.r.fmt(dual.r.max) !== '' ? (narrow ? 62 : 52) : 14, ends ? (narrow ? 58 : 72) : 0), t: 22, b: 30 }
   const iw = W - m.l - m.r
   const ih = height - m.t - m.b
   const X = (x: number) => m.l + ((x - xDomain[0]) / (xDomain[1] - xDomain[0])) * iw
@@ -107,11 +112,18 @@ export function LineChart({
           {series.map((s) => (
             <path key={s.id} d={path(s.pts, s.axis)} fill="none" stroke={s.color} strokeWidth={2.2} strokeDasharray={s.dash} strokeLinejoin="round" strokeLinecap="round" />
           ))}
+          {(() => {
+            // end labels, nudged apart so two lines that finish close together stay readable
+            const L = series.filter((s) => s.end).map((s) => { const p = s.pts[s.pts.length - 1]; return { id: s.id, t: s.end!, c: s.color, x: X(p[0]), y: Y(p[1], s.axis) } }).sort((a, b) => a.y - b.y)
+            for (let i = 1; i < L.length; i++) if (L[i].y - L[i - 1].y < 14) L[i].y = L[i - 1].y + 14
+            return L.map((l) => <text key={l.id} x={l.x + 8} y={l.y + 4} className="jt-tick end" style={{ fill: l.c }}>{l.t}</text>)
+          })()}
           {hx !== null && <line x1={left} x2={left} y1={m.t} y2={m.t + ih} className="jt-cross" />}
           {marks.map((k) => (
             <g key={k.label} transform={`translate(${X(k.x)},${Y(k.y, k.axis)})`}>
               <circle r={8} fill={k.color} opacity={0.2} />
               <circle r={4.5} fill="var(--panel)" stroke={k.color} strokeWidth={2} />
+              {k.text && <text y={-13} textAnchor="middle" className="jt-tick mark">{k.text}</text>}
             </g>
           ))}
           <rect x={m.l} y={m.t} width={iw} height={ih} fill="transparent" onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={() => setHx(null)} />

@@ -100,10 +100,9 @@ function Select({ id, label, value, onChange, children, disabled }: { id: string
 }
 
 /** A band is one question a banker asks, in reading order: the question, then the answer in one line. */
-function BandHead({ n, tag, id, q, a }: { n: number; tag: string; id: string; q: string; a: ReactNode }) {
+function BandHead({ id, q, a }: { id: string; q: string; a: ReactNode }) {
   return (
     <div className="band-h">
-      <span className="band-n">{n} · {tag}</span>
       <h2 id={id} className="band-q">{q}</h2>
       <p className="band-a">{a}</p>
     </div>
@@ -151,7 +150,7 @@ export default function Dashboard() {
         <div className="body">
           <header className="topbar" id="pools">
             <div className="tb-l">
-              <h1>Banker <em>view</em></h1>
+              <h1>Banker view</h1>
               <Select id="pool" label="Pool" value={poolId} onChange={(v) => setPoolId(v as PoolId)}>
                 {POOL_IDS.map((id) => (
                   <option key={id} value={id}>
@@ -172,7 +171,7 @@ export default function Dashboard() {
           <main id="overview">
             {/* 1 · now: the size of the risk under the selected scenario */}
             <section className="band" aria-labelledby="b1-h">
-              <BandHead n={1} tag="Now" id="b1-h" q="How big is the risk?"
+              <BandHead id="b1-h" q="How big is the risk?"
                 a={isKG && jx ? <>Under the <b className="t">{sc!.label.toLowerCase()}</b> scenario both bonds are wiped out together in <b>{oneIn(jx.value)}</b> three-year terms.</> : <>{pool.label}: the shared limit and the loss it leaves uncovered, at the US${pool.T_moderate}m threshold.</>} />
               {isKG && sc ? (
                 <>
@@ -189,7 +188,7 @@ export default function Dashboard() {
 
             {/* 2 · stress: how the brief's scenarios move it */}
             <section className="band" id="scenarios" aria-labelledby="b2-h">
-              <BandHead n={2} tag="Stress" id="b2-h" q={isKG ? 'What changes under the brief’s scenarios?' : 'How rare is each event?'}
+              <BandHead id="b2-h" q={isKG ? 'What changes under the brief’s scenarios?' : 'How rare is each event?'}
                 a={isKG ? <><b className="t">{ss[top.id].label}</b> moves the joint risk most: <b>{times(top.r)}</b> than the base case. Pick a scenario to update the whole page.</> : <>Exact probabilities on a log scale, for this pool.</>} />
               <div className={isKG ? 'duo' : ''}>
                 <section className="panel bars" aria-label={isKG ? 'The brief’s five scenarios' : 'Reference probabilities'}>
@@ -226,7 +225,7 @@ export default function Dashboard() {
             {/* 3 · drivers: what pushes the tail up */}
             {poolId !== 'ap' && (
             <section className="band" aria-labelledby="b3-h">
-              <BandHead n={3} tag="Drivers" id="b3-h" q={isKG ? 'What pushes the joint risk up?' : 'How fast does the tail thin out?'}
+              <BandHead id="b3-h" q={isKG ? 'What pushes the joint risk up?' : 'How fast does the tail thin out?'}
                 a={isKG ? <>How often one earthquake hits both countries. Raising that share from the brief&rsquo;s {pct(g.brief.eq, 1)} to the {pct(g.data.eq, 0)} seen in public records, with shared rain held at {pct(g.brief.rain, 0)}, makes the joint risk <b>{times(quakeOnly)}</b>.</> : <>Exact loss exceedance down to 10⁻¹², with the two thresholds the register reads.</>} />
               <section className="panel trend" aria-labelledby="trend-h">
                 <div className="ph">
@@ -263,7 +262,7 @@ export default function Dashboard() {
 
             {/* 4 · trust: exact values, and how close the fast estimator gets to them */}
             <section className="band" aria-labelledby="b4-h">
-              <BandHead n={poolId === 'ap' ? 3 : 4} tag="Trust" id="b4-h" q="Can these numbers be trusted?"
+              <BandHead id="b4-h" q="Can these numbers be trusted?"
                 a={isKG && jx ? <>Every figure above is an exact calculation. The fast estimator (RDPO) lands within <b className="t">{relErr(jx.rdpo_rel_rmse)}</b> of it on the joint risk, and its 95% range held the exact value in {Math.round(jx.rdpo_coverage * jx.reps)} of {jx.reps} runs.</> : <>Every figure is exact; the fast estimators are checked against it below.</>} />
               {poolId === 'ap' && (
                 <section className="panel trend" aria-label="Estimator error by method">
@@ -305,7 +304,7 @@ export default function Dashboard() {
                   Every probability marked exact comes from a full calculation, not a simulation. RDPO is the fast estimator whose error is tracked in the register.
                 </p>
                 <a className="jt-btn solid" href="/solution/">How the solution works</a>
-                <a className="lnk" href="/#method">Method on the home page</a>
+                <a className="lnk" href="/#how">Method on the home page</a>
               </section>
               </div>
             </section>
@@ -330,10 +329,15 @@ function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show
   }
   const lv = maxOf('exceed') * 1.04, rv = maxOf('joint_exhaustion') * 1.04
   // one probability on one axis by default; both together keep the two-axis view
-  const fit = (v: number, ks?: number[]) => [4, 5, 6].reduce((b, k) => (step(v / k, ks) * k < step(v / b, ks) * b ? k : b), 4)
-  const n = which === 'joint' ? fit(rv, [1, 2, 5, 10]) : fit(lv)
-  const pctAxis = { max: step(lv / n) * n, fmt: (v: number) => `${+(v * 100).toPrecision(3)}%`, color: COL.teal }
-  const sciAxis = { max: step(rv / n, [1, 2, 5, 10]) * n, fmt: (v: number) => sciSvg(v, 2), color: COL.terra }
+  // the tightest round top (3 to 6 gridlines), so the lines fill the plot instead of its lower half
+  // (powers of ten print with two significant digits, so their steps avoid 2.5)
+  const SCI = [1, 2, 5, 10]
+  const fit = (v: number, ks?: number[]) => [3, 4, 5, 6, 7].reduce((b, k) => (step(v / k, ks) * k < step(v / b, ks) * b ? k : b), 4)
+  const n = which === 'joint' ? fit(rv, SCI) : fit(lv)
+  // tick labels are neutral; only with two axes does each axis take its series' colour
+  const tc = (c: string) => (which === 'both' ? c : 'var(--tick)')
+  const pctAxis = { max: step(lv / n) * n, fmt: (v: number) => `${+(v * 100).toPrecision(3)}%`, color: tc(COL.teal) }
+  const sciAxis = { max: step(rv / n, SCI) * n, fmt: (v: number) => sciSvg(v, 2), color: tc(COL.terra) }
   const dual = which === 'both' ? { n, l: pctAxis, r: sciAxis } : which === 'exceed' ? { n, l: pctAxis, r: { ...pctAxis, fmt: () => '' } } : { n, l: sciAxis, r: { ...sciAxis, fmt: () => '' } }
   const jAxis = which === 'both' ? ('r' as const) : undefined
   const wantE = which !== 'joint', wantJ = which !== 'exceed'
@@ -341,14 +345,17 @@ function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show
   const show = (which: 'brief' | 'data') => mode === 'both' || mode === which
   const series: Series[] = []
   const marks: Mark[] = []
+  // direct labels: each line names its rain share at its end, each point names itself (once per point when both probabilities show)
+  const endB = `rain ${pct(g.rain_axis[rBrief], 0)}`, endD = `rain ${pct(g.rain_axis[rData], 0)}`
+  const tB = `Brief, ${pct(g.brief.eq, 1)}`, tD = `Public records, ${pct(g.data.eq, 0)}`
   if (show('brief')) {
-    if (wantE) { series.push({ id: 'eb', color: COL.teal, pts: pick('exceed', rBrief) }); marks.push({ x: g.brief.eq * 100, y: g.brief.exceed, color: COL.teal, label: 'brief-e' }) }
-    if (wantJ) { series.push({ id: 'jb', color: COL.terra, axis: jAxis, pts: pick('joint_exhaustion', rBrief) }); marks.push({ x: g.brief.eq * 100, y: g.brief.joint_exhaustion, axis: jAxis, color: COL.terra, label: 'brief-j' }) }
+    if (wantE) { series.push({ id: 'eb', color: COL.teal, pts: pick('exceed', rBrief), end: endB }); marks.push({ x: g.brief.eq * 100, y: g.brief.exceed, color: COL.teal, label: 'brief-e', text: tB }) }
+    if (wantJ) { series.push({ id: 'jb', color: COL.terra, axis: jAxis, pts: pick('joint_exhaustion', rBrief), end: endB }); marks.push({ x: g.brief.eq * 100, y: g.brief.joint_exhaustion, axis: jAxis, color: COL.terra, label: 'brief-j', text: wantE ? undefined : tB }) }
   }
   if (show('data')) {
     const dash = mode === 'both' ? '5 4' : undefined
-    if (wantE) { series.push({ id: 'ed', color: COL.teal, dash, pts: pick('exceed', rData) }); marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.sand, label: 'data-e' }) }
-    if (wantJ) { series.push({ id: 'jd', color: COL.terra, dash, axis: jAxis, pts: pick('joint_exhaustion', rData) }); marks.push({ x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: jAxis, color: COL.sand, label: 'data-j' }) }
+    if (wantE) { series.push({ id: 'ed', color: COL.teal, dash, pts: pick('exceed', rData), end: endD }); marks.push({ x: g.data.eq * 100, y: g.data.exceed, color: COL.sand, label: 'data-e', text: tD }) }
+    if (wantJ) { series.push({ id: 'jd', color: COL.terra, dash, axis: jAxis, pts: pick('joint_exhaustion', rData), end: endD }); marks.push({ x: g.data.eq * 100, y: g.data.joint_exhaustion, axis: jAxis, color: COL.sand, label: 'data-j', text: wantE ? undefined : tD }) }
   }
   const at = (x: number) => Math.min(g.eq_axis.length - 1, Math.max(0, Math.round(x)))
   const tipRows = (x: number) => {
@@ -366,14 +373,13 @@ function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show
     <>
       <LineChart series={series} marks={marks} xDomain={[0, 60]} xTicks={[0, 10, 20, 30, 40, 50, 60]} xFmt={(x) => `${x}%`} yDomain={yDomain} dual={dual} height={290}
         tipX={(x) => `${at(x)}% of quakes hit both countries`} tipRows={tipRows} />
-      <div className="jt-legend">
-        {wantE && <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m){which === 'both' ? ', left axis' : ''}</span>}
-        {wantJ && <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted){which === 'both' ? ', right axis' : ''}</span>}
-        {mode === 'both' && <span><i className="ln dash" />dashed: rain share 2% (grid slice)</span>}
-        {show('brief') && <span><i className="dot" style={{ borderColor: COL.teal }} />brief: {pct(g.brief.eq, 1)} quake share, {pct(g.brief.rain, 0)} rain</span>}
-        {show('data') && <span><i className="dot" style={{ borderColor: COL.sand }} />public records, exact point: {pct(g.data.eq, 0)} quake, {pct(g.data.rain, 2)} rain</span>}
-      </div>
-      <p className="src">Exact: every point is a full calculation on the two-country grid, no sampling. Hover for values.</p>
+      {which === 'both' && (
+        <div className="jt-legend">
+          <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m), left axis</span>
+          <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted), right axis</span>
+        </div>
+      )}
+      <p className="src">Horizontal axis: share of earthquakes that hit both countries. Lines end with the share of extreme rain that hits both{show('data') ? <>; the public-records point uses {pct(g.data.rain, 2)} rain</> : null}. Exact: every point is a full calculation on the two-country grid, no sampling. Hover for values.</p>
     </>
   )
 }
