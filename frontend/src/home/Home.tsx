@@ -29,10 +29,6 @@ function Term({ name, children }: { name: string; children: ReactNode }) {
   return <span className="term" tabIndex={0}>{name}<span className="tip" role="tooltip"><b>{name}</b>{children}</span></span>
 }
 
-function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
-  return <span className={`eyebrow ${dark ? 'on-dark' : ''}`}><i aria-hidden="true" />{children}</span>
-}
-
 function Card({ title, sub, children, className = '' }: { title: string; sub?: string; children: ReactNode; className?: string }) {
   const [ref, shown] = useInView<HTMLElement>()
   return (
@@ -63,27 +59,6 @@ function HeroFigure() {
   const hold = useRef(false)
   const oneIn = useOneIn()
   useEffect(() => { setGl(webglAvailable()) }, [])
-  // the island opens enlarged and settles to its place over the first ~60% of a screen of scrolling; the scroll position
-  // is eased toward each frame so wheel steps read as one continuous shrink, not a jump per notch
-  const fig = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const el = fig.current
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const target = () => Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.6)))
-    const put = (v: number) => el.style.setProperty('--hz', (v * v * (3 - 2 * v)).toFixed(4)) // smoothstep
-    let cur = target(), raf = 0
-    const tick = () => {
-      const t = target()
-      cur += (t - cur) * 0.14
-      if (Math.abs(t - cur) < 0.001) cur = t
-      put(cur)
-      raf = cur === t ? 0 : requestAnimationFrame(tick)
-    }
-    const kick = () => { if (!raf) raf = requestAnimationFrame(tick) }
-    put(cur)
-    window.addEventListener('scroll', kick, { passive: true })
-    return () => { window.removeEventListener('scroll', kick); cancelAnimationFrame(raf) }
-  }, [])
   const shared = map?.quakes.filter((q) => q[4] === 1).length
   // three places on the island that lead somewhere: the shared zone (why it matters), a country (try the model), the pool
   const pins = useMemo<Pin[]>(() => {
@@ -97,7 +72,7 @@ function HeroFigure() {
     ]
   }, [map])
   return (
-    <figure ref={fig} className={`hero-fig ${live ? 'live' : ''}`} style={{ ['--ar' as string]: HERO_ASPECT }}>
+    <figure className={`hero-fig ${live ? 'live' : ''}`} style={{ ['--ar' as string]: HERO_ASPECT }}>
       <div className="hero-shadow" aria-hidden="true" />
       <div className="hero-frame">
         <img className="hero-still" src="hero-terrain.webp" alt="The Tian Shan and Pamir cut from real elevation data as a floating terrain block, with the Kyrgyz Republic and Tajikistan, earthquake main shocks as thin columns and the shared border zone glowing." width={2400} height={Math.round(2400 / HERO_ASPECT)} fetchPriority="high" decoding="async" />
@@ -108,22 +83,21 @@ function HeroFigure() {
         )}
         {live && (
           <div className="pins" onPointerOver={() => { hold.current = true }} onPointerOut={() => { hold.current = false }} onFocus={() => { hold.current = true }} onBlur={() => { hold.current = false }}>
-            <a className="hpin pin-zone" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><em>Problem &darr;</em><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''}</small></span></a>
-            <a className="hpin pin-model" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><em>Solution &rarr;</em><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run</small></span></a>
-            <a className="hpin pin-pool" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><em>Dashboard &rarr;</em><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures</small></span></a>
-          </div>
-        )}
-        {live && map && (
-          <div className="replay" aria-hidden="true">
-            <b className="yr">{tally ? tally.year : '1965\u20132016'}</b>
-            <span className="prog"><i style={{ width: `${tally ? (100 * (tally.year - 1965)) / (2016 - 1965) : 100}%` }} /></span>
-            <span className="cnt"><span>{tally ? tally.all : map.quakes.length} main shocks</span><span key={tally ? tally.both : 'all'} className="both">{tally ? tally.both : shared} reached both</span></span>
+            <a className="hpin pin-zone" href="#problem" ref={(e) => { pinEls.current.zone = e }} onClick={(e) => { e.preventDefault(); document.getElementById('problem')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }}><i aria-hidden="true" /><span><em>Problem</em><b className="l">Shared border zone</b><b className="s">Shared zone</b><small>Both bonds exhausted {oneIn ? <>1 in {oneIn.toLocaleString('en-US')}</> : ''}</small></span></a>
+            <a className="hpin pin-model" href={SOLUTION} ref={(e) => { pinEls.current.model = e }}><i aria-hidden="true" /><span><em>Solution</em><b className="l">Try the two-country model</b><b className="s">Try the model</b><small>Dependence, cards, a live run</small></span></a>
+            <a className="hpin pin-pool" href="/dashboard/" ref={(e) => { pinEls.current.pool = e }}><i aria-hidden="true" /><span><em>Dashboard</em><b className="l">Banker view</b><b className="s">Banker view</b><small>Scenarios and key figures</small></span></a>
           </div>
         )}
       </div>
       <figcaption>
-        <span><i className="d solo" />Earthquake main shocks{map ? <>, <b>{map.quakes.length}</b></> : null}</span>
-        <span><i className="d both" />Reached both countries{shared !== undefined ? <>, <b>{shared}</b></> : null}</span>
+        {live && map && (
+          <span className="replay" aria-hidden="true">
+            <b>{tally ? tally.year : '1965\u20132016'}</b>
+            <span className="prog"><i style={{ width: `${tally ? (100 * (tally.year - 1965)) / (2016 - 1965) : 100}%` }} /></span>
+          </span>
+        )}
+        <span><i className="d solo" />Earthquake main shocks{map ? <>, <b>{live && tally ? <>{tally.all} of </> : null}{map.quakes.length}</b></> : null}</span>
+        <span><i className="d both" />Reached both countries{shared !== undefined ? <>, <b key={live && tally ? tally.both : 'all'} className={live && tally ? 'tick' : undefined}>{live && tally ? <>{tally.both} of </> : null}{shared}</b></> : null}</span>
         <span><i className="d zone" />Shared border zone</span>
         <span className="src">Real elevation, Tian Shan and Pamir</span>
       </figcaption>
@@ -179,7 +153,6 @@ function Problem() {
     <section className="sec light" id="problem">
       <div className="wrap">
         <Reveal className="sec-head">
-          <Eyebrow>Problem</Eyebrow>
           <h2 className="h2"><span className="sans">Joint losses are</span> <em>too rare to see</em></h2>
         </Reveal>
         <div className="prob">
@@ -222,7 +195,6 @@ function How() {
     <section className="sec dark" id="how">
       <div className="wrap">
         <Reveal className="sec-head center">
-          <Eyebrow dark>How it works</Eyebrow>
           <h2 className="h2"><span className="sans">Exact where possible,</span> <em>learned where not</em></h2>
         </Reveal>
         <div className="how">
@@ -270,12 +242,12 @@ function PoolLimit() {
   return (
     <div className="pool">
       <div className="prow">
+        <div className="pnum"><span>Under the brief&rsquo;s dependence</span><b><V k="FIN_POOL_BRIEF" /></b></div>
         <div className="pbar"><i style={{ width: `${a || 0}%` }} /></div>
-        <div className="pnum"><b><V k="FIN_POOL_BRIEF" /></b><span>under the brief&rsquo;s dependence</span></div>
       </div>
       <div className="prow">
+        <div className="pnum"><span>Under the public records, posterior median (95%: <V k="FIN_POOL_LO" /> to <V k="FIN_POOL_HI" />)</span><b><V k="FIN_POOL_MED" /></b></div>
         <div className="pbar data"><i style={{ width: `${b || 0}%` }} />{lo && hi ? <u style={{ left: `${lo}%`, width: `${hi - lo}%` }} /> : null}</div>
-        <div className="pnum"><b><V k="FIN_POOL_MED" /></b><span>posterior median under the public records, 95% <V k="FIN_POOL_LO" /> to <V k="FIN_POOL_HI" /></span></div>
       </div>
     </div>
   )
@@ -288,7 +260,6 @@ function Results() {
     <section className="sec light" id="results">
       <div className="wrap wide">
         <Reveal className="sec-head">
-          <Eyebrow>Results</Eyebrow>
           <h2 className="h2"><span className="sans">What the evidence</span> <em>actually shows</em></h2>
         </Reveal>
         <div className="res">
@@ -342,7 +313,6 @@ function Team() {
     <section className="sec light tight" id="team">
       <div className="wrap">
         <Reveal className="sec-head">
-          <Eyebrow>Team</Eyebrow>
           <h2 className="h2"><span className="sans">Two builders,</span> <em>one reproducible codebase</em></h2>
         </Reveal>
         <div className="people">
@@ -376,7 +346,6 @@ function Documents() {
     <section className="sec dark tight" id="documents">
       <div className="wrap">
         <Reveal className="sec-head center">
-          <Eyebrow dark>Documents</Eyebrow>
           <h2 className="h2"><span className="sans">Read it, run it,</span> <em>check it</em></h2>
         </Reveal>
         <div className="docs">
