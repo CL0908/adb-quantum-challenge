@@ -71,7 +71,7 @@ export function LineChart({
   const narrow = W < 420 // phones: a taller plot and slimmer axis gutters
   const height = narrow ? h0 + 70 : h0
   const ends = series.some((s) => s.end)
-  const m = { l: narrow ? 40 : 48, r: Math.max(dual && dual.r.fmt(dual.r.max) !== '' ? (narrow ? 62 : 52) : 14, ends ? (narrow ? 58 : 72) : 0), t: 22, b: 30 }
+  const m = { l: narrow ? 58 : 60, r: Math.max(dual && dual.r.fmt(dual.r.max) !== '' ? (narrow ? 62 : 52) : 14, ends ? (narrow ? 58 : 72) : 0), t: 22, b: 30 }
   const iw = W - m.l - m.r
   const ih = height - m.t - m.b
   const X = (x: number) => m.l + ((x - xDomain[0]) / (xDomain[1] - xDomain[0])) * iw
@@ -96,14 +96,19 @@ export function LineChart({
               <text x={W - m.r + 8} y={Y(dual.l.max * f) + 3} textAnchor="start" className="jt-tick" style={{ fill: dual.r.color }}>{dual.r.fmt(dual.r.max * f)}</text>
             </g>
           ))}
-          {!dual && exps(yDomain[0], yDomain[1]).map((e) => (
-            <g key={e}>
-              <line x1={m.l} x2={W - m.r} y1={Y(10 ** e)} y2={Y(10 ** e)} className="jt-grid" />
-              <text x={m.l - 8} y={Y(10 ** e) + 3} textAnchor="end" className="jt-tick">
-                {tickLabel(e)}
-              </text>
-            </g>
-          ))}
+          {!dual && (() => {
+            // one label per decade only while they fit; otherwise every 2nd or 3rd decade, gridlines on the labelled ones
+            const es = exps(yDomain[0], yDomain[1])
+            const every = Math.max(1, Math.ceil(es.length / Math.max(2, Math.floor(ih / 26))))
+            return es.filter((e) => (yDomain[1] - e) % every === 0).map((e) => (
+              <g key={e}>
+                <line x1={m.l} x2={W - m.r} y1={Y(10 ** e)} y2={Y(10 ** e)} className="jt-grid" />
+                <text x={m.l - 8} y={Y(10 ** e) + 3} textAnchor="end" className="jt-tick">
+                  {tickLabel(e)}
+                </text>
+              </g>
+            ))
+          })()}
           {xTicks.map((x) => (
             <text key={x} x={X(x)} y={height - 9} textAnchor="middle" className="jt-tick">
               {xFmt(x)}

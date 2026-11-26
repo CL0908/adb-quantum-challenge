@@ -346,7 +346,8 @@ function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show
   const series: Series[] = []
   const marks: Mark[] = []
   // direct labels: each line names its rain share at its end, each point names itself (once per point when both probabilities show)
-  const endB = `rain ${pct(g.rain_axis[rBrief], 0)}`, endD = `rain ${pct(g.rain_axis[rData], 0)}`
+  // (with two axes the right axis takes the right margin, so the dash is explained in the legend instead)
+  const endB = which === 'both' ? undefined : `rain ${pct(g.rain_axis[rBrief], 0)}`, endD = which === 'both' ? undefined : `rain ${pct(g.rain_axis[rData], 0)}`
   const tB = `Brief, ${pct(g.brief.eq, 1)}`, tD = `Public records, ${pct(g.data.eq, 0)}`
   if (show('brief')) {
     if (wantE) { series.push({ id: 'eb', color: COL.teal, pts: pick('exceed', rBrief), end: endB }); marks.push({ x: g.brief.eq * 100, y: g.brief.exceed, color: COL.teal, label: 'brief-e', text: tB }) }
@@ -377,9 +378,10 @@ function TrendKG({ g, mode, show: which }: { g: Grid; mode: RainMode; show: Show
         <div className="jt-legend">
           <span><i className="ln" style={{ background: COL.teal }} />Pr(pool pays more than US$80m), left axis</span>
           <span><i className="ln" style={{ background: COL.terra }} />Pr(both bonds exhausted), right axis</span>
+          {mode === 'both' && <span>solid: rain {pct(g.rain_axis[rBrief], 0)} shared; dashed: rain {pct(g.rain_axis[rData], 0)}</span>}
         </div>
       )}
-      <p className="src">Horizontal axis: share of earthquakes that hit both countries. Lines end with the share of extreme rain that hits both{show('data') ? <>; the public-records point uses {pct(g.data.rain, 2)} rain</> : null}. Exact: every point is a full calculation on the two-country grid, no sampling. Hover for values.</p>
+      <p className="src">Horizontal axis: share of earthquakes that hit both countries. {which === 'both' ? 'Rain is the share of extreme rain that hits both' : 'Lines end with the share of extreme rain that hits both'}{show('data') ? <>; the public-records point uses {pct(g.data.rain, 2)} rain</> : null}. Exact: every point is a full calculation on the two-country grid, no sampling. Hover for values.</p>
     </>
   )
 }
@@ -391,7 +393,7 @@ function TrendCurve({ pool }: { pool: Pool }) {
   const yDomain: [number, number] = [-12, Math.ceil(Math.log10(Math.max(...c.y)))]
   const marks: Mark[] = [pool.T_moderate!, pool.T_rare!].map((t) => {
     const row = pool.targets!.find((r) => r.target === 'exceedance' && r.threshold_musd === t)!
-    return { x: t, y: row.value, color: t === pool.T_moderate ? COL.teal : COL.sand, label: `T${t}` }
+    return { x: t, y: row.value, color: t === pool.T_moderate ? COL.teal : COL.sand, label: `T${t}`, text: `US$${t}m` }
   })
   const nearest = (x: number) => c.x.reduce((b, v) => (Math.abs(v - x) < Math.abs(b - x) ? v : b), c.x[0])
   const xmin = Math.min(...c.x)
@@ -399,12 +401,11 @@ function TrendCurve({ pool }: { pool: Pool }) {
   const ticks = c.x.filter((x) => x % 100 === 0 && x <= xmax)
   return (
     <>
-      <LineChart series={[{ id: 'c', color: COL.teal, pts }]} marks={marks} xDomain={[xmin, xmax]} xTicks={ticks} xFmt={(x) => `${x}`} yDomain={yDomain} height={270}
+      <LineChart series={[{ id: 'c', color: COL.teal, pts }]} marks={marks} xDomain={[xmin, xmax]} xTicks={ticks} xFmt={(x) => `US$${x}m`} yDomain={yDomain} height={270}
         tipX={(x) => `Loss above US$${nearest(x)}m`} tipRows={(x) => [{ label: 'Probability in one term', value: prob(c.y[c.x.indexOf(nearest(x))]), color: COL.teal }]} />
       <div className="jt-legend">
-        <span><i className="ln" style={{ background: COL.teal }} />Pr(pooled loss &gt; threshold), threshold in US$m</span>
         {marks.map((m) => (
-          <span key={m.label}><i className="dot" style={{ borderColor: m.color }} />US${m.x}m: {prob(m.y)}</span>
+          <span key={m.label}><i className="dot" style={{ borderColor: m.color }} /><span>Above US${m.x}m: {prob(m.y)} in one term</span></span>
         ))}
       </div>
     </>
